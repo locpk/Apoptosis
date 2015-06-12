@@ -2,6 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Cancer Chance
+/// </summary>
+ public static class CancerChance
+    {
+        public const float LEVEL_1 = 0.0f;
+        public const float LEVEL_2 = 0.1f;
+        public const float LEVEL_3 = 0.2f;
+        public const float LEVEL_4 = 0.3f;
+        public const float LEVEL_5 = 0.4f;
+    }
 
 /// <summary>
 /// Different Cell types
@@ -17,7 +28,7 @@ public enum CellType
 /// </summary>
 public enum CellState
 {
-    IDLE,ATTACK,MOVING,ATTACK_MOVING,DEAD,CANCEROUS_SPLITTING,PERFECT_SPLITTING,EVOLVING,INCUBATING,MERGING, 
+    IDLE, ATTACK, MOVING, ATTACK_MOVING, DEAD, CANCEROUS_SPLITTING, PERFECT_SPLITTING, EVOLVING, INCUBATING, MERGING,
 }
 
 
@@ -26,13 +37,17 @@ public enum CellState
 /// </summary>
 public class BaseCell : MonoBehaviour
 {
-    
+
+    public  GameObject cancerCellPrefab;
+
     public float MAX_PROTEIN = 500.0f;
     public const float DEPLETE_TIME = 20.0f;
     public const float ATTACK_COOLDOWN = 1.0f;
     /// <summary>
     /// Fields
     /// </summary>
+    //
+    public int currentLevel = 0;
     public bool isMine;
     public bool isAlive = true;
     public bool isAIPossessed;
@@ -72,12 +87,12 @@ public class BaseCell : MonoBehaviour
     public void Move(Vector3 _destination)
     {
         //Move only there is a path.
-        if (navAgent.CalculatePath(_destination,new NavMeshPath()))
+        if (navAgent.CalculatePath(_destination, new NavMeshPath()))
         {
             destination = _destination;
-             navAgent.SetDestination(_destination);
+            navAgent.SetDestination(_destination);
         }
-       
+
     }
 
     public void AttackMove(Vector3 _destination)
@@ -115,9 +130,9 @@ public class BaseCell : MonoBehaviour
         {
             targets = _targets;
         }
-        
+
     }
-    
+
     public void Attack(GameObject _target)
     {
         Move(_target.transform.position);
@@ -139,6 +154,102 @@ public class BaseCell : MonoBehaviour
     {
 
     }
+
+    public void PerfectSplit()
+    {
+        if (currentLevel >= 5)
+        {
+            return;
+        }
+
+        Vector3 newposition = this.transform.position;
+        newposition += Quaternion.Euler(0, 0, Random.Range(0, 360)) * new Vector3(GetComponent<SphereCollider>().radius, 0, 0);
+        GameObject newCell = GameObject.Instantiate(gameObject, newposition, Quaternion.identity) as GameObject;
+        this.currentProtein *= 0.5f;
+        switch (this.celltype)
+        {
+            case CellType.STEM_CELL:
+                newCell.GetComponent<StemCell>().currentProtein = this.currentProtein;
+                newCell.GetComponent<StemCell>().currentLevel++;
+                break;
+            case CellType.CANCER_CELL:
+                newCell.GetComponent<CancerCell>().currentProtein = this.currentProtein;
+                newCell.GetComponent<CancerCell>().currentLevel++;
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public void CancerousSplit()
+    {
+        if (currentLevel >= 5)
+        {
+            return;
+        }
+
+
+        float cancerousChance = 0.0f;
+        switch (currentLevel)
+        {
+            case 1:
+                cancerousChance = CancerChance.LEVEL_1;
+                break;
+            case 2:
+                cancerousChance = CancerChance.LEVEL_2;
+                break;
+            case 3:
+                cancerousChance = CancerChance.LEVEL_3;
+                break;
+            case 4:
+                cancerousChance = CancerChance.LEVEL_4;
+                break;
+            case 5:
+                cancerousChance = CancerChance.LEVEL_5;
+                break;
+            default:
+                break;
+        }
+
+        //Get a new position around myself
+        Vector3 newposition = this.transform.position;
+        newposition += Quaternion.Euler(0, 0, Random.Range(0, 360)) * new Vector3(GetComponent<SphereCollider>().radius, 0, 0);
+
+        //half my protein
+        this.currentProtein *= 0.5f;
+
+
+        GameObject newCell;
+
+
+        if (Random.Range(0.0f,1.0f) <= cancerousChance)
+        {
+            newCell = GameObject.Instantiate(cancerCellPrefab, newposition, Quaternion.identity) as GameObject;
+            switch (this.celltype)
+            {
+                case CellType.HEAT_CELL:
+                    newCell.GetComponent<HeatCell>().currentProtein = this.currentProtein;
+                    newCell.GetComponent<HeatCell>().currentLevel++;
+                    break;
+                case CellType.COLD_CELL:
+                    newCell.GetComponent<ColdCell>().currentProtein = this.currentProtein;
+                    newCell.GetComponent<ColdCell>().currentLevel++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            newCell = GameObject.Instantiate(gameObject, newposition, Quaternion.identity) as GameObject;
+            newCell.GetComponent<CancerCell>().currentProtein = this.currentProtein;
+        }
+       
+        
+        
+    }
+
 
     protected void Deplete(float _deltaTime)
     {
