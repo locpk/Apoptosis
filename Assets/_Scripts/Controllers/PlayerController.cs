@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     System.Collections.Generic.List<GameObject> allSelectableUnits;
     System.Collections.Generic.List<GameObject> selectedUnits;
+    GameObject selectedTarget;
     System.Collections.Generic.List<GameObject>[] groups;
 
     void Awake()
@@ -61,14 +62,26 @@ public class PlayerController : MonoBehaviour
 
     public void UnitMove()
     {
+        foreach (GameObject item in selectedUnits)
+        {
+            item.GetComponent<BaseCell>().Move(Input.mousePosition);
+        }
     }
 
     public void UnitAttack()
     {
+        foreach (GameObject item in selectedUnits)
+        {
+            item.GetComponent<BaseCell>().Attack(selectedTarget);
+        }
     }
 
     public void UnitSplit()
     {
+        foreach (GameObject item in selectedUnits)
+        {
+
+        }
     }
 
     public void UnitEvolve()
@@ -77,6 +90,10 @@ public class PlayerController : MonoBehaviour
 
     public void UnitHarvest()
     {
+        foreach (GameObject item in selectedUnits)
+        {
+            item.GetComponent<BaseCell>().Consume(selectedTarget);
+        }
     }
 
     public void UnitIncubation()
@@ -85,6 +102,15 @@ public class PlayerController : MonoBehaviour
 
     public void DoubleClick()
     {
+        System.Type selectedType = selectedUnits[0].GetType();
+        selectedUnits.Clear();
+        foreach (GameObject item in allSelectableUnits)
+        {
+            if (item.GetComponent<BaseCell>().GetType() == selectedType)
+            {
+                selectedUnits.Add(item);
+            }
+        }
     }
 
     public void Grouping()
