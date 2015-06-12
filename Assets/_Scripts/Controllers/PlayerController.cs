@@ -10,6 +10,22 @@ public class PlayerController : MonoBehaviour
     public GameObject movePin;
     public GameObject attackPin;
 
+    System.Collections.Generic.List<GameObject> allSelectableUnits;
+    System.Collections.Generic.List<GameObject> selectedUnits;
+    System.Collections.Generic.List<GameObject>[] groups;
+
+    void Awake()
+    {
+        groups = new System.Collections.Generic.List<GameObject>[10];
+        allSelectableUnits = new System.Collections.Generic.List<GameObject>();
+        selectedUnits = new System.Collections.Generic.List<GameObject>();
+        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit");
+        foreach (GameObject item in tmpArr)
+        {
+            allSelectableUnits.Add(item);
+        }
+    }
+
     void MouseFeedback()
     {
         RaycastHit hit;
@@ -33,11 +49,69 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public System.Collections.Generic.List<GameObject> GetAllSelectableObjects()
+    {
+        System.Collections.Generic.List<GameObject> hoopla = new System.Collections.Generic.List<GameObject>();
+        return hoopla;
+    }
+
+    public void UnitSelection()
+    {
+    }
+
+    public void UnitMove()
+    {
+    }
+
+    public void UnitAttack()
+    {
+    }
+
+    public void UnitSplit()
+    {
+    }
+
+    public void UnitEvolve()
+    {
+    }
+
+    public void UnitHarvest()
+    {
+    }
+
+    public void UnitIncubation()
+    {
+    }
+
+    public void DoubleClick()
+    {
+    }
+
+    public void Grouping()
+    {
+    }
+
+    public void DrawPin()
+    {
+    }
+
+    public void OnGUI()
+    {
+    }
+
+    public void FixedUpdate()
+    {
+    }
+
+    public void PauseMenu()
+    {
+    }
+
     // Update is called once per frame
     void Update()
     {
-       // MouseFeedback();
+        // MouseFeedback();
 
-       
+
     }
 }
