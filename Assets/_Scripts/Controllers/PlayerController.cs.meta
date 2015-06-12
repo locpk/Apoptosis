@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 471d131ae0e64404b9eb047dfc59791e
+timeCreated: 1433733294
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - movePin: {fileID: 165000, guid: f77dcc63e9f32e946a614abcc9575a63, type: 2}
+  - attackPin: {fileID: 142206, guid: c9ae0278b5093004d9dc07422c77a8e3, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
