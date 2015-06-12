@@ -56,4 +56,15 @@ public class ColdCell : BaseCell
     {
 
     }
+	void Attack()
+	{
+		if(Vector3.Distance(transform.position, base.primaryTarget.transform.position) <= attackRange)
+		{
+			base.Attack (base.primaryTarget);
+		}
+	}
+	void Consume()
+	{
+		base.Consume (base.primaryTarget);
+	}
 }
