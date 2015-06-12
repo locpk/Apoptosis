@@ -10,23 +10,27 @@ public class PlayerController : MonoBehaviour
     public GameObject movePin;
     public GameObject attackPin;
 
-    System.Collections.Generic.List<GameObject> allSelectableUnits;
-    System.Collections.Generic.List<GameObject> selectedUnits;
+    System.Collections.Generic.List<BaseCell> allSelectableUnits;
+    System.Collections.Generic.List<BaseCell> selectedUnits;
     GameObject selectedTarget;
-    System.Collections.Generic.List<GameObject>[] groups;
+    System.Collections.Generic.List<BaseCell>[] groups;
 
     Rect selectionRect;
 
     void Awake()
     {
         selectedTarget = null;
-        groups = new System.Collections.Generic.List<GameObject>[10];
-        allSelectableUnits = new System.Collections.Generic.List<GameObject>();
-        selectedUnits = new System.Collections.Generic.List<GameObject>();
+        groups = new System.Collections.Generic.List<BaseCell>[10];
+        allSelectableUnits = new System.Collections.Generic.List<BaseCell>();
+        selectedUnits = new System.Collections.Generic.List<BaseCell>();
         GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit");
         foreach (GameObject item in tmpArr)
         {
-            allSelectableUnits.Add(item);
+            BaseCell bCell = item.GetComponent<BaseCell>();
+            if (!bCell.isAIPossessed && bCell.isMine)
+            {
+                allSelectableUnits.Add(item.GetComponent<BaseCell>());
+            }
         }
         selectionRect = new Rect();
     }
@@ -56,8 +60,12 @@ public class PlayerController : MonoBehaviour
 
     public System.Collections.Generic.List<GameObject> GetAllSelectableObjects()
     {
-        System.Collections.Generic.List<GameObject> hoopla = new System.Collections.Generic.List<GameObject>();
-        return hoopla;
+        System.Collections.Generic.List<GameObject> allSelectableObjects = new System.Collections.Generic.List<GameObject>();
+        foreach (BaseCell item in allSelectableUnits)
+        {
+            allSelectableObjects.Add(item.gameObject);
+        }
+        return allSelectableObjects;
     }
 
     public void UnitSelection()
@@ -67,33 +75,32 @@ public class PlayerController : MonoBehaviour
 
     public void UnitMove()
     {
-        foreach (GameObject item in selectedUnits)
+        foreach (BaseCell item in selectedUnits)
         {
-            item.GetComponent<BaseCell>().Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
     }
 
     public void UnitAttack()
     {
-        foreach (GameObject item in selectedUnits)
+        foreach (BaseCell item in selectedUnits)
         {
-            item.GetComponent<BaseCell>().Attack(selectedTarget);
+            item.Attack(selectedTarget);
         }
     }
 
     public void UnitSplit()
     {
-        foreach (GameObject item in selectedUnits)
+        foreach (BaseCell item in selectedUnits)
         {
-            BaseCell hoopla = item.GetComponent<HeatCell>() as BaseCell;
-            switch (hoopla.celltype)
+            switch (item.celltype)
             {
                 case CellType.STEM_CELL:
-                    hoopla.PerfectSplit();
+                    item.PerfectSplit();
                     break;
                 case CellType.HEAT_CELL:
                 case CellType.COLD_CELL:
-                    hoopla.CancerousSplit();
+                    item.CancerousSplit();
                     break;
 
                 default:
@@ -108,9 +115,9 @@ public class PlayerController : MonoBehaviour
 
     public void UnitHarvest()
     {
-        foreach (GameObject item in selectedUnits)
+        foreach (BaseCell item in selectedUnits)
         {
-            item.GetComponent<BaseCell>().Consume(selectedTarget);
+            item.Consume(selectedTarget);
         }
     }
 
@@ -120,11 +127,12 @@ public class PlayerController : MonoBehaviour
 
     public void DoubleClick()
     {
-        System.Type selectedType = selectedUnits[0].GetType();
+        BaseCell selectedCell = selectedUnits[0].GetComponent<BaseCell>();
+        CellType selectedType = selectedCell.celltype;
         selectedUnits.Clear();
-        foreach (GameObject item in allSelectableUnits)
+        foreach (BaseCell item in allSelectableUnits)
         {
-            if (item.GetComponent<BaseCell>().GetType() == selectedType)
+            if (item.celltype == selectedType)
             {
                 selectedUnits.Add(item);
             }
