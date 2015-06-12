@@ -27,12 +27,13 @@ public enum CellState
 public class BaseCell : MonoBehaviour
 {
     
-    public const float MAX_PROTEIN = 500.0f;
+    public float MAX_PROTEIN = 500.0f;
     public const float DEPLETE_TIME = 20.0f;
+    public const float ATTACK_COOLDOWN = 1.0f;
     /// <summary>
     /// Fields
     /// </summary>
-    
+    public bool isMine;
     public bool isAlive = true;
     public bool isAIPossessed;
     public bool isDepleting;
@@ -44,6 +45,7 @@ public class BaseCell : MonoBehaviour
     public Vector3 destination;
     public List<GameObject> targets;
     public GameObject primaryTarget;
+    public PhotonView photonView;
     public float currentProtein;
     public float moveSpeed;
     public float fovRadius;
@@ -69,27 +71,68 @@ public class BaseCell : MonoBehaviour
 
     public void Move(Vector3 _destination)
     {
-
+        //Move only there is a path.
+        if (navAgent.CalculatePath(_destination,new NavMeshPath()))
+        {
+            destination = _destination;
+             navAgent.SetDestination(_destination);
+        }
+       
     }
 
     public void AttackMove(Vector3 _destination)
     {
-
+        Move(_destination);
+        foreach (var item in targets)
+        {
+            if (Vector3.Distance(this.transform.position, item.transform.position) <= attackRange)
+            {
+                SetPrimaryTarget(item);
+                break;
+            }
+        }
     }
 
     public void SetPrimaryTarget(GameObject _target)
     {
-
+        if (_target)
+        {
+            primaryTarget = _target;
+            if (_target.GetComponent<BaseCell>())
+            {
+                Attack(_target);
+            }
+            else if (_target.GetComponent<Protein>())
+            {
+                Consume(_target);
+            }
+        }
     }
 
     public void SetTargets(List<GameObject> _targets)
     {
-
+        if (_targets.Count > 0)
+        {
+            targets = _targets;
+        }
+        
     }
     
     public void Attack(GameObject _target)
     {
-
+        Move(_target.transform.position);
+        if (attackCooldown <= 0.0f)
+        {
+            attackCooldown = ATTACK_COOLDOWN;
+            //
+            //Attack effects
+            //
+            _target.GetComponent<BaseCell>().ApplyDamage(attackDamage);
+        }
+        else
+        {
+            attackCooldown -= Time.deltaTime;
+        }
     }
 
     public void Consume(GameObject _target)
@@ -112,6 +155,11 @@ public class BaseCell : MonoBehaviour
     void Awake()
     {
 
+        navAgent = GetComponent<NavMeshAgent>();
+        photonView = GetComponent<PhotonView>();
+        navObstacle = GetComponent<NavMeshObstacle>();
+        navAgent.speed = moveSpeed;
+        isMine = photonView.isMine;
     }
 
     // Use this for initialization
@@ -121,8 +169,5 @@ public class BaseCell : MonoBehaviour
     }
 
 
-    void FixedUpdate()
-    {
-        
-    }
+
 }
