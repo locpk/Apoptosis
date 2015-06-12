@@ -15,8 +15,11 @@ public class PlayerController : MonoBehaviour
     GameObject selectedTarget;
     System.Collections.Generic.List<GameObject>[] groups;
 
+    Rect selectionRect;
+
     void Awake()
     {
+        selectedTarget = null;
         groups = new System.Collections.Generic.List<GameObject>[10];
         allSelectableUnits = new System.Collections.Generic.List<GameObject>();
         selectedUnits = new System.Collections.Generic.List<GameObject>();
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour
         {
             allSelectableUnits.Add(item);
         }
+        selectionRect = new Rect();
     }
 
     void MouseFeedback()
@@ -58,13 +62,14 @@ public class PlayerController : MonoBehaviour
 
     public void UnitSelection()
     {
+        selectionRect.size.Set(selectionRect.x - Input.mousePosition.x, selectionRect.y - Input.mousePosition.y);
     }
 
     public void UnitMove()
     {
         foreach (GameObject item in selectedUnits)
         {
-            item.GetComponent<BaseCell>().Move(Input.mousePosition);
+            item.GetComponent<BaseCell>().Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
     }
 
@@ -80,7 +85,20 @@ public class PlayerController : MonoBehaviour
     {
         foreach (GameObject item in selectedUnits)
         {
+            BaseCell hoopla = item.GetComponent<HeatCell>() as BaseCell;
+            switch (hoopla.celltype)
+            {
+                case CellType.STEM_CELL:
+                    hoopla.PerfectSplit();
+                    break;
+                case CellType.HEAT_CELL:
+                case CellType.COLD_CELL:
+                    hoopla.CancerousSplit();
+                    break;
 
+                default:
+                    break;
+            }
         }
     }
 
@@ -137,7 +155,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // MouseFeedback();
-
-
+        if (Input.GetMouseButtonDown(1))
+        {
+            selectionRect.position.Set(Input.mousePosition.x, Input.mousePosition.y);
+        }
+        else if (Input.GetMouseButton(1))
+        {
+            UnitSelection();
+        }
     }
 }
