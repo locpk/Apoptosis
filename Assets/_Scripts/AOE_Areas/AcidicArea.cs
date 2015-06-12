@@ -2,9 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class AcidicArea : BaseArea
-{
-
+public class AcidicArea : BaseArea {
 
 	void Awake() {
         
@@ -28,4 +26,5 @@ public class AcidicArea : BaseArea
 	void LateUpdate() {
         
     }
+
 }
