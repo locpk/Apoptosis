@@ -67,4 +67,5 @@ public class ColdCell : BaseCell
 	{
 		base.Consume (base.primaryTarget);
 	}
+	void Split()
 }

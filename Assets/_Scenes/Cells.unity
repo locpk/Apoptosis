@@ -440,8 +440,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a012dff7dc71a14d8606e3f6813704b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MAX_PROTEIN: 500
+  isMine: 0
   isAlive: 1
-  isAIPossessed: 0
+  isAIPossessed: 1
   isDepleting: 0
   isSelected: 0
   celltype: 1
@@ -451,6 +453,7 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
+  photonView: {fileID: 0}
   currentProtein: 20
   moveSpeed: 5
   fovRadius: 0
@@ -506,6 +509,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9072eca16e5ac4b8d3ed6ee1b47389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MAX_PROTEIN: 500
+  isMine: 0
   isAlive: 1
   isAIPossessed: 0
   isDepleting: 0
@@ -517,6 +522,7 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
+  photonView: {fileID: 0}
   currentProtein: 20
   moveSpeed: 2
   fovRadius: 0
