@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public static int cap = 0;
     public GameObject movePin;
     public GameObject attackPin;
+	
 
     void MouseFeedback()
     {
@@ -38,6 +39,5 @@ public class PlayerController : MonoBehaviour
     {
        // MouseFeedback();
 
-       
     }
 }

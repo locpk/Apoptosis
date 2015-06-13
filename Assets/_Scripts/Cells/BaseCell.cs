@@ -58,6 +58,7 @@ public class BaseCell : MonoBehaviour
 
 
 
+
     //[RPC] Methods, which called via network
     [RPC]
     public void ApplyDamage(float _received_damage)
