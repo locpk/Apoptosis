@@ -4,10 +4,11 @@ using System.Collections;
 public class PauseMenu : MonoBehaviour {
 
 	bool isPaused = false;
-    public int number = 1;
+    //test number to see if the variable got reset
+    public int number;
 
 	void Awake() {
-		
+        number = 1;
 	}
 
 	// Use this for initialization
