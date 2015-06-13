@@ -7,13 +7,13 @@ public class ColdCell : BaseCell
 
     void Awake()
     {
-
+		base.Awake ();
     }
 
     // Use this for initialization
     void Start()
     {
-
+		base.Start ();
     }
 
     // Update is called once per frame
@@ -48,7 +48,7 @@ public class ColdCell : BaseCell
 
     void FixedUpdate()
     {
-        base.Deplete(Time.fixedDeltaTime);
+        base.FixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
@@ -56,4 +56,17 @@ public class ColdCell : BaseCell
     {
 
     }
+	void Attack()
+	{
+		if(Vector3.Distance(transform.position, base.primaryTarget.transform.position) <= attackRange)
+		{
+			base.Attack (base.primaryTarget);
+		}
+	}
+	void Consume()
+	{
+		base.Consume(base.primaryTarget);
+	}
+
+
 }

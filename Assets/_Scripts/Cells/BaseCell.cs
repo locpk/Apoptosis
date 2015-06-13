@@ -5,14 +5,14 @@ using System.Collections.Generic;
 /// <summary>
 /// Cancer Chance
 /// </summary>
- public static class CancerChance
-    {
-        public const float LEVEL_1 = 0.0f;
-        public const float LEVEL_2 = 0.1f;
-        public const float LEVEL_3 = 0.2f;
-        public const float LEVEL_4 = 0.3f;
-        public const float LEVEL_5 = 0.4f;
-    }
+public static class CancerChance
+{
+    public const float LEVEL_1 = 0.0f;
+    public const float LEVEL_2 = 0.1f;
+    public const float LEVEL_3 = 0.2f;
+    public const float LEVEL_4 = 0.3f;
+    public const float LEVEL_5 = 0.4f;
+}
 
 /// <summary>
 /// Different Cell types
@@ -38,16 +38,22 @@ public enum CellState
 public class BaseCell : MonoBehaviour
 {
 
-    public  GameObject cancerCellPrefab;
+    public GameObject gCancerCellPrefab;
+    public GameObject gStemCellPrefab;
+    public GameObject gHeatCellPrefab;
+    public GameObject gColdCellPrefab;
+    public GameObject gAcidicCellPrefab;
+    public GameObject gAlkaliCellPrefab;
 
     public float MAX_PROTEIN = 500.0f;
-    public const float DEPLETE_TIME = 20.0f;
+    public const float DEPLETE_TIME = 1.0f;
     public const float ATTACK_COOLDOWN = 1.0f;
     /// <summary>
     /// Fields
     /// </summary>
     //
     public int currentLevel = 0;
+    public bool isSinglePlayer = true;
     public bool isMine;
     public bool isAlive = true;
     public bool isAIPossessed;
@@ -67,7 +73,7 @@ public class BaseCell : MonoBehaviour
     public float attackDamage;
     public float attackRange;
     public float defense;
-    public float depleteTimer = DEPLETE_TIME;
+    public float depleteTimer;
     public float depleteAmount = 3.0f; // pre second
     public float attackCooldown;
     public float splitCooldown;
@@ -164,21 +170,33 @@ public class BaseCell : MonoBehaviour
 
         Vector3 newposition = this.transform.position;
         newposition += Quaternion.Euler(0, 0, Random.Range(0, 360)) * new Vector3(GetComponent<SphereCollider>().radius, 0, 0);
-        GameObject newCell = GameObject.Instantiate(gameObject, newposition, Quaternion.identity) as GameObject;
-        this.currentProtein *= 0.5f;
-        switch (this.celltype)
+        GameObject newCell;
+        switch (celltype)
         {
             case CellType.STEM_CELL:
-                newCell.GetComponent<StemCell>().currentProtein = this.currentProtein;
-                newCell.GetComponent<StemCell>().currentLevel++;
+                newCell = GameObject.Instantiate(gStemCellPrefab, newposition, Quaternion.identity) as GameObject;
+                newCell.gameObject.transform.Rotate(90, -180, -180);
+                this.currentProtein *= 0.5f;
+                this.currentLevel++;
+                newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
+                newCell.GetComponent<BaseCell>().currentLevel++;
+                newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
                 break;
             case CellType.CANCER_CELL:
-                newCell.GetComponent<CancerCell>().currentProtein = this.currentProtein;
-                newCell.GetComponent<CancerCell>().currentLevel++;
+                newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.identity) as GameObject;
+                newCell.gameObject.transform.Rotate(90, -180, -180);
+                this.currentProtein *= 0.5f;
+                this.currentLevel++;
+                newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
+                newCell.GetComponent<BaseCell>().currentLevel++;
+                newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
                 break;
             default:
                 break;
         }
+
+
+
 
     }
 
@@ -223,18 +241,24 @@ public class BaseCell : MonoBehaviour
         GameObject newCell;
 
 
-        if (Random.Range(0.0f,1.0f) <= cancerousChance)
+        if (Random.Range(0.0f, 1.0f) > cancerousChance)
         {
-            newCell = GameObject.Instantiate(cancerCellPrefab, newposition, Quaternion.identity) as GameObject;
+
             switch (this.celltype)
             {
                 case CellType.HEAT_CELL:
+                    newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.identity) as GameObject;
+                    newCell.gameObject.transform.Rotate(90, -180, -180);
                     newCell.GetComponent<HeatCell>().currentProtein = this.currentProtein;
                     newCell.GetComponent<HeatCell>().currentLevel++;
+                    newCell.GetComponent<HeatCell>().navAgent.updateRotation = false;
                     break;
                 case CellType.COLD_CELL:
+                    newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.identity) as GameObject;
+                    newCell.gameObject.transform.Rotate(90, -180, -180);
                     newCell.GetComponent<ColdCell>().currentProtein = this.currentProtein;
                     newCell.GetComponent<ColdCell>().currentLevel++;
+                    newCell.GetComponent<ColdCell>().navAgent.updateRotation = false;
                     break;
                 default:
                     break;
@@ -242,12 +266,12 @@ public class BaseCell : MonoBehaviour
         }
         else
         {
-            newCell = GameObject.Instantiate(gameObject, newposition, Quaternion.identity) as GameObject;
+            newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.identity) as GameObject;
             newCell.GetComponent<CancerCell>().currentProtein = this.currentProtein;
         }
-       
-        
-        
+
+
+
     }
 
 
@@ -263,9 +287,13 @@ public class BaseCell : MonoBehaviour
 
 
     // Private Methods
-    void Awake()
+    protected void Awake()
     {
-
+        depleteTimer = DEPLETE_TIME;
+        if (isSinglePlayer)
+        {
+            GetComponent<PhotonView>().enabled = false;
+        }
         navAgent = GetComponent<NavMeshAgent>();
         photonView = GetComponent<PhotonView>();
         navObstacle = GetComponent<NavMeshObstacle>();
@@ -274,11 +302,21 @@ public class BaseCell : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start()
+    protected void Start()
     {
-
+        navAgent.enabled = true;
+        navAgent.updateRotation = false;
+        navObstacle.enabled = false;
     }
 
 
-
+    protected void FixedUpdate()
+    {
+        Deplete(Time.fixedDeltaTime);
+        if (currentProtein <= 0.0f)
+        {
+            currentProtein = 0.0f;
+        }
+        transform.FindChild("Health").transform.localScale = new Vector3(0.8f * currentProtein / MAX_PROTEIN, 0.8f * currentProtein / MAX_PROTEIN, 0.8f * currentProtein / MAX_PROTEIN);
+    }
 }
