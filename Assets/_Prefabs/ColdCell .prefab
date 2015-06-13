@@ -14,11 +14,10 @@ GameObject:
   - 135: {fileID: 13520958}
   - 208: {fileID: 20888316}
   - 114: {fileID: 11447996}
-  - 114: {fileID: 11435476}
   - 114: {fileID: 11434674}
   m_Layer: 0
   m_Name: 'ColdCell '
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +32,7 @@ GameObject:
   - 4: {fileID: 441596}
   - 212: {fileID: 21236518}
   m_Layer: 0
-  m_Name: Health
+  m_Name: Neucleus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100116}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -.00300000003, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 441596}
@@ -122,17 +121,6 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 1
   splitCooldown: 0
---- !u!114 &11435476
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ecea618faa56264090ee63fc8918e04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11447996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -284,6 +272,14 @@ Prefab:
       propertyPath: ColdCell
       value: 
       objectReference: {fileID: 100116}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Unit
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Name
+      value: Neucleus
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100116}

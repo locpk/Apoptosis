@@ -4,6 +4,23 @@ using System.Collections.Generic;
 public class StemCell : BaseCell
 {
 
+
+    public override void Mutation(CellType _newType)
+    {
+
+        switch (_newType)
+        {
+            case CellType.HEAT_CELL:
+                // GameObject.Instantiate(whateverthetypeis, transform.position, Quaternion.identity);
+                break;
+            case CellType.COLD_CELL:
+                break;
+            default:
+                break;
+        }
+        base.Mutation(_newType);
+    }
+
     void Awake()
     {
 

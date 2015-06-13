@@ -1,10 +1,20 @@
 fileFormatVersion: 2
 guid: b917dd87f75102345baa76cd1c67fa08
-timeCreated: 1433802965
+timeCreated: 1434223149
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - gCancerCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
+  - gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
+  - gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
+  - gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
+  - gAcidicCellPrefab: {instanceID: 0}
+  - gAlkaliCellPrefab: {instanceID: 0}
+  - navAgent: {instanceID: 0}
+  - navObstacle: {instanceID: 0}
+  - primaryTarget: {instanceID: 0}
+  - photonView: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

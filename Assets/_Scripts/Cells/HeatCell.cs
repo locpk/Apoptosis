@@ -50,7 +50,7 @@ public class HeatCell : BaseCell
 		 {
 			if (splitCD >= 1.0f)
 			{
-			base.PerfectSplit();
+            base.CancerousSplit();
 			splitCD = 0;
 			}
 		}
