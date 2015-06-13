@@ -4,6 +4,7 @@ using System.Collections;
 public class PauseMenu : MonoBehaviour {
 
 	bool isPaused = false;
+    public int number = 1;
 
 	void Awake() {
 		
@@ -17,7 +18,7 @@ public class PauseMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
-			isPaused = !isPaused;
+			//RestartLevel();
 			//Debug.Log ("game paused");
 		}
 
@@ -39,4 +40,9 @@ public class PauseMenu : MonoBehaviour {
 	void LateUpdate() {
 		
 	}
+
+    public void LoadLevel()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
 }

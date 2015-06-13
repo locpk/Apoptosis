@@ -136,6 +136,7 @@ public class PlayerController : MonoBehaviour
     {
     }
 
+    //Made a pause menu script instead
     public void PauseMenu()
     {
     }
