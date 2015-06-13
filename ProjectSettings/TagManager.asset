@@ -7,6 +7,7 @@ TagManager:
   - Unit
   - MainCameraOffset
   - Area
+  - Neucleus
   layers:
   - Default
   - TransparentFX

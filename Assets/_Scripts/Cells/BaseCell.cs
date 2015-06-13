@@ -97,35 +97,14 @@ public class BaseCell : MonoBehaviour
     public virtual void Move(Vector3 _destination)
     {
         //Move only there is a path.
-        if (primaryTarget != null)
-        {
-            Debug.Log(targets);
-            Debug.Log(primaryTarget);
-            GetComponent<BaseCell>().navAgent.enabled = true;
-            GetComponent<BaseCell>().navObstacle.enabled = false;
-        }
-        GetComponent<BaseCell>().navAgent.enabled = true;
-        GetComponent<BaseCell>().navObstacle.enabled = false;
-        GetComponent<BaseCell>().navAgent.SetDestination(_destination);
-        if ((GetComponent<BaseCell>().navAgent.destination - GetComponent<HeatCell>().transform.position).sqrMagnitude < Mathf.Pow(GetComponent<HeatCell>().navAgent.stoppingDistance, 2))
-        {
-            Debug.Log(GetComponent<BaseCell>().navAgent.enabled);
-            Debug.Log(GetComponent<BaseCell>().navObstacle.enabled);
-            GetComponent<BaseCell>().navAgent.enabled = false;
-            GetComponent<BaseCell>().navObstacle.enabled = true;
-     //       Debug.Log("MADE IT");
-        }
-
-        
-
+        currentState = CellState.MOVING;
+        navAgent.enabled = true;
+        navObstacle.enabled = false;
+       navAgent.SetDestination(_destination);
 
     }
 
-    public virtual void Move()
-    {
-
-
-    }
+ 
 
     public virtual void AttackMove(Vector3 _destination)
     {
@@ -164,6 +143,10 @@ public class BaseCell : MonoBehaviour
         }
 
     }
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 
     public virtual void Attack(GameObject _target)
     {
@@ -185,7 +168,7 @@ public class BaseCell : MonoBehaviour
 
         Vector3 newposition = this.transform.position;
      
-        newposition += Quaternion.Euler(0, 0, Random.Range(0, 360)) * new Vector3(GetComponent<SphereCollider>().radius, 0, 0);
+        newposition += Quaternion.Euler(0, 0, Random.Range(0, 360)) * new Vector3(GetComponent<SphereCollider>().radius *0.1f, 0, 0);
         GameObject newCell;
         switch (celltype)
         {
@@ -248,7 +231,7 @@ public class BaseCell : MonoBehaviour
 
         //Get a new position around myself
         Vector3 newposition = this.transform.position;
-       newposition += Quaternion.Euler(0, 0, Random.Range(0, 360)) * new Vector3(GetComponent<SphereCollider>().radius/10, 0, 0);
+        newposition += Quaternion.Euler(0, 0, Random.Range(0, 360)) * new Vector3(GetComponent<SphereCollider>().radius * 0.1f, 0.0f, 0.0f);
 
         //half my protein
         this.currentProtein *= 0.5f;
@@ -332,7 +315,7 @@ public class BaseCell : MonoBehaviour
         photonView = GetComponent<PhotonView>();
         navObstacle = GetComponent<NavMeshObstacle>();
         navAgent.speed = moveSpeed;
-        isMine = photonView.isMine;
+      //  isMine = photonView.isMine;
     }
 
     // Use this for initialization
@@ -351,6 +334,18 @@ public class BaseCell : MonoBehaviour
         {
             currentProtein = 0.0f;
         }
-        transform.FindChild("Nucleus").transform.localScale = new Vector3(0.8f * currentProtein / MAX_PROTEIN, 0.8f * currentProtein / MAX_PROTEIN, 0.8f * currentProtein / MAX_PROTEIN);
+
+        if (currentState == CellState.MOVING)
+        {
+            if (Vector3.Distance(navAgent.destination, transform.position) <= navAgent.stoppingDistance || !navAgent.CalculatePath(navAgent.destination, new NavMeshPath()))
+            {
+                navAgent.enabled = false;
+                navObstacle.enabled = true;
+                currentState = CellState.IDLE;
+            }
+            
+        }
+       
+       // transform.FindChild("Nucleus").transform.localScale = new Vector3(0.8f * currentProtein / MAX_PROTEIN, 0.8f * currentProtein / MAX_PROTEIN, 0.8f * currentProtein / MAX_PROTEIN);
     }
 }

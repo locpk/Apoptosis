@@ -46,6 +46,7 @@ public class StemCell : BaseCell
             case CellState.ATTACK_MOVING:
                 break;
             case CellState.DEAD:
+                base.Die();
                 break;
             case CellState.CANCEROUS_SPLITTING:
                 break;

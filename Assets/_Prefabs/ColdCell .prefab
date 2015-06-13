@@ -31,9 +31,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 441596}
   - 212: {fileID: 21236518}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Neucleus
-  m_TagString: Untagged
+  m_TagString: Neucleus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -274,7 +274,7 @@ Prefab:
       objectReference: {fileID: 100116}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Unit
+      value: Neucleus
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Name
@@ -296,6 +296,10 @@ Prefab:
       propertyPath: gColdCellPrefab
       value: 
       objectReference: {fileID: 100116}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100116}

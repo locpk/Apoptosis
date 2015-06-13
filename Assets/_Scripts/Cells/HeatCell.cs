@@ -85,20 +85,5 @@ public class HeatCell : BaseCell
 		base.Consume (base.primaryTarget);
 	}
 
-    public override void Move(Vector3 whereImgoing)
-    {
-        RaycastHit hit; 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit, 50))
-        {
-          
-            navObstacle.enabled = false;
-            navAgent.enabled = true;
 
-            whereImgoing = hit.point;
-            base.Move(whereImgoing);
-
-        }
-        
-    }
 }
