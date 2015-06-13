@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6a58b969a86dd4a8ee70b7ccfa010b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gCancerCellPrefab: {fileID: 174676}
+  gCancerCellPrefab: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
   gStemCellPrefab: {fileID: 174676}
   gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
   gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
@@ -260,7 +260,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: gCancerCellPrefab
       value: 
-      objectReference: {fileID: 174676}
+      objectReference: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
     - target: {fileID: 0}
       propertyPath: gStemCellPrefab
       value: 

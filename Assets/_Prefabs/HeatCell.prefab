@@ -17,7 +17,7 @@ GameObject:
   - 114: {fileID: 11413980}
   m_Layer: 0
   m_Name: HeatCell
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,7 +45,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -.0160000008, y: .0199999996, z: .293000013}
+  m_LocalPosition: {x: .893000007, y: 1, z: -.936999977}
   m_LocalScale: {x: .0299999993, y: .0299999993, z: .0299999993}
   m_Children:
   - {fileID: 495744}
@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a012dff7dc71a14d8606e3f6813704b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gCancerCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
-  gStemCellPrefab: {fileID: 0}
+  gCancerCellPrefab: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
+  gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
   gHeatCellPrefab: {fileID: 174676}
   gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
   gAcidicCellPrefab: {fileID: 0}
@@ -272,6 +272,14 @@ Prefab:
       propertyPath: m_Radius
       value: 4.92000008
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gCancerCellPrefab
+      value: 
+      objectReference: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
+    - target: {fileID: 0}
+      propertyPath: gStemCellPrefab
+      value: 
+      objectReference: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174676}

@@ -90,9 +90,8 @@ public class BaseCell : MonoBehaviour
     }
     #endregion
 
-<<<<<<< HEAD
+
     #region Standard Actions
-=======
     // Public Methods
 
     public virtual void Move(Vector3 _destination)
