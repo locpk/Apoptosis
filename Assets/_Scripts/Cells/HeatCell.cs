@@ -3,16 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 public class HeatCell : BaseCell
 {
-
+	float splitCD = 0;
     void Awake()
     {
-
+		base.Awake ();
     }
 
     // Use this for initialization
     void Start()
     {
 
+		base.Start ();
     }
 
     // Update is called once per frame
@@ -43,11 +44,21 @@ public class HeatCell : BaseCell
             default:
                 break;
         }
+		splitCD += Time.deltaTime;
+
+		if(Input.GetKey(KeyCode.D))
+		 {
+			if (splitCD >= 1.0f)
+			{
+			base.PerfectSplit();
+			splitCD = 0;
+			}
+		}
     }
 
     void FixedUpdate()
     {
-        base.Deplete(Time.fixedDeltaTime);
+        base.FixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
