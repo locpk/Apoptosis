@@ -14,8 +14,9 @@ public class PlayerController : MonoBehaviour
     System.Collections.Generic.List<BaseCell> selectedUnits;
     GameObject selectedTarget;
     System.Collections.Generic.List<BaseCell>[] groups;
+    public Texture selector;
 
-    Rect selectionRect;
+    Rect GUISelectRect;
 
     void Awake()
     {
@@ -35,7 +36,6 @@ public class PlayerController : MonoBehaviour
                 allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
             }
         }
-        selectionRect = new Rect();
     }
 
     public System.Collections.Generic.List<GameObject> GetAllSelectableObjects()
@@ -50,7 +50,16 @@ public class PlayerController : MonoBehaviour
 
     public void UnitSelection()
     {
-        selectionRect.size.Set(selectionRect.x - Input.mousePosition.x, selectionRect.y - Input.mousePosition.y);
+        GUISelectRect.xMax = Input.mousePosition.x;
+        GUISelectRect.yMax = -Input.mousePosition.y + Screen.height;
+        selectedUnits.Clear();
+        foreach (BaseCell item in allSelectableUnits)
+        {
+            if (GUISelectRect.Contains(Camera.main.WorldToScreenPoint(item.transform.position)))
+            {
+                selectedUnits.Add(item);
+            }
+        }
     }
 
     public void UnitMove()
@@ -129,6 +138,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnGUI()
     {
+        if (GUISelectRect.height != 0)
+        {
+            GUI.DrawTexture(GUISelectRect, selector);
+        }
     }
 
     public void FixedUpdate()
@@ -150,57 +163,61 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("D")) // If the player presses D
+        Vector3 topleft = new Vector3(GUISelectRect.xMin, GUISelectRect.yMin, Camera.main.transform.position.z);
+        Vector3 bottomright = new Vector3(GUISelectRect.xMax, GUISelectRect.yMin, Camera.main.transform.position.z);
+        if (Input.GetKeyDown(KeyCode.D)) // If the player presses D
         {
             UnitSplit();
         }
 
-        if (Input.GetKeyDown("S")) // If the player presses S
+        if (Input.GetKeyDown(KeyCode.S)) // If the player presses S
         {
             UnitStop();
         }
 
-        if (Input.GetKeyDown("C")) // If the player presses C
+        if (Input.GetKeyDown(KeyCode.C)) // If the player presses C
         {
             foreach (StemCell item in selectedUnits) // For each of the player's selected units
             {
-                //item.Mutate(CellType.ACIDIC_CELL)
+                //item.Mutation(CellType.ACIDIC_CELL)
             }
         }
 
-        if (Input.GetKeyDown("X")) // If the player presses X
+        if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
         {
             foreach (StemCell item in selectedUnits) // For each of the player's selected units
             {
-                //item.Mutate(CellType.HEAT_CELL)
+                //item.Mutation(CellType.HEAT_CELL)
             }
         }
 
-        if (Input.GetKeyDown("V")) // If the player presses V
+        if (Input.GetKeyDown(KeyCode.V)) // If the player presses V
         {
             foreach (StemCell item in selectedUnits)
             {
-                //item.Mutate(CellType.ALKALI_CELL)
+                //item.Mutation(CellType.ALKALI_CELL)
             }
         }
 
-        if (Input.GetKeyDown("Z")) // If the player presses Z
+        if (Input.GetKeyDown(KeyCode.Z)) // If the player presses Z
         {
             foreach (StemCell item in selectedUnits)
             {
-                //item.Mutate(CellType.COLD_CELL)
+                //item.Mutation(CellType.COLD_CELL)
             }
         }
 
-        if (Input.GetMouseButtonDown(1)) // If the player left-clicks
+        if (Input.GetMouseButtonDown(0)) // If the player left-clicks
         {
-            selectionRect.position.Set(Input.mousePosition.x, Input.mousePosition.y);
+            GUISelectRect.xMin = Input.mousePosition.x;
+            GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
         }
-        else if (Input.GetMouseButtonUp(1)) // When the player releases left-click
+        else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
         {
-
+            GUISelectRect.yMax = GUISelectRect.yMin;
+            GUISelectRect.xMax = GUISelectRect.xMin;
         }
-        else if (Input.GetMouseButton(1)) // If the player has left-click held down
+        else if (Input.GetMouseButton(0)) // If the player has left-click held down
         {
             UnitSelection();
         }
