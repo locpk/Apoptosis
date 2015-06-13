@@ -159,13 +159,57 @@ public class PlayerController : MonoBehaviour
     {
     }
 
+    public void UnitStop()
+    {
+        foreach (BaseCell item in selectedUnits)
+        {
+            //item.Stop();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        // MouseFeedback();
+        if (Input.GetKeyDown("D"))
+        {
+            UnitSplit();
+        }
+
+        if (Input.GetKeyDown("S"))
+        {
+            UnitStop();
+        }
+
+        if (Input.GetKeyDown("C"))
+        {
+            foreach (StemCell item in selectedUnits)
+            {
+                //item.Mutate(CellType.ALKALI_CELL)
+            }
+        }
+
+        if (Input.GetKeyDown("X"))
+        {
+
+        }
+
+        if (Input.GetKeyDown("V"))
+        {
+
+        }
+
+        if (Input.GetKeyDown("Z"))
+        {
+
+        }
+
         if (Input.GetMouseButtonDown(1))
         {
             selectionRect.position.Set(Input.mousePosition.x, Input.mousePosition.y);
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+
         }
         else if (Input.GetMouseButton(1))
         {
