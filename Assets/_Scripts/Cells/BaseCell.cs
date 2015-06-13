@@ -95,7 +95,6 @@ public class BaseCell : MonoBehaviour
 =======
     // Public Methods
 
->>>>>>> origin/JameelKnight
     public virtual void Move(Vector3 _destination)
     {
         //Move only there is a path.

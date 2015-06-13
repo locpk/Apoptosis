@@ -55,11 +55,7 @@ public class HeatCell : BaseCell
 		 {
 			if (splitCD >= 1.0f)
 			{
-<<<<<<< HEAD
-            base.CancerousSplit();
-=======
 			base.CancerousSplit();
->>>>>>> origin/JameelKnight
 			splitCD = 0;
 			}
 		}
