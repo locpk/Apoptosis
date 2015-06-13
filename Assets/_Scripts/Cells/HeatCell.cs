@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class HeatCell : BaseCell
 {
 	float splitCD = 0;
+
     void Awake()
     {
 		base.Awake ();
@@ -45,15 +46,20 @@ public class HeatCell : BaseCell
                 break;
         }
 		splitCD += Time.deltaTime;
-
+        if (Input.GetMouseButtonUp(1))
+        {
+            Move(new Vector3());
+        }
+     
 		if(Input.GetKey(KeyCode.D))
 		 {
 			if (splitCD >= 1.0f)
 			{
-			base.PerfectSplit();
+			base.CancerousSplit();
 			splitCD = 0;
 			}
 		}
+      
     }
 
     void FixedUpdate()
@@ -67,7 +73,7 @@ public class HeatCell : BaseCell
 
     }
 
-	void Attack()
+	public override void Attack(GameObject _target)
 	{
 		if(Vector3.Distance(transform.position, base.primaryTarget.transform.position) <= attackRange)
 		{
@@ -78,4 +84,21 @@ public class HeatCell : BaseCell
 	{
 		base.Consume (base.primaryTarget);
 	}
+
+    public override void Move(Vector3 whereImgoing)
+    {
+        RaycastHit hit; 
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if(Physics.Raycast(ray, out hit, 50))
+        {
+          
+            navObstacle.enabled = false;
+            navAgent.enabled = true;
+
+            whereImgoing = hit.point;
+            base.Move(whereImgoing);
+
+        }
+        
+    }
 }
