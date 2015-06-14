@@ -4,27 +4,42 @@ using System.Collections.Generic;
 
 public class BaseArea : MonoBehaviour {
 
+    private float effectTimer;
+    private float effectAmount;
 
-	void Awake() {
+    public float EffectTimer {
+        get { return effectTimer; }
+        set { effectTimer = value; }
+    }
+
+    public float EffectAmount {
+        get { return effectAmount; }
+        set { effectAmount = value; }
+    }
+
+    public virtual void OnTriggerStay(Collider other) {
+        if (/** other.gameObject.tag == "" **/false) {
+            // TO-DO
+        }
+    }
+    
+	public virtual void Awake() {
         
     }
 
-	// Use this for initialization
-	void Start () {
+	public virtual void Start () {
 	
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	public virtual void Update () {
 	
 	}
 
-	void FixedUpdate() {
+	public virtual void FixedUpdate() {
        
     }
 
-	//LateUpdate is called after all Update functions have been called
-	void LateUpdate() {
+	public virtual void LateUpdate() {
         
     }
 }

@@ -292,6 +292,10 @@ Prefab:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 92d3cda65ae00354f9425494133fb6cf, type: 3}
+      propertyPath: m_TagString
+      value: Collider_Heat
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3300000, guid: 92d3cda65ae00354f9425494133fb6cf, type: 3}
     - {fileID: 2300000, guid: 92d3cda65ae00354f9425494133fb6cf, type: 3}
@@ -301,6 +305,22 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 92d3cda65ae00354f9425494133fb6cf, type: 3}
   m_PrefabInternal: {fileID: 235883772}
+--- !u!1 &235883774 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 92d3cda65ae00354f9425494133fb6cf, type: 3}
+  m_PrefabInternal: {fileID: 235883772}
+--- !u!114 &235883775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 235883774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c18ba72b6e08c429d584143c6f3aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerSecond: 0
 --- !u!1 &283634585
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,6 +537,10 @@ Prefab:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9a2c51f106dfd044fa445cbe61c1d601, type: 3}
+      propertyPath: m_TagString
+      value: Collider_Acidic
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3300000, guid: 9a2c51f106dfd044fa445cbe61c1d601, type: 3}
     - {fileID: 2300000, guid: 9a2c51f106dfd044fa445cbe61c1d601, type: 3}
@@ -526,6 +550,22 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 9a2c51f106dfd044fa445cbe61c1d601, type: 3}
   m_PrefabInternal: {fileID: 891497873}
+--- !u!1 &891497875 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 9a2c51f106dfd044fa445cbe61c1d601, type: 3}
+  m_PrefabInternal: {fileID: 891497873}
+--- !u!114 &891497876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 891497875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdee0aba1a054c2488c81f776d1f8df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerSecond: 0
 --- !u!1001 &1021674657
 Prefab:
   m_ObjectHideFlags: 0
@@ -585,6 +625,10 @@ Prefab:
       propertyPath: m_Name
       value: Dense
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 13ea420df5aee7b49ab4ac2549b5dc20, type: 3}
+      propertyPath: m_TagString
+      value: Collider_Dense
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3300000, guid: 13ea420df5aee7b49ab4ac2549b5dc20, type: 3}
     - {fileID: 2300000, guid: 13ea420df5aee7b49ab4ac2549b5dc20, type: 3}
@@ -594,6 +638,22 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 13ea420df5aee7b49ab4ac2549b5dc20, type: 3}
   m_PrefabInternal: {fileID: 1021674657}
+--- !u!1 &1021674659 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 13ea420df5aee7b49ab4ac2549b5dc20, type: 3}
+  m_PrefabInternal: {fileID: 1021674657}
+--- !u!114 &1021674660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1021674659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6dd98929ad18a3459117fe2a034d5c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerSecond: 0
 --- !u!1001 &1032341848
 Prefab:
   m_ObjectHideFlags: 0
@@ -793,6 +853,10 @@ Prefab:
       propertyPath: m_Name
       value: Acidic-1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5d3119eed75941e498a56ce6dbaed804, type: 3}
+      propertyPath: m_TagString
+      value: Collider_Acidic
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3300000, guid: 5d3119eed75941e498a56ce6dbaed804, type: 3}
     - {fileID: 2300000, guid: 5d3119eed75941e498a56ce6dbaed804, type: 3}
@@ -802,6 +866,22 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 5d3119eed75941e498a56ce6dbaed804, type: 3}
   m_PrefabInternal: {fileID: 1611770710}
+--- !u!1 &1611770712 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 5d3119eed75941e498a56ce6dbaed804, type: 3}
+  m_PrefabInternal: {fileID: 1611770710}
+--- !u!114 &1611770713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1611770712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdee0aba1a054c2488c81f776d1f8df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerSecond: 0
 --- !u!1001 &1966312491
 Prefab:
   m_ObjectHideFlags: 0
@@ -861,6 +941,10 @@ Prefab:
       propertyPath: m_Name
       value: Cold
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3700bba3d2d4f064e92cc08b13d47965, type: 3}
+      propertyPath: m_TagString
+      value: Collider_Cold
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3300000, guid: 3700bba3d2d4f064e92cc08b13d47965, type: 3}
     - {fileID: 2300000, guid: 3700bba3d2d4f064e92cc08b13d47965, type: 3}
@@ -870,6 +954,22 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 3700bba3d2d4f064e92cc08b13d47965, type: 3}
   m_PrefabInternal: {fileID: 1966312491}
+--- !u!1 &1966312493 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 3700bba3d2d4f064e92cc08b13d47965, type: 3}
+  m_PrefabInternal: {fileID: 1966312491}
+--- !u!114 &1966312494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1966312493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6d043a6b410bd478e25f5f8f2f5813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerSecond: 0
 --- !u!1001 &1980903566
 Prefab:
   m_ObjectHideFlags: 0
@@ -933,6 +1033,10 @@ Prefab:
       propertyPath: m_Name
       value: Alkali
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 67640fee8b704824b9b2c6d10019b99f, type: 3}
+      propertyPath: m_TagString
+      value: Collider_Alkali
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3300000, guid: 67640fee8b704824b9b2c6d10019b99f, type: 3}
     - {fileID: 2300000, guid: 67640fee8b704824b9b2c6d10019b99f, type: 3}
@@ -942,3 +1046,19 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 67640fee8b704824b9b2c6d10019b99f, type: 3}
   m_PrefabInternal: {fileID: 1980903566}
+--- !u!1 &1980903568 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 67640fee8b704824b9b2c6d10019b99f, type: 3}
+  m_PrefabInternal: {fileID: 1980903566}
+--- !u!114 &1980903569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1980903568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e216ce44e86399343890261ae5485d5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerSecond: 0
