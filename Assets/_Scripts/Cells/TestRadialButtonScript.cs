@@ -8,8 +8,8 @@ public class TestRadialButtonScript : MonoBehaviour {
 	//get mouse position for creating buttons
 	Vector3 mousePosition;
 	bool objectClicked = false;
-	Vector3 objectPosition;
-	Rect heatButton;
+	//Vector3 objectPosition;
+	//Rect heatButton;
 
 
 	void Awake(){
