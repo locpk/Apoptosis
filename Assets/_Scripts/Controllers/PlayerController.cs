@@ -149,6 +149,12 @@ public class PlayerController : MonoBehaviour
         {
             GUI.DrawTexture(GUISelectRect, selector);
         }
+        foreach (BaseCell item in selectedUnits)
+        {
+            Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
+            Rect location = new Rect((float)(drawLoc.x - .1), (float)(drawLoc.y - .1), (float)(drawLoc.x + .1), (float)(drawLoc.y + .1));
+            GUI.DrawTexture(location, selector);
+        }
     }
 
     public void FixedUpdate()
