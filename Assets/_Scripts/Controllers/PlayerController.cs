@@ -64,10 +64,17 @@ public class PlayerController : MonoBehaviour
 
     public void UnitMove()
     {
-        foreach (BaseCell item in selectedUnits) // For each of the player's selected units
+        for (int i = 0; i < selectedUnits.Count; i++)
         {
-            item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Set their destination
+            double w = .1 * System.Math.Sqrt(i);
+            double t = 2 * System.Math.PI * i;
+            double x = w * System.Math.Cos(t);
+            double y = w * System.Math.Sin(t);
+            Vector3 newPos = Input.mousePosition;
+            newPos.Set((float)(newPos.x + x), (float)(newPos.y + y), newPos.z);
+            selectedUnits[i].Move(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Set their destination
         }
+
     }
 
     public void UnitAttack()
