@@ -174,14 +174,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d09384ec709d7043bd7d2a1c74e3315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -100
-  maxX: 100
+  minX: -95
+  maxX: 95
   minY: -100
   maxY: 100
   scrollSpeed: 40
   scrollPercentage: .0500000007
-  minZoom: 8
-  maxZoom: 16
+  minZoom: 10
+  maxZoom: 18
 --- !u!124 &12436434
 Behaviour:
   m_ObjectHideFlags: 1
