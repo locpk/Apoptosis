@@ -5,20 +5,19 @@ public class HeatCell : BaseCell
 {
 	float splitCD = 0;
 
-    void Awake()
+    new void Awake()
     {
 		base.Awake ();
     }
 
     // Use this for initialization
-    void Start()
+    new void Start()
     {
-
 		base.Start ();
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         switch (currentState)
         {
@@ -48,7 +47,7 @@ public class HeatCell : BaseCell
 		splitCD += Time.deltaTime;
         if (Input.GetMouseButtonUp(1))
         {
-            Move(new Vector3());
+            Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
      
 		if(Input.GetKey(KeyCode.D))
@@ -62,13 +61,13 @@ public class HeatCell : BaseCell
       
     }
 
-    void FixedUpdate()
+    new void FixedUpdate()
     {
         base.FixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
-    void LateUpdate()
+    new void LateUpdate()
     {
 
     }
@@ -80,10 +79,7 @@ public class HeatCell : BaseCell
 		base.Attack (base.primaryTarget);
 		}
 	}
-	void Consume()
-	{
-		base.Consume (base.primaryTarget);
-	}
+
 
 
 }

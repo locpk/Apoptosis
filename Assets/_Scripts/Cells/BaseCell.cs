@@ -28,7 +28,7 @@ public enum CellType
 /// </summary>
 public enum CellState
 {
-    IDLE, ATTACK, MOVING, ATTACK_MOVING, DEAD, CANCEROUS_SPLITTING, PERFECT_SPLITTING, EVOLVING, INCUBATING, MERGING,
+    IDLE, ATTACK, MOVING, CONSUMING, ATTACK_MOVING, DEAD, CANCEROUS_SPLITTING, PERFECT_SPLITTING, EVOLVING, INCUBATING, MERGING,
 }
 
 
@@ -48,6 +48,7 @@ public class BaseCell : MonoBehaviour
     public float MAX_PROTEIN = 500.0f;
     public const float DEPLETE_TIME = 1.0f;
     public const float ATTACK_COOLDOWN = 1.0f;
+    public const float moveSpeed = 3.0f;
     /// <summary>
     /// Fields
     /// </summary>
@@ -68,13 +69,12 @@ public class BaseCell : MonoBehaviour
     public GameObject primaryTarget;
     public PhotonView photonView;
     public float currentProtein;
-    public float moveSpeed;
     public float fovRadius;
     public float attackDamage;
     public float attackRange;
     public float defense;
     public float depleteTimer;
-    public float depleteAmount = 3.0f; // pre second
+    public float depleteAmount = 3.0f; // per second
     public float attackCooldown;
     public float splitCooldown;
 
@@ -98,13 +98,17 @@ public class BaseCell : MonoBehaviour
     {
         //Move only there is a path.
         currentState = CellState.MOVING;
-        navAgent.enabled = true;
         navObstacle.enabled = false;
-       navAgent.SetDestination(_destination);
+        navAgent.enabled = true;
+        destination = _destination;
+        navAgent.SetDestination(_destination);
 
     }
 
- 
+    public void SetSpeed(float _speed)
+    {
+        navAgent.speed = _speed;
+    }
 
     public virtual void AttackMove(Vector3 _destination)
     {
@@ -167,8 +171,8 @@ public class BaseCell : MonoBehaviour
         }
 
         Vector3 newposition = this.transform.position;
-     
-        newposition += Quaternion.Euler(0, 0, Random.Range(0, 360)) * new Vector3(GetComponent<SphereCollider>().radius *0.1f, 0, 0);
+
+        newposition += Quaternion.Euler(0, 0, Random.Range(0, 360)) * new Vector3(GetComponent<SphereCollider>().radius * 0.1f, 0, 0);
         GameObject newCell;
         switch (celltype)
         {
@@ -293,7 +297,7 @@ public class BaseCell : MonoBehaviour
 
 
 
-    protected void Deplete(float _deltaTime)
+    public void Deplete(float _deltaTime)
     {
         depleteTimer -= _deltaTime;
         if (depleteTimer <= 0.0f)
@@ -312,40 +316,68 @@ public class BaseCell : MonoBehaviour
             GetComponent<PhotonView>().enabled = false;
         }
         navAgent = GetComponent<NavMeshAgent>();
-        photonView = GetComponent<PhotonView>();
         navObstacle = GetComponent<NavMeshObstacle>();
         navAgent.speed = moveSpeed;
-      //  isMine = photonView.isMine;
+        photonView = GetComponent<PhotonView>();
+        //  isMine = photonView.isMine;
     }
 
     // Use this for initialization
     protected void Start()
     {
-        GetComponent<BaseCell>().navAgent.enabled = false;
-        GetComponent<BaseCell>().navAgent.updateRotation = false;
-        GetComponent<BaseCell>().navObstacle.enabled = true;
+        navAgent.enabled = false;
+        navAgent.updateRotation = false;
+        navObstacle.enabled = true;
     }
 
+    protected void Update()
+    {
+
+    }
 
     protected void FixedUpdate()
     {
         Deplete(Time.fixedDeltaTime);
         if (currentProtein <= 0.0f)
         {
-            currentProtein = 0.0f;
+            currentState = CellState.DEAD;
         }
 
         if (currentState == CellState.MOVING)
         {
-            if (Vector3.Distance(navAgent.destination, transform.position) <= navAgent.stoppingDistance || !navAgent.CalculatePath(navAgent.destination, new NavMeshPath()))
+
+            if (!navAgent.pathPending)
             {
-                navAgent.enabled = false;
-                navObstacle.enabled = true;
-                currentState = CellState.IDLE;
+                if (navAgent.remainingDistance <= navAgent.stoppingDistance)
+                {
+                    if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
+                    {
+                        currentState = CellState.IDLE;
+                        navAgent.enabled = false;
+                        navObstacle.enabled = true;
+                    }
+                }
             }
-            
+            //if  (Mathf.Abs(Vector3.Distance(destination, transform.position)) <= 1.1f)
+            //{
+
+            //    navAgent.enabled = false;
+
+            //    navObstacle.enabled = true;
+            //    //currentState = CellState.IDLE;
+
+            //}
+
         }
-       
-       // transform.FindChild("Nucleus").transform.localScale = new Vector3(0.8f * currentProtein / MAX_PROTEIN, 0.8f * currentProtein / MAX_PROTEIN, 0.8f * currentProtein / MAX_PROTEIN);
+
+
+
+
+        // transform.FindChild("Nucleus").transform.localScale = new Vector3(0.8f * currentProtein / MAX_PROTEIN, 0.8f * currentProtein / MAX_PROTEIN, 0.8f * currentProtein / MAX_PROTEIN);
+    }
+
+    protected void LateUpdate()
+    {
+
     }
 }
