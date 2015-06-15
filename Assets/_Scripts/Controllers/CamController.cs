@@ -89,6 +89,7 @@ public class CamController : MonoBehaviour {
             transform.position = boundPos;
             if (isScrolled)
                 smoothFocusTarget = transform.position;
+            
 
         } else if (mode == CameraMode.FocusView) {
             Camera camera = GetComponentInChildren<Camera>();
