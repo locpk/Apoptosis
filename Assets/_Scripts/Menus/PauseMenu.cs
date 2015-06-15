@@ -4,16 +4,17 @@ using System.Collections;
 public class PauseMenu : MonoBehaviour {
 
 	bool isPaused = false;
-    //test number to see if the variable got reset
-    public int number;
+    //get the pause menu
+    public GameObject pauseMenu;
+
 
 	void Awake() {
-        number = 1;
+        isPaused = false;
 	}
 
 	// Use this for initialization
 	void Start () {
-	
+        isPaused = false;	
 	}
 	
 	// Update is called once per frame
@@ -23,15 +24,24 @@ public class PauseMenu : MonoBehaviour {
 			//Debug.Log ("game paused");
 		}
 
+        //check if game is paused or not
 		if (isPaused) {
-			//Debug.Log ("game paused");
+			Debug.Log ("game paused");
+            //set the pause menu to true
+            pauseMenu.SetActive(true);
 			Time.timeScale = 0.0f;
 		} else {
-			//Debug.Log ("game resumed");
+			Debug.Log ("game resumed");
+            //turn the pause menu off
+            pauseMenu.SetActive(false);
 			Time.timeScale = 1.0f;
 		}
 	
 	}
+
+    public void ContinuePlaying(){
+        isPaused = false;
+    }
 	
 	void FixedUpdate() {
 		
@@ -51,6 +61,7 @@ public class PauseMenu : MonoBehaviour {
     void OnLevelWasLoaded()
     {
         //Any variables that need to be reset should be reset in this function
+        isPaused = false;
 
     }
 }
