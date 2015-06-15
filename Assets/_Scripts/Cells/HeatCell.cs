@@ -3,20 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 public class HeatCell : BaseCell
 {
+	float splitCD = 0;
 
-    void Awake()
+    new void Awake()
     {
-
+		base.Awake ();
     }
 
     // Use this for initialization
-    void Start()
+    new void Start()
     {
-
+		base.Start ();
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         switch (currentState)
         {
@@ -29,6 +30,7 @@ public class HeatCell : BaseCell
             case CellState.ATTACK_MOVING:
                 break;
             case CellState.DEAD:
+                base.Die();
                 break;
             case CellState.CANCEROUS_SPLITTING:
                 break;
@@ -43,18 +45,42 @@ public class HeatCell : BaseCell
             default:
                 break;
         }
+		splitCD += Time.deltaTime;
+        if (Input.GetMouseButtonUp(1))
+        {
+            Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        }
+     
+		if(Input.GetKey(KeyCode.D))
+		 {
+			if (splitCD >= 1.0f)
+			{
+			base.CancerousSplit();
+			splitCD = 0;
+			}
+		}
+        base.Update();
     }
 
-    void FixedUpdate()
+    new void FixedUpdate()
     {
-        base.Deplete(Time.fixedDeltaTime);
+        base.FixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
-    void LateUpdate()
+    new void LateUpdate()
     {
 
     }
+
+	public override void Attack(GameObject _target)
+	{
+		if(Vector3.Distance(transform.position, base.primaryTarget.transform.position) <= attackRange)
+		{
+		base.Attack (base.primaryTarget);
+		}
+	}
+
 
 
 }

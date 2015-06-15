@@ -1,10 +1,20 @@
 fileFormatVersion: 2
 guid: b917dd87f75102345baa76cd1c67fa08
-timeCreated: 1433802965
+timeCreated: 1434236410
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - gCancerCellPrefab: {instanceID: 0}
+  - gStemCellPrefab: {instanceID: 0}
+  - gHeatCellPrefab: {instanceID: 0}
+  - gColdCellPrefab: {instanceID: 0}
+  - gAcidicCellPrefab: {instanceID: 0}
+  - gAlkaliCellPrefab: {instanceID: 0}
+  - navAgent: {instanceID: 0}
+  - navObstacle: {instanceID: 0}
+  - primaryTarget: {instanceID: 0}
+  - photonView: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
