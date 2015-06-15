@@ -332,17 +332,6 @@ public class BaseCell : MonoBehaviour
 
     protected void Update()
     {
-
-    }
-
-    protected void FixedUpdate()
-    {
-        Deplete(Time.fixedDeltaTime);
-        if (currentProtein <= 0.0f)
-        {
-            currentState = CellState.DEAD;
-        }
-
         if (currentState == CellState.MOVING)
         {
 
@@ -353,22 +342,36 @@ public class BaseCell : MonoBehaviour
                     if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
                     {
                         currentState = CellState.IDLE;
+                        navAgent.SetDestination(transform.position);
                         navAgent.enabled = false;
                         navObstacle.enabled = true;
                     }
                 }
             }
-            //if  (Mathf.Abs(Vector3.Distance(destination, transform.position)) <= 1.1f)
-            //{
-
-            //    navAgent.enabled = false;
-
-            //    navObstacle.enabled = true;
-            //    //currentState = CellState.IDLE;
-
-            //}
 
         }
+    }
+
+    protected void FixedUpdate()
+    {
+        Deplete(Time.fixedDeltaTime);
+        if (currentProtein <= 0.0f)
+        {
+            currentState = CellState.DEAD;
+        }
+
+
+        //if  (Mathf.Abs(Vector3.Distance(destination, transform.position)) <= 1.1f)
+        //{
+
+        //    navAgent.enabled = false;
+
+        //    navObstacle.enabled = true;
+        //    //currentState = CellState.IDLE;
+
+        //}
+
+
 
 
 

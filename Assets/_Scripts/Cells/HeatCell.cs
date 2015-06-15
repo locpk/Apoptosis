@@ -30,6 +30,7 @@ public class HeatCell : BaseCell
             case CellState.ATTACK_MOVING:
                 break;
             case CellState.DEAD:
+                base.Die();
                 break;
             case CellState.CANCEROUS_SPLITTING:
                 break;
@@ -58,7 +59,7 @@ public class HeatCell : BaseCell
 			splitCD = 0;
 			}
 		}
-      
+        base.Update();
     }
 
     new void FixedUpdate()
