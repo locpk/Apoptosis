@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
     public GameObject movePin;
     public GameObject attackPin;
 
-    System.Collections.Generic.List<BaseCell> allSelectableUnits;
-    System.Collections.Generic.List<BaseCell> selectedUnits;
+    public System.Collections.Generic.List<BaseCell> allSelectableUnits;
+    public System.Collections.Generic.List<BaseCell> selectedUnits;
     GameObject selectedTarget;
     System.Collections.Generic.List<BaseCell>[] groups;
     public Texture selector;
@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
             if (GUISelectRect.Contains(Camera.main.WorldToScreenPoint(item.transform.position)))
             {
                 selectedUnits.Add(item);
+                item.isSelected = true;
             }
         }
     }
@@ -131,6 +132,7 @@ public class PlayerController : MonoBehaviour
             if (item.celltype == selectedType) // If the type matches the double-clicked cell
             {
                 selectedUnits.Add(item); // Add the cell to the players selected units
+                item.isSelected = true;
             }
         }
     }
@@ -152,7 +154,9 @@ public class PlayerController : MonoBehaviour
         foreach (BaseCell item in selectedUnits)
         {
             Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
-            Rect location = new Rect((float)(drawLoc.x - .1), (float)(drawLoc.y - .1), (float)(drawLoc.x + .1), (float)(drawLoc.y + .1));
+            float left = drawLoc.x - (float)4;
+            float top = drawLoc.y - (float)4;
+            Rect location = new Rect(left, top, (float)8, (float)8);
             GUI.DrawTexture(location, selector);
         }
     }
