@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 public class HeatCell : BaseCell
 {
-	float splitCD = 0;
+    float splitCD = 0;
 
     new void Awake()
     {
-		base.Awake ();
+        base.Awake();
     }
 
     // Use this for initialization
     new void Start()
     {
-		base.Start ();
+        base.Start();
     }
 
     // Update is called once per frame
@@ -45,20 +45,20 @@ public class HeatCell : BaseCell
             default:
                 break;
         }
-		splitCD += Time.deltaTime;
+        splitCD += Time.deltaTime;
         if (Input.GetMouseButtonUp(1))
         {
             Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
-     
-		if(Input.GetKey(KeyCode.D))
-		 {
-			if (splitCD >= 1.0f)
-			{
-			base.CancerousSplit();
-			splitCD = 0;
-			}
-		}
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            if (splitCD >= 1.0f)
+            {
+                base.CancerousSplit();
+                splitCD = 0;
+            }
+        }
         base.Update();
     }
 
@@ -73,44 +73,55 @@ public class HeatCell : BaseCell
 
     }
 
-	public override void Attack(GameObject _target)
-	{
-        currentState = CellState.ATTACK_MOVING;
-        Debug.Log(_target);
-        while (Vector3.Distance(transform.position, _target.transform.position)> attackRange)
+    public override void Attack(GameObject _target)
+    {
+        if (_target != null)
         {
+
             Debug.Log(_target);
-            Move(_target.transform.position);
+            if (Vector3.Distance(transform.position, _target.transform.position) > attackRange)
+            {
+                Debug.Log(_target);
+                Move(_target.transform.position);
+            }
+            if (Vector3.Distance(transform.position, _target.transform.position) <= attackRange)
+            {
+                Debug.Log(_target);
+                currentState = CellState.ATTACK;
+                Move(transform.position);
+                _target.GetComponent<BaseCell>().currentProtein = _target.GetComponent<BaseCell>().currentProtein - attackDamage;
+            }
         }
-		if(Vector3.Distance(transform.position, _target.transform.position) <= attackRange)
-		{
-            Debug.Log(_target);
-            currentState = CellState.ATTACK;
-            _target.GetComponent<BaseCell>().currentProtein = _target.GetComponent<BaseCell>().currentProtein - attackDamage;
-		}
-	}
+        else
+            currentState = CellState.IDLE;
+    }
     public override void AutoAttack()
     {
-        GameObject closestAiguy = null; 
-        foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Unit"))
+        GameObject closestAiguy = null;
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Unit"))
         {
             if (enemy.GetComponent<BaseCell>().isAIPossessed)
             {
                 Debug.Log(enemy.name);
 
-                if (closestAiguy == null ||  Vector3.Distance(transform.position, enemy.transform.position) <   Vector3.Distance(transform.position, closestAiguy.transform.position))
+                if (closestAiguy == null || Vector3.Distance(transform.position, enemy.transform.position) < Vector3.Distance(transform.position, closestAiguy.transform.position) )
                 {
-                    
+          
                     closestAiguy = enemy;
+                    if(Vector3.Distance(transform.position, closestAiguy.transform.position) <= attackRange)
+                    {
+                        SetPrimaryTarget(closestAiguy);
+                        break;
+                    }
                 }
             }
         }
-       
-        SetPrimaryTarget(closestAiguy);
-        
-        
+
+     
+
+
     }
- 
+
 
 
 
