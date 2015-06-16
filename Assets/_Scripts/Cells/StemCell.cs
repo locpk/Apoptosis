@@ -21,37 +21,79 @@ public class StemCell : BaseCell
         base.Mutation(_newType);
     }
 
-    new void Awake()
+    void DamagePreSecond()
     {
+        primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+    }
 
+    public override void Attack(GameObject _target)
+    {
+        if (_target)
+        {
+            SetPrimaryTarget(_target);
+            currentState = CellState.ATTACK;
+        }
+    }
+
+
+    void Awake()
+    {
+        base.Awake();
     }
 
     // Use this for initialization
-    new void Start()
+    void Start()
     {
-
+        base.Start();
+        
     }
 
     // Update is called once per frame
-    new void Update()
+    void Update()
     {
+
         switch (currentState)
         {
             case CellState.IDLE:
                 //guard mode auto attack enemy in range
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    base.PerfectSplit();
+                }
+                Attack(GameObject.Find("HeatCell"));
                 break;
             case CellState.ATTACK:
-                if (!primaryTarget)
+                if (primaryTarget)
                 {
-                    if (targets.Count > 0)
+                    if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                     {
-                        primaryTarget = targets[0];
-                        targets.RemoveAt(0);
+                        if (!IsInvoking("DamagePreSecond"))
+                        {
+                            if (GetComponent<ParticleSystem>().isStopped || GetComponent<ParticleSystem>().isPaused)
+                            {
+                                GetComponent<ParticleSystem>().Play();
+                            }
+                            InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
+                        }
+                        
                     }
                     else
                     {
-                        currentState = CellState.IDLE;
+                        base.ChaseTarget();
+                        if (IsInvoking("DamagePreSecond"))
+                        {
+                            if (GetComponent<ParticleSystem>().isPlaying)
+                            {
+
+                                GetComponent<ParticleSystem>().Pause();
+                            }
+                            CancelInvoke("DamagePreSecond");
+                        }
                     }
+                }
+                else
+                {
+                    currentState = CellState.IDLE;
                 }
                 break;
             case CellState.CONSUMING:
@@ -69,10 +111,8 @@ public class StemCell : BaseCell
                 }
                 break;
             case CellState.MOVING:
-                if (!navAgent.isActiveAndEnabled)
-                {
-                    currentState = CellState.IDLE;
-                }
+                base.Update();
+   
                 break;
             case CellState.ATTACK_MOVING:
                 if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
@@ -85,11 +125,10 @@ public class StemCell : BaseCell
                 break;
             case CellState.CANCEROUS_SPLITTING:
                 //Switch to split image
-               
                 //disable navAgent
                 //start splitting timer
                 //initialize splitting after timer
-               
+
                 break;
             case CellState.PERFECT_SPLITTING:
                 break;
@@ -102,16 +141,18 @@ public class StemCell : BaseCell
             default:
                 break;
         }
+        
+
     }
 
-    new void FixedUpdate()
+    void FixedUpdate()
     {
         base.FixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
-    new void LateUpdate()
+    void LateUpdate()
     {
-
+        base.LateUpdate();
     }
 }
