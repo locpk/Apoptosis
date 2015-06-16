@@ -22,6 +22,7 @@ public class StemCell : BaseCell
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     void Awake()
     {
         base.Awake();
@@ -46,6 +47,22 @@ public class StemCell : BaseCell
         }
     }
 
+=======
+    void DamagePreSecond()
+    {
+        primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+    }
+
+    public override void Attack(GameObject _target)
+    {
+        if (_target)
+        {
+            SetPrimaryTarget(_target);
+            currentState = CellState.ATTACK;
+        }
+    }
+
+>>>>>>> origin/Junshu
 
     void Awake()
     {
@@ -57,6 +74,9 @@ public class StemCell : BaseCell
     {
         base.Start();
         
+<<<<<<< HEAD
+>>>>>>> origin/Junshu
+=======
 >>>>>>> origin/Junshu
     }
 
@@ -154,7 +174,12 @@ public class StemCell : BaseCell
                 break;
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         base.Update();
+=======
+        
+
+>>>>>>> origin/Junshu
 =======
         
 

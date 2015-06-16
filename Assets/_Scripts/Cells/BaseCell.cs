@@ -163,11 +163,14 @@ public class BaseCell : MonoBehaviour
     public BaseCell PerfectSplit()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         //if (currentLevel >= 5)
         //{
         //    return null;
         //}
 =======
+=======
+>>>>>>> origin/Junshu
         if (currentLevel >= 5 || currentProtein <= 1.0f)
         {
             return;
@@ -181,6 +184,7 @@ public class BaseCell : MonoBehaviour
         switch (celltype)
         {
             case CellType.STEM_CELL:
+<<<<<<< HEAD
 <<<<<<< HEAD
                 newCell = GameObject.Instantiate(gStemCellPrefab, newposition, Quaternion.identity) as GameObject;
                 newCell.gameObject.transform.Rotate(90, -180, -180);
@@ -207,6 +211,15 @@ public class BaseCell : MonoBehaviour
                 this.currentState = CellState.DEAD;
                 break;
             case CellType.CANCER_CELL:
+=======
+                cellSplitAnimation = GameObject.Instantiate(gStemCellPrefab, transform.position, Quaternion.identity) as GameObject;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1 ;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                this.currentState = CellState.DEAD;
+                break;
+            case CellType.CANCER_CELL:
+>>>>>>> origin/Junshu
                 cellSplitAnimation = GameObject.Instantiate(gCancerCellPrefab, transform.position, Quaternion.identity) as GameObject;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
@@ -365,6 +378,7 @@ public class BaseCell : MonoBehaviour
         if (currentState == CellState.MOVING)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			float radius = 0;
 			if (neighbors > 19)
 				radius = 7;
@@ -383,11 +397,16 @@ public class BaseCell : MonoBehaviour
 				navAgent.enabled = false;
 				navObstacle.enabled = true;
 =======
+=======
+>>>>>>> origin/Junshu
             if (isStopped())
             {
                 currentState = CellState.IDLE;
                 navAgent.enabled = false;
                 navObstacle.enabled = true;
+<<<<<<< HEAD
+>>>>>>> origin/Junshu
+=======
 >>>>>>> origin/Junshu
             }
            

@@ -79,7 +79,11 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Constraints: 80
+=======
+  m_Constraints: 112
+>>>>>>> origin/Junshu
 =======
   m_Constraints: 112
 >>>>>>> origin/Junshu
@@ -1419,6 +1423,30 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: isAIPossessed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isAIPossessed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Name
+      value: Nucleus
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isAIPossessed

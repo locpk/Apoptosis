@@ -88,7 +88,11 @@ NavMeshSettings:
     manualCellSize: 0
   m_NavMeshData: {fileID: 23800000, guid: 11db6dfa1f7856f4fbe3c6ef6f5e7223, type: 2}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1001 &123865587
+=======
+--- !u!1001 &413853844
+>>>>>>> origin/Junshu
 =======
 --- !u!1001 &413853844
 >>>>>>> origin/Junshu
@@ -101,7 +105,11 @@ Prefab:
     - target: {fileID: 471618, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: m_LocalPosition.x
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: .675999999
+=======
+      value: -1.28799999
+>>>>>>> origin/Junshu
 =======
       value: -1.28799999
 >>>>>>> origin/Junshu
@@ -113,7 +121,11 @@ Prefab:
     - target: {fileID: 471618, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: m_LocalPosition.z
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: 0
+=======
+      value: .127000004
+>>>>>>> origin/Junshu
 =======
       value: .127000004
 >>>>>>> origin/Junshu
@@ -136,6 +148,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: m_RootOrder
+<<<<<<< HEAD
 <<<<<<< HEAD
       value: 5
       objectReference: {fileID: 0}
@@ -184,6 +197,8 @@ Prefab:
       value: 
       objectReference: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
 =======
+=======
+>>>>>>> origin/Junshu
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11498870, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
@@ -302,6 +317,9 @@ Prefab:
       propertyPath: m_StoppingDistance
       value: 1
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+>>>>>>> origin/Junshu
+=======
 >>>>>>> origin/Junshu
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
@@ -464,6 +482,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_RootOrder: 1
 --- !u!1001 &1132409203
 Prefab:
@@ -542,6 +561,9 @@ Prefab:
 =======
   m_RootOrder: 3
 >>>>>>> origin/Junshu
+=======
+  m_RootOrder: 3
+>>>>>>> origin/Junshu
 --- !u!1 &1140662820
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +624,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_RootOrder: 2
 --- !u!1 &1844690987
 GameObject:
@@ -648,6 +671,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
 =======
+=======
+>>>>>>> origin/Junshu
   m_RootOrder: 4
 --- !u!1001 &1943490955
 Prefab:
@@ -699,4 +724,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
   m_IsPrefabParent: 0
+<<<<<<< HEAD
+>>>>>>> origin/Junshu
+=======
 >>>>>>> origin/Junshu
