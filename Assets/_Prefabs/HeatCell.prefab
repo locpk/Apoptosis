@@ -45,8 +45,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: .0299999993, y: .0299999993, z: .0299999993}
+  m_LocalPosition: {x: 4.67000008, y: 0, z: .119690776}
+  m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 495744}
   m_Father: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
-  isMine: 1
+  isMine: 0
   isAlive: 1
   isAIPossessed: 0
   isDepleting: 0
@@ -145,7 +145,6 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
-  neighbors: 0
 --- !u!135 &13587872
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -170,7 +169,7 @@ NavMeshAgent:
   m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1.20000005
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 0
@@ -262,7 +261,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_StoppingDistance
-      value: 0
+      value: 1.20000005
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
@@ -321,16 +320,6 @@ Prefab:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-<<<<<<< HEAD
-<<<<<<< HEAD
-      propertyPath: isMine
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-=======
->>>>>>> origin/Junshu
-=======
->>>>>>> origin/Junshu
       propertyPath: isAIPossessed
       value: 0
       objectReference: {fileID: 0}

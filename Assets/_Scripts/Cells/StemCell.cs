@@ -21,18 +21,6 @@ public class StemCell : BaseCell
         base.Mutation(_newType);
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    void Awake()
-    {
-        base.Awake();
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-        base.Start();
-=======
     void DamagePreSecond()
     {
         primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
@@ -47,22 +35,6 @@ public class StemCell : BaseCell
         }
     }
 
-=======
-    void DamagePreSecond()
-    {
-        primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
-    }
-
-    public override void Attack(GameObject _target)
-    {
-        if (_target)
-        {
-            SetPrimaryTarget(_target);
-            currentState = CellState.ATTACK;
-        }
-    }
-
->>>>>>> origin/Junshu
 
     void Awake()
     {
@@ -74,10 +46,6 @@ public class StemCell : BaseCell
     {
         base.Start();
         
-<<<<<<< HEAD
->>>>>>> origin/Junshu
-=======
->>>>>>> origin/Junshu
     }
 
     // Update is called once per frame
@@ -92,7 +60,11 @@ public class StemCell : BaseCell
                 {
                     base.PerfectSplit();
                 }
-                Attack(GameObject.Find("HeatCell"));
+                if (Vector3.Distance(GameObject.Find("HeatCell").transform.position, transform.position) <= fovRadius)
+                {
+                    Attack(GameObject.Find("HeatCell"));
+                }
+                
                 break;
             case CellState.ATTACK:
                 if (primaryTarget)
@@ -109,7 +81,7 @@ public class StemCell : BaseCell
                         }
                         
                     }
-                    else
+                    else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                     {
                         base.ChaseTarget();
                         if (IsInvoking("DamagePreSecond"))
@@ -117,10 +89,15 @@ public class StemCell : BaseCell
                             if (GetComponent<ParticleSystem>().isPlaying)
                             {
 
-                                GetComponent<ParticleSystem>().Pause();
+                                GetComponent<ParticleSystem>().Stop();
                             }
                             CancelInvoke("DamagePreSecond");
                         }
+                    }
+                    else
+                    {
+                        SetPrimaryTarget(null);
+                        navAgent.Stop();
                     }
                 }
                 else
@@ -173,17 +150,8 @@ public class StemCell : BaseCell
             default:
                 break;
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-        base.Update();
-=======
         
 
->>>>>>> origin/Junshu
-=======
-        
-
->>>>>>> origin/Junshu
     }
 
     void FixedUpdate()
