@@ -105,7 +105,7 @@ public class BaseCell : MonoBehaviour
         destination = _destination;
         navAgent.SetDestination(_destination);
 
-        neighbors = count + 1;
+        neighbors = count - 1;
 
     }
 
@@ -341,13 +341,23 @@ public class BaseCell : MonoBehaviour
     {
         if (currentState == CellState.MOVING)
         {
+			float radius = 0;
+			if (neighbors > 19)
+				radius = 7;
+			else if (neighbors > 5) {
+				radius = 5;
+			}
+			else if (neighbors > 0)
+				radius = 3;
 
-            if (Vector3.Distance(navAgent.destination, transform.position) <= .001 * neighbors * (neighbors / 9))
+			if (Vector2.Distance(navAgent.destination, transform.position) <= 0) {
+				currentState = CellState.IDLE;
+				navAgent.SetDestination(transform.position);
+			}
+            if (Vector3.Distance(navAgent.destination, transform.position) <= radius * .05)
             {
-                currentState = CellState.IDLE;
-                //navAgent.SetDestination(transform.position);
-                navAgent.enabled = false;
-                navObstacle.enabled = true;
+				navAgent.enabled = false;
+				navObstacle.enabled = true;
             }
 
         }
