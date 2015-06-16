@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PauseMenu : MonoBehaviour {
 
+    //bool for if the game is paused or not
 	bool isPaused = false;
     //get the pause menu
     public GameObject pauseMenu;
@@ -40,6 +41,7 @@ public class PauseMenu : MonoBehaviour {
 	}
 
     public void ContinuePlaying(){
+        //set the bool to continue the game
         isPaused = false;
     }
 	
@@ -62,6 +64,5 @@ public class PauseMenu : MonoBehaviour {
     {
         //Any variables that need to be reset should be reset in this function
         isPaused = false;
-
     }
 }
