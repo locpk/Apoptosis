@@ -75,11 +75,42 @@ public class HeatCell : BaseCell
 
 	public override void Attack(GameObject _target)
 	{
-		if(Vector3.Distance(transform.position, base.primaryTarget.transform.position) <= attackRange)
+        currentState = CellState.ATTACK_MOVING;
+        Debug.Log(_target);
+        while (Vector3.Distance(transform.position, _target.transform.position)> attackRange)
+        {
+            Debug.Log(_target);
+            Move(_target.transform.position);
+        }
+		if(Vector3.Distance(transform.position, _target.transform.position) <= attackRange)
 		{
-		base.Attack (base.primaryTarget);
+            Debug.Log(_target);
+            currentState = CellState.ATTACK;
+            _target.GetComponent<BaseCell>().currentProtein = _target.GetComponent<BaseCell>().currentProtein - attackDamage;
 		}
 	}
+    public override void AutoAttack()
+    {
+        GameObject closestAiguy = null; 
+        foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Unit"))
+        {
+            if (enemy.GetComponent<BaseCell>().isAIPossessed)
+            {
+                Debug.Log(enemy.name);
+
+                if (closestAiguy == null ||  Vector3.Distance(transform.position, enemy.transform.position) <   Vector3.Distance(transform.position, closestAiguy.transform.position))
+                {
+                    
+                    closestAiguy = enemy;
+                }
+            }
+        }
+       
+        SetPrimaryTarget(closestAiguy);
+        
+        
+    }
+ 
 
 
 

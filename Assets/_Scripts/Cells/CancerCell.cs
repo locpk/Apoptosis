@@ -12,7 +12,11 @@ public class CancerCell : BaseCell
     // Use this for initialization
     new void Start()
     {
-
+       if (isAIPossessed)
+       {
+           navAgent.enabled = false;
+           
+       }
     }
 
     // Update is called once per frame
