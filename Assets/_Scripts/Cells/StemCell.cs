@@ -21,19 +21,19 @@ public class StemCell : BaseCell
         base.Mutation(_newType);
     }
 
-    new void Awake()
+    void Awake()
     {
-
+        base.Awake();
     }
 
     // Use this for initialization
-    new void Start()
+    void Start()
     {
-
+        base.Start();
     }
 
     // Update is called once per frame
-    new void Update()
+    void Update()
     {
         switch (currentState)
         {
@@ -102,6 +102,7 @@ public class StemCell : BaseCell
             default:
                 break;
         }
+        base.Update();
     }
 
     new void FixedUpdate()

@@ -46,19 +46,19 @@ public class HeatCell : BaseCell
                 break;
         }
 		splitCD += Time.deltaTime;
-        if (Input.GetMouseButtonUp(1))
-        {
-            Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        }
+        //if (Input.GetMouseButtonUp(1))
+        //{
+        //    Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        //}
      
-		if(Input.GetKey(KeyCode.D))
-		 {
-			if (splitCD >= 1.0f)
-			{
-			base.CancerousSplit();
-			splitCD = 0;
-			}
-		}
+        //if(Input.GetKey(KeyCode.D))
+        // {
+        //    if (splitCD >= 1.0f)
+        //    {
+        //    base.CancerousSplit();
+        //    splitCD = 0;
+        //    }
+        //}
         base.Update();
     }
 

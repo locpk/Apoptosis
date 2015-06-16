@@ -55,7 +55,9 @@ public class PlayerController : MonoBehaviour
         selectedUnits.Clear();
         foreach (BaseCell item in allSelectableUnits)
         {
-            if (GUISelectRect.Contains(Camera.main.WorldToScreenPoint(item.transform.position)))
+            Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
+            itemPos.y = -itemPos.y + Screen.height;
+            if (GUISelectRect.Contains(itemPos))
             {
                 selectedUnits.Add(item);
                 item.isSelected = true;
@@ -65,15 +67,9 @@ public class PlayerController : MonoBehaviour
 
     public void UnitMove()
     {
-        for (int i = 0; i < selectedUnits.Count; i++)
+        foreach (BaseCell item in selectedUnits)
         {
-            double w = .1 * System.Math.Sqrt(i);
-            double t = 2 * System.Math.PI * i;
-            double x = w * System.Math.Cos(t);
-            double y = w * System.Math.Sin(t);
-            Vector3 newPos = Input.mousePosition;
-            newPos.Set((float)(newPos.x + x), (float)(newPos.y + y), newPos.z);
-            selectedUnits[i].Move(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Set their destination
+            item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition), selectedUnits.Count); // Set their destination
         }
 
     }
@@ -88,16 +84,25 @@ public class PlayerController : MonoBehaviour
 
     public void UnitSplit()
     {
-        foreach (BaseCell item in selectedUnits) // For each of the player's selected units
+        int i = 0;
+        for (int count = selectedUnits.Count; i < count; ++i) // For each of the player's selected units
         {
-            switch (item.celltype) // Dependent on the type of cell it is
+            BaseCell temp;
+            switch (selectedUnits[i].celltype) // Dependent on the type of cell it is
             {
                 case CellType.STEM_CELL: // If it is a stem cell
-                    item.PerfectSplit(); // Split without a chance of cancer
+                    temp = selectedUnits[i].PerfectSplit();
+                    allSelectableUnits.Add(temp); // Split with a chance of cancer
+                    selectedUnits.Add(temp); // Split without a chance of cancer
                     break;
                 case CellType.HEAT_CELL: // If it is a heat cell
                 case CellType.COLD_CELL: // OR If it is a cold cell
-                    item.CancerousSplit(); // Split with a chance of cancer
+                    temp = selectedUnits[i].CancerousSplit();
+                    if (temp.celltype != CellType.CANCER_CELL)
+                    {
+                        allSelectableUnits.Add(temp); // Split with a chance of cancer
+                        selectedUnits.Add(temp); // Split without a chance of cancer
+                    }
                     break;
 
                 default:
@@ -147,7 +152,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnGUI()
     {
-        if (GUISelectRect.height != 0)
+        if (GUISelectRect.height != 0 && GUISelectRect.width != 0)
         {
             GUI.DrawTexture(GUISelectRect, selector);
         }
@@ -155,7 +160,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
             float left = drawLoc.x - (float)4;
-            float top = drawLoc.y - (float)4;
+            float top = -(drawLoc.y - (float)4) + Screen.height;
             Rect location = new Rect(left, top, (float)8, (float)8);
             GUI.DrawTexture(location, selector);
         }
@@ -180,6 +185,40 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //foreach (BaseCell item in selectedUnits)
+        //{
+        //    if (item == null)
+        //    {
+        //        selectedUnits.Remove(item);
+        //    }
+        //}
+        //foreach (BaseCell item in allSelectableUnits)
+        //{
+        //    if (item == null)
+        //    {
+        //        selectedUnits.Remove(item);
+        //    }
+        //}
+        int i = 0;
+        while (i < selectedUnits.Count)
+        {
+            if (selectedUnits[i] == null)
+            {
+                selectedUnits.RemoveAt(i);
+            }
+            else
+                i++;
+        }
+        i = 0;
+        while (i < allSelectableUnits.Count)
+        {
+            if (allSelectableUnits[i] == null)
+            {
+                allSelectableUnits.RemoveAt(i);
+            }
+            else
+                i++;
+        }
         Vector3 topleft = new Vector3(GUISelectRect.xMin, GUISelectRect.yMin, Camera.main.transform.position.z);
         Vector3 bottomright = new Vector3(GUISelectRect.xMax, GUISelectRect.yMin, Camera.main.transform.position.z);
         if (Input.GetKeyDown(KeyCode.D)) // If the player presses D
@@ -196,7 +235,7 @@ public class PlayerController : MonoBehaviour
         {
             foreach (StemCell item in selectedUnits) // For each of the player's selected units
             {
-                //item.Mutation(CellType.ACIDIC_CELL)
+                item.Mutation(CellType.ACIDIC_CELL);
             }
         }
 
@@ -204,7 +243,7 @@ public class PlayerController : MonoBehaviour
         {
             foreach (StemCell item in selectedUnits) // For each of the player's selected units
             {
-                //item.Mutation(CellType.HEAT_CELL)
+                item.Mutation(CellType.HEAT_CELL);
             }
         }
 
@@ -212,7 +251,7 @@ public class PlayerController : MonoBehaviour
         {
             foreach (StemCell item in selectedUnits)
             {
-                //item.Mutation(CellType.ALKALI_CELL)
+                item.Mutation(CellType.ALKALI_CELL);
             }
         }
 
@@ -220,7 +259,7 @@ public class PlayerController : MonoBehaviour
         {
             foreach (StemCell item in selectedUnits)
             {
-                //item.Mutation(CellType.COLD_CELL)
+                item.Mutation(CellType.COLD_CELL);
             }
         }
 
@@ -237,6 +276,10 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetMouseButton(0)) // If the player has left-click held down
         {
             UnitSelection();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            UnitMove();
         }
     }
 }

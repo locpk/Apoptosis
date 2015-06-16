@@ -78,6 +78,8 @@ public class BaseCell : MonoBehaviour
     public float attackCooldown;
     public float splitCooldown;
 
+    public int neighbors = 0;
+
 
     #region RPC Methods
 
@@ -94,7 +96,7 @@ public class BaseCell : MonoBehaviour
     #region Standard Actions
     // Public Methods
 
-    public virtual void Move(Vector3 _destination)
+    public virtual void Move(Vector3 _destination, int count)
     {
         //Move only there is a path.
         currentState = CellState.MOVING;
@@ -102,6 +104,8 @@ public class BaseCell : MonoBehaviour
         navAgent.enabled = true;
         destination = _destination;
         navAgent.SetDestination(_destination);
+
+        neighbors = count + 1;
 
     }
 
@@ -112,7 +116,7 @@ public class BaseCell : MonoBehaviour
 
     public virtual void AttackMove(Vector3 _destination)
     {
-        Move(_destination);
+        Move(_destination, 0);
         foreach (var item in targets)
         {
             if (Vector3.Distance(this.transform.position, item.transform.position) <= attackRange)
@@ -163,12 +167,12 @@ public class BaseCell : MonoBehaviour
     #endregion
 
     #region Special abilities
-    public void PerfectSplit()
+    public BaseCell PerfectSplit()
     {
-        if (currentLevel >= 5)
-        {
-            return;
-        }
+        //if (currentLevel >= 5)
+        //{
+        //    return null;
+        //}
 
         Vector3 newposition = this.transform.position;
 
@@ -184,7 +188,7 @@ public class BaseCell : MonoBehaviour
                 newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
                 newCell.GetComponent<BaseCell>().currentLevel++;
                 newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
-                break;
+                return newCell.GetComponent<BaseCell>();
             case CellType.CANCER_CELL:
                 newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.identity) as GameObject;
                 newCell.gameObject.transform.Rotate(90, -180, -180);
@@ -193,22 +197,23 @@ public class BaseCell : MonoBehaviour
                 newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
                 newCell.GetComponent<BaseCell>().currentLevel++;
                 newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
-                break;
+                return newCell.GetComponent<BaseCell>();
             default:
                 break;
         }
 
 
+        return null;
 
 
     }
 
-    public void CancerousSplit()
+    public BaseCell CancerousSplit()
     {
-        if (currentLevel >= 5)
-        {
-            return;
-        }
+        //if (currentLevel >= 5)
+        //{
+        //    return null;
+        //}
 
 
         float cancerousChance = 0.0f;
@@ -255,14 +260,14 @@ public class BaseCell : MonoBehaviour
                     newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
                     newCell.GetComponent<BaseCell>().currentLevel++;
                     newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
-                    break;
+                    return newCell.GetComponent<BaseCell>();
                 case CellType.COLD_CELL:
                     newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.identity) as GameObject;
                     newCell.gameObject.transform.Rotate(90, -180, -180);
                     newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
                     newCell.GetComponent<BaseCell>().currentLevel++;
                     newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
-                    break;
+                    return newCell.GetComponent<BaseCell>();
                 default:
                     break;
             }
@@ -274,8 +279,10 @@ public class BaseCell : MonoBehaviour
             newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
             newCell.GetComponent<BaseCell>().currentLevel++;
             newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
+            return newCell.GetComponent<BaseCell>();
         }
 
+        return null;
 
 
 
@@ -303,7 +310,7 @@ public class BaseCell : MonoBehaviour
         if (depleteTimer <= 0.0f)
         {
             depleteTimer = DEPLETE_TIME;
-            currentProtein -= depleteAmount;
+            currentProtein += depleteAmount;
         }
     }
     #endregion
@@ -335,18 +342,12 @@ public class BaseCell : MonoBehaviour
         if (currentState == CellState.MOVING)
         {
 
-            if (!navAgent.pathPending)
+            if (Vector3.Distance(navAgent.destination, transform.position) <= .001 * neighbors * (neighbors / 9))
             {
-                if (navAgent.remainingDistance <= navAgent.stoppingDistance)
-                {
-                    if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
-                    {
-                        currentState = CellState.IDLE;
-                        navAgent.SetDestination(transform.position);
-                        navAgent.enabled = false;
-                        navObstacle.enabled = true;
-                    }
-                }
+                currentState = CellState.IDLE;
+                //navAgent.SetDestination(transform.position);
+                navAgent.enabled = false;
+                navObstacle.enabled = true;
             }
 
         }
