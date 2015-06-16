@@ -19,6 +19,7 @@ public class HeatCell : BaseCell
     // Update is called once per frame
     new void Update()
     {
+        
         switch (currentState)
         {
             case CellState.IDLE:

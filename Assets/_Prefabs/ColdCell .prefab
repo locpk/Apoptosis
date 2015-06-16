@@ -32,8 +32,8 @@ GameObject:
   - 4: {fileID: 441596}
   - 212: {fileID: 21236518}
   m_Layer: 2
-  m_Name: Neucleus
-  m_TagString: Neucleus
+  m_Name: Nucleus
+  m_TagString: Nucleus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,8 +99,8 @@ MonoBehaviour:
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 0
-  isAlive: 0
-  isAIPossessed: 1
+  isAlive: 1
+  isAIPossessed: 0
   isDepleting: 0
   isSelected: 0
   celltype: 2
@@ -112,7 +112,6 @@ MonoBehaviour:
   primaryTarget: {fileID: 0}
   photonView: {fileID: 0}
   currentProtein: 20
-  moveSpeed: 2
   fovRadius: 0
   attackDamage: 6
   attackRange: .200000003
@@ -258,11 +257,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isAlive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isAIPossessed
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: HeatCell
@@ -274,11 +273,11 @@ Prefab:
       objectReference: {fileID: 100116}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Neucleus
+      value: Nucleus
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Name
-      value: Neucleus
+      value: Nucleus
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: gCancerCellPrefab

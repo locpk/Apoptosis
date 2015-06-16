@@ -32,8 +32,8 @@ GameObject:
   - 4: {fileID: 495744}
   - 212: {fileID: 21259276}
   m_Layer: 2
-  m_Name: Neucleus
-  m_TagString: Neucleus
+  m_Name: Nucleus
+  m_TagString: Nucleus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -282,7 +282,7 @@ Prefab:
       objectReference: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Name
-      value: Neucleus
+      value: Nucleus
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Layer
@@ -290,7 +290,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Neucleus
+      value: Nucleus
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
@@ -321,10 +321,13 @@ Prefab:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+<<<<<<< HEAD
       propertyPath: isMine
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+=======
+>>>>>>> origin/Junshu
       propertyPath: isAIPossessed
       value: 0
       objectReference: {fileID: 0}

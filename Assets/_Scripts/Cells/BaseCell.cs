@@ -46,7 +46,7 @@ public class BaseCell : MonoBehaviour
     public GameObject gAlkaliCellPrefab;
 
     public float MAX_PROTEIN = 500.0f;
-    public const float DEPLETE_TIME = 1.0f;
+    public const float DEPLETE_TIME = 5.0f;
     public const float ATTACK_COOLDOWN = 1.0f;
     public const float moveSpeed = 3.0f;
     /// <summary>
@@ -93,6 +93,8 @@ public class BaseCell : MonoBehaviour
     #endregion
 
 
+
+
     #region Standard Actions
     // Public Methods
 
@@ -129,18 +131,9 @@ public class BaseCell : MonoBehaviour
 
     public void SetPrimaryTarget(GameObject _target)
     {
-        if (_target)
-        {
-            primaryTarget = _target;
-            if (_target.GetComponent<BaseCell>())
-            {
-                Attack(_target);
-            }
-            else if (_target.GetComponent<Protein>())
-            {
-                Consume(_target);
-            }
-        }
+
+        primaryTarget = _target;
+
     }
 
     public void SetTargets(List<GameObject> _targets)
@@ -169,18 +162,26 @@ public class BaseCell : MonoBehaviour
     #region Special abilities
     public BaseCell PerfectSplit()
     {
+<<<<<<< HEAD
         //if (currentLevel >= 5)
         //{
         //    return null;
         //}
+=======
+        if (currentLevel >= 5 || currentProtein <= 1.0f)
+        {
+            return;
+        }
+>>>>>>> origin/Junshu
 
         Vector3 newposition = this.transform.position;
 
         newposition += Quaternion.Euler(0, 0, Random.Range(0, 360)) * new Vector3(GetComponent<SphereCollider>().radius * 0.1f, 0, 0);
-        GameObject newCell;
+        GameObject cellSplitAnimation;
         switch (celltype)
         {
             case CellType.STEM_CELL:
+<<<<<<< HEAD
                 newCell = GameObject.Instantiate(gStemCellPrefab, newposition, Quaternion.identity) as GameObject;
                 newCell.gameObject.transform.Rotate(90, -180, -180);
                 this.currentProtein *= 0.5f;
@@ -198,6 +199,21 @@ public class BaseCell : MonoBehaviour
                 newCell.GetComponent<BaseCell>().currentLevel++;
                 newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
                 return newCell.GetComponent<BaseCell>();
+=======
+                cellSplitAnimation = GameObject.Instantiate(gStemCellPrefab, transform.position, Quaternion.identity) as GameObject;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1 ;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                this.currentState = CellState.DEAD;
+                break;
+            case CellType.CANCER_CELL:
+                cellSplitAnimation = GameObject.Instantiate(gCancerCellPrefab, transform.position, Quaternion.identity) as GameObject;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                this.currentState = CellState.DEAD;
+                break;
+>>>>>>> origin/Junshu
             default:
                 break;
         }
@@ -303,7 +319,14 @@ public class BaseCell : MonoBehaviour
     }
 
 
+    public void ChaseTarget()
+    {
+        if (primaryTarget)
+        {
+            Move(primaryTarget.transform.position);
 
+        }
+    }
     public void Deplete(float _deltaTime)
     {
         depleteTimer -= _deltaTime;
@@ -341,6 +364,7 @@ public class BaseCell : MonoBehaviour
     {
         if (currentState == CellState.MOVING)
         {
+<<<<<<< HEAD
 			float radius = 0;
 			if (neighbors > 19)
 				radius = 7;
@@ -358,36 +382,43 @@ public class BaseCell : MonoBehaviour
             {
 				navAgent.enabled = false;
 				navObstacle.enabled = true;
+=======
+            if (isStopped())
+            {
+                currentState = CellState.IDLE;
+                navAgent.enabled = false;
+                navObstacle.enabled = true;
+>>>>>>> origin/Junshu
             }
-
+           
         }
     }
 
+    public bool isStopped()
+    {
+        if (navAgent.isActiveAndEnabled  && navAgent.remainingDistance <= navAgent.stoppingDistance )
+            {
+               return true;
+            }
+        return false;
+    }
     protected void FixedUpdate()
     {
-        Deplete(Time.fixedDeltaTime);
+        //Deplete(Time.fixedDeltaTime);
         if (currentProtein <= 0.0f)
         {
             currentState = CellState.DEAD;
         }
 
-
-        //if  (Mathf.Abs(Vector3.Distance(destination, transform.position)) <= 1.1f)
-        //{
-
-        //    navAgent.enabled = false;
-
-        //    navObstacle.enabled = true;
-        //    //currentState = CellState.IDLE;
-
-        //}
-
-
-
-
-
-
-        // transform.FindChild("Nucleus").transform.localScale = new Vector3(0.8f * currentProtein / MAX_PROTEIN, 0.8f * currentProtein / MAX_PROTEIN, 0.8f * currentProtein / MAX_PROTEIN);
+        if (currentProtein >= 100.0f)
+        {
+            transform.FindChild("Nucleus").transform.localScale = new Vector3(currentProtein / MAX_PROTEIN, currentProtein / MAX_PROTEIN, currentProtein / MAX_PROTEIN);
+        }
+        else
+        {
+            transform.FindChild("Nucleus").transform.localScale = new Vector3(100.0f / MAX_PROTEIN, 100.0f / MAX_PROTEIN, 100.0f / MAX_PROTEIN);
+        }
+       
     }
 
     protected void LateUpdate()
