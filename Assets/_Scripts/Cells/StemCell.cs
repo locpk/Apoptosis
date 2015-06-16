@@ -60,7 +60,11 @@ public class StemCell : BaseCell
                 {
                     base.PerfectSplit();
                 }
-                Attack(GameObject.Find("HeatCell"));
+                if (Vector3.Distance(GameObject.Find("HeatCell").transform.position, transform.position) <= fovRadius)
+                {
+                    Attack(GameObject.Find("HeatCell"));
+                }
+                
                 break;
             case CellState.ATTACK:
                 if (primaryTarget)
@@ -77,7 +81,7 @@ public class StemCell : BaseCell
                         }
                         
                     }
-                    else
+                    else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                     {
                         base.ChaseTarget();
                         if (IsInvoking("DamagePreSecond"))
@@ -85,10 +89,15 @@ public class StemCell : BaseCell
                             if (GetComponent<ParticleSystem>().isPlaying)
                             {
 
-                                GetComponent<ParticleSystem>().Pause();
+                                GetComponent<ParticleSystem>().Stop();
                             }
                             CancelInvoke("DamagePreSecond");
                         }
+                    }
+                    else
+                    {
+                        SetPrimaryTarget(null);
+                        navAgent.Stop();
                     }
                 }
                 else
