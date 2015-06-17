@@ -7,13 +7,13 @@ public class StemCell : BaseCell
     public GameObject stemtoHeat;
     public override void Mutation(CellType _newType)
     {
-        GameObject newCell;
+
         switch (_newType)
         {
             case CellType.HEAT_CELL:
-                newCell = GameObject.Instantiate(stemtoHeat, transform.position, Quaternion.identity) as GameObject;
-                newCell.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
-                newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+                GameObject newCell = GameObject.Instantiate(stemtoHeat, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 currentState = CellState.DEAD;
                 break;
             case CellType.COLD_CELL:
