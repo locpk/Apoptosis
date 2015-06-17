@@ -3,14 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Unit
-  - MainCameraOffset
-  - Collider_Alkali
-  - Collider_Acidic
-  - Collider_Cold
-  - Collider_Dense
-  - Collider_Heat
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -20,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - Unit
+  - 
   - 
   - 
   - 
