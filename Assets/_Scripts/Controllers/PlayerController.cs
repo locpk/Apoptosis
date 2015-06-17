@@ -38,6 +38,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+	public void AddNewCell(BaseCell _in){
+		allSelectableUnits.Add (_in);
+		selectedUnits.Add (_in);
+	}
+
     public System.Collections.Generic.List<GameObject> GetAllSelectableObjects()
     {
         System.Collections.Generic.List<GameObject> allSelectableObjects = new System.Collections.Generic.List<GameObject>(); // Initialize a list of GameObjects
@@ -69,7 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         foreach (BaseCell item in selectedUnits)
         {
-            item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition), selectedUnits.Count); // Set their destination
+            item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Set their destination
         }
 
     }
@@ -87,22 +92,14 @@ public class PlayerController : MonoBehaviour
         int i = 0;
         for (int count = selectedUnits.Count; i < count; ++i) // For each of the player's selected units
         {
-            BaseCell temp;
             switch (selectedUnits[i].celltype) // Dependent on the type of cell it is
             {
                 case CellType.STEM_CELL: // If it is a stem cell
-                    temp = selectedUnits[i].PerfectSplit();
-                    allSelectableUnits.Add(temp); // Split with a chance of cancer
-                    selectedUnits.Add(temp); // Split without a chance of cancer
+                    selectedUnits[i].PerfectSplit();
                     break;
                 case CellType.HEAT_CELL: // If it is a heat cell
                 case CellType.COLD_CELL: // OR If it is a cold cell
-                    temp = selectedUnits[i].CancerousSplit();
-                    if (temp.celltype != CellType.CANCER_CELL)
-                    {
-                        allSelectableUnits.Add(temp); // Split with a chance of cancer
-                        selectedUnits.Add(temp); // Split without a chance of cancer
-                    }
+                    selectedUnits[i].CancerousSplit();
                     break;
 
                 default:

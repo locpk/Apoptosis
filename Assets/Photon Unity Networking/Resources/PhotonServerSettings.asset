@@ -29,4 +29,5 @@ MonoBehaviour:
   - PunPickupSimple
   - PunRespawn
   - RequestForPickupTimes
+  - Harvest
   DisableAutoOpenWizard: 1
