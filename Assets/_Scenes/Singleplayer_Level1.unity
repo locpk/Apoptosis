@@ -264,6 +264,10 @@ Prefab:
       propertyPath: m_TagString
       value: Collider_Heat
       objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 92d3cda65ae00354f9425494133fb6cf, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3300000, guid: 92d3cda65ae00354f9425494133fb6cf, type: 3}
     - {fileID: 2300000, guid: 92d3cda65ae00354f9425494133fb6cf, type: 3}
@@ -397,7 +401,7 @@ GameObject:
   - 4: {fileID: 747809417}
   - 114: {fileID: 747809418}
   m_Layer: 0
-  m_Name: PlayerController
+  m_Name: PlayerControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,6 +558,10 @@ Prefab:
       propertyPath: m_TagString
       value: Collider_Acidic
       objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 9a2c51f106dfd044fa445cbe61c1d601, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3300000, guid: 9a2c51f106dfd044fa445cbe61c1d601, type: 3}
     - {fileID: 2300000, guid: 9a2c51f106dfd044fa445cbe61c1d601, type: 3}
@@ -580,6 +588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaType: 2
   damagePerSecond: 5
+  convertingDelayed: 5
 --- !u!1001 &1021674657
 Prefab:
   m_ObjectHideFlags: 0
@@ -642,6 +651,10 @@ Prefab:
     - target: {fileID: 100000, guid: 13ea420df5aee7b49ab4ac2549b5dc20, type: 3}
       propertyPath: m_TagString
       value: Collider_Dense
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 13ea420df5aee7b49ab4ac2549b5dc20, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3300000, guid: 13ea420df5aee7b49ab4ac2549b5dc20, type: 3}
@@ -886,7 +899,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 6400000, guid: 5d3119eed75941e498a56ce6dbaed804, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5d3119eed75941e498a56ce6dbaed804, type: 3}
       propertyPath: m_Name
@@ -922,6 +935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaType: 2
   damagePerSecond: 5
+  convertingDelayed: 5
 --- !u!1001 &1966312491
 Prefab:
   m_ObjectHideFlags: 0
@@ -984,6 +998,10 @@ Prefab:
     - target: {fileID: 100000, guid: 3700bba3d2d4f064e92cc08b13d47965, type: 3}
       propertyPath: m_TagString
       value: Collider_Cold
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 3700bba3d2d4f064e92cc08b13d47965, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3300000, guid: 3700bba3d2d4f064e92cc08b13d47965, type: 3}
@@ -1078,6 +1096,10 @@ Prefab:
       propertyPath: m_TagString
       value: Collider_Alkali
       objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: 67640fee8b704824b9b2c6d10019b99f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3300000, guid: 67640fee8b704824b9b2c6d10019b99f, type: 3}
     - {fileID: 2300000, guid: 67640fee8b704824b9b2c6d10019b99f, type: 3}
@@ -1104,6 +1126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaType: 3
   damagePerSecond: 5
+  convertingDelayed: 5
 --- !u!1001 &2017659470
 Prefab:
   m_ObjectHideFlags: 0
@@ -1117,7 +1140,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1149,42 +1172,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11498870, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: instantiationId
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19805724, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-      propertyPath: InitialModule.startSize.scalar
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 19805724, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 19805724, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 19805724, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-      propertyPath: lengthInSec
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 19805724, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-      propertyPath: prewarm
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19805724, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-      propertyPath: looping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19805724, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-      propertyPath: InitialModule.startRotation.scalar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19805724, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-      propertyPath: ShapeModule.angle
-      value: 72.5129242
-      objectReference: {fileID: 0}
-    - target: {fileID: 11454602, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-      propertyPath: isMine
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

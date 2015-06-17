@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class AlkaliArea : BaseArea {
 
     public float damagePerSecond;
+    public float convertingDelayed = 5.0f;
 
 	public override void Awake() {
         base.Awake();
@@ -30,5 +31,35 @@ public class AlkaliArea : BaseArea {
         base.LateUpdate();
 
     }
+
+    void OnTriggerEnter(Collider collider) {
+        if (collider.gameObject.tag == "Unit") {
+            BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+
+            if (enterCell.celltype == CellType.STEM_CELL) {
+                StartCoroutine(ConvertToAlkaliCell(convertingDelayed, enterCell));
+
+            }
+        }
+    }
+
+    //void OnTriggerStay(Collider collider) {
+    //    if (collider.gameObject.tag == "Unit") {
+    //        BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+
+    //        if (enterCell.celltype == CellType.ALKALI_CELL) {
+    //            StartCoroutine(ConvertToAlkaliCell(convertingDelayed, enterCell));
+
+    //        }
+    //    }
+    //}
+
+    IEnumerator ConvertToAlkaliCell(float delayed, BaseCell baseCell) {
+        yield return new WaitForSeconds(delayed);
+        Debug.Log("triggerhere! " + name);
+        baseCell.Mutation(CellType.ALKALI_CELL);
+    }
+
+
 
 }
