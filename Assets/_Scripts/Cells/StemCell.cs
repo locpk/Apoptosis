@@ -4,21 +4,23 @@ using System.Collections.Generic;
 public class StemCell : BaseCell
 {
 
-
+    public GameObject stemtoHeat;
     public override void Mutation(CellType _newType)
     {
-
+        GameObject newCell;
         switch (_newType)
         {
             case CellType.HEAT_CELL:
-                // GameObject.Instantiate(whateverthetypeis, transform.position, Quaternion.identity);
+                newCell = GameObject.Instantiate(stemtoHeat, transform.position, Quaternion.identity) as GameObject;
+                newCell.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
+                newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+                currentState = CellState.DEAD;
                 break;
             case CellType.COLD_CELL:
                 break;
             default:
                 break;
         }
-        base.Mutation(_newType);
     }
 
     void DamagePreSecond()
@@ -45,7 +47,7 @@ public class StemCell : BaseCell
     void Start()
     {
         base.Start();
-        
+
     }
 
     // Update is called once per frame
@@ -56,15 +58,19 @@ public class StemCell : BaseCell
         {
             case CellState.IDLE:
                 //guard mode auto attack enemy in range
-                if (Input.GetKeyDown(KeyCode.D))
+                if (Input.GetKeyDown(KeyCode.S))
                 {
                     base.PerfectSplit();
                 }
-                if (Vector3.Distance(GameObject.Find("HeatCell").transform.position, transform.position) <= fovRadius)
+                if (Input.GetKeyDown(KeyCode.D))
                 {
-                    Attack(GameObject.Find("HeatCell"));
+                    Mutation(CellType.HEAT_CELL);
                 }
-                
+                //if (Vector3.Distance(GameObject.Find("HeatCell").transform.position, transform.position) <= fovRadius)
+                //{
+                //    Attack(GameObject.Find("HeatCell"));
+                //}
+
                 break;
             case CellState.ATTACK:
                 if (primaryTarget)
@@ -79,7 +85,7 @@ public class StemCell : BaseCell
                             }
                             InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
                         }
-                        
+
                     }
                     else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                     {
@@ -121,7 +127,7 @@ public class StemCell : BaseCell
                 break;
             case CellState.MOVING:
                 base.Update();
-   
+
                 break;
             case CellState.ATTACK_MOVING:
                 if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
@@ -150,7 +156,7 @@ public class StemCell : BaseCell
             default:
                 break;
         }
-        
+
 
     }
 

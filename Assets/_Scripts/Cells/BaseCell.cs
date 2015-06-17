@@ -171,7 +171,7 @@ public class BaseCell : MonoBehaviour
         {
             case CellType.STEM_CELL:
                 cellSplitAnimation = GameObject.Instantiate(gStemCellPrefab, transform.position, Quaternion.identity) as GameObject;
-                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1 ;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 this.currentState = CellState.DEAD;
@@ -274,14 +274,12 @@ public class BaseCell : MonoBehaviour
 
     public virtual void Mutation(CellType _newType)
     {
-        isAlive = false;
-        currentState = CellState.DEAD;
+
     }
 
     public virtual void Evolve(CellType _newType)
     {
-        isAlive = false;
-        currentState = CellState.DEAD;
+
     }
 
 
@@ -332,20 +330,27 @@ public class BaseCell : MonoBehaviour
         {
             if (isStopped())
             {
+
                 currentState = CellState.IDLE;
                 navAgent.enabled = false;
                 navObstacle.enabled = true;
+
             }
-           
         }
     }
 
     public bool isStopped()
     {
-        if (navAgent.isActiveAndEnabled  && navAgent.remainingDistance <= navAgent.stoppingDistance )
+        if (!navAgent.pathPending)
+        {
+            if (navAgent.remainingDistance <= navAgent.stoppingDistance)
             {
-               return true;
+                if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
+                {
+                    return true;
+                }
             }
+        }
         return false;
     }
     protected void FixedUpdate()
@@ -364,7 +369,7 @@ public class BaseCell : MonoBehaviour
         {
             transform.FindChild("Nucleus").transform.localScale = new Vector3(100.0f / MAX_PROTEIN, 100.0f / MAX_PROTEIN, 100.0f / MAX_PROTEIN);
         }
-       
+
     }
 
     protected void LateUpdate()
