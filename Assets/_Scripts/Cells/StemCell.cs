@@ -6,6 +6,8 @@ public class StemCell : BaseCell
 
     public GameObject stemtoHeat;
     public GameObject stemtoCold;
+    public GameObject stemtoAlkali;
+    public GameObject stemtoAcidic;
     public override void Mutation(CellType _newType)
     {
         if (currentProtein <= 50.0f)
@@ -23,6 +25,18 @@ public class StemCell : BaseCell
                 break;
             case CellType.COLD_CELL:
                 newCell = GameObject.Instantiate(stemtoCold, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                currentState = CellState.DEAD;
+                break;
+            case CellType.ACIDIC_CELL:
+                newCell = GameObject.Instantiate(stemtoAcidic, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                currentState = CellState.DEAD;
+                break;
+            case CellType.ALKALI_CELL:
+                newCell = GameObject.Instantiate(stemtoAlkali, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
                 newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 currentState = CellState.DEAD;

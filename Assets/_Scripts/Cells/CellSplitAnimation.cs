@@ -8,6 +8,8 @@ public class CellSplitAnimation : MonoBehaviour
     public GameObject gStemCellPrefab;
     public GameObject gHeatCellPrefab;
     public GameObject gColdCellPrefab;
+    public GameObject gAlkaliCellPrefab;
+    public GameObject gAcidicCellPrefab;
 
 
     public int currentLevel;
@@ -144,7 +146,27 @@ public class CellSplitAnimation : MonoBehaviour
     }
 
 
+    public void CreateAlkaliCell()
+    {
 
+        GameObject newcell = GameObject.Instantiate(gAlkaliCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
+        newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+        newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        Destroy(gameObject);
+    }
+
+    public void CreateAcidicCell()
+    {
+
+        GameObject newcell = GameObject.Instantiate(gAcidicCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
+        newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+        newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        Destroy(gameObject);
+    }
 
 
 
