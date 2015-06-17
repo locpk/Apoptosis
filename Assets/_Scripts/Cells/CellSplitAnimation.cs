@@ -13,6 +13,18 @@ public class CellSplitAnimation : MonoBehaviour
     public int currentLevel;
     public float currentProtein;
     public bool isAIPossessed = false;
+
+
+
+    public void CreateHeatCell()
+    {
+
+        GameObject newcell = GameObject.Instantiate(gHeatCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
+        newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+        newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+        Destroy(gameObject);
+    }
     public void CreateStemCells()
     {
         for (int i = 0; i < 2; i++)

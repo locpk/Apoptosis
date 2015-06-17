@@ -6,12 +6,9 @@ TagManager:
   tags:
   - Unit
   - MainCameraOffset
-  - Collider_Alkali
-  - Collider_Acidic
-  - Collider_Cold
-  - Collider_Dense
-  - Collider_Heat
-  - Neucleus
+  - Area
+  - Nucleus
+  - Animation
   layers:
   - Default
   - TransparentFX
@@ -22,7 +19,7 @@ TagManager:
   - 
   - 
   - Unit
-  - Terrain
+  - 
   - 
   - 
   - 
