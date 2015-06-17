@@ -100,7 +100,7 @@ MonoBehaviour:
   MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
-  isMine: 0
+  isMine: 1
   isAlive: 1
   isAIPossessed: 0
   isDepleting: 0
@@ -1442,6 +1442,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isMine
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
