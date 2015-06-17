@@ -18,7 +18,7 @@ public class GameObjectManager : MonoBehaviour {
       System.Collections.Generic.List<GameObject> cells = GameObject.FindGameObjectsWithTag("Unit").ToList<GameObject>();
       for(int i = 0; i < cells.Count; i++)
       {
-          if(cells[i].GetComponent<BaseCell>().isAIPossessed)
+          if(!cells[i].GetComponent<BaseCell>().isAIPossessed)
           {
               cells.RemoveAt(i);
           }
