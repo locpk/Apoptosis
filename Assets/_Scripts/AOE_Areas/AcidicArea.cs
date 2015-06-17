@@ -25,7 +25,7 @@ public class AcidicArea : BaseArea {
 
 	public override void FixedUpdate() {
         base.FixedUpdate();
-        Debug.Log(enterCell.name +"'s curProtein: "+ enterCell.currentProtein);
+        //Debug.Log(enterCell.name +"'s curProtein: "+ enterCell.currentProtein);
     }
 
 	public override void LateUpdate() {

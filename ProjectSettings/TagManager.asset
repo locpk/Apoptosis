@@ -9,6 +9,11 @@ TagManager:
   - Area
   - Nucleus
   - Animation
+  - Collider_Heat
+  - Collider_Acidic
+  - Collider_Dense
+  - Collider_Cold
+  - Collider_Alkali
   layers:
   - Default
   - TransparentFX
@@ -19,7 +24,7 @@ TagManager:
   - 
   - 
   - Unit
-  - 
+  - Terrain
   - 
   - 
   - 

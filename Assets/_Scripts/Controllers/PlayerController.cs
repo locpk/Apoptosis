@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
-
+    private int terrainLayer;
 
     public const int MAX_CAP = 20;
     public static int cap = 0;
@@ -11,10 +12,10 @@ public class PlayerController : MonoBehaviour
     public GameObject attackPin;
 	
 
-    public System.Collections.Generic.List<BaseCell> allSelectableUnits;
-    public System.Collections.Generic.List<BaseCell> selectedUnits;
+    public List<BaseCell> allSelectableUnits;
+    public List<BaseCell> selectedUnits;
     GameObject selectedTarget;
-    System.Collections.Generic.List<BaseCell>[] groups;
+    List<BaseCell>[] groups;
     public Texture selector;
 
     Rect GUISelectRect;
@@ -23,9 +24,10 @@ public class PlayerController : MonoBehaviour
     {
         // Initialize variables
         selectedTarget = null;
-        groups = new System.Collections.Generic.List<BaseCell>[10];
-        allSelectableUnits = new System.Collections.Generic.List<BaseCell>();
-        selectedUnits = new System.Collections.Generic.List<BaseCell>();
+        groups = new List<BaseCell>[10];
+        allSelectableUnits = new List<BaseCell>();
+        selectedUnits = new List<BaseCell>();
+        terrainLayer = 1 << LayerMask.NameToLayer ("Terrain");  // Layer masking for raycast clicking
         // ----------
 
         GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
@@ -44,9 +46,9 @@ public class PlayerController : MonoBehaviour
 		selectedUnits.Add (_in);
 	}
 
-    public System.Collections.Generic.List<GameObject> GetAllSelectableObjects()
+    public List<GameObject> GetAllSelectableObjects()
     {
-        System.Collections.Generic.List<GameObject> allSelectableObjects = new System.Collections.Generic.List<GameObject>(); // Initialize a list of GameObjects
+        List<GameObject> allSelectableObjects = new List<GameObject>(); // Initialize a list of GameObjects
         foreach (BaseCell item in allSelectableUnits) // For each of the player's controllable cells
         {
             allSelectableObjects.Add(item.gameObject); // Add the cell's GameObject to the list
@@ -73,11 +75,17 @@ public class PlayerController : MonoBehaviour
 
     public void UnitMove()
     {
-        foreach (BaseCell item in selectedUnits)
-        {
-            item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Set their destination
-        }
+        // Modified by using raycast
+        RaycastHit hitInfo;
+        Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+        if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer)) {
+            foreach (BaseCell item in selectedUnits)
+            {
+                //item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Set their destination
+                item.Move(hitInfo.point); // Set their destination
+            }
+        }
     }
 
     public void UnitAttack()
@@ -156,22 +164,19 @@ public class PlayerController : MonoBehaviour
         }
         foreach (BaseCell item in selectedUnits)
         {
-            Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
-            float left = drawLoc.x - (float)4;
-            float top = -(drawLoc.y - (float)4) + Screen.height;
-            Rect location = new Rect(left, top, (float)8, (float)8);
-            GUI.DrawTexture(location, selector);
+            if (item) {
+                Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
+                float left = drawLoc.x - (float)4;
+                float top = -(drawLoc.y - (float)4) + Screen.height;
+                Rect location = new Rect(left, top, (float)8, (float)8);
+                GUI.DrawTexture(location, selector);
+            }
         }
     }
 
     public void FixedUpdate()
     {
     }
-
-    //Made a pause menu script instead
-    //public void PauseMenu()
-    //{
-    //}
 
     public void UnitStop()
     {
@@ -184,20 +189,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //foreach (BaseCell item in selectedUnits)
-        //{
-        //    if (item == null)
-        //    {
-        //        selectedUnits.Remove(item);
-        //    }
-        //}
-        //foreach (BaseCell item in allSelectableUnits)
-        //{
-        //    if (item == null)
-        //    {
-        //        selectedUnits.Remove(item);
-        //    }
-        //}
         int i = 0;
         while (i < selectedUnits.Count)
         {
