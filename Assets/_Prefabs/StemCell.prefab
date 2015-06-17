@@ -100,7 +100,7 @@ MonoBehaviour:
   MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
-  isMine: 0
+  isMine: 1
   isAlive: 1
   isAIPossessed: 0
   isDepleting: 0
@@ -123,6 +123,7 @@ MonoBehaviour:
   attackCooldown: 2
   splitCooldown: 0
   stemtoHeat: {fileID: 137274, guid: 996a46fa7705a134cbca9e2676ece137, type: 2}
+  stemtoCold: {fileID: 190572, guid: 03026532dd50e414d91a085b722f86c6, type: 2}
 --- !u!114 &11498870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1334,8 +1335,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 12be41204cae34947867bd18306abafe, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: .916000009}
+  m_Sprite: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: .652999997}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -1346,7 +1347,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 0aee0435461c43e43b45a0a5a6bc0bc2,
+      objectReference: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded,
         type: 3}
     - target: {fileID: 0}
       propertyPath: gCancerCellPrefab
@@ -1443,6 +1444,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isMine
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: stemtoCold
+      value: 
+      objectReference: {fileID: 190572, guid: 03026532dd50e414d91a085b722f86c6, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Color.a
+      value: .652999997
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
