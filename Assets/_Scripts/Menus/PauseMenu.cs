@@ -7,15 +7,23 @@ public class PauseMenu : MonoBehaviour {
 	bool isPaused = false;
     //get the pause menu
     public GameObject pauseMenu;
+    public GameObject optionsMenu;
+    public GameObject instructionsMenu;
 
 
 	void Awake() {
         isPaused = false;
+        pauseMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        instructionsMenu.SetActive(false);
 	}
 
 	// Use this for initialization
 	void Start () {
-        isPaused = false;	
+        isPaused = false;
+        pauseMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        instructionsMenu.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -51,6 +59,18 @@ public class PauseMenu : MonoBehaviour {
         Application.LoadLevel(Application.loadedLevel);
     }
 
+    public void LoadOptions()
+    {
+        pauseMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+    }
+
+    public void LoadInstructions()
+    {
+        pauseMenu.SetActive(false);
+        instructionsMenu.SetActive(true);
+    }
+
     public void ExitToMainMenu()
     {
         Application.LoadLevel("MainMenu");
@@ -60,5 +80,8 @@ public class PauseMenu : MonoBehaviour {
     {
         //Any variables that need to be reset should be reset in this function
         isPaused = false;
+        pauseMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        instructionsMenu.SetActive(false);
     }
 }

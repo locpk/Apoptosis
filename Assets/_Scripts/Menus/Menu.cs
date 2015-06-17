@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Menu : MonoBehaviour {
 
+    public GameObject menu;
 
 	void Awake() {
         
@@ -26,5 +27,15 @@ public class Menu : MonoBehaviour {
 	//LateUpdate is called after all Update functions have been called
 	void LateUpdate() {
         
+    }
+
+    public void LoadScene(string SceneName)
+    {
+        Application.LoadLevel(SceneName);
+    }
+
+    public void ExitApplication()
+    {
+        Application.Quit();
     }
 }
