@@ -38,13 +38,14 @@ public class HeatCell : BaseCell
                 }
                 
                 System.Collections.Generic.List<GameObject> enemyUnits = test.AiUnits();
-                if (enemyUnits != null || enemyUnits.Count == 0)
+                if (enemyUnits != null )
                 {
                     for (int i = 0; i < enemyUnits.Count; i++)
                     {
                         if (Vector3.Distance(enemyUnits[i].transform.position, transform.position) <= attackRange)
                         {
                             Attack(enemyUnits[i]);
+                            break;
                         }
                     }
                 }
@@ -126,6 +127,15 @@ public class HeatCell : BaseCell
     {
         base.FixedUpdate();
     }
+     public override void Attack(GameObject _target)
+     {
+         if (_target)
+         {
+             SetPrimaryTarget(_target);
+             currentState = CellState.ATTACK;
+         }
+     }
+
 
     //LateUpdate is called after all Update functions have been called
      void LateUpdate()
