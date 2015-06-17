@@ -63,9 +63,9 @@ public class OptionsMenu : MonoBehaviour
 
 	void OnDestroy()
 	{
-		byte[] toWrite;
-		toWrite [0] = BGMVolSlider.GetComponent<AudioSource> ().volume;
-		System.IO.FileStream fout = System.IO.File.Open ("GameOptions.cfg", System.IO.FileMode.OpenOrCreate);
+		//byte[] toWrite;
+		//toWrite [0] = BGMVolSlider.GetComponent<AudioSource> ().volume;
+		//System.IO.FileStream fout = System.IO.File.Open ("GameOptions.cfg", System.IO.FileMode.OpenOrCreate);
 		//fout.BeginWrite(BGMVolSlider.GetComponent<AudioSource>().volume, 0, sizeof(float), 
 	}
 }
