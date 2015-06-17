@@ -1,34 +1,107 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 public class HeatCell : BaseCell
 {
-	float splitCD = 0;
+    GameObjectManager test;
+    float splitCD = 0;
 
-    new void Awake()
+    void Awake()
     {
-		base.Awake ();
+        base.Awake();
+        test = new GameObjectManager();
+    }
+
+    void DamagePreSecond()
+    {
+        primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
     }
 
     // Use this for initialization
-    new void Start()
+    void Start()
     {
-		base.Start ();
+        base.Start();
     }
 
     // Update is called once per frame
-    new void Update()
+    void Update()
     {
-        
+
         switch (currentState)
         {
+
             case CellState.IDLE:
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    base.CancerousSplit();
+                }
+                
+                System.Collections.Generic.List<GameObject> enemyUnits = test.AiUnits();
+                if (enemyUnits != null || enemyUnits.Count == 0)
+                {
+                    for (int i = 0; i < enemyUnits.Count; i++)
+                    {
+                        if (Vector3.Distance(enemyUnits[i].transform.position, transform.position) <= attackRange)
+                        {
+                            Attack(enemyUnits[i]);
+                        }
+                    }
+                }
+
                 break;
             case CellState.ATTACK:
+                if (!primaryTarget)
+                {
+                    if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
+                    {
+                        if (!IsInvoking("DamagePreSecond"))
+                        {
+                            InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
+                        }
+                    }
+
+                    else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                    {
+                        base.ChaseTarget();
+                        if (IsInvoking("DamagePreSecond"))
+                        {
+                            CancelInvoke("DamagePreSecond");
+                        }
+                    }
+                    else
+                    {
+                        SetPrimaryTarget(null);
+                        navAgent.Stop();
+                    }
+                }
+                else
+                {
+                    currentState = CellState.IDLE;
+                }
+                break;
+            case CellState.CONSUMING:
+                if(!primaryTarget)
+                {
+                    if(targets.Count > 0)
+                    {
+                        primaryTarget = targets[0];
+                        targets.RemoveAt(0);
+                    }
+                    else
+                    {
+                        currentState = CellState.IDLE;
+                    }
+                }
                 break;
             case CellState.MOVING:
+                base.Update();
                 break;
             case CellState.ATTACK_MOVING:
+                if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+                {
+                    currentState = CellState.IDLE;
+                }
                 break;
             case CellState.DEAD:
                 base.Die();
@@ -46,42 +119,18 @@ public class HeatCell : BaseCell
             default:
                 break;
         }
-		splitCD += Time.deltaTime;
-        if (Input.GetMouseButtonUp(1))
-        {
-            Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        }
-     
-		if(Input.GetKey(KeyCode.D))
-		 {
-			if (splitCD >= 1.0f)
-			{
-			base.CancerousSplit();
-			splitCD = 0;
-			}
-		}
-        base.Update();
+
     }
 
-    new void FixedUpdate()
+     void FixedUpdate()
     {
         base.FixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
-    new void LateUpdate()
+     void LateUpdate()
     {
-
+        base.LateUpdate();
     }
-
-	public override void Attack(GameObject _target)
-	{
-		if(Vector3.Distance(transform.position, base.primaryTarget.transform.position) <= attackRange)
-		{
-		base.Attack (base.primaryTarget);
-		}
-	}
-
-
 
 }
