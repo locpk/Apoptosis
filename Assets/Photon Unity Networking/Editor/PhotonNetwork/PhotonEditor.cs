@@ -23,7 +23,7 @@ public class PunWizardText
     public string SetupWizardWarningMessage = "You have not yet run the Photon setup wizard! Your game won't be able to connect. See Windows -> Photon Unity Networking.";
     public string MainMenuButton = "Main Menu";
     public string SetupWizardTitle = "PUN Setup";
-    public string SetupWizardInfo = "Thanks for importing Photon Unity Networking.\nThis window should set you up.\n\n<b>�</b> To use an existing Photon Cloud App, enter your AppId.\n<b>�</b> To register an account or access an existing one, enter the account�s mail address.\n<b>�</b> To use Photon OnPremise, skip this step.";
+    public string SetupWizardInfo = "Thanks for importing Photon Unity Networking.\nThis window should set you up.\n\n<b>•</b> To use an existing Photon Cloud App, enter your AppId.\n<b>•</b> To register an account or access an existing one, enter the account’s mail address.\n<b>•</b> To use Photon OnPremise, skip this step.";
     public string EmailOrAppIdLabel = "AppId or Email";
     public string AlreadyRegisteredInfo = "The email is registered so we can't fetch your AppId (without password).\n\nPlease login online to get your AppId and paste it above.";
     public string SkipRegistrationInfo = "Skipping? No problem:\nEdit your server settings in the PhotonServerSettings file.";
@@ -256,8 +256,8 @@ public class PhotonEditor : EditorWindow
             EditorUtility.DisplayDialog(CurrentLang.SetupWizardWarningTitle, CurrentLang.SetupWizardWarningMessage, CurrentLang.OkButton);
         }
     }
-    
-    
+
+
     #region GUI and Wizard
 
     // Window Update() callback. On-demand, when Window is open
@@ -414,7 +414,7 @@ public class PhotonEditor : EditorWindow
                 GUILayout.Label(CurrentLang.AppliedToSettingsInfo);
             }
 
-            
+
             // setup-complete info
             GUILayout.Space(15);
             GUILayout.Label(CurrentLang.SetupCompleteInfo);
@@ -456,7 +456,7 @@ public class PhotonEditor : EditorWindow
 
         // title
         UiTitleBox(CurrentLang.PUNWizardLabel, BackgroundImage);
-        
+
         // wizard info text
         GUILayout.Label("This window should help you find important settings for PUN, as well as documentation.");
         GUILayout.Space(15);
@@ -561,7 +561,7 @@ public class PhotonEditor : EditorWindow
         {
             PhotonNetwork.PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
             PhotonEditor.SaveSettings();
-            
+
             Debug.LogWarning(client.Message);
             if (client.Message.Contains("registered"))
             {
