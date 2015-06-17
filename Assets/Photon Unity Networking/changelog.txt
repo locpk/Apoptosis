@@ -1,10 +1,13 @@
+v1.56 (16. June 2015)
+Changed: The RPC attribute is now replaced by PunRPC and no longer supported. Search and replace your code for [RPC] and replace it with [PunRPC]. The change is necessary, because the RPC attribute is obsolete in Unity 5.1 (which causes a large amount of warnings at compile time).
+
+
 v1.55 (12. June 2015)
 Changed: PhotonNetwork.time so that it's always positive, even on iOS 64bit exports. Note: this time value does not start at 0 and it will "wrap around" from 4294967.295 to 0! Use with care - we will implement a better soltion asap.
 Changed: ServerSettings.EnabledRegions (for "Best Region" Cloud hosting) now defaults to "all". The old default had the same effect but it was labelled as "none" of the regions (which is not allowed).
 Fixed: Re-creation of the PhotonServerSettings file in case you deleted a duplicate. This always created a file in the default location. Now, it does not matter where the PhotonSettingsFile is: If you have one at least, it will be found.
 Changed: AuthenticationValues now has a property UserId. You can set a UserId independent from the playerName now. This UserId should be unique per player and does not have to be readable. FindFriends will use this UserId (or one set by a Custom Auth Service). If you don't set it, PUN will use PhotonNetwork.playerName to identify a user.
 Changed: AuthenticationValues now uses AddAuthParameter(key, value) to set parameters. Simply call it once for each parameter that your authentication service expects. Changed GUICustomAuth accordingly.
-
 
 v1.54 (3. June 2015)
 Fixed: In Offline Mode, the NetworkingPeer.mMasterClientId always returns the local player ID. This fixes RPCs in offline mode targeted at the Master Client.
