@@ -27,12 +27,12 @@ public class PauseMenu : MonoBehaviour {
 
         //check if game is paused or not
 		if (isPaused) {
-			Debug.Log ("game paused");
+			//Debug.Log ("game paused");
             //set the pause menu to true
             pauseMenu.SetActive(true);
 			Time.timeScale = 0.0f;
 		} else {
-			Debug.Log ("game resumed");
+			//Debug.Log ("game resumed");
             //turn the pause menu off
             pauseMenu.SetActive(false);
 			Time.timeScale = 1.0f;
