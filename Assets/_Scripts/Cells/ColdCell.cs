@@ -7,13 +7,13 @@ public class ColdCell : BaseCell
 
     new void Awake()
     {
-		base.Awake ();
+		base.bAwake ();
     }
 
     // Use this for initialization
     new void Start()
     {
-		base.Start ();
+		base.bStart ();
     }
 
     // Update is called once per frame
@@ -48,7 +48,7 @@ public class ColdCell : BaseCell
 
     new void FixedUpdate()
     {
-        base.FixedUpdate();
+        base.bFixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called

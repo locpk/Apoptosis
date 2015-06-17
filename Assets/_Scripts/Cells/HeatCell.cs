@@ -7,13 +7,13 @@ public class HeatCell : BaseCell
 
     new void Awake()
     {
-		base.Awake ();
+		base.bAwake ();
     }
 
     // Use this for initialization
     new void Start()
     {
-		base.Start ();
+		base.bStart ();
     }
 
     // Update is called once per frame
@@ -60,12 +60,12 @@ public class HeatCell : BaseCell
         //    splitCD = 0;
         //    }
         //}
-        base.Update();
+        base.bUpdate();
     }
 
     new void FixedUpdate()
     {
-        base.FixedUpdate();
+        base.bFixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called

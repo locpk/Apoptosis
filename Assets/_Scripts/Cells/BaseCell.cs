@@ -302,7 +302,7 @@ public class BaseCell : MonoBehaviour
     }
     #endregion
 
-    protected void Awake()
+    protected void bAwake()
     {
         depleteTimer = DEPLETE_TIME;
         if (isSinglePlayer)
@@ -317,14 +317,14 @@ public class BaseCell : MonoBehaviour
     }
 
     // Use this for initialization
-    protected void Start()
+    protected void bStart()
     {
         navAgent.enabled = false;
         navAgent.updateRotation = false;
         navObstacle.enabled = true;
     }
 
-    protected void Update()
+    protected void bUpdate()
     {
         if (currentState == CellState.MOVING)
         {
@@ -353,7 +353,7 @@ public class BaseCell : MonoBehaviour
         }
         return false;
     }
-    protected void FixedUpdate()
+    protected void bFixedUpdate()
     {
         Deplete(Time.fixedDeltaTime);
         if (currentProtein <= 0.0f)
@@ -372,7 +372,7 @@ public class BaseCell : MonoBehaviour
 
     }
 
-    protected void LateUpdate()
+    protected void bLateUpdate()
     {
 
     }

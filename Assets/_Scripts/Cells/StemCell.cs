@@ -63,13 +63,13 @@ public class StemCell : BaseCell
 
     void Awake()
     {
-        base.Awake();
+        base.bAwake();
     }
 
     // Use this for initialization
     void Start()
     {
-        base.Start();
+        base.bStart();
 
     }
 
@@ -142,7 +142,7 @@ public class StemCell : BaseCell
                 break;
             case CellState.MOVING:
                 GetComponent<Animator>().Play("StemMovement");
-                base.Update();
+                base.bUpdate();
 
                 break;
             case CellState.ATTACK_MOVING:
@@ -178,12 +178,12 @@ public class StemCell : BaseCell
 
     void FixedUpdate()
     {
-        base.FixedUpdate();
+        base.bFixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
     void LateUpdate()
     {
-        base.LateUpdate();
+        base.bLateUpdate();
     }
 }
