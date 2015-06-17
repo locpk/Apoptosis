@@ -44,20 +44,16 @@ public class PauseMenu : MonoBehaviour {
         //set the bool to continue the game
         isPaused = false;
     }
-	
-	void FixedUpdate() {
-		
-	}
-	
-	//LateUpdate is called after all Update functions have been called
-	void LateUpdate() {
-		
-	}
 
     public void RestartLevel()
     {
         //restarts the level
         Application.LoadLevel(Application.loadedLevel);
+    }
+
+    public void ExitToMainMenu()
+    {
+        Application.LoadLevel("MainMenu");
     }
 
     void OnLevelWasLoaded()
