@@ -174,6 +174,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     public void FixedUpdate()
     {
     }
@@ -272,4 +273,12 @@ public class PlayerController : MonoBehaviour
             UnitMove();
         }
     }
+
+
+
+    public static void Swap<T> (ref T lhs, ref T rhs) {
+		T temp = lhs;
+		lhs = rhs;
+		rhs = temp;
+	}
 }
