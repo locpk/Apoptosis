@@ -17,6 +17,7 @@ GameObject:
   - 114: {fileID: 11498870}
   - 199: {fileID: 19912704}
   - 198: {fileID: 19805724}
+  - 95: {fileID: 9577826}
   m_Layer: 0
   m_Name: StemCell
   m_TagString: Unit
@@ -80,6 +81,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &9577826
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174676}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae36b6a776c814647aca3566fb1d474c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11454602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1336,7 +1354,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: .652999997}
+  m_Color: {r: 1, g: 1, b: 1, a: .627451003}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
