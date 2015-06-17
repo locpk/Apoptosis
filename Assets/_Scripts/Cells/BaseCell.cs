@@ -355,7 +355,7 @@ public class BaseCell : MonoBehaviour
     }
     protected void FixedUpdate()
     {
-        //Deplete(Time.fixedDeltaTime);
+        Deplete(Time.fixedDeltaTime);
         if (currentProtein <= 0.0f)
         {
             currentState = CellState.DEAD;

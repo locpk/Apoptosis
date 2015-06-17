@@ -5,18 +5,27 @@ public class StemCell : BaseCell
 {
 
     public GameObject stemtoHeat;
+    public GameObject stemtoCold;
     public override void Mutation(CellType _newType)
     {
-
+        if (currentProtein <= 50.0f)
+        {
+            return;
+        }
+        GameObject newCell;
         switch (_newType)
         {
             case CellType.HEAT_CELL:
-                GameObject newCell = GameObject.Instantiate(stemtoHeat, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+                newCell = GameObject.Instantiate(stemtoHeat, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
                 newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 currentState = CellState.DEAD;
                 break;
             case CellType.COLD_CELL:
+                newCell = GameObject.Instantiate(stemtoCold, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                currentState = CellState.DEAD;
                 break;
             default:
                 break;
@@ -58,14 +67,6 @@ public class StemCell : BaseCell
         {
             case CellState.IDLE:
                 //guard mode auto attack enemy in range
-                if (Input.GetKeyDown(KeyCode.S))
-                {
-                    base.PerfectSplit();
-                }
-                if (Input.GetKeyDown(KeyCode.D))
-                {
-                    Mutation(CellType.HEAT_CELL);
-                }
                 //if (Vector3.Distance(GameObject.Find("HeatCell").transform.position, transform.position) <= fovRadius)
                 //{
                 //    Attack(GameObject.Find("HeatCell"));
@@ -126,6 +127,7 @@ public class StemCell : BaseCell
                 }
                 break;
             case CellState.MOVING:
+                GetComponent<Animator>().Play("StemMovement");
                 base.Update();
 
                 break;

@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: eba9e1ecbf30f764d93b2a24b377d274
-timeCreated: 1434404296
+timeCreated: 1434567465
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - gCancerCellPrefab: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
+  - gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
+  - gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
+  - gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

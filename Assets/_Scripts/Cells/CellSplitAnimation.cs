@@ -23,6 +23,7 @@ public class CellSplitAnimation : MonoBehaviour
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         Destroy(gameObject);
     }
     public void CreateStemCells()
@@ -34,6 +35,7 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
             newcell.GetComponent<BaseCell>().currentLevel = currentLevel;
             newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         Destroy(gameObject);
     }
@@ -76,7 +78,16 @@ public class CellSplitAnimation : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void CreateColdCell()
+    {
 
+        GameObject newcell = GameObject.Instantiate(gColdCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
+        newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+        newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        Destroy(gameObject);
+    }
 
     public void CreateColdCells()
     {
