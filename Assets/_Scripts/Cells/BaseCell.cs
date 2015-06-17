@@ -155,7 +155,14 @@ public class BaseCell : MonoBehaviour
 
     public virtual void Attack(GameObject _target)
     {
+       
     }
+
+    public virtual void AutoAttack()
+    {
+        
+    }
+
 
     public virtual void Consume(GameObject _target)
     {
@@ -335,22 +342,26 @@ public class BaseCell : MonoBehaviour
     {
         if (currentState == CellState.MOVING)
         {
-
-            if (!navAgent.pathPending)
+            if (navAgent.isActiveAndEnabled)
             {
-                if (navAgent.remainingDistance <= navAgent.stoppingDistance)
+                if (!navAgent.pathPending)
                 {
-                    if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
+                    if (navAgent.remainingDistance <= navAgent.stoppingDistance)
                     {
-                        currentState = CellState.IDLE;
-                        navAgent.SetDestination(transform.position);
-                        navAgent.enabled = false;
-                        navObstacle.enabled = true;
+                        if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
+                        {
+                            currentState = CellState.IDLE;
+                            navAgent.SetDestination(transform.position);
+                            navAgent.enabled = false;
+                            navObstacle.enabled = true;
+                        }
                     }
                 }
             }
 
         }
+        AutoAttack();
+        Attack(primaryTarget);
     }
 
     protected void FixedUpdate()
