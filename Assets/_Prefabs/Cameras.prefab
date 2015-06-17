@@ -178,7 +178,7 @@ MonoBehaviour:
   maxX: 95
   minY: -100
   maxY: 100
-  scrollSpeed: 40
+  scrollSpeed: 15
   scrollPercentage: .0500000007
   minZoom: 10
   maxZoom: 18

@@ -4,10 +4,12 @@ using System.Collections.Generic;
 public class HeatCell : BaseCell
 {
 	float splitCD = 0;
+    int terrainLayer;
 
     new void Awake()
     {
 		base.Awake ();
+        terrainLayer = 1 << LayerMask.NameToLayer ("Terrain");
     }
 
     // Use this for initialization
@@ -46,17 +48,21 @@ public class HeatCell : BaseCell
                 break;
         }
 		splitCD += Time.deltaTime;
-        if (Input.GetMouseButtonUp(1))
-        {
-            Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        if (Input.GetMouseButtonUp(1)) {
+            RaycastHit hitInfo;
+            Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer)) {
+                Move(hitInfo.point);
+            }
         }
      
 		if(Input.GetKey(KeyCode.D))
 		 {
 			if (splitCD >= 1.0f)
 			{
-			base.CancerousSplit();
-			splitCD = 0;
+			    base.CancerousSplit();
+			    splitCD = 0;
 			}
 		}
         base.Update();

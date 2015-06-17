@@ -11,6 +11,7 @@ TagManager:
   - Collider_Cold
   - Collider_Dense
   - Collider_Heat
+  - Neucleus
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - 
   - 
   - Unit
-  - 
+  - Terrain
   - 
   - 
   - 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class DenseArea : BaseArea {
 
-    public float damagePerSecond;
+    public float speedDebuff;
 
 	public override void Awake() {
         base.Awake();
@@ -31,8 +31,4 @@ public class DenseArea : BaseArea {
 
     }
 
-    public override void OnTriggerStay(Collider other) {
-        base.OnTriggerStay(other);
-
-    }
 }

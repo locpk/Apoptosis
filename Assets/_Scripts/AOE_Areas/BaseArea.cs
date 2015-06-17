@@ -4,6 +4,12 @@ using System.Collections.Generic;
 
 public class BaseArea : MonoBehaviour {
 
+    public enum AreaType {
+        HEAT_AREA, COLD_AREA, ACIDIC_AREA, ALKALI_AREA, DENSE_AREA, AREA_COUNTS
+    }
+
+    public AreaType areaType;
+
     private float effectTimer;
     private float effectAmount;
 
@@ -17,14 +23,9 @@ public class BaseArea : MonoBehaviour {
         set { effectAmount = value; }
     }
 
-    public virtual void OnTriggerStay(Collider other) {
-        if (/** other.gameObject.tag == "" **/false) {
-            // TO-DO
-        }
-    }
-    
+
 	public virtual void Awake() {
-        
+
     }
 
 	public virtual void Start () {
@@ -42,4 +43,5 @@ public class BaseArea : MonoBehaviour {
 	public virtual void LateUpdate() {
         
     }
+
 }
