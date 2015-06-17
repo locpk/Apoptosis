@@ -95,7 +95,7 @@ public class HeatCell : BaseCell
         else
             currentState = CellState.IDLE;
     }
-    public override void AutoAttack()
+    public void AutoAttack()
     {
         GameObject closestAiguy = null;
         foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Unit"))

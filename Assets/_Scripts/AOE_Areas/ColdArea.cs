@@ -31,8 +31,5 @@ public class ColdArea : BaseArea {
 
     }
 
-    public override void OnTriggerStay(Collider other) {
-        base.OnTriggerStay(other);
 
-    }
 }

@@ -33,7 +33,7 @@ GameObject:
   - 212: {fileID: 21239700}
   m_Layer: 2
   m_Name: Nucleus
-  m_TagString: Neucleus
+  m_TagString: Nucleus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   isSinglePlayer: 1
   isMine: 0
   isAlive: 1
-  isAIPossessed: 1
+  isAIPossessed: 0
   isDepleting: 0
   isSelected: 0
   celltype: 7
@@ -112,7 +112,6 @@ MonoBehaviour:
   primaryTarget: {fileID: 0}
   photonView: {fileID: 0}
   currentProtein: 500
-  moveSpeed: 5
   fovRadius: 0
   attackDamage: 5
   attackRange: 1.5
@@ -291,7 +290,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Neucleus
+      value: Nucleus
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Radius
@@ -308,6 +307,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isAIPossessed
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

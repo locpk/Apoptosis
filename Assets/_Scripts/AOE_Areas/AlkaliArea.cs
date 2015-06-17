@@ -31,8 +31,4 @@ public class AlkaliArea : BaseArea {
 
     }
 
-    public override void OnTriggerStay(Collider other) {
-        base.OnTriggerStay(other);
-
-    }
 }

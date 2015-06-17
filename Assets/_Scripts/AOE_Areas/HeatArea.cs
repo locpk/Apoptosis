@@ -31,8 +31,4 @@ public class HeatArea : BaseArea {
 
     }
 
-    public override void OnTriggerStay(Collider other) {
-        base.OnTriggerStay(other);
-
-    }
 }
