@@ -20,14 +20,4 @@ MonoBehaviour:
   EnabledRegions: -1
   RpcList:
   - ApplyDamage
-  - Chat
-  - DestroyRpc
-  - InstantiateRpc
-  - OnAwakeRPC
-  - PickupItemInit
-  - PunPickup
-  - PunPickupSimple
-  - PunRespawn
-  - RequestForPickupTimes
-  - Harvest
   DisableAutoOpenWizard: 1

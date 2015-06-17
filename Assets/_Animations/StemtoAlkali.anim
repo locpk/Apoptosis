@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: StemtoCold
+  m_Name: StemtoAlkali
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -23,7 +23,7 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 3.98333335
+      - time: 11
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -42,12 +42,42 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 1
+      - time: 2
         value: 0
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 3.5
+      - time: 5.98333311
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 7
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 8
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 9
+        value: 0
+        inSlope: .5
+        outSlope: .5
+        tangentMode: 10
+      - time: 10
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 12
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 15
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -55,7 +85,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_IsActive
-    path: ColdCell
+    path: Alkali Cell
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -63,18 +93,13 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 1
-        inSlope: -.5
-        outSlope: -.5
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: 1
-        value: .5
-        inSlope: -.349999994
-        outSlope: -.349999994
-        tangentMode: 10
-      - time: 2
-        value: .300000012
-        inSlope: -.199999988
-        outSlope: -.199999988
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -87,13 +112,13 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 1
-        inSlope: -.349999994
-        outSlope: -.349999994
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
-      - time: 2
-        value: .300000012
-        inSlope: -.349999994
-        outSlope: -.349999994
+      - time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -106,13 +131,13 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 1
-        inSlope: -.5
-        outSlope: -.5
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: 1
-        value: .5
-        inSlope: -.5
-        outSlope: -.5
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -124,29 +149,39 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .552999973
-        inSlope: .0470000505
-        outSlope: .0470000505
+        value: .300000012
+        inSlope: .699999988
+        outSlope: .699999988
         tangentMode: 10
       - time: 1
-        value: .600000024
-        inSlope: -.126499981
-        outSlope: -.126499981
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: 2
         value: .300000012
-        inSlope: -.200000018
-        outSlope: -.200000018
+        inSlope: -.349999994
+        outSlope: -.349999994
         tangentMode: 10
-      - time: 3
-        value: .200000003
-        inSlope: -.25
-        outSlope: -.25
+      - time: 5.98333311
+        value: .300000012
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
-      - time: 3.5
+      - time: 8
+        value: .300000012
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 10
+        value: .300000012
+        inSlope: -.150000006
+        outSlope: -.150000006
+        tangentMode: 10
+      - time: 11
         value: 0
-        inSlope: -.400000006
-        outSlope: -.400000006
+        inSlope: -.300000012
+        outSlope: -.300000012
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -158,6 +193,92 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
+        value: .479250699
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.r
+    path: Alkali Cell
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .11505191
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.g
+    path: Alkali Cell
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .558823526
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.b
+    path: Alkali Cell
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: -.100000001
+        outSlope: -.100000001
+        tangentMode: 10
+      - time: 10
+        value: 0
+        inSlope: .200000003
+        outSlope: .200000003
+        tangentMode: 10
+      - time: 11
+        value: .5
+        inSlope: .400000006
+        outSlope: .400000006
+        tangentMode: 10
+      - time: 12
+        value: .800000012
+        inSlope: .183333337
+        outSlope: .183333337
+        tangentMode: 10
+      - time: 15
+        value: 1
+        inSlope: .0666666627
+        outSlope: .0666666627
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.a
+    path: Alkali Cell
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 4
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 10
         value: 1
         inSlope: 0
         outSlope: 0
@@ -165,7 +286,31 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Color.r
-    path: ColdCell
+    path: StemCell/Nucleus
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: -.174999997
+        outSlope: -.174999997
+        tangentMode: 10
+      - time: 4
+        value: .300000012
+        inSlope: -.0291666649
+        outSlope: -.0291666649
+        tangentMode: 10
+      - time: 10
+        value: 1
+        inSlope: .116666667
+        outSlope: .116666667
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.g
+    path: StemCell/Nucleus
     classID: 212
     script: {fileID: 0}
   - curve:
@@ -176,16 +321,7 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.g
-    path: ColdCell
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
+      - time: 10
         value: 1
         inSlope: 0
         outSlope: 0
@@ -193,122 +329,41 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Color.b
-    path: ColdCell
+    path: StemCell/Nucleus
     classID: 212
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .884000003
-        inSlope: -.223999992
-        outSlope: -.223999992
+        value: .627451003
+        inSlope: .372548997
+        outSlope: .372548997
         tangentMode: 10
-      - time: 3.5
+      - time: 1
+        value: 1
+        inSlope: .0862745047
+        outSlope: .0862745047
+        tangentMode: 10
+      - time: 2
+        value: .800000012
+        inSlope: -.162499994
+        outSlope: -.162499994
+        tangentMode: 10
+      - time: 6
+        value: .300000012
+        inSlope: -.112500004
+        outSlope: -.112500004
+        tangentMode: 10
+      - time: 8
         value: .100000001
-        inSlope: .301793098
-        outSlope: .301793098
+        inSlope: -.075000003
+        outSlope: -.075000003
         tangentMode: 10
-      - time: 3.98333335
-        value: .5
-        inSlope: .561334074
-        outSlope: .561334074
-        tangentMode: 10
-      - time: 5
-        value: .800000012
-        inSlope: .295081973
-        outSlope: .295081973
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.a
-    path: ColdCell
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: -.349999994
-        outSlope: -.349999994
-        tangentMode: 10
-      - time: 2
-        value: .300000012
-        inSlope: -.349999994
-        outSlope: -.349999994
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.r
-    path: StemCell/Nucleus
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      - time: 2
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.g
-    path: StemCell/Nucleus
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: -.349999994
-        outSlope: -.349999994
-        tangentMode: 10
-      - time: 2
-        value: .300000012
-        inSlope: -.349999994
-        outSlope: -.349999994
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.b
-    path: StemCell/Nucleus
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .916000009
-        inSlope: -.315999985
-        outSlope: -.315999985
-        tangentMode: 10
-      - time: 1
-        value: .600000024
-        inSlope: -.157999992
-        outSlope: -.157999992
-        tangentMode: 10
-      - time: 2
-        value: .600000024
-        inSlope: -.200000018
-        outSlope: -.200000018
-        tangentMode: 10
-      - time: 3
-        value: .200000003
-        inSlope: -.400000036
-        outSlope: -.400000036
-        tangentMode: 10
-      - time: 3.5
+      - time: 10
         value: 0
-        inSlope: -.400000006
-        outSlope: -.400000006
+        inSlope: -.0500000007
+        outSlope: -.0500000007
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -320,86 +375,86 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1
+        value: .289684236
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      - time: 3.5
-        value: 1
+      - time: 15
+        value: .289684236
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Color.r
-    path: ColdCell/Nucleus
+    path: Alkali Cell/Nucleus
     classID: 212
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1
+        value: .609000027
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      - time: 3.5
-        value: 1
+      - time: 15
+        value: .609000027
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Color.g
-    path: ColdCell/Nucleus
+    path: Alkali Cell/Nucleus
     classID: 212
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1
+        value: .41911763
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      - time: 3.5
-        value: 1
+      - time: 15
+        value: .41911763
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Color.b
-    path: ColdCell/Nucleus
+    path: Alkali Cell/Nucleus
     classID: 212
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .578000009
-        inSlope: -.108000003
-        outSlope: -.108000003
+        value: .802999973
+        inSlope: -.0802999958
+        outSlope: -.0802999958
         tangentMode: 10
-      - time: 3.5
-        value: .200000003
-        inSlope: .256344825
-        outSlope: .256344825
+      - time: 10
+        value: 0
+        inSlope: .209849998
+        outSlope: .209849998
         tangentMode: 10
-      - time: 3.98333335
+      - time: 11
         value: .5
-        inSlope: .457885802
-        outSlope: .457885802
+        inSlope: .3125
+        outSlope: .3125
         tangentMode: 10
-      - time: 5
-        value: .800000012
-        inSlope: .295081973
-        outSlope: .295081973
+      - time: 15
+        value: 1
+        inSlope: .125
+        outSlope: .125
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Color.a
-    path: ColdCell/Nucleus
+    path: Alkali Cell/Nucleus
     classID: 212
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -416,13 +471,43 @@ AnimationClip:
       classID: 1
       customType: 0
       isPPtrCurve: 0
-    - path: 3871067911
+    - path: 2637204646
       attribute: 2086281974
       script: {fileID: 0}
       classID: 1
       customType: 0
       isPPtrCurve: 0
     - path: 3586524577
+      attribute: 304273561
+      script: {fileID: 0}
+      classID: 212
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2637204646
+      attribute: 304273561
+      script: {fileID: 0}
+      classID: 212
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3270383912
+      attribute: 4215373228
+      script: {fileID: 0}
+      classID: 212
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3270383912
+      attribute: 304273561
+      script: {fileID: 0}
+      classID: 212
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2129483420
+      attribute: 304273561
+      script: {fileID: 0}
+      classID: 212
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3586524577
       attribute: 2526845255
       script: {fileID: 0}
       classID: 212
@@ -440,14 +525,20 @@ AnimationClip:
       classID: 212
       customType: 0
       isPPtrCurve: 0
-    - path: 3586524577
-      attribute: 304273561
+    - path: 2637204646
+      attribute: 2526845255
       script: {fileID: 0}
       classID: 212
       customType: 0
       isPPtrCurve: 0
-    - path: 3871067911
-      attribute: 304273561
+    - path: 2637204646
+      attribute: 4215373228
+      script: {fileID: 0}
+      classID: 212
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2637204646
+      attribute: 2334886179
       script: {fileID: 0}
       classID: 212
       customType: 0
@@ -464,55 +555,19 @@ AnimationClip:
       classID: 212
       customType: 0
       isPPtrCurve: 0
-    - path: 3270383912
-      attribute: 304273561
-      script: {fileID: 0}
-      classID: 212
-      customType: 0
-      isPPtrCurve: 0
-    - path: 2543643567
-      attribute: 304273561
-      script: {fileID: 0}
-      classID: 212
-      customType: 0
-      isPPtrCurve: 0
-    - path: 3871067911
+    - path: 2129483420
       attribute: 2526845255
       script: {fileID: 0}
       classID: 212
       customType: 0
       isPPtrCurve: 0
-    - path: 3871067911
+    - path: 2129483420
       attribute: 4215373228
       script: {fileID: 0}
       classID: 212
       customType: 0
       isPPtrCurve: 0
-    - path: 3871067911
-      attribute: 2334886179
-      script: {fileID: 0}
-      classID: 212
-      customType: 0
-      isPPtrCurve: 0
-    - path: 3270383912
-      attribute: 4215373228
-      script: {fileID: 0}
-      classID: 212
-      customType: 0
-      isPPtrCurve: 0
-    - path: 2543643567
-      attribute: 2526845255
-      script: {fileID: 0}
-      classID: 212
-      customType: 0
-      isPPtrCurve: 0
-    - path: 2543643567
-      attribute: 4215373228
-      script: {fileID: 0}
-      classID: 212
-      customType: 0
-      isPPtrCurve: 0
-    - path: 2543643567
+    - path: 2129483420
       attribute: 2334886179
       script: {fileID: 0}
       classID: 212
@@ -522,7 +577,7 @@ AnimationClip:
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: 5
+    m_StopTime: 15
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -545,7 +600,7 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 3.98333335
+      - time: 11
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -564,12 +619,42 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 1
+      - time: 2
         value: 0
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 3.5
+      - time: 5.98333311
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 7
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 8
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 9
+        value: 0
+        inSlope: .5
+        outSlope: .5
+        tangentMode: 10
+      - time: 10
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 12
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 15
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -577,7 +662,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_IsActive
-    path: ColdCell
+    path: Alkali Cell
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -585,18 +670,13 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 1
-        inSlope: -.5
-        outSlope: -.5
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: 1
-        value: .5
-        inSlope: -.349999994
-        outSlope: -.349999994
-        tangentMode: 10
-      - time: 2
-        value: .300000012
-        inSlope: -.199999988
-        outSlope: -.199999988
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -609,13 +689,13 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 1
-        inSlope: -.349999994
-        outSlope: -.349999994
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
-      - time: 2
-        value: .300000012
-        inSlope: -.349999994
-        outSlope: -.349999994
+      - time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -628,13 +708,13 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 1
-        inSlope: -.5
-        outSlope: -.5
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: 1
-        value: .5
-        inSlope: -.5
-        outSlope: -.5
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -646,29 +726,39 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .552999973
-        inSlope: .0470000505
-        outSlope: .0470000505
+        value: .300000012
+        inSlope: .699999988
+        outSlope: .699999988
         tangentMode: 10
       - time: 1
-        value: .600000024
-        inSlope: -.126499981
-        outSlope: -.126499981
+        value: 1
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: 2
         value: .300000012
-        inSlope: -.200000018
-        outSlope: -.200000018
+        inSlope: -.349999994
+        outSlope: -.349999994
         tangentMode: 10
-      - time: 3
-        value: .200000003
-        inSlope: -.25
-        outSlope: -.25
+      - time: 5.98333311
+        value: .300000012
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
-      - time: 3.5
+      - time: 8
+        value: .300000012
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 10
+        value: .300000012
+        inSlope: -.150000006
+        outSlope: -.150000006
+        tangentMode: 10
+      - time: 11
         value: 0
-        inSlope: -.400000006
-        outSlope: -.400000006
+        inSlope: -.300000012
+        outSlope: -.300000012
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -680,6 +770,92 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
+        value: .479250699
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.r
+    path: Alkali Cell
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .11505191
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.g
+    path: Alkali Cell
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: .558823526
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.b
+    path: Alkali Cell
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: -.100000001
+        outSlope: -.100000001
+        tangentMode: 10
+      - time: 10
+        value: 0
+        inSlope: .200000003
+        outSlope: .200000003
+        tangentMode: 10
+      - time: 11
+        value: .5
+        inSlope: .400000006
+        outSlope: .400000006
+        tangentMode: 10
+      - time: 12
+        value: .800000012
+        inSlope: .183333337
+        outSlope: .183333337
+        tangentMode: 10
+      - time: 15
+        value: 1
+        inSlope: .0666666627
+        outSlope: .0666666627
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.a
+    path: Alkali Cell
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 4
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: 10
         value: 1
         inSlope: 0
         outSlope: 0
@@ -687,7 +863,31 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Color.r
-    path: ColdCell
+    path: StemCell/Nucleus
+    classID: 212
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: -.174999997
+        outSlope: -.174999997
+        tangentMode: 10
+      - time: 4
+        value: .300000012
+        inSlope: -.0291666649
+        outSlope: -.0291666649
+        tangentMode: 10
+      - time: 10
+        value: 1
+        inSlope: .116666667
+        outSlope: .116666667
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Color.g
+    path: StemCell/Nucleus
     classID: 212
     script: {fileID: 0}
   - curve:
@@ -698,16 +898,7 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.g
-    path: ColdCell
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
+      - time: 10
         value: 1
         inSlope: 0
         outSlope: 0
@@ -715,122 +906,41 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Color.b
-    path: ColdCell
+    path: StemCell/Nucleus
     classID: 212
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .884000003
-        inSlope: -.223999992
-        outSlope: -.223999992
+        value: .627451003
+        inSlope: .372548997
+        outSlope: .372548997
         tangentMode: 10
-      - time: 3.5
+      - time: 1
+        value: 1
+        inSlope: .0862745047
+        outSlope: .0862745047
+        tangentMode: 10
+      - time: 2
+        value: .800000012
+        inSlope: -.162499994
+        outSlope: -.162499994
+        tangentMode: 10
+      - time: 6
+        value: .300000012
+        inSlope: -.112500004
+        outSlope: -.112500004
+        tangentMode: 10
+      - time: 8
         value: .100000001
-        inSlope: .301793098
-        outSlope: .301793098
+        inSlope: -.075000003
+        outSlope: -.075000003
         tangentMode: 10
-      - time: 3.98333335
-        value: .5
-        inSlope: .561334074
-        outSlope: .561334074
-        tangentMode: 10
-      - time: 5
-        value: .800000012
-        inSlope: .295081973
-        outSlope: .295081973
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.a
-    path: ColdCell
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: -.349999994
-        outSlope: -.349999994
-        tangentMode: 10
-      - time: 2
-        value: .300000012
-        inSlope: -.349999994
-        outSlope: -.349999994
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.r
-    path: StemCell/Nucleus
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      - time: 2
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.g
-    path: StemCell/Nucleus
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: -.349999994
-        outSlope: -.349999994
-        tangentMode: 10
-      - time: 2
-        value: .300000012
-        inSlope: -.349999994
-        outSlope: -.349999994
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.b
-    path: StemCell/Nucleus
-    classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .916000009
-        inSlope: -.315999985
-        outSlope: -.315999985
-        tangentMode: 10
-      - time: 1
-        value: .600000024
-        inSlope: -.157999992
-        outSlope: -.157999992
-        tangentMode: 10
-      - time: 2
-        value: .600000024
-        inSlope: -.200000018
-        outSlope: -.200000018
-        tangentMode: 10
-      - time: 3
-        value: .200000003
-        inSlope: -.400000036
-        outSlope: -.400000036
-        tangentMode: 10
-      - time: 3.5
+      - time: 10
         value: 0
-        inSlope: -.400000006
-        outSlope: -.400000006
+        inSlope: -.0500000007
+        outSlope: -.0500000007
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -842,86 +952,86 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1
+        value: .289684236
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      - time: 3.5
-        value: 1
+      - time: 15
+        value: .289684236
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Color.r
-    path: ColdCell/Nucleus
+    path: Alkali Cell/Nucleus
     classID: 212
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1
+        value: .609000027
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      - time: 3.5
-        value: 1
+      - time: 15
+        value: .609000027
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Color.g
-    path: ColdCell/Nucleus
+    path: Alkali Cell/Nucleus
     classID: 212
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1
+        value: .41911763
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      - time: 3.5
-        value: 1
+      - time: 15
+        value: .41911763
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Color.b
-    path: ColdCell/Nucleus
+    path: Alkali Cell/Nucleus
     classID: 212
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .578000009
-        inSlope: -.108000003
-        outSlope: -.108000003
+        value: .802999973
+        inSlope: -.0802999958
+        outSlope: -.0802999958
         tangentMode: 10
-      - time: 3.5
-        value: .200000003
-        inSlope: .256344825
-        outSlope: .256344825
+      - time: 10
+        value: 0
+        inSlope: .209849998
+        outSlope: .209849998
         tangentMode: 10
-      - time: 3.98333335
+      - time: 11
         value: .5
-        inSlope: .457885802
-        outSlope: .457885802
+        inSlope: .3125
+        outSlope: .3125
         tangentMode: 10
-      - time: 5
-        value: .800000012
-        inSlope: .295081973
-        outSlope: .295081973
+      - time: 15
+        value: 1
+        inSlope: .125
+        outSlope: .125
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Color.a
-    path: ColdCell/Nucleus
+    path: Alkali Cell/Nucleus
     classID: 212
     script: {fileID: 0}
   m_EulerEditorCurves: []
@@ -936,8 +1046,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 5
-    functionName: CreateColdCell
+  - time: 15
+    functionName: CreateAlkaliCell
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
