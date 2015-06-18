@@ -7,12 +7,11 @@ public class Menu : MonoBehaviour {
     public GameObject menu;
 
 	void Awake() {
-        
     }
 
 	// Use this for initialization
 	void Start () {
-	
+        Time.timeScale = 1.0f;
 	}
 	
 	// Update is called once per frame
