@@ -36,10 +36,12 @@ public class StemCell : BaseCell
                 currentState = CellState.DEAD;
                 break;
             case CellType.ALKALI_CELL:
-                newCell = GameObject.Instantiate(stemtoAlkali, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
-                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
-                newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                currentState = CellState.DEAD;
+                if (stemtoAlkali) {
+                    newCell = GameObject.Instantiate(stemtoAlkali, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                    newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                    currentState = CellState.DEAD;
+                }
                 break;
             default:
                 break;

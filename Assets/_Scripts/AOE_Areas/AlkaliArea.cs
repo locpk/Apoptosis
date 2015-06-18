@@ -43,6 +43,7 @@ public class AlkaliArea : BaseArea {
         }
     }
 
+
     //void OnTriggerStay(Collider collider) {
     //    if (collider.gameObject.tag == "Unit") {
     //        BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
@@ -54,11 +55,21 @@ public class AlkaliArea : BaseArea {
     //    }
     //}
 
+    void OnTriggerExit(Collider collider) {
+        if (collider.gameObject.tag == "Unit") {
+            BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+
+            if (enterCell.celltype == CellType.STEM_CELL) {
+                StopCoroutine(ConvertToAlkaliCell(convertingDelayed, enterCell));
+            }
+        }
+    }
+
     IEnumerator ConvertToAlkaliCell(float delayed, BaseCell baseCell) {
         yield return new WaitForSeconds(delayed);
-        Debug.Log("triggerhere! " + name);
         baseCell.Mutation(CellType.ALKALI_CELL);
     }
+
 
 
 
