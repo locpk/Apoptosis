@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public static int cap = 0;
     public GameObject movePin;
     public GameObject attackPin;
-	
+
 
     public List<BaseCell> allSelectableUnits;
     public List<BaseCell> selectedUnits;
@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     Rect GUISelectRect;
 
+    Vector2 origin = new Vector2();
+
     void Awake()
     {
         // Initialize variables
@@ -27,7 +29,7 @@ public class PlayerController : MonoBehaviour
         groups = new List<BaseCell>[10];
         allSelectableUnits = new List<BaseCell>();
         selectedUnits = new List<BaseCell>();
-        terrainLayer = 1 << LayerMask.NameToLayer ("Terrain");  // Layer masking for raycast clicking
+        terrainLayer = 1 << LayerMask.NameToLayer("Terrain");  // Layer masking for raycast clicking
         // ----------
 
         GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
@@ -41,10 +43,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-	public void AddNewCell(BaseCell _in){
-		allSelectableUnits.Add (_in);
-		selectedUnits.Add (_in);
-	}
+    public void AddNewCell(BaseCell _in)
+    {
+        allSelectableUnits.Add(_in);
+        selectedUnits.Add(_in);
+    }
 
     public List<GameObject> GetAllSelectableObjects()
     {
@@ -56,10 +59,27 @@ public class PlayerController : MonoBehaviour
         return allSelectableObjects; // Return the list
     }
 
-    public void UnitSelection()
+    public void UnitSelection(Vector2 origin)
     {
-        GUISelectRect.xMax = Input.mousePosition.x;
-        GUISelectRect.yMax = -Input.mousePosition.y + Screen.height;
+        if (Input.mousePosition.x >= origin.x)
+        {
+            GUISelectRect.xMax = Input.mousePosition.x;
+            Debug.Log("posX");
+        }
+        else
+        {
+            GUISelectRect.xMin = Input.mousePosition.x;
+            Debug.Log("negX");
+        }
+
+        if (-Input.mousePosition.y + Screen.height >= origin.y)
+        { GUISelectRect.yMax = -Input.mousePosition.y + Screen.height; Debug.Log("posY"); }
+        else
+        { GUISelectRect.yMin = -Input.mousePosition.y + Screen.height; Debug.Log("negY"); }
+
+        Debug.Log(GUISelectRect.width);
+        Debug.Log(GUISelectRect.height);
+
         selectedUnits.Clear();
         foreach (BaseCell item in allSelectableUnits)
         {
@@ -79,7 +99,8 @@ public class PlayerController : MonoBehaviour
         RaycastHit hitInfo;
         Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer)) {
+        if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer))
+        {
             foreach (BaseCell item in selectedUnits)
             {
                 //item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Set their destination
@@ -164,7 +185,8 @@ public class PlayerController : MonoBehaviour
         }
         foreach (BaseCell item in selectedUnits)
         {
-            if (item) {
+            if (item)
+            {
                 Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
                 float left = drawLoc.x - (float)4;
                 float top = -(drawLoc.y - (float)4) + Screen.height;
@@ -258,6 +280,8 @@ public class PlayerController : MonoBehaviour
         {
             GUISelectRect.xMin = Input.mousePosition.x;
             GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
+            origin = Input.mousePosition;
+            origin.y = -origin.y + Screen.height;
         }
         else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
         {
@@ -266,7 +290,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetMouseButton(0)) // If the player has left-click held down
         {
-            UnitSelection();
+            UnitSelection(origin);
         }
         if (Input.GetMouseButtonDown(1))
         {
