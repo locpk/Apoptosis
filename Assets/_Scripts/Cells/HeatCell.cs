@@ -6,7 +6,7 @@ public class HeatCell : BaseCell
 {
     public GameObject fireball;
     GameObjectManager test;
-    float splitCD = 0;
+   // float splitCD = 0;
     float fireballSpeed = 5;
     void Awake()
     {
@@ -16,11 +16,11 @@ public class HeatCell : BaseCell
 
     void DamagePreSecond()
     {
-       GameObject test = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
-      
-        
-       Vector3 them2me = new Vector3((primaryTarget.transform.position.x - transform.position.x), (primaryTarget.transform.position.y - transform.position.y), (primaryTarget.transform.position.z - transform.position.z));
-       test.GetComponent<Rigidbody>().velocity += them2me;
+       GameObject fire = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
+
+
+       Vector3 them2me = primaryTarget.transform.position - transform.position;
+       fire.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
         primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
     }
 
