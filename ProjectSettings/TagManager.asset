@@ -9,6 +9,7 @@ TagManager:
   - Area
   - Nucleus
   - Animation
+  - Protein
   layers:
   - Default
   - TransparentFX

@@ -68,7 +68,10 @@ public class StemCell : BaseCell
         {
             if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
             {
-                Attack(enemy);
+                if (enemy != this)
+                {
+                    Attack(enemy);
+                }
                 break;
             }
         }
@@ -94,17 +97,8 @@ public class StemCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-                if (IsInvoking("DamagePerSecond"))
-                {
-                    if (GetComponent<ParticleSystem>().isPlaying)
-                    {
 
-                        GetComponent<ParticleSystem>().Stop();
-                    }
-                    CancelInvoke("DamagePerSecond");
-                }
-                SetPrimaryTarget(null);
-                navAgent.Stop();
+
                 //guard mode auto attack enemy in range
                 Guarding();
                 break;
@@ -139,65 +133,37 @@ public class StemCell : BaseCell
                 }
                 else
                 {
+                    if (IsInvoking("DamagePerSecond"))
+                    {
+                        if (GetComponent<ParticleSystem>().isPlaying)
+                        {
 
+                            GetComponent<ParticleSystem>().Stop();
+                        }
+                        CancelInvoke("DamagePerSecond");
+                    }
                     currentState = CellState.IDLE;
                 }
                 break;
             case CellState.CONSUMING:
-                if (IsInvoking("DamagePerSecond"))
-                {
-                    if (GetComponent<ParticleSystem>().isPlaying)
-                    {
+                base.bUpdate();
 
-                        GetComponent<ParticleSystem>().Stop();
-                    }
-                    CancelInvoke("DamagePerSecond");
-                }
-                //if (!primaryTarget)
-                //{
-                //    if (targets.Count > 0)
-                //    {
-                //        primaryTarget = targets[0];
-                //        targets.RemoveAt(0);
-                //    }
-                //    else
-                //    {
-                //        currentState = CellState.IDLE;
-                //    }
-                //}
                 break;
             case CellState.MOVING:
-                if (IsInvoking("DamagePerSecond"))
-                {
-                    if (GetComponent<ParticleSystem>().isPlaying)
-                    {
 
-                        GetComponent<ParticleSystem>().Stop();
-                    }
-                    CancelInvoke("DamagePerSecond");
-                }
-                float dis = Vector3.Distance(primaryTarget.transform.position, transform.position);
-                if (dis > fovRadius)
+                base.bUpdate();
+                if (primaryTarget.GetComponent<BaseCell>())
                 {
-                    SetPrimaryTarget(null);
-                    navAgent.Stop();
-                    currentState = CellState.IDLE;
+                    currentState = CellState.ATTACK;
                 }
-                else
+                else if (primaryTarget.GetComponent<Protein>())
                 {
-                    base.bUpdate();
+                    currentState = CellState.CONSUMING;
                 }
+
                 break;
             case CellState.ATTACK_MOVING:
-                if (IsInvoking("DamagePerSecond"))
-                {
-                    if (GetComponent<ParticleSystem>().isPlaying)
-                    {
 
-                        GetComponent<ParticleSystem>().Stop();
-                    }
-                    CancelInvoke("DamagePerSecond");
-                }
                 //if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
                 //{
                 //    currentState = CellState.IDLE;

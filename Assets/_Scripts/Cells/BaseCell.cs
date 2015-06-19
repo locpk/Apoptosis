@@ -149,9 +149,23 @@ public class BaseCell : MonoBehaviour
     {
     }
 
-    public virtual void Consume(GameObject _target)
+    void ConsumePerSecond()
     {
+        if (primaryTarget)
+        {
+            primaryTarget.GetComponent<Protein>().Harvest();
+        }
+        
+    }
 
+    public void Consume(GameObject _target)
+    {
+        Protein targetProtein = _target.GetComponent<Protein>();
+        if (targetProtein)
+        {
+            SetPrimaryTarget(_target);
+            currentState = CellState.CONSUMING;
+        }
     }
     #endregion
 
@@ -329,9 +343,42 @@ public class BaseCell : MonoBehaviour
         {
             if (isStopped())
             {
-                currentState = CellState.IDLE;
+              
                 navAgent.enabled = false;
                 navObstacle.enabled = true;
+            }
+        }
+        else if (currentState == CellState.CONSUMING)
+        {
+            if (primaryTarget)
+            {
+                float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
+
+                if (distance > attackRange && distance <= fovRadius)
+                {
+                    if (IsInvoking("ConsumePerSecond"))
+                    {
+                        CancelInvoke("ConsumePerSecond");
+                    }
+                    ChaseTarget();
+                }
+                else if (distance <= attackRange)
+                {
+                    if (!IsInvoking("ConsumePerSecond"))
+                    {
+
+                        InvokeRepeating("ConsumePerSecond", 1.0f, 1.0f);
+                    }
+
+                }
+                else
+                {
+                    ChaseTarget();
+                }
+            }
+            else
+            {
+                currentState = CellState.IDLE;
             }
         }
     }
