@@ -5,15 +5,15 @@ using System.Collections.Generic;
 public class HeatCell : BaseCell
 {
     public GameObject fireball;
-    GameObjectManager test;
+
     delegate void TakeDamage();
     TakeDamage multidamagesources;
     // float splitCD = 0;
     float fireballSpeed = 5;
     void Awake()
     {
-        base.Awake();
-        test = new GameObjectManager();
+        base.bAwake();
+
 
 
     }
@@ -37,7 +37,7 @@ public class HeatCell : BaseCell
     // Use this for initialization
     void Start()
     {
-        base.Start();
+        base.bStart();
         multidamagesources += AreaDamage;
         multidamagesources();
     }
@@ -58,7 +58,7 @@ public class HeatCell : BaseCell
                 {
                     base.CancerousSplit();
                 }
-                System.Collections.Generic.List<GameObject> enemyUnits = test.AiUnits();
+                System.Collections.Generic.List<GameObject> enemyUnits = GameObjectManager.FindAIUnits();
                 if (enemyUnits != null)
                 {
                     for (int i = 0; i < enemyUnits.Count; i++)
@@ -126,7 +126,7 @@ public class HeatCell : BaseCell
                 {
                     CancelInvoke("DamagePreSecond");
                 }
-                base.Update();
+                base.bUpdate();
                 break;
             case CellState.ATTACK_MOVING:
                 if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
@@ -155,7 +155,7 @@ public class HeatCell : BaseCell
 
     void FixedUpdate()
     {
-        base.FixedUpdate();
+        base.bFixedUpdate();
     }
     public override void Attack(GameObject _target)
     {
@@ -170,7 +170,7 @@ public class HeatCell : BaseCell
     //LateUpdate is called after all Update functions have been called
     void LateUpdate()
     {
-        base.LateUpdate();
+        base.bLateUpdate();
     }
 
 }
