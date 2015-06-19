@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 public class StemCell : BaseCell
 {
-
+    public bool isInAcidic;
+    public bool isInAlkali;
     public GameObject stemtoHeat;
     public GameObject stemtoCold;
     public GameObject stemtoAlkali;
@@ -48,7 +49,7 @@ public class StemCell : BaseCell
         }
     }
 
-    void DamagePreSecond()
+    void DamagePerSecond()
     {
         primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
     }
@@ -62,16 +63,29 @@ public class StemCell : BaseCell
         }
     }
 
+    public void Guarding()
+    {
+        List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
+        foreach (var enemy in aiUnits)
+        {
+            if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
+            {
+                Attack(enemy);
+                break;
+            }
+        }
+    }
+
 
     void Awake()
     {
-        base.Awake();
+        base.bAwake();
     }
 
     // Use this for initialization
     void Start()
     {
-        base.Start();
+        base.bStart();
 
     }
 
@@ -82,94 +96,117 @@ public class StemCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-                //guard mode auto attack enemy in range
-                //if (Vector3.Distance(GameObject.Find("HeatCell").transform.position, transform.position) <= fovRadius)
-                //{
-                //    Attack(GameObject.Find("HeatCell"));
-                //}
+                if (IsInvoking("DamagePerSecond"))
+                {
+                    if (GetComponent<ParticleSystem>().isPlaying)
+                    {
 
+                        GetComponent<ParticleSystem>().Stop();
+                    }
+                    CancelInvoke("DamagePerSecond");
+                }
+                SetPrimaryTarget(null);
+                navAgent.Stop();
+                //guard mode auto attack enemy in range
+                Guarding();
                 break;
             case CellState.ATTACK:
-                if (primaryTarget)
+
+                float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
+
+                if (distance > attackRange && distance <= fovRadius)
                 {
-                    if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
+                    if (IsInvoking("DamagePerSecond"))
                     {
-                        if (!IsInvoking("DamagePreSecond"))
+                        if (GetComponent<ParticleSystem>().isPlaying)
                         {
-                            if (GetComponent<ParticleSystem>().isStopped || GetComponent<ParticleSystem>().isPaused)
-                            {
-                                GetComponent<ParticleSystem>().Play();
-                            }
-                            InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
-                        }
 
+                            GetComponent<ParticleSystem>().Stop();
+                        }
+                        CancelInvoke("DamagePerSecond");
                     }
-                    else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                    base.ChaseTarget();
+                }
+                else if (distance <= attackRange)
+                {
+                    if (!IsInvoking("DamagePerSecond"))
                     {
-                        base.ChaseTarget();
-                        if (IsInvoking("DamagePreSecond"))
+                        if (GetComponent<ParticleSystem>().isStopped || GetComponent<ParticleSystem>().isPaused)
                         {
-                            if (GetComponent<ParticleSystem>().isPlaying)
-                            {
-
-                                GetComponent<ParticleSystem>().Stop();
-                            }
-                            CancelInvoke("DamagePreSecond");
+                            GetComponent<ParticleSystem>().Play();
                         }
+                        InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
                     }
-                    else
-                    {
-                        SetPrimaryTarget(null);
-                        navAgent.Stop();
-                    }
+
                 }
                 else
                 {
+
                     currentState = CellState.IDLE;
                 }
                 break;
             case CellState.CONSUMING:
-                if (!primaryTarget)
+                if (IsInvoking("DamagePerSecond"))
                 {
-                    if (targets.Count > 0)
+                    if (GetComponent<ParticleSystem>().isPlaying)
                     {
-                        primaryTarget = targets[0];
-                        targets.RemoveAt(0);
+
+                        GetComponent<ParticleSystem>().Stop();
                     }
-                    else
-                    {
-                        currentState = CellState.IDLE;
-                    }
+                    CancelInvoke("DamagePerSecond");
                 }
+                //if (!primaryTarget)
+                //{
+                //    if (targets.Count > 0)
+                //    {
+                //        primaryTarget = targets[0];
+                //        targets.RemoveAt(0);
+                //    }
+                //    else
+                //    {
+                //        currentState = CellState.IDLE;
+                //    }
+                //}
                 break;
             case CellState.MOVING:
-                GetComponent<Animator>().Play("StemMovement");
-                base.Update();
-
-                break;
-            case CellState.ATTACK_MOVING:
-                if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+                if (IsInvoking("DamagePerSecond"))
                 {
+                    if (GetComponent<ParticleSystem>().isPlaying)
+                    {
+
+                        GetComponent<ParticleSystem>().Stop();
+                    }
+                    CancelInvoke("DamagePerSecond");
+                }
+                float dis = Vector3.Distance(primaryTarget.transform.position, transform.position);
+                if (dis > fovRadius)
+                {
+                    SetPrimaryTarget(null);
+                    navAgent.Stop();
                     currentState = CellState.IDLE;
                 }
+                else
+                {
+                    base.bUpdate();
+                }
+                break;
+            case CellState.ATTACK_MOVING:
+                if (IsInvoking("DamagePerSecond"))
+                {
+                    if (GetComponent<ParticleSystem>().isPlaying)
+                    {
+
+                        GetComponent<ParticleSystem>().Stop();
+                    }
+                    CancelInvoke("DamagePerSecond");
+                }
+                //if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+                //{
+                //    currentState = CellState.IDLE;
+                //}
                 break;
             case CellState.DEAD:
                 base.Die();
-                break;
-            case CellState.CANCEROUS_SPLITTING:
-                //Switch to split image
-                //disable navAgent
-                //start splitting timer
-                //initialize splitting after timer
-
-                break;
-            case CellState.PERFECT_SPLITTING:
-                break;
-            case CellState.EVOLVING:
-                break;
-            case CellState.INCUBATING:
-                break;
-            case CellState.MERGING:
                 break;
             default:
                 break;
@@ -180,12 +217,12 @@ public class StemCell : BaseCell
 
     void FixedUpdate()
     {
-        base.FixedUpdate();
+        base.bFixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
     void LateUpdate()
     {
-        base.LateUpdate();
+        base.bLateUpdate();
     }
 }

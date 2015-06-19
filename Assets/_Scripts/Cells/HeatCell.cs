@@ -3,22 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 public class HeatCell : BaseCell
 {
-    float splitCD = 0;
+	float splitCD = 0;
 
-    new void Awake()
+     void Awake()
     {
-        base.Awake();
+		base.bAwake ();
     }
 
     // Use this for initialization
-    new void Start()
+     void Start()
     {
-        base.Start();
+		base.bStart ();
     }
 
     // Update is called once per frame
-    new void Update()
+     void Update()
     {
+        
         switch (currentState)
         {
             case CellState.IDLE:
@@ -45,83 +46,41 @@ public class HeatCell : BaseCell
             default:
                 break;
         }
-        splitCD += Time.deltaTime;
-        if (Input.GetMouseButtonUp(1))
-        {
-            Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (splitCD >= 1.0f)
-            {
-                base.CancerousSplit();
-                splitCD = 0;
-            }
-        }
-        base.Update();
+		splitCD += Time.deltaTime;
+        //if (Input.GetMouseButtonUp(1))
+        //{
+        //    Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        //}
+     
+        //if(Input.GetKey(KeyCode.D))
+        // {
+        //    if (splitCD >= 1.0f)
+        //    {
+        //    base.CancerousSplit();
+        //    splitCD = 0;
+        //    }
+        //}
+        base.bUpdate();
     }
 
-    new void FixedUpdate()
+     void FixedUpdate()
     {
-        base.FixedUpdate();
+        base.bFixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
-    new void LateUpdate()
+     void LateUpdate()
     {
 
     }
 
-    public override void Attack(GameObject _target)
-    {
-        if (_target != null)
-        {
-
-            Debug.Log(_target);
-            if (Vector3.Distance(transform.position, _target.transform.position) > attackRange)
-            {
-                Debug.Log(_target);
-                Move(_target.transform.position);
-            }
-            if (Vector3.Distance(transform.position, _target.transform.position) <= attackRange)
-            {
-                Debug.Log(_target);
-                currentState = CellState.ATTACK;
-                Move(transform.position);
-                _target.GetComponent<BaseCell>().currentProtein = _target.GetComponent<BaseCell>().currentProtein - attackDamage;
-            }
-        }
-        else
-            currentState = CellState.IDLE;
-    }
-    public void AutoAttack()
-    {
-        GameObject closestAiguy = null;
-        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Unit"))
-        {
-            if (enemy.GetComponent<BaseCell>().isAIPossessed)
-            {
-                Debug.Log(enemy.name);
-
-                if (closestAiguy == null || Vector3.Distance(transform.position, enemy.transform.position) < Vector3.Distance(transform.position, closestAiguy.transform.position) )
-                {
-          
-                    closestAiguy = enemy;
-                    if(Vector3.Distance(transform.position, closestAiguy.transform.position) <= attackRange)
-                    {
-                        SetPrimaryTarget(closestAiguy);
-                        break;
-                    }
-                }
-            }
-        }
-
-     
-
-
-    }
-
+	public override void Attack(GameObject _target)
+	{
+		if(Vector3.Distance(transform.position, base.primaryTarget.transform.position) <= attackRange)
+		{
+		base.Attack (base.primaryTarget);
+		}
+	}
 
 
 

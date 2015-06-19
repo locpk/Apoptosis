@@ -4,19 +4,15 @@ using System.Collections.Generic;
 public class CancerCell : BaseCell
 {
 
-    new void Awake()
+     void Awake()
     {
-
+        base.bAwake();
     }
 
     // Use this for initialization
-    new void Start()
+     void Start()
     {
-       if (isAIPossessed)
-       {
-           navAgent.enabled = false;
-           
-       }
+        base.bStart();
     }
 
     // Update is called once per frame
@@ -33,7 +29,6 @@ public class CancerCell : BaseCell
             case CellState.ATTACK_MOVING:
                 break;
             case CellState.DEAD:
-                base.Die();
                 break;
             case CellState.CANCEROUS_SPLITTING:
                 break;
@@ -48,16 +43,17 @@ public class CancerCell : BaseCell
             default:
                 break;
         }
+        base.bUpdate();
     }
 
-    new void FixedUpdate()
+     void FixedUpdate()
     {
-        base.Deplete(Time.fixedDeltaTime);
+        base.bFixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
-    new void LateUpdate()
+     void LateUpdate()
     {
-
+        base.bLateUpdate();
     }
 }

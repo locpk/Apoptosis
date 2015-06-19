@@ -6,19 +6,19 @@ public class NerveCell : BaseCell
 {
 
 
-    new void Awake()
+     void Awake()
     {
 
     }
 
     // Use this for initialization
-    new void Start()
+     void Start()
     {
 
     }
 
     // Update is called once per frame
-    new void Update()
+     void Update()
     {
         switch (currentState)
         {
@@ -47,13 +47,13 @@ public class NerveCell : BaseCell
         }
     }
 
-    new void FixedUpdate()
+     void FixedUpdate()
     {
         base.Deplete(Time.fixedDeltaTime);
     }
 
     //LateUpdate is called after all Update functions have been called
-    new void LateUpdate()
+     void LateUpdate()
     {
 
     }
