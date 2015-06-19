@@ -4,27 +4,62 @@ using System.Collections.Generic;
 
 public class AlkaliArea : BaseArea {
 
+    public float damagePerSecond;
+    public float convertingDelayed = 5.0f;
 
-	void Awake() {
-        
+	public override void Awake() {
+        base.Awake();
+
     }
 
-	// Use this for initialization
-	void Start () {
-	
+	public override void Start () {
+        base.Start();
+
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	public override void Update () {
+        base.Update();
+
 	}
 
-	void FixedUpdate() {
-       
+	public override void FixedUpdate() {
+        base.FixedUpdate();
+
     }
 
-	//LateUpdate is called after all Update functions have been called
-	void LateUpdate() {
-        
+	public override void LateUpdate() {
+        base.LateUpdate();
+
     }
+
+    void OnTriggerEnter(Collider collider) {
+        if (collider.gameObject.tag == "Unit") {
+            BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+
+            if (enterCell.celltype == CellType.STEM_CELL) {
+                StartCoroutine(ConvertToAlkaliCell(convertingDelayed, enterCell));
+
+            }
+        }
+    }
+
+    //void OnTriggerStay(Collider collider) {
+    //    if (collider.gameObject.tag == "Unit") {
+    //        BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+
+    //        if (enterCell.celltype == CellType.ALKALI_CELL) {
+    //            StartCoroutine(ConvertToAlkaliCell(convertingDelayed, enterCell));
+
+    //        }
+    //    }
+    //}
+
+    IEnumerator ConvertToAlkaliCell(float delayed, BaseCell baseCell) {
+        yield return new WaitForSeconds(delayed);
+        Debug.Log("triggerhere! " + name);
+        baseCell.Mutation(CellType.ALKALI_CELL);
+    }
+
+
+
 }

@@ -4,27 +4,31 @@ using System.Collections.Generic;
 
 public class DenseArea : BaseArea {
 
+    public float speedDebuff;
 
-	void Awake() {
-        
+	public override void Awake() {
+        base.Awake();
+
     }
 
-	// Use this for initialization
-	void Start () {
-	
+	public override void Start () {
+        base.Start();
+
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	public override void Update () {
+        base.Update();
+
 	}
 
-	void FixedUpdate() {
-       
+	public override void FixedUpdate() {
+        base.FixedUpdate();
+
     }
 
-	//LateUpdate is called after all Update functions have been called
-	void LateUpdate() {
-        
+	public override void LateUpdate() {
+        base.LateUpdate();
+
     }
+
 }

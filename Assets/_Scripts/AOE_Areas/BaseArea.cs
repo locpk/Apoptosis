@@ -4,27 +4,44 @@ using System.Collections.Generic;
 
 public class BaseArea : MonoBehaviour {
 
-
-	void Awake() {
-        
+    public enum AreaType {
+        HEAT_AREA, COLD_AREA, ACIDIC_AREA, ALKALI_AREA, DENSE_AREA, AREA_COUNTS
     }
 
-	// Use this for initialization
-	void Start () {
+    public AreaType areaType;
+
+    private float effectTimer;
+    private float effectAmount;
+
+    public float EffectTimer {
+        get { return effectTimer; }
+        set { effectTimer = value; }
+    }
+
+    public float EffectAmount {
+        get { return effectAmount; }
+        set { effectAmount = value; }
+    }
+
+
+	public virtual void Awake() {
+
+    }
+
+	public virtual void Start () {
 	
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	public virtual void Update () {
 	
 	}
 
-	void FixedUpdate() {
+	public virtual void FixedUpdate() {
        
     }
 
-	//LateUpdate is called after all Update functions have been called
-	void LateUpdate() {
+	public virtual void LateUpdate() {
         
     }
+
 }
