@@ -3,7 +3,9 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
+
 public static class GameObjectManager {
+
 
 
 
@@ -17,9 +19,9 @@ public static class GameObjectManager {
     public static List<GameObject> FindAIUnits()
     {
         List<GameObject> allAIunits = GameObject.FindGameObjectsWithTag("Unit").ToList<GameObject>();
-        allAIunits.RemoveAll(item => item.GetComponent<BaseCell>().isAIPossessed == true);
+        allAIunits.RemoveAll(item => item.GetComponent<BaseCell>().isAIPossessed == false);
         return allAIunits;
     }
 
-	
+
 }
