@@ -252,7 +252,8 @@ public class PlayerController : MonoBehaviour
     {
         foreach (BaseCell item in selectedUnits) // For each of the player's selected units
         {
-            item.SetTargets(null);
+            selectedTargets.Clear();
+            item.SetTargets(selectedTargets);
             item.SetPrimaryTarget(null);
             item.Move(item.transform.position);
             item.currentState = CellState.IDLE;
