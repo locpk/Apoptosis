@@ -16,7 +16,7 @@ GameObject:
   - 208: {fileID: 20888316}
   - 114: {fileID: 11447996}
   m_Layer: 0
-  m_Name: 'ColdCell '
+  m_Name: ColdCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
-  isMine: 0
+  isMine: 1
   isAlive: 1
   isAIPossessed: 0
   isDepleting: 0
@@ -253,7 +253,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: isMine
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isAlive
