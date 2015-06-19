@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
 
     public List<BaseCell> allSelectableUnits;
     public List<BaseCell> selectedUnits;
-    GameObject selectedTarget;
+    public List<GameObject> allSelectableTargets;
+    public List<GameObject> selectedTargets;
     List<BaseCell>[] groups;
     public Texture selector;
 
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         // Initialize variables
-        selectedTarget = null;
+        selectedTargets.Clear();
         groups = new List<BaseCell>[10];
         allSelectableUnits = new List<BaseCell>();
         selectedUnits = new List<BaseCell>();
@@ -55,10 +56,26 @@ public class PlayerController : MonoBehaviour
         selectedUnits.Remove(_in);
     }
 
-    public List<GameObject> GetAllSelectableObjects()
+    public void RemoveTarget(GameObject _in)
+    {
+        allSelectableTargets.Remove(_in);
+        selectedTargets.Remove(_in);
+    }
+
+    public List<GameObject> GetAllSelectableUnits()
     {
         List<GameObject> allSelectableObjects = new List<GameObject>(); // Initialize a list of GameObjects
         foreach (BaseCell item in allSelectableUnits) // For each of the player's controllable cells
+        {
+            allSelectableObjects.Add(item.gameObject); // Add the cell's GameObject to the list
+        }
+        return allSelectableObjects; // Return the list
+    }
+
+    public List<GameObject> GetAllSelectableTargets()
+    {
+        List<GameObject> allSelectableObjects = new List<GameObject>(); // Initialize a list of GameObjects
+        foreach (GameObject item in allSelectableTargets) // For each of the player's controllable cells
         {
             allSelectableObjects.Add(item.gameObject); // Add the cell's GameObject to the list
         }
@@ -70,21 +87,16 @@ public class PlayerController : MonoBehaviour
         if (Input.mousePosition.x >= origin.x)
         {
             GUISelectRect.xMax = Input.mousePosition.x;
-            Debug.Log("posX");
         }
         else
         {
             GUISelectRect.xMin = Input.mousePosition.x;
-            Debug.Log("negX");
         }
 
         if (-Input.mousePosition.y + Screen.height >= origin.y)
-        { GUISelectRect.yMax = -Input.mousePosition.y + Screen.height; Debug.Log("posY"); }
+        { GUISelectRect.yMax = -Input.mousePosition.y + Screen.height; }
         else
-        { GUISelectRect.yMin = -Input.mousePosition.y + Screen.height; Debug.Log("negY"); }
-
-        Debug.Log(GUISelectRect.width);
-        Debug.Log(GUISelectRect.height);
+        { GUISelectRect.yMin = -Input.mousePosition.y + Screen.height; }
 
         selectedUnits.Clear();
         foreach (BaseCell item in allSelectableUnits)
@@ -95,6 +107,34 @@ public class PlayerController : MonoBehaviour
             {
                 selectedUnits.Add(item);
                 item.isSelected = true;
+            }
+        }
+    }
+
+    public void TargetSelection(Vector2 origin)
+    {
+        if (Input.mousePosition.x >= origin.x)
+        {
+            GUISelectRect.xMax = Input.mousePosition.x;
+        }
+        else
+        {
+            GUISelectRect.xMin = Input.mousePosition.x;
+        }
+
+        if (-Input.mousePosition.y + Screen.height >= origin.y)
+        { GUISelectRect.yMax = -Input.mousePosition.y + Screen.height; }
+        else
+        { GUISelectRect.yMin = -Input.mousePosition.y + Screen.height; }
+        
+        selectedTargets.Clear();
+        foreach (GameObject item in allSelectableTargets)
+        {
+            Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
+            itemPos.y = -itemPos.y + Screen.height;
+            if (GUISelectRect.Contains(itemPos))
+            {
+                selectedTargets.Add(item);
             }
         }
     }
@@ -119,7 +159,7 @@ public class PlayerController : MonoBehaviour
     {
         foreach (BaseCell item in selectedUnits) // For each of the player's selected units
         {
-            item.Attack(selectedTarget); // Set the target cell to attack
+            item.Attack(selectedTargets[0]); // Set the target cell to attack
         }
     }
 
@@ -152,7 +192,7 @@ public class PlayerController : MonoBehaviour
     {
         foreach (BaseCell item in selectedUnits) // For each of the player's selected units
         {
-            item.Consume(selectedTarget); // Set the target protein to consume
+            item.Consume(selectedTargets[0]); // Set the target protein to consume
         }
     }
 
@@ -297,9 +337,26 @@ public class PlayerController : MonoBehaviour
         {
             UnitSelection(origin);
         }
-        if (Input.GetMouseButtonDown(1))
+
+        if (Input.GetMouseButtonDown(1)) // If the player left-clicks
         {
-            UnitMove();
+            GUISelectRect.xMin = Input.mousePosition.x;
+            GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
+            origin = Input.mousePosition;
+            origin.y = -origin.y + Screen.height;
+        }
+        else if (Input.GetMouseButtonUp(1)) // When the player releases left-click
+        {
+            if (selectedTargets.Count > 0)
+            {
+
+            }
+            else
+                UnitMove();
+        }
+        else if (Input.GetMouseButton(1)) // If the player has left-click held down
+        {
+            TargetSelection(origin);
         }
     }
 }
