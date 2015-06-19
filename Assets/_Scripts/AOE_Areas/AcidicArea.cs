@@ -33,8 +33,30 @@ public class AcidicArea : BaseArea {
     }
 
     void OnTriggerEnter(Collider collider) {
+        if (collider.gameObject.tag == "Unit") {
+            BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
 
+            if (enterCell.celltype == CellType.STEM_CELL) {
+                StopCoroutine("ReadyToConvert");
+                StartCoroutine(ReadyToConvert(pendingConvertDelayed, collider.gameObject.GetComponent<StemCell>()));
+
+            }
+        }
     }
 
 
+    void OnTriggerStay(Collider collider) {
+
+    }
+
+    void OnTriggerExit(Collider collider) {
+        
+        collider.gameObject.GetComponent<StemCell>().isInAcidic = false;
+    }
+
+    IEnumerator ReadyToConvert(float delayed, StemCell stemCell) {
+        yield return new WaitForSeconds(delayed);
+        // to toggle on the pending converting
+        stemCell.isInAcidic = true;
+    }
 }
