@@ -4,13 +4,13 @@ using System.Collections.Generic;
 public class CancerCell : BaseCell
 {
 
-    new void Awake()
+     void Awake()
     {
-
+        base.bAwake();
     }
 
     // Use this for initialization
-    new void Start()
+     void Start()
     {
        if (isAIPossessed)
        {
@@ -48,16 +48,17 @@ public class CancerCell : BaseCell
             default:
                 break;
         }
+        base.bUpdate();
     }
 
-    new void FixedUpdate()
+     void FixedUpdate()
     {
-        base.Deplete(Time.fixedDeltaTime);
+        base.bFixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
-    new void LateUpdate()
+     void LateUpdate()
     {
-
+        base.bLateUpdate();
     }
 }

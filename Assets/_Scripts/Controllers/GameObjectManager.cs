@@ -3,37 +3,29 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
-public class GameObjectManager : MonoBehaviour {
 
-    public List<GameObject> AllUnits;
-
+public static class GameObjectManager {
 
 
-    List<GameObject> FindAllUnits()
+
+
+
+    public static List<GameObject> FindAllUnits()
     {
         return GameObject.FindGameObjectsWithTag("Unit").ToList<GameObject>();
     }
 
 
-	void Awake() {
-        
-    }
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	}
-
-	void FixedUpdate() {
+    public static List<GameObject> FindAIUnits()
+    {
+        List<GameObject> allAIunits = GameObject.FindGameObjectsWithTag("Unit").ToList<GameObject>();
+        if (allAIunits.Count > 0 )
+        {
+            allAIunits.RemoveAll(item => item.GetComponent<BaseCell>().isAIPossessed == false);
+        }
        
+        return allAIunits;
     }
 
-	//LateUpdate is called after all Update functions have been called
-	void LateUpdate() {
-        
-    }
+
 }

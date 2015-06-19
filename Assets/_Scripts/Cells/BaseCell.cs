@@ -83,7 +83,7 @@ public class BaseCell : MonoBehaviour
 
 
     //[RPC] Methods, which called via network
-    [RPC]
+    [PunRPC]
     public void ApplyDamage(float _received_damage)
     {
         currentProtein -= _received_damage - defense;
@@ -98,7 +98,7 @@ public class BaseCell : MonoBehaviour
 
     public virtual void Move(Vector3 _destination)
     {
-        //Move only there is a path.
+
         currentState = CellState.MOVING;
         navObstacle.enabled = false;
         navAgent.enabled = true;
@@ -142,6 +142,7 @@ public class BaseCell : MonoBehaviour
     }
     public void Die()
     {
+
         Destroy(gameObject);
     }
 
@@ -149,9 +150,27 @@ public class BaseCell : MonoBehaviour
     {
     }
 
-    public virtual void Consume(GameObject _target)
+    void ConsumePerSecond()
     {
+        if (primaryTarget)
+        {
+            currentProtein += primaryTarget.GetComponent<Protein>().Harvest();
+            if (currentProtein > MAX_PROTEIN)
+            {
+                currentProtein = MAX_PROTEIN;
+            }
+        }
 
+    }
+
+    public void Consume(GameObject _target)
+    {
+        Protein targetProtein = _target.GetComponent<Protein>();
+        if (targetProtein)
+        {
+            SetPrimaryTarget(_target);
+            currentState = CellState.CONSUMING;
+        }
     }
     #endregion
 
@@ -174,6 +193,7 @@ public class BaseCell : MonoBehaviour
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
                 this.currentState = CellState.DEAD;
                 break;
             case CellType.CANCER_CELL:
@@ -181,6 +201,7 @@ public class BaseCell : MonoBehaviour
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
                 this.currentState = CellState.DEAD;
                 break;
             default:
@@ -239,18 +260,26 @@ public class BaseCell : MonoBehaviour
             switch (this.celltype)
             {
                 case CellType.HEAT_CELL:
-                    newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.identity) as GameObject;
-                    newCell.gameObject.transform.Rotate(90, -180, -180);
-                    newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
-                    newCell.GetComponent<BaseCell>().currentLevel++;
+                    newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
+                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                    newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
+                    if (!isAIPossessed)
+                    {
+                        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newCell.GetComponent<BaseCell>());
+                    }
                     break;
                 case CellType.COLD_CELL:
-                    newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.identity) as GameObject;
-                    newCell.gameObject.transform.Rotate(90, -180, -180);
-                    newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
-                    newCell.GetComponent<BaseCell>().currentLevel++;
+                    newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
+                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                    newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
+                    if (!isAIPossessed)
+                    {
+                        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newCell.GetComponent<BaseCell>());
+                    }
                     break;
                 default:
                     break;
@@ -258,10 +287,11 @@ public class BaseCell : MonoBehaviour
         }
         else
         {
-            newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.identity) as GameObject;
-            newCell.gameObject.transform.Rotate(90, -180, -180);
-            newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
+            newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+            newCell.GetComponent<BaseCell>().currentProtein = currentProtein;
+            newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
             newCell.GetComponent<BaseCell>().currentLevel++;
+            newCell.GetComponent<BaseCell>().isAIPossessed = false;
             newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
         }
 
@@ -288,7 +318,6 @@ public class BaseCell : MonoBehaviour
         if (primaryTarget)
         {
             Move(primaryTarget.transform.position);
-
         }
     }
     public void Deplete(float _deltaTime)
@@ -302,7 +331,7 @@ public class BaseCell : MonoBehaviour
     }
     #endregion
 
-    protected void Awake()
+    protected void bAwake()
     {
         depleteTimer = DEPLETE_TIME;
         if (isSinglePlayer)
@@ -317,24 +346,56 @@ public class BaseCell : MonoBehaviour
     }
 
     // Use this for initialization
-    protected void Start()
+    protected void bStart()
     {
         navAgent.enabled = false;
         navAgent.updateRotation = false;
         navObstacle.enabled = true;
     }
 
-    protected void Update()
+    protected void bUpdate()
     {
         if (currentState == CellState.MOVING)
         {
             if (isStopped())
             {
 
-                currentState = CellState.IDLE;
                 navAgent.enabled = false;
                 navObstacle.enabled = true;
+                currentState = CellState.IDLE;
+            }
+        }
+        else if (currentState == CellState.CONSUMING)
+        {
+            if (primaryTarget)
+            {
+                float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
 
+                if (distance > attackRange && distance <= fovRadius)
+                {
+                    if (IsInvoking("ConsumePerSecond"))
+                    {
+                        CancelInvoke("ConsumePerSecond");
+                    }
+                    ChaseTarget();
+                }
+                else if (distance <= attackRange)
+                {
+                    if (!IsInvoking("ConsumePerSecond"))
+                    {
+
+                        InvokeRepeating("ConsumePerSecond", 1.0f, 1.0f);
+                    }
+
+                }
+                else
+                {
+                    ChaseTarget();
+                }
+            }
+            else
+            {
+                currentState = CellState.IDLE;
             }
         }
     }
@@ -353,7 +414,7 @@ public class BaseCell : MonoBehaviour
         }
         return false;
     }
-    protected void FixedUpdate()
+    protected void bFixedUpdate()
     {
         Deplete(Time.fixedDeltaTime);
         if (currentProtein <= 0.0f)
@@ -372,7 +433,7 @@ public class BaseCell : MonoBehaviour
 
     }
 
-    protected void LateUpdate()
+    protected void bLateUpdate()
     {
 
     }

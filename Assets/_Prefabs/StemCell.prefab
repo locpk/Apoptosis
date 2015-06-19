@@ -90,7 +90,7 @@ Animator:
   m_GameObject: {fileID: 174676}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ae36b6a776c814647aca3566fb1d474c, type: 2}
+  m_Controller: {fileID: 9100000, guid: f4df203874c11074ebaef806a4100ac7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -142,6 +142,8 @@ MonoBehaviour:
   splitCooldown: 0
   stemtoHeat: {fileID: 137274, guid: 996a46fa7705a134cbca9e2676ece137, type: 2}
   stemtoCold: {fileID: 190572, guid: 03026532dd50e414d91a085b722f86c6, type: 2}
+  stemtoAlkali: {fileID: 108478, guid: 0952dbaf7191c144d9f1aac0bb704ced, type: 2}
+  stemtoAcidic: {fileID: 146776, guid: 29147b9cb59143a41a45534e611f3390, type: 2}
 --- !u!114 &11498870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1475,6 +1477,18 @@ Prefab:
       propertyPath: m_Color.a
       value: .652999997
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: stemtoAlkali
+      value: 
+      objectReference: {fileID: 108478, guid: 0952dbaf7191c144d9f1aac0bb704ced, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f4df203874c11074ebaef806a4100ac7, type: 2}
+    - target: {fileID: 0}
+      propertyPath: stemtoAcidic
+      value: 
+      objectReference: {fileID: 146776, guid: 29147b9cb59143a41a45534e611f3390, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174676}

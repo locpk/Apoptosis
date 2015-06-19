@@ -14,6 +14,7 @@ TagManager:
   - Collider_Dense
   - Collider_Cold
   - Collider_Alkali
+  - Protein
   layers:
   - Default
   - TransparentFX

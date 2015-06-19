@@ -27,7 +27,7 @@ using System.IO;
 public static class PhotonNetwork
 {
     /// <summary>Version number of PUN. Also used in GameVersion to separate client version from each other.</summary>
-    public const string versionPUN = "1.55";
+    public const string versionPUN = "1.56";
 
     public static string gameVersion
     {

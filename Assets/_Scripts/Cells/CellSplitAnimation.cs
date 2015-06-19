@@ -8,6 +8,8 @@ public class CellSplitAnimation : MonoBehaviour
     public GameObject gStemCellPrefab;
     public GameObject gHeatCellPrefab;
     public GameObject gColdCellPrefab;
+    public GameObject gAlkaliCellPrefab;
+    public GameObject gAcidicCellPrefab;
 
 
     public int currentLevel;
@@ -23,7 +25,10 @@ public class CellSplitAnimation : MonoBehaviour
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
-        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        if (!isAIPossessed)
+        {
+            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        }
         Destroy(gameObject);
     }
     public void CreateStemCells()
@@ -35,7 +40,10 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
             newcell.GetComponent<BaseCell>().currentLevel = currentLevel;
             newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+            if (!isAIPossessed)
+            {
+                GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+            }
         }
         Destroy(gameObject);
     }
@@ -85,7 +93,10 @@ public class CellSplitAnimation : MonoBehaviour
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
-        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        if (!isAIPossessed)
+        {
+            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        }
         Destroy(gameObject);
     }
 
@@ -144,14 +155,56 @@ public class CellSplitAnimation : MonoBehaviour
     }
 
 
+    public void CreateAlkaliCell()
+    {
 
+        GameObject newcell = GameObject.Instantiate(gAlkaliCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
+        newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+        newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+        if (!isAIPossessed)
+        {
+            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        }
+        Destroy(gameObject);
+    }
+
+    public void CreateAcidicCell()
+    {
+
+        GameObject newcell = GameObject.Instantiate(gAcidicCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
+        newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+        newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+        if (!isAIPossessed)
+        {
+            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        }
+        Destroy(gameObject);
+    }
 
 
 
     public void UpdateProtein()
     {
-        transform.GetChild(0).GetComponent<BaseCell>().currentProtein = currentProtein;
-        transform.GetChild(1).GetComponent<BaseCell>().currentProtein = currentProtein;
+        //transform.GetChild(0).GetComponent<BaseCell>().currentProtein = currentProtein;
+        //transform.GetChild(1).GetComponent<BaseCell>().currentProtein = currentProtein;
+        if (currentProtein >= 100.0f)
+        {
+            transform.GetChild(0).FindChild("Nucleus").transform.localScale = new Vector3(currentProtein / 500.0f, currentProtein / 500.0f, currentProtein / 500.0f);
+        }
+        else
+        {
+            transform.GetChild(0).FindChild("Nucleus").transform.localScale = new Vector3(100.0f / 500.0f, 100.0f / 500.0f, 100.0f / 500.0f);
+        }
+        if (currentProtein >= 100.0f)
+        {
+            transform.GetChild(1).FindChild("Nucleus").transform.localScale = new Vector3(currentProtein / 500.0f, currentProtein / 500.0f, currentProtein / 500.0f);
+        }
+        else
+        {
+            transform.GetChild(1).FindChild("Nucleus").transform.localScale = new Vector3(100.0f / 500.0f, 100.0f / 500.0f, 100.0f / 500.0f);
+        }
     }
 
 
