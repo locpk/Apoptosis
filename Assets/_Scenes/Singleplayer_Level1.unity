@@ -434,6 +434,8 @@ MonoBehaviour:
   attackPin: {fileID: 142206, guid: c9ae0278b5093004d9dc07422c77a8e3, type: 2}
   allSelectableUnits: []
   selectedUnits: []
+  allSelectableTargets: []
+  selectedTargets: []
   selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
 --- !u!1 &799641297
 GameObject:
@@ -494,7 +496,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1001 &891497873
 Prefab:
   m_ObjectHideFlags: 0
@@ -756,7 +758,7 @@ Transform:
   - {fileID: 1021674658}
   - {fileID: 235883773}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!1 &1530484545
 GameObject:
   m_ObjectHideFlags: 0

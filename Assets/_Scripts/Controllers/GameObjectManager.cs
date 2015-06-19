@@ -19,7 +19,11 @@ public static class GameObjectManager {
     public static List<GameObject> FindAIUnits()
     {
         List<GameObject> allAIunits = GameObject.FindGameObjectsWithTag("Unit").ToList<GameObject>();
-        allAIunits.RemoveAll(item => item.GetComponent<BaseCell>().isAIPossessed == false);
+        if (allAIunits.Count > 0 )
+        {
+            allAIunits.RemoveAll(item => item.GetComponent<BaseCell>().isAIPossessed == false);
+        }
+       
         return allAIunits;
     }
 

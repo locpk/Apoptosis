@@ -55,9 +55,9 @@ public class AcidicArea : BaseArea {
     //}
 
     IEnumerator ConvertToAcidicCell(float delayed, BaseCell baseCell) {
-        Debug.Log("ConvertToAcidicCell! before" + name);
+
         yield return new WaitForSeconds(delayed);
-        Debug.Log("ConvertToAcidicCell! after " + name);
+
         baseCell.Mutation(CellType.ACIDIC_CELL);
     }
 }

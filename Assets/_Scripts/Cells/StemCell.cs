@@ -64,17 +64,21 @@ public class StemCell : BaseCell
     public void Guarding()
     {
         List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
-        foreach (var enemy in aiUnits)
+        if (aiUnits.Count > 0)
         {
-            if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
+            foreach (var enemy in aiUnits)
             {
-                if (enemy != this)
+                if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
                 {
-                    Attack(enemy);
+                    if (enemy != this)
+                    {
+                        Attack(enemy);
+                    }
+                    break;
                 }
-                break;
             }
         }
+        
     }
 
 
@@ -152,14 +156,18 @@ public class StemCell : BaseCell
             case CellState.MOVING:
 
                 base.bUpdate();
-                if (primaryTarget.GetComponent<BaseCell>())
+                if (primaryTarget)
                 {
-                    currentState = CellState.ATTACK;
+                    if (primaryTarget.GetComponent<BaseCell>())
+                    {
+                        currentState = CellState.ATTACK;
+                    }
+                    else if (primaryTarget.GetComponent<Protein>())
+                    {
+                        currentState = CellState.CONSUMING;
+                    }
                 }
-                else if (primaryTarget.GetComponent<Protein>())
-                {
-                    currentState = CellState.CONSUMING;
-                }
+              
 
                 break;
             case CellState.ATTACK_MOVING:

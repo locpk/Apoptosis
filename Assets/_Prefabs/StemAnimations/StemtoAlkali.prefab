@@ -331,7 +331,7 @@ MonoBehaviour:
   MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
-  isMine: 1
+  isMine: 0
   isAlive: 1
   isAIPossessed: 0
   isDepleting: 0
@@ -353,6 +353,8 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
+  isInAcidic: 0
+  isInAlkali: 0
   stemtoHeat: {fileID: 137274, guid: 996a46fa7705a134cbca9e2676ece137, type: 2}
   stemtoCold: {fileID: 190572, guid: 03026532dd50e414d91a085b722f86c6, type: 2}
   stemtoAlkali: {fileID: 0}
@@ -1541,7 +1543,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145584}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
   m_Extents: {x: .100000001, y: .100000001, z: .100000001}
@@ -1686,6 +1688,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isMine
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         { GUISelectRect.yMax = -Input.mousePosition.y + Screen.height; }
         else
         { GUISelectRect.yMin = -Input.mousePosition.y + Screen.height; }
-        
+
         selectedTargets.Clear();
         foreach (GameObject item in allSelectableTargets)
         {
@@ -227,7 +227,9 @@ public class PlayerController : MonoBehaviour
     {
         if (GUISelectRect.height != 0 && GUISelectRect.width != 0)
         {
-            GUI.DrawTexture(GUISelectRect, selector);
+            GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+
+            GUI.DrawTexture(GUISelectRect, selector, ScaleMode.StretchToFill, true);
         }
         foreach (BaseCell item in selectedUnits)
         {
@@ -293,7 +295,10 @@ public class PlayerController : MonoBehaviour
         {
             foreach (StemCell item in selectedUnits) // For each of the player's selected units
             {
-                item.Mutation(CellType.ACIDIC_CELL);
+                if (item.isInAcidic)
+                {
+                    item.Mutation(CellType.ACIDIC_CELL);
+                }
             }
         }
 
@@ -309,7 +314,11 @@ public class PlayerController : MonoBehaviour
         {
             foreach (StemCell item in selectedUnits)
             {
-                item.Mutation(CellType.ALKALI_CELL);
+                if (item.isInAlkali)
+                {
+                    item.Mutation(CellType.ALKALI_CELL);
+                }
+
             }
         }
 
@@ -347,12 +356,11 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(1)) // When the player releases left-click
         {
-            if (selectedTargets.Count > 0)
-            {
 
-            }
-            else
-                UnitMove();
+            GUISelectRect.yMax = GUISelectRect.yMin;
+            GUISelectRect.xMax = GUISelectRect.xMin;
+            UnitMove();
+
         }
         else if (Input.GetMouseButton(1)) // If the player has left-click held down
         {
