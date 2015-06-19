@@ -6,28 +6,40 @@ public class HeatCell : BaseCell
 {
     public GameObject fireball;
     GameObjectManager test;
-   // float splitCD = 0;
+    delegate void TakeDamage();
+    TakeDamage multidamagesources;
+    // float splitCD = 0;
     float fireballSpeed = 5;
     void Awake()
     {
         base.Awake();
         test = new GameObjectManager();
+
+
     }
 
+    void AreaDamage()
+    {
+        currentProtein -= 5;
+    }
     void DamagePreSecond()
     {
-       GameObject fire = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
+        GameObject fire = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
 
 
-       Vector3 them2me = primaryTarget.transform.position - transform.position;
-       fire.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
-        primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+        Vector3 them2me = primaryTarget.transform.position - transform.position;
+        fire.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
+        primaryTarget.GetComponent<BaseCell>().currentProtein -= (attackDamage / defense);
     }
+
+
 
     // Use this for initialization
     void Start()
     {
         base.Start();
+        multidamagesources += AreaDamage;
+        multidamagesources();
     }
 
     // Update is called once per frame
@@ -53,9 +65,9 @@ public class HeatCell : BaseCell
                     {
                         if (Vector3.Distance(enemyUnits[i].transform.position, transform.position) <= fovRadius)
                         {
-                           
-                                Attack(enemyUnits[i]);
-                                break;
+
+                            Attack(enemyUnits[i]);
+                            break;
 
                         }
                     }
@@ -86,8 +98,8 @@ public class HeatCell : BaseCell
                     {
                         SetPrimaryTarget(null);
                         navAgent.Stop();
-            
- 
+
+
                     }
                 }
                 else
@@ -110,6 +122,10 @@ public class HeatCell : BaseCell
                 }
                 break;
             case CellState.MOVING:
+                if (IsInvoking("DamagePreSecond"))
+                {
+                    CancelInvoke("DamagePreSecond");
+                }
                 base.Update();
                 break;
             case CellState.ATTACK_MOVING:

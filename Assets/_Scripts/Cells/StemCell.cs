@@ -66,7 +66,7 @@ public class StemCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-                //guard mode auto attack enemy in range
+                //guard mode auto attack enemy in range-
                 //if (Vector3.Distance(GameObject.Find("HeatCell").transform.position, transform.position) <= fovRadius)
                 //{
                 //    Attack(GameObject.Find("HeatCell"));

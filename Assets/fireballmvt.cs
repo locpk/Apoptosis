@@ -16,9 +16,9 @@ public class fireballmvt : MonoBehaviour {
 	void FixedUpdate () {
         if( Owner.GetComponent<BaseCell>().primaryTarget != null)
         {
-        Vector3 Owner2Target = Owner.GetComponent<BaseCell>().primaryTarget.transform.position - Owner.GetComponent<BaseCell>().transform.position;
-        transform.LookAt(Owner.GetComponent<BaseCell>().primaryTarget.transform);
-        rb.AddForce(transform.forward);
+       //Vector3 Owner2Target = Owner.GetComponent<BaseCell>().primaryTarget.transform.position - Owner.GetComponent<BaseCell>().transform.position;
+       //transform.LookAt(Owner.GetComponent<BaseCell>().primaryTarget.transform);
+       //rb.AddForce(transform.forward);
 
         }
         
