@@ -6,9 +6,10 @@ public class Protein : MonoBehaviour {
     public float value;
 
 
-    public void Harvest()
+    public float Harvest()
     {
         value -= 5.0f;
+        return 5.0f;
     }
 	// Use this for initialization
 	void Start () {

@@ -153,7 +153,11 @@ public class BaseCell : MonoBehaviour
     {
         if (primaryTarget)
         {
-            primaryTarget.GetComponent<Protein>().Harvest();
+           currentProtein += primaryTarget.GetComponent<Protein>().Harvest();
+           if (currentProtein > MAX_PROTEIN)
+           {
+               currentProtein = MAX_PROTEIN;
+           }
         }
         
     }
