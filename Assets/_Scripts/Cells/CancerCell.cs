@@ -12,7 +12,11 @@ public class CancerCell : BaseCell
     // Use this for initialization
      void Start()
     {
-        base.bStart();
+       if (isAIPossessed)
+       {
+           navAgent.enabled = false;
+           
+       }
     }
 
     // Update is called once per frame
@@ -29,6 +33,7 @@ public class CancerCell : BaseCell
             case CellState.ATTACK_MOVING:
                 break;
             case CellState.DEAD:
+                base.Die();
                 break;
             case CellState.CANCEROUS_SPLITTING:
                 break;

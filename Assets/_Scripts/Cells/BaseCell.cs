@@ -142,6 +142,7 @@ public class BaseCell : MonoBehaviour
     }
     public void Die()
     {
+
         Destroy(gameObject);
     }
 
@@ -153,13 +154,13 @@ public class BaseCell : MonoBehaviour
     {
         if (primaryTarget)
         {
-           currentProtein += primaryTarget.GetComponent<Protein>().Harvest();
-           if (currentProtein > MAX_PROTEIN)
-           {
-               currentProtein = MAX_PROTEIN;
-           }
+            currentProtein += primaryTarget.GetComponent<Protein>().Harvest();
+            if (currentProtein > MAX_PROTEIN)
+            {
+                currentProtein = MAX_PROTEIN;
+            }
         }
-        
+
     }
 
     public void Consume(GameObject _target)
@@ -257,18 +258,26 @@ public class BaseCell : MonoBehaviour
             switch (this.celltype)
             {
                 case CellType.HEAT_CELL:
-                    newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.identity) as GameObject;
-                    newCell.gameObject.transform.Rotate(90, -180, -180);
-                    newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
-                    newCell.GetComponent<BaseCell>().currentLevel++;
+                    newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
+                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                    newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
+                    if (!isAIPossessed)
+                    {
+                        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newCell.GetComponent<BaseCell>());
+                    }
                     break;
                 case CellType.COLD_CELL:
-                    newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.identity) as GameObject;
-                    newCell.gameObject.transform.Rotate(90, -180, -180);
-                    newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
-                    newCell.GetComponent<BaseCell>().currentLevel++;
+                    newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
+                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                    newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
+                    if (!isAIPossessed)
+                    {
+                        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newCell.GetComponent<BaseCell>());
+                    }
                     break;
                 default:
                     break;
@@ -276,10 +285,11 @@ public class BaseCell : MonoBehaviour
         }
         else
         {
-            newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.identity) as GameObject;
-            newCell.gameObject.transform.Rotate(90, -180, -180);
-            newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
+            newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+            newCell.GetComponent<BaseCell>().currentProtein = currentProtein;
+            newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
             newCell.GetComponent<BaseCell>().currentLevel++;
+            newCell.GetComponent<BaseCell>().isAIPossessed = false;
             newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
         }
 
@@ -347,9 +357,10 @@ public class BaseCell : MonoBehaviour
         {
             if (isStopped())
             {
-              
+
                 navAgent.enabled = false;
                 navObstacle.enabled = true;
+                currentState = CellState.IDLE;
             }
         }
         else if (currentState == CellState.CONSUMING)

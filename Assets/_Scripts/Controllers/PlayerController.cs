@@ -49,6 +49,12 @@ public class PlayerController : MonoBehaviour
         selectedUnits.Add(_in);
     }
 
+    public void RemoveDeadCell(BaseCell _in)
+    {
+        allSelectableUnits.Remove(_in);
+        selectedUnits.Remove(_in);
+    }
+
     public List<GameObject> GetAllSelectableObjects()
     {
         List<GameObject> allSelectableObjects = new List<GameObject>(); // Initialize a list of GameObjects
