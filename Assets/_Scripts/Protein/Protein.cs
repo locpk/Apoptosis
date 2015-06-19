@@ -9,7 +9,7 @@ public class Protein : MonoBehaviour {
     public float Harvest()
     {
         value -= 5.0f;
-        return 5.0f;
+        return value >= 0 ? 5.0f : 5.0f + value;
     }
 	// Use this for initialization
 	void Start () {
