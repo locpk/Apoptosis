@@ -65,8 +65,10 @@ public class HeatCell : BaseCell
                     {
                         if (Vector3.Distance(enemyUnits[i].transform.position, transform.position) <= fovRadius)
                         {
-
-                            Attack(enemyUnits[i]);
+                            if (enemyUnits[i] != this.gameObject)
+                            {
+                                Attack(enemyUnits[i]);
+                            }
                             break;
 
                         }

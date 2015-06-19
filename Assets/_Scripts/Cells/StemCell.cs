@@ -64,11 +64,14 @@ public class StemCell : BaseCell
     public void Guarding()
     {
         List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
-        foreach (var enemy in aiUnits)
+        for (int i = 0; i < aiUnits.Count; i++)
         {
-            if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
+            if (Vector3.Distance(aiUnits[i].transform.position, transform.position) <= fovRadius)
             {
-                Attack(enemy);
+                if (aiUnits[i] != this.gameObject)
+                {
+                    Attack(aiUnits[i]);
+                }
                 break;
             }
         }
@@ -104,7 +107,10 @@ public class StemCell : BaseCell
                     CancelInvoke("DamagePerSecond");
                 }
                 SetPrimaryTarget(null);
-                navAgent.Stop();
+                if (navAgent.isActiveAndEnabled)
+                {
+                    navAgent.Stop();
+                }
                 //guard mode auto attack enemy in range
                 Guarding();
                 break;
@@ -176,16 +182,19 @@ public class StemCell : BaseCell
                     }
                     CancelInvoke("DamagePerSecond");
                 }
-                float dis = Vector3.Distance(primaryTarget.transform.position, transform.position);
-                if (dis > fovRadius)
+                if (primaryTarget != null)
                 {
-                    SetPrimaryTarget(null);
-                    navAgent.Stop();
-                    currentState = CellState.IDLE;
-                }
-                else
-                {
-                    base.bUpdate();
+                    float dis = Vector3.Distance(primaryTarget.transform.position, transform.position);
+                    if (dis > fovRadius)
+                    {
+                        SetPrimaryTarget(null);
+                        navAgent.Stop();
+                        currentState = CellState.IDLE;
+                    }
+                    else
+                    {
+                        base.bUpdate();
+                    }
                 }
                 break;
             case CellState.ATTACK_MOVING:

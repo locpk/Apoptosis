@@ -186,11 +186,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11454602, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: fovRadius
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11454602, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: attackRange
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454602, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
+      propertyPath: isMine
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454602, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
+      propertyPath: isAIPossessed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454602, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
+      propertyPath: attackDamage
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
@@ -208,11 +220,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: .0799999982
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4.55127382
+      value: 4.40999985
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
       propertyPath: m_LocalRotation.x
@@ -240,6 +252,22 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11413980, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
       propertyPath: instantiationId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454602, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
+      propertyPath: isMine
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454602, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
+      propertyPath: fireball
+      value: 
+      objectReference: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
+    - target: {fileID: 11454602, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
+      propertyPath: isAIPossessed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11454602, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
+      propertyPath: fovRadius
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
