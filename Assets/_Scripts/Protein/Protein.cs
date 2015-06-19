@@ -22,6 +22,14 @@ public class Protein : MonoBehaviour {
 	}
     void LateUpdate()
     {
+        if (value >= 100.0f)
+        {
+            transform.localScale = new Vector3(0.3f * value / 110, 0.3f * value / 110, 0.3f * value / 110);
+        }
+        else
+        {
+            transform.transform.localScale = new Vector3( 30.0f / 110, 30.0f / 110,30.0f / 110);
+        }
         if (value <= 0.0f)
         {
             DestroyImmediate(gameObject);
