@@ -522,6 +522,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 19820138, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+      propertyPath: EmissionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
   m_IsPrefabParent: 0
