@@ -331,7 +331,7 @@ MonoBehaviour:
   MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
-  isMine: 1
+  isMine: 0
   isAlive: 1
   isAIPossessed: 0
   isDepleting: 0
@@ -353,6 +353,8 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
+  isInAcidic: 0
+  isInAlkali: 0
   stemtoHeat: {fileID: 137274, guid: 996a46fa7705a134cbca9e2676ece137, type: 2}
   stemtoCold: {fileID: 0}
   stemtoAlkali: {fileID: 0}
@@ -1697,6 +1699,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isMine
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

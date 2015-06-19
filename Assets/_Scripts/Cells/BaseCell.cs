@@ -193,6 +193,7 @@ public class BaseCell : MonoBehaviour
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
                 this.currentState = CellState.DEAD;
                 break;
             case CellType.CANCER_CELL:
@@ -200,6 +201,7 @@ public class BaseCell : MonoBehaviour
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
                 this.currentState = CellState.DEAD;
                 break;
             default:

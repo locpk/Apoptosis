@@ -5,19 +5,19 @@ public class HeatCell : BaseCell
 {
     float splitCD = 0;
 
-    new void Awake()
+     void Awake()
     {
-        base.Awake();
+        base.bAwake();
     }
 
     // Use this for initialization
-    new void Start()
+     void Start()
     {
-        base.Start();
+        base.bStart();
     }
 
     // Update is called once per frame
-    new void Update()
+     void Update()
     {
         switch (currentState)
         {
@@ -59,16 +59,16 @@ public class HeatCell : BaseCell
                 splitCD = 0;
             }
         }
-        base.Update();
+        base.bUpdate();
     }
 
-    new void FixedUpdate()
+     void FixedUpdate()
     {
-        base.FixedUpdate();
+        base.bFixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
-    new void LateUpdate()
+     void LateUpdate()
     {
 
     }
@@ -78,15 +78,13 @@ public class HeatCell : BaseCell
         if (_target != null)
         {
 
-            Debug.Log(_target);
+
             if (Vector3.Distance(transform.position, _target.transform.position) > attackRange)
             {
-                Debug.Log(_target);
                 Move(_target.transform.position);
             }
             if (Vector3.Distance(transform.position, _target.transform.position) <= attackRange)
             {
-                Debug.Log(_target);
                 currentState = CellState.ATTACK;
                 Move(transform.position);
                 _target.GetComponent<BaseCell>().currentProtein = _target.GetComponent<BaseCell>().currentProtein - attackDamage;
@@ -102,7 +100,6 @@ public class HeatCell : BaseCell
         {
             if (enemy.GetComponent<BaseCell>().isAIPossessed)
             {
-                Debug.Log(enemy.name);
 
                 if (closestAiguy == null || Vector3.Distance(transform.position, enemy.transform.position) < Vector3.Distance(transform.position, closestAiguy.transform.position) )
                 {
