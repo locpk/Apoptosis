@@ -5,19 +5,19 @@ using System.Collections.Generic;
 public class ColdCell : BaseCell
 {
 
-     void Awake()
+    void Awake()
     {
-		base.bAwake ();
+        base.bAwake();
     }
 
     // Use this for initialization
-     void Start()
+    void Start()
     {
-		base.bStart ();
+        base.bStart();
     }
 
     // Update is called once per frame
-     void Update()
+    void Update()
     {
         switch (currentState)
         {
@@ -26,10 +26,21 @@ public class ColdCell : BaseCell
             case CellState.ATTACK:
                 break;
             case CellState.MOVING:
+                if (IsInvoking("DamagePreSecond"))
+                {
+                    CancelInvoke("DamagePreSecond");
+                }
+                base.bUpdate();
                 break;
             case CellState.ATTACK_MOVING:
+                if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+                {
+                    currentState = CellState.IDLE;
+                }
                 break;
+
             case CellState.DEAD:
+                base.Die();
                 break;
             case CellState.CANCEROUS_SPLITTING:
                 break;
@@ -46,27 +57,36 @@ public class ColdCell : BaseCell
         }
     }
 
-     void FixedUpdate()
+    void FixedUpdate()
     {
         base.bFixedUpdate();
     }
 
     //LateUpdate is called after all Update functions have been called
-     void LateUpdate()
+    void LateUpdate()
     {
 
     }
-	void Attack()
-	{
-		if(Vector3.Distance(transform.position, base.primaryTarget.transform.position) <= attackRange)
-		{
-			base.Attack (base.primaryTarget);
-		}
-	}
-	void Consume()
-	{
-		base.Consume(base.primaryTarget);
-	}
+    public override void Attack(GameObject _target)
+    {
+        if (_target)
+        {
+            SetPrimaryTarget(_target);
+            currentState = CellState.ATTACK;
+        }
+    }
 
+    void FixedUpdate()
+    {
+        base.bFixedUpdate();
+    }
+    void Consume()
+    {
+        base.Consume(base.primaryTarget);
+    }
 
+    void LateUpdate()
+    {
+        base.bLateUpdate();
+    }
 }

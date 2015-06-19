@@ -287,6 +287,7 @@ public class BaseCell : MonoBehaviour
     {
         if (primaryTarget)
         {
+            
             Move(primaryTarget.transform.position);
         }
     }

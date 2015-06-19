@@ -9,7 +9,7 @@ public class HeatCell : BaseCell
     delegate void TakeDamage();
     TakeDamage multidamagesources;
     // float splitCD = 0;
-    float fireballSpeed = 5;
+    float fireballSpeed = 10;
     void Awake()
     {
         base.bAwake();
@@ -90,18 +90,19 @@ public class HeatCell : BaseCell
 
                     else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                     {
-                        base.ChaseTarget();
                         if (IsInvoking("DamagePreSecond"))
                         {
                             CancelInvoke("DamagePreSecond");
+                        }
+                        if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
+                        {
+                            base.ChaseTarget();
                         }
                     }
                     else
                     {
                         SetPrimaryTarget(null);
                         navAgent.Stop();
-
-
                     }
                 }
                 else
