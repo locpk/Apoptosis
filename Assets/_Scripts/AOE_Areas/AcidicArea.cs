@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class AcidicArea : BaseArea {
 
     public float damagePerSecond;
-    public float convertingDelayed = 5.0f;
+    public float pendingConvertDelayed = 5.0f;
 
 	public override void Awake() {
         base.Awake();
@@ -33,31 +33,8 @@ public class AcidicArea : BaseArea {
     }
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.tag == "Unit") {
-            BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
 
-            if (enterCell.celltype == CellType.STEM_CELL) {
-                StartCoroutine(ConvertToAcidicCell(convertingDelayed, enterCell));
-
-            }
-        }
     }
 
-    //void OnTriggerStay(Collider collider) {
-    //    if (collider.gameObject.tag == "Unit") {
-    //        BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
 
-    //        if (enterCell.celltype == CellType.ACIDIC_CELL) {
-    //            StartCoroutine(ConvertToAcidicCell(convertingDelayed, enterCell));
-
-    //        }
-    //    }
-    //}
-
-    IEnumerator ConvertToAcidicCell(float delayed, BaseCell baseCell) {
-        Debug.Log("ConvertToAcidicCell! before" + name);
-        yield return new WaitForSeconds(delayed);
-        Debug.Log("ConvertToAcidicCell! after " + name);
-        baseCell.Mutation(CellType.ACIDIC_CELL);
-    }
 }

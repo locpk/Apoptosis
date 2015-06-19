@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class AlkaliArea : BaseArea {
 
     public float damagePerSecond;
-    public float convertingDelayed = 5.0f;
+    public float pendingConvertDelayed = 5.0f;
 
 	public override void Awake() {
         base.Awake();
@@ -37,13 +37,15 @@ public class AlkaliArea : BaseArea {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
 
             if (enterCell.celltype == CellType.STEM_CELL) {
-                StartCoroutine(ConvertToAlkaliCell(convertingDelayed, enterCell));
+                StartCoroutine(ReadyToConvert(pendingConvertDelayed, collider.gameObject.GetComponent<StemCell>()));
 
             }
         }
     }
 
+    void OnTriggerStay(Collider collider) {
 
+    }
     //void OnTriggerStay(Collider collider) {
     //    if (collider.gameObject.tag == "Unit") {
     //        BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
@@ -56,18 +58,12 @@ public class AlkaliArea : BaseArea {
     //}
 
     void OnTriggerExit(Collider collider) {
-        if (collider.gameObject.tag == "Unit") {
-            BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
 
-            if (enterCell.celltype == CellType.STEM_CELL) {
-                StopCoroutine(ConvertToAlkaliCell(convertingDelayed, enterCell));
-            }
-        }
     }
 
-    IEnumerator ConvertToAlkaliCell(float delayed, BaseCell baseCell) {
+    IEnumerator ReadyToConvert(float delayed, StemCell stemCell) {
         yield return new WaitForSeconds(delayed);
-        baseCell.Mutation(CellType.ALKALI_CELL);
+        // to do toggle on the pending converting
     }
 
 
