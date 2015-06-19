@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Menu : MonoBehaviour {
 
-    public GameObject menu;
+    //public GameObject menu;
 
 	void Awake() {
     }
