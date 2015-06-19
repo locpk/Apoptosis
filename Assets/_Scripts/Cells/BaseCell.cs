@@ -83,7 +83,7 @@ public class BaseCell : MonoBehaviour
 
 
     //[RPC] Methods, which called via network
-    [RPC]
+    [PunRPC]
     public void ApplyDamage(float _received_damage)
     {
         currentProtein -= _received_damage - defense;
@@ -98,7 +98,7 @@ public class BaseCell : MonoBehaviour
 
     public virtual void Move(Vector3 _destination)
     {
-        //Move only there is a path.
+
         currentState = CellState.MOVING;
         navObstacle.enabled = false;
         navAgent.enabled = true;
@@ -288,7 +288,6 @@ public class BaseCell : MonoBehaviour
         if (primaryTarget)
         {
             Move(primaryTarget.transform.position);
-
         }
     }
     public void Deplete(float _deltaTime)
@@ -330,11 +329,9 @@ public class BaseCell : MonoBehaviour
         {
             if (isStopped())
             {
-
                 currentState = CellState.IDLE;
                 navAgent.enabled = false;
                 navObstacle.enabled = true;
-
             }
         }
     }
