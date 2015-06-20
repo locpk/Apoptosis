@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class AcidicArea : BaseArea {
 
     public float damagePerSecond;
-    public float convertingDelayed = 5.0f;
+    public float pendingConvertDelayed = 5.0f;
 
 	public override void Awake() {
         base.Awake();
@@ -35,29 +35,35 @@ public class AcidicArea : BaseArea {
     void OnTriggerEnter(Collider collider) {
         if (collider.gameObject.tag == "Unit") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+            StemCell stemCell = collider.gameObject.GetComponent<StemCell>();
 
             if (enterCell.celltype == CellType.STEM_CELL) {
-                StartCoroutine(ConvertToAcidicCell(convertingDelayed, enterCell));
+                StopCoroutine("ReadyToConvert");
+                StartCoroutine(ReadyToConvert(pendingConvertDelayed, stemCell));
 
             }
         }
     }
 
-    //void OnTriggerStay(Collider collider) {
-    //    if (collider.gameObject.tag == "Unit") {
-    //        BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
 
-    //        if (enterCell.celltype == CellType.ACIDIC_CELL) {
-    //            StartCoroutine(ConvertToAcidicCell(convertingDelayed, enterCell));
+    void OnTriggerStay(Collider collider) {
 
-    //        }
-    //    }
-    //}
+    }
 
-    IEnumerator ConvertToAcidicCell(float delayed, BaseCell baseCell) {
+    void OnTriggerExit(Collider collider) {
+        if (collider.gameObject.tag == "Unit") {
+            StemCell stemCell = collider.gameObject.GetComponent<StemCell>();
+            if (stemCell) {
+                stemCell.isInAcidic = false;
 
+            }
+        }
+    }
+
+    IEnumerator ReadyToConvert(float delayed, StemCell stemCell) {
         yield return new WaitForSeconds(delayed);
-
-        baseCell.Mutation(CellType.ACIDIC_CELL);
+        // to toggle on the pending converting
+        if (stemCell)
+            stemCell.isInAcidic = true;
     }
 }

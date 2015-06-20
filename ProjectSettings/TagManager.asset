@@ -9,12 +9,12 @@ TagManager:
   - Area
   - Nucleus
   - Animation
+  - Protein
   - Collider_Heat
   - Collider_Acidic
   - Collider_Dense
   - Collider_Cold
   - Collider_Alkali
-  - Protein
   layers:
   - Default
   - TransparentFX
