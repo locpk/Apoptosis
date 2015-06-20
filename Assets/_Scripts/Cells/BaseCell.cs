@@ -115,14 +115,9 @@ public class BaseCell : MonoBehaviour
     public virtual void AttackMove(Vector3 _destination)
     {
         Move(_destination);
-        foreach (var item in targets)
-        {
-            if (Vector3.Distance(this.transform.position, item.transform.position) <= attackRange)
-            {
-                SetPrimaryTarget(item);
-                break;
-            }
-        }
+        Guarding();
+        currentState = CellState.ATTACK_MOVING;
+
     }
 
     public void SetPrimaryTarget(GameObject _target)
@@ -171,6 +166,26 @@ public class BaseCell : MonoBehaviour
             SetPrimaryTarget(_target);
             currentState = CellState.CONSUMING;
         }
+    }
+
+    public void Guarding()
+    {
+        List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
+        if (aiUnits.Count > 0)
+        {
+            foreach (var enemy in aiUnits)
+            {
+                if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
+                {
+                    if (enemy != this)
+                    {
+                        Attack(enemy);
+                    }
+                    break;
+                }
+            }
+        }
+
     }
     #endregion
 
@@ -395,6 +410,16 @@ public class BaseCell : MonoBehaviour
             }
             else
             {
+                currentState = CellState.IDLE;
+            }
+        }
+        else if (currentState == CellState.ATTACK_MOVING)
+        {
+            if (isStopped())
+            {
+
+                navAgent.enabled = false;
+                navObstacle.enabled = true;
                 currentState = CellState.IDLE;
             }
         }
