@@ -42,6 +42,22 @@ public class PlayerController : MonoBehaviour
                 allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
             }
         }
+
+        tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
+        foreach (GameObject item in tmpArr) // Iterate through all the cells
+        {
+            BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
+            if (bCell.isAIPossessed && !bCell.isMine) // If the cell belongs to this player
+            {
+                allSelectableTargets.Add(item); // Add the cell to the players controllable units
+            }
+        }
+
+        tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
+        foreach (GameObject item in tmpArr) // Iterate through all the cells
+        {
+            allSelectableTargets.Add(item); // Add the cell to the players controllable units
+        }
     }
 
     public void AddNewCell(BaseCell _in)
@@ -150,6 +166,7 @@ public class PlayerController : MonoBehaviour
             foreach (BaseCell item in selectedUnits)
             {
                 //item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Set their destination
+                item.SetPrimaryTarget(null);
                 item.Move(hitInfo.point); // Set their destination
             }
         }
@@ -369,7 +386,7 @@ public class PlayerController : MonoBehaviour
                 if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
                 {
                     BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
-                    if (hitCell.isMine)
+                    if (allSelectableUnits.Contains(hitCell))
                     {
                         selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
                     }
@@ -393,7 +410,31 @@ public class PlayerController : MonoBehaviour
 
             GUISelectRect.yMax = GUISelectRect.yMin;
             GUISelectRect.xMax = GUISelectRect.xMin;
-            UnitMove();
+            if (selectedTargets.Count == 0)
+            {
+                RaycastHit hitInfo;
+                Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
+                {
+                    GameObject hitObject = hitInfo.collider.gameObject;
+                    if (allSelectableTargets.Contains(hitObject))
+                    {
+                        selectedTargets.Add(hitObject);
+                    }
+                }
+            }
+            if (selectedTargets.Count > 0)
+            {
+                foreach (BaseCell item in selectedUnits)
+                {
+                    item.SetTargets(selectedTargets);
+                    item.SetPrimaryTarget(selectedTargets[0]);
+                }
+                UnitAttack();
+            }
+            else
+                UnitMove();
 
         }
         else if (Input.GetMouseButton(1)) // If the player has left-click held down
