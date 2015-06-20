@@ -24,8 +24,10 @@ public class CamController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        smoothTargetPosition = transform.position;
-        smoothTargetRotation = transform.rotation;
+        //smoothTargetPosition = transform.position;
+        //smoothTargetRotation = transform.rotation;
+        smoothFocusTarget = transform.position;
+        GetComponentInChildren<Camera>().orthographicSize = maxZoom;
         realtimeTimer = Time.time;
 	}
 	
@@ -38,11 +40,10 @@ public class CamController : MonoBehaviour {
             {
                 //Scroll zooming
                 zoomValue -= Input.mouseScrollDelta.y;
-                zoomValue = Mathf.Clamp(zoomValue, minZoom, maxZoom);
+                zoomValue = Mathf.Clamp(zoomValue, minZoom , maxZoom);
 
                 Camera camera = GetComponentInChildren<Camera>();
-                if (camera)
-                {
+                if (camera) {
                     camera.orthographicSize = zoomValue;
                 }
 
