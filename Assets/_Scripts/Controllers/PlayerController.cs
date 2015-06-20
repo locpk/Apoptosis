@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C)) // If the player presses C
         {
-            foreach (StemCell item in selectedUnits) // For each of the player's selected units
+            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
             {
                 if (item.isInAcidic)
                 {
@@ -306,29 +306,28 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
-        {
-            foreach (StemCell item in selectedUnits) // For each of the player's selected units
-            {
-                item.Mutation(CellType.HEAT_CELL);
-            }
-        }
-
         if (Input.GetKeyDown(KeyCode.V)) // If the player presses V
         {
-            foreach (StemCell item in selectedUnits)
+            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
             {
                 if (item.isInAlkali)
                 {
                     item.Mutation(CellType.ALKALI_CELL);
                 }
+            }
+        }
 
+        if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
+        {
+            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits)) // For each of the player's selected units
+            {
+                item.Mutation(CellType.HEAT_CELL);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Z)) // If the player presses Z
         {
-            foreach (StemCell item in selectedUnits)
+            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
             {
                 item.Mutation(CellType.COLD_CELL);
             }
