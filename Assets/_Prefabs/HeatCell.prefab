@@ -145,6 +145,7 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
+  fireball: {fileID: 0}
 --- !u!135 &13587872
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -322,6 +323,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: isAIPossessed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

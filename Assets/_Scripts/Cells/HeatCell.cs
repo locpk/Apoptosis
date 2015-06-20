@@ -48,8 +48,8 @@ public class HeatCell : BaseCell
 
         switch (currentState)
         {
-
             case CellState.IDLE:
+            SetPrimaryTarget(null);
                 if (IsInvoking("DamagePreSecond"))
                 {
                     CancelInvoke("DamagePreSecond");
@@ -58,22 +58,22 @@ public class HeatCell : BaseCell
                 {
                     base.CancerousSplit();
                 }
-                System.Collections.Generic.List<GameObject> enemyUnits = GameObjectManager.FindAIUnits();
-                if (enemyUnits != null)
-                {
-                    for (int i = 0; i < enemyUnits.Count; i++)
-                    {
-                        if (Vector3.Distance(enemyUnits[i].transform.position, transform.position) <= fovRadius)
-                        {
-                            if (enemyUnits[i] != this.gameObject)
-                            {
-                                Attack(enemyUnits[i]);
-                            }
-                            break;
+                //System.Collections.Generic.List<GameObject> enemyUnits = GameObjectManager.FindAIUnits();
+                //if (enemyUnits != null)
+                //{
+                //    for (int i = 0; i < enemyUnits.Count; i++)
+                //    {
+                //        if (Vector3.Distance(enemyUnits[i].transform.position, transform.position) <= fovRadius)
+                //        {
+                //            if (enemyUnits[i] != this.gameObject)
+                //            {
+                //                Attack(enemyUnits[i]);
+                //            }
+                //            break;
 
-                        }
-                    }
-                }
+                //        }
+                //    }
+                //}
 
                 break;
             case CellState.ATTACK:
@@ -99,11 +99,7 @@ public class HeatCell : BaseCell
                             base.ChaseTarget();
                         }
                     }
-                    else
-                    {
-                        SetPrimaryTarget(null);
-                        navAgent.Stop();
-                    }
+              
                 }
                 else
                 {

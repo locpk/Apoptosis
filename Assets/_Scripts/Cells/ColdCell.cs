@@ -74,12 +74,7 @@ public class ColdCell : BaseCell
                             base.ChaseTarget();
                         }
                     }
-                    else
-                    {
-                        SetPrimaryTarget(null);
-                        navAgent.Stop();
-                    }
-
+           
                 }
                 else
                 {
