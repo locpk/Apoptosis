@@ -19,6 +19,7 @@ public class ColdCell : BaseCell
     {
         if (primaryTarget != null)
         {
+            AoeDmg(transform.position, attackRange);
             primaryTarget.GetComponent<BaseCell>().currentProtein -= (attackDamage / primaryTarget.GetComponent<BaseCell>().defense);
         }
     }
@@ -52,7 +53,7 @@ public class ColdCell : BaseCell
                 Guarding();
                 break;
             case CellState.ATTACK:
-                if(primaryTarget != null)
+                if (primaryTarget != null)
                 {
                     if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                     {
@@ -86,7 +87,7 @@ public class ColdCell : BaseCell
                 }
                 break;
             case CellState.MOVING:
-             base.bUpdate();
+                base.bUpdate();
                 if (primaryTarget != null)
                 {
                     if (primaryTarget.GetComponent<BaseCell>())
@@ -102,10 +103,10 @@ public class ColdCell : BaseCell
 
                 break;
             case CellState.ATTACK_MOVING:
-             //  if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
-             //  {
-             //      currentState = CellState.IDLE;
-             //  }
+                //  if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+                //  {
+                //      currentState = CellState.IDLE;
+                //  }
                 break;
             case CellState.CONSUMING:
                 base.bUpdate();
@@ -113,7 +114,7 @@ public class ColdCell : BaseCell
             case CellState.DEAD:
                 base.Die();
                 break;
-         
+
             default:
                 break;
         }
@@ -141,4 +142,22 @@ public class ColdCell : BaseCell
     {
         base.bLateUpdate();
     }
+
+    void AoeDmg(Vector3 center, float radius)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+        for (int i = 0; i < hitColliders.Length; i++)
+        {
+            BaseCell basecellerino = hitColliders[i].GetComponent<BaseCell>();
+            if (basecellerino != null)
+            {
+                if (basecellerino.isAIPossessed && basecellerino != primaryTarget && basecellerino.isMine == false)
+                {
+                    basecellerino.currentProtein -= (attackDamage / basecellerino.defense);
+                }
+
+            }
+        }
+    }
 }
+
