@@ -56,7 +56,6 @@ public class AlkaliArea : BaseArea {
 
     IEnumerator ConvertToAlkaliCell(float delayed, BaseCell baseCell) {
         yield return new WaitForSeconds(delayed);
-        Debug.Log("triggerhere! " + name);
         baseCell.Mutation(CellType.ALKALI_CELL);
     }
 

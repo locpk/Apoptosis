@@ -17,7 +17,7 @@ GameObject:
   - 199: {fileID: 19937610}
   - 198: {fileID: 19808222}
   - 114: {fileID: 11489682}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: StemCell
   m_TagString: Animation
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - 135: {fileID: 13572976}
   - 208: {fileID: 20822348}
   - 114: {fileID: 11445358}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HeatCell
   m_TagString: Animation
   m_Icon: {fileID: 0}
@@ -291,6 +291,8 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
+  isInAcidic: 0
+  isInAlkali: 0
   stemtoHeat: {fileID: 0}
   stemtoCold: {fileID: 0}
   stemtoAlkali: {fileID: 0}
@@ -1682,6 +1684,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

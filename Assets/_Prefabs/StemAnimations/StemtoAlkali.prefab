@@ -8,9 +8,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 486792}
-  - 95: {fileID: 9536048}
   - 114: {fileID: 11443334}
   - 114: {fileID: 11490424}
+  - 95: {fileID: 9557556}
   m_Layer: 0
   m_Name: StemtoAlkali
   m_TagString: Animation
@@ -32,9 +32,9 @@ GameObject:
   - 54: {fileID: 5446322}
   - 114: {fileID: 11411164}
   - 114: {fileID: 11451930}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Alkali Cell
-  m_TagString: Untagged
+  m_TagString: Animation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 439874}
   - 212: {fileID: 21245340}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Nucleus
   m_TagString: Nucleus
   m_Icon: {fileID: 0}
@@ -89,9 +89,9 @@ GameObject:
   - 198: {fileID: 19853652}
   - 95: {fileID: 9524378}
   - 114: {fileID: 11436086}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: StemCell
-  m_TagString: Unit
+  m_TagString: Animation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +153,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.3485413, y: 0, z: -9.71634007}
+  m_LocalPosition: {x: 2.16542053, y: 0, z: 29.011795}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458428}
@@ -186,7 +186,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -207,7 +207,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &9536048
+--- !u!95 &9557556
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -216,7 +216,7 @@ Animator:
   m_GameObject: {fileID: 108478}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 165f1814e3168ac4f939efae5082b17d, type: 2}
+  m_Controller: {fileID: 9100000, guid: a8f48b77cd5091845b0270dbe92ac6e0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -243,9 +243,9 @@ MonoBehaviour:
   gAlkaliCellPrefab: {fileID: 0}
   MAX_PROTEIN: 500
   currentLevel: 0
-  isSinglePlayer: 1
+  isSinglePlayer: 0
   isMine: 0
-  isAlive: 1
+  isAlive: 0
   isAIPossessed: 0
   isDepleting: 0
   isSelected: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
   targets: []
   primaryTarget: {fileID: 0}
   photonView: {fileID: 0}
-  currentProtein: 0
+  currentProtein: 500
   fovRadius: 0
   attackDamage: 0
   attackRange: 0
@@ -414,7 +414,7 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145584}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .0900000036
   m_Speed: 3.5
   m_Acceleration: 8
@@ -434,7 +434,7 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183110}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 4.69000006
   m_Speed: 3.5
   m_Acceleration: 8
@@ -1697,6 +1697,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: isMine
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Animation
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: currentProtein
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
