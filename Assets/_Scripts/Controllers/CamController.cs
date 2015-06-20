@@ -31,6 +31,7 @@ public class CamController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
         float deltaTime = Time.realtimeSinceStartup - realtimeTimer;
         realtimeTimer = Time.realtimeSinceStartup;
 
@@ -53,38 +54,48 @@ public class CamController : MonoBehaviour {
             Vector3 nodePos = Vector3.zero;
 
             bool isScrolled = false;
-
-            // to go up 
-            if (Input.GetKey(KeyCode.UpArrow) || viewPoint.y > 1.0f - scrollPercentage) {
-                nodePos.z = 1.0f;
-                isScrolled = true;
-            }
-            // to go down
-            if (Input.GetKey(KeyCode.DownArrow) || viewPoint.y < scrollPercentage) {
-                nodePos.z = -1.0f;
-                isScrolled = true;
-            }
-            // to go left
-            if (Input.GetKey(KeyCode.LeftArrow) || viewPoint.x < scrollPercentage) {
-                nodePos.x = -1.0f;
-                isScrolled = true;
-            }
-            // to go right
-            if (Input.GetKey(KeyCode.RightArrow) || viewPoint.x > 1.0f - scrollPercentage) {
-                nodePos.x = 1.0f;
-                isScrolled = true;
+            Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
+            if (screenRect.Contains(Input.mousePosition))
+            {
+                // to go up 
+                if (Input.GetKey(KeyCode.UpArrow) || viewPoint.y > 1.0f - scrollPercentage)
+                {
+                    nodePos.z = 1.0f;
+                    isScrolled = true;
+                }
+                // to go down
+                if (Input.GetKey(KeyCode.DownArrow) || viewPoint.y < scrollPercentage)
+                {
+                    nodePos.z = -1.0f;
+                    isScrolled = true;
+                }
+                // to go left
+                if (Input.GetKey(KeyCode.LeftArrow) || viewPoint.x < scrollPercentage)
+                {
+                    nodePos.x = -1.0f;
+                    isScrolled = true;
+                }
+                // to go right
+                if (Input.GetKey(KeyCode.RightArrow) || viewPoint.x > 1.0f - scrollPercentage)
+                {
+                    nodePos.x = 1.0f;
+                    isScrolled = true;
+                }
             }
 
             Vector3 boundPos = transform.position + nodePos.normalized * deltaTime * scrollSpeed;
 
-            if (boundPos.x < minX)
-                boundPos.x = minX;
-            if (boundPos.x > maxX)
-                boundPos.x = maxX;
-            if (boundPos.z < minY)
-                boundPos.z = minY;
-            if (boundPos.z > maxY)
-                boundPos.z = maxY;
+           
+           
+                if (boundPos.x < minX)
+                    boundPos.x = minX;
+                if (boundPos.x > maxX)
+                    boundPos.x = maxX;
+                if (boundPos.z < minY)
+                    boundPos.z = minY;
+                if (boundPos.z > maxY)
+                    boundPos.z = maxY; 
+            
 
             transform.position = boundPos;
             if (isScrolled)
