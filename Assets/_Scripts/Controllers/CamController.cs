@@ -55,7 +55,7 @@ public class CamController : MonoBehaviour {
 
             bool isScrolled = false;
             Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
-            if (screenRect.Contains(Input.mousePosition))
+            if (screenRect.Contains(Input.mousePosition) /*&& !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()*/)
             {
                 // to go up 
                 if (Input.GetKey(KeyCode.UpArrow) || viewPoint.y > 1.0f - scrollPercentage)
