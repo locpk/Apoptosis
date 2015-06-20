@@ -269,7 +269,11 @@ public class PlayerController : MonoBehaviour
     {
         foreach (BaseCell item in selectedUnits) // For each of the player's selected units
         {
-            //item.Stop();
+            selectedTargets.Clear();
+            item.SetTargets(selectedTargets);
+            item.SetPrimaryTarget(null);
+            item.Move(item.transform.position);
+            item.currentState = CellState.IDLE;
         }
     }
 
@@ -310,7 +314,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C)) // If the player presses C
         {
-            foreach (StemCell item in selectedUnits) // For each of the player's selected units
+            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
             {
                 if (item.isInAcidic)
                 {
@@ -319,29 +323,28 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
-        {
-            foreach (StemCell item in selectedUnits) // For each of the player's selected units
-            {
-                item.Mutation(CellType.HEAT_CELL);
-            }
-        }
-
         if (Input.GetKeyDown(KeyCode.V)) // If the player presses V
         {
-            foreach (StemCell item in selectedUnits)
+            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
             {
                 if (item.isInAlkali)
                 {
                     item.Mutation(CellType.ALKALI_CELL);
                 }
+            }
+        }
 
+        if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
+        {
+            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits)) // For each of the player's selected units
+            {
+                item.Mutation(CellType.HEAT_CELL);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Z)) // If the player presses Z
         {
-            foreach (StemCell item in selectedUnits)
+            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
             {
                 item.Mutation(CellType.COLD_CELL);
             }
@@ -358,6 +361,20 @@ public class PlayerController : MonoBehaviour
         {
             GUISelectRect.yMax = GUISelectRect.yMin;
             GUISelectRect.xMax = GUISelectRect.xMin;
+            if (selectedUnits.Count == 0)
+            {
+                RaycastHit hitInfo;
+                Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
+                {
+                    BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
+                    if (hitCell.isMine)
+                    {
+                        selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
+                    }
+                }
+            }
         }
         else if (Input.GetMouseButton(0)) // If the player has left-click held down
         {
