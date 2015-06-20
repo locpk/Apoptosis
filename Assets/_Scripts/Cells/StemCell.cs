@@ -54,32 +54,14 @@ public class StemCell : BaseCell
 
     public override void Attack(GameObject _target)
     {
-        if (_target)
+        if (_target && _target != this.gameObject)
         {
             SetPrimaryTarget(_target);
             currentState = CellState.ATTACK;
         }
     }
 
-    public void Guarding()
-    {
-        List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
-        if (aiUnits.Count > 0)
-        {
-            foreach (var enemy in aiUnits)
-            {
-                if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
-                {
-                    if (enemy != this)
-                    {
-                        Attack(enemy);
-                    }
-                    break;
-                }
-            }
-        }
-        
-    }
+   
 
 
     void Awake()
@@ -104,7 +86,7 @@ public class StemCell : BaseCell
 
 
                 //guard mode auto attack enemy in range
-                Guarding();
+                base.Guarding();
                 break;
             case CellState.ATTACK:
 
@@ -156,7 +138,7 @@ public class StemCell : BaseCell
             case CellState.MOVING:
 
                 base.bUpdate();
-                if (primaryTarget)
+                if (primaryTarget && base.isStopped())
                 {
                     if (primaryTarget.GetComponent<BaseCell>())
                     {
@@ -171,11 +153,8 @@ public class StemCell : BaseCell
 
                 break;
             case CellState.ATTACK_MOVING:
+                base.bUpdate();
 
-                //if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
-                //{
-                //    currentState = CellState.IDLE;
-                //}
                 break;
             case CellState.DEAD:
                 base.Die();

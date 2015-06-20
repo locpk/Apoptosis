@@ -155,6 +155,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
+        public void UnitAttackMove()
+    {
+        // Modified by using raycast
+        RaycastHit hitInfo;
+        Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer))
+        {
+            foreach (BaseCell item in selectedUnits)
+            {
+                //item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Set their destination
+                item.AttackMove(hitInfo.point); // Set their destination
+            }
+        }
+    }
+
     public void UnitAttack()
     {
         foreach (BaseCell item in selectedUnits) // For each of the player's selected units
@@ -366,6 +383,10 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetMouseButton(1)) // If the player has left-click held down
         {
             TargetSelection(origin);
+        }
+        else if (Input.GetMouseButton(2)) 
+        {
+            UnitAttackMove();
         }
     }
 

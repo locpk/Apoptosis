@@ -114,15 +114,11 @@ public class BaseCell : MonoBehaviour
 
     public virtual void AttackMove(Vector3 _destination)
     {
-        Move(_destination);
-        foreach (var item in targets)
-        {
-            if (Vector3.Distance(this.transform.position, item.transform.position) <= attackRange)
-            {
-                SetPrimaryTarget(item);
-                break;
-            }
-        }
+        currentState = CellState.ATTACK_MOVING;
+        navObstacle.enabled = false;
+        navAgent.enabled = true;
+        destination = _destination;
+        navAgent.SetDestination(_destination);
     }
 
     public void SetPrimaryTarget(GameObject _target)
@@ -171,6 +167,26 @@ public class BaseCell : MonoBehaviour
             SetPrimaryTarget(_target);
             currentState = CellState.CONSUMING;
         }
+    }
+
+    public void Guarding()
+    {
+        List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
+        if (aiUnits.Count > 0)
+        {
+            foreach (var enemy in aiUnits)
+            {
+                if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
+                {
+                    if (enemy != this)
+                    {
+                        Attack(enemy);
+                    }
+                    break;
+                }
+            }
+        }
+
     }
     #endregion
 
@@ -398,19 +414,49 @@ public class BaseCell : MonoBehaviour
                 currentState = CellState.IDLE;
             }
         }
+        else if (currentState == CellState.ATTACK_MOVING)
+        {
+            
+            List<GameObject> theirUnits = GameObjectManager.FindTheirUnits();
+            if (theirUnits.Count > 0)
+            {
+                foreach (var enemy in theirUnits)
+                {
+                    if (Vector3.Distance(enemy.transform.position, transform.position) <= attackRange)
+                    {
+                        if (enemy != this.gameObject)
+                        {
+                            Attack(enemy);
+                            return;
+                        }
+                        
+                    }
+                }
+            }
+             if (isStopped() )
+            {
+
+                navAgent.enabled = false;
+                navObstacle.enabled = true;
+                currentState = CellState.IDLE;
+            }
+        }
     }
 
     public bool isStopped()
     {
-        if (!navAgent.pathPending)
+        if (navAgent.isActiveAndEnabled)
         {
-            if (navAgent.remainingDistance <= navAgent.stoppingDistance)
+            if (!navAgent.pathPending)
             {
-                if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
+                if (navAgent.remainingDistance <= navAgent.stoppingDistance)
                 {
-                    return true;
+                    if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
+                    {
+                        return true;
+                    }
                 }
-            }
+            } 
         }
         return false;
     }

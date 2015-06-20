@@ -29,16 +29,10 @@ public class AlkaliCell : BaseCell
             case CellState.ATTACK_MOVING:
                 break;
             case CellState.DEAD:
+                base.Die();
                 break;
-            case CellState.CANCEROUS_SPLITTING:
-                break;
-            case CellState.PERFECT_SPLITTING:
-                break;
-            case CellState.EVOLVING:
-                break;
-            case CellState.INCUBATING:
-                break;
-            case CellState.MERGING:
+            case CellState.CONSUMING:
+                base.bUpdate();
                 break;
             default:
                 break;

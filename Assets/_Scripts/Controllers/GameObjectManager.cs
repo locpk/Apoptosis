@@ -27,5 +27,14 @@ public static class GameObjectManager {
         return allAIunits;
     }
 
+    public static List<GameObject> FindTheirUnits()
+    {
+        List<GameObject> allTheirUnits = GameObject.FindGameObjectsWithTag("Unit").ToList<GameObject>();
+        if (allTheirUnits.Count > 0)
+        {
+            allTheirUnits.RemoveAll(item => item.GetComponent<BaseCell>().isMine == true);
+        }
 
+        return allTheirUnits;
+    }
 }
