@@ -83,10 +83,19 @@ public class StemCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
+                SetPrimaryTarget(null);
+                if (IsInvoking("DamagePerSecond"))
+                {
+                    if (GetComponent<ParticleSystem>().isPlaying)
+                    {
 
+                        GetComponent<ParticleSystem>().Stop();
+                    }
+                    CancelInvoke("DamagePerSecond");
+                }
 
                 //guard mode auto attack enemy in range
-                base.Guarding();
+                //base.Guarding();
                 break;
             case CellState.ATTACK:
 
@@ -148,6 +157,10 @@ public class StemCell : BaseCell
                     {
                         currentState = CellState.CONSUMING;
                     }
+                }
+                else if (!primaryTarget || base.isStopped())
+                {
+                    currentState = CellState.IDLE;
                 }
               
 
