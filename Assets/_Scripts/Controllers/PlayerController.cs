@@ -344,6 +344,20 @@ public class PlayerController : MonoBehaviour
         {
             GUISelectRect.yMax = GUISelectRect.yMin;
             GUISelectRect.xMax = GUISelectRect.xMin;
+            if (selectedUnits.Count == 0)
+            {
+                RaycastHit hitInfo;
+                Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
+                {
+                    BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
+                    if (hitCell.isMine)
+                    {
+                        selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
+                    }
+                }
+            }
         }
         else if (Input.GetMouseButton(0)) // If the player has left-click held down
         {
