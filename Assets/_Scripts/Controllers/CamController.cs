@@ -26,14 +26,13 @@ public class CamController : MonoBehaviour {
 	void Start () {
         smoothTargetPosition = transform.position;
         smoothTargetRotation = transform.rotation;
-        realtimeTimer = Time.realtimeSinceStartup;
+        realtimeTimer = Time.timeScale;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        
-        float deltaTime = Time.realtimeSinceStartup - realtimeTimer;
-        realtimeTimer = Time.realtimeSinceStartup;
+
+        float deltaTime = Time.deltaTime;
 
         if (mode == CameraMode.GameView) {
             //Scroll zooming
