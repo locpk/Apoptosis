@@ -54,7 +54,7 @@ public class StemCell : BaseCell
 
     public override void Attack(GameObject _target)
     {
-        if (_target)
+        if (_target && _target != this.gameObject)
         {
             SetPrimaryTarget(_target);
             currentState = CellState.ATTACK;
@@ -138,7 +138,7 @@ public class StemCell : BaseCell
             case CellState.MOVING:
 
                 base.bUpdate();
-                if (primaryTarget)
+                if (primaryTarget && base.isStopped())
                 {
                     if (primaryTarget.GetComponent<BaseCell>())
                     {

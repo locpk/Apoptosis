@@ -114,10 +114,11 @@ public class BaseCell : MonoBehaviour
 
     public virtual void AttackMove(Vector3 _destination)
     {
-        Move(_destination);
-        Guarding();
         currentState = CellState.ATTACK_MOVING;
-
+        navObstacle.enabled = false;
+        navAgent.enabled = true;
+        destination = _destination;
+        navAgent.SetDestination(_destination);
     }
 
     public void SetPrimaryTarget(GameObject _target)
@@ -415,7 +416,24 @@ public class BaseCell : MonoBehaviour
         }
         else if (currentState == CellState.ATTACK_MOVING)
         {
-            if (isStopped())
+            
+            List<GameObject> theirUnits = GameObjectManager.FindTheirUnits();
+            if (theirUnits.Count > 0)
+            {
+                foreach (var enemy in theirUnits)
+                {
+                    if (Vector3.Distance(enemy.transform.position, transform.position) <= attackRange)
+                    {
+                        if (enemy != this.gameObject)
+                        {
+                            Attack(enemy);
+                            return;
+                        }
+                        
+                    }
+                }
+            }
+             if (isStopped() )
             {
 
                 navAgent.enabled = false;
@@ -427,15 +445,18 @@ public class BaseCell : MonoBehaviour
 
     public bool isStopped()
     {
-        if (!navAgent.pathPending)
+        if (navAgent.isActiveAndEnabled)
         {
-            if (navAgent.remainingDistance <= navAgent.stoppingDistance)
+            if (!navAgent.pathPending)
             {
-                if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
+                if (navAgent.remainingDistance <= navAgent.stoppingDistance)
                 {
-                    return true;
+                    if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
+                    {
+                        return true;
+                    }
                 }
-            }
+            } 
         }
         return false;
     }
