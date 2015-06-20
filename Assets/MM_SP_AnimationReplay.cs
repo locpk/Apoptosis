@@ -12,7 +12,7 @@ public class MM_SP_AnimationReplay : MonoBehaviour {
 	void Start () 
     {
         
-      anim =  animator.GetBehaviour<"New State">();
+      //anim =  animator.GetBehaviour<"New State">();
       anim.Rewind();
      
      //  //  anim = animator.GetBehaviour <ExampleStateMachineBehaviour> ();
