@@ -35,10 +35,11 @@ public class AlkaliArea : BaseArea {
     void OnTriggerEnter(Collider collider) {
         if (collider.gameObject.tag == "Unit") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+            StemCell stemCell = collider.gameObject.GetComponent<StemCell>();
 
             if (enterCell.celltype == CellType.STEM_CELL) {
                 StopCoroutine("ReadyToConvert");
-                StartCoroutine(ReadyToConvert(pendingConvertDelayed, collider.gameObject.GetComponent<StemCell>()));
+                StartCoroutine(ReadyToConvert(pendingConvertDelayed, stemCell));
 
             }
         }
@@ -49,14 +50,20 @@ public class AlkaliArea : BaseArea {
     }
 
     void OnTriggerExit(Collider collider) {
-        collider.gameObject.GetComponent<StemCell>().isInAlkali = false;
+        if (collider.gameObject.tag == "Unit") {
+            StemCell stemCell = collider.gameObject.GetComponent<StemCell>();
+            if (stemCell) {
+                stemCell.isInAlkali = false;
 
+            }
+        }
     }
 
     IEnumerator ReadyToConvert(float delayed, StemCell stemCell) {
         yield return new WaitForSeconds(delayed);
         // to toggle on the pending converting
-        stemCell.isInAlkali = true;
+        if (stemCell)
+            stemCell.isInAlkali = true;
 
     }
 

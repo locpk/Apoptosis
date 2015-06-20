@@ -521,6 +521,8 @@ MonoBehaviour:
   attackPin: {fileID: 142206, guid: c9ae0278b5093004d9dc07422c77a8e3, type: 2}
   allSelectableUnits: []
   selectedUnits: []
+  allSelectableTargets: []
+  selectedTargets: []
   selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
 --- !u!1 &799641297
 GameObject:

@@ -239,8 +239,8 @@ MonoBehaviour:
   gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
   gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
   gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
-  gAlkaliCellPrefab: {fileID: 111564, guid: 281a433cc39823c45a493b6e058bae66, type: 2}
-  gAcidicCellPrefab: {fileID: 181396, guid: 1e70e9901d054a547ad1e82c64a3f39d, type: 2}
+  gAlkaliCellPrefab: {fileID: 0}
+  gAcidicCellPrefab: {fileID: 181396, guid: 7545a113ed3a61b49b9518aa849185b0, type: 2}
   currentLevel: 0
   currentProtein: 0
   isAIPossessed: 0
@@ -1710,6 +1710,14 @@ Prefab:
       propertyPath: stemtoAlkali
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gAlkaliCellPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gAcidicCellPrefab
+      value: 
+      objectReference: {fileID: 181396, guid: 7545a113ed3a61b49b9518aa849185b0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 146776}
