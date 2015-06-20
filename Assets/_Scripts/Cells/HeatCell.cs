@@ -29,7 +29,7 @@ public class HeatCell : BaseCell
 
         Vector3 them2me = primaryTarget.transform.position - transform.position;
         fire.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
-        primaryTarget.GetComponent<BaseCell>().currentProtein -= (attackDamage / defense);
+        primaryTarget.GetComponent<BaseCell>().currentProtein -= (attackDamage / primaryTarget.GetComponent<BaseCell>().defense);
     }
 
 
@@ -111,18 +111,7 @@ public class HeatCell : BaseCell
                 }
                 break;
             case CellState.CONSUMING:
-                if (!primaryTarget)
-                {
-                    if (targets.Count > 0)
-                    {
-                        primaryTarget = targets[0];
-                        targets.RemoveAt(0);
-                    }
-                    else
-                    {
-                        currentState = CellState.IDLE;
-                    }
-                }
+                base.bUpdate();
                 break;
             case CellState.MOVING:
                 if (IsInvoking("DamagePreSecond"))
@@ -140,16 +129,7 @@ public class HeatCell : BaseCell
             case CellState.DEAD:
                 base.Die();
                 break;
-            case CellState.CANCEROUS_SPLITTING:
-                break;
-            case CellState.PERFECT_SPLITTING:
-                break;
-            case CellState.EVOLVING:
-                break;
-            case CellState.INCUBATING:
-                break;
-            case CellState.MERGING:
-                break;
+    
             default:
                 break;
         }

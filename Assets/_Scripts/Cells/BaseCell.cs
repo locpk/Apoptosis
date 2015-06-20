@@ -77,7 +77,7 @@ public class BaseCell : MonoBehaviour
     public float depleteAmount = 3.0f; // per second
     public float attackCooldown;
     public float splitCooldown;
-
+    public float speed;
 
     #region RPC Methods
 
@@ -149,9 +149,27 @@ public class BaseCell : MonoBehaviour
     {
     }
 
-    public virtual void Consume(GameObject _target)
+    void ConsumePerSecond()
     {
+        if (primaryTarget)
+        {
+           currentProtein += primaryTarget.GetComponent<Protein>().Harvest();
+           if (currentProtein > MAX_PROTEIN)
+           {
+               currentProtein = MAX_PROTEIN;
+           }
+        }
+        
+    }
 
+    public void Consume(GameObject _target)
+    {
+        Protein targetProtein = _target.GetComponent<Protein>();
+        if (targetProtein)
+        {
+            SetPrimaryTarget(_target);
+            currentState = CellState.CONSUMING;
+        }
     }
     #endregion
 
@@ -250,7 +268,7 @@ public class BaseCell : MonoBehaviour
                     newCell.gameObject.transform.Rotate(90, -180, -180);
                     newCell.GetComponent<BaseCell>().currentProtein = this.currentProtein;
                     newCell.GetComponent<BaseCell>().currentLevel++;
-                    newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
+                    //newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
                     break;
                 default:
                     break;
@@ -322,6 +340,8 @@ public class BaseCell : MonoBehaviour
         navAgent.enabled = false;
         navAgent.updateRotation = false;
         navObstacle.enabled = true;
+        navAgent.speed = speed;
+        
     }
 
     protected void bUpdate()
@@ -330,9 +350,43 @@ public class BaseCell : MonoBehaviour
         {
             if (isStopped())
             {
-                currentState = CellState.IDLE;
+              
                 navAgent.enabled = false;
                 navObstacle.enabled = true;
+                currentState = CellState.IDLE;
+            }
+        }
+        else if (currentState == CellState.CONSUMING)
+        {
+            if (primaryTarget)
+            {
+                float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
+
+                if (distance > attackRange && distance <= fovRadius)
+                {
+                    if (IsInvoking("ConsumePerSecond"))
+                    {
+                        CancelInvoke("ConsumePerSecond");
+                    }
+                    ChaseTarget();
+                }
+                else if (distance <= attackRange)
+                {
+                    if (!IsInvoking("ConsumePerSecond"))
+                    {
+
+                        InvokeRepeating("ConsumePerSecond", 1.0f, 1.0f);
+                    }
+
+                }
+                else
+                {
+                    ChaseTarget();
+                }
+            }
+            else
+            {
+                currentState = CellState.IDLE;
             }
         }
     }
