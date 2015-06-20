@@ -17,6 +17,8 @@ public class PauseMenu : MonoBehaviour {
     public GameObject optionsMenu;
     //get the instructions menu
     //public GameObject instructionsMenu;
+    //Capture the pause menu button
+    public GameObject pauseMenuButton;
 
 
 	void Awake() {
@@ -54,6 +56,7 @@ public class PauseMenu : MonoBehaviour {
         //check if game is paused or not
         if (PauseGame)
         {
+            pauseMenuButton.SetActive(false);
             //check if only pause menu is on
             if (OnPause && !OptionsOn && !InstructOn)
             {
@@ -109,6 +112,9 @@ public class PauseMenu : MonoBehaviour {
             
             //turn the timescale back to 1 to continue playing
             Time.timeScale = 1.0f;
+
+            //turn pause menu button back on
+            pauseMenuButton.SetActive(true);
         }
 	
 	}
@@ -129,6 +135,9 @@ public class PauseMenu : MonoBehaviour {
     //call this function to load the pause menu
     public void LoadPauseMenu()
     {
+        //Pause the game
+        PauseGame = true;
+
         //turn the pause menu bool on
         OnPause = true;
 
