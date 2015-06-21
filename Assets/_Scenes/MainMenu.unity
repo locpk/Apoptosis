@@ -1540,7 +1540,6 @@ GameObject:
   - 114: {fileID: 1786119102}
   - 114: {fileID: 1786119101}
   - 95: {fileID: 1786119100}
-  - 114: {fileID: 1786119106}
   - 111: {fileID: 1786119107}
   m_Layer: 5
   m_Name: Button_SinglePlayer
@@ -1700,17 +1699,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1786119098}
---- !u!114 &1786119106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1786119098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce8453cd9d9770e4492dc220884c145d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!111 &1786119107
 Animation:
   m_ObjectHideFlags: 0
