@@ -35,12 +35,32 @@ public class AlkaliArea : BaseArea {
     void OnTriggerEnter(Collider collider) {
         if (collider.gameObject.tag == "Unit") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
-            StemCell stemCell = collider.gameObject.GetComponent<StemCell>();
+            if (!enterCell) return;
 
-            if (enterCell.celltype == CellType.STEM_CELL) {
-                StopCoroutine("ReadyToConvert");
-                StartCoroutine(ReadyToConvert(pendingConvertDelayed, stemCell));
-
+            switch (enterCell.celltype) {
+                case CellType.STEM_CELL: {
+                    StemCell stemCell = enterCell.GetComponent<StemCell>();
+                    StopCoroutine("ReadyToConvert");
+                    StartCoroutine(ReadyToConvert(pendingConvertDelayed, stemCell));
+                    break;
+                }
+                    
+                case CellType.HEAT_CELL:
+                    break;
+                case CellType.COLD_CELL:
+                    break;
+                case CellType.HEAT_CELL_TIRE2:
+                    break;
+                case CellType.COLD_CELL_TIRE2:
+                    break;
+                case CellType.ACIDIC_CELL:
+                    break;
+                case CellType.ALKALI_CELL:
+                    break;
+                case CellType.CANCER_CELL:
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -55,6 +75,40 @@ public class AlkaliArea : BaseArea {
             if (stemCell) {
                 stemCell.isInAlkali = false;
 
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider collider) {
+        if (collider.gameObject.tag == "Unit") {
+            BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+            if (!enterCell) return;
+
+            switch (enterCell.celltype) {
+                case CellType.STEM_CELL: {
+                    StemCell stemCell = collider.gameObject.GetComponent<StemCell>();
+                    if (stemCell) {
+                        stemCell.isInAlkali = false;
+                    }
+                    break;
+                }
+                    
+                case CellType.HEAT_CELL:
+                    break;
+                case CellType.COLD_CELL:
+                    break;
+                case CellType.HEAT_CELL_TIRE2:
+                    break;
+                case CellType.COLD_CELL_TIRE2:
+                    break;
+                case CellType.ACIDIC_CELL:
+                    break;
+                case CellType.ALKALI_CELL:
+                    break;
+                case CellType.CANCER_CELL:
+                    break;
+                default:
+                    break;
             }
         }
     }

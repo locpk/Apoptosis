@@ -31,4 +31,65 @@ public class DenseArea : BaseArea {
 
     }
 
+    
+    void OnTriggerEnter(Collider collider) {
+        if (collider.gameObject.tag == "Unit") {
+            BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+            if (!enterCell) return;
+
+            switch (enterCell.celltype) {
+                case CellType.STEM_CELL:
+                    break;
+                case CellType.HEAT_CELL:
+                    break;
+                case CellType.COLD_CELL:
+                    break;
+                case CellType.HEAT_CELL_TIRE2:
+                    break;
+                case CellType.COLD_CELL_TIRE2:
+                    break;
+                case CellType.ACIDIC_CELL:
+                    break;
+                case CellType.ALKALI_CELL:
+                    break;
+                case CellType.CANCER_CELL:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+
+    void OnTriggerStay(Collider collider) {
+
+    }
+
+    void OnTriggerExit(Collider collider) {
+        if (collider.gameObject.tag == "Unit") {
+            BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+            if (!enterCell) return;
+
+            switch (enterCell.celltype) {
+                case CellType.STEM_CELL:
+                    break;
+                case CellType.HEAT_CELL:
+                    break;
+                case CellType.COLD_CELL:
+                    break;
+                case CellType.HEAT_CELL_TIRE2:
+                    break;
+                case CellType.COLD_CELL_TIRE2:
+                    break;
+                case CellType.ACIDIC_CELL:
+                    break;
+                case CellType.ALKALI_CELL:
+                    break;
+                case CellType.CANCER_CELL:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }
