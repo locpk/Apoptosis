@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 670447367}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
 --- !u!4 &70619114
@@ -161,6 +161,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!1 &670447367 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 197948, guid: cbfd684879b192f4b95249028d7e02e6, type: 2}
+  m_PrefabInternal: {fileID: 1491223274}
 --- !u!1 &835915248
 GameObject:
   m_ObjectHideFlags: 0
