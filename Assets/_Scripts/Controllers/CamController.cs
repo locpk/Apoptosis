@@ -24,8 +24,9 @@ public class CamController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        smoothTargetPosition = transform.position;
-        smoothTargetRotation = transform.rotation;
+        //smoothTargetPosition = transform.position;
+        //smoothTargetRotation = transform.rotation;
+        smoothFocusTarget = transform.position;
         realtimeTimer = Time.timeScale;
 	}
 	

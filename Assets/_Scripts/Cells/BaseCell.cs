@@ -140,7 +140,7 @@ public class BaseCell : MonoBehaviour
     {
         transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
-        Destroy(gameObject, 3.0f);
+        Destroy(gameObject, 5.0f);
     }
 
     public virtual void Attack(GameObject _target)
@@ -252,11 +252,10 @@ public class BaseCell : MonoBehaviour
 
     public void CancerousSplit()
     {
-        if (currentLevel >= 5)
+        if (currentLevel >= 5 || currentProtein <= 1.0f)
         {
             return;
         }
-
 
         float cancerousChance = 0.0f;
         switch (currentLevel)
@@ -286,7 +285,7 @@ public class BaseCell : MonoBehaviour
 
         //half my protein
         this.currentProtein *= 0.5f;
-
+        currentLevel++;
 
         GameObject newCell;
 
@@ -298,8 +297,8 @@ public class BaseCell : MonoBehaviour
             {
                 case CellType.HEAT_CELL:
                     newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel + 1;
-                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
+                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
+                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein ;
                     newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
                     if (!isAIPossessed)
@@ -309,8 +308,8 @@ public class BaseCell : MonoBehaviour
                     break;
                 case CellType.COLD_CELL:
                     newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel + 1;
-                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
+                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
+                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein;
                     newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
                     if (!isAIPossessed)
@@ -327,7 +326,6 @@ public class BaseCell : MonoBehaviour
             newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
             newCell.GetComponent<BaseCell>().currentProtein = currentProtein;
             newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
-            newCell.GetComponent<BaseCell>().currentLevel++;
             newCell.GetComponent<BaseCell>().isAIPossessed = false;
             newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
         }
