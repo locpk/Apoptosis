@@ -9,6 +9,9 @@ public class StemCell : BaseCell
     public GameObject stemtoCold;
     public GameObject stemtoAlkali;
     public GameObject stemtoAcidic;
+    public delegate void TakeDamage();
+    public TakeDamage multidamagesources;
+
     public override void Mutation(CellType _newType)
     {
         if (currentProtein <= 50.0f)
@@ -46,7 +49,14 @@ public class StemCell : BaseCell
                 break;
         }
     }
+    public void AreaDamage()
+    {
+        currentProtein -= 10;
+    }
+    void nothing()
+    {
 
+    }
     void DamagePerSecond()
     {
         primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
@@ -83,10 +93,19 @@ public class StemCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
+                SetPrimaryTarget(null);
+                if (IsInvoking("DamagePerSecond"))
+                {
+                    if (GetComponent<ParticleSystem>().isPlaying)
+                    {
 
+                        GetComponent<ParticleSystem>().Stop();
+                    }
+                    CancelInvoke("DamagePerSecond");
+                }
 
                 //guard mode auto attack enemy in range
-                base.Guarding();
+                //base.Guarding();
                 break;
             case CellState.ATTACK:
 
@@ -148,6 +167,10 @@ public class StemCell : BaseCell
                     {
                         currentState = CellState.CONSUMING;
                     }
+                }
+                else if (!primaryTarget || base.isStopped())
+                {
+                    currentState = CellState.IDLE;
                 }
               
 

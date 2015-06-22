@@ -24,39 +24,38 @@ public class CamController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //smoothTargetPosition = transform.position;
-        //smoothTargetRotation = transform.rotation;
-        smoothFocusTarget = transform.position;
-        GetComponentInChildren<Camera>().orthographicSize = maxZoom;
-        realtimeTimer = Time.time;
+        smoothTargetPosition = transform.position;
+        smoothTargetRotation = transform.rotation;
+        realtimeTimer = Time.timeScale;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        float deltaTime = Time.time - realtimeTimer;
-        realtimeTimer = Time.time;
 
-            if (mode == CameraMode.GameView)
+        float deltaTime = Time.deltaTime;
+
+        if (mode == CameraMode.GameView) {
+            //Scroll zooming
+            zoomValue -= Input.mouseScrollDelta.y;
+            zoomValue = Mathf.Clamp(zoomValue, minZoom, maxZoom);
+
+            Camera camera = GetComponentInChildren<Camera>();
+            if (camera) {
+                camera.orthographicSize = zoomValue;
+            }
+
+        
+            // smooth movement
+            transform.position = Vector3.Lerp(transform.position, smoothFocusTarget, deltaTime * 2.5f);
+
+            // scoller
+            Vector3 viewPoint = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            Vector3 nodePos = Vector3.zero;
+
+            bool isScrolled = false;
+            Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
+            if (screenRect.Contains(Input.mousePosition) /*&& !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()*/)
             {
-                //Scroll zooming
-                zoomValue -= Input.mouseScrollDelta.y;
-                zoomValue = Mathf.Clamp(zoomValue, minZoom , maxZoom);
-
-                Camera camera = GetComponentInChildren<Camera>();
-                if (camera) {
-                    camera.orthographicSize = zoomValue;
-                }
-
-
-                // smooth movement
-                transform.position = Vector3.Lerp(transform.position, smoothFocusTarget, deltaTime * 2.5f);
-
-                // scoller
-                Vector3 viewPoint = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-                Vector3 nodePos = Vector3.zero;
-
-                bool isScrolled = false;
-
                 // to go up 
                 if (Input.GetKey(KeyCode.UpArrow) || viewPoint.y > 1.0f - scrollPercentage)
                 {
@@ -81,9 +80,12 @@ public class CamController : MonoBehaviour {
                     nodePos.x = 1.0f;
                     isScrolled = true;
                 }
+            }
 
-                Vector3 boundPos = transform.position + nodePos.normalized * deltaTime * scrollSpeed;
+            Vector3 boundPos = transform.position + nodePos.normalized * deltaTime * scrollSpeed;
 
+           
+           
                 if (boundPos.x < minX)
                     boundPos.x = minX;
                 if (boundPos.x > maxX)
@@ -91,23 +93,21 @@ public class CamController : MonoBehaviour {
                 if (boundPos.z < minY)
                     boundPos.z = minY;
                 if (boundPos.z > maxY)
-                    boundPos.z = maxY;
+                    boundPos.z = maxY; 
+            
 
-                transform.position = boundPos;
-                if (isScrolled)
-                    smoothFocusTarget = transform.position;
+            transform.position = boundPos;
+            if (isScrolled)
+                smoothFocusTarget = transform.position;
+            
 
-
+        } else if (mode == CameraMode.FocusView) {
+            Camera camera = GetComponentInChildren<Camera>();
+            if (camera) {
+                camera.transform.position = Vector3.Lerp(camera.transform.position, smoothTargetPosition, deltaTime * 2.5f);
+                camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, smoothTargetRotation, deltaTime * 2.5f);
             }
-            else if (mode == CameraMode.FocusView)
-            {
-                Camera camera = GetComponentInChildren<Camera>();
-                if (camera)
-                {
-                    camera.transform.position = Vector3.Lerp(camera.transform.position, smoothTargetPosition, deltaTime * 2.5f);
-                    camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, smoothTargetRotation, deltaTime * 2.5f);
-                }
-            }
+        }
 	}
 
     public void smoothMoveTo(Vector3 _des) {

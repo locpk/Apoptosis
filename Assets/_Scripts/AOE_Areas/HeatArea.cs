@@ -30,6 +30,7 @@ public class HeatArea : BaseArea {
         base.LateUpdate();
 
     }
+    
 
     
     void OnTriggerEnter(Collider collider) {

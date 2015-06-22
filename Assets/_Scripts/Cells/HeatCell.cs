@@ -1,125 +1,155 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 public class HeatCell : BaseCell
 {
-    float splitCD = 0;
-
-     void Awake()
+    public GameObject fireball;
+    
+  public  delegate void TakeDamage();
+  public TakeDamage multidamagesources;
+    // float splitCD = 0;
+    float fireballSpeed = 10;
+    void Awake()
     {
         base.bAwake();
+        multidamagesources += nothing;
+        InvokeRepeating("multidamagesources", 1.0f, 1.0f);
+    
+    }
+    
+    public void AreaDamage()
+    {
+        currentProtein -= 10;
+    }
+    void nothing()
+    {
+
+    }
+    void DamagePreSecond()
+    {
+        GameObject fire = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
+
+
+        Vector3 them2me = primaryTarget.transform.position - transform.position;
+        fire.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
+        primaryTarget.GetComponent<BaseCell>().currentProtein -= (attackDamage / primaryTarget.GetComponent<BaseCell>().defense);
     }
 
+
+
     // Use this for initialization
-     void Start()
+    void Start()
     {
         base.bStart();
+        multidamagesources += AreaDamage;
+        multidamagesources();
     }
 
     // Update is called once per frame
-     void Update()
+    void Update()
     {
+
         switch (currentState)
         {
             case CellState.IDLE:
+            SetPrimaryTarget(null);
+                if (IsInvoking("DamagePreSecond"))
+                {
+                    CancelInvoke("DamagePreSecond");
+                }
+                //System.Collections.Generic.List<GameObject> enemyUnits = GameObjectManager.FindAIUnits();
+                //if (enemyUnits != null)
+                //{
+                //    for (int i = 0; i < enemyUnits.Count; i++)
+                //    {
+                //        if (Vector3.Distance(enemyUnits[i].transform.position, transform.position) <= fovRadius)
+                //        {
+                //            if (enemyUnits[i] != this.gameObject)
+                //            {
+                //                Attack(enemyUnits[i]);
+                //            }
+                //            break;
+
+                //        }
+                //    }
+                //}
+
                 break;
             case CellState.ATTACK:
+                if (primaryTarget != null)
+                {
+                    if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
+                    {
+                        if (!IsInvoking("DamagePreSecond"))
+                        {
+                            InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
+
+                        }
+                    }
+
+                    else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                    {
+                        if (IsInvoking("DamagePreSecond"))
+                        {
+                            CancelInvoke("DamagePreSecond");
+                        }
+                        if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
+                        {
+                            base.ChaseTarget();
+                        }
+                    }
+              
+                }
+                else
+                {
+                    currentState = CellState.IDLE;
+                }
+                break;
+            case CellState.CONSUMING:
+                base.bUpdate();
                 break;
             case CellState.MOVING:
+                if (IsInvoking("DamagePreSecond"))
+                {
+                    CancelInvoke("DamagePreSecond");
+                }
+                base.bUpdate();
                 break;
             case CellState.ATTACK_MOVING:
+                if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+                {
+                    currentState = CellState.IDLE;
+                }
                 break;
             case CellState.DEAD:
                 base.Die();
                 break;
-            case CellState.CANCEROUS_SPLITTING:
-                break;
-            case CellState.PERFECT_SPLITTING:
-                break;
-            case CellState.EVOLVING:
-                break;
-            case CellState.INCUBATING:
-                break;
-            case CellState.MERGING:
-                break;
+    
             default:
                 break;
         }
-        splitCD += Time.deltaTime;
-        if (Input.GetMouseButtonUp(1))
-        {
-            Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (splitCD >= 1.0f)
-            {
-                base.CancerousSplit();
-                splitCD = 0;
-            }
-        }
-        base.bUpdate();
     }
 
-     void FixedUpdate()
+    void FixedUpdate()
     {
         base.bFixedUpdate();
     }
-
-    //LateUpdate is called after all Update functions have been called
-     void LateUpdate()
-    {
-
-    }
-
     public override void Attack(GameObject _target)
     {
-        if (_target != null)
+        if (_target)
         {
-
-
-            if (Vector3.Distance(transform.position, _target.transform.position) > attackRange)
-            {
-                Move(_target.transform.position);
-            }
-            if (Vector3.Distance(transform.position, _target.transform.position) <= attackRange)
-            {
-                currentState = CellState.ATTACK;
-                Move(transform.position);
-                _target.GetComponent<BaseCell>().currentProtein = _target.GetComponent<BaseCell>().currentProtein - attackDamage;
-            }
+            SetPrimaryTarget(_target);
+            currentState = CellState.ATTACK;
         }
-        else
-            currentState = CellState.IDLE;
     }
-    public void AutoAttack()
+
+
+    //LateUpdate is called after all Update functions have been called
+    void LateUpdate()
     {
-        GameObject closestAiguy = null;
-        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Unit"))
-        {
-            if (enemy.GetComponent<BaseCell>().isAIPossessed)
-            {
-
-                if (closestAiguy == null || Vector3.Distance(transform.position, enemy.transform.position) < Vector3.Distance(transform.position, closestAiguy.transform.position) )
-                {
-          
-                    closestAiguy = enemy;
-                    if(Vector3.Distance(transform.position, closestAiguy.transform.position) <= attackRange)
-                    {
-                        SetPrimaryTarget(closestAiguy);
-                        break;
-                    }
-                }
-            }
-        }
-
-     
-
-
+        base.bLateUpdate();
     }
-
-
-
 
 }
