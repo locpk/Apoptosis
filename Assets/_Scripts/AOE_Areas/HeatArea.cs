@@ -30,5 +30,6 @@ public class HeatArea : BaseArea {
         base.LateUpdate();
 
     }
+    
 
 }

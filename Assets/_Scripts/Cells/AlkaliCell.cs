@@ -3,10 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 public class AlkaliCell : BaseCell
 {
-
+    public delegate void TakeDamage();
+    public TakeDamage multidamagesources;
     void Awake()
     {
         base.bAwake();
+        multidamagesources += nothing;
+        InvokeRepeating("multidamagesources", 1.0f, 1.0f);
+    }
+    public void AreaDamage()
+    {
+        currentProtein -= 10;
+    }
+    void nothing()
+    {
+
     }
     void DamagePerSecond()
     {

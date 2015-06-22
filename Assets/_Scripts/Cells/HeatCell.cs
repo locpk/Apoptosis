@@ -5,22 +5,26 @@ using System.Collections.Generic;
 public class HeatCell : BaseCell
 {
     public GameObject fireball;
-
-    delegate void TakeDamage();
-    TakeDamage multidamagesources;
+    
+  public  delegate void TakeDamage();
+  public TakeDamage multidamagesources;
     // float splitCD = 0;
     float fireballSpeed = 10;
     void Awake()
     {
         base.bAwake();
-
-
-
+        multidamagesources += nothing;
+        InvokeRepeating("multidamagesources", 1.0f, 1.0f);
+    
     }
-
-    void AreaDamage()
+    
+    public void AreaDamage()
     {
-        currentProtein -= 5;
+        currentProtein -= 10;
+    }
+    void nothing()
+    {
+
     }
     void DamagePreSecond()
     {

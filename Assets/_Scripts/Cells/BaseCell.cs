@@ -62,6 +62,7 @@ public class BaseCell : MonoBehaviour
     public bool isSelected;
     public CellType celltype;
     public CellState currentState;
+
     public NavMeshAgent navAgent;
     public NavMeshObstacle navObstacle;
     public Vector3 destination;

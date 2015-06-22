@@ -9,6 +9,9 @@ public class StemCell : BaseCell
     public GameObject stemtoCold;
     public GameObject stemtoAlkali;
     public GameObject stemtoAcidic;
+    public delegate void TakeDamage();
+    public TakeDamage multidamagesources;
+
     public override void Mutation(CellType _newType)
     {
         if (currentProtein <= 50.0f)
@@ -46,7 +49,14 @@ public class StemCell : BaseCell
                 break;
         }
     }
+    public void AreaDamage()
+    {
+        currentProtein -= 10;
+    }
+    void nothing()
+    {
 
+    }
     void DamagePerSecond()
     {
         primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
