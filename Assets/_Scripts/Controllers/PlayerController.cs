@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public List<BaseCell> selectedUnits;
     public List<GameObject> allSelectableTargets;
     public List<GameObject> selectedTargets;
-    List<BaseCell>[] groups;
+//    List<BaseCell>[] groups;
     public Texture selector;
 
     Rect GUISelectRect;
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         // Initialize variables
         selectedTargets.Clear();
-        groups = new List<BaseCell>[10];
+//        groups = new List<BaseCell>[10];
         allSelectableUnits = new List<BaseCell>();
         selectedUnits = new List<BaseCell>();
         terrainLayer = 1 << LayerMask.NameToLayer("Terrain");  // Layer masking for raycast clicking

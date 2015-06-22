@@ -9,7 +9,7 @@ public class SinglePlayerSpawner : MonoBehaviour {
     public List<float> spawningWavesInTime;         // in sec, total 8 waves
     public List<int> spawnAmountPerWave;          // each wave has amount of cells
 
-    private List<BaseCell> spawnedList;           // 
+//    private List<BaseCell> spawnedList;           // 
 
     private int waveIndex = 0;
     private float timeSinceLevelStart = 0.0f;
@@ -50,7 +50,7 @@ public class SinglePlayerSpawner : MonoBehaviour {
         spwanAngle.eulerAngles = new Vector3(90, 0, 0);
         BaseCell spawnedCell = Instantiate(enermyCellSet[cellId], spawnPos, spwanAngle) as BaseCell;
         if (spawnedCell) {
-            spawnedList.Add(spawnedCell);
+//            spawnedList.Add(spawnedCell);
         }
 
     }

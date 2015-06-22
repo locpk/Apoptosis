@@ -141,11 +141,28 @@ public class StemCell : BaseCell
                 }
                 break;
             case CellState.CONSUMING:
+                if (IsInvoking("DamagePerSecond"))
+                {
+                    if (GetComponent<ParticleSystem>().isPlaying)
+                    {
+
+                        GetComponent<ParticleSystem>().Stop();
+                    }
+                    CancelInvoke("DamagePerSecond");
+                }
                 base.bUpdate();
 
                 break;
             case CellState.MOVING:
+                if (IsInvoking("DamagePerSecond"))
+                {
+                    if (GetComponent<ParticleSystem>().isPlaying)
+                    {
 
+                        GetComponent<ParticleSystem>().Stop();
+                    }
+                    CancelInvoke("DamagePerSecond");
+                }
                 base.bUpdate();
                 if (primaryTarget && base.isStopped())
                 {

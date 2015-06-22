@@ -27,4 +27,12 @@ public class FireBall : BaseProjectile {
 	void LateUpdate() {
         
     }
+    void OnTriggerEnter(Collider other)
+    {
+        //if (other.gameObject.tag == "Unit" && other.gameObject != this.gameObject)
+        //{
+        //    Destroy(this.gameObject);
+        //}
+       
+    }
 }

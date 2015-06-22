@@ -123,6 +123,10 @@ public class BaseCell : MonoBehaviour
 
     public void SetPrimaryTarget(GameObject _target)
     {
+        if (IsInvoking("ConsumePerSecond"))
+        {
+            CancelInvoke("ConsumePerSecond");
+        }
 
         primaryTarget = _target;
 
@@ -174,21 +178,21 @@ public class BaseCell : MonoBehaviour
 
     public void Guarding()
     {
-        List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
-        if (aiUnits.Count > 0)
-        {
-            foreach (var enemy in aiUnits)
-            {
-                if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
-                {
-                    if (enemy != this)
-                    {
-                        Attack(enemy);
-                    }
-                    break;
-                }
-            }
-        }
+        //List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
+        //if (aiUnits.Count > 0)
+        //{
+        //    foreach (var enemy in aiUnits)
+        //    {
+        //        if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
+        //        {
+        //            if (enemy != this)
+        //            {
+        //                Attack(enemy);
+        //            }
+        //            break;
+        //        }
+        //    }
+        //}
 
     }
 
@@ -237,9 +241,9 @@ public class BaseCell : MonoBehaviour
                 break;
             case CellType.CANCER_CELL:
                 cellSplitAnimation = GameObject.Instantiate(gCancerCellPrefab, transform.position, Quaternion.identity) as GameObject;
-                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
-                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
-                cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                cellSplitAnimation.GetComponent<BaseCell>().currentLevel = currentLevel + 1;
+                cellSplitAnimation.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
+                cellSplitAnimation.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                // GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
                 this.currentState = CellState.DEAD;
                 break;
@@ -392,6 +396,13 @@ public class BaseCell : MonoBehaviour
 
     protected void bUpdate()
     {
+        if (currentState == CellState.IDLE)
+        {
+             if (IsInvoking("ConsumePerSecond"))
+                {
+                    CancelInvoke("ConsumePerSecond");
+                }
+        }
         if (currentState == CellState.MOVING)
         {
             if (isStopped())
@@ -432,6 +443,7 @@ public class BaseCell : MonoBehaviour
             }
             else
             {
+               
                 currentState = CellState.IDLE;
             }
         }

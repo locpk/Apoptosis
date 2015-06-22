@@ -110,15 +110,15 @@ MonoBehaviour:
   targets: []
   primaryTarget: {fileID: 0}
   currentProtein: 500
-  fovRadius: 0
+  fovRadius: 5
   attackDamage: 5
-  attackRange: 1.5
+  attackRange: 4
   defense: 10
   depleteTimer: 1
   depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
-  fireball: {fileID: 0}
+  fireball: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
 --- !u!135 &13587872
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -126,7 +126,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 4.92000008
@@ -267,7 +267,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Constraints
@@ -305,6 +305,18 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
+    - target: {fileID: 0}
+      propertyPath: fireball
+      value: 
+      objectReference: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
+    - target: {fileID: 0}
+      propertyPath: fovRadius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackRange
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174676}

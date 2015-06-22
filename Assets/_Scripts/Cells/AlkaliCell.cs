@@ -27,7 +27,7 @@ public class AlkaliCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-                Guarding();
+                base.Guarding();
                 break;
             case CellState.ATTACK:
                 if (primaryTarget != null)
@@ -113,21 +113,7 @@ public class AlkaliCell : BaseCell
         }
     }
 
-    public void Guarding()
-    {
-        List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
-        for (int i = 0; i < aiUnits.Count; i++)
-        {
-            if (Vector3.Distance(aiUnits[i].transform.position, transform.position) <= fovRadius)
-            {
-                if (aiUnits[i] != this.gameObject)
-                {
-                    Attack(aiUnits[i]);
-                }
-                break;
-            }
-        }
-    }
+  
 
     void FixedUpdate()
     {

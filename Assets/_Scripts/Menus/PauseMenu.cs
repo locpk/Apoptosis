@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
     //get the options menu
     public GameObject optionsMenu;
     //get the instructions menu
-    //public GameObject instructionsMenu;
+    public GameObject instructionsMenu;
     //Capture the pause menu button
     public GameObject pauseMenuButton;
 
@@ -31,7 +31,7 @@ public class PauseMenu : MonoBehaviour
         InstructOn = false;
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
-        //instructionsMenu.SetActive(false);
+        instructionsMenu.SetActive(false);
     }
 
     // Use this for initialization
@@ -44,7 +44,7 @@ public class PauseMenu : MonoBehaviour
         InstructOn = false;
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
-        //instructionsMenu.SetActive(false);
+        instructionsMenu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -72,7 +72,7 @@ public class PauseMenu : MonoBehaviour
                 optionsMenu.SetActive(false);
 
                 //turn the instructions menu off
-                //instructionsMenu.SetActive(false);
+                instructionsMenu.SetActive(false);
 
             }
             //check if only options menu is on
@@ -85,7 +85,7 @@ public class PauseMenu : MonoBehaviour
                 optionsMenu.SetActive(true);
 
                 //turn off the instructions menu
-                //instructionsMenu.SetActive(false);
+                instructionsMenu.SetActive(false);
             }
             //check if only instructions menu is on
             else if (!OnPause && !OptionsOn && InstructOn)
@@ -97,7 +97,7 @@ public class PauseMenu : MonoBehaviour
                 optionsMenu.SetActive(false);
 
                 //turn on the instructions menu
-                //instructionsMenu.SetActive(true);
+                instructionsMenu.SetActive(true);
             }
 
             //set the timescale to 0 to pause the game
@@ -108,7 +108,7 @@ public class PauseMenu : MonoBehaviour
             //turn the all menus off
             pauseMenu.SetActive(false);
             optionsMenu.SetActive(false);
-            //instructionsMenu.SetActive(false);
+            instructionsMenu.SetActive(false);
 
             //turn all menu bools off
             InstructOn = false;
@@ -197,6 +197,6 @@ public class PauseMenu : MonoBehaviour
         InstructOn = false;
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
-        //instructionsMenu.SetActive(false);
+        instructionsMenu.SetActive(false);
     }
 }
