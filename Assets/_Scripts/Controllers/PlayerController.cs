@@ -228,8 +228,35 @@ public class PlayerController : MonoBehaviour
         allSelectableTargets.RemoveAll(item => item == null);
     }
 
-    public void UnitEvolve()
+    public void UnitEvolve(int cellNum)
     {
+        foreach (var item in selectedUnits)
+        {
+            switch (cellNum)
+            {
+                case 0: //turn into heat cell
+                    item.Mutation(CellType.HEAT_CELL);
+                    break;
+                case 1: //turn into cold cell
+                    item.Mutation(CellType.COLD_CELL);
+                    break;
+                case 2: //turn into acidic cell
+                    if (item.GetComponent<StemCell>().isInAcidic)
+                    {
+                        item.Mutation(CellType.ACIDIC_CELL);
+                    }
+                    break;
+                case 3: //turn into alkali cell
+                    
+                    if (item.GetComponent<StemCell>().isInAlkali)
+                    {
+                        item.Mutation(CellType.ALKALI_CELL);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
         selectedUnits.RemoveAll(item => item == null);
         selectedTargets.RemoveAll(item => item == null);
         allSelectableTargets.RemoveAll(item => item == null);
