@@ -138,8 +138,9 @@ public class BaseCell : MonoBehaviour
     }
     public void Die()
     {
-
-        Destroy(gameObject);
+        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        Destroy(gameObject, 3.0f);
     }
 
     public virtual void Attack(GameObject _target)
@@ -188,6 +189,26 @@ public class BaseCell : MonoBehaviour
         }
 
     }
+
+    public void AIAttacking()
+    {
+        List<GameObject> playerUnits = GameObjectManager.FindPlayerUnits();
+        if (playerUnits.Count > 0)
+        {
+            foreach (var enemy in playerUnits)
+            {
+                if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
+                {
+                    if (enemy != this)
+                    {
+                        Attack(enemy);
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
     #endregion
 
     #region Special abilities

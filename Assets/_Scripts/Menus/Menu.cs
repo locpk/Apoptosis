@@ -35,6 +35,7 @@ public class Menu : MonoBehaviour {
 
     public void ExitApplication()
     {
-        Application.Quit();
+        System.Diagnostics.Process.GetCurrentProcess().Kill();
+        //Application.Quit();
     }
 }

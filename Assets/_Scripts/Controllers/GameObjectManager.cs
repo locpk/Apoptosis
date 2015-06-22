@@ -18,7 +18,7 @@ public static class GameObjectManager {
 
     public static List<GameObject> FindAIUnits()
     {
-        List<GameObject> allAIunits = GameObject.FindGameObjectsWithTag("Unit").ToList<GameObject>();
+        List<GameObject> allAIunits = FindAllUnits();
         if (allAIunits.Count > 0 )
         {
             allAIunits.RemoveAll(item => item.GetComponent<BaseCell>().isAIPossessed == false);
@@ -27,9 +27,20 @@ public static class GameObjectManager {
         return allAIunits;
     }
 
+    public static List<GameObject> FindPlayerUnits()
+    {
+        List<GameObject> allPlayerUnits = FindAllUnits();
+        if (allPlayerUnits.Count > 0)
+        {
+            allPlayerUnits.RemoveAll(item => item.GetComponent<BaseCell>().isAIPossessed == true);
+        }
+
+        return allPlayerUnits;
+    }
+
     public static List<GameObject> FindTheirUnits()
     {
-        List<GameObject> allTheirUnits = GameObject.FindGameObjectsWithTag("Unit").ToList<GameObject>();
+        List<GameObject> allTheirUnits = FindAllUnits();
         if (allTheirUnits.Count > 0)
         {
             allTheirUnits.RemoveAll(item => item.GetComponent<BaseCell>().isMine == true);
