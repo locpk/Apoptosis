@@ -110,9 +110,9 @@ MonoBehaviour:
   targets: []
   primaryTarget: {fileID: 0}
   currentProtein: 500
-  fovRadius: 5
-  attackDamage: 5
-  attackRange: 4
+  fovRadius: 10
+  attackDamage: 3
+  attackRange: 10
   defense: 10
   depleteTimer: 1
   depleteAmount: 3
@@ -311,11 +311,15 @@ Prefab:
       objectReference: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
     - target: {fileID: 0}
       propertyPath: fovRadius
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attackRange
-      value: 4
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackDamage
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -29,10 +29,10 @@ public class FireBall : BaseProjectile {
     }
     void OnTriggerEnter(Collider other)
     {
-        //if (other.gameObject.tag == "Unit" && other.gameObject != this.gameObject)
-        //{
-        //    Destroy(this.gameObject);
-        //}
+        if (other.gameObject.tag == "Unit" && !other.gameObject.GetComponent<BaseCell>().isMine)
+        {
+            Destroy(this.gameObject);
+        }
        
     }
 }
