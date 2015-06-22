@@ -206,27 +206,33 @@ public class PlayerController : MonoBehaviour
 
     public void UnitSplit()
     {
-        int i = 0;
-        for (int count = selectedUnits.Count; i < count; count = selectedUnits.Count) // For each of the player's selected units
+        
+        foreach (var item in selectedUnits)
         {
-            switch (selectedUnits[i].celltype) // Dependent on the type of cell it is
+            switch (item.celltype) // Dependent on the type of cell it is
             {
                 case CellType.STEM_CELL: // If it is a stem cell
-                    selectedUnits[i].PerfectSplit();
+                    item.PerfectSplit();
                     break;
                 case CellType.HEAT_CELL: // If it is a heat cell
                 case CellType.COLD_CELL: // OR If it is a cold cell
-                    selectedUnits[i].CancerousSplit();
+                    item.CancerousSplit();
                     break;
 
                 default:
                     break;
             }
         }
+        selectedUnits.RemoveAll(item => item == null);
+        selectedTargets.RemoveAll(item => item == null);
+        allSelectableTargets.RemoveAll(item => item == null);
     }
 
     public void UnitEvolve()
     {
+        selectedUnits.RemoveAll(item => item == null);
+        selectedTargets.RemoveAll(item => item == null);
+        allSelectableTargets.RemoveAll(item => item == null);
     }
 
     public void UnitHarvest()
@@ -239,6 +245,9 @@ public class PlayerController : MonoBehaviour
 
     public void UnitIncubation()
     {
+        selectedUnits.RemoveAll(item => item == null);
+        selectedTargets.RemoveAll(item => item == null);
+        allSelectableTargets.RemoveAll(item => item == null);
     }
 
     public void DoubleClick()
@@ -304,6 +313,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
+
         int i = 0;
         while (i < selectedUnits.Count)
         {
@@ -346,6 +358,9 @@ public class PlayerController : MonoBehaviour
                         item.Mutation(CellType.ACIDIC_CELL);
                     }
                 }
+                selectedUnits.RemoveAll(item => item == null);
+                selectedTargets.RemoveAll(item => item == null);
+                allSelectableTargets.RemoveAll(item => item == null);
             }
 
             if (Input.GetKeyDown(KeyCode.V)) // If the player presses V
@@ -357,6 +372,9 @@ public class PlayerController : MonoBehaviour
                         item.Mutation(CellType.ALKALI_CELL);
                     }
                 }
+                selectedUnits.RemoveAll(item => item == null);
+                selectedTargets.RemoveAll(item => item == null);
+                allSelectableTargets.RemoveAll(item => item == null);
             }
 
             if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
@@ -365,6 +383,9 @@ public class PlayerController : MonoBehaviour
                 {
                     item.Mutation(CellType.HEAT_CELL);
                 }
+                selectedUnits.RemoveAll(item => item == null);
+                selectedTargets.RemoveAll(item => item == null);
+                allSelectableTargets.RemoveAll(item => item == null);
             }
 
             if (Input.GetKeyDown(KeyCode.Z)) // If the player presses Z
@@ -373,6 +394,9 @@ public class PlayerController : MonoBehaviour
                 {
                     item.Mutation(CellType.COLD_CELL);
                 }
+                selectedUnits.RemoveAll(item => item == null);
+                selectedTargets.RemoveAll(item => item == null);
+                allSelectableTargets.RemoveAll(item => item == null);
             }
 
             if (!isOverUI)

@@ -54,10 +54,6 @@ public class HeatCell : BaseCell
                 {
                     CancelInvoke("DamagePreSecond");
                 }
-                if (Input.GetKeyDown(KeyCode.D))
-                {
-                    base.CancerousSplit();
-                }
                 //System.Collections.Generic.List<GameObject> enemyUnits = GameObjectManager.FindAIUnits();
                 //if (enemyUnits != null)
                 //{

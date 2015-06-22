@@ -67,7 +67,7 @@ public class BaseCell : MonoBehaviour
     public Vector3 destination;
     public List<GameObject> targets;
     public GameObject primaryTarget;
-    public PhotonView photonView;
+   // public PhotonView photonView;
     public float currentProtein;
     public float fovRadius;
     public float attackDamage;
@@ -82,12 +82,12 @@ public class BaseCell : MonoBehaviour
     #region RPC Methods
 
 
-    //[RPC] Methods, which called via network
-    [PunRPC]
-    public void ApplyDamage(float _received_damage)
-    {
-        currentProtein -= _received_damage - defense;
-    }
+    ////[RPC] Methods, which called via network
+    //[PunRPC]
+    //public void ApplyDamage(float _received_damage)
+    //{
+    //    currentProtein -= _received_damage - defense;
+    //}
     #endregion
 
 
@@ -209,7 +209,7 @@ public class BaseCell : MonoBehaviour
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
+                //GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
                 this.currentState = CellState.DEAD;
                 break;
             case CellType.CANCER_CELL:
@@ -217,7 +217,7 @@ public class BaseCell : MonoBehaviour
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
+               // GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
                 this.currentState = CellState.DEAD;
                 break;
             default:
@@ -277,8 +277,8 @@ public class BaseCell : MonoBehaviour
             {
                 case CellType.HEAT_CELL:
                     newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
-                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel + 1;
+                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
                     newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
                     if (!isAIPossessed)
@@ -288,8 +288,8 @@ public class BaseCell : MonoBehaviour
                     break;
                 case CellType.COLD_CELL:
                     newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
-                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel + 1;
+                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
                     newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
                     if (!isAIPossessed)
@@ -350,14 +350,14 @@ public class BaseCell : MonoBehaviour
     protected void bAwake()
     {
         depleteTimer = DEPLETE_TIME;
-        if (isSinglePlayer)
-        {
-            GetComponent<PhotonView>().enabled = false;
-        }
+        //if (isSinglePlayer)
+        //{
+        //    GetComponent<PhotonView>().enabled = false;
+        //}
         navAgent = GetComponent<NavMeshAgent>();
         navObstacle = GetComponent<NavMeshObstacle>();
         navAgent.speed = moveSpeed;
-        photonView = GetComponent<PhotonView>();
+       // photonView = GetComponent<PhotonView>();
         //  isMine = photonView.isMine;
     }
 

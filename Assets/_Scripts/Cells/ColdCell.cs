@@ -46,10 +46,6 @@ public class ColdCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-                if (Input.GetKeyDown(KeyCode.D))
-                {
-                    base.CancerousSplit();
-                }
                 Guarding();
                 break;
             case CellState.ATTACK:

@@ -14,7 +14,6 @@ GameObject:
   - 54: {fileID: 5491636}
   - 135: {fileID: 13587872}
   - 208: {fileID: 20890738}
-  - 114: {fileID: 11413980}
   m_Layer: 0
   m_Name: HeatCell
   m_TagString: Unit
@@ -78,31 +77,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &11413980
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!114 &11454602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,7 +109,6 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
-  photonView: {fileID: 0}
   currentProtein: 500
   fovRadius: 0
   attackDamage: 5
@@ -203,7 +176,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6a5340d775ff8e84fbc5edfc11da1041, type: 2}
+  - {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -328,6 +301,10 @@ Prefab:
       propertyPath: speed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174676}

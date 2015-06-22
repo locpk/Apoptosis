@@ -14,7 +14,6 @@ GameObject:
   - 54: {fileID: 5491636}
   - 135: {fileID: 13587872}
   - 208: {fileID: 20890738}
-  - 114: {fileID: 11498870}
   - 199: {fileID: 19912704}
   - 198: {fileID: 19805724}
   - 95: {fileID: 9577826}
@@ -130,7 +129,6 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
-  photonView: {fileID: 0}
   currentProtein: 500
   fovRadius: 10
   attackDamage: 5
@@ -146,31 +144,6 @@ MonoBehaviour:
   stemtoCold: {fileID: 190572, guid: 03026532dd50e414d91a085b722f86c6, type: 2}
   stemtoAlkali: {fileID: 108478, guid: 0952dbaf7191c144d9f1aac0bb704ced, type: 2}
   stemtoAcidic: {fileID: 146776, guid: 29147b9cb59143a41a45534e611f3390, type: 2}
---- !u!114 &11498870
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!135 &13587872
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -1317,7 +1290,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: b2cd823da5c0e744caa8d832057f1ab5, type: 2}
+  - {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1410,7 +1383,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 2

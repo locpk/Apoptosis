@@ -12,7 +12,6 @@ GameObject:
   - 195: {fileID: 19523110}
   - 208: {fileID: 20824072}
   - 54: {fileID: 5486120}
-  - 114: {fileID: 11450074}
   - 114: {fileID: 11468860}
   m_Layer: 2
   m_Name: AcidicCell
@@ -85,7 +84,6 @@ GameObject:
   - 54: {fileID: 5446144}
   - 135: {fileID: 13521920}
   - 208: {fileID: 20867146}
-  - 114: {fileID: 11486594}
   - 199: {fileID: 19985328}
   - 198: {fileID: 19867634}
   - 95: {fileID: 9553816}
@@ -244,31 +242,6 @@ MonoBehaviour:
   currentLevel: 0
   currentProtein: 0
   isAIPossessed: 0
---- !u!114 &11450074
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!114 &11466632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -301,7 +274,6 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
-  photonView: {fileID: 0}
   currentProtein: 500
   fovRadius: 10
   attackDamage: 5
@@ -349,7 +321,6 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
-  photonView: {fileID: 0}
   currentProtein: 500
   fovRadius: 2
   attackDamage: 0
@@ -359,31 +330,6 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
---- !u!114 &11486594
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 173570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!114 &11494794
 MonoBehaviour:
   m_ObjectHideFlags: 1

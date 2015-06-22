@@ -16,7 +16,6 @@ GameObject:
   - 208: {fileID: 20819290}
   - 199: {fileID: 19937610}
   - 198: {fileID: 19808222}
-  - 114: {fileID: 11489682}
   m_Layer: 2
   m_Name: StemCell
   m_TagString: Animation
@@ -88,7 +87,6 @@ GameObject:
   - 54: {fileID: 5419682}
   - 135: {fileID: 13572976}
   - 208: {fileID: 20822348}
-  - 114: {fileID: 11445358}
   m_Layer: 2
   m_Name: HeatCell
   m_TagString: Animation
@@ -239,7 +237,6 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
-  photonView: {fileID: 0}
   currentProtein: 500
   fovRadius: 0
   attackDamage: 5
@@ -249,6 +246,7 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
+  fireball: {fileID: 0}
 --- !u!114 &11433764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -281,7 +279,6 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
-  photonView: {fileID: 0}
   currentProtein: 500
   fovRadius: 5
   attackDamage: 5
@@ -297,31 +294,6 @@ MonoBehaviour:
   stemtoCold: {fileID: 0}
   stemtoAlkali: {fileID: 0}
   stemtoAcidic: {fileID: 0}
---- !u!114 &11445358
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!114 &11470278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -354,31 +326,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
---- !u!114 &11489682
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!135 &13562520
 SphereCollider:
   m_ObjectHideFlags: 1
