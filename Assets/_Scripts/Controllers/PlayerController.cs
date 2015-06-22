@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public void TurnOffOverUI() { isOverUI = false; }
 
 
-  
+
     private int terrainLayer;
 
     public const int MAX_CAP = 20;
@@ -179,8 +179,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
-        public void UnitAttackMove()
+
+    public void UnitAttackMove()
     {
         // Modified by using raycast
         RaycastHit hitInfo;
@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour
 
     public void UnitSplit()
     {
-        
+
         foreach (var item in selectedUnits)
         {
             switch (item.celltype) // Dependent on the type of cell it is
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
                 case 3: //turn into alkali cell
-                    
+
                     if (item.GetComponent<StemCell>().isInAlkali)
                     {
                         item.Mutation(CellType.ALKALI_CELL);
@@ -340,8 +340,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
+        selectedTargets.RemoveAll(item => item == null);
+        allSelectableTargets.RemoveAll(item => item == null);
 
         int i = 0;
         while (i < selectedUnits.Count)
@@ -365,153 +365,158 @@ public class PlayerController : MonoBehaviour
         }
         //Vector3 topleft = new Vector3(GUISelectRect.xMin, GUISelectRect.yMin, Camera.main.transform.position.z);
         //Vector3 bottomright = new Vector3(GUISelectRect.xMax, GUISelectRect.yMin, Camera.main.transform.position.z);
-        
-            if (Input.GetKeyDown(KeyCode.D)) // If the player presses D
-            {
-                UnitSplit();
-            }
 
-            if (Input.GetKeyDown(KeyCode.S)) // If the player presses S
-            {
-                UnitStop();
-            }
+        if (Input.GetKeyDown(KeyCode.D)) // If the player presses D
+        {
+            UnitSplit();
+        }
 
-            if (Input.GetKeyDown(KeyCode.C)) // If the player presses C
+        if (Input.GetKeyDown(KeyCode.S)) // If the player presses S
+        {
+            UnitStop();
+        }
+
+        if (Input.GetKeyDown(KeyCode.C)) // If the player presses C
+        {
+            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
             {
-                foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
+                if (item.isInAcidic)
                 {
-                    if (item.isInAcidic)
-                    {
-                        item.Mutation(CellType.ACIDIC_CELL);
-                    }
+                    item.Mutation(CellType.ACIDIC_CELL);
                 }
-                selectedUnits.RemoveAll(item => item == null);
-                selectedTargets.RemoveAll(item => item == null);
-                allSelectableTargets.RemoveAll(item => item == null);
             }
+            selectedUnits.RemoveAll(item => item == null);
+            selectedTargets.RemoveAll(item => item == null);
+            allSelectableTargets.RemoveAll(item => item == null);
+        }
 
-            if (Input.GetKeyDown(KeyCode.V)) // If the player presses V
+        if (Input.GetKeyDown(KeyCode.V)) // If the player presses V
+        {
+            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
             {
-                foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
+                if (item.isInAlkali)
                 {
-                    if (item.isInAlkali)
-                    {
-                        item.Mutation(CellType.ALKALI_CELL);
-                    }
+                    item.Mutation(CellType.ALKALI_CELL);
                 }
-                selectedUnits.RemoveAll(item => item == null);
-                selectedTargets.RemoveAll(item => item == null);
-                allSelectableTargets.RemoveAll(item => item == null);
             }
+            selectedUnits.RemoveAll(item => item == null);
+            selectedTargets.RemoveAll(item => item == null);
+            allSelectableTargets.RemoveAll(item => item == null);
+        }
 
-            if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
+        if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
+        {
+            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits)) // For each of the player's selected units
             {
-                foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits)) // For each of the player's selected units
-                {
-                    item.Mutation(CellType.HEAT_CELL);
-                }
-                selectedUnits.RemoveAll(item => item == null);
-                selectedTargets.RemoveAll(item => item == null);
-                allSelectableTargets.RemoveAll(item => item == null);
+                item.Mutation(CellType.HEAT_CELL);
             }
+            selectedUnits.RemoveAll(item => item == null);
+            selectedTargets.RemoveAll(item => item == null);
+            allSelectableTargets.RemoveAll(item => item == null);
+        }
 
-            if (Input.GetKeyDown(KeyCode.Z)) // If the player presses Z
+        if (Input.GetKeyDown(KeyCode.Z)) // If the player presses Z
+        {
+            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
             {
-                foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
-                {
-                    item.Mutation(CellType.COLD_CELL);
-                }
-                selectedUnits.RemoveAll(item => item == null);
-                selectedTargets.RemoveAll(item => item == null);
-                allSelectableTargets.RemoveAll(item => item == null);
+                item.Mutation(CellType.COLD_CELL);
             }
+            selectedUnits.RemoveAll(item => item == null);
+            selectedTargets.RemoveAll(item => item == null);
+            allSelectableTargets.RemoveAll(item => item == null);
+        }
 
-            if (!isOverUI)
+        if (!isOverUI)
+        {
+            if (Input.GetMouseButtonDown(0)) // If the player left-clicks
             {
-                if (Input.GetMouseButtonDown(0)) // If the player left-clicks
-                {
 
 
-                    GUISelectRect.xMin = Input.mousePosition.x;
-                    GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
-                    origin = Input.mousePosition;
-                    origin.y = -origin.y + Screen.height;
-
-                }
-                else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
-                {
-                    GUISelectRect.yMax = GUISelectRect.yMin;
-                    GUISelectRect.xMax = GUISelectRect.xMin;
-                    if (selectedUnits.Count == 0)
-                    {
-                        RaycastHit hitInfo;
-                        Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                        if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
-                        {
-                            BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
-                            if (allSelectableUnits.Contains(hitCell))
-                            {
-                                selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
-                            }
-                        }
-                    }
-                }
-                else if (Input.GetMouseButton(0)) // If the player has left-click held down
-                {
-
-                    UnitSelection(origin);
-
-                } 
-            }
-
-            if (Input.GetMouseButtonDown(1)) // If the player left-clicks
-            {
                 GUISelectRect.xMin = Input.mousePosition.x;
                 GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
                 origin = Input.mousePosition;
                 origin.y = -origin.y + Screen.height;
-            }
-            else if (Input.GetMouseButtonUp(1)) // When the player releases left-click
-            {
 
+            }
+            else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
+            {
                 GUISelectRect.yMax = GUISelectRect.yMin;
                 GUISelectRect.xMax = GUISelectRect.xMin;
-                if (selectedTargets.Count == 0)
+                if (selectedUnits.Count == 0)
                 {
                     RaycastHit hitInfo;
                     Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                     if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
                     {
-                        GameObject hitObject = hitInfo.collider.gameObject;
-                        if (allSelectableTargets.Contains(hitObject))
+                        BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
+                        if (allSelectableUnits.Contains(hitCell))
                         {
-                            selectedTargets.Add(hitObject);
+                            selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
                         }
                     }
                 }
-                if (selectedTargets.Count > 0)
-                {
-                    foreach (BaseCell item in selectedUnits)
-                    {
-                        item.SetTargets(selectedTargets);
-                        item.SetPrimaryTarget(selectedTargets[0]);
-                    }
-                    UnitAttack();
-                }
-                else
-                    UnitMove();
+            }
+            else if (Input.GetMouseButton(0)) // If the player has left-click held down
+            {
+
+                UnitSelection(origin);
 
             }
-            else if (Input.GetMouseButton(1)) // If the player has left-click held down
-            {
-                TargetSelection(origin);
-            }
-            else if (Input.GetMouseButton(2))
-            {
-                UnitAttackMove();
-            } 
         }
-    
+
+        if (Input.GetMouseButtonDown(1)) // If the player left-clicks
+        {
+            GUISelectRect.xMin = Input.mousePosition.x;
+            GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
+            origin = Input.mousePosition;
+            origin.y = -origin.y + Screen.height;
+        }
+        else if (Input.GetMouseButtonUp(1)) // When the player releases left-click
+        {
+
+            GUISelectRect.yMax = GUISelectRect.yMin;
+            GUISelectRect.xMax = GUISelectRect.xMin;
+            if (selectedTargets.Count == 0)
+            {
+                RaycastHit hitInfo;
+                Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
+                {
+                    GameObject hitObject = hitInfo.collider.gameObject;
+                    if (allSelectableTargets.Contains(hitObject))
+                    {
+                        selectedTargets.Add(hitObject);
+                    }
+                }
+            }
+            if (selectedTargets.Count > 0)
+            {
+                foreach (BaseCell item in selectedUnits)
+                {
+                    item.SetTargets(selectedTargets);
+                    item.SetPrimaryTarget(selectedTargets[0]);
+                }
+                if (selectedTargets[0].tag == "Protein")
+                {
+                    UnitHarvest();
+                }
+                else
+                    UnitAttack();
+            }
+            else
+                UnitMove();
+
+        }
+        else if (Input.GetMouseButton(1)) // If the player has left-click held down
+        {
+            TargetSelection(origin);
+        }
+        else if (Input.GetMouseButton(2))
+        {
+            UnitAttackMove();
+        }
+    }
+
 }
