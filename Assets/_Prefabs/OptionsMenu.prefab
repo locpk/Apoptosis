@@ -79,7 +79,6 @@ GameObject:
   - 223: {fileID: 22360638}
   - 114: {fileID: 11420380}
   - 114: {fileID: 11447470}
-  - 114: {fileID: 11454950}
   m_Layer: 5
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -596,7 +595,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11454950}
+      - m_Target: {fileID: 0}
         m_MethodName: ToggleFullscreen
         m_Mode: 1
         m_Arguments:
@@ -610,17 +609,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
---- !u!114 &11454950
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 119138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbe59bf2c98bb5459a183f424ec14c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11467200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -709,7 +697,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11454950}
+      - m_Target: {fileID: 0}
         m_MethodName: ChangeSEVolume
         m_Mode: 0
         m_Arguments:
@@ -909,7 +897,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11454950}
+      - m_Target: {fileID: 0}
         m_MethodName: ChangeBGMVolume
         m_Mode: 0
         m_Arguments:
