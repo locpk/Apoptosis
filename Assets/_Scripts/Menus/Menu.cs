@@ -30,12 +30,13 @@ public class Menu : MonoBehaviour {
 
     public void LoadScene(string SceneName)
     {
+        //loading screen goes here, fade and put it in 
         Application.LoadLevel(SceneName);
     }
 
     public void ExitApplication()
     {
         System.Diagnostics.Process.GetCurrentProcess().Kill();
-        //Application.Quit();
+      
     }
 }
