@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: 19cc9c279993da24e9c07667aad64568
-timeCreated: 1434457405
-licenseType: Store
-TextScriptImporter:
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+guid: c29089d5f5388bf479c9c8c96ba6df54
+labels:
+- ExitGames
+- PUN
+- Photon
+- Networking
