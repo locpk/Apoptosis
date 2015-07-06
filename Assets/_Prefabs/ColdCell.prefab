@@ -17,6 +17,7 @@ GameObject:
   - 114: {fileID: 11486718}
   - 114: {fileID: 11443562}
   - 114: {fileID: 11434914}
+  - 114: {fileID: 11474616}
   m_Layer: 0
   m_Name: ColdCell
   m_TagString: Unit
@@ -141,6 +142,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2064ca72bf0d14a4fab78eaff6b9edad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11474616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4ef090f52247a49b75200aa7ae2228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11486718

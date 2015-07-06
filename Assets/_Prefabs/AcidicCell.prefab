@@ -32,6 +32,7 @@ GameObject:
   - 135: {fileID: 13562056}
   - 114: {fileID: 11456450}
   - 114: {fileID: 11443690}
+  - 114: {fileID: 11433158}
   m_Layer: 0
   m_Name: AcidicCell
   m_TagString: Unit
@@ -120,6 +121,17 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
+--- !u!114 &11433158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4ef090f52247a49b75200aa7ae2228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11443690
 MonoBehaviour:
   m_ObjectHideFlags: 1

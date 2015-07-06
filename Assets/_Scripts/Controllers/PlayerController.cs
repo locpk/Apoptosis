@@ -189,11 +189,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer))
         {
-            foreach (BaseCell item in selectedUnits)
-            {
-                //item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Set their destination
-                item.AttackMove(hitInfo.point); // Set their destination
-            }
+            EventManager.AttackMove(hitInfo.point);
         }
     }
 
