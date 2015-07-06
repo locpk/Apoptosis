@@ -303,25 +303,20 @@ public class BaseCell : MonoBehaviour
             {
                 case CellType.HEAT_CELL:
                     newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
-                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein ;
-                    newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
-                    newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
+                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+                    newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                     if (!isAIPossessed)
                     {
                         GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newCell.GetComponent<BaseCell>());
                     }
                     break;
                 case CellType.COLD_CELL:
-                    newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
-                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein;
-                    newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
-                    newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
-                    if (!isAIPossessed)
-                    {
-                        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newCell.GetComponent<BaseCell>());
-                    }
+                    newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.identity) as GameObject;
+                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+                    newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                    this.currentState = CellState.DEAD;
                     break;
                 default:
                     break;

@@ -91,7 +91,7 @@ MonoBehaviour:
   gCancerCellPrefab: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
   gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
   gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
-  gColdCellPrefab: {fileID: 100116}
+  gColdCellPrefab: {fileID: 149900, guid: 054778e6ee0a8c1429b6cbf3bf479fc2, type: 2}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   MAX_PROTEIN: 500
@@ -267,7 +267,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: gColdCellPrefab
       value: 
-      objectReference: {fileID: 100116}
+      objectReference: {fileID: 149900, guid: 054778e6ee0a8c1429b6cbf3bf479fc2, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 2

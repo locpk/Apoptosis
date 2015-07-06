@@ -109,6 +109,10 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
             newcell.GetComponent<BaseCell>().currentLevel = currentLevel;
             newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+            if (!isAIPossessed)
+            {
+                GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+            }
         }
         Destroy(gameObject);
     }
