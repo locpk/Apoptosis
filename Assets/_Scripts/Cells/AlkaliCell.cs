@@ -3,16 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 public class AlkaliCell : BaseCell
 {
+    public delegate void TakeDamage();
+    public TakeDamage multidamagesources;
+    public GameObject DOT;
+    GameObject previousTarget;
+
 
     void Awake()
     {
         base.bAwake();
+        multidamagesources += nothing;
+        InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
     }
-    void DamagePerSecond()
+    void MUltiDMg()
+    {
+        multidamagesources();
+    }
+    
+    public void AreaDamage()
+    {
+        currentProtein -= 10;
+    }
+    void nothing()
+    {
+
+    }
+    void DamagePreSecond()
     {
         if (primaryTarget != null)
         {
-            primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+            previousTarget = primaryTarget;
+            Vector3 newvec =  new Vector3(primaryTarget.transform.position.x, primaryTarget.transform.position.y, (primaryTarget.transform.position.z + primaryTarget.GetComponent<SphereCollider>().radius/4));
+            GameObject theDOT= Instantiate(DOT,  newvec ,primaryTarget.transform.rotation) as GameObject;
+    
+            theDOT.GetComponent<Dot>().Target = primaryTarget;
+            theDOT.GetComponent<Dot>().Owner = this.gameObject;
         }
     }
     // Use this for initialization
@@ -27,7 +52,8 @@ public class AlkaliCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-                base.Guarding();
+      
+                Guarding();
                 break;
             case CellState.ATTACK:
                 if (primaryTarget != null)
@@ -36,8 +62,8 @@ public class AlkaliCell : BaseCell
                     {
                         if (!IsInvoking("DamagePreSecond"))
                         {
-                            InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
-
+                            InvokeRepeating("DamagePreSecond", 1.0f, 3.0f);
+                       
                         }
                     }
                     else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
@@ -46,15 +72,7 @@ public class AlkaliCell : BaseCell
                         {
                             CancelInvoke("DamagePreSecond");
                         }
-                        if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
-                        {
-                            base.ChaseTarget();
-                        }
-                    }
-                    else
-                    {
-                        SetPrimaryTarget(null);
-                        navAgent.Stop();
+                        base.ChaseTarget();
                     }
 
                 }
@@ -81,14 +99,15 @@ public class AlkaliCell : BaseCell
                 {
                     currentState = CellState.IDLE;
                 }
-
+              
 
                 break;
             case CellState.ATTACK_MOVING:
-                if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
-                {
-                    currentState = CellState.IDLE;
-                }
+             // if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+             // {
+             //     currentState = CellState.IDLE;
+             // }
+                base.bUpdate();
                 break;
             case CellState.DEAD:
                 base.Die();
@@ -113,7 +132,21 @@ public class AlkaliCell : BaseCell
         }
     }
 
-  
+    public void Guarding()
+    {
+        List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
+        for (int i = 0; i < aiUnits.Count; i++)
+        {
+            if (Vector3.Distance(aiUnits[i].transform.position, transform.position) <= fovRadius)
+            {
+                if (aiUnits[i] != this.gameObject)
+                {
+                    Attack(aiUnits[i]);
+                }
+                break;
+            }
+        }
+    }
 
     void FixedUpdate()
     {

@@ -9,6 +9,9 @@ public class StemCell : BaseCell
     public GameObject stemtoCold;
     public GameObject stemtoAlkali;
     public GameObject stemtoAcidic;
+    public delegate void TakeDamage();
+    public TakeDamage multidamagesources;
+
     public override void Mutation(CellType _newType)
     {
         if (currentProtein <= 50.0f)
@@ -47,6 +50,18 @@ public class StemCell : BaseCell
         }
     }
 
+    void MUltiDMg()
+    {
+        multidamagesources();
+    }
+    public void AreaDamage()
+    {
+        currentProtein -= 10;
+    }
+    void nothing()
+    {
+
+    }
     void DamagePerSecond()
     {
         primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
@@ -67,6 +82,8 @@ public class StemCell : BaseCell
     void Awake()
     {
         base.bAwake();
+        multidamagesources += nothing;
+        InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
     }
 
     // Use this for initialization
@@ -141,28 +158,11 @@ public class StemCell : BaseCell
                 }
                 break;
             case CellState.CONSUMING:
-                if (IsInvoking("DamagePerSecond"))
-                {
-                    if (GetComponent<ParticleSystem>().isPlaying)
-                    {
-
-                        GetComponent<ParticleSystem>().Stop();
-                    }
-                    CancelInvoke("DamagePerSecond");
-                }
                 base.bUpdate();
 
                 break;
             case CellState.MOVING:
-                if (IsInvoking("DamagePerSecond"))
-                {
-                    if (GetComponent<ParticleSystem>().isPlaying)
-                    {
 
-                        GetComponent<ParticleSystem>().Stop();
-                    }
-                    CancelInvoke("DamagePerSecond");
-                }
                 base.bUpdate();
                 if (primaryTarget && base.isStopped())
                 {

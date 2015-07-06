@@ -5,22 +5,32 @@ using System.Collections.Generic;
 public class HeatCell : BaseCell
 {
     public GameObject fireball;
-
-    delegate void TakeDamage();
-    TakeDamage multidamagesources;
+    
+  public  delegate void TakeDamage();
+  public TakeDamage multidamagesources;
     // float splitCD = 0;
     float fireballSpeed = 10;
     void Awake()
     {
         base.bAwake();
-
-
-
+        multidamagesources += nothing;
+        InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+    
     }
 
-    void AreaDamage()
+    void MUltiDMg()
     {
-        currentProtein -= 5;
+        multidamagesources();
+        Debug.Log("HIT");
+    }
+    
+    public void AreaDamage()
+    {
+        currentProtein -= 10;
+    }
+    void nothing()
+    {
+
     }
     void DamagePreSecond()
     {
@@ -38,13 +48,16 @@ public class HeatCell : BaseCell
     void Start()
     {
         base.bStart();
-        multidamagesources += AreaDamage;
-        multidamagesources();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isAIPossessed)
+
+        {
+            transform.position = new Vector3(transform.position.x + .00100f, 0, transform.position.z + .00100f);
+        }
 
         switch (currentState)
         {
@@ -103,10 +116,6 @@ public class HeatCell : BaseCell
                 }
                 break;
             case CellState.CONSUMING:
-                if (IsInvoking("DamagePreSecond"))
-                {
-                    CancelInvoke("DamagePreSecond");
-                }
                 base.bUpdate();
                 break;
             case CellState.MOVING:
@@ -152,4 +161,8 @@ public class HeatCell : BaseCell
         base.bLateUpdate();
     }
 
+    void Evolve(GameObject other)
+    {
+
+    }
 }
