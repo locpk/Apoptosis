@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class ColdArea : BaseArea {
 
     public float damagePerSecond;
+    public float speedDecreaseRate;
 
 	public override void Awake() {
         base.Awake();
@@ -39,20 +40,26 @@ public class ColdArea : BaseArea {
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL:
+                    enterCell.navAgent.speed -= speedDecreaseRate;
                     break;
                 case CellType.HEAT_CELL:
+                    enterCell.navAgent.speed -= speedDecreaseRate;
                     break;
                 case CellType.COLD_CELL:
                     break;
                 case CellType.HEAT_CELL_TIRE2:
+                    enterCell.navAgent.speed -= speedDecreaseRate;
                     break;
                 case CellType.COLD_CELL_TIRE2:
                     break;
                 case CellType.ACIDIC_CELL:
+                    enterCell.navAgent.speed -= speedDecreaseRate;
                     break;
                 case CellType.ALKALI_CELL:
+                    enterCell.navAgent.speed -= speedDecreaseRate;
                     break;
                 case CellType.CANCER_CELL:
+                    enterCell.navAgent.speed -= speedDecreaseRate;
                     break;
                 default:
                     break;
@@ -72,20 +79,26 @@ public class ColdArea : BaseArea {
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL:
+                    enterCell.navAgent.speed += speedDecreaseRate;
                     break;
                 case CellType.HEAT_CELL:
+                    enterCell.navAgent.speed += speedDecreaseRate;
                     break;
                 case CellType.COLD_CELL:
                     break;
                 case CellType.HEAT_CELL_TIRE2:
+                    enterCell.navAgent.speed += speedDecreaseRate;
                     break;
                 case CellType.COLD_CELL_TIRE2:
                     break;
                 case CellType.ACIDIC_CELL:
+                    enterCell.navAgent.speed += speedDecreaseRate;
                     break;
                 case CellType.ALKALI_CELL:
+                    enterCell.navAgent.speed += speedDecreaseRate;
                     break;
                 case CellType.CANCER_CELL:
+                    enterCell.navAgent.speed += speedDecreaseRate;
                     break;
                 default:
                     break;

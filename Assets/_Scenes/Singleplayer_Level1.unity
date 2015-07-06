@@ -261,6 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaType: 0
   damagePerSecond: 5
+  speedIncreaseRate: 0
 --- !u!1 &283634585
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +995,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 471618, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -11.1000004
+      value: 71.6999969
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1002,7 +1003,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -66.9000015
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1022,7 +1023,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 11413980, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
       propertyPath: viewIdField
@@ -1401,7 +1402,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 487196, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -70
+      value: -66.9000015
       objectReference: {fileID: 0}
     - target: {fileID: 487196, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1421,7 +1422,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 487196, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 11447996, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
       propertyPath: viewIdField
@@ -1602,6 +1603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaType: 1
   damagePerSecond: 5
+  speedDecreaseRate: 0
 --- !u!1001 &1980903566
 Prefab:
   m_ObjectHideFlags: 0
@@ -1748,7 +1750,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -77.6999969
+      value: -74.5999985
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1768,7 +1770,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 11498870, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: viewIdField
