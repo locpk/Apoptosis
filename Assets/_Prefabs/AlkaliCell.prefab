@@ -14,6 +14,7 @@ GameObject:
   - 54: {fileID: 5498356}
   - 114: {fileID: 11409952}
   - 135: {fileID: 13560164}
+  - 114: {fileID: 11463068}
   m_Layer: 0
   m_Name: AlkaliCell
   m_TagString: Unit
@@ -118,6 +119,17 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 0
   splitCooldown: 0
+--- !u!114 &11463068
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2064ca72bf0d14a4fab78eaff6b9edad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &13560164
 SphereCollider:
   m_ObjectHideFlags: 1
