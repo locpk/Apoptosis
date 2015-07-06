@@ -5,30 +5,11 @@ using System.Collections.Generic;
 public class AcidicCell : BaseCell
 {
 
-    public delegate void TakeDamage();
-    public TakeDamage multidamagesources;
-    public void Guarding()
-    {
-        List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
-        for (int i = 0; i < aiUnits.Count; i++)
-        {
-            if (Vector3.Distance(aiUnits[i].transform.position, transform.position) <= fovRadius)
-            {
-                if (aiUnits[i] != this.gameObject)
-                {
-                    Attack(aiUnits[i]);
-                }
-                break;
-            }
-        }
-    }
+   
     void Awake()
     {
         base.bAwake();
-        multidamagesources += nothing;
-        InvokeRepeating("multidamagesources", 1.0f, 1.0f);
     }
-
     void DamagePreSecond()
     {
         if (primaryTarget != null)
@@ -36,14 +17,7 @@ public class AcidicCell : BaseCell
             primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
         }
     }
-    public void AreaDamage()
-    {
-        currentProtein -= 10;
-    }
-    void nothing()
-    {
 
-    }
     // Use this for initialization
     void Start()
     {
@@ -56,7 +30,7 @@ public class AcidicCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-                Guarding();
+                base.Guarding();
                 break;
             case CellState.ATTACK:
                 if (primaryTarget != null)

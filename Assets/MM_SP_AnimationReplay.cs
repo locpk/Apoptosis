@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MM_SP_AnimationReplay : MonoBehaviour {
 
-    Animation anim;
+   // Animation anim;
     Motion test;
   //  Animation anim;
   
@@ -13,7 +13,7 @@ public class MM_SP_AnimationReplay : MonoBehaviour {
     {
         
       //anim =  animator.GetBehaviour<"New State">();
-      anim.Rewind();
+      //anim.Rewind();
      
      //  //  anim = animator.GetBehaviour <ExampleStateMachineBehaviour> ();
 	}

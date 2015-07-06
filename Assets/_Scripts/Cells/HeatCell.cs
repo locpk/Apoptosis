@@ -107,6 +107,10 @@ public class HeatCell : BaseCell
                 }
                 break;
             case CellState.CONSUMING:
+                if (IsInvoking("DamagePreSecond"))
+                {
+                    CancelInvoke("DamagePreSecond");
+                }
                 base.bUpdate();
                 break;
             case CellState.MOVING:

@@ -124,6 +124,10 @@ public class BaseCell : MonoBehaviour
 
     public void SetPrimaryTarget(GameObject _target)
     {
+        if (IsInvoking("ConsumePerSecond"))
+        {
+            CancelInvoke("ConsumePerSecond");
+        }
 
         primaryTarget = _target;
 
@@ -139,9 +143,11 @@ public class BaseCell : MonoBehaviour
     }
     public void Die()
     {
+        isMine = false;
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
         transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
-        Destroy(gameObject, 3.0f);
+        Destroy(gameObject, 5.0f);
     }
 
     public virtual void Attack(GameObject _target)
@@ -173,21 +179,21 @@ public class BaseCell : MonoBehaviour
 
     public void Guarding()
     {
-        List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
-        if (aiUnits.Count > 0)
-        {
-            foreach (var enemy in aiUnits)
-            {
-                if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
-                {
-                    if (enemy != this)
-                    {
-                        Attack(enemy);
-                    }
-                    break;
-                }
-            }
-        }
+        //List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
+        //if (aiUnits.Count > 0)
+        //{
+        //    foreach (var enemy in aiUnits)
+        //    {
+        //        if (Vector3.Distance(enemy.transform.position, transform.position) <= fovRadius)
+        //        {
+        //            if (enemy != this)
+        //            {
+        //                Attack(enemy);
+        //            }
+        //            break;
+        //        }
+        //    }
+        //}
 
     }
 
@@ -236,9 +242,9 @@ public class BaseCell : MonoBehaviour
                 break;
             case CellType.CANCER_CELL:
                 cellSplitAnimation = GameObject.Instantiate(gCancerCellPrefab, transform.position, Quaternion.identity) as GameObject;
-                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
-                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
-                cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                cellSplitAnimation.GetComponent<BaseCell>().currentLevel = currentLevel + 1;
+                cellSplitAnimation.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
+                cellSplitAnimation.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                // GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
                 this.currentState = CellState.DEAD;
                 break;
@@ -253,11 +259,10 @@ public class BaseCell : MonoBehaviour
 
     public void CancerousSplit()
     {
-        if (currentLevel >= 5)
+        if (currentLevel >= 5 || currentProtein <= 1.0f)
         {
             return;
         }
-
 
         float cancerousChance = 0.0f;
         switch (currentLevel)
@@ -287,7 +292,7 @@ public class BaseCell : MonoBehaviour
 
         //half my protein
         this.currentProtein *= 0.5f;
-
+        currentLevel++;
 
         GameObject newCell;
 
@@ -299,8 +304,8 @@ public class BaseCell : MonoBehaviour
             {
                 case CellType.HEAT_CELL:
                     newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel + 1;
-                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
+                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
+                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein ;
                     newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
                     if (!isAIPossessed)
@@ -310,8 +315,8 @@ public class BaseCell : MonoBehaviour
                     break;
                 case CellType.COLD_CELL:
                     newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel + 1;
-                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
+                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
+                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein;
                     newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
                     if (!isAIPossessed)
@@ -328,7 +333,6 @@ public class BaseCell : MonoBehaviour
             newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
             newCell.GetComponent<BaseCell>().currentProtein = currentProtein;
             newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
-            newCell.GetComponent<BaseCell>().currentLevel++;
             newCell.GetComponent<BaseCell>().isAIPossessed = false;
             newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
         }
@@ -393,6 +397,13 @@ public class BaseCell : MonoBehaviour
 
     protected void bUpdate()
     {
+        if (currentState == CellState.IDLE)
+        {
+             if (IsInvoking("ConsumePerSecond"))
+                {
+                    CancelInvoke("ConsumePerSecond");
+                }
+        }
         if (currentState == CellState.MOVING)
         {
             if (isStopped())
@@ -433,6 +444,7 @@ public class BaseCell : MonoBehaviour
             }
             else
             {
+               
                 currentState = CellState.IDLE;
             }
         }

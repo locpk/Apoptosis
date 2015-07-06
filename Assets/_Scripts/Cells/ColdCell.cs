@@ -35,21 +35,7 @@ public class ColdCell : BaseCell
         }
     }
 
-    public void Guarding()
-    {
-        List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
-        for (int i = 0; i < aiUnits.Count; i++)
-        {
-            if (Vector3.Distance(aiUnits[i].transform.position, transform.position) <= fovRadius)
-            {
-                if (aiUnits[i] != this.gameObject)
-                {
-                    Attack(aiUnits[i]);
-                }
-                break;
-            }
-        }
-    }
+   
 
     // Update is called once per frame
     void Update()
@@ -57,7 +43,11 @@ public class ColdCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-                Guarding();
+                if (IsInvoking("DamagePreSecond"))
+                {
+                    CancelInvoke("DamagePreSecond");
+                }
+                base.Guarding();
                 break;
             case CellState.ATTACK:
                 if (primaryTarget != null)
@@ -85,10 +75,18 @@ public class ColdCell : BaseCell
                 }
                 else
                 {
+                    if (IsInvoking("DamagePreSecond"))
+                    {
+                        CancelInvoke("DamagePreSecond");
+                    }
                     currentState = CellState.IDLE;
                 }
                 break;
             case CellState.MOVING:
+                if (IsInvoking("DamagePreSecond"))
+                {
+                    CancelInvoke("DamagePreSecond");
+                }
                 base.bUpdate();
                 if (primaryTarget != null)
                 {
@@ -111,6 +109,10 @@ public class ColdCell : BaseCell
                 //  }
                 break;
             case CellState.CONSUMING:
+                if (IsInvoking("DamagePreSecond"))
+                {
+                    CancelInvoke("DamagePreSecond");
+                }
                 base.bUpdate();
                 break;
             case CellState.DEAD:

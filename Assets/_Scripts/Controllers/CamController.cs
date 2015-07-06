@@ -15,7 +15,7 @@ public class CamController : MonoBehaviour {
     public float maxZoom;
 
     private float zoomValue = 0.0f;
-    private float realtimeTimer;
+//    private float realtimeTimer;
     private Vector3 smoothFocusTarget;
     private Vector3 smoothTargetPosition;
     private Quaternion smoothTargetRotation;
@@ -24,9 +24,10 @@ public class CamController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        smoothTargetPosition = transform.position;
-        smoothTargetRotation = transform.rotation;
-        realtimeTimer = Time.timeScale;
+        //smoothTargetPosition = transform.position;
+        //smoothTargetRotation = transform.rotation;
+        smoothFocusTarget = transform.position;
+    //    realtimeTimer = Time.timeScale;
 	}
 	
 	// Update is called once per frame

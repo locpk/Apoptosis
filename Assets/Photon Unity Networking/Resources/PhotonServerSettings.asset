@@ -19,5 +19,13 @@ MonoBehaviour:
   PreferredRegion: 0
   EnabledRegions: -1
   RpcList:
-  - ApplyDamage
+  - Chat
+  - DestroyRpc
+  - InstantiateRpc
+  - OnAwakeRPC
+  - PickupItemInit
+  - PunPickup
+  - PunPickupSimple
+  - PunRespawn
+  - RequestForPickupTimes
   DisableAutoOpenWizard: 1
