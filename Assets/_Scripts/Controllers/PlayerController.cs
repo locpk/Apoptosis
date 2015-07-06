@@ -307,6 +307,7 @@ public class PlayerController : MonoBehaviour
             GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 
             GUI.DrawTexture(GUISelectRect, selector, ScaleMode.StretchToFill, true);
+
         }
         foreach (BaseCell item in selectedUnits)
         {
@@ -319,6 +320,7 @@ public class PlayerController : MonoBehaviour
                 GUI.DrawTexture(location, selector);
             }
         }
+       
     }
 
     public void FixedUpdate()
@@ -431,7 +433,6 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) // If the player left-clicks
             {
 
-
                 GUISelectRect.xMin = Input.mousePosition.x;
                 GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
                 origin = Input.mousePosition;
@@ -440,6 +441,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
             {
+               
                 GUISelectRect.yMax = GUISelectRect.yMin;
                 GUISelectRect.xMax = GUISelectRect.xMin;
                 if (selectedUnits.Count == 0)
@@ -461,18 +463,18 @@ public class PlayerController : MonoBehaviour
             {
 
                 UnitSelection(origin);
-
+                
             }
         }
 
-        if (Input.GetMouseButtonDown(1)) // If the player left-clicks
+        if (Input.GetMouseButtonDown(1)) // If the player right-clicks
         {
             GUISelectRect.xMin = Input.mousePosition.x;
             GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
             origin = Input.mousePosition;
             origin.y = -origin.y + Screen.height;
         }
-        else if (Input.GetMouseButtonUp(1)) // When the player releases left-click
+        else if (Input.GetMouseButtonUp(1)) // When the player releases right-click
         {
 
             GUISelectRect.yMax = GUISelectRect.yMin;
@@ -509,7 +511,7 @@ public class PlayerController : MonoBehaviour
                 UnitMove();
 
         }
-        else if (Input.GetMouseButton(1)) // If the player has left-click held down
+        else if (Input.GetMouseButton(1)) // If the player has right-click held down
         {
             TargetSelection(origin);
         }
@@ -517,6 +519,7 @@ public class PlayerController : MonoBehaviour
         {
             UnitAttackMove();
         }
+        
     }
 
 }

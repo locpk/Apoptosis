@@ -27,6 +27,7 @@ public class CellSplitAnimation : MonoBehaviour
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
         if (!isAIPossessed)
         {
+            newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         Destroy(gameObject);
@@ -42,6 +43,7 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
             if (!isAIPossessed)
             {
+                newcell.GetComponent<BaseCell>().isMine = true;
                 GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
             }
         }
@@ -95,6 +97,7 @@ public class CellSplitAnimation : MonoBehaviour
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
         if (!isAIPossessed)
         {
+            newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         Destroy(gameObject);
@@ -164,6 +167,7 @@ public class CellSplitAnimation : MonoBehaviour
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
         if (!isAIPossessed)
         {
+            newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         Destroy(gameObject);
@@ -178,6 +182,7 @@ public class CellSplitAnimation : MonoBehaviour
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
         if (!isAIPossessed)
         {
+            newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         Destroy(gameObject);
