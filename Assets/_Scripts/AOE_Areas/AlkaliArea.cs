@@ -71,16 +71,6 @@ public class AlkaliArea : BaseArea {
 
     void OnTriggerExit(Collider collider) {
         if (collider.gameObject.tag == "Unit") {
-            StemCell stemCell = collider.gameObject.GetComponent<StemCell>();
-            if (stemCell) {
-                stemCell.isInAlkali = false;
-
-            }
-        }
-    }
-
-    void OnTriggerExit(Collider collider) {
-        if (collider.gameObject.tag == "Unit") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
 
