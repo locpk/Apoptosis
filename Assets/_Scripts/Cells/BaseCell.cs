@@ -144,9 +144,9 @@ public class BaseCell : MonoBehaviour
     {
         isMine = false;
         GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
-        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<SpriteRenderer>().enabled = false;
-        Destroy(gameObject, 5.0f);
+        //transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+        //GetComponent<SpriteRenderer>().enabled = false;
+        Destroy(gameObject);
     }
 
     public virtual void Attack(GameObject _target)
@@ -312,7 +312,7 @@ public class BaseCell : MonoBehaviour
                     }
                     break;
                 case CellType.COLD_CELL:
-                    newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.identity) as GameObject;
+                    newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
                     newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
                     newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                     newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;

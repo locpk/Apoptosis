@@ -14,6 +14,7 @@ GameObject:
   - 54: {fileID: 5491636}
   - 135: {fileID: 13587872}
   - 208: {fileID: 20890738}
+  - 114: {fileID: 11483244}
   m_Layer: 0
   m_Name: HeatCell
   m_TagString: Unit
@@ -119,6 +120,17 @@ MonoBehaviour:
   attackCooldown: 2
   splitCooldown: 0
   fireball: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
+--- !u!114 &11483244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb7de6a51f17df242b8448c819b0d5ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &13587872
 SphereCollider:
   m_ObjectHideFlags: 1

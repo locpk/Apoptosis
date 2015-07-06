@@ -43,6 +43,7 @@ public class CellSplitAnimation : MonoBehaviour
             if (!isAIPossessed)
             {
                 GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+                
             }
         }
         Destroy(gameObject);
@@ -191,24 +192,24 @@ public class CellSplitAnimation : MonoBehaviour
 
     public void UpdateProtein()
     {
-        //transform.GetChild(0).GetComponent<BaseCell>().currentProtein = currentProtein;
-        //transform.GetChild(1).GetComponent<BaseCell>().currentProtein = currentProtein;
-        if (currentProtein >= 100.0f)
-        {
-            transform.GetChild(0).FindChild("Nucleus").transform.localScale = new Vector3(currentProtein / 500.0f, currentProtein / 500.0f, currentProtein / 500.0f);
-        }
-        else
-        {
-            transform.GetChild(0).FindChild("Nucleus").transform.localScale = new Vector3(100.0f / 500.0f, 100.0f / 500.0f, 100.0f / 500.0f);
-        }
-        if (currentProtein >= 100.0f)
-        {
-            transform.GetChild(1).FindChild("Nucleus").transform.localScale = new Vector3(currentProtein / 500.0f, currentProtein / 500.0f, currentProtein / 500.0f);
-        }
-        else
-        {
-            transform.GetChild(1).FindChild("Nucleus").transform.localScale = new Vector3(100.0f / 500.0f, 100.0f / 500.0f, 100.0f / 500.0f);
-        }
+        transform.GetChild(0).GetComponent<BaseCell>().currentProtein = currentProtein;
+        transform.GetChild(1).GetComponent<BaseCell>().currentProtein = currentProtein;
+        //if (currentProtein >= 100.0f)
+        //{
+        //    transform.GetChild(0).FindChild("Nucleus").transform.localScale = new Vector3(currentProtein / 500.0f, currentProtein / 500.0f, currentProtein / 500.0f);
+        //}
+        //else
+        //{
+        //    transform.GetChild(0).FindChild("Nucleus").transform.localScale = new Vector3(100.0f / 500.0f, 100.0f / 500.0f, 100.0f / 500.0f);
+        //}
+        //if (currentProtein >= 100.0f)
+        //{
+        //    transform.GetChild(1).FindChild("Nucleus").transform.localScale = new Vector3(currentProtein / 500.0f, currentProtein / 500.0f, currentProtein / 500.0f);
+        //}
+        //else
+        //{
+        //    transform.GetChild(1).FindChild("Nucleus").transform.localScale = new Vector3(100.0f / 500.0f, 100.0f / 500.0f, 100.0f / 500.0f);
+        //}
     }
 
 
