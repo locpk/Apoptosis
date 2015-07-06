@@ -14,8 +14,14 @@ public class HeatCell : BaseCell
     {
         base.bAwake();
         multidamagesources += nothing;
-        InvokeRepeating("multidamagesources", 1.0f, 1.0f);
+        InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
     
+    }
+
+    void MUltiDMg()
+    {
+        multidamagesources();
+        Debug.Log("HIT");
     }
     
     public void AreaDamage()
@@ -42,13 +48,16 @@ public class HeatCell : BaseCell
     void Start()
     {
         base.bStart();
-        multidamagesources += AreaDamage;
-        multidamagesources();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isAIPossessed)
+
+        {
+            transform.position = new Vector3(transform.position.x + .00100f, 0, transform.position.z + .00100f);
+        }
 
         switch (currentState)
         {
@@ -107,10 +116,6 @@ public class HeatCell : BaseCell
                 }
                 break;
             case CellState.CONSUMING:
-                if (IsInvoking("DamagePreSecond"))
-                {
-                    CancelInvoke("DamagePreSecond");
-                }
                 base.bUpdate();
                 break;
             case CellState.MOVING:
@@ -156,4 +161,8 @@ public class HeatCell : BaseCell
         base.bLateUpdate();
     }
 
+    void Evolve(GameObject other)
+    {
+
+    }
 }
