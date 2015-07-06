@@ -199,21 +199,14 @@ public class PlayerController : MonoBehaviour
 
     public void UnitAttack()
     {
-        foreach (BaseCell item in selectedUnits) // For each of the player's selected units
-        {
-            item.Attack(selectedTargets[0]); // Set the target cell to attack
-        }
+        EventManager.Attack(selectedTargets[0]);
+        
     }
 
-    IEnumerator WaitAndPrint(float waitTime,BaseCell item)
-    {
-        yield return new WaitForSeconds(waitTime);
-        item.PerfectSplit();
-    }
 
     public void UnitSplit()
     {
-        GameObject.Find("EventManager").GetComponent<EventManager>().Split(); 
+        EventManager.Split(); 
     }
 
     public void UnitEvolve(int cellNum)

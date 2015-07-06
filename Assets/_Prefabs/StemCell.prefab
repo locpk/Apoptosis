@@ -19,6 +19,7 @@ GameObject:
   - 95: {fileID: 9577826}
   - 114: {fileID: 11407436}
   - 114: {fileID: 11412848}
+  - 114: {fileID: 11422490}
   m_Layer: 0
   m_Name: StemCell
   m_TagString: Unit
@@ -119,6 +120,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2064ca72bf0d14a4fab78eaff6b9edad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11422490
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d9b8ef6f623bd418431e10ef3a8e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11454602
