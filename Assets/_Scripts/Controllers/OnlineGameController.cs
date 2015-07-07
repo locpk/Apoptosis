@@ -7,12 +7,14 @@ public class OnlineGameController : Photon.MonoBehaviour
 
 
 	void Awake() {
-        
+        SpawnSceneObjects();
+        InitPlayers();
+        SpawnPlayerUnits();
     }
 
 	// Use this for initialization
 	void Start () {
-        PhotonNetwork.ConnectUsingSettings("0.0");
+
 	}
 	
 	// Update is called once per frame
@@ -29,36 +31,6 @@ public class OnlineGameController : Photon.MonoBehaviour
         
     }
 
-    void OnJoinedLobby()
-    {
-        if (PhotonNetwork.countOfRooms == 0)
-        {
-            PhotonNetwork.CreateRoom("Kewlala-SGP", new RoomOptions() { maxPlayers = 2 }, null);
-        }
-        PhotonNetwork.JoinRandomRoom();
-    }
-
-    void OnPhotonRandomJoinFailed()
-    {
-        PhotonNetwork.CreateRoom("Kewlala-SGP", new RoomOptions() { maxPlayers = 2 }, null);
-    }
-
-    void OnJoinedRoom()
-    {
-        if (Application.isEditor)
-        {
-            
-        }
-        else
-        {
-            if (PhotonNetwork.room.playerCount >= 2)
-            {
-                PhotonNetwork.room.open = false;
-            }
-        }
-
-    }
-
     void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
        
@@ -66,15 +38,8 @@ public class OnlineGameController : Photon.MonoBehaviour
 
     void OnLeftRoom()
     {
-
         PhotonNetwork.LeaveLobby();
         PhotonNetwork.Disconnect();
-    }
-
-
-    void OnCreatedRoom()
-    {
-       
     }
 
     void InitPlayers()
