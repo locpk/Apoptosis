@@ -8,12 +8,12 @@ public class Menu : MonoBehaviour {
 
     public GameObject backGround;
     public GameObject loadingBar;
-
-    private int loadProgress = 0;
+    public GameObject brackets;
+    private float n_loadProgress = 0.0f;
 
 	void Awake() 
     {
-
+        brackets.SetActive(false);
         backGround.SetActive(false);
         loadingBar.SetActive(false);
     }
@@ -40,10 +40,10 @@ public class Menu : MonoBehaviour {
     public void LoadScene(string SceneName)
     {
         //loading screen goes here, fade and put it in 
-
+        // does the progress bar over the corutine.
         StartCoroutine(DisplayLoadingScreen(SceneName));
 
-        Application.LoadLevel(SceneName);
+       // Application.LoadLevel(SceneName);
 
     }
 
@@ -54,14 +54,22 @@ public class Menu : MonoBehaviour {
     }
 
     // this does the loading bar and returns when done
-    IEnumerator DisplayLoadingScreen(string levelName)
+    IEnumerator DisplayLoadingScreen(string new_SceneName)
     {
-        loadingBar.transform.localScale = new Vector3(loadProgress, loadingBar.transform.position.x, loadingBar.transform.position.z);
+        loadingBar.transform.localScale = new Vector3( n_loadProgress, loadingBar.transform.localScale.y, loadingBar.transform.localScale.z);
    
         backGround.SetActive(true);
         loadingBar.SetActive(true);
-
-        yield return null; 
+        brackets.SetActive(true);
+        
+        AsyncOperation async = Application.LoadLevelAsync(new_SceneName);
+        while (!async.isDone) // carry on updating
+        {
+            n_loadProgress = async.progress; // returns from 0.0 - 1.0
+            n_loadProgress *= 0.2f;
+            loadingBar.transform.localScale = new Vector3(n_loadProgress, loadingBar.transform.localScale.y, loadingBar.transform.localScale.z);
+          
+            yield return null; 
+        }
     }
-
 }
