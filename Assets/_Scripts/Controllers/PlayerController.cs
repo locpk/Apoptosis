@@ -80,12 +80,14 @@ public class PlayerController : MonoBehaviour
     {
         allSelectableUnits.Add(_in);
         selectedUnits.Add(_in);
+        CheckSelectedUnits();
     }
 
     public void RemoveDeadCell(BaseCell _in)
     {
         allSelectableUnits.Remove(_in);
         selectedUnits.Remove(_in);
+        CheckSelectedUnits();
     }
 
     public void RemoveTarget(GameObject _in)
