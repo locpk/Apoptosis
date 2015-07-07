@@ -15,6 +15,7 @@ TagManager:
   - Collider_Dense
   - Collider_Cold
   - Collider_Alkali
+  - MinimapIndicator
   layers:
   - Default
   - TransparentFX

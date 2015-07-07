@@ -77,7 +77,6 @@ public class BaseCell : MonoBehaviour
     public float attackCooldown;
     public float splitCooldown;
 
-
     #region RPC Methods
 
 

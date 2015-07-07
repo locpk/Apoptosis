@@ -18,12 +18,21 @@ public class PlayerController : MonoBehaviour
     public GameObject movePin;
     public GameObject attackPin;
 
+    public int NumStemCells = 0;
+    public int NumHeatCells = 0;
+    public int NumColdCells = 0;
+    public int NumAcidicCells = 0;
+    public int NumAlkaliCells = 0;
+    public int NumNerveCells = 0;
+    public int NumTierTwoCold = 0;
+    public int NumTierTwoHeat = 0;
+
 
     public List<BaseCell> allSelectableUnits;
     public List<BaseCell> selectedUnits;
     public List<GameObject> allSelectableTargets;
     public List<GameObject> selectedTargets;
-//    List<BaseCell>[] groups;
+    //    List<BaseCell>[] groups;
     public Texture selector;
 
     Rect GUISelectRect;
@@ -34,7 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         // Initialize variables
         selectedTargets.Clear();
-//        groups = new List<BaseCell>[10];
+        //        groups = new List<BaseCell>[10];
         allSelectableUnits = new List<BaseCell>();
         selectedUnits = new List<BaseCell>();
         terrainLayer = 1 << LayerMask.NameToLayer("Terrain");  // Layer masking for raycast clicking
@@ -177,6 +186,7 @@ public class PlayerController : MonoBehaviour
                 item.Move(hitInfo.point); // Set their destination
             }
         }
+
     }
 
 
@@ -206,23 +216,26 @@ public class PlayerController : MonoBehaviour
 
     public void UnitSplit()
     {
-
         foreach (var item in selectedUnits)
         {
             switch (item.celltype) // Dependent on the type of cell it is
             {
                 case CellType.STEM_CELL: // If it is a stem cell
                     item.PerfectSplit();
+                    CheckSelectedUnits();
                     break;
                 case CellType.HEAT_CELL: // If it is a heat cell
                 case CellType.COLD_CELL: // OR If it is a cold cell
                     item.CancerousSplit();
+                    CheckSelectedUnits();
                     break;
 
                 default:
                     break;
             }
         }
+        
+
         selectedUnits.RemoveAll(item => item == null);
         selectedTargets.RemoveAll(item => item == null);
         allSelectableTargets.RemoveAll(item => item == null);
@@ -236,14 +249,17 @@ public class PlayerController : MonoBehaviour
             {
                 case 0: //turn into heat cell
                     item.Mutation(CellType.HEAT_CELL);
+                    CheckSelectedUnits();
                     break;
                 case 1: //turn into cold cell
                     item.Mutation(CellType.COLD_CELL);
+                    CheckSelectedUnits();
                     break;
                 case 2: //turn into acidic cell
                     if (item.GetComponent<StemCell>().isInAcidic)
                     {
                         item.Mutation(CellType.ACIDIC_CELL);
+                        CheckSelectedUnits();
                     }
                     break;
                 case 3: //turn into alkali cell
@@ -251,6 +267,7 @@ public class PlayerController : MonoBehaviour
                     if (item.GetComponent<StemCell>().isInAlkali)
                     {
                         item.Mutation(CellType.ALKALI_CELL);
+                        CheckSelectedUnits();
                     }
                     break;
                 default:
@@ -288,6 +305,7 @@ public class PlayerController : MonoBehaviour
             {
                 selectedUnits.Add(item); // Add the cell to the players selected units
                 item.isSelected = true;
+                CheckSelectedUnits();
             }
         }
     }
@@ -320,11 +338,47 @@ public class PlayerController : MonoBehaviour
                 GUI.DrawTexture(location, selector);
             }
         }
-       
+
+        if (Time.timeScale > 0.0f)
+        {
+            GUI.BeginGroup(new Rect(Screen.width * 0.5f - 320, 15, 900, 100));
+            GUI.Box(new Rect(0, 0, 75, 60), "Stem Cells: ");
+            GUI.Label(new Rect(35, 35, 50, 50), NumStemCells.ToString());
+
+            GUI.Box(new Rect(80, 0, 75, 60), "Heat Cells: ");
+            GUI.Label(new Rect(115, 35, 50, 50), NumHeatCells.ToString());
+
+            GUI.Box(new Rect(160, 0, 75, 60), "Cold Cells: ");
+            GUI.Label(new Rect(195, 35, 50, 50), NumColdCells.ToString());
+
+            GUI.Box(new Rect(240, 0, 75, 60), "Acidic Cells: ");
+            GUI.Label(new Rect(275, 35, 50, 50), NumAcidicCells.ToString());
+
+            GUI.Box(new Rect(320, 0, 75, 60), "Alkali Cells: ");
+            GUI.Label(new Rect(355, 35, 50, 50), NumAlkaliCells.ToString());
+
+            GUI.Box(new Rect(400, 0, 75, 60), "Nerve Cells: ");
+            GUI.Label(new Rect(435, 35, 50, 50), NumNerveCells.ToString());
+
+            GUI.Box(new Rect(480, 0, 75, 60), "Tier 2\nHeat Cells: ");
+            GUI.Label(new Rect(515, 35, 50, 50), NumTierTwoHeat.ToString());
+
+            GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
+            GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
+
+            GUI.EndGroup();
+        }
+
     }
 
     public void FixedUpdate()
     {
+        //Debug.Log(allSelectableUnits.Count);
+        if (allSelectableUnits.Count <= 0)
+        {
+            //Time.timeScale = 0.0f;
+            Application.LoadLevel("Credits");
+        }
     }
 
     public void UnitStop()
@@ -371,6 +425,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) // If the player presses D
         {
             UnitSplit();
+            CheckSelectedUnits();
         }
 
         if (Input.GetKeyDown(KeyCode.S)) // If the player presses S
@@ -385,6 +440,7 @@ public class PlayerController : MonoBehaviour
                 if (item.isInAcidic)
                 {
                     item.Mutation(CellType.ACIDIC_CELL);
+                    CheckSelectedUnits();
                 }
             }
             selectedUnits.RemoveAll(item => item == null);
@@ -399,6 +455,7 @@ public class PlayerController : MonoBehaviour
                 if (item.isInAlkali)
                 {
                     item.Mutation(CellType.ALKALI_CELL);
+                    CheckSelectedUnits();
                 }
             }
             selectedUnits.RemoveAll(item => item == null);
@@ -411,6 +468,7 @@ public class PlayerController : MonoBehaviour
             foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits)) // For each of the player's selected units
             {
                 item.Mutation(CellType.HEAT_CELL);
+                CheckSelectedUnits();
             }
             selectedUnits.RemoveAll(item => item == null);
             selectedTargets.RemoveAll(item => item == null);
@@ -426,6 +484,7 @@ public class PlayerController : MonoBehaviour
             selectedUnits.RemoveAll(item => item == null);
             selectedTargets.RemoveAll(item => item == null);
             allSelectableTargets.RemoveAll(item => item == null);
+            CheckSelectedUnits();
         }
 
         if (!isOverUI)
@@ -437,11 +496,11 @@ public class PlayerController : MonoBehaviour
                 GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
                 origin = Input.mousePosition;
                 origin.y = -origin.y + Screen.height;
-
+                CheckSelectedUnits();
             }
             else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
             {
-               
+
                 GUISelectRect.yMax = GUISelectRect.yMin;
                 GUISelectRect.xMax = GUISelectRect.xMin;
                 if (selectedUnits.Count == 0)
@@ -458,12 +517,14 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                 }
+                CheckSelectedUnits();
+
             }
             else if (Input.GetMouseButton(0)) // If the player has left-click held down
             {
 
                 UnitSelection(origin);
-                
+
             }
         }
 
@@ -492,6 +553,8 @@ public class PlayerController : MonoBehaviour
                         selectedTargets.Add(hitObject);
                     }
                 }
+
+
             }
             if (selectedTargets.Count > 0)
             {
@@ -519,7 +582,47 @@ public class PlayerController : MonoBehaviour
         {
             UnitAttackMove();
         }
-        
+    }
+
+    public void CheckSelectedUnits()
+    {
+        NumStemCells = 0;
+        NumHeatCells = 0;
+        NumColdCells = 0;
+        NumAcidicCells = 0;
+        NumAlkaliCells = 0;
+        NumTierTwoCold = 0;
+        NumTierTwoHeat = 0;
+
+        foreach (var item in selectedUnits)
+        {
+            switch (item.celltype)
+            {
+                case CellType.STEM_CELL:
+                    NumStemCells++;
+                    break;
+                case CellType.HEAT_CELL:
+                    NumHeatCells++;
+                    break;
+                case CellType.COLD_CELL:
+                    NumColdCells++;
+                    break;
+                case CellType.ACIDIC_CELL:
+                    NumAcidicCells++;
+                    break;
+                case CellType.ALKALI_CELL:
+                    NumAlkaliCells++;
+                    break;
+                case CellType.COLD_CELL_TIRE2:
+                    NumTierTwoCold++;
+                    break;
+                case CellType.HEAT_CELL_TIRE2:
+                    NumTierTwoHeat++;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
 }
