@@ -40,21 +40,21 @@ public class ColdCell : BaseCell
         }
     }
 
-    public void Guarding()
-    {
-        List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
-        for (int i = 0; i < aiUnits.Count; i++)
-        {
-            if (Vector3.Distance(aiUnits[i].transform.position, transform.position) <= fovRadius)
-            {
-                if (aiUnits[i] != this.gameObject)
-                {
-                    Attack(aiUnits[i]);
-                }
-                break;
-            }
-        }
-    }
+//  public void Guarding()
+//  {
+//      List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
+//      for (int i = 0; i < aiUnits.Count; i++)
+//      {
+//          if (Vector3.Distance(aiUnits[i].transform.position, transform.position) <= fovRadius)
+//          {
+//              if (aiUnits[i] != this.gameObject)
+//              {
+//                  Attack(aiUnits[i]);
+//              }
+//              break;
+//          }
+//      }
+//  }
 
     // Update is called once per frame
     void Update()
@@ -62,7 +62,7 @@ public class ColdCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-                Guarding();
+       //         Guarding();
                 break;
             case CellState.ATTACK:
                 if (primaryTarget != null)

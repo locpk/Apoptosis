@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     public void AddNewCell(BaseCell _in)
     {
         _in.isSelected = true;

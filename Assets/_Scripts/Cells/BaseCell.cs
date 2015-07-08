@@ -62,7 +62,6 @@ public class BaseCell : MonoBehaviour
     public bool isSelected;
     public CellType celltype;
     public CellState currentState;
-
     public NavMeshAgent navAgent;
     public NavMeshObstacle navObstacle;
     public Vector3 destination;
@@ -145,8 +144,8 @@ public class BaseCell : MonoBehaviour
     {
         isMine = false;
         GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
-        //transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-        //GetComponent<SpriteRenderer>().enabled = false;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
         Destroy(gameObject);
     }
 
@@ -304,20 +303,25 @@ public class BaseCell : MonoBehaviour
             {
                 case CellType.HEAT_CELL:
                     newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
-                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
-                    newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
+                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein ;
+                    newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+                    newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
                     if (!isAIPossessed)
                     {
                         GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newCell.GetComponent<BaseCell>());
                     }
                     break;
                 case CellType.COLD_CELL:
-                    newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
-                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
-                    newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                    this.currentState = CellState.DEAD;
+                    newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
+                    newCell.GetComponent<BaseCell>().currentProtein = currentProtein;
+                    newCell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+                    newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
+                    if (!isAIPossessed)
+                    {
+                        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newCell.GetComponent<BaseCell>());
+                    }
                     break;
                 default:
                     break;
