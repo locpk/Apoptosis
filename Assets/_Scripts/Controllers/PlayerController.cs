@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
     public void AddNewCell(BaseCell _in)
     {
+        _in.isSelected = true;
         allSelectableUnits.Add(_in);
         selectedUnits.Add(_in);
         CheckSelectedUnits();
@@ -85,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     public void RemoveDeadCell(BaseCell _in)
     {
+        _in.isSelected = false;
         allSelectableUnits.Remove(_in);
         selectedUnits.Remove(_in);
         CheckSelectedUnits();
@@ -132,6 +134,10 @@ public class PlayerController : MonoBehaviour
         else
         { GUISelectRect.yMin = -Input.mousePosition.y + Screen.height; }
 
+        foreach (BaseCell item in selectedUnits)
+        {
+            item.isSelected = false;
+        }
         selectedUnits.Clear();
         foreach (BaseCell item in allSelectableUnits)
         {
@@ -181,12 +187,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer))
         {
-            foreach (BaseCell item in selectedUnits)
-            {
-                //item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Set their destination
-                item.SetPrimaryTarget(null);
-                item.Move(hitInfo.point); // Set their destination
-            }
+            EventManager.Move(hitInfo.point);
         }
 
     }
@@ -200,100 +201,52 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer))
         {
-            foreach (BaseCell item in selectedUnits)
-            {
-                //item.Move(Camera.main.ScreenToWorldPoint(Input.mousePosition)); // Set their destination
-                item.AttackMove(hitInfo.point); // Set their destination
-            }
+            EventManager.AttackMove(hitInfo.point);
         }
     }
 
     public void UnitAttack()
     {
-        foreach (BaseCell item in selectedUnits) // For each of the player's selected units
-        {
-            item.Attack(selectedTargets[0]); // Set the target cell to attack
-        }
+        EventManager.Attack(selectedTargets[0]);
+
     }
+
 
     public void UnitSplit()
     {
-        foreach (var item in selectedUnits)
-        {
-            switch (item.celltype) // Dependent on the type of cell it is
-            {
-                case CellType.STEM_CELL: // If it is a stem cell
-                    item.PerfectSplit();
+        EventManager.Split();
                     CheckSelectedUnits();
-                    break;
-                case CellType.HEAT_CELL: // If it is a heat cell
-                case CellType.COLD_CELL: // OR If it is a cold cell
-                    item.CancerousSplit();
-                    CheckSelectedUnits();
-                    break;
-
-                default:
-                    break;
-            }
-        }
-        
-
-        selectedUnits.RemoveAll(item => item == null);
-        selectedTargets.RemoveAll(item => item == null);
-        allSelectableTargets.RemoveAll(item => item == null);
     }
 
     public void UnitEvolve(int cellNum)
     {
-        foreach (var item in selectedUnits)
+        switch (cellNum)
         {
-            switch (cellNum)
-            {
-                case 0: //turn into heat cell
-                    item.Mutation(CellType.HEAT_CELL);
-                    CheckSelectedUnits();
-                    break;
-                case 1: //turn into cold cell
-                    item.Mutation(CellType.COLD_CELL);
-                    CheckSelectedUnits();
-                    break;
-                case 2: //turn into acidic cell
-                    if (item.GetComponent<StemCell>().isInAcidic)
-                    {
-                        item.Mutation(CellType.ACIDIC_CELL);
-                        CheckSelectedUnits();
-                    }
-                    break;
-                case 3: //turn into alkali cell
-
-                    if (item.GetComponent<StemCell>().isInAlkali)
-                    {
-                        item.Mutation(CellType.ALKALI_CELL);
-                        CheckSelectedUnits();
-                    }
-                    break;
-                default:
-                    break;
-            }
+            case 0: //turn into heat cell
+                EventManager.Evolve(CellType.HEAT_CELL);
+                break;
+            case 1: //turn into cold cell
+                EventManager.Evolve(CellType.COLD_CELL);
+                break;
+            case 2: //turn into acidic cell
+                EventManager.Evolve(CellType.ACIDIC_CELL);
+                break;
+            case 3: //turn into alkali cell
+                EventManager.Evolve(CellType.ALKALI_CELL);
+                break;
+            default:
+                break;
         }
-        selectedUnits.RemoveAll(item => item == null);
-        selectedTargets.RemoveAll(item => item == null);
-        allSelectableTargets.RemoveAll(item => item == null);
     }
 
     public void UnitHarvest()
     {
-        foreach (BaseCell item in selectedUnits) // For each of the player's selected units
-        {
-            item.Consume(selectedTargets[0]); // Set the target protein to consume
-        }
+        EventManager.Consume(selectedTargets[0]);
     }
 
     public void UnitIncubation()
     {
-        selectedUnits.RemoveAll(item => item == null);
-        selectedTargets.RemoveAll(item => item == null);
-        allSelectableTargets.RemoveAll(item => item == null);
+
     }
 
     public void DoubleClick()
@@ -385,19 +338,14 @@ public class PlayerController : MonoBehaviour
 
     public void UnitStop()
     {
-        foreach (BaseCell item in selectedUnits) // For each of the player's selected units
-        {
-            selectedTargets.Clear();
-            item.SetTargets(selectedTargets);
-            item.SetPrimaryTarget(null);
-            item.Move(item.transform.position);
-            item.currentState = CellState.IDLE;
-        }
+        selectedTargets.Clear();
+        EventManager.Stop();
     }
 
     // Update is called once per frame
     void Update()
     {
+        selectedUnits.RemoveAll(item => item == null);
         selectedTargets.RemoveAll(item => item == null);
         allSelectableTargets.RemoveAll(item => item == null);
 
@@ -407,6 +355,7 @@ public class PlayerController : MonoBehaviour
             if (selectedUnits[i] == null)
             {
                 selectedUnits.RemoveAt(i);
+
             }
             else
                 i++;
@@ -445,9 +394,7 @@ public class PlayerController : MonoBehaviour
                     CheckSelectedUnits();
                 }
             }
-            selectedUnits.RemoveAll(item => item == null);
-            selectedTargets.RemoveAll(item => item == null);
-            allSelectableTargets.RemoveAll(item => item == null);
+
         }
 
         if (Input.GetKeyDown(KeyCode.V)) // If the player presses V
@@ -460,9 +407,6 @@ public class PlayerController : MonoBehaviour
                     CheckSelectedUnits();
                 }
             }
-            selectedUnits.RemoveAll(item => item == null);
-            selectedTargets.RemoveAll(item => item == null);
-            allSelectableTargets.RemoveAll(item => item == null);
         }
 
         if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
@@ -472,9 +416,7 @@ public class PlayerController : MonoBehaviour
                 item.Mutation(CellType.HEAT_CELL);
                 CheckSelectedUnits();
             }
-            selectedUnits.RemoveAll(item => item == null);
-            selectedTargets.RemoveAll(item => item == null);
-            allSelectableTargets.RemoveAll(item => item == null);
+
         }
 
         if (Input.GetKeyDown(KeyCode.Z)) // If the player presses Z
@@ -483,9 +425,7 @@ public class PlayerController : MonoBehaviour
             {
                 item.Mutation(CellType.COLD_CELL);
             }
-            selectedUnits.RemoveAll(item => item == null);
-            selectedTargets.RemoveAll(item => item == null);
-            allSelectableTargets.RemoveAll(item => item == null);
+
             CheckSelectedUnits();
         }
 
@@ -515,6 +455,7 @@ public class PlayerController : MonoBehaviour
                         BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
                         if (allSelectableUnits.Contains(hitCell))
                         {
+                            hitInfo.collider.gameObject.GetComponent<BaseCell>().isSelected = true;
                             selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
                         }
                     }
