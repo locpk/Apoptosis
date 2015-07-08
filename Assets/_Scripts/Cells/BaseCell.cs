@@ -37,7 +37,6 @@ public enum CellState
 /// </summary>
 public class BaseCell : MonoBehaviour
 {
-
     public GameObject gCancerCellPrefab;
     public GameObject gStemCellPrefab;
     public GameObject gHeatCellPrefab;
@@ -77,7 +76,6 @@ public class BaseCell : MonoBehaviour
     public float depleteAmount = 3.0f; // per second
     public float attackCooldown;
     public float splitCooldown;
-
 
     #region RPC Methods
 
@@ -379,6 +377,7 @@ public class BaseCell : MonoBehaviour
         navAgent.speed = moveSpeed;
        // photonView = GetComponent<PhotonView>();
         //  isMine = photonView.isMine;
+
     }
 
     // Use this for initialization
@@ -387,6 +386,14 @@ public class BaseCell : MonoBehaviour
         navAgent.enabled = false;
         navAgent.updateRotation = false;
         navObstacle.enabled = true;
+        if (!isMine)
+        {
+            if (this.gameObject != null)
+            {
+                GameObject obj = this.gameObject;
+                obj.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+            }
+        }
     }
 
     protected void bUpdate()
@@ -405,7 +412,17 @@ public class BaseCell : MonoBehaviour
 
                 navAgent.enabled = false;
                 navObstacle.enabled = true;
-                currentState = CellState.IDLE;
+                if (primaryTarget != null)
+                {
+                    if (primaryTarget.tag == "Protein")
+                    {
+                        currentState = CellState.CONSUMING;
+                    }
+                }
+                else
+                {
+                    currentState = CellState.IDLE;
+                }
             }
         }
         else if (currentState == CellState.CONSUMING)
@@ -469,6 +486,11 @@ public class BaseCell : MonoBehaviour
                 currentState = CellState.IDLE;
             }
         }
+        if (!isMine)
+        {
+            GameObject obj = this.gameObject;
+            obj.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+        }
     }
 
     public bool isStopped()
@@ -504,11 +526,9 @@ public class BaseCell : MonoBehaviour
         {
             transform.FindChild("Nucleus").transform.localScale = new Vector3(100.0f / MAX_PROTEIN, 100.0f / MAX_PROTEIN, 100.0f / MAX_PROTEIN);
         }
-
     }
 
     protected void bLateUpdate()
     {
-
     }
 }

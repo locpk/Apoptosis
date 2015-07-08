@@ -77,18 +77,7 @@ public class ColdCell : BaseCell
                     CancelInvoke("DamagePreSecond");
                 }
                 base.bUpdate();
-                if (primaryTarget != null)
-                {
-                    if (primaryTarget.GetComponent<BaseCell>())
-                    {
-                        currentState = CellState.ATTACK;
-                    }
-                    else if (primaryTarget.GetComponent<Protein>())
-                    {
-                        currentState = CellState.CONSUMING;
-                    }
-
-                }
+               
 
                 break;
             case CellState.ATTACK_MOVING:
