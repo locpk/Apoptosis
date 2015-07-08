@@ -19,7 +19,7 @@ public static class CancerChance
 /// </summary>
 public enum CellType
 {
-    STEM_CELL, HEAT_CELL, COLD_CELL, HEAT_CELL_TIRE2, COLD_CELL_TIRE2, ACIDIC_CELL, ALKALI_CELL, CANCER_CELL,
+    STEM_CELL, HEAT_CELL, COLD_CELL, HEAT_CELL_TIRE2, COLD_CELL_TIRE2, ACIDIC_CELL, ALKALI_CELL, CANCER_CELL,NERVE_CELL
 }
 
 
@@ -155,7 +155,15 @@ public class BaseCell : MonoBehaviour
     public void Die()
     {
         isMine = false;
-        PlayerController.cap--;
+        if (celltype != CellType.CANCER_CELL)
+        {
+            PlayerController.cap--;
+            if (PlayerController.cap < 0)
+            {
+                PlayerController.cap = 0;
+            }
+        }
+
         GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
         //transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         //GetComponent<SpriteRenderer>().enabled = false;
@@ -391,10 +399,7 @@ public class BaseCell : MonoBehaviour
         navObstacle = GetComponent<NavMeshObstacle>();
         navAgent.speed = moveSpeed;
 
-        if (isMine)
-        {
-            PlayerController.cap++;
-        }
+       
         // photonView = GetComponent<PhotonView>();
         //  isMine = photonView.isMine;
 
@@ -406,7 +411,7 @@ public class BaseCell : MonoBehaviour
         navAgent.enabled = false;
         navAgent.updateRotation = false;
         navObstacle.enabled = true;
-        
+
     }
 
     protected void bUpdate()
@@ -499,7 +504,7 @@ public class BaseCell : MonoBehaviour
                 currentState = CellState.IDLE;
             }
         }
-        if (!isMine && transform.tag != "Animation")
+        if (!isMine && transform.tag != "Animation" && this.celltype != CellType.CANCER_CELL)
         {
 
             this.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.color = Color.red;
