@@ -19,6 +19,14 @@ public class EventManager : MonoBehaviour
         OnMove(_dest);
     }
 
+    public delegate void StopEvent();
+    public static event StopEvent OnStop;
+
+    public static void Stop()
+    {
+        OnStop();
+    }
+
     public delegate void AttackMoveEvent(Vector3 _dest);
     public static event AttackMoveEvent OnAttackMove;
 

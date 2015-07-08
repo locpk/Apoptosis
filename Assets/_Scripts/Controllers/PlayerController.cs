@@ -286,14 +286,8 @@ public class PlayerController : MonoBehaviour
 
     public void UnitStop()
     {
-        foreach (BaseCell item in selectedUnits) // For each of the player's selected units
-        {
-            selectedTargets.Clear();
-            item.SetTargets(selectedTargets);
-            item.SetPrimaryTarget(null);
-            item.Move(item.transform.position);
-            item.currentState = CellState.IDLE;
-        }
+        selectedTargets.Clear();
+        EventManager.Stop();
     }
 
     // Update is called once per frame

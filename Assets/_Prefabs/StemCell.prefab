@@ -23,6 +23,7 @@ GameObject:
   - 114: {fileID: 11481132}
   - 114: {fileID: 11406754}
   - 114: {fileID: 11469932}
+  - 114: {fileID: 11467484}
   m_Layer: 0
   m_Name: StemCell
   m_TagString: Unit
@@ -194,6 +195,17 @@ MonoBehaviour:
   stemtoCold: {fileID: 190572, guid: 03026532dd50e414d91a085b722f86c6, type: 2}
   stemtoAlkali: {fileID: 108478, guid: 0952dbaf7191c144d9f1aac0bb704ced, type: 2}
   stemtoAcidic: {fileID: 146776, guid: 29147b9cb59143a41a45534e611f3390, type: 2}
+--- !u!114 &11467484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3277305bd7a2f03428631da060b500bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11469932
 MonoBehaviour:
   m_ObjectHideFlags: 1
