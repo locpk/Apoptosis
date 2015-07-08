@@ -18,6 +18,7 @@ GameObject:
   - 114: {fileID: 11443562}
   - 114: {fileID: 11434914}
   - 114: {fileID: 11474616}
+  - 114: {fileID: 11430816}
   m_Layer: 0
   m_Name: ColdCell
   m_TagString: Unit
@@ -81,6 +82,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &11430816
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd88def841af1747840697bd7deef13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11434674
 MonoBehaviour:
   m_ObjectHideFlags: 1

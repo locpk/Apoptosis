@@ -18,6 +18,7 @@ GameObject:
   - 114: {fileID: 11494884}
   - 114: {fileID: 11445180}
   - 114: {fileID: 11476450}
+  - 114: {fileID: 11446688}
   m_Layer: 0
   m_Name: HeatCell
   m_TagString: Unit
@@ -90,6 +91,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0d9b8ef6f623bd418431e10ef3a8e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11446688
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd88def841af1747840697bd7deef13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11454602

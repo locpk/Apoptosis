@@ -228,10 +228,7 @@ public class PlayerController : MonoBehaviour
 
     public void UnitHarvest()
     {
-        foreach (BaseCell item in selectedUnits) // For each of the player's selected units
-        {
-            item.Consume(selectedTargets[0]); // Set the target protein to consume
-        }
+        EventManager.Consume(selectedTargets[0]);
     }
 
     public void UnitIncubation()
