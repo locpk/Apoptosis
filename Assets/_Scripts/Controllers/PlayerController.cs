@@ -170,6 +170,10 @@ public class PlayerController : MonoBehaviour
 
     public void UnitMove()
     {
+        if (selectedUnits.Count <= 0)
+        {
+            return;
+        }
         // Modified by using raycast
         RaycastHit hitInfo;
         Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -177,6 +181,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer))
         {
             EventManager.Move(hitInfo.point);
+            GameObject.Instantiate(movePin, hitInfo.point, Quaternion.Euler(90.0f,0.0f,0.0f));
         }
     }
 
@@ -333,13 +338,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C)) // If the player presses C
         {
-            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
-            {
-                if (item.isInAcidic)
-                {
-                    item.Mutation(CellType.ACIDIC_CELL);
-                }
-            }
+      
+            EventManager.Evolve(CellType.ACIDIC_CELL);
 
         }
 
