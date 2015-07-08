@@ -99,6 +99,10 @@ public class HeatCell : BaseCell
                 }
                 else
                 {
+                    if (IsInvoking("DamagePreSecond"))
+                    {
+                        CancelInvoke("DamagePreSecond");
+                    }
                     currentState = CellState.IDLE;
                 }
                 break;

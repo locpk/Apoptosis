@@ -18,6 +18,15 @@ public class PlayerController : MonoBehaviour
     public GameObject movePin;
     public GameObject attackPin;
 
+    public int NumStemCells = 0;
+    public int NumHeatCells = 0;
+    public int NumColdCells = 0;
+    public int NumAcidicCells = 0;
+    public int NumAlkaliCells = 0;
+    public int NumNerveCells = 0;
+    public int NumTierTwoCold = 0;
+    public int NumTierTwoHeat = 0;
+
 
     public List<BaseCell> allSelectableUnits;
     public List<BaseCell> selectedUnits;
@@ -72,6 +81,7 @@ public class PlayerController : MonoBehaviour
         _in.isSelected = true;
         allSelectableUnits.Add(_in);
         selectedUnits.Add(_in);
+        CheckSelectedUnits();
     }
 
     public void RemoveDeadCell(BaseCell _in)
@@ -79,6 +89,7 @@ public class PlayerController : MonoBehaviour
         _in.isSelected = false;
         allSelectableUnits.Remove(_in);
         selectedUnits.Remove(_in);
+        CheckSelectedUnits();
     }
 
     public void RemoveTarget(GameObject _in)
@@ -183,6 +194,7 @@ public class PlayerController : MonoBehaviour
             EventManager.Move(hitInfo.point);
             GameObject.Instantiate(movePin, hitInfo.point, Quaternion.Euler(90.0f,0.0f,0.0f));
         }
+
     }
 
 
@@ -208,6 +220,7 @@ public class PlayerController : MonoBehaviour
     public void UnitSplit()
     {
         EventManager.Split();
+        CheckSelectedUnits();
     }
 
     public void UnitEvolve(int cellNum)
@@ -229,6 +242,7 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
+        CheckSelectedUnits();
     }
 
     public void UnitHarvest()
@@ -252,6 +266,7 @@ public class PlayerController : MonoBehaviour
             {
                 selectedUnits.Add(item); // Add the cell to the players selected units
                 item.isSelected = true;
+                CheckSelectedUnits();
             }
         }
     }
@@ -268,9 +283,20 @@ public class PlayerController : MonoBehaviour
     {
         if (GUISelectRect.height != 0 && GUISelectRect.width != 0)
         {
-            GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+            if (!isOverUI)
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    GUI.color = new Color(0.0f, 0.0f, 1.0f, 0.5f);
+                }
+                else
+                {
+                    GUI.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+                }
 
-            GUI.DrawTexture(GUISelectRect, selector, ScaleMode.StretchToFill, true);
+                GUI.DrawTexture(GUISelectRect, selector, ScaleMode.StretchToFill, true);
+            }
+
         }
         foreach (BaseCell item in selectedUnits)
         {
@@ -283,10 +309,61 @@ public class PlayerController : MonoBehaviour
                 GUI.DrawTexture(location, selector);
             }
         }
+
+        if (Time.timeScale > 0.0f)
+        {
+            GUI.BeginGroup(new Rect(Screen.width * 0.5f - 320, 15, 900, 100));
+            GUI.Box(new Rect(0, 0, 75, 60), "Stem Cells: ");
+            GUI.Label(new Rect(35, 35, 50, 50), NumStemCells.ToString());
+
+            GUI.Box(new Rect(80, 0, 75, 60), "Heat Cells: ");
+            GUI.Label(new Rect(115, 35, 50, 50), NumHeatCells.ToString());
+
+            GUI.Box(new Rect(160, 0, 75, 60), "Cold Cells: ");
+            GUI.Label(new Rect(195, 35, 50, 50), NumColdCells.ToString());
+
+            GUI.Box(new Rect(240, 0, 75, 60), "Acidic Cells: ");
+            GUI.Label(new Rect(275, 35, 50, 50), NumAcidicCells.ToString());
+
+            GUI.Box(new Rect(320, 0, 75, 60), "Alkali Cells: ");
+            GUI.Label(new Rect(355, 35, 50, 50), NumAlkaliCells.ToString());
+
+            GUI.Box(new Rect(400, 0, 75, 60), "Nerve Cells: ");
+            GUI.Label(new Rect(435, 35, 50, 50), NumNerveCells.ToString());
+
+            GUI.Box(new Rect(480, 0, 75, 60), "Tier 2\nHeat Cells: ");
+            GUI.Label(new Rect(515, 35, 50, 50), NumTierTwoHeat.ToString());
+
+            GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
+            GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
+
+            GUI.EndGroup();
+        }
+
+        if (allSelectableUnits.Count <= 0)
+        {
+            GUI.BeginGroup(new Rect(Screen.width * 0.5f - 300, Screen.height * 0.5f - 100, 500, 300));
+            GUI.Box(new Rect(0, 0, 500, 300), "\n\n\n\n\n\n\nYou Lose\nPress Enter to Continue");
+            GUI.EndGroup();
+        }
+
     }
 
     public void FixedUpdate()
     {
+        //Debug.Log(allSelectableUnits.Count);
+        if (allSelectableUnits.Count <= 0)
+        {
+            if (Input.GetKey(KeyCode.Return))
+            {
+                Application.LoadLevel("Credits");
+            }
+        }
+
+
+
+
+
     }
 
     public void UnitStop()
@@ -329,6 +406,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) // If the player presses D
         {
             UnitSplit();
+            CheckSelectedUnits();
         }
 
         if (Input.GetKeyDown(KeyCode.S)) // If the player presses S
@@ -338,51 +416,45 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C)) // If the player presses C
         {
-      
             EventManager.Evolve(CellType.ACIDIC_CELL);
+            CheckSelectedUnits();
 
         }
 
         if (Input.GetKeyDown(KeyCode.V)) // If the player presses V
         {
-            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
-            {
-                if (item.isInAlkali)
-                {
-                    item.Mutation(CellType.ALKALI_CELL);
-                }
-            }
+            EventManager.Evolve(CellType.ALKALI_CELL);
+            CheckSelectedUnits();
         }
 
         if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
         {
-            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits)) // For each of the player's selected units
-            {
-                item.Mutation(CellType.HEAT_CELL);
-            }
+            EventManager.Evolve(CellType.HEAT_CELL);
+            CheckSelectedUnits();
 
         }
 
         if (Input.GetKeyDown(KeyCode.Z)) // If the player presses Z
         {
-            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
-            {
-                item.Mutation(CellType.COLD_CELL);
-            }
+            EventManager.Evolve(CellType.COLD_CELL);
 
+            CheckSelectedUnits();
         }
 
         if (!isOverUI)
         {
             if (Input.GetMouseButtonDown(0)) // If the player left-clicks
             {
-
+                GUISelectRect.xMin = Input.mousePosition.x;
+                GUISelectRect.yMin = Input.mousePosition.y;
+                GUISelectRect.xMax = Input.mousePosition.x;
+                GUISelectRect.yMax = Input.mousePosition.y;
 
                 GUISelectRect.xMin = Input.mousePosition.x;
                 GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
                 origin = Input.mousePosition;
                 origin.y = -origin.y + Screen.height;
-
+                CheckSelectedUnits();
             }
             else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
             {
@@ -403,6 +475,7 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                 }
+                CheckSelectedUnits();
             }
             else if (Input.GetMouseButton(0)) // If the player has left-click held down
             {
@@ -410,59 +483,108 @@ public class PlayerController : MonoBehaviour
                 UnitSelection(origin);
 
             }
-        }
 
-        if (Input.GetMouseButtonDown(1)) // If the player left-clicks
-        {
-            GUISelectRect.xMin = Input.mousePosition.x;
-            GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
-            origin = Input.mousePosition;
-            origin.y = -origin.y + Screen.height;
-        }
-        else if (Input.GetMouseButtonUp(1)) // When the player releases left-click
-        {
-
-            GUISelectRect.yMax = GUISelectRect.yMin;
-            GUISelectRect.xMax = GUISelectRect.xMin;
-            if (selectedTargets.Count == 0)
+            if (Input.GetMouseButtonDown(1)) // If the player right-clicks
             {
-                RaycastHit hitInfo;
-                Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                GUISelectRect.xMin = Input.mousePosition.x;
+                GUISelectRect.yMin = Input.mousePosition.y;
+                GUISelectRect.xMax = Input.mousePosition.x;
+                GUISelectRect.yMax = Input.mousePosition.y;
 
-                if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
-                {
-                    GameObject hitObject = hitInfo.collider.gameObject;
-                    if (allSelectableTargets.Contains(hitObject))
-                    {
-                        selectedTargets.Add(hitObject);
-                    }
-                }
+                GUISelectRect.xMin = Input.mousePosition.x;
+                GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
+                origin = Input.mousePosition;
+                origin.y = -origin.y + Screen.height;
             }
-            if (selectedTargets.Count > 0)
+            else if (Input.GetMouseButtonUp(1)) // When the player releases right-click
             {
-                foreach (BaseCell item in selectedUnits)
+
+                GUISelectRect.yMax = GUISelectRect.yMin;
+                GUISelectRect.xMax = GUISelectRect.xMin;
+                if (selectedTargets.Count == 0)
                 {
-                    item.SetTargets(selectedTargets);
-                    item.SetPrimaryTarget(selectedTargets[0]);
+                    RaycastHit hitInfo;
+                    Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                    if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
+                    {
+                        GameObject hitObject = hitInfo.collider.gameObject;
+                        if (allSelectableTargets.Contains(hitObject))
+                        {
+                            selectedTargets.Add(hitObject);
+                        }
+                    }
+
+
                 }
-                if (selectedTargets[0].tag == "Protein")
+                if (selectedTargets.Count > 0)
                 {
-                    UnitHarvest();
+                    foreach (BaseCell item in selectedUnits)
+                    {
+                        item.SetTargets(selectedTargets);
+                        item.SetPrimaryTarget(selectedTargets[0]);
+                    }
+                    if (selectedTargets[0].tag == "Protein")
+                    {
+                        UnitHarvest();
+                    }
+                    else
+                        UnitAttack();
                 }
                 else
-                    UnitAttack();
-            }
-            else
-                UnitMove();
+                    UnitMove();
 
+            }
+            else if (Input.GetMouseButton(1)) // If the player has right-click held down
+            {
+                TargetSelection(origin);
+            }
         }
-        else if (Input.GetMouseButton(1)) // If the player has left-click held down
-        {
-            TargetSelection(origin);
-        }
-        else if (Input.GetMouseButton(2))
+
+        if (Input.GetMouseButton(2))
         {
             UnitAttackMove();
+        }
+    }
+
+    public void CheckSelectedUnits()
+    {
+        NumStemCells = 0;
+        NumHeatCells = 0;
+        NumColdCells = 0;
+        NumAcidicCells = 0;
+        NumAlkaliCells = 0;
+        NumTierTwoCold = 0;
+        NumTierTwoHeat = 0;
+
+        foreach (var item in selectedUnits)
+        {
+            switch (item.celltype)
+            {
+                case CellType.STEM_CELL:
+                    NumStemCells++;
+                    break;
+                case CellType.HEAT_CELL:
+                    NumHeatCells++;
+                    break;
+                case CellType.COLD_CELL:
+                    NumColdCells++;
+                    break;
+                case CellType.ACIDIC_CELL:
+                    NumAcidicCells++;
+                    break;
+                case CellType.ALKALI_CELL:
+                    NumAlkaliCells++;
+                    break;
+                case CellType.COLD_CELL_TIRE2:
+                    NumTierTwoCold++;
+                    break;
+                case CellType.HEAT_CELL_TIRE2:
+                    NumTierTwoHeat++;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
