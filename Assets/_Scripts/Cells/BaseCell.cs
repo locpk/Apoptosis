@@ -66,7 +66,7 @@ public class BaseCell : MonoBehaviour
     public Vector3 destination;
     public List<GameObject> targets;
     public GameObject primaryTarget;
-   // public PhotonView photonView;
+    // public PhotonView photonView;
     public float currentProtein;
     public float fovRadius;
     public float attackDamage;
@@ -155,6 +155,7 @@ public class BaseCell : MonoBehaviour
     public void Die()
     {
         isMine = false;
+        PlayerController.cap--;
         GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
         //transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         //GetComponent<SpriteRenderer>().enabled = false;
@@ -232,7 +233,7 @@ public class BaseCell : MonoBehaviour
     #region Special abilities
     public void PerfectSplit()
     {
-        if (currentLevel >= 5 || currentProtein <= 1.0f)
+        if (currentLevel >= 5 || currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
         {
             return;
         }
@@ -256,7 +257,7 @@ public class BaseCell : MonoBehaviour
                 cellSplitAnimation.GetComponent<BaseCell>().currentLevel = currentLevel + 1;
                 cellSplitAnimation.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
                 cellSplitAnimation.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
-               // GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
+                // GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
                 this.currentState = CellState.DEAD;
                 break;
             default:
@@ -270,7 +271,7 @@ public class BaseCell : MonoBehaviour
 
     public void CancerousSplit()
     {
-        if (currentLevel >= 5 || currentProtein <= 1.0f)
+        if (currentLevel >= 5 || currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
         {
             return;
         }
@@ -389,7 +390,12 @@ public class BaseCell : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
         navObstacle = GetComponent<NavMeshObstacle>();
         navAgent.speed = moveSpeed;
-       // photonView = GetComponent<PhotonView>();
+
+        if (isMine)
+        {
+            PlayerController.cap++;
+        }
+        // photonView = GetComponent<PhotonView>();
         //  isMine = photonView.isMine;
 
     }
@@ -400,24 +406,17 @@ public class BaseCell : MonoBehaviour
         navAgent.enabled = false;
         navAgent.updateRotation = false;
         navObstacle.enabled = true;
-        if (!isMine)
-        {
-            if (this.gameObject != null)
-            {
-                GameObject obj = this.gameObject;
-                obj.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
-            }
-        }
+        
     }
 
     protected void bUpdate()
     {
         if (currentState == CellState.IDLE)
         {
-             if (IsInvoking("ConsumePerSecond"))
-                {
-                    CancelInvoke("ConsumePerSecond");
-                }
+            if (IsInvoking("ConsumePerSecond"))
+            {
+                CancelInvoke("ConsumePerSecond");
+            }
         }
         if (currentState == CellState.MOVING)
         {
@@ -469,13 +468,13 @@ public class BaseCell : MonoBehaviour
             }
             else
             {
-               
+
                 currentState = CellState.IDLE;
             }
         }
         else if (currentState == CellState.ATTACK_MOVING)
         {
-            
+
             List<GameObject> theirUnits = GameObjectManager.FindTheirUnits();
             if (theirUnits.Count > 0)
             {
@@ -488,11 +487,11 @@ public class BaseCell : MonoBehaviour
                             Attack(enemy);
                             return;
                         }
-                        
+
                     }
                 }
             }
-             if (isStopped() )
+            if (isStopped())
             {
 
                 navAgent.enabled = false;
@@ -500,10 +499,10 @@ public class BaseCell : MonoBehaviour
                 currentState = CellState.IDLE;
             }
         }
-        if (!isMine)
+        if (!isMine && transform.tag != "Animation")
         {
-            GameObject obj = this.gameObject;
-            obj.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+
+            this.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.color = Color.red;
         }
     }
 
@@ -520,7 +519,7 @@ public class BaseCell : MonoBehaviour
                         return true;
                     }
                 }
-            } 
+            }
         }
         return false;
     }

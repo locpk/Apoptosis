@@ -298,6 +298,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        GUI.color = new Color(0.0f, 1.0f, 0.0f,1.0f);
         foreach (BaseCell item in selectedUnits)
         {
             if (item)
@@ -337,6 +338,8 @@ public class PlayerController : MonoBehaviour
             GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
             GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
 
+            GUI.Box(new Rect(720, 0, 75, 60), "Cap: ");
+            GUI.Label(new Rect(755, 35, 50, 50), cap.ToString());
             GUI.EndGroup();
         }
 
