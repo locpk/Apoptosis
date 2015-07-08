@@ -90,7 +90,21 @@ public class BaseCell : MonoBehaviour
     //}
     #endregion
 
-
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(transform.position);
+            stream.SendNext(currentProtein);
+        }
+        else
+        {
+            // Network player, receive data
+            this.transform.position = (Vector3)stream.ReceiveNext();
+            this.currentProtein = (float)stream.ReceiveNext();
+        }
+    }
 
 
     #region Standard Actions
