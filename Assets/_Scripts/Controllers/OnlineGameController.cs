@@ -74,7 +74,7 @@ public class OnlineGameController : Photon.PunBehaviour
 
     void SpawnPlayerUnits()
     {
-        PhotonNetwork.Instantiate("StemCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0);
+        PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("StemCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0).GetComponent<BaseCell>());
     }
 
     void Rematch()
