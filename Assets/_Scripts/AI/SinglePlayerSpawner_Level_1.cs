@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SinglePlayerSpawner : MonoBehaviour {
+public class SinglePlayerSpawner_Level_1 : MonoBehaviour {
 
     public List<Transform> enermyCellSet;
     public List<Transform> spawnAreas;
     public List<float> spawningWavesInTime;         // in sec, total 8 waves
     public List<int> spawnAmountPerWave;          // each wave has amount of cells
 
-    private List<GameObject> spawnedList;       
+    private List<Transform> spawnedList;       
 
     private int waveIndex = 0;
     private float timeSinceLevelStart = 0.0f;
@@ -17,7 +17,7 @@ public class SinglePlayerSpawner : MonoBehaviour {
 
 
     void Awake () {
-
+        spawnedList = new List<Transform>();
     }
 
 	// Use this for initialization
@@ -27,14 +27,15 @@ public class SinglePlayerSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        timeSinceLevelStart += Time.deltaTime;
-
-        if (timeSinceLevelStart >= spawningWavesInTime[waveIndex]) {
-            Debug.Log("Time: " + timeSinceLevelStart + " wave: " + waveIndex + " count: " + spawningWavesInTime [waveIndex]);
-            for (int i = 0; i < spawnAmountPerWave[waveIndex]; i++) {
-                SpawnEnemy(Random.Range(0, enermyCellSet.Count), Random.Range(0, spawnAreas.Count));
+        if (spawningWavesInTime.Count >= waveIndex) {
+            timeSinceLevelStart += Time.deltaTime;
+            if (timeSinceLevelStart >= spawningWavesInTime[waveIndex]) {
+                Debug.Log("Time: " + timeSinceLevelStart + " wave: " + waveIndex + " count: " + spawningWavesInTime [waveIndex]);
+                for (int i = 0; i < spawnAmountPerWave[waveIndex]; i++) {
+                    SpawnEnemy(Random.Range(0, enermyCellSet.Count), Random.Range(0, spawnAreas.Count));
+                }
+                waveIndex++;
             }
-            waveIndex++;
         }
 	}
 
@@ -48,9 +49,9 @@ public class SinglePlayerSpawner : MonoBehaviour {
         float _z = area.transform.position.z + Random.Range(-area.transform.localScale.z * 5, area.transform.localScale.z * 5);
         spawnPos = new Vector3(_x, area.transform.position.y + 0.5f, _z);
         spwanAngle.eulerAngles = new Vector3(90, 0, 0);
-        BaseCell baseReadySpawnCell = enermyCellSet[cellId].gameObject.GetComponent<BaseCell>();
+        //BaseCell baseReadySpawnCell = enermyCellSet[cellId].gameObject.GetComponent<BaseCell>();
 
-        GameObject spawnedCell = Instantiate(baseReadySpawnCell, spawnPos, spwanAngle) as GameObject;
+        Transform spawnedCell = Instantiate(enermyCellSet[cellId], spawnPos, spwanAngle) as Transform;
         
         if (spawnedCell) {
             spawnedList.Add(spawnedCell);
@@ -58,7 +59,7 @@ public class SinglePlayerSpawner : MonoBehaviour {
 
     }
 
-    List<GameObject> GetSpawnedList() {
+    public List<Transform> GetSpawnedList() {
         return spawnedList;
     }
 
