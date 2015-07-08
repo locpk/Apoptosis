@@ -146,7 +146,7 @@ public class BaseCell : MonoBehaviour
         GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
         transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
-        Destroy(gameObject, 5.0f);
+        Destroy(gameObject);
     }
 
     public virtual void Attack(GameObject _target)

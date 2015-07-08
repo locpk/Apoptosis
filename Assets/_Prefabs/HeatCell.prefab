@@ -44,7 +44,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 66.0299988, y: 1.5, z: -73.75}
+  m_LocalPosition: {x: -.409999996, y: -0, z: -17.4699993}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 495744}
@@ -119,6 +119,9 @@ MonoBehaviour:
   attackCooldown: 2
   splitCooldown: 0
   fireball: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
+  Tier2Heat: {fileID: 152348, guid: 983b6959b3692f34c83f783b1017eb01, type: 2}
+  Inheat: 1
+  controller: {fileID: 0}
 --- !u!135 &13587872
 SphereCollider:
   m_ObjectHideFlags: 1

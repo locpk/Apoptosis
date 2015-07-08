@@ -26,7 +26,7 @@ public class AcidicCell : BaseCell
     {
         base.bAwake();
         multidamagesources += nothing;
-        InvokeRepeating("multidamagesources", 1.0f, 1.0f);
+          InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
     }
 
     void DamagePreSecond()
@@ -35,6 +35,11 @@ public class AcidicCell : BaseCell
         {
             primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
         }
+    }
+    void MUltiDMg()
+    {
+        multidamagesources();
+
     }
     public void AreaDamage()
     {
