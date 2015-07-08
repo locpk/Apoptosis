@@ -140,7 +140,7 @@ GUITexture:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124224}
   m_Enabled: 1
-  m_Texture: {fileID: 2800000, guid: 62930acde91c45145abb216c489fef63, type: 3}
+  m_Texture: {fileID: 2800000, guid: 56f4f93404640f645826c46a8e509ccc, type: 3}
   m_Color: {r: .5, g: .5, b: .5, a: .5}
   m_PixelInset:
     serializedVersion: 2
@@ -160,7 +160,7 @@ GUIText:
   m_GameObject: {fileID: 179230}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: '[                                                      ]'
+  m_Text: '[                                                  ]'
   m_Anchor: 0
   m_Alignment: 0
   m_PixelOffset: {x: 0, y: 0}
