@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour
     public void UnitSplit()
     {
         EventManager.Split();
-                    CheckSelectedUnits();
+        CheckSelectedUnits();
     }
 
     public void UnitEvolve(int cellNum)
@@ -237,6 +237,7 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
+        CheckSelectedUnits();
     }
 
     public void UnitHarvest()
@@ -324,6 +325,13 @@ public class PlayerController : MonoBehaviour
             GUI.EndGroup();
         }
 
+        if (allSelectableUnits.Count <= 0)
+        {
+            GUI.BeginGroup(new Rect(Screen.width * 0.5f - 300, Screen.height * 0.5f - 100, 500, 300));
+            GUI.Box(new Rect(0, 0, 500, 300), "\n\n\n\n\n\n\nYou Lose\nPress Enter to Continue");
+            GUI.EndGroup();
+        }
+
     }
 
     public void FixedUpdate()
@@ -331,9 +339,16 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(allSelectableUnits.Count);
         if (allSelectableUnits.Count <= 0)
         {
-            //Time.timeScale = 0.0f;
-            Application.LoadLevel("Credits");
+            if (Input.GetKey(KeyCode.Return))
+            {
+                Application.LoadLevel("Credits");
+            }
         }
+
+         
+
+
+
     }
 
     public void UnitStop()
@@ -386,45 +401,27 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C)) // If the player presses C
         {
-            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
-            {
-                if (item.isInAcidic)
-                {
-                    item.Mutation(CellType.ACIDIC_CELL);
-                    CheckSelectedUnits();
-                }
-            }
+            EventManager.Evolve(CellType.ACIDIC_CELL);
+            CheckSelectedUnits();
 
         }
 
         if (Input.GetKeyDown(KeyCode.V)) // If the player presses V
         {
-            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
-            {
-                if (item.isInAlkali)
-                {
-                    item.Mutation(CellType.ALKALI_CELL);
-                    CheckSelectedUnits();
-                }
-            }
+            EventManager.Evolve(CellType.ALKALI_CELL);
+            CheckSelectedUnits();
         }
 
         if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
         {
-            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits)) // For each of the player's selected units
-            {
-                item.Mutation(CellType.HEAT_CELL);
-                CheckSelectedUnits();
-            }
+            EventManager.Evolve(CellType.HEAT_CELL);
+            CheckSelectedUnits();
 
         }
 
         if (Input.GetKeyDown(KeyCode.Z)) // If the player presses Z
         {
-            foreach (StemCell item in System.Linq.Enumerable.OfType<StemCell>(selectedUnits))
-            {
-                item.Mutation(CellType.COLD_CELL);
-            }
+            EventManager.Evolve(CellType.COLD_CELL);
 
             CheckSelectedUnits();
         }
@@ -433,6 +430,10 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0)) // If the player left-clicks
             {
+                GUISelectRect.xMin = Input.mousePosition.x;
+                GUISelectRect.yMin = Input.mousePosition.y;
+                GUISelectRect.xMax = Input.mousePosition.x;
+                GUISelectRect.yMax = Input.mousePosition.y;
 
                 GUISelectRect.xMin = Input.mousePosition.x;
                 GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
@@ -442,7 +443,6 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
             {
-
                 GUISelectRect.yMax = GUISelectRect.yMin;
                 GUISelectRect.xMax = GUISelectRect.xMin;
                 if (selectedUnits.Count == 0)
@@ -461,7 +461,6 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 CheckSelectedUnits();
-
             }
             else if (Input.GetMouseButton(0)) // If the player has left-click held down
             {
@@ -469,59 +468,66 @@ public class PlayerController : MonoBehaviour
                 UnitSelection(origin);
 
             }
-        }
 
-        if (Input.GetMouseButtonDown(1)) // If the player right-clicks
-        {
-            GUISelectRect.xMin = Input.mousePosition.x;
-            GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
-            origin = Input.mousePosition;
-            origin.y = -origin.y + Screen.height;
-        }
-        else if (Input.GetMouseButtonUp(1)) // When the player releases right-click
-        {
-
-            GUISelectRect.yMax = GUISelectRect.yMin;
-            GUISelectRect.xMax = GUISelectRect.xMin;
-            if (selectedTargets.Count == 0)
+            if (Input.GetMouseButtonDown(1)) // If the player right-clicks
             {
-                RaycastHit hitInfo;
-                Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                GUISelectRect.xMin = Input.mousePosition.x;
+                GUISelectRect.yMin = Input.mousePosition.y;
+                GUISelectRect.xMax = Input.mousePosition.x;
+                GUISelectRect.yMax = Input.mousePosition.y;
 
-                if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
-                {
-                    GameObject hitObject = hitInfo.collider.gameObject;
-                    if (allSelectableTargets.Contains(hitObject))
-                    {
-                        selectedTargets.Add(hitObject);
-                    }
-                }
-
-
+                GUISelectRect.xMin = Input.mousePosition.x;
+                GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
+                origin = Input.mousePosition;
+                origin.y = -origin.y + Screen.height;
             }
-            if (selectedTargets.Count > 0)
+            else if (Input.GetMouseButtonUp(1)) // When the player releases right-click
             {
-                foreach (BaseCell item in selectedUnits)
+
+                GUISelectRect.yMax = GUISelectRect.yMin;
+                GUISelectRect.xMax = GUISelectRect.xMin;
+                if (selectedTargets.Count == 0)
                 {
-                    item.SetTargets(selectedTargets);
-                    item.SetPrimaryTarget(selectedTargets[0]);
+                    RaycastHit hitInfo;
+                    Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                    if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
+                    {
+                        GameObject hitObject = hitInfo.collider.gameObject;
+                        if (allSelectableTargets.Contains(hitObject))
+                        {
+                            selectedTargets.Add(hitObject);
+                        }
+                    }
+
+
                 }
-                if (selectedTargets[0].tag == "Protein")
+                if (selectedTargets.Count > 0)
                 {
-                    UnitHarvest();
+                    foreach (BaseCell item in selectedUnits)
+                    {
+                        item.SetTargets(selectedTargets);
+                        item.SetPrimaryTarget(selectedTargets[0]);
+                    }
+                    if (selectedTargets[0].tag == "Protein")
+                    {
+                        UnitHarvest();
+                    }
+                    else
+                        UnitAttack();
                 }
                 else
-                    UnitAttack();
-            }
-            else
-                UnitMove();
+                    UnitMove();
 
+            }
+            else if (Input.GetMouseButton(1)) // If the player has right-click held down
+            {
+                TargetSelection(origin);
+            }
         }
-        else if (Input.GetMouseButton(1)) // If the player has right-click held down
-        {
-            TargetSelection(origin);
-        }
-        else if (Input.GetMouseButton(2))
+
+        
+        if (Input.GetMouseButton(2))
         {
             UnitAttackMove();
         }

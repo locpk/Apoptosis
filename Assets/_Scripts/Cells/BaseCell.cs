@@ -412,7 +412,17 @@ public class BaseCell : MonoBehaviour
 
                 navAgent.enabled = false;
                 navObstacle.enabled = true;
-                currentState = CellState.IDLE;
+                if (primaryTarget != null)
+                {
+                    if (primaryTarget.tag == "Protein")
+                    {
+                        currentState = CellState.CONSUMING;
+                    }
+                }
+                else
+                {
+                    currentState = CellState.IDLE;
+                }
             }
         }
         else if (currentState == CellState.CONSUMING)
