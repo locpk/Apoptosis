@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class ColdArea : BaseArea {
 
     public float damagePerSecond;
-    public float speedDecreaseRate;
+    public float speedCoefficient = 0.5f;
+    private float enterCellSpeed;
 
 	public override void Awake() {
         base.Awake();
@@ -37,29 +38,30 @@ public class ColdArea : BaseArea {
         if (collider.gameObject.tag == "Unit") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
+            enterCellSpeed = enterCell.navAgent.speed;
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL:
-                    enterCell.navAgent.speed -= speedDecreaseRate;
+                    enterCell.navAgent.speed *= speedCoefficient;
                     break;
                 case CellType.HEAT_CELL:
-                    enterCell.navAgent.speed -= speedDecreaseRate;
+                    enterCell.navAgent.speed *= speedCoefficient;
                     break;
                 case CellType.COLD_CELL:
                     break;
                 case CellType.HEAT_CELL_TIRE2:
-                    enterCell.navAgent.speed -= speedDecreaseRate;
+                    enterCell.navAgent.speed *= speedCoefficient;
                     break;
                 case CellType.COLD_CELL_TIRE2:
                     break;
                 case CellType.ACIDIC_CELL:
-                    enterCell.navAgent.speed -= speedDecreaseRate;
+                    enterCell.navAgent.speed *= speedCoefficient;
                     break;
                 case CellType.ALKALI_CELL:
-                    enterCell.navAgent.speed -= speedDecreaseRate;
+                    enterCell.navAgent.speed *= speedCoefficient;
                     break;
                 case CellType.CANCER_CELL:
-                    enterCell.navAgent.speed -= speedDecreaseRate;
+                    enterCell.navAgent.speed *= speedCoefficient;
                     break;
                 default:
                     break;
@@ -76,29 +78,24 @@ public class ColdArea : BaseArea {
         if (collider.gameObject.tag == "Unit") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
+            enterCell.navAgent.speed = enterCellSpeed;
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL:
-                    enterCell.navAgent.speed += speedDecreaseRate;
                     break;
                 case CellType.HEAT_CELL:
-                    enterCell.navAgent.speed += speedDecreaseRate;
                     break;
                 case CellType.COLD_CELL:
                     break;
                 case CellType.HEAT_CELL_TIRE2:
-                    enterCell.navAgent.speed += speedDecreaseRate;
                     break;
                 case CellType.COLD_CELL_TIRE2:
                     break;
                 case CellType.ACIDIC_CELL:
-                    enterCell.navAgent.speed += speedDecreaseRate;
                     break;
                 case CellType.ALKALI_CELL:
-                    enterCell.navAgent.speed += speedDecreaseRate;
                     break;
                 case CellType.CANCER_CELL:
-                    enterCell.navAgent.speed += speedDecreaseRate;
                     break;
                 default:
                     break;

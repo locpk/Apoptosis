@@ -49,7 +49,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111564}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -12.3483887, y: 0, z: -11.6461792}
+  m_LocalPosition: {x: -10.21, y: 1.5, z: -8.69999981}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 428644}
@@ -102,12 +102,12 @@ MonoBehaviour:
   MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
-  isMine: 0
+  isMine: 1
   isAlive: 1
   isAIPossessed: 0
   isDepleting: 0
   isSelected: 0
-  celltype: 0
+  celltype: 6
   currentState: 0
   navAgent: {fileID: 0}
   navObstacle: {fileID: 0}
@@ -123,6 +123,7 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 0
   splitCooldown: 0
+  DOT: {fileID: 0}
 --- !u!114 &11431862
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -46,18 +46,35 @@ public class AlkaliArea : BaseArea {
                 }
                     
                 case CellType.HEAT_CELL:
+                    HeatCell heatCell = enterCell.GetComponent<HeatCell>();
+                    heatCell.multidamagesources += heatCell.AreaDamage;
+
                     break;
                 case CellType.COLD_CELL:
+                    ColdCell coldCell = enterCell.GetComponent<ColdCell>();
+                    coldCell.multidamagesources += coldCell.AreaDamage;
+
                     break;
                 case CellType.HEAT_CELL_TIRE2:
+
                     break;
                 case CellType.COLD_CELL_TIRE2:
+
                     break;
                 case CellType.ACIDIC_CELL:
+                    AcidicCell acidicCell = enterCell.GetComponent<AcidicCell>();
+                    acidicCell.multidamagesources += acidicCell.AreaDamage;
+                    acidicCell.multidamagesources += acidicCell.AreaDamage;
+
                     break;
                 case CellType.ALKALI_CELL:
+                    //AlkaliCell alkaliCell = enterCell.GetComponent<AlkaliCell>();
+                    //alkaliCell.multidamagesources += alkaliCell.AreaDamage;
+                    //alkaliCell.multidamagesources += alkaliCell.AreaDamage;
+
                     break;
                 case CellType.CANCER_CELL:
+
                     break;
                 default:
                     break;
@@ -84,18 +101,35 @@ public class AlkaliArea : BaseArea {
                 }
                     
                 case CellType.HEAT_CELL:
+                    HeatCell heatCell = enterCell.GetComponent<HeatCell>();
+                    heatCell.multidamagesources -= heatCell.AreaDamage;
+
                     break;
                 case CellType.COLD_CELL:
+                    ColdCell coldCell = enterCell.GetComponent<ColdCell>();
+                    coldCell.multidamagesources -= coldCell.AreaDamage;
+
                     break;
                 case CellType.HEAT_CELL_TIRE2:
+
                     break;
                 case CellType.COLD_CELL_TIRE2:
+
                     break;
                 case CellType.ACIDIC_CELL:
+                    AcidicCell acidicCell = enterCell.GetComponent<AcidicCell>();
+                    acidicCell.multidamagesources -= acidicCell.AreaDamage;
+                    acidicCell.multidamagesources -= acidicCell.AreaDamage;
+
                     break;
                 case CellType.ALKALI_CELL:
+                    //AlkaliCell alkaliCell = enterCell.GetComponent<AlkaliCell>();
+                    //alkaliCell.multidamagesources += alkaliCell.AreaDamage;
+                    //alkaliCell.multidamagesources += alkaliCell.AreaDamage;
+
                     break;
                 case CellType.CANCER_CELL:
+
                     break;
                 default:
                     break;
