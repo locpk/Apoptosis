@@ -21,6 +21,7 @@ GameObject:
   - 114: {fileID: 11412848}
   - 114: {fileID: 11422490}
   - 114: {fileID: 11481132}
+  - 114: {fileID: 11406754}
   m_Layer: 0
   m_Name: StemCell
   m_TagString: Unit
@@ -101,6 +102,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11406754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1afcd32177450f14e805766ae2d57450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11407436
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -47,7 +47,7 @@ public class EventManager : MonoBehaviour
     public delegate void ConsumeEvent(GameObject _target);
     public static event ConsumeEvent OnConsume;
 
-    public static void Evolve(GameObject _target)
+    public static void Consume(GameObject _target)
     {
         OnConsume(_target);
     }

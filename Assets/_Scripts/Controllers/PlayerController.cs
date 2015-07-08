@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public List<BaseCell> selectedUnits;
     public List<GameObject> allSelectableTargets;
     public List<GameObject> selectedTargets;
-//    List<BaseCell>[] groups;
+    //    List<BaseCell>[] groups;
     public Texture selector;
 
     Rect GUISelectRect;
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         // Initialize variables
         selectedTargets.Clear();
-//        groups = new List<BaseCell>[10];
+        //        groups = new List<BaseCell>[10];
         allSelectableUnits = new List<BaseCell>();
         selectedUnits = new List<BaseCell>();
         terrainLayer = 1 << LayerMask.NameToLayer("Terrain");  // Layer masking for raycast clicking
@@ -196,45 +196,34 @@ public class PlayerController : MonoBehaviour
     public void UnitAttack()
     {
         EventManager.Attack(selectedTargets[0]);
-        
+
     }
 
 
     public void UnitSplit()
     {
-        EventManager.Split(); 
+        EventManager.Split();
     }
 
     public void UnitEvolve(int cellNum)
     {
-        foreach (var item in selectedUnits)
+        switch (cellNum)
         {
-            switch (cellNum)
-            {
-                case 0: //turn into heat cell
-                    item.Mutation(CellType.HEAT_CELL);
-                    break;
-                case 1: //turn into cold cell
-                    item.Mutation(CellType.COLD_CELL);
-                    break;
-                case 2: //turn into acidic cell
-                    if (item.GetComponent<StemCell>().isInAcidic)
-                    {
-                        item.Mutation(CellType.ACIDIC_CELL);
-                    }
-                    break;
-                case 3: //turn into alkali cell
-
-                    if (item.GetComponent<StemCell>().isInAlkali)
-                    {
-                        item.Mutation(CellType.ALKALI_CELL);
-                    }
-                    break;
-                default:
-                    break;
-            }
+            case 0: //turn into heat cell
+                EventManager.Evolve(CellType.HEAT_CELL);
+                break;
+            case 1: //turn into cold cell
+                EventManager.Evolve(CellType.COLD_CELL);
+                break;
+            case 2: //turn into acidic cell
+                EventManager.Evolve(CellType.ACIDIC_CELL);
+                break;
+            case 3: //turn into alkali cell
+                EventManager.Evolve(CellType.ALKALI_CELL);
+                break;
+            default:
+                break;
         }
-
     }
 
     public void UnitHarvest()
@@ -247,7 +236,7 @@ public class PlayerController : MonoBehaviour
 
     public void UnitIncubation()
     {
- 
+
     }
 
     public void DoubleClick()
