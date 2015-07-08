@@ -278,9 +278,12 @@ public class PlayerController : MonoBehaviour
     {
         if (GUISelectRect.height != 0 && GUISelectRect.width != 0)
         {
-            GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+            if (!isOverUI)
+            {
+                GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 
-            GUI.DrawTexture(GUISelectRect, selector, ScaleMode.StretchToFill, true);
+                GUI.DrawTexture(GUISelectRect, selector, ScaleMode.StretchToFill, true);
+            }
 
         }
         foreach (BaseCell item in selectedUnits)
@@ -345,7 +348,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-         
+
 
 
 
@@ -526,7 +529,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        
         if (Input.GetMouseButton(2))
         {
             UnitAttackMove();
