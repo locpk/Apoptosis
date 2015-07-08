@@ -280,7 +280,14 @@ public class PlayerController : MonoBehaviour
         {
             if (!isOverUI)
             {
-                GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+                if (Input.GetMouseButton(0))
+                {
+                    GUI.color = new Color(0.0f, 0.0f, 1.0f, 0.5f);
+                }
+                else
+                {
+                    GUI.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+                }
 
                 GUI.DrawTexture(GUISelectRect, selector, ScaleMode.StretchToFill, true);
             }
