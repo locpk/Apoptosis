@@ -2,49 +2,64 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class OnlineGameController : Photon.MonoBehaviour
+public class OnlineGameController : Photon.PunBehaviour
 {
+    public GameObject PlayerControls;
 
+    void Awake()
+    {
+        if (PhotonNetwork.room.playerCount < 2)
+        {
+            SpawnSceneObjects();
+        }
+        else
+        {
+            InitPlayers();
+            SpawnPlayerUnits();
+        }
+    }
 
-	void Awake() {
-        SpawnSceneObjects();
+    // Use this for initialization
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            PhotonNetwork.LeaveRoom();
+        }
+    }
+
+    void FixedUpdate()
+    {
+
+    }
+
+    //LateUpdate is called after all Update functions have been called
+    void LateUpdate()
+    {
+
+    }
+
+    public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
+    {
+        base.OnPhotonPlayerConnected(newPlayer);
         InitPlayers();
         SpawnPlayerUnits();
     }
 
-	// Use this for initialization
-	void Start () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-	void FixedUpdate() {
-       
-    }
-
-	//LateUpdate is called after all Update functions have been called
-	void LateUpdate() {
-        
-    }
-
-    void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
+    public override void OnLeftRoom()
     {
-       
-    }
-
-    void OnLeftRoom()
-    {
-        PhotonNetwork.LeaveLobby();
-        PhotonNetwork.Disconnect();
+        base.OnLeftRoom();
+        Application.LoadLevel("Multiplayer_Lobby");
     }
 
     void InitPlayers()
     {
-
+        PlayerControls.SetActive(true);
     }
 
     void ResetPlayers()
@@ -54,17 +69,20 @@ public class OnlineGameController : Photon.MonoBehaviour
 
     void SpawnSceneObjects()
     {
-
+        PhotonNetwork.InstantiateSceneObject("Protein", Vector3.right * 4, Quaternion.Euler(90, 0, 0), 0, null);
     }
 
     void SpawnPlayerUnits()
     {
-
+        PhotonNetwork.Instantiate("StemCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0);
     }
 
     void Rematch()
     {
-
+        if (true)
+        {
+            ResetPlayers();
+        }
     }
 
 }

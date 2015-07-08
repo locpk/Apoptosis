@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LobbyController : MonoBehaviour
+public class LobbyController : Photon.PunBehaviour
 {
 
     // Use this for initialization
     void Start()
     {
-        PhotonNetwork.ConnectUsingSettings("0.0");
+        if (!PhotonNetwork.connected)
+        {
+            PhotonNetwork.ConnectUsingSettings("0.0");
+        }
     }
 
     // Update is called once per frame
@@ -16,8 +19,9 @@ public class LobbyController : MonoBehaviour
         //Debug.Log(PhotonNetwork.connectionStateDetailed);
     }
 
-    void OnJoinedLobby()
+    public override void OnJoinedLobby()
     {
+        base.OnJoinedLobby();
         if (PhotonNetwork.countOfRooms == 0)
         {
             PhotonNetwork.CreateRoom("Kewlala-SGP", new RoomOptions() { maxPlayers = 2 }, null);
@@ -26,13 +30,14 @@ public class LobbyController : MonoBehaviour
             PhotonNetwork.JoinRandomRoom();
     }
 
-    void OnCreatedRoom()
+    public override void OnCreatedRoom()
     {
-
+        base.OnCreatedRoom();
     }
 
-    void OnJoinedRoom()
+    public override void OnJoinedRoom()
     {
+        base.OnJoinedRoom();
         if (Application.isEditor)
         {
 
@@ -44,11 +49,12 @@ public class LobbyController : MonoBehaviour
                 PhotonNetwork.room.open = false;
             }
         }
-        Application.LoadLevel("Multiplayer_Level");
+        PhotonNetwork.LoadLevel("Multiplayer_Level");
     }
 
-    void OnPhotonRandomJoinFailed()
+    public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
     {
+        base.OnPhotonRandomJoinFailed(codeAndMsg);
         PhotonNetwork.CreateRoom("Kewlala-SGP", new RoomOptions() { maxPlayers = 2 }, null);
     }
 }
