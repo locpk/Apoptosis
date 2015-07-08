@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public GameObject movePin;
     public GameObject attackPin;
 
+
     public int NumStemCells = 0;
     public int NumHeatCells = 0;
     public int NumColdCells = 0;
@@ -69,11 +70,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //NumEnemiesLeft = allSelectableTargets.Count;
+
         tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             allSelectableTargets.Add(item); // Add the cell to the players controllable units
         }
+
     }
 
     public void AddNewCell(BaseCell _in)
@@ -213,6 +217,7 @@ public class PlayerController : MonoBehaviour
     public void UnitAttack()
     {
         EventManager.Attack(selectedTargets[0]);
+        CheckEnemiesLeft();
 
     }
 
@@ -337,6 +342,9 @@ public class PlayerController : MonoBehaviour
             GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
             GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
 
+            //GUI.Box(new Rect(640, 0, 85, 60), "Number of\nEnemies Left: ");
+            //GUI.Label(new Rect(675, 35, 50, 50), NumEnemiesLeft.ToString());
+
             GUI.EndGroup();
         }
 
@@ -441,7 +449,7 @@ public class PlayerController : MonoBehaviour
             CheckSelectedUnits();
         }
 
-        if (!isOverUI)
+        if (!isOverUI && Time.timeScale > 0.0f)
         {
             if (Input.GetMouseButtonDown(0)) // If the player left-clicks
             {
@@ -515,7 +523,6 @@ public class PlayerController : MonoBehaviour
                         }
                     }
 
-
                 }
                 if (selectedTargets.Count > 0)
                 {
@@ -588,4 +595,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void CheckEnemiesLeft()
+    {
+        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit");
+        foreach (GameObject item in tmpArr)
+        {
+            BaseCell bCell = item.GetComponent<BaseCell>();
+            if (bCell.isAIPossessed && !bCell.isMine)
+            {
+                //NumEnemiesLeft++;
+            }
+        }
+    }
 }
