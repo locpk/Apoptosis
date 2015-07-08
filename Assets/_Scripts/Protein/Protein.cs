@@ -5,6 +5,19 @@ public class Protein : MonoBehaviour {
 
     public float value;
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(value);
+        }
+        else
+        {
+            // Network player, receive data
+            this.value = (float)stream.ReceiveNext();
+        }
+    }
 
     public float Harvest()
     {
