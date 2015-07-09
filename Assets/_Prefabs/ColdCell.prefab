@@ -81,7 +81,7 @@ Transform:
   m_GameObject: {fileID: 114528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.65660011e-10, y: 0, z: -.00100000005}
-  m_LocalScale: {x: .600000024, y: .600000024, z: .600000024}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 487196}
   m_RootOrder: 0
@@ -182,6 +182,7 @@ MonoBehaviour:
   gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
   gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
   gColdCellPrefab: {fileID: 149900, guid: 054778e6ee0a8c1429b6cbf3bf479fc2, type: 2}
+  gColdCancerPrefab: {fileID: 169166, guid: e157488d71bd50240afc0fa1528c42ea, type: 2}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   MAX_PROTEIN: 500
@@ -208,6 +209,9 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 1
   splitCooldown: 0
+  health_10: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
+  health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
+  health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
 --- !u!114 &11434914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,7 +339,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4fc91fe7f50fe9d4fbfcdf2303f0715c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: .578000009}
 --- !u!212 &21291168
 SpriteRenderer:
@@ -420,15 +424,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Materials.Array.data[0]
@@ -437,12 +441,31 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c1bebf43398e2bc4e92a5e757a7501bb,
+      objectReference: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2,
         type: 3}
     - target: {fileID: 0}
       propertyPath: speed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health_10
+      value: 
+      objectReference: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: health_50
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: health_100
+      value: 
+      objectReference: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: gColdCancerPrefab
+      value: 
+      objectReference: {fileID: 169166, guid: e157488d71bd50240afc0fa1528c42ea, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100116}

@@ -5,9 +5,13 @@ using System.Collections.Generic;
 public class ColdCell : BaseCell
 {
 
+    public Sprite health_10;
+    public Sprite health_50;
+    public Sprite health_100;
     void Awake()
     {
         base.bAwake();
+        
     }
 
     // Use this for initialization
@@ -117,7 +121,17 @@ public class ColdCell : BaseCell
 
     void FixedUpdate()
     {
-        base.bFixedUpdate();
+        float healthRatio = currentProtein / MAX_PROTEIN;
+        if (healthRatio <= 0.5f && healthRatio > 0.1f)
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = health_50;
+        }
+        else if (healthRatio <= 0.1f)
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = health_10;
+        }
+
+        //base.bFixedUpdate();
     }
 
     void LateUpdate()
