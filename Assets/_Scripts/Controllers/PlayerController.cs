@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
+
 public class PlayerController : MonoBehaviour
 {
     private bool isOverUI = false;
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public int NumNerveCells = 0;
     public int NumTierTwoCold = 0;
     public int NumTierTwoHeat = 0;
+    public int NumEnemiesLeft = 0;
 
 
     public List<BaseCell> allSelectableUnits;
@@ -597,13 +600,15 @@ public class PlayerController : MonoBehaviour
 
     public void CheckEnemiesLeft()
     {
+        NumEnemiesLeft = 0;
+
         GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit");
         foreach (GameObject item in tmpArr)
         {
             BaseCell bCell = item.GetComponent<BaseCell>();
             if (bCell.isAIPossessed && !bCell.isMine)
             {
-                //NumEnemiesLeft++;
+                NumEnemiesLeft++;
             }
         }
     }
