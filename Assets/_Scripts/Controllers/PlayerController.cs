@@ -507,8 +507,7 @@ public class PlayerController : MonoBehaviour
 
                 GUISelectRect.yMax = GUISelectRect.yMin;
                 GUISelectRect.xMax = GUISelectRect.xMin;
-                if (selectedTargets.Count == 0)
-                {
+                
                     RaycastHit hitInfo;
                     Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -522,7 +521,7 @@ public class PlayerController : MonoBehaviour
                     }
 
 
-                }
+                
                 if (selectedTargets.Count > 0)
                 {
                     foreach (BaseCell item in selectedUnits)

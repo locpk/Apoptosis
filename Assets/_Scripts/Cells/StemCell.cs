@@ -108,7 +108,7 @@ public class StemCell : BaseCell
             case CellState.ATTACK:
 
                 float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
-
+                Debug.Log(distance);
                 if (distance > attackRange && distance <= fovRadius)
                 {
                     if (IsInvoking("DamagePerSecond"))
@@ -126,11 +126,11 @@ public class StemCell : BaseCell
                 {
                     if (!IsInvoking("DamagePerSecond"))
                     {
-                        if (GetComponent<ParticleSystem>().isStopped || GetComponent<ParticleSystem>().isPaused)
-                        {
-                            GetComponent<ParticleSystem>().Play();
-                        }
                         InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
+                    }
+                    if (GetComponent<ParticleSystem>().isStopped || GetComponent<ParticleSystem>().isPaused)
+                    {
+                        GetComponent<ParticleSystem>().Play();
                     }
 
                 }
@@ -177,15 +177,18 @@ public class StemCell : BaseCell
                     if (primaryTarget.GetComponent<BaseCell>())
                     {
                         currentState = CellState.ATTACK;
+                        return;
                     }
                     else if (primaryTarget.GetComponent<Protein>())
                     {
                         currentState = CellState.CONSUMING;
+                        return;
                     }
                 }
                 else if (!primaryTarget || base.isStopped())
                 {
                     currentState = CellState.IDLE;
+                    return;
                 }
               
 

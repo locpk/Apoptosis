@@ -245,7 +245,7 @@ MonoBehaviour:
   currentProtein: 500
   fovRadius: 10
   attackDamage: 5
-  attackRange: 10
+  attackRange: 2
   defense: 10
   depleteTimer: 1
   depleteAmount: 3

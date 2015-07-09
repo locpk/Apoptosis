@@ -435,11 +435,18 @@ public class BaseCell : MonoBehaviour
                     if (primaryTarget.tag == "Protein")
                     {
                         currentState = CellState.CONSUMING;
+                        return;
+                    }
+                    else if (primaryTarget.tag == "Unit")
+                    {
+                        currentState = CellState.ATTACK;
+                        return;
                     }
                 }
                 else
                 {
                     currentState = CellState.IDLE;
+                    return;
                 }
             }
         }
@@ -475,6 +482,7 @@ public class BaseCell : MonoBehaviour
             {
 
                 currentState = CellState.IDLE;
+                return;
             }
         }
         else if (currentState == CellState.ATTACK_MOVING)
@@ -502,6 +510,7 @@ public class BaseCell : MonoBehaviour
                 navAgent.enabled = false;
                 navObstacle.enabled = true;
                 currentState = CellState.IDLE;
+                return;
             }
         }
         if (!isMine && transform.tag != "Animation" && this.celltype != CellType.CANCER_CELL)
