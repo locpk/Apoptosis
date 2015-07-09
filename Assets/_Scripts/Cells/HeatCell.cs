@@ -14,6 +14,7 @@ public class HeatCell : BaseCell
     float fireballSpeed = 10;
     public bool Inheat;
     public PlayerController controller;
+    GameObject previousTarget;
 
 
     void Merge()
@@ -68,8 +69,8 @@ public class HeatCell : BaseCell
           Die();
           other.Die();
    
-          Instantiate(Tier2Heat, trackingPos, trackingRot);
-          GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(Tier2Heat.GetComponent<BaseCell>());
+        GameObject kTier2Heat =  Instantiate(Tier2Heat, trackingPos, trackingRot) as GameObject;
+          GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(kTier2Heat.GetComponent<BaseCell>());
       }
       else
       {
@@ -103,12 +104,14 @@ public class HeatCell : BaseCell
     }
     void DamagePreSecond()
     {
-        GameObject fire = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
-
-
+        previousTarget = primaryTarget;
         Vector3 them2me = primaryTarget.transform.position - transform.position;
-        fire.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
-        primaryTarget.GetComponent<BaseCell>().currentProtein -= (attackDamage / primaryTarget.GetComponent<BaseCell>().defense);
+        GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
+        thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
+        thefireball.GetComponent<FireBall>().Target = primaryTarget;
+        thefireball.GetComponent<FireBall>().Owner = this.gameObject;
+
+       
     }
 
 
