@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class AIBaseList {
 
-    private List<>
+    //private List<>
 
-    public void AddCell() {
+    //public void AddCell() {
 
-    }
+    //}
 
 }
