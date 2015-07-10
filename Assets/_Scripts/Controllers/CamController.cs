@@ -115,28 +115,22 @@ public class CamController : MonoBehaviour {
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) // if the player clicks on the minimap
         {
+            //get the position of the click
             RaycastHit hitPosition;
-
             Ray ray = minimapCamera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hitPosition))
             {
-                Debug.Log(transform.position);
-
-                //mainCamera.transform.position.Set(hitPosition.point.x, hitPosition.point.y, -hitPosition.point.z);
+                //move the camera to that position
                 smoothMoveTo(hitPosition.point);
-                Debug.Log(transform.position);
-
-                //mainCamera.transform.GetComponentInChildren<Transform>().position = hitPosition.point;
             }
         }
-        transform.position.Set(transform.position.x, 100, transform.position.z);
     }
 
     public void smoothMoveTo(Vector3 _des) {
-        smoothFocusTarget = _des;
+        smoothFocusTarget = new Vector3(_des.x, 100, _des.z);
     }
 
     public void SwitchToFocusView(Transform focusOn) {

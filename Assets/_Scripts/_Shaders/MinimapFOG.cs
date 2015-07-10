@@ -3,24 +3,21 @@ using System.Collections;
 
 public class MinimapFOG : MonoBehaviour
 {
-
-    
-
     // Use this for initialization
     void Start()
     {
+        //grab the object's "grandparent" that is attached to this script
         GameObject obj = gameObject.transform.parent.gameObject.transform.parent.gameObject;
-        if (obj.tag == "Unit")
+        if (obj.tag == "Unit") //check if it is a cell unit
         {
-            if (!obj.GetComponent<BaseCell>().isMine)
+            if (!obj.GetComponent<BaseCell>().isMine) //if the cell is not mine, 
             {
-                obj.GetComponentInChildren<MeshRenderer>().enabled = false;
+                obj.GetComponentInChildren<MeshRenderer>().enabled = false; //turn the minimap image of it off
             }
         }
-
-        if (obj.tag == "Protein")
+        else if (obj.tag == "Protein") //check if it is a protein,
         {
-            obj.GetComponentInChildren<MeshRenderer>().enabled = false;
+            obj.GetComponentInChildren<MeshRenderer>().enabled = false; //turn the minimap image of it off
         }
     }
 
@@ -32,25 +29,24 @@ public class MinimapFOG : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Unit")
+        if (other.tag == "Unit") //if the object that entered the sphere radius is a unit
         {
-            if (!other.GetComponent<BaseCell>().isMine)
+            if (!other.GetComponent<BaseCell>().isMine) //and is not mine
             {
-                GameObject temp = other.gameObject;
-                temp.GetComponentInChildren<MeshRenderer>().enabled = true;
+                other.gameObject.GetComponentInChildren<MeshRenderer>().enabled = true; //turn it's minimap image on
             }
         }
-
-        if (other.tag == "Protein")
+        else if (other.tag == "Protein") //if the object that entered the sphere radius is a protein
         {
-            GameObject temp = other.gameObject;
-            temp.GetComponentInChildren<MeshRenderer>().enabled = true;
+            other.gameObject.GetComponentInChildren<MeshRenderer>().enabled = true; //turn it's minimap image on
         }
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Unit")
+        //while the object is still inside the sphere, keep the minimap image on (this will keep the image on while the object is still
+        //                                                                        within any of your cell's radii)
+        if (other.tag == "Unit") 
         {
             if (!other.GetComponent<BaseCell>().isMine)
             {
@@ -68,6 +64,7 @@ public class MinimapFOG : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        //if the object leaves the sphere radius, turn the minimap image off
         if (other.tag == "Unit")
         {
             if (!other.GetComponent<BaseCell>().isMine)
