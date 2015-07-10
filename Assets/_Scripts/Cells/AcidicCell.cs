@@ -5,11 +5,16 @@ using System.Collections.Generic;
 public class AcidicCell : BaseCell
 {
 
+    public delegate void TakeDamage();
+    public TakeDamage multidamagesources;
    
     void Awake()
     {
         base.bAwake();
+        multidamagesources += nothing;
+          InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
     }
+
     void DamagePreSecond()
     {
         if (primaryTarget != null)
@@ -17,7 +22,19 @@ public class AcidicCell : BaseCell
             primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
         }
     }
+    void MUltiDMg()
+    {
+        multidamagesources();
 
+    }
+    public void AreaDamage()
+    {
+        currentProtein -= 10;
+    }
+    void nothing()
+    {
+
+    }
     // Use this for initialization
     void Start()
     {
@@ -30,7 +47,7 @@ public class AcidicCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-                base.Guarding();
+              
                 break;
             case CellState.ATTACK:
                 if (primaryTarget != null)

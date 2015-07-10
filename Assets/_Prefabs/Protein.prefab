@@ -26,11 +26,12 @@ GameObject:
   - 4: {fileID: 437234}
   - 212: {fileID: 21227910}
   - 114: {fileID: 11499318}
-  - 198: {fileID: 19883964}
-  - 199: {fileID: 19926452}
   - 135: {fileID: 13574808}
   - 54: {fileID: 5480788}
   - 208: {fileID: 20807974}
+  - 199: {fileID: 19967986}
+  - 198: {fileID: 19800084}
+  - 95: {fileID: 9583038}
   m_Layer: 0
   m_Name: Protein
   m_TagString: Protein
@@ -45,7 +46,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130200}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 22.2000008, y: 0, z: -19.1190338}
+  m_LocalPosition: {x: 19.9899998, y: 0, z: -14.6300001}
   m_LocalScale: {x: .300000012, y: .300000012, z: .300000012}
   m_Children:
   - {fileID: 491300}
@@ -78,6 +79,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!95 &9583038
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130200}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c122c244c3e5296438b7814d3437a9d9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11499318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,6 +108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+  beingConsumed: 0
+  consumers: []
 --- !u!135 &13574808
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -100,26 +120,26 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.20000005
+  m_Radius: .910000026
   m_Center: {x: 0, y: 0, z: 0}
---- !u!198 &19883964
+--- !u!198 &19800084
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130200}
-  lengthInSec: 1
+  lengthInSec: 5
   startDelay: 0
   speed: 1
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 1.5
+      scalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -152,20 +172,20 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: .5
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
+          value: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 10
         - time: 1
           value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 10
         m_PreInfinity: 2
         m_PostInfinity: 2
       minCurve:
@@ -183,7 +203,7 @@ ParticleSystem:
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-      minMaxState: 0
+      minMaxState: 1
     startColor:
       maxGradient:
         key0:
@@ -276,7 +296,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 2725440544
+        rgba: 4280568556
       minMaxState: 0
     startSize:
       scalar: .5
@@ -346,26 +366,26 @@ ParticleSystem:
       minMaxState: 0
     gravityModifier: 0
     inheritVelocity: 0
-    maxNumParticles: 100
+    maxNumParticles: 1000
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 0
-    radius: .00999999978
+    type: 12
+    radius: 1.25
     angle: 25
     length: 5
     boxX: 1
     boxY: 1
     boxZ: 1
-    arc: 360
+    arc: 50
     placementMode: 0
     m_Mesh: {fileID: 0}
-    randomDirection: 1
+    randomDirection: 0
   EmissionModule:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 10
+      scalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -402,8 +422,8 @@ ParticleSystem:
     cnt2: 30
     cnt3: 30
     time0: 0
-    time1: 0
-    time2: 0
+    time1: 1
+    time2: 2
     time3: 0
     m_BurstCount: 0
   SizeModule:
@@ -477,12 +497,12 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4294501120
+          rgba: 4294967295
         key1:
           serializedVersion: 2
           rgba: 4294967295
@@ -1031,7 +1051,7 @@ ParticleSystem:
       minMaxState: 0
     range: {x: 0, y: 1}
   ColorBySpeedModule:
-    enabled: 0
+    enabled: 1
     gradient:
       maxGradient:
         key0:
@@ -1039,7 +1059,7 @@ ParticleSystem:
           rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4292267102
         key2:
           serializedVersion: 2
           rgba: 0
@@ -1155,7 +1175,7 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
---- !u!199 &19926452
+--- !u!199 &19967986
 ParticleSystemRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1200,7 +1220,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 2.0999999, y: 2.44499993, z: 2.0999999}
+  m_Extents: {x: .910000026, y: 1.88999999, z: .910000026}
   m_MoveThreshold: .100000001
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -1264,7 +1284,27 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Radius
+      value: .910000026
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Extents.x
+      value: .910000026
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Extents.z
+      value: .910000026
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startSize.scalar
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startColor.maxColor.rgba
+      value: 4280568556
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 130200}

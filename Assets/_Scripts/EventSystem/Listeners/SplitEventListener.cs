@@ -28,6 +28,8 @@ public class SplitEventListener : MonoBehaviour
                 curCell.PerfectSplit();
                 break;
             case CellType.HEAT_CELL:
+                curCell.CancerousSplit();
+                break;
             case CellType.COLD_CELL:
                 curCell.CancerousSplit();
                 break;

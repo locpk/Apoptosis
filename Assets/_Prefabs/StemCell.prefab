@@ -225,8 +225,12 @@ MonoBehaviour:
   gStemCellPrefab: {fileID: 146472, guid: f68bc9c3ba37b4741a32f07628606e80, type: 2}
   gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
   gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
+  gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
+  health_10: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
+  health_50: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
+  health_100: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
   MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
@@ -245,7 +249,7 @@ MonoBehaviour:
   currentProtein: 500
   fovRadius: 10
   attackDamage: 5
-  attackRange: 10
+  attackRange: 2
   defense: 10
   depleteTimer: 1
   depleteAmount: 3
@@ -312,7 +316,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 6.67999983
+  m_Radius: 4.69000006
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &19549964
 NavMeshAgent:
@@ -1432,7 +1436,7 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: .100000001, y: .100000001, z: .100000001}
+  m_Extents: {x: 4.69000006, y: .100000001, z: 4.69000006}
   m_MoveThreshold: .100000001
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -1622,6 +1626,29 @@ Prefab:
       propertyPath: stemtoAcidic
       value: 
       objectReference: {fileID: 146776, guid: 29147b9cb59143a41a45534e611f3390, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Extents.x
+      value: 4.69000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Extents.z
+      value: 4.69000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health_10
+      value: 
+      objectReference: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: health_50
+      value: 
+      objectReference: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: health_100
+      value: 
+      objectReference: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174676}

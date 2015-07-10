@@ -47,6 +47,10 @@ public class Menu : MonoBehaviour {
 
     public void ExitApplication()
     {
+        if (Application.isEditor)
+        {
+            return;
+        }
         System.Diagnostics.Process.GetCurrentProcess().Kill();
       
     }

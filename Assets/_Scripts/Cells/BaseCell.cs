@@ -19,7 +19,7 @@ public static class CancerChance
 /// </summary>
 public enum CellType
 {
-    STEM_CELL, HEAT_CELL, COLD_CELL, HEAT_CELL_TIRE2, COLD_CELL_TIRE2, ACIDIC_CELL, ALKALI_CELL, CANCER_CELL,
+    STEM_CELL, HEAT_CELL, COLD_CELL, HEAT_CELL_TIRE2, COLD_CELL_TIRE2, ACIDIC_CELL, ALKALI_CELL, CANCER_CELL,NERVE_CELL
 }
 
 
@@ -41,8 +41,13 @@ public class BaseCell : MonoBehaviour
     public GameObject gStemCellPrefab;
     public GameObject gHeatCellPrefab;
     public GameObject gColdCellPrefab;
+    public GameObject gColdCancerPrefab;
     public GameObject gAcidicCellPrefab;
     public GameObject gAlkaliCellPrefab;
+
+    public Sprite health_10;
+    public Sprite health_50;
+    public Sprite health_100;
 
     public float MAX_PROTEIN = 500.0f;
     public const float DEPLETE_TIME = 5.0f;
@@ -155,11 +160,29 @@ public class BaseCell : MonoBehaviour
     public void Die()
     {
         isMine = false;
-        PlayerController.cap--;
         GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
+        if (celltype != CellType.CANCER_CELL)
+        {
+            PlayerController.cap--;
+            if (PlayerController.cap < 0)
+            {
+                PlayerController.cap = 0;
+            }
+        }
+
+       
         //transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         //GetComponent<SpriteRenderer>().enabled = false;
         Destroy(gameObject);
+    }
+    public void Deactive()
+    {
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().DeselectCell(this);
+        gameObject.SetActive(false);
+        transform.position = new Vector3(2500.0f, 2500.0f, 2500.0f);
+       
+        GetComponent<SpriteRenderer>().enabled = false;
+
     }
 
     public virtual void Attack(GameObject _target)
@@ -250,7 +273,8 @@ public class BaseCell : MonoBehaviour
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 //GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
-                this.currentState = CellState.DEAD;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().originCell = this;
+                Deactive();
                 break;
             case CellType.CANCER_CELL:
                 cellSplitAnimation = GameObject.Instantiate(gCancerCellPrefab, transform.position, Quaternion.identity) as GameObject;
@@ -258,7 +282,8 @@ public class BaseCell : MonoBehaviour
                 cellSplitAnimation.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
                 cellSplitAnimation.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                 // GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
-                this.currentState = CellState.DEAD;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().originCell = this;
+                Deactive();
                 break;
             default:
                 break;
@@ -300,7 +325,7 @@ public class BaseCell : MonoBehaviour
 
         //Get a new position around myself
         Vector3 newposition = this.transform.position;
-        newposition += Quaternion.Euler(0, 0, Random.Range(0, 360)) * new Vector3(GetComponent<SphereCollider>().radius * 0.1f, 0.0f, 0.0f);
+       
 
         //half my protein
         this.currentProtein *= 0.5f;
@@ -319,17 +344,20 @@ public class BaseCell : MonoBehaviour
                     newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
                     newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                     newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                    newCell.GetComponent<CellSplitAnimation>().originCell = this;
                     if (!isAIPossessed)
                     {
                         GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newCell.GetComponent<BaseCell>());
                     }
+                    Deactive();
                     break;
                 case CellType.COLD_CELL:
                     newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
                     newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
                     newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                     newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                    this.currentState = CellState.DEAD;
+                    newCell.GetComponent<CellSplitAnimation>().originCell = this;
+                    Deactive();
                     break;
                 default:
                     break;
@@ -337,11 +365,28 @@ public class BaseCell : MonoBehaviour
         }
         else
         {
-            newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-            newCell.GetComponent<BaseCell>().currentProtein = currentProtein;
-            newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
-            newCell.GetComponent<BaseCell>().isAIPossessed = false;
-            newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
+            //newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+            //newCell.GetComponent<BaseCell>().currentProtein = currentProtein;
+            //newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
+            //newCell.GetComponent<BaseCell>().isAIPossessed = false;
+            //newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
+
+            switch (this.celltype)
+            {
+                case CellType.HEAT_CELL:
+                
+                    break;
+                case CellType.COLD_CELL:
+                    newCell = GameObject.Instantiate(gColdCancerPrefab, newposition, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+                    newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                    newCell.GetComponent<CellSplitAnimation>().originCell = this;
+                    Deactive();
+                    break;
+                default:
+                    break;
+            }
         }
 
 
@@ -391,10 +436,7 @@ public class BaseCell : MonoBehaviour
         navObstacle = GetComponent<NavMeshObstacle>();
         navAgent.speed = moveSpeed;
 
-        if (isMine)
-        {
-            PlayerController.cap++;
-        }
+       
         // photonView = GetComponent<PhotonView>();
         //  isMine = photonView.isMine;
 
@@ -406,13 +448,15 @@ public class BaseCell : MonoBehaviour
         navAgent.enabled = false;
         navAgent.updateRotation = false;
         navObstacle.enabled = true;
-        
+
     }
 
     protected void bUpdate()
     {
         if (currentState == CellState.IDLE)
         {
+           
+            
             if (IsInvoking("ConsumePerSecond"))
             {
                 CancelInvoke("ConsumePerSecond");
@@ -429,12 +473,20 @@ public class BaseCell : MonoBehaviour
                 {
                     if (primaryTarget.tag == "Protein")
                     {
+                        
                         currentState = CellState.CONSUMING;
+                        return;
+                    }
+                    else if (primaryTarget.tag == "Unit")
+                    {
+                        currentState = CellState.ATTACK;
+                        return;
                     }
                 }
                 else
                 {
                     currentState = CellState.IDLE;
+                    return;
                 }
             }
         }
@@ -442,12 +494,17 @@ public class BaseCell : MonoBehaviour
         {
             if (primaryTarget)
             {
+                if (!primaryTarget.GetComponent<Protein>().consumers.Contains(this))
+                {
+                    primaryTarget.GetComponent<Protein>().consumers.Add(this);
+                }
                 float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
 
                 if (distance > attackRange && distance <= fovRadius)
                 {
                     if (IsInvoking("ConsumePerSecond"))
                     {
+                    
                         CancelInvoke("ConsumePerSecond");
                     }
                     ChaseTarget();
@@ -456,20 +513,22 @@ public class BaseCell : MonoBehaviour
                 {
                     if (!IsInvoking("ConsumePerSecond"))
                     {
-
+                        
                         InvokeRepeating("ConsumePerSecond", 1.0f, 1.0f);
                     }
 
                 }
                 else
                 {
+       
                     ChaseTarget();
                 }
             }
             else
             {
-
+              
                 currentState = CellState.IDLE;
+                return;
             }
         }
         else if (currentState == CellState.ATTACK_MOVING)
@@ -497,9 +556,10 @@ public class BaseCell : MonoBehaviour
                 navAgent.enabled = false;
                 navObstacle.enabled = true;
                 currentState = CellState.IDLE;
+                return;
             }
         }
-        if (!isMine && transform.tag != "Animation")
+        if (!isMine && transform.tag != "Animation" && this.celltype != CellType.CANCER_CELL)
         {
 
             this.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.color = Color.red;
@@ -531,17 +591,22 @@ public class BaseCell : MonoBehaviour
             currentState = CellState.DEAD;
         }
 
-        if (currentProtein >= 100.0f)
-        {
-            transform.FindChild("Nucleus").transform.localScale = new Vector3(currentProtein / MAX_PROTEIN, currentProtein / MAX_PROTEIN, currentProtein / MAX_PROTEIN);
-        }
-        else
-        {
-            transform.FindChild("Nucleus").transform.localScale = new Vector3(100.0f / MAX_PROTEIN, 100.0f / MAX_PROTEIN, 100.0f / MAX_PROTEIN);
-        }
     }
 
     protected void bLateUpdate()
     {
+        float healthRatio = currentProtein / MAX_PROTEIN;
+        if (healthRatio <= 0.5f && healthRatio > 0.1f)
+        {
+            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_50;
+        }
+        else if (healthRatio <= 0.1f)
+        {
+            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_10;
+        }
+        else
+        {
+            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
+        }
     }
 }

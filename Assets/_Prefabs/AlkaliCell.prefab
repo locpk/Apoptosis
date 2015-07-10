@@ -159,8 +159,12 @@ MonoBehaviour:
   gStemCellPrefab: {fileID: 0}
   gHeatCellPrefab: {fileID: 0}
   gColdCellPrefab: {fileID: 0}
+  gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
+  health_10: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068, type: 3}
+  health_50: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068, type: 3}
+  health_100: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068, type: 3}
   MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
@@ -185,6 +189,7 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 0
   splitCooldown: 0
+  DOT: {fileID: 0}
 --- !u!114 &11431862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -262,7 +267,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4.82000017
+  m_Radius: 4.69000006
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &19584330
 NavMeshAgent:
@@ -293,7 +298,7 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 4.57999992, y: .100000001, z: 4.57999992}
+  m_Extents: {x: 4.69000006, y: .100000001, z: 4.69000006}
   m_MoveThreshold: .100000001
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -374,6 +379,21 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
+    - target: {fileID: 0}
+      propertyPath: health_10
+      value: 
+      objectReference: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: health_50
+      value: 
+      objectReference: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: health_100
+      value: 
+      objectReference: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 111564}
