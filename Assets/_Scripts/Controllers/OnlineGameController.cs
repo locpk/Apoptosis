@@ -65,10 +65,10 @@ public class OnlineGameController : Photon.PunBehaviour
         switch (info.photonView.gameObject.tag)
         {
             case "Protein":
-                PlayerControls.GetComponent<PlayerController>().AddNewProtein(info.photonView.gameObject.GetComponent<Protein>());
+                PlayerControls.GetComponent<OnlinePlayerController>().AddNewProtein(info.photonView.gameObject.GetComponent<Protein>());
                 break;
             case "Unit":
-                PlayerControls.GetComponent<PlayerController>().AddNewCell(info.photonView.gameObject.GetComponent<BaseCell>());
+                PlayerControls.GetComponent<OnlinePlayerController>().AddNewCell(info.photonView.gameObject.GetComponent<BaseCell>());
                 break;
             default:
                 break;
@@ -80,14 +80,14 @@ public class OnlineGameController : Photon.PunBehaviour
         GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
-            PlayerControls.GetComponent<PlayerController>().AddNewProtein(item.GetComponent<Protein>()); // Add the cell to the players controllable units
+            PlayerControls.GetComponent<OnlinePlayerController>().AddNewProtein(item.GetComponent<Protein>()); // Add the cell to the players controllable units
         }
     }
 
     void InitPlayer()
     {
         PlayerControls.SetActive(true);
-        //PlayerControls.GetComponent<PhotonView>().ObservedComponents.Add(PlayerControls.GetComponent<PlayerController>());
+        //PlayerControls.GetComponent<PhotonView>().ObservedComponents.Add(PlayerControls.GetComponent<OnlinePlayerController>());
     }
 
     void ResetPlayers()
@@ -102,7 +102,7 @@ public class OnlineGameController : Photon.PunBehaviour
 
     void SpawnPlayerUnits()
     {
-        PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("StemCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0).GetComponent<BaseCell>());
+        PlayerControls.GetComponent<OnlinePlayerController>().AddNewCell(PhotonNetwork.Instantiate("StemCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0).GetComponent<BaseCell>());
     }
 
     void Rematch()
