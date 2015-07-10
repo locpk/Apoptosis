@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Protein : MonoBehaviour {
 
     public float value;
-
+    public bool beingConsumed = false;
+    ParticleSystem emitter;
+    public List<BaseCell> consumers;
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.isWriting)
@@ -27,27 +30,52 @@ public class Protein : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         value = Random.Range(70, 110);
+        emitter = GetComponent<ParticleSystem>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        
+        
 	}
+    void FixedUpdate()
+    {
+        if (consumers.FindAll(item => item.GetComponent<BaseCell>().currentState == CellState.CONSUMING).Count == 0)
+	    {
+            beingConsumed = false;
+            consumers.Clear();
+	    }
+        else
+        {
+            consumers.RemoveAll(item => item.GetComponent<BaseCell>().currentState != CellState.CONSUMING);
+            beingConsumed = true;
+        }
+        
+        if (beingConsumed)
+        {
+            if (emitter.isStopped)
+            {
+                emitter.Play();
+            }
+        }
+        else
+        {
+            if (emitter.isPlaying)
+            {
+                emitter.Stop();
+            }
+        }
+    }
     void LateUpdate()
     {
-        //if (value >= 20.0f)
-        //{
-        //    transform.localScale = new Vector3(0.3f * value / 110, 0.3f * value / 110, 0.3f * value / 110);
-        //}
-        //else
-        //{
-        //    transform.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        //}
-
-        transform.localScale = new Vector3(0.3f * value / 110 + .2f, 0.3f * value / 110 + .2f, 0.3f * value / 110 + .2f);
+        float scale = 0.3f * value / 110 + .2f;
+        transform.localScale = new Vector3(scale, scale, 1.0f);
         if (value <= 0.0f)
         {
             Destroy(gameObject);
         }
     }
+
+
+   
 }

@@ -91,6 +91,12 @@ public class PlayerController : MonoBehaviour
         selectedUnits.Remove(_in);
 
     }
+    public void DeselectCell(BaseCell _in)
+    {
+        _in.isSelected = false;
+        selectedUnits.Remove(_in);
+
+    }
 
     public void RemoveTarget(GameObject _in)
     {

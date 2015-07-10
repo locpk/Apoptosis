@@ -11,7 +11,7 @@ public class CellSplitAnimation : MonoBehaviour
     public GameObject gAlkaliCellPrefab;
     public GameObject gAcidicCellPrefab;
 
-
+    public BaseCell originCell;
     public int currentLevel;
     public float currentProtein;
     public bool isAIPossessed = false;
@@ -31,6 +31,7 @@ public class CellSplitAnimation : MonoBehaviour
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         Destroy(gameObject);
+        originCell.Die();
     }
     public void CreateStemCells()
     {
@@ -48,6 +49,7 @@ public class CellSplitAnimation : MonoBehaviour
             }
         }
         Destroy(gameObject);
+        originCell.Die();
     }
 
 
@@ -67,6 +69,7 @@ public class CellSplitAnimation : MonoBehaviour
             }
         }
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateHeatandCancerCells()
@@ -91,6 +94,7 @@ public class CellSplitAnimation : MonoBehaviour
 
 
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateColdCell()
@@ -106,6 +110,7 @@ public class CellSplitAnimation : MonoBehaviour
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateColdCells()
@@ -124,6 +129,7 @@ public class CellSplitAnimation : MonoBehaviour
             }
         }
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateColdandCancerCells()
@@ -148,6 +154,7 @@ public class CellSplitAnimation : MonoBehaviour
 
 
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateCancerCells()
@@ -165,6 +172,7 @@ public class CellSplitAnimation : MonoBehaviour
             pos.x += 1.0f;
         }
         Destroy(gameObject);
+        originCell.Die();
     }
 
 
@@ -181,6 +189,7 @@ public class CellSplitAnimation : MonoBehaviour
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateAcidicCell()
@@ -196,6 +205,7 @@ public class CellSplitAnimation : MonoBehaviour
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         Destroy(gameObject);
+        originCell.Die();
     }
 
 
