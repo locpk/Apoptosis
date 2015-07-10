@@ -1,10 +1,9 @@
 using UnityEngine;
 using Random = System.Random;
 
-[ExecuteInEditMode]
-public class TerrainTransparency : MonoBehaviour {
+[ExecuteInEditMode] public class TerrainTransparency : MonoBehaviour {
 	private bool disableBasemap = true;
-	public float alphaCutoff = .5f;
+	private float alphaCutoff = .5f;
 	public bool autoUpdateTransparencyMap = true;
 	
 	public Texture2D transparencyMap;
@@ -50,19 +49,22 @@ public class TerrainTransparency : MonoBehaviour {
 				break;
 			}
 		}
-
 		bool transparencyMapNeedsUpdating = !transparencyMap;
 		if (!transparencyMapNeedsUpdating) {
-				Color[] transparencyMap_colors = transparencyMap.GetPixels();
-				if (transparencyMap.width != tData.alphamapResolution || transparencyMap.height != tData.alphamapResolution)
-					transparencyMapNeedsUpdating = true;
-				if (!transparencyMapNeedsUpdating)
-					for (var a = 0; a < tData.alphamapResolution; a++)
-						for (var b = 0; b < tData.alphamapResolution; b++)
-							if (transparencyMap_colors[(a * tData.alphamapResolution) + b] != newTransparencyMapValues[b, a]) {
-								transparencyMapNeedsUpdating = true;
-								break;
-							}
+			Color[] transparencyMap_colors = transparencyMap.GetPixels();
+            if (transparencyMap.width != tData.alphamapResolution || transparencyMap.height != tData.alphamapResolution) {
+				transparencyMapNeedsUpdating = true;
+            }
+            if (!transparencyMapNeedsUpdating) {
+                for (var a = 0; a < tData.alphamapResolution; a++) {
+                    for (var b = 0; b < tData.alphamapResolution; b++) {
+                        if (transparencyMap_colors[(a * tData.alphamapResolution) + b] != newTransparencyMapValues[b, a]) {
+							transparencyMapNeedsUpdating = true;
+							break;
+						}
+                    }
+                }
+            }
 		}
 
 		if (transparencyMapNeedsUpdating) {
@@ -74,9 +76,11 @@ public class TerrainTransparency : MonoBehaviour {
 				transparencyMap = new Texture2D(tData.alphamapResolution, tData.alphamapResolution);
             }
 
-			for (var a = 0; a < tData.alphamapResolution; a++)
-				for (var b = 0; b < tData.alphamapResolution; b++)
+            for (var a = 0; a < tData.alphamapResolution; a++) {
+                for (var b = 0; b < tData.alphamapResolution; b++) {
 					transparencyMap.SetPixel(a, b, newTransparencyMapValues[a, b]);
+                }
+            }
 			transparencyMap.Apply();
 		}
 	}
