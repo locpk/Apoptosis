@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 486792}
   - 114: {fileID: 11443334}
   - 95: {fileID: 9557556}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: StemtoAlkali
   m_TagString: Animation
   m_Icon: {fileID: 0}
@@ -206,10 +206,14 @@ MonoBehaviour:
   gCancerCellPrefab: {fileID: 0}
   gStemCellPrefab: {fileID: 0}
   gHeatCellPrefab: {fileID: 0}
+  gTier2HeatCellPrefab: {fileID: 0}
   gColdCellPrefab: {fileID: 0}
+  gTier2ColdCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 111564, guid: 1580ecf4540999c4482352dd573da390, type: 2}
   gAcidicCellPrefab: {fileID: 0}
+  gNerveCellPrefab: {fileID: 0}
   originCell: {fileID: 0}
+  originCell1: {fileID: 0}
   currentLevel: 0
   currentProtein: 0
   isAIPossessed: 0

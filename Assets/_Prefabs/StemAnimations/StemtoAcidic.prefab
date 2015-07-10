@@ -43,7 +43,7 @@ GameObject:
   - 4: {fileID: 418378}
   - 114: {fileID: 11414398}
   - 95: {fileID: 9558278}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: StemtoAcidic
   m_TagString: Animation
   m_Icon: {fileID: 0}
@@ -178,10 +178,14 @@ MonoBehaviour:
   gCancerCellPrefab: {fileID: 0}
   gStemCellPrefab: {fileID: 0}
   gHeatCellPrefab: {fileID: 0}
+  gTier2HeatCellPrefab: {fileID: 0}
   gColdCellPrefab: {fileID: 0}
+  gTier2ColdCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 181396, guid: 7545a113ed3a61b49b9518aa849185b0, type: 2}
+  gNerveCellPrefab: {fileID: 0}
   originCell: {fileID: 0}
+  originCell1: {fileID: 0}
   currentLevel: 0
   currentProtein: 0
   isAIPossessed: 0

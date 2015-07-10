@@ -340,15 +340,11 @@ public class BaseCell : MonoBehaviour
             switch (this.celltype)
             {
                 case CellType.HEAT_CELL:
-                    newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
                     newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
                     newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                     newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<CellSplitAnimation>().originCell = this;
-                    if (!isAIPossessed)
-                    {
-                        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newCell.GetComponent<BaseCell>());
-                    }
                     Deactive();
                     break;
                 case CellType.COLD_CELL:

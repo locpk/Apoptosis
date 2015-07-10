@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
@@ -49,17 +50,22 @@ public class PlayerController : MonoBehaviour
         terrainLayer = 1 << LayerMask.NameToLayer("Terrain");  // Layer masking for raycast clicking
         // ----------
 
-        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
+        List<GameObject> tmpArr = GameObjectManager.FindAllUnits(); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
-            if (!bCell.isAIPossessed && bCell.isMine) // If the cell belongs to this player
+            if (bCell)
             {
-                allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
+                if (!bCell.isAIPossessed && bCell.isMine) // If the cell belongs to this player
+                {
+                    allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
+                }
             }
+            
         }
 
-        tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
+        tmpArr.Clear();
+        tmpArr = GameObjectManager.FindAllUnits(); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
@@ -69,7 +75,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
+        tmpArr.Clear();
+        tmpArr = GameObject.FindGameObjectsWithTag("Protein").ToList<GameObject>(); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             allSelectableTargets.Add(item); // Add the cell to the players controllable units
