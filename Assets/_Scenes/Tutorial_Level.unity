@@ -912,21 +912,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1366368653 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 157688, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
-  m_PrefabInternal: {fileID: 1927934963}
---- !u!114 &1366368661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1366368653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1364ef780787f94468c412e024cb58c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1424228623 stripped
 Transform:
   m_PrefabParentObject: {fileID: 471618, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
@@ -1122,8 +1107,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471d131ae0e64404b9eb047dfc59791e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePin: {fileID: 165000, guid: f77dcc63e9f32e946a614abcc9575a63, type: 2}
-  attackPin: {fileID: 142206, guid: c9ae0278b5093004d9dc07422c77a8e3, type: 2}
+  movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
+  attackPin: {fileID: 0}
+  NumStemCells: 0
+  NumHeatCells: 0
+  NumColdCells: 0
+  NumAcidicCells: 0
+  NumAlkaliCells: 0
+  NumNerveCells: 0
+  NumTierTwoCold: 0
+  NumTierTwoHeat: 0
+  NumEnemiesLeft: 0
   allSelectableUnits: []
   selectedUnits: []
   allSelectableTargets: []
@@ -1582,7 +1576,7 @@ Transform:
   - {fileID: 213373112}
   - {fileID: 997633782}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 9
 --- !u!28 &1979198696
 Texture2D:
   m_ObjectHideFlags: 0
