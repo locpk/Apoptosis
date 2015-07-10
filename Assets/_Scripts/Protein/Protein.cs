@@ -19,6 +19,7 @@ public class Protein : MonoBehaviour {
         }
     }
 
+    [PunRPC]
     public float Harvest()
     {
         value -= 5.0f;
@@ -47,7 +48,7 @@ public class Protein : MonoBehaviour {
         transform.localScale = new Vector3(0.3f * value / 110 + .2f, 0.3f * value / 110 + .2f, 0.3f * value / 110 + .2f);
         if (value <= 0.0f)
         {
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
