@@ -51,14 +51,7 @@ public class Tier2HeatCell : BaseCell
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Alpha1))
-        {
-            Vector3 trackingPos = this.transform.position;
-            Quaternion trackingRot = this.transform.rotation;
-            Die();
-         GameObject gstem = Instantiate(stemCell, trackingPos, trackingRot) as GameObject;
-         GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(gstem.GetComponent<BaseCell>());
-        }
+        
         hasteTimer += 1 * Time.deltaTime;
         if (hasteTimer >= 5)
         {

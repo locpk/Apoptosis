@@ -54,6 +54,24 @@ public class CellSplitAnimation : MonoBehaviour
         originCell.Die();
         originCell1.Die();
     }
+
+    public void CreateStemCell()
+    {
+
+        GameObject newcell = GameObject.Instantiate(gStemCellPrefab, transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
+        newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+        newcell.GetComponent<BaseCell>().currentLevel = currentLevel;
+        newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+        if (!isAIPossessed)
+        {
+            newcell.GetComponent<BaseCell>().isMine = true;
+            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        }
+
+        Destroy(gameObject);
+        originCell.Die();
+    }
     public void CreateStemCells()
     {
         for (int i = 0; i < 2; i++)
@@ -231,7 +249,7 @@ public class CellSplitAnimation : MonoBehaviour
 
 
 
-    
+
 
 
 }

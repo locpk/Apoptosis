@@ -35,6 +35,7 @@ GameObject:
   - 114: {fileID: 11474128}
   - 114: {fileID: 11449670}
   - 114: {fileID: 11454132}
+  - 114: {fileID: 11463738}
   m_Layer: 0
   m_Name: Tier2HeatCell
   m_TagString: Unit
@@ -111,6 +112,7 @@ MonoBehaviour:
   gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
+  gRevertHeatPrefab: {fileID: 124642, guid: 34ed06a8dff0e8c4ab0d147943105b8a, type: 2}
   health_10: {fileID: 21300000, guid: f8352a793aaca5a4eb4079dc34493331, type: 3}
   health_50: {fileID: 21300000, guid: 4af6c55a799eca648aeae4e7cc2ebe41, type: 3}
   health_100: {fileID: 21300000, guid: 7bd591d9b1d87c94f90857d8f388fe8a, type: 3}
@@ -139,7 +141,7 @@ MonoBehaviour:
   splitCooldown: 0
   fireball: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
   hasteTimer: 0
-  stemCell: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
+  stemCell: {fileID: 0}
 --- !u!114 &11454132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,6 +162,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0d9b8ef6f623bd418431e10ef3a8e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11463738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5ec483df34dc84a988179bcb7fa7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11474128
@@ -332,7 +345,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: stemCell
       value: 
-      objectReference: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: fireball
       value: 
@@ -341,6 +354,14 @@ Prefab:
       propertyPath: isSelected
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gStemCellPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gRevertHeatPrefab
+      value: 
+      objectReference: {fileID: 124642, guid: 34ed06a8dff0e8c4ab0d147943105b8a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 152348}

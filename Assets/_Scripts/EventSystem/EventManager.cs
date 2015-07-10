@@ -67,4 +67,12 @@ public class EventManager : MonoBehaviour
     {
         OnMerge();
     }
+
+    public delegate void RevertEvent();
+    public static event RevertEvent OnRevert;
+
+    public static void Revert()
+    {
+        OnRevert();
+    }
 }

@@ -69,9 +69,12 @@ public class PlayerController : MonoBehaviour
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
-            if (bCell.isAIPossessed && !bCell.isMine) // If the cell belongs to this player
+            if (bCell)
             {
-                allSelectableTargets.Add(item); // Add the cell to the players controllable units
+                if (bCell.isAIPossessed && !bCell.isMine) // If the cell belongs to this player
+                {
+                    allSelectableTargets.Add(item); // Add the cell to the players controllable units
+                }
             }
         }
 
@@ -392,8 +395,12 @@ public class PlayerController : MonoBehaviour
 
     public void UnitMerge()
     {
-
         EventManager.Merge();
+    }
+
+    public void UnitRevert()
+    {
+        EventManager.Revert();
     }
 
     // Update is called once per frame
@@ -432,6 +439,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) // If the player presses D
         {
             UnitSplit();
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) // If the player presses 1
+        {
+            UnitRevert();
 
         }
 

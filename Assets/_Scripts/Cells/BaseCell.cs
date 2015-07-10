@@ -44,6 +44,7 @@ public class BaseCell : MonoBehaviour
     public GameObject gColdCancerPrefab;
     public GameObject gAcidicCellPrefab;
     public GameObject gAlkaliCellPrefab;
+    public GameObject gRevertHeatPrefab;
 
     public Sprite health_10;
     public Sprite health_50;
@@ -272,7 +273,6 @@ public class BaseCell : MonoBehaviour
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                //GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().originCell = this;
                 Deactive();
                 break;
@@ -281,7 +281,6 @@ public class BaseCell : MonoBehaviour
                 cellSplitAnimation.GetComponent<BaseCell>().currentLevel = currentLevel + 1;
                 cellSplitAnimation.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
                 cellSplitAnimation.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
-                // GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().originCell = this;
                 Deactive();
                 break;
@@ -292,6 +291,16 @@ public class BaseCell : MonoBehaviour
 
 
 
+    }
+
+    public void Revert()
+    {
+        GameObject cellSplitAnimation = GameObject.Instantiate(gRevertHeatPrefab, transform.position, Quaternion.identity) as GameObject;
+        cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+        cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+        cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+        cellSplitAnimation.GetComponent<CellSplitAnimation>().originCell = this;
+        Deactive();
     }
 
     public void CancerousSplit()
