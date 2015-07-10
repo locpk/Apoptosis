@@ -383,6 +383,12 @@ public class PlayerController : MonoBehaviour
         EventManager.Stop();
     }
 
+    public void UnitMerge()
+    {
+
+        EventManager.Merge();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -419,6 +425,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) // If the player presses D
         {
             UnitSplit();
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q)) // If the player presses Q
+        {
+            UnitMerge();
 
         }
 

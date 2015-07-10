@@ -7,11 +7,15 @@ public class CellSplitAnimation : MonoBehaviour
     public GameObject gCancerCellPrefab;
     public GameObject gStemCellPrefab;
     public GameObject gHeatCellPrefab;
+    public GameObject gTier2HeatCellPrefab;
     public GameObject gColdCellPrefab;
+    public GameObject gTier2ColdCellPrefab;
     public GameObject gAlkaliCellPrefab;
     public GameObject gAcidicCellPrefab;
+    public GameObject gNerveCellPrefab;
 
     public BaseCell originCell;
+    public BaseCell originCell1;
     public int currentLevel;
     public float currentProtein;
     public bool isAIPossessed = false;
@@ -32,6 +36,23 @@ public class CellSplitAnimation : MonoBehaviour
         }
         Destroy(gameObject);
         originCell.Die();
+    }
+
+    public void CreateTier2HeatCell()
+    {
+
+        GameObject newcell = GameObject.Instantiate(gTier2HeatCellPrefab, transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
+        newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+        newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+        if (!isAIPossessed)
+        {
+            newcell.GetComponent<BaseCell>().isMine = true;
+            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        }
+        Destroy(gameObject);
+        originCell.Die();
+        originCell1.Die();
     }
     public void CreateStemCells()
     {

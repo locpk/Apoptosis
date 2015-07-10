@@ -38,6 +38,7 @@ GameObject:
   - 114: {fileID: 11476450}
   - 114: {fileID: 11446688}
   - 114: {fileID: 11404524}
+  - 114: {fileID: 11400622}
   m_Layer: 0
   m_Name: HeatCell
   m_TagString: Unit
@@ -145,6 +146,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &11400622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3083db6dfd461994ab13129b4ec176ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11404524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,7 +211,6 @@ MonoBehaviour:
   health_10: {fileID: 21300000, guid: f8352a793aaca5a4eb4079dc34493331, type: 3}
   health_50: {fileID: 21300000, guid: 4af6c55a799eca648aeae4e7cc2ebe41, type: 3}
   health_100: {fileID: 21300000, guid: 7bd591d9b1d87c94f90857d8f388fe8a, type: 3}
-  MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 1
@@ -224,7 +235,7 @@ MonoBehaviour:
   attackCooldown: 2
   splitCooldown: 0
   fireball: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
-  Tier2Heat: {fileID: 152348, guid: 983b6959b3692f34c83f783b1017eb01, type: 2}
+  Tier2Heat: {fileID: 106386, guid: c4230a3c412c0044bafc5ac2b753aaca, type: 2}
   Inheat: 1
   controller: {fileID: 0}
 --- !u!114 &11476450
@@ -481,7 +492,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Tier2Heat
       value: 
-      objectReference: {fileID: 152348, guid: 983b6959b3692f34c83f783b1017eb01, type: 2}
+      objectReference: {fileID: 106386, guid: c4230a3c412c0044bafc5ac2b753aaca, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 

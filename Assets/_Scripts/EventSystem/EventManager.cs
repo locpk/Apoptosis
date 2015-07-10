@@ -59,4 +59,12 @@ public class EventManager : MonoBehaviour
     {
         OnConsume(_target);
     }
+
+    public delegate void MergeEvent();
+    public static event MergeEvent OnMerge;
+
+    public static void Merge()
+    {
+        OnMerge();
+    }
 }

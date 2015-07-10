@@ -36,7 +36,7 @@ GameObject:
   - 114: {fileID: 11449670}
   - 114: {fileID: 11454132}
   m_Layer: 0
-  m_Name: Tier 2 Heat
+  m_Name: Tier2HeatCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,16 +114,15 @@ MonoBehaviour:
   health_10: {fileID: 21300000, guid: f8352a793aaca5a4eb4079dc34493331, type: 3}
   health_50: {fileID: 21300000, guid: 4af6c55a799eca648aeae4e7cc2ebe41, type: 3}
   health_100: {fileID: 21300000, guid: 7bd591d9b1d87c94f90857d8f388fe8a, type: 3}
-  MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 1
   isAlive: 1
   isAIPossessed: 0
   isDepleting: 0
-  isSelected: 1
+  isSelected: 0
   celltype: 3
-  currentState: 2
+  currentState: 0
   navAgent: {fileID: 19542924}
   navObstacle: {fileID: 20808468}
   destination: {x: -13.0605164, y: 0, z: -18.7612991}
@@ -138,9 +137,9 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
-  fireball: {fileID: 0}
+  fireball: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
   hasteTimer: 0
-  stemCell: {fileID: 0}
+  stemCell: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
 --- !u!114 &11454132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,6 +325,22 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 7bd591d9b1d87c94f90857d8f388fe8a,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: currentState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: stemCell
+      value: 
+      objectReference: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
+    - target: {fileID: 0}
+      propertyPath: fireball
+      value: 
+      objectReference: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
+    - target: {fileID: 0}
+      propertyPath: isSelected
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 152348}
