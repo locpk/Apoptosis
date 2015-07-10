@@ -4,16 +4,31 @@ using System.Collections.Generic;
 
 public class ColdCell : BaseCell
 {
-
+    public delegate void TakeDamage();
+    public TakeDamage multidamagesources;
     public Sprite health_10;
     public Sprite health_50;
     public Sprite health_100;
     void Awake()
     {
         base.bAwake();
-        
-    }
+        multidamagesources += nothing;
+        InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
+
+    }
+    void MUltiDMg()
+    {
+        multidamagesources();
+    }
+    public void AreaDamage()
+    {
+        currentProtein -= 10;
+    }
+    void nothing()
+    {
+
+    }
     // Use this for initialization
     void Start()
     {
@@ -28,7 +43,21 @@ public class ColdCell : BaseCell
         }
     }
 
-   
+//  public void Guarding()
+//  {
+//      List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
+//      for (int i = 0; i < aiUnits.Count; i++)
+//      {
+//          if (Vector3.Distance(aiUnits[i].transform.position, transform.position) <= fovRadius)
+//          {
+//              if (aiUnits[i] != this.gameObject)
+//              {
+//                  Attack(aiUnits[i]);
+//              }
+//              break;
+//          }
+//      }
+//  }
 
     // Update is called once per frame
     void Update()
@@ -36,11 +65,7 @@ public class ColdCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-                if (IsInvoking("DamagePreSecond"))
-                {
-                    CancelInvoke("DamagePreSecond");
-                }
-                base.Guarding();
+       //         Guarding();
                 break;
             case CellState.ATTACK:
                 if (primaryTarget != null)
@@ -68,18 +93,10 @@ public class ColdCell : BaseCell
                 }
                 else
                 {
-                    if (IsInvoking("DamagePreSecond"))
-                    {
-                        CancelInvoke("DamagePreSecond");
-                    }
                     currentState = CellState.IDLE;
                 }
                 break;
             case CellState.MOVING:
-                if (IsInvoking("DamagePreSecond"))
-                {
-                    CancelInvoke("DamagePreSecond");
-                }
                 base.bUpdate();
                
 
@@ -91,10 +108,6 @@ public class ColdCell : BaseCell
                 //  }
                 break;
             case CellState.CONSUMING:
-                if (IsInvoking("DamagePreSecond"))
-                {
-                    CancelInvoke("DamagePreSecond");
-                }
                 base.bUpdate();
                 break;
             case CellState.DEAD:

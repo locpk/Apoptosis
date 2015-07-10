@@ -180,6 +180,7 @@ public class BaseCell : MonoBehaviour
         transform.position = new Vector3(2500.0f, 2500.0f, 2500.0f);
        
         GetComponent<SpriteRenderer>().enabled = false;
+
     }
 
     public virtual void Attack(GameObject _target)
