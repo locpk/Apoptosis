@@ -10,10 +10,6 @@ GameObject:
   - 4: {fileID: 415160}
   - 212: {fileID: 21271864}
   - 114: {fileID: 11479566}
-  - 195: {fileID: 19575368}
-  - 54: {fileID: 5488362}
-  - 135: {fileID: 13556506}
-  - 208: {fileID: 20854012}
   m_Layer: 0
   m_Name: ColdCell (1)
   m_TagString: Animation
@@ -31,10 +27,6 @@ GameObject:
   - 4: {fileID: 472226}
   - 212: {fileID: 21283130}
   - 114: {fileID: 11450816}
-  - 195: {fileID: 19532294}
-  - 54: {fileID: 5437750}
-  - 135: {fileID: 13571916}
-  - 208: {fileID: 20808506}
   m_Layer: 0
   m_Name: ColdCell
   m_TagString: Animation
@@ -99,7 +91,7 @@ Transform:
   m_GameObject: {fileID: 110632}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 429970}
   m_Father: {fileID: 465088}
@@ -111,8 +103,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.65660011e-10, y: 0, z: -.00100000005}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: 4.65660011e-10, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 415160}
   m_RootOrder: 0
@@ -123,7 +115,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.0530396, y: 0, z: -8.96004486}
+  m_LocalPosition: {x: -12.947876, y: 0, z: -12.789856}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 472226}
@@ -138,7 +130,7 @@ Transform:
   m_GameObject: {fileID: 120506}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 485744}
   m_Father: {fileID: 465088}
@@ -150,41 +142,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.65660011e-10, y: 0, z: -.00100000005}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: 4.65660011e-10, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 472226}
   m_RootOrder: 0
---- !u!54 &5437750
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 120506}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5488362
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 110632}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!95 &9552796
 Animator:
   serializedVersion: 3
@@ -217,8 +179,12 @@ MonoBehaviour:
   gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
   gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
   gColdCellPrefab: {fileID: 120506}
+  gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
+  health_10: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
+  health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
+  health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
   MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
@@ -243,9 +209,6 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 1
   splitCooldown: 0
-  health_10: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
-  health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
-  health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
 --- !u!114 &11479566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -261,8 +224,12 @@ MonoBehaviour:
   gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
   gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
   gColdCellPrefab: {fileID: 110632}
+  gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
+  health_10: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
+  health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
+  health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
   MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
@@ -287,9 +254,6 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 1
   splitCooldown: 0
-  health_10: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
-  health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
-  health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
 --- !u!114 &11491458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -307,103 +271,10 @@ MonoBehaviour:
   gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
   gAlkaliCellPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
+  originCell: {fileID: 0}
   currentLevel: 0
   currentProtein: 0
   isAIPossessed: 0
---- !u!135 &13556506
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 110632}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4.78999996
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &13571916
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 120506}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4.78999996
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &19532294
-NavMeshAgent:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 120506}
-  m_Enabled: 1
-  m_Radius: 4.71000004
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: .199999973
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!195 &19575368
-NavMeshAgent:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 110632}
-  m_Enabled: 1
-  m_Radius: 4.71000004
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: .199999973
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!208 &20808506
-NavMeshObstacle:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 120506}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: .100000001, y: .100000001, z: .100000001}
-  m_MoveThreshold: .100000001
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: .5
---- !u!208 &20854012
-NavMeshObstacle:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 110632}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: .100000001, y: .100000001, z: .100000001}
-  m_MoveThreshold: .100000001
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: .5
 --- !u!212 &21247980
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -454,7 +325,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c1bebf43398e2bc4e92a5e757a7501bb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e1065543b1ee0554d9aced4bf6730cd8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: .884000003}
 --- !u!212 &21283130
 SpriteRenderer:
@@ -480,7 +351,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c1bebf43398e2bc4e92a5e757a7501bb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e1065543b1ee0554d9aced4bf6730cd8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: .884000003}
 --- !u!212 &21286490
 SpriteRenderer:

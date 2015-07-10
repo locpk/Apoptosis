@@ -17,6 +17,7 @@ public class HeatCell : BaseCell
     GameObject previousTarget;
 
 
+
     void Merge()
     {
 
@@ -41,8 +42,8 @@ public class HeatCell : BaseCell
             for (int o = 0; o < heatCellsMerge.Count; o++)
             {
                 if (mergePartner == null || Vector3.Distance(this.transform.position, heatCellsMerge[o].transform.position)
-                    < Vector3.Distance(this.transform.position, mergePartner.transform.position) || 
-                    (haveMergePartner == false && mergePartner.haveMergePartner == false ))
+                    < Vector3.Distance(this.transform.position, mergePartner.transform.position) ||
+                    (haveMergePartner == false && mergePartner.haveMergePartner == false))
                 {
                     mergePartner = heatCellsMerge[o];
                     mergePartner.mergePartner = this;
@@ -61,23 +62,24 @@ public class HeatCell : BaseCell
     void MergingTheCells(HeatCell other)
     {
 
-          float distance = Vector3.Distance(this.transform.position, other.transform.position);
-      if (Vector3.Distance(this.transform.position, other.transform.position) < 2.0f)
-      {
-          Vector3 trackingPos = this.transform.position;
-          Quaternion trackingRot = this.transform.rotation;
-          Die();
-          other.Die();
-   
-        GameObject kTier2Heat =  Instantiate(Tier2Heat, trackingPos, trackingRot) as GameObject;
-          GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(kTier2Heat.GetComponent<BaseCell>());
-      }
-      else
-      {
-   
-        Move(other.transform.position);
-   
-      }
+        float distance = Vector3.Distance(this.transform.position, other.transform.position);
+        if (Vector3.Distance(this.transform.position, other.transform.position) < 2.0f)
+        {
+            Vector3 trackingPos = this.transform.position;
+            Quaternion trackingRot = this.transform.rotation;
+            Die();
+            other.Die();
+
+            GameObject kTier2Heat = Instantiate(Tier2Heat, trackingPos, trackingRot) as GameObject;
+            controller.AddNewCell(kTier2Heat.GetComponent<BaseCell>());
+            kTier2Heat.GetComponent<BaseCell>().currentState = CellState.IDLE;
+        }
+        else
+        {
+
+            Move(other.transform.position);
+
+        }
 
     }
     void Awake()
@@ -85,7 +87,9 @@ public class HeatCell : BaseCell
         base.bAwake();
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
-
+        controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
+        
+  
     }
 
     void MUltiDMg()
@@ -111,7 +115,7 @@ public class HeatCell : BaseCell
         thefireball.GetComponent<FireBall>().Target = primaryTarget;
         thefireball.GetComponent<FireBall>().Owner = this.gameObject;
 
-       
+
     }
 
 
@@ -159,7 +163,7 @@ public class HeatCell : BaseCell
                     {
                         Merge();
                     }
-               
+
                     break;
                 case CellState.ATTACK:
                     if (primaryTarget != null)
@@ -236,6 +240,7 @@ public class HeatCell : BaseCell
     //LateUpdate is called after all Update functions have been called
     void LateUpdate()
     {
+        
         base.bLateUpdate();
     }
 

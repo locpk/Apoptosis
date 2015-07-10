@@ -45,7 +45,9 @@ public class BaseCell : MonoBehaviour
     public GameObject gAcidicCellPrefab;
     public GameObject gAlkaliCellPrefab;
 
-
+    public Sprite health_10;
+    public Sprite health_50;
+    public Sprite health_100;
 
     public float MAX_PROTEIN = 500.0f;
     public const float DEPLETE_TIME = 5.0f;
@@ -589,17 +591,22 @@ public class BaseCell : MonoBehaviour
             currentState = CellState.DEAD;
         }
 
-        if (currentProtein >= 100.0f)
-        {
-            transform.FindChild("Nucleus").transform.localScale = new Vector3(currentProtein / MAX_PROTEIN, currentProtein / MAX_PROTEIN, currentProtein / MAX_PROTEIN);
-        }
-        else
-        {
-            transform.FindChild("Nucleus").transform.localScale = new Vector3(100.0f / MAX_PROTEIN, 100.0f / MAX_PROTEIN, 100.0f / MAX_PROTEIN);
-        }
     }
 
     protected void bLateUpdate()
     {
+        float healthRatio = currentProtein / MAX_PROTEIN;
+        if (healthRatio <= 0.5f && healthRatio > 0.1f)
+        {
+            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_50;
+        }
+        else if (healthRatio <= 0.1f)
+        {
+            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_10;
+        }
+        else
+        {
+            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
+        }
     }
 }

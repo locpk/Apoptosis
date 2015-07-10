@@ -7,21 +7,7 @@ public class AcidicCell : BaseCell
 
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
-    public void Guarding()
-    {
-        List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
-        for (int i = 0; i < aiUnits.Count; i++)
-        {
-            if (Vector3.Distance(aiUnits[i].transform.position, transform.position) <= fovRadius)
-            {
-                if (aiUnits[i] != this.gameObject)
-                {
-                    Attack(aiUnits[i]);
-                }
-                break;
-            }
-        }
-    }
+   
     void Awake()
     {
         base.bAwake();
@@ -61,7 +47,7 @@ public class AcidicCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-                Guarding();
+              
                 break;
             case CellState.ATTACK:
                 if (primaryTarget != null)

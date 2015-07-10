@@ -6,15 +6,13 @@ public class ColdCell : BaseCell
 {
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
-    public Sprite health_10;
-    public Sprite health_50;
-    public Sprite health_100;
+    
     void Awake()
     {
         base.bAwake();
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
-
+     
 
     }
     void MUltiDMg()
@@ -134,21 +132,14 @@ public class ColdCell : BaseCell
 
     void FixedUpdate()
     {
-        float healthRatio = currentProtein / MAX_PROTEIN;
-        if (healthRatio <= 0.5f && healthRatio > 0.1f)
-        {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = health_50;
-        }
-        else if (healthRatio <= 0.1f)
-        {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = health_10;
-        }
+        
 
         //base.bFixedUpdate();
     }
 
     void LateUpdate()
     {
+       
         base.bLateUpdate();
     }
 
