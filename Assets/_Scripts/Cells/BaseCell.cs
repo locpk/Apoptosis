@@ -83,6 +83,9 @@ public class BaseCell : MonoBehaviour
     public float attackCooldown;
     public float splitCooldown;
 
+    public int NumEnemiesLeft = 0;
+
+
     #region RPC Methods
 
 

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+
+
 public class PlayerController : MonoBehaviour
 {
     private bool isOverUI = false;
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public GameObject movePin;
     public GameObject attackPin;
 
+
     public int NumStemCells = 0;
     public int NumHeatCells = 0;
     public int NumColdCells = 0;
@@ -27,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public int NumNerveCells = 0;
     public int NumTierTwoCold = 0;
     public int NumTierTwoHeat = 0;
+    public int NumEnemiesLeft = 0;
 
 
     public List<BaseCell> allSelectableUnits;
@@ -84,6 +88,7 @@ public class PlayerController : MonoBehaviour
         {
             allSelectableTargets.Add(item); // Add the cell to the players controllable units
         }
+
     }
 
 
@@ -230,6 +235,7 @@ public class PlayerController : MonoBehaviour
     public void UnitAttack()
     {
         EventManager.Attack(selectedTargets[0]);
+        CheckEnemiesLeft();
 
     }
 
@@ -486,7 +492,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if (!isOverUI)
+        if (!isOverUI && Time.timeScale > 0.0f)
         {
             if (Input.GetMouseButtonDown(0)) // If the player left-clicks
             {
@@ -559,7 +565,6 @@ public class PlayerController : MonoBehaviour
                         }
                     }
 
-
                 
                 if (selectedTargets.Count > 0)
                 {
@@ -610,4 +615,18 @@ public class PlayerController : MonoBehaviour
         NumTierTwoHeat = selectedUnits.FindAll(item => item.celltype == CellType.HEAT_CELL_TIRE2).Count;
     }
 
+    public void CheckEnemiesLeft()
+    {
+        NumEnemiesLeft = 0;
+
+        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit");
+        foreach (GameObject item in tmpArr)
+        {
+            BaseCell bCell = item.GetComponent<BaseCell>();
+            if (bCell.isAIPossessed && !bCell.isMine)
+            {
+                NumEnemiesLeft++;
+            }
+        }
+    }
 }
