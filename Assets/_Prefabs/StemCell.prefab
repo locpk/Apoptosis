@@ -228,10 +228,9 @@ MonoBehaviour:
   gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
-  health_10: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
+  health_10: {fileID: 21300000, guid: 12be41204cae34947867bd18306abafe, type: 3}
   health_50: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
   health_100: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
-  MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 1
@@ -1637,7 +1636,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: health_10
       value: 
-      objectReference: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded,
+      objectReference: {fileID: 21300000, guid: 12be41204cae34947867bd18306abafe,
         type: 3}
     - target: {fileID: 0}
       propertyPath: health_50

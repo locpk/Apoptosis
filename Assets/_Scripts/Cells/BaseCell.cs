@@ -49,7 +49,7 @@ public class BaseCell : MonoBehaviour
     public Sprite health_50;
     public Sprite health_100;
 
-    public float MAX_PROTEIN = 500.0f;
+    public const float MAX_PROTEIN = 500.0f;
     public const float DEPLETE_TIME = 5.0f;
     public const float ATTACK_COOLDOWN = 1.0f;
     public const float moveSpeed = 3.0f;

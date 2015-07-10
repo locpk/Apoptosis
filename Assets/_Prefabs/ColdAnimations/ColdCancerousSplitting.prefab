@@ -41,14 +41,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 404956}
   - 212: {fileID: 21251050}
-  - 114: {fileID: 11475552}
-  - 195: {fileID: 19532942}
-  - 54: {fileID: 5421694}
-  - 135: {fileID: 13562712}
-  - 208: {fileID: 20839222}
+  - 114: {fileID: 11457214}
   m_Layer: 0
   m_Name: CancerCell
-  m_TagString: Unit
+  m_TagString: Animation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,20 +58,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 440460}
   - 212: {fileID: 21261470}
-  - 114: {fileID: 11428240}
-  - 195: {fileID: 19524062}
-  - 54: {fileID: 5452798}
-  - 135: {fileID: 13502466}
-  - 208: {fileID: 20828442}
-  - 114: {fileID: 11463182}
-  - 114: {fileID: 11424272}
-  - 114: {fileID: 11407092}
-  - 114: {fileID: 11447450}
-  - 114: {fileID: 11418964}
-  - 114: {fileID: 11400534}
+  - 114: {fileID: 11408560}
   m_Layer: 0
   m_Name: ColdCell (1)
-  m_TagString: Unit
+  m_TagString: Animation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,20 +127,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 473466}
   - 212: {fileID: 21258144}
-  - 114: {fileID: 11437466}
-  - 195: {fileID: 19570654}
-  - 54: {fileID: 5408806}
-  - 135: {fileID: 13587756}
-  - 208: {fileID: 20808422}
-  - 114: {fileID: 11425304}
-  - 114: {fileID: 11421588}
-  - 114: {fileID: 11425194}
-  - 114: {fileID: 11436892}
-  - 114: {fileID: 11446204}
-  - 114: {fileID: 11491534}
+  - 114: {fileID: 11499262}
   m_Layer: 0
   m_Name: ColdCell
-  m_TagString: Unit
+  m_TagString: Animation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -383,51 +359,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150290}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &5408806
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155802}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5421694
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136060}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5452798
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136540}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!95 &9569642
 Animator:
   serializedVersion: 3
@@ -445,7 +376,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11400534
+--- !u!114 &11408560
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -453,120 +384,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 136540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3277305bd7a2f03428631da060b500bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11407092
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0d9b8ef6f623bd418431e10ef3a8e76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11418964
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd88def841af1747840697bd7deef13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11421588
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2064ca72bf0d14a4fab78eaff6b9edad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11424272
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2064ca72bf0d14a4fab78eaff6b9edad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11425194
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0d9b8ef6f623bd418431e10ef3a8e76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11425304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb7de6a51f17df242b8448c819b0d5ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11428240
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d9072eca16e5ac4b8d3ed6ee1b47389, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gCancerCellPrefab: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
-  gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-  gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
-  gColdCellPrefab: {fileID: 149900, guid: 054778e6ee0a8c1429b6cbf3bf479fc2, type: 2}
-  gColdCancerPrefab: {fileID: 0}
-  gAcidicCellPrefab: {fileID: 0}
-  gAlkaliCellPrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
   health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
   health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
-  MAX_PROTEIN: 500
-  currentLevel: 0
-  isSinglePlayer: 1
-  isMine: 1
-  isAlive: 1
-  isAIPossessed: 0
-  isDepleting: 0
-  isSelected: 0
-  celltype: 2
-  currentState: 0
-  navAgent: {fileID: 0}
-  navObstacle: {fileID: 0}
-  destination: {x: 0, y: 0, z: 0}
-  targets: []
-  primaryTarget: {fileID: 0}
-  currentProtein: 500
-  fovRadius: 3
-  attackDamage: 6
-  attackRange: 3
-  defense: 15
-  depleteTimer: 20
-  depleteAmount: 3
-  attackCooldown: 1
-  splitCooldown: 0
 --- !u!114 &11434262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -588,7 +411,21 @@ MonoBehaviour:
   currentLevel: 0
   currentProtein: 0
   isAIPossessed: 0
---- !u!114 &11436892
+--- !u!114 &11457214
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health_10: {fileID: 21300000, guid: b88f64507361a7e45973eacefd8966b6, type: 3}
+  health_50: {fileID: 21300000, guid: b88f64507361a7e45973eacefd8966b6, type: 3}
+  health_100: {fileID: 21300000, guid: b88f64507361a7e45973eacefd8966b6, type: 3}
+--- !u!114 &11499262
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -596,179 +433,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 155802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de4ef090f52247a49b75200aa7ae2228, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11437466
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d9072eca16e5ac4b8d3ed6ee1b47389, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gCancerCellPrefab: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
-  gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-  gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
-  gColdCellPrefab: {fileID: 149900, guid: 054778e6ee0a8c1429b6cbf3bf479fc2, type: 2}
-  gColdCancerPrefab: {fileID: 0}
-  gAcidicCellPrefab: {fileID: 0}
-  gAlkaliCellPrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
   health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
   health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
-  MAX_PROTEIN: 500
-  currentLevel: 0
-  isSinglePlayer: 1
-  isMine: 1
-  isAlive: 1
-  isAIPossessed: 0
-  isDepleting: 0
-  isSelected: 0
-  celltype: 2
-  currentState: 0
-  navAgent: {fileID: 0}
-  navObstacle: {fileID: 0}
-  destination: {x: 0, y: 0, z: 0}
-  targets: []
-  primaryTarget: {fileID: 0}
-  currentProtein: 500
-  fovRadius: 3
-  attackDamage: 6
-  attackRange: 3
-  defense: 15
-  depleteTimer: 20
-  depleteAmount: 3
-  attackCooldown: 1
-  splitCooldown: 0
---- !u!114 &11446204
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd88def841af1747840697bd7deef13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11447450
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de4ef090f52247a49b75200aa7ae2228, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11463182
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb7de6a51f17df242b8448c819b0d5ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11475552
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09b55239135e17e4fb03606a74691dae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gCancerCellPrefab: {fileID: 136060}
-  gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-  gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
-  gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
-  gColdCancerPrefab: {fileID: 0}
-  gAcidicCellPrefab: {fileID: 0}
-  gAlkaliCellPrefab: {fileID: 0}
-  health_10: {fileID: 0}
-  health_50: {fileID: 0}
-  health_100: {fileID: 0}
-  MAX_PROTEIN: 500
-  currentLevel: 0
-  isSinglePlayer: 1
-  isMine: 0
-  isAlive: 1
-  isAIPossessed: 0
-  isDepleting: 0
-  isSelected: 0
-  celltype: 7
-  currentState: 0
-  navAgent: {fileID: 19532942}
-  navObstacle: {fileID: 20839222}
-  destination: {x: 0, y: 0, z: 0}
-  targets: []
-  primaryTarget: {fileID: 0}
-  currentProtein: 500
-  fovRadius: 0
-  attackDamage: 5
-  attackRange: 1.5
-  defense: 10
-  depleteTimer: 1
-  depleteAmount: 3
-  attackCooldown: 2
-  splitCooldown: 0
---- !u!114 &11491534
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3277305bd7a2f03428631da060b500bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!135 &13502466
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136540}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.25
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &13562712
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136060}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: .930000007
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &13587756
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155802}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.25
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13589700
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -793,111 +463,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &19524062
-NavMeshAgent:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136540}
-  m_Enabled: 1
-  m_Radius: 1.25
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: .199999973
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!195 &19532942
-NavMeshAgent:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136060}
-  m_Enabled: 1
-  m_Radius: .930000007
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: .199999973
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!195 &19570654
-NavMeshAgent:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155802}
-  m_Enabled: 1
-  m_Radius: 1.25
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: .199999973
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!208 &20808422
-NavMeshObstacle:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155802}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: .100000001, y: .100000001, z: .100000001}
-  m_MoveThreshold: .100000001
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: .5
---- !u!208 &20828442
-NavMeshObstacle:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136540}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: .100000001, y: .100000001, z: .100000001}
-  m_MoveThreshold: .100000001
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: .5
---- !u!208 &20839222
-NavMeshObstacle:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136060}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: .100000001, y: .100000001, z: .100000001}
-  m_MoveThreshold: .100000001
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: .5
 --- !u!212 &21205836
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1103,6 +668,25 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health_10
+      value: 
+      objectReference: {fileID: 21300000, guid: b88f64507361a7e45973eacefd8966b6,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: health_50
+      value: 
+      objectReference: {fileID: 21300000, guid: b88f64507361a7e45973eacefd8966b6,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: health_100
+      value: 
+      objectReference: {fileID: 21300000, guid: b88f64507361a7e45973eacefd8966b6,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Animation
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
