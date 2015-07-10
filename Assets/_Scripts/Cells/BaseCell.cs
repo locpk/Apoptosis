@@ -444,6 +444,7 @@ public class BaseCell : MonoBehaviour
         navObstacle = GetComponent<NavMeshObstacle>();
         navAgent.speed = moveSpeed;
 
+        
        
         // photonView = GetComponent<PhotonView>();
         //  isMine = photonView.isMine;
@@ -457,6 +458,11 @@ public class BaseCell : MonoBehaviour
         navAgent.updateRotation = false;
         navObstacle.enabled = true;
 
+        if (!isMine && transform.tag != "Animation" && this.celltype != CellType.CANCER_CELL)
+        {
+
+            this.gameObject.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().material.color = Color.red;
+        }
     }
 
     protected void bUpdate()
@@ -567,11 +573,7 @@ public class BaseCell : MonoBehaviour
                 return;
             }
         }
-        if (!isMine && transform.tag != "Animation" && this.celltype != CellType.CANCER_CELL)
-        {
-
-            this.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.color = Color.red;
-        }
+       
     }
 
     public bool isStopped()
@@ -599,6 +601,8 @@ public class BaseCell : MonoBehaviour
             currentState = CellState.DEAD;
         }
 
+       
+        
     }
 
     protected void bLateUpdate()

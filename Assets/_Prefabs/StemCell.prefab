@@ -89,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -14.5100002, y: 1.5, z: 3.13000011}
+  m_LocalPosition: {x: -19.6800003, y: 1.5, z: -6.38999987}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 495744}
@@ -275,9 +275,9 @@ MonoBehaviour:
   health_100: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
   currentLevel: 0
   isSinglePlayer: 1
-  isMine: 1
+  isMine: 0
   isAlive: 1
-  isAIPossessed: 0
+  isAIPossessed: 1
   isDepleting: 0
   isSelected: 0
   celltype: 0
