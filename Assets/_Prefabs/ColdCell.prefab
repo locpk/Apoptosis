@@ -20,6 +20,7 @@ GameObject:
   - 114: {fileID: 11474616}
   - 114: {fileID: 11430816}
   - 114: {fileID: 11412058}
+  - 95: {fileID: 9583442}
   m_Layer: 0
   m_Name: ColdCell
   m_TagString: Unit
@@ -92,7 +93,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100116}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -16.3256454, y: 0, z: -10.1507263}
+  m_LocalPosition: {x: -11.5799999, y: 0, z: -8.11999989}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 441596}
@@ -145,6 +146,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &9583442
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100116}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9163f774d67e2fb4eab229fabb71f127, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11412058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,10 +203,10 @@ MonoBehaviour:
   gColdCancerPrefab: {fileID: 169166, guid: e157488d71bd50240afc0fa1528c42ea, type: 2}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
+  gRevertHeatPrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
   health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
   health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
-  MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 1

@@ -36,6 +36,7 @@ GameObject:
   - 114: {fileID: 11449670}
   - 114: {fileID: 11454132}
   - 114: {fileID: 11463738}
+  - 95: {fileID: 9519400}
   m_Layer: 0
   m_Name: Tier2HeatCell
   m_TagString: Unit
@@ -83,6 +84,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &9519400
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152348}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9163f774d67e2fb4eab229fabb71f127, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11449670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -280,7 +298,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -362,6 +380,14 @@ Prefab:
       propertyPath: gRevertHeatPrefab
       value: 
       objectReference: {fileID: 124642, guid: 34ed06a8dff0e8c4ab0d147943105b8a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9163f774d67e2fb4eab229fabb71f127, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 152348}

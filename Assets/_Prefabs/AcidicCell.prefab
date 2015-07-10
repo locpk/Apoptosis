@@ -35,6 +35,7 @@ GameObject:
   - 114: {fileID: 11433158}
   - 114: {fileID: 11487138}
   - 114: {fileID: 11478438}
+  - 95: {fileID: 9553798}
   m_Layer: 0
   m_Name: AcidicCell
   m_TagString: Unit
@@ -144,6 +145,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &9553798
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181396}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9163f774d67e2fb4eab229fabb71f127, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11418466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,10 +180,10 @@ MonoBehaviour:
   gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
+  gRevertHeatPrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: ac2c55435e17c3349bb9f9865c02885f, type: 3}
   health_50: {fileID: 21300000, guid: 405fb9a2dd0de9044a542c898df3d160, type: 3}
   health_100: {fileID: 21300000, guid: a4acf9dd95ac8f24ca0a81888b64cacd, type: 3}
-  MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 1
@@ -434,6 +452,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: a4acf9dd95ac8f24ca0a81888b64cacd,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9163f774d67e2fb4eab229fabb71f127, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181396}

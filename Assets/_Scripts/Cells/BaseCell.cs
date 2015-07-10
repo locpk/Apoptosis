@@ -613,5 +613,10 @@ public class BaseCell : MonoBehaviour
         {
             transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
         }
+
+        if (currentProtein <= 0.0f)
+        {
+            Die();
+        }
     }
 }

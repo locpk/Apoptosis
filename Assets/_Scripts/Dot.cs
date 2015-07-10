@@ -15,7 +15,12 @@ public class Dot : MonoBehaviour
     }
     void DotEffect()
     {
-        Target.GetComponent<BaseCell>().currentProtein -= Owner.GetComponent<BaseCell>().attackDamage;
+        if (Target)
+        {
+            Target.GetComponent<BaseCell>().currentProtein -= Owner.GetComponent<BaseCell>().attackDamage;
+            Target.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+        }
+        
     }
     // Update is called once per frame
     void Update()
