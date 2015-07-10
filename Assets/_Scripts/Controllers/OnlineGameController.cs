@@ -8,20 +8,22 @@ public class OnlineGameController : Photon.PunBehaviour
 
     void Awake()
     {
+    }
+
+    // Use this for initialization
+    void Start()
+    {
         if (PhotonNetwork.room.playerCount < 2)
         {
             SpawnSceneObjects();
         }
         else
         {
-            InitPlayers();
+            InitPlayer();
             SpawnPlayerUnits();
+            Invoke("InitSync", 2.0f);
         }
-    }
-
-    // Use this for initialization
-    void Start()
-    {
+        //PlayerControls.AddComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -47,7 +49,7 @@ public class OnlineGameController : Photon.PunBehaviour
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
         base.OnPhotonPlayerConnected(newPlayer);
-        InitPlayers();
+        InitPlayer();
         SpawnPlayerUnits();
     }
 
@@ -57,9 +59,35 @@ public class OnlineGameController : Photon.PunBehaviour
         Application.LoadLevel("Multiplayer_Lobby");
     }
 
-    void InitPlayers()
+    public override void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        base.OnPhotonInstantiate(info);
+        switch (info.photonView.gameObject.tag)
+        {
+            case "Protein":
+                PlayerControls.GetComponent<PlayerController>().AddNewProtein(info.photonView.gameObject.GetComponent<Protein>());
+                break;
+            case "Unit":
+                PlayerControls.GetComponent<PlayerController>().AddNewCell(info.photonView.gameObject.GetComponent<BaseCell>());
+                break;
+            default:
+                break;
+        }
+    }
+
+    void InitSync()
+    {
+        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
+        foreach (GameObject item in tmpArr) // Iterate through all the cells
+        {
+            PlayerControls.GetComponent<PlayerController>().AddNewProtein(item.GetComponent<Protein>()); // Add the cell to the players controllable units
+        }
+    }
+
+    void InitPlayer()
     {
         PlayerControls.SetActive(true);
+        //PlayerControls.GetComponent<PhotonView>().ObservedComponents.Add(PlayerControls.GetComponent<PlayerController>());
     }
 
     void ResetPlayers()
@@ -69,7 +97,7 @@ public class OnlineGameController : Photon.PunBehaviour
 
     void SpawnSceneObjects()
     {
-        PhotonNetwork.InstantiateSceneObject("Protein", Vector3.right * 4, Quaternion.Euler(90, 0, 0), 0, null);
+        PhotonNetwork.InstantiateSceneObject("Protein", Vector3.right * 4, Quaternion.Euler(90, 0, 0), 0, null).GetComponent<Protein>();
     }
 
     void SpawnPlayerUnits()
