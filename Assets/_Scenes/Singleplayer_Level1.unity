@@ -1425,6 +1425,18 @@ Prefab:
       propertyPath: m_CullingMask.m_Bits
       value: 4294967263
       objectReference: {fileID: 0}
+    - target: {fileID: 11441316, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: quad
+      value: 
+      objectReference: {fileID: 133795709}
+    - target: {fileID: 11441316, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1389477439}
+    - target: {fileID: 11441316, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: minimapCamera
+      value: 
+      objectReference: {fileID: 1217737350}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
   m_IsPrefabParent: 0
@@ -1673,6 +1685,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1389477439 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 149172, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+  m_PrefabInternal: {fileID: 1032341848}
 --- !u!1001 &1413680110
 Prefab:
   m_ObjectHideFlags: 0
