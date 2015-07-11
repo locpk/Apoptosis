@@ -104,9 +104,9 @@ public class FogOfWar : MonoBehaviour {
 		//fow_mask.Apply ();
 	}
 
-    void OnGUI() {
-        GUI.DrawTexture(new Rect(10, 10, 210, 210), fow_mask, ScaleMode.ScaleToFit, true);
-    }
+    //void OnGUI() {
+    //    GUI.DrawTexture(new Rect(10, 10, 210, 210), fow_mask, ScaleMode.ScaleToFit, true);
+    //}
 
 	public Texture2D GetMaskTexture() {
 		return fow_mask;
