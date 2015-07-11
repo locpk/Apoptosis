@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     //    List<BaseCell>[] groups;
     public Texture selector;
 
+    float fps;
+
     Rect GUISelectRect;
 
     Vector2 origin = new Vector2();
@@ -288,6 +290,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnGUI()
     {
+        GUI.Label(Rect.MinMaxRect(0, 0, Screen.width, Screen.height), fps.ToString());
         if (GUISelectRect.height != 0 && GUISelectRect.width != 0)
         {
             if (!isOverUI)
@@ -386,7 +389,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        fps = 1.0f / Time.deltaTime;
         cap = allSelectableUnits.Count;
         selectedUnits.RemoveAll(item => item == null);
         selectedTargets.RemoveAll(item => item == null);
