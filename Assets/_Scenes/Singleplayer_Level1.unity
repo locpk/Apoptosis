@@ -88,6 +88,10 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 23800000, guid: 0a99588eb54cdf244a5302daf6afb8b0, type: 2}
+--- !u!1 &17294880 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 165422, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+  m_PrefabInternal: {fileID: 848484275}
 --- !u!1 &62626060
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,6 +451,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &374423660 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 140122, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+  m_PrefabInternal: {fileID: 848484275}
 --- !u!4 &376943833 stripped
 Transform:
   m_PrefabParentObject: {fileID: 437234, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
@@ -1242,6 +1250,7 @@ MonoBehaviour:
   areaType: 2
   damagePerSecond: 5
   pendingConvertDelayed: 5
+  acidicButton: {fileID: 17294880}
 --- !u!1 &892530472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,6 +1597,10 @@ Prefab:
       propertyPath: isAIPossessed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11409952, guid: 1580ecf4540999c4482352dd573da390, type: 2}
+      propertyPath: DOT
+      value: 
+      objectReference: {fileID: 151690, guid: ce2e7885672d3534ca16f22399068182, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1580ecf4540999c4482352dd573da390, type: 2}
   m_IsPrefabParent: 0
@@ -1953,6 +1966,7 @@ MonoBehaviour:
   areaType: 2
   damagePerSecond: 5
   pendingConvertDelayed: 5
+  acidicButton: {fileID: 17294880}
 --- !u!1001 &1695325849
 Prefab:
   m_ObjectHideFlags: 0
@@ -2507,6 +2521,7 @@ MonoBehaviour:
   areaType: 3
   damagePerSecond: 5
   pendingConvertDelayed: 5
+  alkaliButton: {fileID: 374423660}
 --- !u!1001 &2017659470
 Prefab:
   m_ObjectHideFlags: 0
