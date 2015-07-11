@@ -38,6 +38,8 @@ GameObject:
   - 114: {fileID: 11476450}
   - 114: {fileID: 11446688}
   - 114: {fileID: 11404524}
+  - 114: {fileID: 11400622}
+  - 95: {fileID: 9569438}
   m_Layer: 0
   m_Name: HeatCell
   m_TagString: Unit
@@ -110,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -20.3799992, y: -9.53674316e-07, z: -10.5779266}
+  m_LocalPosition: {x: -20.0895386, y: -9.53674316e-07, z: -10.5779266}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 495744}
@@ -125,7 +127,7 @@ Transform:
   m_GameObject: {fileID: 198956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .209999993, y: 0, z: -.300000012}
-  m_LocalScale: {x: .600000024, y: .600000024, z: .600000024}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 471618}
   m_RootOrder: 0
@@ -175,6 +177,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &9569438
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174676}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9163f774d67e2fb4eab229fabb71f127, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11400622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3083db6dfd461994ab13129b4ec176ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11404524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,12 +250,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gCancerCellPrefab: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
-  gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-  gHeatCellPrefab: {fileID: 174676}
+  gStemCellPrefab: {fileID: 0}
+  gHeatCellPrefab: {fileID: 168428, guid: d145796a9e2b44b46b824864a6f518ae, type: 2}
   gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
+  gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
-  MAX_PROTEIN: 500
+  gRevertHeatPrefab: {fileID: 0}
+  health_10: {fileID: 21300000, guid: f8352a793aaca5a4eb4079dc34493331, type: 3}
+  health_50: {fileID: 21300000, guid: 4af6c55a799eca648aeae4e7cc2ebe41, type: 3}
+  health_100: {fileID: 21300000, guid: 7bd591d9b1d87c94f90857d8f388fe8a, type: 3}
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 0
@@ -251,6 +285,9 @@ MonoBehaviour:
   splitCooldown: 0
   NumEnemiesLeft: 0
   fireball: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
+  Tier2Heat: {fileID: 106386, guid: c4230a3c412c0044bafc5ac2b753aaca, type: 2}
+  Inheat: 1
+  controller: {fileID: 0}
 --- !u!114 &11476450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -329,7 +366,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4.92000008
+  m_Radius: 4.88999987
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &19549964
 NavMeshAgent:
@@ -360,7 +397,7 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 4.9000001, y: .100000001, z: 4.9000001}
+  m_Extents: {x: 4.88999987, y: .100000001, z: 4.88999987}
   m_MoveThreshold: .100000001
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -376,7 +413,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -416,7 +453,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7bd591d9b1d87c94f90857d8f388fe8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -428,7 +465,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: gHeatCellPrefab
       value: 
-      objectReference: {fileID: 174676}
+      objectReference: {fileID: 168428, guid: d145796a9e2b44b46b824864a6f518ae, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Mass
       value: 4.82999992
@@ -452,7 +489,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: gStemCellPrefab
       value: 
-      objectReference: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Name
       value: Nucleus
@@ -521,6 +558,46 @@ Prefab:
       propertyPath: attackDamage
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Inheat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Tier2Heat
+      value: 
+      objectReference: {fileID: 106386, guid: c4230a3c412c0044bafc5ac2b753aaca, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7bd591d9b1d87c94f90857d8f388fe8a,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health_10
+      value: 
+      objectReference: {fileID: 21300000, guid: f8352a793aaca5a4eb4079dc34493331,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: health_50
+      value: 
+      objectReference: {fileID: 21300000, guid: 4af6c55a799eca648aeae4e7cc2ebe41,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: health_100
+      value: 
+      objectReference: {fileID: 21300000, guid: 7bd591d9b1d87c94f90857d8f388fe8a,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174676}

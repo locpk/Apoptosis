@@ -52,6 +52,7 @@ GameObject:
   - 114: {fileID: 11433158}
   - 114: {fileID: 11487138}
   - 114: {fileID: 11478438}
+  - 95: {fileID: 9553798}
   m_Layer: 0
   m_Name: AcidicCell
   m_TagString: Unit
@@ -110,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 145230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 470922}
   m_RootOrder: 0
@@ -174,6 +175,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &9553798
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181396}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9163f774d67e2fb4eab229fabb71f127, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11418466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,9 +207,13 @@ MonoBehaviour:
   gStemCellPrefab: {fileID: 0}
   gHeatCellPrefab: {fileID: 0}
   gColdCellPrefab: {fileID: 0}
+  gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
-  MAX_PROTEIN: 500
+  gRevertHeatPrefab: {fileID: 0}
+  health_10: {fileID: 21300000, guid: ac2c55435e17c3349bb9f9865c02885f, type: 3}
+  health_50: {fileID: 21300000, guid: 405fb9a2dd0de9044a542c898df3d160, type: 3}
+  health_100: {fileID: 21300000, guid: a4acf9dd95ac8f24ca0a81888b64cacd, type: 3}
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 1
@@ -292,7 +314,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4.7295475
+  m_Radius: 3.43000007
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13579478
 SphereCollider:
@@ -325,7 +347,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181396}
   m_Enabled: 1
-  m_Radius: 4.78000021
+  m_Radius: 3.43000007
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -347,7 +369,7 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: .100000001, y: .100000001, z: .100000001}
+  m_Extents: {x: 3.43000007, y: .100000001, z: 3.43000007}
   m_MoveThreshold: .100000001
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -377,7 +399,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4acf9dd95ac8f24ca0a81888b64cacd, type: 3}
   m_Color: {r: 0, g: 1, b: .255172253, a: .921999991}
 --- !u!212 &21248600
 SpriteRenderer:
@@ -403,8 +425,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1cc00fa0e6de54e469ca649de01b42b6, type: 3}
-  m_Color: {r: .187177956, g: .551470578, b: 0, a: .697000027}
+  m_Sprite: {fileID: 21300000, guid: ed94fef22ec7c92408aa52b78cc665c1, type: 3}
+  m_Color: {r: .222117856, g: .654411793, b: 0, a: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -442,11 +464,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
-      value: .600000024
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.y
-      value: .600000024
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
@@ -464,6 +486,30 @@ Prefab:
       propertyPath: attackDamage
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health_10
+      value: 
+      objectReference: {fileID: 21300000, guid: ac2c55435e17c3349bb9f9865c02885f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: health_50
+      value: 
+      objectReference: {fileID: 21300000, guid: 405fb9a2dd0de9044a542c898df3d160,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: health_100
+      value: 
+      objectReference: {fileID: 21300000, guid: a4acf9dd95ac8f24ca0a81888b64cacd,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a4acf9dd95ac8f24ca0a81888b64cacd,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9163f774d67e2fb4eab229fabb71f127, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181396}

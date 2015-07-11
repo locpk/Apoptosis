@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 
 
@@ -53,29 +54,36 @@ public class PlayerController : MonoBehaviour
         terrainLayer = 1 << LayerMask.NameToLayer("Terrain");  // Layer masking for raycast clicking
         // ----------
 
-        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
+        List<GameObject> tmpArr = GameObjectManager.FindAllUnits(); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
-            if (!bCell.isAIPossessed && bCell.isMine) // If the cell belongs to this player
+            if (bCell)
             {
-                allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
+                if (!bCell.isAIPossessed && bCell.isMine) // If the cell belongs to this player
+                {
+                    allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
+                }
             }
+            
         }
 
-        tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
+        tmpArr.Clear();
+        tmpArr = GameObjectManager.FindAllUnits(); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
-            if (bCell.isAIPossessed && !bCell.isMine) // If the cell belongs to this player
+            if (bCell)
             {
-                allSelectableTargets.Add(item); // Add the cell to the players controllable units
+                if (bCell.isAIPossessed && !bCell.isMine) // If the cell belongs to this player
+                {
+                    allSelectableTargets.Add(item); // Add the cell to the players controllable units
+                }
             }
         }
 
-        //NumEnemiesLeft = allSelectableTargets.Count;
-
-        tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
+        tmpArr.Clear();
+        tmpArr = GameObject.FindGameObjectsWithTag("Protein").ToList<GameObject>(); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             allSelectableTargets.Add(item); // Add the cell to the players controllable units
@@ -83,12 +91,13 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
     public void AddNewCell(BaseCell _in)
     {
         _in.isSelected = true;
         allSelectableUnits.Add(_in);
         selectedUnits.Add(_in);
-        CheckSelectedUnits();
+
     }
 
     public void RemoveDeadCell(BaseCell _in)
@@ -96,7 +105,13 @@ public class PlayerController : MonoBehaviour
         _in.isSelected = false;
         allSelectableUnits.Remove(_in);
         selectedUnits.Remove(_in);
-        CheckSelectedUnits();
+
+    }
+    public void DeselectCell(BaseCell _in)
+    {
+        _in.isSelected = false;
+        selectedUnits.Remove(_in);
+
     }
 
     public void RemoveTarget(GameObject _in)
@@ -228,7 +243,7 @@ public class PlayerController : MonoBehaviour
     public void UnitSplit()
     {
         EventManager.Split();
-        CheckSelectedUnits();
+   
     }
 
     public void UnitEvolve(int cellNum)
@@ -250,7 +265,7 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
-        CheckSelectedUnits();
+ 
     }
 
     public void UnitHarvest()
@@ -274,7 +289,7 @@ public class PlayerController : MonoBehaviour
             {
                 selectedUnits.Add(item); // Add the cell to the players selected units
                 item.isSelected = true;
-                CheckSelectedUnits();
+
             }
         }
     }
@@ -306,6 +321,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        GUI.color = new Color(0.0f, 1.0f, 0.0f,1.0f);
         foreach (BaseCell item in selectedUnits)
         {
             if (item)
@@ -345,9 +361,8 @@ public class PlayerController : MonoBehaviour
             GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
             GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
 
-            //GUI.Box(new Rect(640, 0, 85, 60), "Number of\nEnemies Left: ");
-            //GUI.Label(new Rect(675, 35, 50, 50), NumEnemiesLeft.ToString());
-
+            GUI.Box(new Rect(720, 0, 75, 60), "Cap: ");
+            GUI.Label(new Rect(755, 35, 50, 50), cap.ToString());
             GUI.EndGroup();
         }
 
@@ -362,6 +377,7 @@ public class PlayerController : MonoBehaviour
 
     public void FixedUpdate()
     {
+        CheckSelectedUnits();
         //Debug.Log(allSelectableUnits.Count);
         if (allSelectableUnits.Count <= 0)
         {
@@ -383,9 +399,21 @@ public class PlayerController : MonoBehaviour
         EventManager.Stop();
     }
 
+    public void UnitMerge()
+    {
+        EventManager.Merge();
+    }
+
+    public void UnitRevert()
+    {
+        EventManager.Revert();
+    }
+
     // Update is called once per frame
     void Update()
     {
+
+        cap = allSelectableUnits.Count;
         selectedUnits.RemoveAll(item => item == null);
         selectedTargets.RemoveAll(item => item == null);
         allSelectableTargets.RemoveAll(item => item == null);
@@ -417,7 +445,19 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) // If the player presses D
         {
             UnitSplit();
-            CheckSelectedUnits();
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) // If the player presses 1
+        {
+            UnitRevert();
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q)) // If the player presses Q
+        {
+            UnitMerge();
+
         }
 
         if (Input.GetKeyDown(KeyCode.S)) // If the player presses S
@@ -428,20 +468,20 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C)) // If the player presses C
         {
             EventManager.Evolve(CellType.ACIDIC_CELL);
-            CheckSelectedUnits();
+
 
         }
 
         if (Input.GetKeyDown(KeyCode.V)) // If the player presses V
         {
             EventManager.Evolve(CellType.ALKALI_CELL);
-            CheckSelectedUnits();
+
         }
 
         if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
         {
             EventManager.Evolve(CellType.HEAT_CELL);
-            CheckSelectedUnits();
+
 
         }
 
@@ -449,7 +489,7 @@ public class PlayerController : MonoBehaviour
         {
             EventManager.Evolve(CellType.COLD_CELL);
 
-            CheckSelectedUnits();
+
         }
 
         if (!isOverUI && Time.timeScale > 0.0f)
@@ -465,7 +505,7 @@ public class PlayerController : MonoBehaviour
                 GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
                 origin = Input.mousePosition;
                 origin.y = -origin.y + Screen.height;
-                CheckSelectedUnits();
+
             }
             else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
             {
@@ -486,7 +526,7 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                 }
-                CheckSelectedUnits();
+
             }
             else if (Input.GetMouseButton(0)) // If the player has left-click held down
             {
@@ -512,8 +552,7 @@ public class PlayerController : MonoBehaviour
 
                 GUISelectRect.yMax = GUISelectRect.yMin;
                 GUISelectRect.xMax = GUISelectRect.xMin;
-                if (selectedTargets.Count == 0)
-                {
+                
                     RaycastHit hitInfo;
                     Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -526,7 +565,7 @@ public class PlayerController : MonoBehaviour
                         }
                     }
 
-                }
+                
                 if (selectedTargets.Count > 0)
                 {
                     foreach (BaseCell item in selectedUnits)
@@ -567,35 +606,13 @@ public class PlayerController : MonoBehaviour
         NumTierTwoCold = 0;
         NumTierTwoHeat = 0;
 
-        foreach (var item in selectedUnits)
-        {
-            switch (item.celltype)
-            {
-                case CellType.STEM_CELL:
-                    NumStemCells++;
-                    break;
-                case CellType.HEAT_CELL:
-                    NumHeatCells++;
-                    break;
-                case CellType.COLD_CELL:
-                    NumColdCells++;
-                    break;
-                case CellType.ACIDIC_CELL:
-                    NumAcidicCells++;
-                    break;
-                case CellType.ALKALI_CELL:
-                    NumAlkaliCells++;
-                    break;
-                case CellType.COLD_CELL_TIRE2:
-                    NumTierTwoCold++;
-                    break;
-                case CellType.HEAT_CELL_TIRE2:
-                    NumTierTwoHeat++;
-                    break;
-                default:
-                    break;
-            }
-        }
+        NumStemCells = selectedUnits.FindAll(item => item.celltype == CellType.STEM_CELL).Count;
+        NumHeatCells = selectedUnits.FindAll(item => item.celltype == CellType.HEAT_CELL).Count;
+        NumColdCells = selectedUnits.FindAll(item => item.celltype == CellType.COLD_CELL).Count;
+        NumAcidicCells = selectedUnits.FindAll(item => item.celltype == CellType.ACIDIC_CELL).Count;
+        NumAlkaliCells = selectedUnits.FindAll(item => item.celltype == CellType.ALKALI_CELL).Count;
+        NumTierTwoCold = selectedUnits.FindAll(item => item.celltype == CellType.COLD_CELL_TIRE2).Count;
+        NumTierTwoHeat = selectedUnits.FindAll(item => item.celltype == CellType.HEAT_CELL_TIRE2).Count;
     }
 
     public void CheckEnemiesLeft()

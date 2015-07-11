@@ -13,6 +13,7 @@ public class Menu : MonoBehaviour {
 
 	void Awake() 
     {
+        // hides the loaging screen.
         brackets.SetActive(false);
         backGround.SetActive(false);
         loadingBar.SetActive(false);
@@ -42,19 +43,20 @@ public class Menu : MonoBehaviour {
         //loading screen goes here, fade and put it in 
         // does the progress bar over the corutine.
         StartCoroutine(DisplayLoadingScreen(SceneName));
-
-       // Application.LoadLevel(SceneName);
-
     }
 
     public void ExitApplication()
     {
+        if (Application.isEditor)
+        {
+            return;
+        }
         System.Diagnostics.Process.GetCurrentProcess().Kill();
       
     }
 
-    // this does the loading bar and returns when done
-    IEnumerator DisplayLoadingScreen(string new_SceneName)
+    // this does the loading bar while the scene loads and returns when done
+    public IEnumerator DisplayLoadingScreen(string new_SceneName)
     {
         loadingBar.transform.localScale = new Vector3( n_loadProgress, loadingBar.transform.localScale.y, loadingBar.transform.localScale.z);
    
@@ -63,13 +65,19 @@ public class Menu : MonoBehaviour {
         brackets.SetActive(true);
         
         AsyncOperation async = Application.LoadLevelAsync(new_SceneName);
-        while (!async.isDone) // carry on updating
+        while (!async.isDone) // carry on updating while loading is not done
         {
             n_loadProgress = async.progress; // returns from 0.0 - 1.0
-            n_loadProgress *= 0.2f;
-            loadingBar.transform.localScale = new Vector3(n_loadProgress, loadingBar.transform.localScale.y, loadingBar.transform.localScale.z);
+            n_loadProgress *= 0.2f; // scaling for graphics 
+            loadingBar.transform.localScale = new Vector3(n_loadProgress, loadingBar.transform.localScale.y, loadingBar.transform.localScale.z); // moves the bar along 
           
-            yield return null; 
+            yield return null; // returns result every frame
         }
+    }
+
+    // this is for the facebook link and stuff
+    public void LoadURL(string link)
+    {
+        Application.OpenURL(link);
     }
 }

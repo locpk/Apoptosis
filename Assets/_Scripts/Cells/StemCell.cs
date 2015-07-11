@@ -9,6 +9,9 @@ public class StemCell : BaseCell
     public GameObject stemtoCold;
     public GameObject stemtoAlkali;
     public GameObject stemtoAcidic;
+    public delegate void TakeDamage();
+    public TakeDamage multidamagesources;
+
     public override void Mutation(CellType _newType)
     {
         if (currentProtein <= 50.0f)
@@ -55,9 +58,25 @@ public class StemCell : BaseCell
         }
     }
 
+    void MUltiDMg()
+    {
+        multidamagesources();
+    }
+    public void AreaDamage()
+    {
+        currentProtein -= 10;
+    }
+    void nothing()
+    {
+
+    }
     void DamagePerSecond()
     {
-        primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+        if (primaryTarget != null)
+        {
+            primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+            primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+        }
     }
 
     public override void Attack(GameObject _target)
@@ -75,6 +94,8 @@ public class StemCell : BaseCell
     void Awake()
     {
         base.bAwake();
+        multidamagesources += nothing;
+        InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
     }
 
     // Use this for initialization
@@ -108,7 +129,7 @@ public class StemCell : BaseCell
             case CellState.ATTACK:
 
                 float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
-
+                Debug.Log(distance);
                 if (distance > attackRange && distance <= fovRadius)
                 {
                     if (IsInvoking("DamagePerSecond"))
@@ -126,11 +147,11 @@ public class StemCell : BaseCell
                 {
                     if (!IsInvoking("DamagePerSecond"))
                     {
-                        if (GetComponent<ParticleSystem>().isStopped || GetComponent<ParticleSystem>().isPaused)
-                        {
-                            GetComponent<ParticleSystem>().Play();
-                        }
                         InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
+                    }
+                    if (GetComponent<ParticleSystem>().isStopped || GetComponent<ParticleSystem>().isPaused)
+                    {
+                        GetComponent<ParticleSystem>().Play();
                     }
 
                 }
@@ -149,43 +170,29 @@ public class StemCell : BaseCell
                 }
                 break;
             case CellState.CONSUMING:
-                if (IsInvoking("DamagePerSecond"))
-                {
-                    if (GetComponent<ParticleSystem>().isPlaying)
-                    {
-
-                        GetComponent<ParticleSystem>().Stop();
-                    }
-                    CancelInvoke("DamagePerSecond");
-                }
                 base.bUpdate();
 
                 break;
             case CellState.MOVING:
-                if (IsInvoking("DamagePerSecond"))
-                {
-                    if (GetComponent<ParticleSystem>().isPlaying)
-                    {
 
-                        GetComponent<ParticleSystem>().Stop();
-                    }
-                    CancelInvoke("DamagePerSecond");
-                }
                 base.bUpdate();
                 if (primaryTarget && base.isStopped())
                 {
                     if (primaryTarget.GetComponent<BaseCell>())
                     {
                         currentState = CellState.ATTACK;
+                        return;
                     }
                     else if (primaryTarget.GetComponent<Protein>())
                     {
                         currentState = CellState.CONSUMING;
+                        return;
                     }
                 }
                 else if (!primaryTarget || base.isStopped())
                 {
                     currentState = CellState.IDLE;
+                    return;
                 }
               
 

@@ -4,6 +4,9 @@ using System.Collections;
 public class LobbyController : Photon.PunBehaviour
 {
 
+    public UnityEngine.UI.Text ConnectionStatusText;
+    public GameObject RandomJoinButton;
+
     // Use this for initialization
     void Start()
     {
@@ -16,10 +19,10 @@ public class LobbyController : Photon.PunBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(PhotonNetwork.connectionStateDetailed);
+        ConnectionStatusText.text = PhotonNetwork.connectionStateDetailed.ToString();
     }
 
-    public override void OnJoinedLobby()
+    public void JoinRandomRoom()
     {
         base.OnJoinedLobby();
         if (PhotonNetwork.countOfRooms == 0)
@@ -28,6 +31,11 @@ public class LobbyController : Photon.PunBehaviour
         }
         else
             PhotonNetwork.JoinRandomRoom();
+    }
+
+    public override void OnJoinedLobby()
+    {
+        RandomJoinButton.SetActive(true);
     }
 
     public override void OnCreatedRoom()

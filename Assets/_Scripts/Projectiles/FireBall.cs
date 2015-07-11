@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class FireBall : BaseProjectile {
-
+    public GameObject Target;
+    public GameObject Owner;
 
 	void Awake() {
         
@@ -14,6 +15,7 @@ public class FireBall : BaseProjectile {
 	
 	}
 	
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -31,6 +33,8 @@ public class FireBall : BaseProjectile {
     {
         if (other.gameObject.tag == "Unit" && !other.gameObject.GetComponent<BaseCell>().isMine)
         {
+            Target.GetComponent<BaseCell>().currentProtein = Target.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
+            Target.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
             Destroy(this.gameObject);
         }
        

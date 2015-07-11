@@ -7,6 +7,9 @@ public class CancerCell : BaseCell
      void Awake()
     {
         base.bAwake();
+        isAIPossessed = true;
+        isMine = false;
+
     }
 
     // Use this for initialization

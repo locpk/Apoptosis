@@ -28,4 +28,9 @@ MonoBehaviour:
   - PunPickupSimple
   - PunRespawn
   - RequestForPickupTimes
+  - AddNewCell
+  - AddNewProtein
+  - RemoveConsumedProtein
+  - RemoveDeadCell
+  - Harvest
   DisableAutoOpenWizard: 1
