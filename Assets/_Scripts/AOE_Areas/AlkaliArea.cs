@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,12 +8,16 @@ public class AlkaliArea : BaseArea {
     public float damagePerSecond;
     public float pendingConvertDelayed = 5.0f;
 
+    public GameObject alkaliButton;
+
+
 	public override void Awake() {
         base.Awake();
 
     }
 
 	public override void Start () {
+        alkaliButton.GetComponent<Button>().interactable = false;
         base.Start();
 
 	}
@@ -42,6 +47,8 @@ public class AlkaliArea : BaseArea {
                     StemCell stemCell = enterCell.GetComponent<StemCell>();
                     StopCoroutine("ReadyToConvert");
                     StartCoroutine(ReadyToConvert(pendingConvertDelayed, stemCell));
+                    alkaliButton.GetComponent<Button>().interactable = true;
+
                     break;
                 }
                     
@@ -83,7 +90,20 @@ public class AlkaliArea : BaseArea {
     }
 
     void OnTriggerStay(Collider collider) {
+        if (collider.gameObject.tag == "Unit")
+        {
+            BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+            if (!enterCell) return;
 
+            switch (enterCell.celltype)
+            {
+                case CellType.STEM_CELL:
+                    {
+                        alkaliButton.GetComponent<Button>().interactable = true;
+                        break;
+                    }
+            }
+        }
     }
 
     void OnTriggerExit(Collider collider) {
@@ -134,6 +154,7 @@ public class AlkaliArea : BaseArea {
                 default:
                     break;
             }
+            alkaliButton.GetComponent<Button>().interactable = false;
         }
     }
 
