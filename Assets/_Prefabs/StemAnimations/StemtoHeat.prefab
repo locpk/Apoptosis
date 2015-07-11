@@ -43,7 +43,7 @@ GameObject:
   - 4: {fileID: 440656}
   - 95: {fileID: 9598338}
   - 114: {fileID: 11470278}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: StemtoHeat
   m_TagString: Animation
   m_Icon: {fileID: 0}
@@ -192,10 +192,14 @@ MonoBehaviour:
   gCancerCellPrefab: {fileID: 0}
   gStemCellPrefab: {fileID: 0}
   gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
+  gTier2HeatCellPrefab: {fileID: 0}
   gColdCellPrefab: {fileID: 0}
+  gTier2ColdCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
+  gNerveCellPrefab: {fileID: 0}
   originCell: {fileID: 0}
+  originCell1: {fileID: 0}
   currentLevel: 0
   currentProtein: 0
   isAIPossessed: 0

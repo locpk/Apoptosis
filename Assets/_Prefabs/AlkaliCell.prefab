@@ -19,6 +19,7 @@ GameObject:
   - 114: {fileID: 11437392}
   - 114: {fileID: 11490784}
   - 114: {fileID: 11431862}
+  - 95: {fileID: 9525432}
   m_Layer: 0
   m_Name: AlkaliCell
   m_TagString: Unit
@@ -60,6 +61,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &195670
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 412578}
+  - 135: {fileID: 13525398}
+  - 114: {fileID: 11449674}
+  m_Layer: 0
+  m_Name: FOWSight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &412578
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195670}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 416.700012}
+  m_LocalScale: {x: .0333333351, y: .0333333351, z: 1}
+  m_Children: []
+  m_Father: {fileID: 433240}
+  m_RootOrder: 0
 --- !u!4 &422074
 Transform:
   m_ObjectHideFlags: 1
@@ -67,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111564}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -10.8932266, y: 0, z: 1.15439606}
+  m_LocalPosition: {x: -16.0599995, y: 0, z: -8.35999966}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 428644}
@@ -95,7 +125,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0, z: -416.700012}
   m_LocalScale: {x: 30, y: 30, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 412578}
   m_Father: {fileID: 422074}
   m_RootOrder: 1
 --- !u!23 &2380550
@@ -144,6 +175,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &9525432
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111564}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9163f774d67e2fb4eab229fabb71f127, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11409952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,15 +210,15 @@ MonoBehaviour:
   gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
+  gRevertHeatPrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068, type: 3}
   health_50: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068, type: 3}
   health_100: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068, type: 3}
-  MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
-  isMine: 1
+  isMine: 0
   isAlive: 1
-  isAIPossessed: 0
+  isAIPossessed: 1
   isDepleting: 0
   isSelected: 0
   celltype: 6
@@ -189,6 +237,7 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 0
   splitCooldown: 0
+  NumEnemiesLeft: 0
   DOT: {fileID: 0}
 --- !u!114 &11431862
 MonoBehaviour:
@@ -223,6 +272,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d9b8ef6f623bd418431e10ef3a8e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11449674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0918649c5b506df4c88a8435ed870de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11463068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,6 +305,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd88def841af1747840697bd7deef13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &13525398
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195670}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 38.0288277
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13545144
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -394,6 +466,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9163f774d67e2fb4eab229fabb71f127, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 111564}

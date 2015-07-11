@@ -13,6 +13,9 @@ public class CamController : MonoBehaviour {
     public float scrollPercentage;
     public float minZoom;
     public float maxZoom;
+    public GameObject quad;
+    public GameObject mainCamera;
+    public Camera minimapCamera;
 
     private float zoomValue = 0.0f;
 //    private float realtimeTimer;
@@ -39,16 +42,18 @@ public class CamController : MonoBehaviour {
             //Scroll zooming
             zoomValue -= Input.mouseScrollDelta.y;
             zoomValue = Mathf.Clamp(zoomValue, minZoom, maxZoom);
+            
 
             Camera camera = GetComponentInChildren<Camera>();
+            
             if (camera) {
                 camera.orthographicSize = zoomValue;
+                
             }
 
         
             // smooth movement
             transform.position = Vector3.Lerp(transform.position, smoothFocusTarget, deltaTime * 2.5f);
-
             // scoller
             Vector3 viewPoint = Camera.main.ScreenToViewportPoint(Input.mousePosition);
             Vector3 nodePos = Vector3.zero;
@@ -109,10 +114,23 @@ public class CamController : MonoBehaviour {
                 camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, smoothTargetRotation, deltaTime * 2.5f);
             }
         }
-	}
+
+        if (Input.GetMouseButtonDown(0)) // if the player clicks on the minimap
+        {
+            //get the position of the click
+            RaycastHit hitPosition;
+            Ray ray = minimapCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hitPosition))
+            {
+                //move the camera to that position
+                smoothMoveTo(hitPosition.point);
+            }
+        }
+    }
 
     public void smoothMoveTo(Vector3 _des) {
-        smoothFocusTarget = _des;
+        smoothFocusTarget = new Vector3(_des.x, 100, _des.z);
     }
 
     public void SwitchToFocusView(Transform focusOn) {

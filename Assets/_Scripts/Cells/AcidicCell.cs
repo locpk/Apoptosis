@@ -20,6 +20,7 @@ public class AcidicCell : BaseCell
         if (primaryTarget != null)
         {
             primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+            primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
         }
     }
     void MUltiDMg()

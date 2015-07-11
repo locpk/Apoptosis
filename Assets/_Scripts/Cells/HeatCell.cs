@@ -18,24 +18,15 @@ public class HeatCell : BaseCell
 
 
 
-    void Merge()
+    public void Merge()
     {
 
 
 
-        List<HeatCell> heatCellsMerge = new List<HeatCell>();
+        List<BaseCell> heatCellsMerge;
         List<BaseCell> possibleMergers = controller.selectedUnits;
-        for (int i = 0; i < possibleMergers.Count; i++)
-        {
-
-            if (possibleMergers[i].celltype == CellType.HEAT_CELL &&
-                possibleMergers[i].GetComponent<HeatCell>().Inheat == true &&
-               possibleMergers[i] != this)
-            {
-                heatCellsMerge.Add(possibleMergers[i].GetComponent<HeatCell>());
-            }
-
-        }
+        heatCellsMerge = possibleMergers.FindAll(item => item.celltype == CellType.HEAT_CELL && item.GetComponent<HeatCell>().Inheat == true &&
+               item != this);
 
         if (heatCellsMerge.Count >= 1)
         {
@@ -45,7 +36,7 @@ public class HeatCell : BaseCell
                     < Vector3.Distance(this.transform.position, mergePartner.transform.position) ||
                     (haveMergePartner == false && mergePartner.haveMergePartner == false))
                 {
-                    mergePartner = heatCellsMerge[o];
+                    mergePartner = heatCellsMerge[o].GetComponent<HeatCell>();
                     mergePartner.mergePartner = this;
                     haveMergePartner = true;
                     mergePartner.haveMergePartner = true;
@@ -67,12 +58,18 @@ public class HeatCell : BaseCell
         {
             Vector3 trackingPos = this.transform.position;
             Quaternion trackingRot = this.transform.rotation;
-            Die();
-            other.Die();
+            
+
 
             GameObject kTier2Heat = Instantiate(Tier2Heat, trackingPos, trackingRot) as GameObject;
-            controller.AddNewCell(kTier2Heat.GetComponent<BaseCell>());
-            kTier2Heat.GetComponent<BaseCell>().currentState = CellState.IDLE;
+            kTier2Heat.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+            kTier2Heat.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+            kTier2Heat.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+            kTier2Heat.GetComponent<CellSplitAnimation>().originCell = this;
+            kTier2Heat.GetComponent<CellSplitAnimation>().originCell1 = other;
+            Deactive();
+            other.Deactive();
+
         }
         else
         {
@@ -159,10 +156,6 @@ public class HeatCell : BaseCell
                     //        }
                     //    }
                     //}
-                    if (Input.GetKeyUp(KeyCode.Q) && isSelected)
-                    {
-                        Merge();
-                    }
 
                     break;
                 case CellState.ATTACK:

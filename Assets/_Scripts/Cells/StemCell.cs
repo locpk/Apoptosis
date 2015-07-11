@@ -72,7 +72,11 @@ public class StemCell : BaseCell
     }
     void DamagePerSecond()
     {
-        primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+        if (primaryTarget != null)
+        {
+            primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+            primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+        }
     }
 
     public override void Attack(GameObject _target)

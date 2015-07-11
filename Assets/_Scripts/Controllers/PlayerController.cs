@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public GameObject movePin;
     public GameObject attackPin;
 
+
     public int NumStemCells = 0;
     public int NumHeatCells = 0;
     public int NumColdCells = 0;
@@ -26,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public int NumNerveCells = 0;
     public int NumTierTwoCold = 0;
     public int NumTierTwoHeat = 0;
+    public int NumEnemiesLeft = 0;
 
 
     public List<BaseCell> allSelectableUnits;
@@ -51,31 +56,41 @@ public class PlayerController : MonoBehaviour
         terrainLayer = 1 << LayerMask.NameToLayer("Terrain");  // Layer masking for raycast clicking
         // ----------
 
-        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
+        List<GameObject> tmpArr = GameObjectManager.FindAllUnits(); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
-            if (!bCell.isAIPossessed && bCell.isMine) // If the cell belongs to this player
+            if (bCell)
             {
-                allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
+                if (!bCell.isAIPossessed && bCell.isMine) // If the cell belongs to this player
+                {
+                    allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
+                }
             }
+            
         }
 
-        tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
+        tmpArr.Clear();
+        tmpArr = GameObjectManager.FindAllUnits(); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
-            if (bCell.isAIPossessed && !bCell.isMine) // If the cell belongs to this player
+            if (bCell)
             {
-                allSelectableTargets.Add(item); // Add the cell to the players controllable units
+                if (bCell.isAIPossessed && !bCell.isMine) // If the cell belongs to this player
+                {
+                    allSelectableTargets.Add(item); // Add the cell to the players controllable units
+                }
             }
         }
 
-        tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
+        tmpArr.Clear();
+        tmpArr = GameObject.FindGameObjectsWithTag("Protein").ToList<GameObject>(); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             allSelectableTargets.Add(item); // Add the cell to the players controllable units
         }
+
     }
 
 
@@ -222,6 +237,7 @@ public class PlayerController : MonoBehaviour
     public void UnitAttack()
     {
         EventManager.Attack(selectedTargets[0]);
+        CheckEnemiesLeft();
 
     }
 
@@ -386,6 +402,16 @@ public class PlayerController : MonoBehaviour
         EventManager.Stop();
     }
 
+    public void UnitMerge()
+    {
+        EventManager.Merge();
+    }
+
+    public void UnitRevert()
+    {
+        EventManager.Revert();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -425,6 +451,18 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1)) // If the player presses 1
+        {
+            UnitRevert();
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q)) // If the player presses Q
+        {
+            UnitMerge();
+
+        }
+
         if (Input.GetKeyDown(KeyCode.S)) // If the player presses S
         {
             UnitStop();
@@ -457,7 +495,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if (!isOverUI)
+        if (!isOverUI && Time.timeScale > 0.0f)
         {
             if (Input.GetMouseButtonDown(0)) // If the player left-clicks
             {
@@ -530,7 +568,6 @@ public class PlayerController : MonoBehaviour
                         }
                     }
 
-
                 
                 if (selectedTargets.Count > 0)
                 {
@@ -581,4 +618,18 @@ public class PlayerController : MonoBehaviour
         NumTierTwoHeat = selectedUnits.FindAll(item => item.celltype == CellType.HEAT_CELL_TIRE2).Count;
     }
 
+    public void CheckEnemiesLeft()
+    {
+        NumEnemiesLeft = 0;
+
+        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit");
+        foreach (GameObject item in tmpArr)
+        {
+            BaseCell bCell = item.GetComponent<BaseCell>();
+            if (bCell.isAIPossessed && !bCell.isMine)
+            {
+                NumEnemiesLeft++;
+            }
+        }
+    }
 }

@@ -38,6 +38,7 @@ public class ColdCell : BaseCell
         {
             AoeDmg(transform.position, attackRange);
             primaryTarget.GetComponent<BaseCell>().currentProtein -= (attackDamage / primaryTarget.GetComponent<BaseCell>().defense);
+            primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
         }
     }
 
