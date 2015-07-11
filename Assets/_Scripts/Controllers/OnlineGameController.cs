@@ -77,7 +77,12 @@ public class OnlineGameController : Photon.PunBehaviour
 
     void InitSync()
     {
-        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
+        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
+        foreach (GameObject item in tmpArr) // Iterate through all the cells
+        {
+            PlayerControls.GetComponent<OnlinePlayerController>().AddNewCell(item.GetComponent<BaseCell>());
+        }
+        tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             PlayerControls.GetComponent<OnlinePlayerController>().AddNewProtein(item.GetComponent<Protein>()); // Add the cell to the players controllable units
