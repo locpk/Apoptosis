@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FogOfWarViewer : MonoBehaviour {
 	Transform m_trans;
-	public Vector2 range = new Vector2(2.0f, 30.0f);
+	public Vector2 viewOfRange = new Vector2(2.0f, 15.0f);
 	public FogOfWarController.LOSChecks lineOfSightCheck = FogOfWarController.LOSChecks.None;
 	public bool isActive = true;
 
@@ -28,8 +28,8 @@ public class FogOfWarViewer : MonoBehaviour {
 			if (lineOfSightCheck != FogOfWarController.LOSChecks.OnlyOnce) m_viewer.cachedBuffer = null;
 
 			m_viewer.pos = m_trans.position;
-			m_viewer.inner = range.x;
-			m_viewer.outer = range.y;
+			m_viewer.inner = viewOfRange.x;
+			m_viewer.outer = viewOfRange.y;
 			m_viewer.los = lineOfSightCheck;
 			m_viewer.isActive = true;
 		} else {
@@ -39,12 +39,12 @@ public class FogOfWarViewer : MonoBehaviour {
 	}
 
 	void OnDrawGizmosSelected () {
-		if (lineOfSightCheck != FogOfWarController.LOSChecks.None && range.x > 0f) {
+		if (lineOfSightCheck != FogOfWarController.LOSChecks.None && viewOfRange.x > 0f) {
 			Gizmos.color = Color.white;
-			Gizmos.DrawWireSphere(transform.position, range.x);
+			Gizmos.DrawWireSphere(transform.position, viewOfRange.x);
 		}
 		Gizmos.color = Color.grey;
-		Gizmos.DrawWireSphere(transform.position, range.y);
+		Gizmos.DrawWireSphere(transform.position, viewOfRange.y);
 	}
 
 	public void Rebuild () { m_viewer.cachedBuffer = null; }

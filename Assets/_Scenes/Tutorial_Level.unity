@@ -2036,6 +2036,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd4d4626c4e696449b7ed92859151a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: {x: 2, y: 30}
+  viewOfRange: {x: 10, y: 10}
   lineOfSightCheck: 0
   isActive: 1
