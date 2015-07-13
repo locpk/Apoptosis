@@ -45,6 +45,8 @@ public class BaseCell : MonoBehaviour
     public GameObject gAcidicCellPrefab;
     public GameObject gAlkaliCellPrefab;
     public GameObject gRevertHeatPrefab;
+    public GameObject gRevertColdPrefab;
+    public GameObject gRevertNervePrefab;
 
     public Sprite health_10;
     public Sprite health_50;
@@ -188,7 +190,7 @@ public class BaseCell : MonoBehaviour
             {
                 PhotonNetwork.Destroy(gameObject);
             }
-            
+
         }
         else
         {
@@ -316,12 +318,37 @@ public class BaseCell : MonoBehaviour
 
     public void Revert()
     {
-        GameObject cellSplitAnimation = GameObject.Instantiate(gRevertHeatPrefab, transform.position, Quaternion.identity) as GameObject;
-        cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
-        cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
-        cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-        cellSplitAnimation.GetComponent<CellSplitAnimation>().originCell = this;
-        Deactive();
+        GameObject cellSplitAnimation;
+        switch (celltype)
+        {
+            case CellType.HEAT_CELL_TIRE2:
+                cellSplitAnimation = GameObject.Instantiate(gRevertHeatPrefab, transform.position, Quaternion.identity) as GameObject;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().originCell = this;
+                Deactive();
+                break;
+            case CellType.COLD_CELL_TIRE2:
+                cellSplitAnimation = GameObject.Instantiate(gRevertColdPrefab, transform.position, Quaternion.identity) as GameObject;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().originCell = this;
+                Deactive();
+                break;
+            case CellType.NERVE_CELL:
+                cellSplitAnimation = GameObject.Instantiate(gRevertNervePrefab, transform.position, Quaternion.identity) as GameObject;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().originCell = this;
+                Deactive();
+                break;
+            default:
+                break;
+        }
+
     }
 
     public void CancerousSplit()
@@ -458,8 +485,16 @@ public class BaseCell : MonoBehaviour
     protected void bAwake()
     {
         photonView = GetComponent<PhotonView>();
-        isSinglePlayer = (bool)photonView.instantiationData[0];
-        
+        if (PhotonNetwork.connected)
+        {
+            isSinglePlayer = (bool)photonView.instantiationData[0];
+        }
+        else
+        {
+            isSinglePlayer = true;
+        }
+
+
         depleteTimer = DEPLETE_TIME;
         if (isSinglePlayer)
         {

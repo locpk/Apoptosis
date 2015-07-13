@@ -235,6 +235,8 @@ MonoBehaviour:
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   gRevertHeatPrefab: {fileID: 0}
+  gRevertColdPrefab: {fileID: 196526, guid: 33a86d00844360944a5e55cd994232b4, type: 2}
+  gRevertNervePrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
   health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
   health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
@@ -245,7 +247,7 @@ MonoBehaviour:
   isAIPossessed: 0
   isDepleting: 0
   isSelected: 0
-  celltype: 2
+  celltype: 4
   currentState: 0
   navAgent: {fileID: 0}
   navObstacle: {fileID: 0}
@@ -484,6 +486,18 @@ Prefab:
       propertyPath: ObservedComponents.Array.data[0]
       value: 
       objectReference: {fileID: 416904}
+    - target: {fileID: 0}
+      propertyPath: gRevertHeatPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gRevertColdPrefab
+      value: 
+      objectReference: {fileID: 196526, guid: 33a86d00844360944a5e55cd994232b4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: celltype
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182240}
