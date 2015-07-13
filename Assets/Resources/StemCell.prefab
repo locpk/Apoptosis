@@ -300,11 +300,11 @@ MonoBehaviour:
   health_50: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
   health_100: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
   currentLevel: 0
-  isSinglePlayer: 1
+  isSinglePlayer: 0
   isMine: 0
   isAlive: 1
-  isAIPossessed: 1
-  isDepleting: 0
+  isAIPossessed: 0
+  isDepleting: 1
   isSelected: 0
   celltype: 0
   currentState: 0
@@ -320,7 +320,7 @@ MonoBehaviour:
   attackRange: 2
   defense: 10
   depleteTimer: 1
-  depleteAmount: 3
+  depleteAmount: 100
   attackCooldown: 2
   splitCooldown: 0
   NumEnemiesLeft: 0
@@ -1583,6 +1583,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: ObservedComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded,
@@ -1738,6 +1742,22 @@ Prefab:
       propertyPath: ObservedComponents.Array.data[0]
       value: 
       objectReference: {fileID: 471618}
+    - target: {fileID: 0}
+      propertyPath: ObservedComponents.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: depleteAmount
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isDepleting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isSinglePlayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174676}

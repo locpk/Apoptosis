@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaType: 0
   damagePerSecond: 5
+  speedCoefficient: 1.5
 --- !u!1 &35076384 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 5d3119eed75941e498a56ce6dbaed804, type: 3}
@@ -285,11 +286,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 525428403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 847839dd4ac9090468967c790c162f0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 471d131ae0e64404b9eb047dfc59791e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
-  attackPin: {fileID: 142206, guid: c9ae0278b5093004d9dc07422c77a8e3, type: 2}
+  attackPin: {fileID: 0}
   NumStemCells: 0
   NumHeatCells: 0
   NumColdCells: 0
@@ -298,21 +299,7 @@ MonoBehaviour:
   NumNerveCells: 0
   NumTierTwoCold: 0
   NumTierTwoHeat: 0
-  allSelectableUnits: []
-  selectedUnits: []
-  allSelectableTargets: []
-  selectedTargets: []
-  selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
-  movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
-  attackPin: {fileID: 142206, guid: c9ae0278b5093004d9dc07422c77a8e3, type: 2}
-  NumStemCells: 0
-  NumHeatCells: 0
-  NumColdCells: 0
-  NumAcidicCells: 0
-  NumAlkaliCells: 0
-  NumNerveCells: 0
-  NumTierTwoCold: 0
-  NumTierTwoHeat: 0
+  NumEnemiesLeft: 0
   allSelectableUnits: []
   selectedUnits: []
   allSelectableTargets: []
@@ -694,7 +681,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaType: 4
-  speedDebuff: 0
+  speedDecreaseRate: 0
+  speedCoefficient: .100000001
 --- !u!1001 &1465870092
 Prefab:
   m_ObjectHideFlags: 0
@@ -996,6 +984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaType: 1
   damagePerSecond: 5
+  speedCoefficient: .5
 --- !u!1001 &1873709745
 Prefab:
   m_ObjectHideFlags: 0
@@ -1114,3 +1103,32 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f8276c563a75914f95e4119065d6fe9, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2031764227 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 157072, guid: 6f8276c563a75914f95e4119065d6fe9, type: 2}
+  m_PrefabInternal: {fileID: 2031764226}
+--- !u!114 &2031764229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2031764227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 1
+  instantiationId: 1
+  isRuntimeInstantiated: 0

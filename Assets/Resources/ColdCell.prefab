@@ -240,7 +240,7 @@ MonoBehaviour:
   health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
   health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
   currentLevel: 0
-  isSinglePlayer: 1
+  isSinglePlayer: 0
   isMine: 1
   isAlive: 1
   isAIPossessed: 0
@@ -608,6 +608,10 @@ Prefab:
       propertyPath: ObservedComponents.Array.data[0]
       value: 
       objectReference: {fileID: 487196}
+    - target: {fileID: 0}
+      propertyPath: isSinglePlayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100116}

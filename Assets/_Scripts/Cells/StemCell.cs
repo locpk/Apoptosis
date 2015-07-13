@@ -58,6 +58,11 @@ public class StemCell : BaseCell
         }
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        stream.Serialize(ref currentProtein);
+    }
+
     void MUltiDMg()
     {
         multidamagesources();
@@ -70,6 +75,8 @@ public class StemCell : BaseCell
     {
 
     }
+    
+
     void DamagePerSecond()
     {
         if (primaryTarget != null)

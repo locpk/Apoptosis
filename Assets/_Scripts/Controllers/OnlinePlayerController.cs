@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
-public class OnlinePlayerController : PlayerController
+public class OnlinePlayerController: MonoBehaviour
 {
     private bool isOverUI = false;
 
@@ -139,35 +140,49 @@ public class OnlinePlayerController : PlayerController
 
     public void UnitSelection(Vector2 origin)
     {
-        if (Input.mousePosition.x >= origin.x)
-        {
-            GUISelectRect.xMax = Input.mousePosition.x;
-        }
-        else
-        {
-            GUISelectRect.xMin = Input.mousePosition.x;
-        }
+        // Initialize variables
+        selectedTargets.Clear();
+        //        groups = new List<BaseCell>[10];
+        allSelectableUnits = new List<BaseCell>();
+        selectedUnits = new List<BaseCell>();
+        terrainLayer = 1 << LayerMask.NameToLayer("Terrain");  // Layer masking for raycast clicking
+        // ----------
 
-        if (-Input.mousePosition.y + Screen.height >= origin.y)
-        { GUISelectRect.yMax = -Input.mousePosition.y + Screen.height; }
-        else
-        { GUISelectRect.yMin = -Input.mousePosition.y + Screen.height; }
-
-        foreach (BaseCell item in selectedUnits)
+        List<GameObject> tmpArr = GameObjectManager.FindAllUnits(); // Get every cell in the game
+        foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
-            item.isSelected = false;
-        }
-        selectedUnits.Clear();
-        foreach (BaseCell item in allSelectableUnits)
-        {
-            Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
-            itemPos.y = -itemPos.y + Screen.height;
-            if (GUISelectRect.Contains(itemPos))
+            BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
+            if (bCell)
             {
-                selectedUnits.Add(item);
-                item.isSelected = true;
+                if (!bCell.isAIPossessed && bCell.isMine) // If the cell belongs to this player
+                {
+                    allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
+                }
+            }
+
+        }
+
+        tmpArr.Clear();
+        tmpArr = GameObjectManager.FindAllUnits(); // Get every cell in the game
+        foreach (GameObject item in tmpArr) // Iterate through all the cells
+        {
+            BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
+            if (bCell)
+            {
+                if (bCell.isAIPossessed && !bCell.isMine) // If the cell belongs to this player
+                {
+                    allSelectableTargets.Add(item); // Add the cell to the players controllable units
+                }
             }
         }
+
+        tmpArr.Clear();
+        tmpArr = GameObject.FindGameObjectsWithTag("Protein").ToList<GameObject>(); // Get every cell in the game
+        foreach (GameObject item in tmpArr) // Iterate through all the cells
+        {
+            allSelectableTargets.Add(item); // Add the cell to the players controllable units
+        }
+
     }
 
     public void TargetSelection(Vector2 origin)
@@ -362,25 +377,13 @@ public class OnlinePlayerController : PlayerController
             GUI.EndGroup();
         }
 
-        if (allSelectableUnits.Count <= 0)
-        {
-            GUI.BeginGroup(new Rect(Screen.width * 0.5f - 300, Screen.height * 0.5f - 100, 500, 300));
-            GUI.Box(new Rect(0, 0, 500, 300), "\n\n\n\n\n\n\nYou Lose\nPress Enter to Continue");
-            GUI.EndGroup();
-        }
+       
 
     }
 
     public void FixedUpdate()
     {
-        //Debug.Log(allSelectableUnits.Count);
-        if (allSelectableUnits.Count <= 0)
-        {
-            if (Input.GetKey(KeyCode.Return))
-            {
-                Application.LoadLevel("Credits");
-            }
-        }
+        
 
 
 
