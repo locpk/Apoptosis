@@ -499,10 +499,20 @@ public class BaseCell : MonoBehaviour
         if (isSinglePlayer)
         {
             GetComponent<PhotonView>().enabled = false;
+            
         }
         else
         {
             isMine = photonView.isMine;
+        }
+
+        if (isMine)
+        {
+            gameObject.AddComponent<FogOfWarViewer>();
+        }
+        else
+        {
+            gameObject.AddComponent<FogOfWarHider>();
         }
         navAgent = GetComponent<NavMeshAgent>();
         navObstacle = GetComponent<NavMeshObstacle>();

@@ -60,11 +60,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 448348}
   - 212: {fileID: 21257262}
+  - 114: {fileID: 11453492}
   - 54: {fileID: 5433408}
   - 208: {fileID: 20808468}
   - 135: {fileID: 13583240}
   - 195: {fileID: 19542924}
-  - 114: {fileID: 11453492}
   - 114: {fileID: 11456440}
   - 114: {fileID: 11479160}
   - 114: {fileID: 11474128}
@@ -249,6 +249,8 @@ MonoBehaviour:
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   gRevertHeatPrefab: {fileID: 124642, guid: 34ed06a8dff0e8c4ab0d147943105b8a, type: 2}
+  gRevertColdPrefab: {fileID: 0}
+  gRevertNervePrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: f8352a793aaca5a4eb4079dc34493331, type: 3}
   health_50: {fileID: 21300000, guid: 4af6c55a799eca648aeae4e7cc2ebe41, type: 3}
   health_100: {fileID: 21300000, guid: 7bd591d9b1d87c94f90857d8f388fe8a, type: 3}

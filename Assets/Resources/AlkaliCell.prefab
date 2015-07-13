@@ -212,14 +212,16 @@ MonoBehaviour:
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   gRevertHeatPrefab: {fileID: 0}
+  gRevertColdPrefab: {fileID: 0}
+  gRevertNervePrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068, type: 3}
   health_50: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068, type: 3}
   health_100: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068, type: 3}
   currentLevel: 0
   isSinglePlayer: 1
-  isMine: 0
+  isMine: 1
   isAlive: 1
-  isAIPossessed: 1
+  isAIPossessed: 0
   isDepleting: 0
   isSelected: 0
   celltype: 6
@@ -505,6 +507,14 @@ Prefab:
       propertyPath: ObservedComponents.Array.data[0]
       value: 
       objectReference: {fileID: 422074}
+    - target: {fileID: 0}
+      propertyPath: isAIPossessed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isMine
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 111564}

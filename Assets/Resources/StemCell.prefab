@@ -288,20 +288,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6a58b969a86dd4a8ee70b7ccfa010b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gCancerCellPrefab: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
+  gCancerCellPrefab: {fileID: 151272, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
   gStemCellPrefab: {fileID: 146472, guid: f68bc9c3ba37b4741a32f07628606e80, type: 2}
   gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
   gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
-  gColdCancerPrefab: {fileID: 0}
-  gAcidicCellPrefab: {fileID: 0}
-  gAlkaliCellPrefab: {fileID: 0}
+  gColdCancerPrefab: {fileID: 169166, guid: e157488d71bd50240afc0fa1528c42ea, type: 2}
+  gAcidicCellPrefab: {fileID: 146776, guid: 29147b9cb59143a41a45534e611f3390, type: 2}
+  gAlkaliCellPrefab: {fileID: 108478, guid: 0952dbaf7191c144d9f1aac0bb704ced, type: 2}
   gRevertHeatPrefab: {fileID: 0}
+  gRevertColdPrefab: {fileID: 0}
+  gRevertNervePrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: 12be41204cae34947867bd18306abafe, type: 3}
   health_50: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
   health_100: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
   currentLevel: 0
   isSinglePlayer: 0
-  isMine: 0
+  isMine: 1
   isAlive: 1
   isAIPossessed: 0
   isDepleting: 1
@@ -320,7 +322,7 @@ MonoBehaviour:
   attackRange: 2
   defense: 10
   depleteTimer: 1
-  depleteAmount: 100
+  depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
   NumEnemiesLeft: 0
@@ -1594,7 +1596,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: gCancerCellPrefab
       value: 
-      objectReference: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
+      objectReference: {fileID: 151272, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
     - target: {fileID: 0}
       propertyPath: gStemCellPrefab
       value: 
@@ -1748,7 +1750,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: depleteAmount
-      value: 100
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isDepleting
@@ -1758,6 +1760,18 @@ Prefab:
       propertyPath: isSinglePlayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gColdCancerPrefab
+      value: 
+      objectReference: {fileID: 169166, guid: e157488d71bd50240afc0fa1528c42ea, type: 2}
+    - target: {fileID: 0}
+      propertyPath: gAcidicCellPrefab
+      value: 
+      objectReference: {fileID: 146776, guid: 29147b9cb59143a41a45534e611f3390, type: 2}
+    - target: {fileID: 0}
+      propertyPath: gAlkaliCellPrefab
+      value: 
+      objectReference: {fileID: 108478, guid: 0952dbaf7191c144d9f1aac0bb704ced, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174676}
