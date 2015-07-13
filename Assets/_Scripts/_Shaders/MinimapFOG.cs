@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MinimapFOG : MonoBehaviour
 {
+
     // Use this for initialization
     void Start()
     {
@@ -36,6 +37,8 @@ public class MinimapFOG : MonoBehaviour
                 if (!other.GetComponent<BaseCell>().isMine) //and is not mine
                 {
                     other.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = true; //turn it's minimap image on
+                    
+
                 }
             }
         }
