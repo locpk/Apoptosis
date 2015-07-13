@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MinimapFOG : MonoBehaviour
 {
+
     // Use this for initialization
     void Start()
     {
@@ -15,9 +16,9 @@ public class MinimapFOG : MonoBehaviour
                 obj.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = false; //turn the minimap image of it off
             }
         }
-        else if (obj.tag == "Protein") //check if it is a protein,
+        if (obj.tag == "Protein") //check if it is a protein,
         {
-            obj.GetComponentInChildren<MeshRenderer>().enabled = false; //turn the minimap image of it off
+            obj.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = false; //turn the minimap image of it off
         }
     }
 
@@ -36,12 +37,14 @@ public class MinimapFOG : MonoBehaviour
                 if (!other.GetComponent<BaseCell>().isMine) //and is not mine
                 {
                     other.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = true; //turn it's minimap image on
+                    
+
                 }
             }
         }
-        else if (other.tag == "Protein") //if the object that entered the sphere radius is a protein
+        else if (other.tag == "Protein" && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine) //if the object that entered the sphere radius is a protein
         {
-            other.transform.FindChild("MinimapIndication").GetComponentInChildren<MeshRenderer>().enabled = true; //turn it's minimap image on
+            other.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = true; //turn it's minimap image on
         }
     }
 
@@ -61,10 +64,10 @@ public class MinimapFOG : MonoBehaviour
             }
         }
 
-        if (other.tag == "Protein")
+        else if (other.tag == "Protein" && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
         {
             GameObject temp = other.gameObject;
-            temp.transform.FindChild("MinimapIndication").GetComponentInChildren<MeshRenderer>().enabled = true;
+            temp.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = true;
         }
     }
 
@@ -83,10 +86,10 @@ public class MinimapFOG : MonoBehaviour
             }
         }
 
-        if (other.tag == "Protein")
+        else if (other.tag == "Protein" && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
         {
             GameObject temp = other.gameObject;
-            temp.transform.FindChild("MinimapIndication").GetComponentInChildren<MeshRenderer>().enabled = false;
+            temp.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = false;
         }
     }
 }

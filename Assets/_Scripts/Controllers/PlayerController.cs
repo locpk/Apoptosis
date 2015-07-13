@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     //    List<BaseCell>[] groups;
     public Texture selector;
 
+    float fps;
+
     Rect GUISelectRect;
 
     Vector2 origin = new Vector2();
@@ -311,6 +313,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnGUI()
     {
+        GUI.Label(Rect.MinMaxRect(0, 0, Screen.width, Screen.height), fps.ToString());
         if (GUISelectRect.height != 0 && GUISelectRect.width != 0)
         {
             if (!isOverUI)
@@ -343,7 +346,7 @@ public class PlayerController : MonoBehaviour
 
         if (Time.timeScale > 0.0f)
         {
-            GUI.BeginGroup(new Rect(Screen.width * 0.5f - 320, 15, 900, 100));
+            GUI.BeginGroup(new Rect(Screen.width * 0.5f - 400, 15, Screen.width * 0.5f + 500, 100));
             GUI.Box(new Rect(0, 0, 75, 60), "Stem Cells: ");
             GUI.Label(new Rect(35, 35, 50, 50), NumStemCells.ToString());
 
@@ -368,6 +371,9 @@ public class PlayerController : MonoBehaviour
             GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
             GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
 
+            GUI.Box(new Rect(640, 0, 75, 60), "Enemies\nLeft: ");
+            GUI.Label(new Rect(675, 35, 50, 50), NumEnemiesLeft.ToString());
+
             GUI.Box(new Rect(720, 0, 75, 60), "Cap: ");
             GUI.Label(new Rect(755, 35, 50, 50), cap.ToString());
             GUI.EndGroup();
@@ -380,6 +386,7 @@ public class PlayerController : MonoBehaviour
     public void FixedUpdate()
     {
         CheckSelectedUnits();
+        CheckEnemiesLeft();
         //Debug.Log(allSelectableUnits.Count);
 
     }
@@ -403,7 +410,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        fps = 1.0f / Time.deltaTime;
         cap = allSelectableUnits.Count;
         selectedUnits.RemoveAll(item => item == null);
         selectedTargets.RemoveAll(item => item == null);
@@ -604,20 +611,32 @@ public class PlayerController : MonoBehaviour
         NumAlkaliCells = selectedUnits.FindAll(item => item.celltype == CellType.ALKALI_CELL).Count;
         NumTierTwoCold = selectedUnits.FindAll(item => item.celltype == CellType.COLD_CELL_TIRE2).Count;
         NumTierTwoHeat = selectedUnits.FindAll(item => item.celltype == CellType.HEAT_CELL_TIRE2).Count;
+        NumNerveCells = selectedUnits.FindAll(item => item.celltype == CellType.NERVE_CELL).Count;
     }
 
     public void CheckEnemiesLeft()
     {
         NumEnemiesLeft = 0;
 
-        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit");
-        foreach (GameObject item in tmpArr)
+
+        List<BaseCell> enemies = new List<BaseCell>();
+
+        foreach (GameObject item in allSelectableTargets)
         {
-            BaseCell bCell = item.GetComponent<BaseCell>();
-            if (bCell.isAIPossessed && !bCell.isMine)
+            if (item.tag == "Unit")
             {
-                NumEnemiesLeft++;
+                enemies.Add(item.GetComponent<BaseCell>());
             }
         }
+
+
+        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.STEM_CELL).Count;
+        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.HEAT_CELL).Count;
+        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.COLD_CELL).Count;
+        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.ACIDIC_CELL).Count;
+        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.ALKALI_CELL).Count;
+        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.HEAT_CELL_TIRE2).Count;
+        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.COLD_CELL_TIRE2).Count;
+        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.NERVE_CELL).Count;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,12 +8,15 @@ public class AcidicArea : BaseArea {
     public float damagePerSecond;
     public float pendingConvertDelayed = 5.0f;
 
+    public GameObject acidicButton;
+
 	public override void Awake() {
         base.Awake();
 
     }
 
 	public override void Start () {
+            acidicButton.GetComponent<Button>().interactable = false;
         base.Start();
 
 	}
@@ -23,6 +27,7 @@ public class AcidicArea : BaseArea {
 	}
 
 	public override void FixedUpdate() {
+        
         base.FixedUpdate();
 
     }
@@ -42,6 +47,7 @@ public class AcidicArea : BaseArea {
                     StemCell stemCell = enterCell.GetComponent<StemCell>();
                     StopCoroutine("ReadyToConvert");
                     StartCoroutine(ReadyToConvert(pendingConvertDelayed, stemCell));
+                    acidicButton.GetComponent<Button>().interactable = true;
                     break;
                 }
                     
@@ -83,7 +89,20 @@ public class AcidicArea : BaseArea {
 
 
     void OnTriggerStay(Collider collider) {
+        if (collider.gameObject.tag == "Unit")
+        {
+            BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+            if (!enterCell) return;
 
+            switch (enterCell.celltype)
+            {
+                case CellType.STEM_CELL:
+                    {
+                        acidicButton.GetComponent<Button>().interactable = true;
+                        break;
+                    }
+            }
+        }
     }
 
     void OnTriggerExit(Collider collider) {
@@ -132,6 +151,7 @@ public class AcidicArea : BaseArea {
                 default:
                     break;
             }
+            acidicButton.GetComponent<Button>().interactable = false;
         }
     }
 
