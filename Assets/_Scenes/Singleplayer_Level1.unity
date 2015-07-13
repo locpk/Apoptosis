@@ -807,6 +807,10 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 523430128}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &549111914 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 140122, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+  m_PrefabInternal: {fileID: 848484275}
 --- !u!1 &583745989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,6 +1479,7 @@ MonoBehaviour:
   areaType: 2
   damagePerSecond: 5
   pendingConvertDelayed: 5
+  acidicButton: {fileID: 1193844764}
 --- !u!23 &891497877
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1876,6 +1881,10 @@ Transform:
   - {fileID: 235883773}
   m_Father: {fileID: 1540919867}
   m_RootOrder: 7
+--- !u!1 &1193844764 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 165422, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+  m_PrefabInternal: {fileID: 848484275}
 --- !u!1 &1238653710 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 163360, guid: 0f4486f3742390b4ca504232c3058518, type: 2}
@@ -2203,6 +2212,7 @@ MonoBehaviour:
   areaType: 2
   damagePerSecond: 5
   pendingConvertDelayed: 5
+  acidicButton: {fileID: 1193844764}
 --- !u!23 &1611770714
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2911,6 +2921,7 @@ MonoBehaviour:
   areaType: 3
   damagePerSecond: 5
   pendingConvertDelayed: 5
+  alkaliButton: {fileID: 549111914}
 --- !u!33 &1980903570
 MeshFilter:
   m_ObjectHideFlags: 0
