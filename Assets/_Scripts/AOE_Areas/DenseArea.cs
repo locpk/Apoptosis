@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class DenseArea : BaseArea {
 
-    public float speedDecreaseRate;
-    public float speedCoefficient = 0.1f;
+    //public float speedDecreaseRate;
+    public float speedCoefficient = 0.2f;
     private float enterCellSpeed;
 
 	public override void Awake() {
