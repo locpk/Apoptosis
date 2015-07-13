@@ -620,6 +620,7 @@ public class PlayerController : MonoBehaviour
         NumAlkaliCells = selectedUnits.FindAll(item => item.celltype == CellType.ALKALI_CELL).Count;
         NumTierTwoCold = selectedUnits.FindAll(item => item.celltype == CellType.COLD_CELL_TIRE2).Count;
         NumTierTwoHeat = selectedUnits.FindAll(item => item.celltype == CellType.HEAT_CELL_TIRE2).Count;
+        NumNerveCells = selectedUnits.FindAll(item => item.celltype == CellType.NERVE_CELL).Count;
     }
 
     public void CheckEnemiesLeft()
