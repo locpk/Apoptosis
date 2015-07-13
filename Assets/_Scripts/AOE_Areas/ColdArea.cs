@@ -46,8 +46,10 @@ public class ColdArea : BaseArea {
                     break;
                 case CellType.HEAT_CELL:
                     enterCell.navAgent.speed *= speedCoefficient;
+                   
                     break;
                 case CellType.COLD_CELL:
+                    enterCell.GetComponent<ColdCell>().InCold = true;
                     break;
                 case CellType.HEAT_CELL_TIRE2:
                     enterCell.navAgent.speed *= speedCoefficient;
@@ -84,8 +86,10 @@ public class ColdArea : BaseArea {
                 case CellType.STEM_CELL:
                     break;
                 case CellType.HEAT_CELL:
+
                     break;
                 case CellType.COLD_CELL:
+                    enterCell.GetComponent<ColdCell>().InCold = false;
                     break;
                 case CellType.HEAT_CELL_TIRE2:
                     break;

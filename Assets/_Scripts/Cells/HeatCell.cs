@@ -54,7 +54,7 @@ public class HeatCell : BaseCell
     {
 
         float distance = Vector3.Distance(this.transform.position, other.transform.position);
-        if (Vector3.Distance(this.transform.position, other.transform.position) < 2.0f)
+        if (distance < GetComponent<SphereCollider>().radius * 2.0f)
         {
             Vector3 trackingPos = this.transform.position;
             Quaternion trackingRot = this.transform.rotation;

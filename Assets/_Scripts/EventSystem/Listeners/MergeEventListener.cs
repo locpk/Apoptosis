@@ -27,6 +27,7 @@ public class MergeEventListener : MonoBehaviour {
                 curCell.GetComponent<HeatCell>().Merge();
                 break;
             case CellType.COLD_CELL:
+                curCell.GetComponent<ColdCell>().Merge();
                 break;
             default:
                 break;

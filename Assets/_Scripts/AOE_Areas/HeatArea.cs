@@ -47,6 +47,7 @@ public class HeatArea : BaseArea {
                     break;
 
                 case CellType.HEAT_CELL:
+                    enterCell.GetComponent<HeatCell>().Inheat = true;
                     break;
 
                 case CellType.COLD_CELL:
@@ -94,6 +95,7 @@ public class HeatArea : BaseArea {
                     break;
 
                 case CellType.HEAT_CELL:
+                    enterCell.GetComponent<HeatCell>().Inheat = false;
                     break;
 
                 case CellType.COLD_CELL:

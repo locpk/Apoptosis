@@ -72,6 +72,7 @@ public class BaseCell : MonoBehaviour
     public Vector3 destination;
     public List<GameObject> targets;
     public GameObject primaryTarget;
+    public PhotonView photonView;
     // public PhotonView photonView;
     public float currentProtein;
     public float fovRadius;
@@ -437,18 +438,22 @@ public class BaseCell : MonoBehaviour
     protected void bAwake()
     {
         depleteTimer = DEPLETE_TIME;
-        //if (isSinglePlayer)
-        //{
-        //    GetComponent<PhotonView>().enabled = false;
-        //}
+        if (isSinglePlayer)
+        {
+            GetComponent<PhotonView>().enabled = false;
+        }
+        else
+        {
+            photonView = GetComponent<PhotonView>();
+            isMine = photonView.isMine;
+        }
         navAgent = GetComponent<NavMeshAgent>();
         navObstacle = GetComponent<NavMeshObstacle>();
         navAgent.speed = moveSpeed;
 
+
+
         
-       
-        // photonView = GetComponent<PhotonView>();
-        //  isMine = photonView.isMine;
 
     }
 
