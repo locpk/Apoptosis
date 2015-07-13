@@ -16,6 +16,12 @@ TagManager:
   - Collider_Cold
   - Collider_Alkali
   - Highlight
+  - Options_Panel
+  - Sound_Manager
+  - Master_Slider
+  - Menu_Canvas
+  - Music_Slider
+  - SFX_Slider
   layers:
   - Default
   - TransparentFX
