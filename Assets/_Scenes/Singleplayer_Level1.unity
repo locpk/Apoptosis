@@ -167,7 +167,7 @@ Transform:
   - {fileID: 846174201}
   - {fileID: 455611243}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!1001 &235883772
 Prefab:
   m_ObjectHideFlags: 0
@@ -1112,7 +1112,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1 &817677233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,6 +1304,18 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 747809418}
+    - target: {fileID: 11480940, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: .202999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 11494586, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: .128000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 141334, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
   m_IsPrefabParent: 0
