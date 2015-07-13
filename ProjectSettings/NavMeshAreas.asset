@@ -12,15 +12,15 @@ NavMeshAreas:
   - name: Jump
     cost: 2
   - name: Heat
+    cost: 3
+  - name: Acidic
     cost: 5
-  - name: 
-    cost: 1
-  - name: 
-    cost: 1
-  - name: 
-    cost: 1
-  - name: 
-    cost: 1
+  - name: Cold
+    cost: 3
+  - name: Alkali
+    cost: 5
+  - name: Dense
+    cost: 10
   - name: 
     cost: 1
   - name: 

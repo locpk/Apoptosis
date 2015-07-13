@@ -27,10 +27,7 @@ public class CamController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //smoothTargetPosition = transform.position;
-        //smoothTargetRotation = transform.rotation;
         smoothFocusTarget = transform.position;
-    //    realtimeTimer = Time.timeScale;
 	}
 	
 	// Update is called once per frame
@@ -92,14 +89,14 @@ public class CamController : MonoBehaviour {
 
            
            
-                if (boundPos.x < minX)
-                    boundPos.x = minX;
-                if (boundPos.x > maxX)
-                    boundPos.x = maxX;
-                if (boundPos.z < minY)
-                    boundPos.z = minY;
-                if (boundPos.z > maxY)
-                    boundPos.z = maxY; 
+           if (boundPos.x < minX)
+               boundPos.x = minX;
+           if (boundPos.x > maxX)
+               boundPos.x = maxX;
+           if (boundPos.z < minY)
+               boundPos.z = minY;
+           if (boundPos.z > maxY)
+               boundPos.z = maxY; 
             
 
             transform.position = boundPos;
@@ -108,11 +105,11 @@ public class CamController : MonoBehaviour {
             
 
         } else if (mode == CameraMode.FocusView) {
-            Camera camera = GetComponentInChildren<Camera>();
-            if (camera) {
-                camera.transform.position = Vector3.Lerp(camera.transform.position, smoothTargetPosition, deltaTime * 2.5f);
-                camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, smoothTargetRotation, deltaTime * 2.5f);
-            }
+            //Camera camera = GetComponentInChildren<Camera>();
+            //if (camera) {
+            //    camera.transform.position = Vector3.Lerp(camera.transform.position, smoothTargetPosition, deltaTime * 2.5f);
+            //    camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, smoothTargetRotation, deltaTime * 2.5f);
+            //}
         }
 
         if (Input.GetMouseButtonDown(0)) // if the player clicks on the minimap
