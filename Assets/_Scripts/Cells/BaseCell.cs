@@ -90,7 +90,7 @@ public class BaseCell : MonoBehaviour
     #region RPC Methods
 
 
-    ////[RPC] Methods, which called via network
+    ////[PunRPC] Methods, which called via network
     //[PunRPC]
     //public void ApplyDamage(float _received_damage)
     //{
@@ -178,7 +178,7 @@ public class BaseCell : MonoBehaviour
        
         //transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         //GetComponent<SpriteRenderer>().enabled = false;
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
     public void Deactive()
     {
@@ -198,6 +198,7 @@ public class BaseCell : MonoBehaviour
     {
         if (primaryTarget)
         {
+            primaryTarget.GetComponent<PhotonView>().RPC("Harvest", PhotonTargets.Others, null);
             currentProtein += primaryTarget.GetComponent<Protein>().Harvest();
             if (currentProtein > MAX_PROTEIN)
             {
