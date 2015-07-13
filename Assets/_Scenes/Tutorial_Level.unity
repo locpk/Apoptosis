@@ -1105,6 +1105,8 @@ MonoBehaviour:
   taskCanvas: {fileID: 799594791}
   currentTaskText: {fileID: 1636168774}
   showTaskButton: {fileID: 2018385667}
+  PlayerControls: {fileID: 1658917130}
+  spawnedProtein: {fileID: 130200, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
 --- !u!4 &1081824981 stripped
 Transform:
   m_PrefabParentObject: {fileID: 422074, guid: 1580ecf4540999c4482352dd573da390, type: 2}
@@ -1557,10 +1559,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 13
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -1570,7 +1572,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123
 --- !u!222 &1636168775
 CanvasRenderer:
   m_ObjectHideFlags: 0
