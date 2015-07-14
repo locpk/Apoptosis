@@ -103,14 +103,17 @@ public class HeatCell : BaseCell
     {
 
     }
-    void DamagePreSecond()
+    
+    public void DamagePreSecond()
     {
         previousTarget = primaryTarget;
         Vector3 them2me = primaryTarget.transform.position - transform.position;
         GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
         thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
         thefireball.GetComponent<FireBall>().Target = primaryTarget;
+        Debug.Log(thefireball.GetComponent<FireBall>().Target + " is my current target!!!");
         thefireball.GetComponent<FireBall>().Owner = this.gameObject;
+        Debug.Log(thefireball.GetComponent<FireBall>().Owner + " is my current owner!!!");
 
 
     }
@@ -128,7 +131,7 @@ public class HeatCell : BaseCell
     {
         if (isAIPossessed)
         {
-            transform.position = new Vector3(transform.position.x + .00100f, 0, transform.position.z + .00100f);
+            transform.position = new Vector3(transform.position.x + .00100f, 0, transform.position.z + .00100f); 
         }
         else
         {

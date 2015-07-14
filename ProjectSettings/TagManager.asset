@@ -16,6 +16,9 @@ TagManager:
   - Collider_Cold
   - Collider_Alkali
   - MinimapIndicator
+  - Highlight
+  - PlayerController
+  - EnemyCell
   layers:
   - Default
   - TransparentFX
