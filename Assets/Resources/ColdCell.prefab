@@ -236,6 +236,8 @@ MonoBehaviour:
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   gRevertHeatPrefab: {fileID: 0}
+  gRevertColdPrefab: {fileID: 0}
+  gRevertNervePrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
   health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
   health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
@@ -266,7 +268,7 @@ MonoBehaviour:
   NumEnemiesLeft: 0
   InCold: 1
   controller: {fileID: 0}
-  Tier2Cold: {fileID: 182240, guid: 7d1e1709031a63746abd9a81b9762b1f, type: 2}
+  Tier2Cold: {fileID: 142014, guid: 0b6cd8365c6173c43821731e16828aed, type: 2}
 --- !u!114 &11434914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -599,7 +601,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Tier2Cold
       value: 
-      objectReference: {fileID: 182240, guid: 7d1e1709031a63746abd9a81b9762b1f, type: 2}
+      objectReference: {fileID: 142014, guid: 0b6cd8365c6173c43821731e16828aed, type: 2}
     - target: {fileID: 0}
       propertyPath: synchronization
       value: 3
