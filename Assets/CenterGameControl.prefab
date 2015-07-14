@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &102990
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 406002}
+  m_Layer: 0
+  m_Name: SpawnAndAIControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &129554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 407378}
+  - 114: {fileID: 11436092}
+  m_Layer: 0
+  m_Name: PlayerControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &162260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 429780}
+  - 114: {fileID: 11447774}
+  m_Layer: 0
+  m_Name: CenterGameControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &406002
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102990}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429780}
+  m_RootOrder: 1
+--- !u!4 &407378
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129554}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429780}
+  m_RootOrder: 0
+--- !u!4 &429780
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162260}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 407378}
+  - {fileID: 406002}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11436092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471d131ae0e64404b9eb047dfc59791e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
+  attackPin: {fileID: 0}
+  NumStemCells: 0
+  NumHeatCells: 0
+  NumColdCells: 0
+  NumAcidicCells: 0
+  NumAlkaliCells: 0
+  NumNerveCells: 0
+  NumTierTwoCold: 0
+  NumTierTwoHeat: 0
+  NumEnemiesLeft: 0
+  allSelectableUnits: []
+  selectedUnits: []
+  allSelectableTargets: []
+  selectedTargets: []
+  selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
+--- !u!114 &11447774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f99f2942194c46409154fdc8b146dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskCanvas: {fileID: 0}
+  currentTaskText: {fileID: 0}
+  showTaskButton: {fileID: 0}
+  PlayerControls: {fileID: 11436092}
+  prefabProtein: {fileID: 156482, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 162260}
+  m_IsPrefabParent: 1
