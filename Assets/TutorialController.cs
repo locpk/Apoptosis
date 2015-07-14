@@ -75,15 +75,35 @@ public class TutorialController : MonoBehaviour
         stemLesson.IsComplete = AnyKeyCondition;
         Tasklist.Add(stemLesson);
         Task mitosis = new Task();
-        mitosis.Text = "Press 'D' to perform mitosis on all selected units. Any cells that divide will have their protein split between the newly created units. Protein is the cells health. Make at least 5 cells.";
+        mitosis.Text = "Press 'D' to perform mitosis on all selected units. This will divide any selected cells into 2. Make at least 5 cells.";
         mitosis.Initialize = EmptyInitialization;
         mitosis.IsComplete = MitosisCondition;
         Tasklist.Add(mitosis);
         Task replenish = new Task();
-        replenish.Text = "Press 'D' to perform mitosis on all selected units. Any cells that divide will have their protein split between the newly created units. Protein is the cells health. Make at least 5 cells.";
+        replenish.Text = "Protein acts as your cells health. Every cell that divides splits their protein with the new cell. All those divides has left your cells starved. Eat these proteins to replenish.";
         replenish.Initialize = ReplenishInitialization;
         replenish.IsComplete = ReplenishCondition;
         Tasklist.Add(replenish);
+        Task mutateHeat = new Task();
+        mutateHeat.Text = "Now that we have a few cells, let's gain some diversity. Select one of your stem cells and press 'X' to mutate it into a faster heat cell.";
+        mutateHeat.Initialize = EmptyInitialization;
+        mutateHeat.IsComplete = MutateHeatCondition;
+        Tasklist.Add(mutateHeat);
+        Task mutateCold = new Task();
+        mutateCold.Text = "Great! Now select another stem cell and press 'Z' to mutate it into a tougher cold cell.";
+        mutateCold.Initialize = EmptyInitialization;
+        mutateCold.IsComplete = MutateColdCondition;
+        Tasklist.Add(mutateCold);
+        Task mutateAlkali = new Task();
+        mutateAlkali.Text = "Protein acts as your cells health. Every cell that divides splits their protein with the new cell. All those divides has left your cells starved. Eat these proteins to replenish.";
+        mutateAlkali.Initialize = EmptyInitialization;
+        mutateAlkali.IsComplete = MutateAlkaliCondition;
+        Tasklist.Add(mutateAlkali);
+        Task mutateAcidic = new Task();
+        mutateAcidic.Text = "Protein acts as your cells health. Every cell that divides splits their protein with the new cell. All those divides has left your cells starved. Eat these proteins to replenish.";
+        mutateAcidic.Initialize = EmptyInitialization;
+        mutateAcidic.IsComplete = MutateAcidicCondition;
+        Tasklist.Add(mutateAcidic);
 
         currentTaskText.text = Tasklist[0].Text;
     }
@@ -167,10 +187,31 @@ public class TutorialController : MonoBehaviour
             spawnPos.x = 4 * i;
             spawnPos.y = 0;
             spawnedProtein = GameObject.Instantiate(prefabProtein, spawnPos, Quaternion.Euler(90, 0, 0)) as GameObject;
+            PlayerControls.allSelectableTargets.Add(spawnedProtein);
         }
     }
 
     bool ReplenishCondition()
+    {
+        return PlayerControls.allSelectableTargets.Count < 1;
+    }
+
+    bool MutateHeatCondition()
+    {
+        return false;
+    }
+
+    bool MutateColdCondition()
+    {
+        return false;
+    }
+
+    bool MutateAlkaliCondition()
+    {
+        return false;
+    }
+
+    bool MutateAcidicCondition()
     {
         return false;
     }
