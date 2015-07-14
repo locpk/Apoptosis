@@ -1,7 +1,5 @@
-Shader "Hidden/TerrainEngine/Splatmap/Diffuse-AddPass"
-{
-	Properties
-	{
+Shader "Hidden/TerrainEngine/Splatmap/Diffuse-AddPass" {
+	Properties {
 		[HideInInspector] _Control("Control (RGBA)", 2D) = "black" {}
 		[HideInInspector] _Splat3("Layer 3 (A)", 2D) = "white" {}
 		[HideInInspector] _Splat2("Layer 2 (B)", 2D) = "white" {}
@@ -22,8 +20,7 @@ Shader "Hidden/TerrainEngine/Splatmap/Diffuse-AddPass"
 	float _AlphaCutoff;
 	sampler2D _TransparencyMap;
 	
-	void surf(Input IN, inout SurfaceOutput o)
-	{
+	void surf(Input IN, inout SurfaceOutput o) {
 		half4 splat_control;
 		half weight;
 		fixed4 mixedDiffuse;
@@ -40,17 +37,14 @@ Shader "Hidden/TerrainEngine/Splatmap/Diffuse-AddPass"
 			o.Albedo = float3(0, 0, 0);
 	}
 
-	void myfinal(Input IN, SurfaceOutput o, inout fixed4 color)
-	{
+	void myfinal(Input IN, SurfaceOutput o, inout fixed4 color) {
 		SplatmapApplyWeight(color, o.Alpha);
 		SplatmapApplyFog(color, IN);
 	}
 	ENDCG
 
-	Category
-	{
-		Tags
-		{
+	Category {
+		Tags {
 			/*"SplatCount" = "4"
 			"Queue" = "Geometry-99"
 			"IgnoreProjector"="True"
@@ -63,17 +57,14 @@ Shader "Hidden/TerrainEngine/Splatmap/Diffuse-AddPass"
 		}
 		Cull Off // comment out this line to only show the front face of terrain surfaces
 		
-		// TODO: Seems like "#pragma target 3.0 _TERRAIN_NORMAL_MAP" can't fallback correctly on less capable devices?
-		// Use two sub-shaders to simulate different features for different targets and still fallback correctly.
-		SubShader
-		{ // for sm3.0+ targets
+
+		SubShader { 
 			CGPROGRAM
 				#pragma target 3.0
 				#pragma multi_compile __ _TERRAIN_NORMAL_MAP
 			ENDCG
 		}
-		SubShader
-		{ // for sm2.0 targets
+		SubShader {
 			CGPROGRAM
 			ENDCG
 		}

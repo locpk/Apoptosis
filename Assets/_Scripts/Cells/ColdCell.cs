@@ -6,13 +6,19 @@ public class ColdCell : BaseCell
 {
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
-    
+    ColdCell mergingPartner;
+    bool haveMergingPartner = false;
+    public bool InCold;
+    public PlayerController controller;
+    public GameObject Tier2Cold;
+
+
     void Awake()
     {
         base.bAwake();
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
-     
+        controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
     }
     void MUltiDMg()
@@ -27,7 +33,67 @@ public class ColdCell : BaseCell
     {
 
     }
-    // Use this for initialization
+
+
+    public void Merge()
+    {
+        List<ColdCell> coldCellsMerge = new List<ColdCell>();
+        List<BaseCell> possibleMergers = controller.selectedUnits;
+        for (int i = 0; i < possibleMergers.Count; i++)
+        {
+
+            if (possibleMergers[i].celltype == CellType.COLD_CELL &&
+                possibleMergers[i].GetComponent<ColdCell>().InCold == true &&
+               possibleMergers[i] != this)
+            {
+                coldCellsMerge.Add(possibleMergers[i].GetComponent<ColdCell>());
+            }
+
+        }
+
+        if (coldCellsMerge.Count >= 1)
+        {
+            for (int o = 0; o < coldCellsMerge.Count; o++)
+            {
+                if (mergingPartner == null || Vector3.Distance(this.transform.position, coldCellsMerge[o].transform.position)
+                    < Vector3.Distance(this.transform.position, mergingPartner.transform.position) ||
+                    (haveMergingPartner == false && mergingPartner.haveMergingPartner == false))
+                {
+                    mergingPartner = coldCellsMerge[o];
+                    mergingPartner.haveMergingPartner = this;
+                    haveMergingPartner = true;
+                    mergingPartner.haveMergingPartner = true;
+
+                }
+            }
+
+        }
+
+
+    }
+
+    void MergingTheCells(ColdCell other)
+    {
+
+        float distance = Vector3.Distance(this.transform.position, other.transform.position);
+        if (distance <= GetComponent<SphereCollider>().radius * 2.0f)
+        {
+            Vector3 trackingPos = this.transform.position;
+            Quaternion trackingRot = this.transform.rotation;
+            Die();
+            other.Die();
+
+            GameObject cTier2Cold = Instantiate(Tier2Cold, trackingPos, trackingRot) as GameObject;
+            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(cTier2Cold.GetComponent<BaseCell>());
+        }
+        else
+        {
+
+            Move(other.transform.position);
+
+        }
+    }
+
     void Start()
     {
         base.bStart();
@@ -38,25 +104,24 @@ public class ColdCell : BaseCell
         {
             AoeDmg(transform.position, attackRange);
             primaryTarget.GetComponent<BaseCell>().currentProtein -= (attackDamage / primaryTarget.GetComponent<BaseCell>().defense);
-            primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
         }
     }
 
-//  public void Guarding()
-//  {
-//      List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
-//      for (int i = 0; i < aiUnits.Count; i++)
-//      {
-//          if (Vector3.Distance(aiUnits[i].transform.position, transform.position) <= fovRadius)
-//          {
-//              if (aiUnits[i] != this.gameObject)
-//              {
-//                  Attack(aiUnits[i]);
-//              }
-//              break;
-//          }
-//      }
-//  }
+    //  public void Guarding()
+    //  {
+    //      List<GameObject> aiUnits = GameObjectManager.FindAIUnits();
+    //      for (int i = 0; i < aiUnits.Count; i++)
+    //      {
+    //          if (Vector3.Distance(aiUnits[i].transform.position, transform.position) <= fovRadius)
+    //          {
+    //              if (aiUnits[i] != this.gameObject)
+    //              {
+    //                  Attack(aiUnits[i]);
+    //              }
+    //              break;
+    //          }
+    //      }
+    //  }
 
     // Update is called once per frame
     void Update()
@@ -64,7 +129,7 @@ public class ColdCell : BaseCell
         switch (currentState)
         {
             case CellState.IDLE:
-       //         Guarding();
+                //         Guarding();
                 break;
             case CellState.ATTACK:
                 if (primaryTarget != null)
@@ -88,7 +153,7 @@ public class ColdCell : BaseCell
                             base.ChaseTarget();
                         }
                     }
-           
+
                 }
                 else
                 {
@@ -97,7 +162,18 @@ public class ColdCell : BaseCell
                 break;
             case CellState.MOVING:
                 base.bUpdate();
-               
+                if (primaryTarget != null)
+                {
+                    if (primaryTarget.GetComponent<BaseCell>())
+                    {
+                        currentState = CellState.ATTACK;
+                    }
+                    else if (primaryTarget.GetComponent<Protein>())
+                    {
+                        currentState = CellState.CONSUMING;
+                    }
+
+                }
 
                 break;
             case CellState.ATTACK_MOVING:
@@ -115,7 +191,10 @@ public class ColdCell : BaseCell
 
             default:
                 break;
+
         }
+        if (mergingPartner != null)
+            MergingTheCells(mergingPartner);
     }
 
 
@@ -133,14 +212,11 @@ public class ColdCell : BaseCell
 
     void FixedUpdate()
     {
-        
-
-        //base.bFixedUpdate();
+        base.bFixedUpdate();
     }
 
     void LateUpdate()
     {
-       
         base.bLateUpdate();
     }
 

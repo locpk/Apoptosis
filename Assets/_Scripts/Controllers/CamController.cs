@@ -17,21 +17,32 @@ public class CamController : MonoBehaviour {
     public GameObject mainCamera;
     public Camera minimapCamera;
 
-    private float zoomValue = 0.0f;
+    public float zoomValue;
 //    private float realtimeTimer;
     private Vector3 smoothFocusTarget;
     private Vector3 smoothTargetPosition;
     private Quaternion smoothTargetRotation;
     private CameraMode mode = CameraMode.GameView;
-
-
+    
+    // Froze mouse when start
+    private bool m_frozeMouse = true;
+    private float m_zoomingTime;
 	// Use this for initialization
 	void Start () {
-        //smoothTargetPosition = transform.position;
-        //smoothTargetRotation = transform.rotation;
         smoothFocusTarget = transform.position;
-    //    realtimeTimer = Time.timeScale;
+        zoomValue = Mathf.Clamp(zoomValue, minZoom, maxZoom);
+        GetComponentInChildren<Camera>().orthographicSize = zoomValue;
+        StartCoroutine(ZoomOutWhenStart(2.0f, 2.0f));
 	}
+
+    IEnumerator ZoomOutWhenStart(float firstDelayed, float secondDelayed) {
+        yield return new WaitForSeconds(firstDelayed);
+        m_zoomingTime = Time.time + secondDelayed;
+
+        yield return new WaitForSeconds(secondDelayed);
+
+        m_frozeMouse = false;
+    } 
 	
 	// Update is called once per frame
 	void Update () {
@@ -39,17 +50,23 @@ public class CamController : MonoBehaviour {
         float deltaTime = Time.deltaTime;
 
         if (mode == CameraMode.GameView) {
-            //Scroll zooming
-            zoomValue -= Input.mouseScrollDelta.y;
-            zoomValue = Mathf.Clamp(zoomValue, minZoom, maxZoom);
-            
-
             Camera camera = GetComponentInChildren<Camera>();
-            
-            if (camera) {
-                camera.orthographicSize = zoomValue;
-                
+
+            float camZoom = camera.orthographicSize;
+
+            if (!m_frozeMouse) {
+                //Scroll zooming
+                zoomValue -= Input.mouseScrollDelta.y;
+                zoomValue = Mathf.Clamp(zoomValue, minZoom, maxZoom);
+                camZoom = Mathf.Lerp(camZoom, zoomValue, deltaTime * 10.0f);
+            } else {
+                if (m_zoomingTime > Time.time) {
+                    zoomValue = Mathf.Lerp(zoomValue, maxZoom, deltaTime * 2.0f);
+                    camZoom = zoomValue;
+                }
             }
+
+            camera.orthographicSize = camZoom;
 
         
             // smooth movement
@@ -92,14 +109,14 @@ public class CamController : MonoBehaviour {
 
            
            
-                if (boundPos.x < minX)
-                    boundPos.x = minX;
-                if (boundPos.x > maxX)
-                    boundPos.x = maxX;
-                if (boundPos.z < minY)
-                    boundPos.z = minY;
-                if (boundPos.z > maxY)
-                    boundPos.z = maxY; 
+           if (boundPos.x < minX)
+               boundPos.x = minX;
+           if (boundPos.x > maxX)
+               boundPos.x = maxX;
+           if (boundPos.z < minY)
+               boundPos.z = minY;
+           if (boundPos.z > maxY)
+               boundPos.z = maxY; 
             
 
             transform.position = boundPos;
@@ -108,11 +125,11 @@ public class CamController : MonoBehaviour {
             
 
         } else if (mode == CameraMode.FocusView) {
-            Camera camera = GetComponentInChildren<Camera>();
-            if (camera) {
-                camera.transform.position = Vector3.Lerp(camera.transform.position, smoothTargetPosition, deltaTime * 2.5f);
-                camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, smoothTargetRotation, deltaTime * 2.5f);
-            }
+            //Camera camera = GetComponentInChildren<Camera>();
+            //if (camera) {
+            //    camera.transform.position = Vector3.Lerp(camera.transform.position, smoothTargetPosition, deltaTime * 2.5f);
+            //    camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, smoothTargetRotation, deltaTime * 2.5f);
+            //}
         }
 
         if (Input.GetMouseButtonDown(0)) // if the player clicks on the minimap

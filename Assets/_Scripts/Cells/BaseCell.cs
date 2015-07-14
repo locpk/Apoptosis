@@ -19,7 +19,7 @@ public static class CancerChance
 /// </summary>
 public enum CellType
 {
-    STEM_CELL, HEAT_CELL, COLD_CELL, HEAT_CELL_TIRE2, COLD_CELL_TIRE2, ACIDIC_CELL, ALKALI_CELL, CANCER_CELL, NERVE_CELL
+    STEM_CELL, HEAT_CELL, COLD_CELL, HEAT_CELL_TIRE2, COLD_CELL_TIRE2, ACIDIC_CELL, ALKALI_CELL, CANCER_CELL,NERVE_CELL
 }
 
 
@@ -72,6 +72,7 @@ public class BaseCell : MonoBehaviour
     public Vector3 destination;
     public List<GameObject> targets;
     public GameObject primaryTarget;
+    public PhotonView photonView;
     // public PhotonView photonView;
     public float currentProtein;
     public float fovRadius;
@@ -174,20 +175,17 @@ public class BaseCell : MonoBehaviour
             }
         }
 
-
+       
         //transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         //GetComponent<SpriteRenderer>().enabled = false;
-        if (PhotonNetwork.connected)
-            PhotonNetwork.Destroy(gameObject);
-        else
-            Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
     public void Deactive()
     {
         GameObject.Find("PlayerControl").GetComponent<PlayerController>().DeselectCell(this);
         gameObject.SetActive(false);
         transform.position = new Vector3(2500.0f, 2500.0f, 2500.0f);
-
+       
         GetComponent<SpriteRenderer>().enabled = false;
 
     }
@@ -200,10 +198,7 @@ public class BaseCell : MonoBehaviour
     {
         if (primaryTarget)
         {
-            if (PhotonNetwork.connected)
-            {
-                primaryTarget.GetComponent<PhotonView>().RPC("Harvest", PhotonTargets.Others, null);
-            }
+            primaryTarget.GetComponent<PhotonView>().RPC("Harvest", PhotonTargets.Others, null);
             currentProtein += primaryTarget.GetComponent<Protein>().Harvest();
             if (currentProtein > MAX_PROTEIN)
             {
@@ -344,7 +339,7 @@ public class BaseCell : MonoBehaviour
 
         //Get a new position around myself
         Vector3 newposition = this.transform.position;
-
+       
 
         //half my protein
         this.currentProtein *= 0.5f;
@@ -389,7 +384,7 @@ public class BaseCell : MonoBehaviour
             switch (this.celltype)
             {
                 case CellType.HEAT_CELL:
-
+                
                     break;
                 case CellType.COLD_CELL:
                     newCell = GameObject.Instantiate(gColdCancerPrefab, newposition, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
@@ -443,18 +438,22 @@ public class BaseCell : MonoBehaviour
     protected void bAwake()
     {
         depleteTimer = DEPLETE_TIME;
-        //if (isSinglePlayer)
-        //{
-        //    GetComponent<PhotonView>().enabled = false;
-        //}
+        if (isSinglePlayer)
+        {
+            GetComponent<PhotonView>().enabled = false;
+        }
+        else
+        {
+            photonView = GetComponent<PhotonView>();
+            isMine = photonView.isMine;
+        }
         navAgent = GetComponent<NavMeshAgent>();
         navObstacle = GetComponent<NavMeshObstacle>();
         navAgent.speed = moveSpeed;
 
 
 
-        // photonView = GetComponent<PhotonView>();
-        //  isMine = photonView.isMine;
+        
 
     }
 
@@ -476,8 +475,8 @@ public class BaseCell : MonoBehaviour
     {
         if (currentState == CellState.IDLE)
         {
-
-
+           
+            
             if (IsInvoking("ConsumePerSecond"))
             {
                 CancelInvoke("ConsumePerSecond");
@@ -494,7 +493,7 @@ public class BaseCell : MonoBehaviour
                 {
                     if (primaryTarget.tag == "Protein")
                     {
-
+                        
                         currentState = CellState.CONSUMING;
                         return;
                     }
@@ -525,7 +524,7 @@ public class BaseCell : MonoBehaviour
                 {
                     if (IsInvoking("ConsumePerSecond"))
                     {
-
+                    
                         CancelInvoke("ConsumePerSecond");
                     }
                     ChaseTarget();
@@ -534,20 +533,20 @@ public class BaseCell : MonoBehaviour
                 {
                     if (!IsInvoking("ConsumePerSecond"))
                     {
-
+                        
                         InvokeRepeating("ConsumePerSecond", 1.0f, 1.0f);
                     }
 
                 }
                 else
                 {
-
+       
                     ChaseTarget();
                 }
             }
             else
             {
-
+              
                 currentState = CellState.IDLE;
                 return;
             }
@@ -580,7 +579,7 @@ public class BaseCell : MonoBehaviour
                 return;
             }
         }
-
+       
     }
 
     public bool isStopped()
@@ -608,8 +607,8 @@ public class BaseCell : MonoBehaviour
             currentState = CellState.DEAD;
         }
 
-
-
+       
+        
     }
 
     protected void bLateUpdate()
