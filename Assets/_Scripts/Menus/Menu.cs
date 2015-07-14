@@ -17,6 +17,10 @@ public class Menu : MonoBehaviour {
         brackets.SetActive(false);
         backGround.SetActive(false);
         loadingBar.SetActive(false);
+        if (Application.isMobilePlatform)
+        {
+            Screen.fullScreen = true;
+        }
     }
 
 	// Use this for initialization

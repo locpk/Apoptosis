@@ -13,6 +13,10 @@ public class OptionsMenu : MonoBehaviour
     byte[] configuration;
     System.IO.FileStream configFile;
 
+    void Awake()
+    {
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -54,6 +58,10 @@ public class OptionsMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (FSToggle.GetActive() && Application.platform == RuntimePlatform.Android)
+        {
+            FSToggle.SetActive(false);
+        }
         if (Input.GetMouseButtonDown(0))
         {
             if (BGMBounds.Contains(Input.mousePosition))
