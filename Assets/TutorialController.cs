@@ -85,22 +85,22 @@ public class TutorialController : MonoBehaviour
         replenish.IsComplete = ReplenishCondition;
         Tasklist.Add(replenish);
         Task mutateHeat = new Task();
-        mutateHeat.Text = "Now that we have a few cells, let's gain some diversity. Select one of your stem cells and press 'X' to mutate it into a faster heat cell.";
+        mutateHeat.Text = "Now that we have a few cells, let's gain some diversity. Select one of your stem cells and press 'X' to mutate it into a faster heat cell. Remember to leave at least one stem cell.";
         mutateHeat.Initialize = EmptyInitialization;
         mutateHeat.IsComplete = MutateHeatCondition;
         Tasklist.Add(mutateHeat);
         Task mutateCold = new Task();
-        mutateCold.Text = "Great! Now select another stem cell and press 'Z' to mutate it into a tougher cold cell.";
+        mutateCold.Text = "Great! Now select another stem cell and press 'Z' to mutate it into a tougher cold cell. Remember to leave at least one stem cell.";
         mutateCold.Initialize = EmptyInitialization;
         mutateCold.IsComplete = MutateColdCondition;
         Tasklist.Add(mutateCold);
         Task mutateAlkali = new Task();
-        mutateAlkali.Text = "Protein acts as your cells health. Every cell that divides splits their protein with the new cell. All those divides has left your cells starved. Eat these proteins to replenish.";
+        mutateAlkali.Text = "Stem cells must be incubated in an alkali zone to mutate into an alkali cell. Move a stem cell there and press 'V' to mutate. Remember to leave at least one stem cell.";
         mutateAlkali.Initialize = EmptyInitialization;
         mutateAlkali.IsComplete = MutateAlkaliCondition;
         Tasklist.Add(mutateAlkali);
         Task mutateAcidic = new Task();
-        mutateAcidic.Text = "Protein acts as your cells health. Every cell that divides splits their protein with the new cell. All those divides has left your cells starved. Eat these proteins to replenish.";
+        mutateAcidic.Text = "Stem cells must be incubated in an acidic zone to mutate into an acidic cell. Move a stem cell there and press 'C' to mutate. Remember to leave at least one stem cell.";
         mutateAcidic.Initialize = EmptyInitialization;
         mutateAcidic.IsComplete = MutateAcidicCondition;
         Tasklist.Add(mutateAcidic);
@@ -198,22 +198,22 @@ public class TutorialController : MonoBehaviour
 
     bool MutateHeatCondition()
     {
-        return false;
+        return PlayerControls.NumHeatCells > 0;
     }
 
     bool MutateColdCondition()
     {
-        return false;
+        return PlayerControls.NumColdCells > 0;
     }
 
     bool MutateAlkaliCondition()
     {
-        return false;
+        return PlayerControls.NumAlkaliCells > 0;
     }
 
     bool MutateAcidicCondition()
     {
-        return false;
+        return PlayerControls.NumAcidicCells > 0;
     }
 
     void EmptyInitialization(){}
