@@ -9,11 +9,12 @@ public class PlayerController : MonoBehaviour
 {
     private bool isOverUI = false;
 
+
     public void TurnOnOverUI() { isOverUI = true; }
     public void TurnOffOverUI() { isOverUI = false; }
 
 
-
+    public bool isTouch = true;
     private int terrainLayer;
 
     public const int MAX_CAP = 20;
@@ -48,6 +49,16 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+
+        if (Input.touchSupported)
+        {
+            isTouch = true;
+        }
+        else
+        {
+            isTouch = false;
+        }
+
         // Initialize variables
         selectedTargets.Clear();
         //        groups = new List<BaseCell>[10];
@@ -67,7 +78,7 @@ public class PlayerController : MonoBehaviour
                     allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
                 }
             }
-            
+
         }
 
         tmpArr.Clear();
@@ -182,6 +193,40 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    public void TouchUnitSelection(Vector2 origin)
+    {
+        if (Input.GetTouch(0).position.x >= origin.x)
+        {
+            GUISelectRect.xMax = Input.GetTouch(0).position.x;
+        }
+        else
+        {
+            GUISelectRect.xMin = Input.GetTouch(0).position.x;
+        }
+
+        if (-Input.GetTouch(0).position.y + Screen.height >= origin.y)
+        { GUISelectRect.yMax = -Input.GetTouch(0).position.y + Screen.height; }
+        else
+        { GUISelectRect.yMin = -Input.GetTouch(0).position.y + Screen.height; }
+
+        foreach (BaseCell item in selectedUnits)
+        {
+            item.isSelected = false;
+        }
+        selectedUnits.Clear();
+        foreach (BaseCell item in allSelectableUnits)
+        {
+            Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
+            itemPos.y = -itemPos.y + Screen.height;
+            if (GUISelectRect.Contains(itemPos))
+            {
+                selectedUnits.Add(item);
+                item.isSelected = true;
+            }
+        }
+    }
+
     public void TargetSelection(Vector2 origin)
     {
         if (Input.mousePosition.x >= origin.x)
@@ -223,7 +268,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer))
         {
             EventManager.Move(hitInfo.point);
-            GameObject.Instantiate(movePin, hitInfo.point, Quaternion.Euler(90.0f,0.0f,0.0f));
+            GameObject.Instantiate(movePin, hitInfo.point, Quaternion.Euler(90.0f, 0.0f, 0.0f));
         }
 
     }
@@ -252,7 +297,7 @@ public class PlayerController : MonoBehaviour
     public void UnitSplit()
     {
         EventManager.Split();
-   
+
     }
 
     public void UnitEvolve(int cellNum)
@@ -274,7 +319,7 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
- 
+
     }
 
     public void UnitHarvest()
@@ -331,7 +376,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        GUI.color = new Color(0.0f, 1.0f, 0.0f,1.0f);
+        GUI.color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
         foreach (BaseCell item in selectedUnits)
         {
             if (item)
@@ -379,7 +424,7 @@ public class PlayerController : MonoBehaviour
             GUI.EndGroup();
         }
 
-    
+
 
     }
 
@@ -407,36 +452,101 @@ public class PlayerController : MonoBehaviour
         EventManager.Revert();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    void TouchUpdate()
     {
-        fps = 1.0f / Time.deltaTime;
-        cap = allSelectableUnits.Count;
-        selectedUnits.RemoveAll(item => item == null);
-        selectedTargets.RemoveAll(item => item == null);
-        allSelectableTargets.RemoveAll(item => item == null);
-
-        int i = 0;
-        while (i < selectedUnits.Count)
+        if (Input.touchCount == 1 && selectedUnits.Count == 0)
         {
-            if (selectedUnits[i] == null)
+            Touch oneTouch = Input.GetTouch(0);
+            switch (oneTouch.phase)
             {
-                selectedUnits.RemoveAt(i);
+                case TouchPhase.Began:
 
+                    
+                    GUISelectRect.xMax = oneTouch.position.x;
+                    GUISelectRect.yMax = oneTouch.position.y;
+                    GUISelectRect.xMin = oneTouch.position.x;
+                    GUISelectRect.yMin = -oneTouch.position.y + Screen.height;
+
+                    origin = oneTouch.position;
+                    origin.y = -origin.y + Screen.height;
+                    break;
+                case TouchPhase.Canceled:
+                    break;
+                case TouchPhase.Ended:
+                    RaycastHit hitInfo;
+                    Ray screenRay = Camera.main.ScreenPointToRay(oneTouch.position);
+
+                    if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
+                    {
+                        BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
+                        if (allSelectableUnits.Contains(hitCell))
+                        {
+                            hitInfo.collider.gameObject.GetComponent<BaseCell>().isSelected = true;
+                            selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
+                        }
+                    }
+                    TouchUnitSelection(origin);
+                    break;
+                case TouchPhase.Moved:
+                    TouchUnitSelection(origin);
+                    break;
+                case TouchPhase.Stationary:
+                    TouchUnitSelection(origin);
+                    break;
+                default:
+                    break;
             }
-            else
-                i++;
         }
-        i = 0;
-        while (i < allSelectableUnits.Count)
+
+        if (Input.touchCount == 1 && selectedUnits.Count > 0)
         {
-            if (allSelectableUnits[i] == null)
+            Vector3 initPos = -Vector3.one;
+            Vector3 lastPos = -Vector3.one;
+            Touch touch = Input.GetTouch(0);
+            switch (touch.phase)
             {
-                allSelectableUnits.RemoveAt(i);
+                case TouchPhase.Began:
+                    RaycastHit hitInfo;
+                    Ray screenRay = Camera.main.ScreenPointToRay(touch.position);
+
+                    if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer))
+                    {
+                        if (hitInfo.collider.name == "Unit" && hitInfo.collider.GetComponent<BaseCell>().isSelected)
+                        {
+                            initPos = hitInfo.point;
+                        }
+                    }
+                    break;
+                case TouchPhase.Canceled:
+                    break;
+                case TouchPhase.Ended:
+                    RaycastHit hitInfo1;
+                    Ray screenRay1 = Camera.main.ScreenPointToRay(touch.position);
+
+                    if (Physics.Raycast(screenRay1, out hitInfo1, 1000.0f, terrainLayer))
+                    {
+                        lastPos = hitInfo1.point;
+                    }
+                    break;
+                case TouchPhase.Moved:
+                    break;
+                case TouchPhase.Stationary:
+                    break;
+                default:
+                    break;
             }
-            else
-                i++;
+            if (lastPos != initPos)
+            {
+                EventManager.Move(lastPos);
+                Gizmos.DrawLine(initPos, lastPos);
+            }
         }
+    }
+
+    void MouseKeyBoardUpdate()
+    {
+
         //Vector3 topleft = new Vector3(GUISelectRect.xMin, GUISelectRect.yMin, Camera.main.transform.position.z);
         //Vector3 bottomright = new Vector3(GUISelectRect.xMax, GUISelectRect.yMin, Camera.main.transform.position.z);
 
@@ -492,46 +602,48 @@ public class PlayerController : MonoBehaviour
 
         if (!isOverUI && Time.timeScale > 0.0f)
         {
-            if (Input.GetMouseButtonDown(0)) // If the player left-clicks
-            {
-                GUISelectRect.xMin = Input.mousePosition.x;
-                GUISelectRect.yMin = Input.mousePosition.y;
-                GUISelectRect.xMax = Input.mousePosition.x;
-                GUISelectRect.yMax = Input.mousePosition.y;
-
-                GUISelectRect.xMin = Input.mousePosition.x;
-                GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
-                origin = Input.mousePosition;
-                origin.y = -origin.y + Screen.height;
-
-            }
-            else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
-            {
-                GUISelectRect.yMax = GUISelectRect.yMin;
-                GUISelectRect.xMax = GUISelectRect.xMin;
-                if (selectedUnits.Count == 0)
+            
+                if (Input.GetMouseButtonDown(0)) // If the player left-clicks
                 {
-                    RaycastHit hitInfo;
-                    Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    GUISelectRect.xMin = Input.mousePosition.x;
+                    GUISelectRect.yMin = Input.mousePosition.y;
+                    GUISelectRect.xMax = Input.mousePosition.x;
+                    GUISelectRect.yMax = Input.mousePosition.y;
 
-                    if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
+                    GUISelectRect.xMin = Input.mousePosition.x;
+                    GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
+                    origin = Input.mousePosition;
+                    origin.y = -origin.y + Screen.height;
+
+                }
+                else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
+                {
+                    GUISelectRect.yMax = GUISelectRect.yMin;
+                    GUISelectRect.xMax = GUISelectRect.xMin;
+                    if (selectedUnits.Count == 0)
                     {
-                        BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
-                        if (allSelectableUnits.Contains(hitCell))
+                        RaycastHit hitInfo;
+                        Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                        if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
                         {
-                            hitInfo.collider.gameObject.GetComponent<BaseCell>().isSelected = true;
-                            selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
+                            BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
+                            if (allSelectableUnits.Contains(hitCell))
+                            {
+                                hitInfo.collider.gameObject.GetComponent<BaseCell>().isSelected = true;
+                                selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
+                            }
                         }
                     }
+
                 }
+                else if (Input.GetMouseButton(0)) // If the player has left-click held down
+                {
 
-            }
-            else if (Input.GetMouseButton(0)) // If the player has left-click held down
-            {
+                    UnitSelection(origin);
 
-                UnitSelection(origin);
-
-            }
+                }
+            
 
             if (Input.GetMouseButtonDown(1)) // If the player right-clicks
             {
@@ -550,20 +662,20 @@ public class PlayerController : MonoBehaviour
 
                 GUISelectRect.yMax = GUISelectRect.yMin;
                 GUISelectRect.xMax = GUISelectRect.xMin;
-                
-                    RaycastHit hitInfo;
-                    Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                    if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
+                RaycastHit hitInfo;
+                Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
+                {
+                    GameObject hitObject = hitInfo.collider.gameObject;
+                    if (allSelectableTargets.Contains(hitObject))
                     {
-                        GameObject hitObject = hitInfo.collider.gameObject;
-                        if (allSelectableTargets.Contains(hitObject))
-                        {
-                            selectedTargets.Add(hitObject);
-                        }
+                        selectedTargets.Add(hitObject);
                     }
+                }
 
-                
+
                 if (selectedTargets.Count > 0)
                 {
                     foreach (BaseCell item in selectedUnits)
@@ -586,12 +698,57 @@ public class PlayerController : MonoBehaviour
             {
                 TargetSelection(origin);
             }
+
+
+
         }
 
         if (Input.GetMouseButton(2))
         {
             UnitAttackMove();
         }
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        fps = 1.0f / Time.deltaTime;
+        cap = allSelectableUnits.Count;
+        selectedUnits.RemoveAll(item => item == null);
+        selectedTargets.RemoveAll(item => item == null);
+        allSelectableTargets.RemoveAll(item => item == null);
+
+        int i = 0;
+        while (i < selectedUnits.Count)
+        {
+            if (selectedUnits[i] == null)
+            {
+                selectedUnits.RemoveAt(i);
+
+            }
+            else
+                i++;
+        }
+        i = 0;
+        while (i < allSelectableUnits.Count)
+        {
+            if (allSelectableUnits[i] == null)
+            {
+                allSelectableUnits.RemoveAt(i);
+            }
+            else
+                i++;
+        }
+
+
+        if (isTouch)
+        {
+            TouchUpdate();
+        }
+        else
+        {
+            MouseKeyBoardUpdate();
+        }
+
     }
 
     public void CheckSelectedUnits()
