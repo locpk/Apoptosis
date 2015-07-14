@@ -266,7 +266,7 @@ MonoBehaviour:
   attackCooldown: 1
   splitCooldown: 0
   NumEnemiesLeft: 0
-  InCold: 1
+  InCold: 0
   controller: {fileID: 0}
   Tier2Cold: {fileID: 142014, guid: 0b6cd8365c6173c43821731e16828aed, type: 2}
 --- !u!114 &11434914
@@ -596,7 +596,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InCold
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Tier2Cold

@@ -64,13 +64,14 @@ GameObject:
   - 208: {fileID: 20854642}
   - 54: {fileID: 5408642}
   - 135: {fileID: 13508456}
+  - 114: {fileID: 11455804}
   - 114: {fileID: 11480380}
   - 114: {fileID: 11448766}
   - 114: {fileID: 11440222}
   - 114: {fileID: 11498296}
   - 114: {fileID: 11481712}
+  - 114: {fileID: 11402092}
   - 95: {fileID: 9565508}
-  - 114: {fileID: 11455804}
   - 114: {fileID: 11470052}
   m_Layer: 0
   m_Name: NerveCell
@@ -193,6 +194,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11402092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5ec483df34dc84a988179bcb7fa7d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11420644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,6 +257,8 @@ MonoBehaviour:
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   gRevertHeatPrefab: {fileID: 0}
+  gRevertColdPrefab: {fileID: 0}
+  gRevertNervePrefab: {fileID: 158558, guid: 78a1cb68570c129478ecef74bd6e9d13, type: 2}
   health_10: {fileID: 21300000, guid: f8352a793aaca5a4eb4079dc34493331, type: 3}
   health_50: {fileID: 21300000, guid: 4af6c55a799eca648aeae4e7cc2ebe41, type: 3}
   health_100: {fileID: 21300000, guid: 7bd591d9b1d87c94f90857d8f388fe8a, type: 3}
@@ -474,6 +488,10 @@ Prefab:
       propertyPath: ObservedComponents.Array.data[0]
       value: 
       objectReference: {fileID: 421212}
+    - target: {fileID: 0}
+      propertyPath: gRevertNervePrefab
+      value: 
+      objectReference: {fileID: 158558, guid: 78a1cb68570c129478ecef74bd6e9d13, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 170144}
