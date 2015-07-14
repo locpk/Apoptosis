@@ -102,6 +102,13 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void AddNewProtein(Protein _in)
+    {
+        allSelectableTargets.Add(_in.gameObject);
+        selectedTargets.Add(_in.gameObject);
+        CheckSelectedUnits();
+    }
+
     public void RemoveDeadCell(BaseCell _in)
     {
         _in.isSelected = false;
@@ -372,12 +379,7 @@ public class PlayerController : MonoBehaviour
             GUI.EndGroup();
         }
 
-        if (allSelectableUnits.Count <= 0)
-        {
-            GUI.BeginGroup(new Rect(Screen.width * 0.5f - 300, Screen.height * 0.5f - 100, 500, 300));
-            GUI.Box(new Rect(0, 0, 500, 300), "\n\n\n\n\n\n\nYou Lose\nPress Enter to Continue");
-            GUI.EndGroup();
-        }
+    
 
     }
 
@@ -386,17 +388,6 @@ public class PlayerController : MonoBehaviour
         CheckSelectedUnits();
         CheckEnemiesLeft();
         //Debug.Log(allSelectableUnits.Count);
-        if (allSelectableUnits.Count <= 0)
-        {
-            if (Input.GetKey(KeyCode.Return))
-            {
-                Application.LoadLevel("Credits");
-            }
-        }
-
-
-
-
 
     }
 
