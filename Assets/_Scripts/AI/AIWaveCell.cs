@@ -10,7 +10,7 @@ public class AIWaveCell : MonoBehaviour {
 
     public Transform spawnPointOwner;
     private List<Transform> m_waypointList;
-    private Queue<Transform> m_waypointQueue;
+    private int currentWaypoint;
     private float m_movingSpeed;
     private float m_attackSpeed;
 
@@ -45,32 +45,29 @@ public class AIWaveCell : MonoBehaviour {
         }
 
         m_waypointList = new List<Transform>();
-        m_waypointQueue = new Queue<Transform>();
 
         m_visionRange = GetComponent<BaseCell>().fovRadius;
     }
 
 	void Start () {
+        m_baseCell.navAgent.autoBraking = false;
         m_baseCell.isMine = false;
         m_baseCell.isAIPossessed = false;
         m_baseCell.tag = "EnemyCell";
         //m_baseCell.SetSpeed(m_baseCell.navAgent.speed * .5f);
-        m_movingSpeed = m_baseCell.navAgent.speed;
-        m_attackSpeed = m_movingSpeed * .5f;
+        m_movingSpeed = m_baseCell.navAgent.speed * 2.0f;
+        m_attackSpeed = m_baseCell.navAgent.speed * .5f;
         m_baseCell.currentState = CellState.IDLE;
         if (GetComponent<FogOfWarHider>() == null) {
-            gameObject.AddComponent<FogOfWarHider>();
+            //gameObject.AddComponent<FogOfWarHider>();
         }
+
 	}
 	
 	void FixedUpdate () {
         if (m_waypointList.Count <= 0) {
             spawnPointOwner.GetComponentsInChildren<Transform>(m_waypointList);
-            foreach (var waypoint in m_waypointList) {
-                m_waypointQueue.Enqueue(waypoint);
-            }
-            m_waypointQueue.Dequeue();  // drop the first transform;
-            
+            GotoNextPoint();
         }
 
         m_cellsInSight = Physics.SphereCastAll(transform.position, m_visionRange, transform.forward);
@@ -97,11 +94,17 @@ public class AIWaveCell : MonoBehaviour {
 
             }
         }
-        if (!targetFound) {
-
+        if (!targetFound && m_baseCell.navAgent.isOnNavMesh) {
+            if (m_baseCell.navAgent.remainingDistance < 0.5f) GotoNextPoint();
         }
 
 	}
+
+    void GotoNextPoint() {
+        if (m_waypointList.Count == 0) return;
+        m_baseCell.Move(m_waypointList[currentWaypoint].position);
+        currentWaypoint = (currentWaypoint + 1) % m_waypointList.Count;
+    }
 
     void OnDrawGizmosSelected() {
         if (m_visionRange > 0.0f) {

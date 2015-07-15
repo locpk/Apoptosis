@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Terrian
-  m_Shader: {fileID: 4800000, guid: 0c86814ba2bb2fd4e9b38bb70355a56f, type: 3}
+  m_Shader: {fileID: 4800000, guid: c20c04b6c11f2e74682314bca005d18f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -204,11 +204,11 @@ Material:
       data:
         first:
           name: _AlphaCutoff
-        second: .500010014
+        second: .5
       data:
         first:
           name: _AlphaCutoff_2
-        second: .500010014
+        second: .5
     m_Colors:
       data:
         first:
