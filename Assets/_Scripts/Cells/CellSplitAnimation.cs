@@ -21,6 +21,13 @@ public class CellSplitAnimation : MonoBehaviour
     public bool isAIPossessed = false;
 
 
+    void Awake()
+    {
+        if (!isAIPossessed)
+        {
+            gameObject.AddComponent<FogOfWarViewer>();
+        }
+    }
 
     public void CreateHeatCell()
     {
@@ -135,6 +142,24 @@ public class CellSplitAnimation : MonoBehaviour
         Destroy(gameObject);
         originCell.Die();
     }
+
+    public void CreateTier2ColdCell()
+    {
+
+        GameObject newcell = GameObject.Instantiate(gTier2ColdCellPrefab, transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
+        newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+        newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+        if (!isAIPossessed)
+        {
+            newcell.GetComponent<BaseCell>().isMine = true;
+            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        }
+        Destroy(gameObject);
+        originCell.Die();
+        originCell1.Die();
+    }
+
 
     public void CreateColdCell()
     {

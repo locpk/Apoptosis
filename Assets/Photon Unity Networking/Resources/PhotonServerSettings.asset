@@ -33,4 +33,5 @@ MonoBehaviour:
   - RemoveConsumedProtein
   - RemoveDeadCell
   - Harvest
+  - GameEnd
   DisableAutoOpenWizard: 1

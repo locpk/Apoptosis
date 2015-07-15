@@ -80,11 +80,15 @@ public class ColdCell : BaseCell
         {
             Vector3 trackingPos = this.transform.position;
             Quaternion trackingRot = this.transform.rotation;
-            Die();
-            other.Die();
-
             GameObject cTier2Cold = Instantiate(Tier2Cold, trackingPos, trackingRot) as GameObject;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(cTier2Cold.GetComponent<BaseCell>());
+            cTier2Cold.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+            cTier2Cold.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+            cTier2Cold.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+            cTier2Cold.GetComponent<CellSplitAnimation>().originCell = this;
+            cTier2Cold.GetComponent<CellSplitAnimation>().originCell1 = other;
+            Deactive();
+            other.Deactive();
+
         }
         else
         {
