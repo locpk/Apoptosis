@@ -24,6 +24,7 @@ TagManager:
   - SFX_Slider
   - Master_Slider
   - PlayerController
+  - Mute_Button
   layers:
   - Default
   - TransparentFX

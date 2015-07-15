@@ -40,6 +40,27 @@ public class PlayerController : MonoBehaviour
     //    List<BaseCell>[] groups;
     public Texture selector;
 
+    private Sound_Manager sound_manager;
+    //**********************************
+    //sounds_evolution
+    //
+    // 0. Heat evolve
+    // 1. Cold Evolve
+    // 2. Acid Evolve
+    // 3. Alkali Evolve 
+    // 4. Nerve Evolve
+    //*********************************
+    //sounds_attacks
+    //
+    // 
+    //*********************************
+    //sounds_miscellaneous
+    // 0. Unit Select
+    // 1. Movement conformation
+    // 2. Unit Splits
+    // 3. Unit Dies
+
+
     float fps;
 
     Rect GUISelectRect;
@@ -91,6 +112,7 @@ public class PlayerController : MonoBehaviour
             allSelectableTargets.Add(item); // Add the cell to the players controllable units
         }
 
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>(); // gets the sound sources
     }
 
 
@@ -170,6 +192,7 @@ public class PlayerController : MonoBehaviour
             item.isSelected = false;
         }
         selectedUnits.Clear();
+      
         foreach (BaseCell item in allSelectableUnits)
         {
             Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
@@ -178,6 +201,10 @@ public class PlayerController : MonoBehaviour
             {
                 selectedUnits.Add(item);
                 item.isSelected = true;
+                if ( !sound_manager.sounds_miscellaneous[0].isPlaying )
+                {
+                      sound_manager.sounds_miscellaneous[0].Play();
+                }
             }
         }
     }
@@ -224,6 +251,10 @@ public class PlayerController : MonoBehaviour
         {
             EventManager.Move(hitInfo.point);
             GameObject.Instantiate(movePin, hitInfo.point, Quaternion.Euler(90.0f,0.0f,0.0f));
+            if (!sound_manager.sounds_miscellaneous[1].isPlaying)
+            {
+                sound_manager.sounds_miscellaneous[1].Play();
+            }
         }
 
     }
@@ -245,14 +276,18 @@ public class PlayerController : MonoBehaviour
     {
         EventManager.Attack(selectedTargets[0]);
         CheckEnemiesLeft();
-
+        
     }
 
 
     public void UnitSplit()
     {
         EventManager.Split();
-   
+        if (!sound_manager.sounds_miscellaneous[2].isPlaying)
+        {
+            sound_manager.sounds_miscellaneous[2].Play();
+            
+        }
     }
 
     public void UnitEvolve(int cellNum)
@@ -261,15 +296,19 @@ public class PlayerController : MonoBehaviour
         {
             case 0: //turn into heat cell
                 EventManager.Evolve(CellType.HEAT_CELL);
+                sound_manager.sounds_evolution[cellNum].Play(); // playes the corresponding sound
                 break;
             case 1: //turn into cold cell
                 EventManager.Evolve(CellType.COLD_CELL);
+                sound_manager.sounds_evolution[cellNum].Play(); // playes the corresponding sound
                 break;
             case 2: //turn into acidic cell
                 EventManager.Evolve(CellType.ACIDIC_CELL);
+                sound_manager.sounds_evolution[cellNum].Play();// playes the corresponding sound
                 break;
             case 3: //turn into alkali cell
                 EventManager.Evolve(CellType.ALKALI_CELL);
+                sound_manager.sounds_evolution[cellNum].Play();// playes the corresponding sound
                 break;
             default:
                 break;
