@@ -18,6 +18,8 @@ public class Lighting : MonoBehaviour
     {
         realOwner = realOwner.gameObject;
         currentTarget = realOwner.GetComponent<BaseCell>().primaryTarget;
+        transform.LookAt(currentTarget.transform);
+        //transform.rotation = Quaternion.Euler(currentTarget.transform.position.x, 0, currentTarget.transform.position.z);
     }
 
     // Update is called once per frame
@@ -28,6 +30,7 @@ public class Lighting : MonoBehaviour
             Vector3 them2me = currentTarget.transform.position - transform.position;
             GetComponent<Rigidbody>().velocity += them2me.normalized * speed;
             transform.LookAt(currentTarget.transform);
+            //transform.rotation = Quaternion.Euler(currentTarget.transform.position.x, 0, currentTarget.transform.position.z);
         }
     }
 

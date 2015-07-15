@@ -532,6 +532,7 @@ public class BaseCell : MonoBehaviour
         {
 
             this.gameObject.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().material.color = Color.red;
+            this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
@@ -674,7 +675,10 @@ public class BaseCell : MonoBehaviour
         {
             transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
-
+        if (!isMine)
+        {
+            this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
+        }
 
     }
 

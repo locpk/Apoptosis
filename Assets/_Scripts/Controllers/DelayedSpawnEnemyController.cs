@@ -34,49 +34,52 @@ public class DelayedSpawnEnemyController : MonoBehaviour {
 
     // Coroutine function
     IEnumerator ReadyToConvert(float delayed) {
-        
-        yield return new WaitForSeconds(delayed);
 
-        for (int i = 0; i < numberOfCells; i++) {
-            Vector3 spawnPos = Vector3.zero;
-            Quaternion spwanAngle = Quaternion.identity;
-            float _x = transform.position.x + Random.Range(-transform.localScale.x * 5, transform.localScale.x * 5);
-            float _z = transform.position.z + Random.Range(-transform.localScale.z * 5, transform.localScale.z * 5);
-            spawnPos = new Vector3(_x, transform.position.y + 0.5f, _z);
-            spwanAngle.eulerAngles = new Vector3(90, 0, 0);
+            yield return new WaitForSeconds(delayed);
 
-            Transform spawnedCell = Instantiate(enermyCellSet[Random.Range(0, enermyCellSet.Count)], spawnPos, spwanAngle) as Transform;
-            Debug.Log(spawnedCell.gameObject.GetComponent<BaseCell>().celltype + " alive!!");
+            for (int i = 0; i < numberOfCells; i++)
+            {
+                Vector3 spawnPos = Vector3.zero;
+                Quaternion spwanAngle = Quaternion.identity;
+                float _x = transform.position.x + Random.Range(-transform.localScale.x * 5, transform.localScale.x * 5);
+                float _z = transform.position.z + Random.Range(-transform.localScale.z * 5, transform.localScale.z * 5);
+                spawnPos = new Vector3(_x, transform.position.y + 0.5f, _z);
+                spwanAngle.eulerAngles = new Vector3(90, 0, 0);
 
-            if (spawnedCell) {
-                //switch (spawnedCell.GetComponent<BaseCell>().celltype) {
-                //    case CellType.HEAT_CELL:
-                //        spawnedCell.gameObject.AddComponent<AITrapCell>();
-                //        break;
-                //    case CellType.COLD_CELL:
-                //        break;
-                //    case CellType.HEAT_CELL_TIRE2:
-                //        break;
-                //    case CellType.COLD_CELL_TIRE2:
-                //        break;
-                //    case CellType.ACIDIC_CELL:
-                //        break;
-                //    case CellType.ALKALI_CELL:
-                //        break;
-                //    case CellType.CANCER_CELL:
-                //        break;
-                //    case CellType.NERVE_CELL:
-                //        break;
-                //    default:
-                //        break;
-                //}
-                spawnedCell.gameObject.AddComponent<AITrapCell>();
+                Transform spawnedCell = Instantiate(enermyCellSet[Random.Range(0, enermyCellSet.Count)], spawnPos, spwanAngle) as Transform;
+                Debug.Log(spawnedCell.gameObject.GetComponent<BaseCell>().celltype + " alive!!");
 
-                m_spawnedList.Add(spawnedCell);
-            }   
-        }
+                if (spawnedCell)
+                {
+                    //switch (spawnedCell.GetComponent<BaseCell>().celltype) {
+                    //    case CellType.HEAT_CELL:
+                    //        spawnedCell.gameObject.AddComponent<AITrapCell>();
+                    //        break;
+                    //    case CellType.COLD_CELL:
+                    //        break;
+                    //    case CellType.HEAT_CELL_TIRE2:
+                    //        break;
+                    //    case CellType.COLD_CELL_TIRE2:
+                    //        break;
+                    //    case CellType.ACIDIC_CELL:
+                    //        break;
+                    //    case CellType.ALKALI_CELL:
+                    //        break;
+                    //    case CellType.CANCER_CELL:
+                    //        break;
+                    //    case CellType.NERVE_CELL:
+                    //        break;
+                    //    default:
+                    //        break;
+                    //}
+                    spawnedCell.gameObject.AddComponent<AITrapCell>();
 
-        DestroyObject(gameObject);
+                    m_spawnedList.Add(spawnedCell);
+                }
+            }
+
+
+            DestroyObject(gameObject);
     }
 
     public List<Transform> GetSpawnedList() {
