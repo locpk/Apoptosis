@@ -51,6 +51,10 @@ public class AITrapCell : MonoBehaviour{
         if (GetComponent<FogOfWarHider>() == null) {
             gameObject.AddComponent<FogOfWarHider>();
         }
+        if (GetComponent<FogOfWarViewer>())
+        {
+            Destroy(GetComponent<FogOfWarViewer>());
+        }
     }
 
     void FixedUpdate() {

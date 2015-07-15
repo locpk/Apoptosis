@@ -52,14 +52,18 @@ public class AIWaveCell : MonoBehaviour {
 	void Start () {
         m_baseCell.navAgent.autoBraking = false;
         m_baseCell.isMine = false;
-        m_baseCell.isAIPossessed = false;
+        m_baseCell.isAIPossessed = true;
         m_baseCell.tag = "EnemyCell";
         //m_baseCell.SetSpeed(m_baseCell.navAgent.speed * .5f);
         m_movingSpeed = m_baseCell.navAgent.speed * 2.0f;
         m_attackSpeed = m_baseCell.navAgent.speed * .5f;
         m_baseCell.currentState = CellState.IDLE;
         if (GetComponent<FogOfWarHider>() == null) {
-            //gameObject.AddComponent<FogOfWarHider>();
+            gameObject.AddComponent<FogOfWarHider>();
+        }
+        if (GetComponent<FogOfWarViewer>())
+        {
+            Destroy(GetComponent<FogOfWarViewer>());
         }
 
 	}
