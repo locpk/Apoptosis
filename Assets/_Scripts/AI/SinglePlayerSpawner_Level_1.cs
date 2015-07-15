@@ -9,15 +9,16 @@ public class SinglePlayerSpawner_Level_1 : MonoBehaviour {
     public List<float> spawningWavesInTime;         // in sec, total 8 waves
     public List<int> spawnAmountPerWave;          // each wave has amount of cells
 
-    private List<Transform> spawnedList;       
 
-    private int waveIndex = 0;
-    private float timeSinceLevelStart = 0.0f;
+    private List<BaseCell> m_spawnedList;       
+
+    private int m_waveIndex = 0;
+    private float m_timeSinceLevelStart = 0.0f;
 
 
 
     void Awake () {
-        spawnedList = new List<Transform>();
+        m_spawnedList = new List<BaseCell>();
     }
 
 	// Use this for initialization
@@ -27,14 +28,14 @@ public class SinglePlayerSpawner_Level_1 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (spawningWavesInTime.Count >= waveIndex) {
-            timeSinceLevelStart += Time.deltaTime;
-            if (timeSinceLevelStart >= spawningWavesInTime[waveIndex]) {
-                Debug.Log("Time: " + timeSinceLevelStart + " wave: " + waveIndex + " count: " + spawningWavesInTime [waveIndex]);
-                for (int i = 0; i < spawnAmountPerWave[waveIndex]; i++) {
+        if (spawningWavesInTime.Count >= m_waveIndex) {
+            m_timeSinceLevelStart += Time.deltaTime;
+            if (m_timeSinceLevelStart >= spawningWavesInTime[m_waveIndex]) {
+                Debug.Log("Time: " + m_timeSinceLevelStart + " wave: " + m_waveIndex + " count: " + spawningWavesInTime [m_waveIndex]);
+                for (int i = 0; i < spawnAmountPerWave[m_waveIndex]; i++) {
                     SpawnEnemy(Random.Range(0, enermyCellSet.Count), Random.Range(0, spawnAreas.Count));
                 }
-                waveIndex++;
+                m_waveIndex++;
             }
         }
 	}
@@ -54,13 +55,44 @@ public class SinglePlayerSpawner_Level_1 : MonoBehaviour {
         Transform spawnedCell = Instantiate(enermyCellSet[cellId], spawnPos, spwanAngle) as Transform;
         
         if (spawnedCell) {
-            spawnedList.Add(spawnedCell);
+            spawnedCell.gameObject.AddComponent<AIWaveCell>();
+            spawnedCell.GetComponent<AIWaveCell>().spawnPointOwner = area;
+            switch (spawnedCell.gameObject.GetComponent<BaseCell>().celltype) {
+                case CellType.STEM_CELL:
+                    //m_spawnedList.Add(spawnedCell.gameObject.GetComponent<StemCell>());
+                    break;
+                case CellType.HEAT_CELL:
+                    m_spawnedList.Add(spawnedCell.gameObject.GetComponent<HeatCell>());
+                    break;
+                case CellType.COLD_CELL:
+                    m_spawnedList.Add(spawnedCell.gameObject.GetComponent<ColdCell>());
+                    break;
+                case CellType.HEAT_CELL_TIRE2:
+                    m_spawnedList.Add(spawnedCell.gameObject.GetComponent<Tier2HeatCell>());
+                    break;
+                case CellType.COLD_CELL_TIRE2:
+                    //m_spawnedList.Add(spawnedCell.gameObject.GetComponent<Tier2ColdCell>());
+                    break;
+                case CellType.ACIDIC_CELL:
+                    m_spawnedList.Add(spawnedCell.gameObject.GetComponent<AcidicCell>());
+                    break;
+                case CellType.ALKALI_CELL:
+                    m_spawnedList.Add(spawnedCell.gameObject.GetComponent<AlkaliCell>());
+                    break;
+                case CellType.CANCER_CELL:
+                    //m_spawnedList.Add(spawnedCell.gameObject.GetComponent<CancerCell>());
+                    break;
+                case CellType.NERVE_CELL:
+                    m_spawnedList.Add(spawnedCell.gameObject.GetComponent<NerveCell>());
+                    break;
+                default:
+                    break;
+            }
         }   
-
     }
 
-    public List<Transform> GetSpawnedList() {
-        return spawnedList;
+    public List<BaseCell> GetSpawnedList() {
+        return m_spawnedList;
     }
 
 }
