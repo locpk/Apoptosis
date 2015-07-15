@@ -346,7 +346,7 @@ public class PlayerController : MonoBehaviour
 
         if (Time.timeScale > 0.0f)
         {
-            GUI.BeginGroup(new Rect(Screen.width * 0.5f - 400, 15, Screen.width * 0.5f + 500, 100));
+            GUI.BeginGroup(new Rect(Screen.width * 0.5f - 325, 15, Screen.width * 0.5f + 500, 100));
             GUI.Box(new Rect(0, 0, 75, 60), "Stem Cells: ");
             GUI.Label(new Rect(35, 35, 50, 50), NumStemCells.ToString());
 
@@ -365,17 +365,17 @@ public class PlayerController : MonoBehaviour
             GUI.Box(new Rect(400, 0, 75, 60), "Nerve Cells: ");
             GUI.Label(new Rect(435, 35, 50, 50), NumNerveCells.ToString());
 
-            GUI.Box(new Rect(480, 0, 75, 60), "Tier 2\nHeat Cells: ");
-            GUI.Label(new Rect(515, 35, 50, 50), NumTierTwoHeat.ToString());
+            GUI.Box(new Rect(490, 0, 75, 60), "Tier 2\nHeat Cells: ");
+            GUI.Label(new Rect(525, 35, 50, 50), NumTierTwoHeat.ToString());
 
-            GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
-            GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
+            GUI.Box(new Rect(570, 0, 75, 60), "Tier 2\nCold Cells: ");
+            GUI.Label(new Rect(605, 35, 50, 50), NumTierTwoCold.ToString());
 
-            GUI.Box(new Rect(640, 0, 75, 60), "Enemies\nLeft: ");
-            GUI.Label(new Rect(675, 35, 50, 50), NumEnemiesLeft.ToString());
+            GUI.Box(new Rect(690, 0, 75, 60), "Enemies\nLeft: ");
+            GUI.Label(new Rect(725, 35, 50, 50), NumEnemiesLeft.ToString());
 
-            GUI.Box(new Rect(720, 0, 75, 60), "Cap: ");
-            GUI.Label(new Rect(755, 35, 50, 50), cap.ToString());
+            GUI.Box(new Rect(770, 0, 75, 60), "Population: ");
+            GUI.Label(new Rect(805, 35, 50, 50), cap.ToString());
             GUI.EndGroup();
         }
 
