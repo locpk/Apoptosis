@@ -85,6 +85,17 @@ public class StemCell : BaseCell
             primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
             primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
         }
+        if (PhotonNetwork.connected)
+        {
+            primaryTarget.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage);
+        }
+    }
+
+    [PunRPC]
+    void ApplyDamage(int damage)
+    {
+        currentProtein -= damage;
+        GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
     }
 
     public override void Attack(GameObject _target)

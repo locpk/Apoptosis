@@ -35,6 +35,8 @@ class Task
 public class TutorialController : MonoBehaviour
 {
 
+    public Menu mainMenu;
+
     int currentTask = 0;
     public GameObject taskCanvas;
     public UnityEngine.UI.Text currentTaskText;
@@ -104,6 +106,42 @@ public class TutorialController : MonoBehaviour
         mutateAcidic.Initialize = EmptyInitialization;
         mutateAcidic.IsComplete = MutateAcidicCondition;
         Tasklist.Add(mutateAcidic);
+        Task cancerLesson = new Task();
+        cancerLesson.Text = "Stem cells can divide indefinitely with no repurcussions. Heat and cold cells can divide too, but the more they divide the higher the chance they have of becoming cancerous. Press any key to continue.";
+        cancerLesson.Initialize = EmptyInitialization;
+        cancerLesson.IsComplete = AnyKeyCondition;
+        Tasklist.Add(cancerLesson);
+        Task cancerLesson2 = new Task();
+        cancerLesson2.Text = "Cancer cells cannot be controlled and will attack everything. Select at least one stem, heat and cold cell then press 'D' to divide each one. Make at least 2 of each.";
+        cancerLesson2.Initialize = EmptyInitialization;
+        cancerLesson2.IsComplete = CancerLesson2Condition;
+        Tasklist.Add(cancerLesson2);
+        Task evolutionLesson = new Task();
+        evolutionLesson.Text = "Some cells can be combined to evolve into a more powerfull cell. Stem cells cannot be merged. Press any key to continue.";
+        evolutionLesson.Initialize = EmptyInitialization;
+        evolutionLesson.IsComplete = AnyKeyCondition;
+        Tasklist.Add(evolutionLesson);
+        Task evolutionHeat = new Task();
+        evolutionHeat.Text = "2 Heat cells can merge when they are in a heat area. Select two heat cells, move them to a heat area and press 'Q' to combine them into an evolved heat cell.";
+        evolutionHeat.Initialize = EmptyInitialization;
+        evolutionHeat.IsComplete = EvolutionHeatCondition;
+        Tasklist.Add(evolutionHeat);
+        Task evolutionCold = new Task();
+        evolutionCold.Text = "2 Cold cells can merge when they are in a cold area. Select two cold cells, move them to a cold area and press 'Q' to combine them into an evolved cold cell.";
+        evolutionCold.Initialize = EmptyInitialization;
+        evolutionCold.IsComplete = EvolutionColdCondition;
+        Tasklist.Add(evolutionCold);
+        Task evolutionNerve = new Task();
+        evolutionNerve.Text = "An acidic and an alkali cell can merge. Select one acidic and one alkali and press 'Q' to combine them into a nerve cell.";
+        evolutionNerve.Initialize = EmptyInitialization;
+        evolutionNerve.IsComplete = EvolutionNerveCondition;
+        Tasklist.Add(evolutionNerve);
+
+        Task tutorialComplete = new Task();
+        tutorialComplete.Text = "This completes the tutorial for Apoptosis. Good luck in your future games! Press any key to return to the main menu.";
+        tutorialComplete.Initialize = EmptyInitialization;
+        tutorialComplete.IsComplete = AnyKeyCondition;
+        Tasklist.Add(tutorialComplete);
 
         currentTaskText.text = Tasklist[0].Text;
     }
@@ -142,7 +180,7 @@ public class TutorialController : MonoBehaviour
         {
             taskCanvas.gameObject.SetActive(false);
             showTaskButton.gameObject.SetActive(false);
-            print("Should Be Complete");
+            Application.LoadLevel("MainMenu");
         }
     }
 
@@ -214,6 +252,29 @@ public class TutorialController : MonoBehaviour
     bool MutateAcidicCondition()
     {
         return PlayerControls.NumAcidicCells > 0;
+    }
+
+    bool CancerLesson2Condition()
+    {
+        return PlayerControls.NumStemCells > 1
+            && PlayerControls.NumHeatCells > 1
+            && PlayerControls.NumColdCells > 1;
+    }
+
+    bool EvolutionHeatCondition()
+    {
+        return PlayerControls.NumTierTwoHeat > 0;
+    }
+
+    bool EvolutionColdCondition()
+    {
+        return PlayerControls.NumTierTwoCold > 0;
+    }
+
+    bool EvolutionNerveCondition()
+    {
+        return true; // dependent on nerve merge
+        //return PlayerControls.NumNerveCells > 0;
     }
 
     void EmptyInitialization(){}
