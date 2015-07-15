@@ -499,7 +499,7 @@ public class BaseCell : MonoBehaviour
         if (isSinglePlayer)
         {
             GetComponent<PhotonView>().enabled = false;
-            
+
         }
         else
         {
@@ -513,6 +513,7 @@ public class BaseCell : MonoBehaviour
         else
         {
             gameObject.AddComponent<FogOfWarHider>();
+
         }
         navAgent = GetComponent<NavMeshAgent>();
         navObstacle = GetComponent<NavMeshObstacle>();
@@ -562,6 +563,7 @@ public class BaseCell : MonoBehaviour
                     }
                     else if (primaryTarget.tag == "Unit")
                     {
+
                         currentState = CellState.ATTACK;
                         return;
                     }
@@ -642,7 +644,6 @@ public class BaseCell : MonoBehaviour
                 return;
             }
         }
-
     }
 
     public bool isStopped()
@@ -693,6 +694,7 @@ public class BaseCell : MonoBehaviour
         if (currentProtein <= 0.0f)
         {
             Die();
+            transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 }

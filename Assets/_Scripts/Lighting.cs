@@ -28,7 +28,6 @@ public class Lighting : MonoBehaviour
             Vector3 them2me = currentTarget.transform.position - transform.position;
             GetComponent<Rigidbody>().velocity += them2me.normalized * speed;
             transform.LookAt(currentTarget.transform);
-            //transform.rotation.Set(Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(them2me), 0.1f).x, transform.rotation.y, transform.rotation.z , transform.rotation.w);
         }
     }
 
