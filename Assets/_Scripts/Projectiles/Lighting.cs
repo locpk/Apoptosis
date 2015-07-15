@@ -18,6 +18,7 @@ public class Lighting : MonoBehaviour
     {
         realOwner = realOwner.gameObject;
         currentTarget = realOwner.GetComponent<BaseCell>().primaryTarget;
+        transform.LookAt(currentTarget.transform);
     }
 
     // Update is called once per frame
@@ -28,7 +29,6 @@ public class Lighting : MonoBehaviour
             Vector3 them2me = currentTarget.transform.position - transform.position;
             GetComponent<Rigidbody>().velocity += them2me.normalized * speed;
             transform.LookAt(currentTarget.transform);
-            //transform.rotation.Set(Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(them2me), 0.1f).x, transform.rotation.y, transform.rotation.z , transform.rotation.w);
         }
     }
 
@@ -61,15 +61,6 @@ public class Lighting : MonoBehaviour
                 if (nextTarget == currentTarget || nextTarget == previousTarget ||  nextTarget.GetComponent<BaseCell>().hitBylightning == true)
                 {
                     nextTarget = null;
-                   // for (int j = i + 1; i < targetsToBounce.Count; j++)
-                   // {
-                   //     previousTarget = nextTarget;
-                   //     nextTarget = targetsToBounce[j];
-                   //     if (nextTarget == null)
-                   //     { }
-                   //     break;
-                   // }
-
                 }
                 break;
             }

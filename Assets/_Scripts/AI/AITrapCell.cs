@@ -60,6 +60,7 @@ public class AITrapCell : MonoBehaviour{
             if (hitInfo.collider.gameObject.tag == "Unit") {
                 if (IsInvoking("RandomMove")) {
                     CancelInvoke("RandomMove");
+                    //m_baseCell.primaryTarget.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = true;
                 }
                 targetFound = true;
                 if (Vector3.Distance(transform.position, hitInfo.transform.position) > m_baseCell.attackRange) {
@@ -69,6 +70,7 @@ public class AITrapCell : MonoBehaviour{
                 } else {
                     if (m_baseCell.primaryTarget == null) {
                         m_baseCell.primaryTarget = hitInfo.transform.gameObject;
+                        m_baseCell.primaryTarget.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = true;
                         m_baseCell.currentState = CellState.ATTACK;
                     }
                 }

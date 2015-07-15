@@ -505,7 +505,7 @@ public class BaseCell : MonoBehaviour
         if (isSinglePlayer)
         {
             GetComponent<PhotonView>().enabled = false;
-            
+
         }
         else
         {
@@ -519,6 +519,7 @@ public class BaseCell : MonoBehaviour
         else
         {
             gameObject.AddComponent<FogOfWarHider>();
+
         }
         navAgent = GetComponent<NavMeshAgent>();
         navObstacle = GetComponent<NavMeshObstacle>();
@@ -537,6 +538,7 @@ public class BaseCell : MonoBehaviour
         {
 
             this.gameObject.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().material.color = Color.red;
+            this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
@@ -568,6 +570,7 @@ public class BaseCell : MonoBehaviour
                     }
                     else if (primaryTarget.tag == "Unit")
                     {
+
                         currentState = CellState.ATTACK;
                         return;
                     }
@@ -648,7 +651,6 @@ public class BaseCell : MonoBehaviour
                 return;
             }
         }
-
     }
 
     public bool isStopped()
@@ -659,7 +661,7 @@ public class BaseCell : MonoBehaviour
             {
                 if (navAgent.remainingDistance <= navAgent.stoppingDistance)
                 {
-                    if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
+                    if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0.0f)
                     {
                         return true;
                     }
@@ -675,8 +677,14 @@ public class BaseCell : MonoBehaviour
         {
             currentState = CellState.DEAD;
         }
-
-
+        if (isMine && currentState != CellState.ATTACK && currentState != CellState.IDLE && currentState != CellState.CONSUMING)
+        {
+            transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
+        }
+        if (!isMine && celltype != CellType.CANCER_CELL)
+        {
+            this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
+        }
 
     }
 
@@ -699,6 +707,7 @@ public class BaseCell : MonoBehaviour
         if (currentProtein <= 0.0f)
         {
             Die();
+            transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 }
