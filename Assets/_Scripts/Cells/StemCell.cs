@@ -91,13 +91,6 @@ public class StemCell : BaseCell
         }
     }
 
-    [PunRPC]
-    void ApplyDamage(int damage)
-    {
-        currentProtein -= damage;
-        GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
-    }
-
     public override void Attack(GameObject _target)
     {
         if (_target && _target != this.gameObject)

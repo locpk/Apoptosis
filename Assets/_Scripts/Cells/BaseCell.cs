@@ -98,6 +98,13 @@ public class BaseCell : MonoBehaviour
     //{
     //    currentProtein -= _received_damage - defense;
     //}
+
+    [PunRPC]
+    public void ApplyDamage(float damage)
+    {
+        currentProtein -= damage;
+        GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+    }
     #endregion
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

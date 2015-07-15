@@ -151,7 +151,7 @@ public class OnlineGameController : Photon.PunBehaviour
         GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
-            PlayerControls.GetComponent<OnlinePlayerController>().AddNewCell(item.GetComponent<BaseCell>());
+            PlayerControls.GetComponent<PlayerController>().AddNewCell(item.GetComponent<BaseCell>());
         }
         tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
@@ -182,7 +182,7 @@ public class OnlineGameController : Photon.PunBehaviour
         object[] isSingleplayer = new object[1];
         isSingleplayer[0] = (bool)false;
         PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("StemCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer).GetComponent<BaseCell>());
-        if (PhotonNetwork.player.ID == 1)
+        if (false/*PhotonNetwork.player.ID == 1*/)
         {
             PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("ColdCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer).GetComponent<BaseCell>());
         }

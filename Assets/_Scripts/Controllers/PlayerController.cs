@@ -62,22 +62,11 @@ public class PlayerController : MonoBehaviour
             BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
             if (bCell)
             {
-                if (!bCell.isAIPossessed && bCell.isMine) // If the cell belongs to this player
+                if (PhotonNetwork.connected && item.GetPhotonView().isMine || !bCell.isAIPossessed && bCell.isMine) // If the cell belongs to this player
                 {
                     allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
                 }
-            }
-            
-        }
-
-        tmpArr.Clear();
-        tmpArr = GameObjectManager.FindAllUnits(); // Get every cell in the game
-        foreach (GameObject item in tmpArr) // Iterate through all the cells
-        {
-            BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
-            if (bCell)
-            {
-                if (bCell.isAIPossessed && !bCell.isMine) // If the cell belongs to this player
+                else if (PhotonNetwork.connected && !item.GetPhotonView().isMine || bCell.isAIPossessed && !bCell.isMine) // If the cell belongs to this player
                 {
                     allSelectableTargets.Add(item); // Add the cell to the players controllable units
                 }
@@ -90,16 +79,22 @@ public class PlayerController : MonoBehaviour
         {
             allSelectableTargets.Add(item); // Add the cell to the players controllable units
         }
-
     }
 
 
     public void AddNewCell(BaseCell _in)
     {
-        _in.isSelected = true;
-        allSelectableUnits.Add(_in);
-        selectedUnits.Add(_in);
-
+        if (!_in.gameObject.GetPhotonView().isMine)
+        {
+            allSelectableTargets.Add(_in.gameObject);
+        }
+        else
+        {
+            _in.isSelected = true;
+            allSelectableUnits.Add(_in);
+            selectedUnits.Add(_in);
+            CheckSelectedUnits();
+        }
     }
 
     public void AddNewProtein(Protein _in)
@@ -114,13 +109,11 @@ public class PlayerController : MonoBehaviour
         _in.isSelected = false;
         allSelectableUnits.Remove(_in);
         selectedUnits.Remove(_in);
-
     }
     public void DeselectCell(BaseCell _in)
     {
         _in.isSelected = false;
         selectedUnits.Remove(_in);
-
     }
 
     public void RemoveTarget(GameObject _in)
