@@ -654,7 +654,7 @@ public class BaseCell : MonoBehaviour
             {
                 if (navAgent.remainingDistance <= navAgent.stoppingDistance)
                 {
-                    if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
+                    if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0.0f)
                     {
                         return true;
                     }
@@ -670,7 +670,10 @@ public class BaseCell : MonoBehaviour
         {
             currentState = CellState.DEAD;
         }
-
+        if (isMine && currentState != CellState.ATTACK && currentState != CellState.IDLE && currentState != CellState.CONSUMING)
+        {
+            transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
+        }
 
 
     }
