@@ -1337,8 +1337,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471d131ae0e64404b9eb047dfc59791e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTouch: 1
   movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
   attackPin: {fileID: 0}
+  moveLine: {fileID: 0}
   NumStemCells: 0
   NumHeatCells: 0
   NumColdCells: 0

@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     public static int cap = 0;
     public GameObject movePin;
     public GameObject attackPin;
+    public GameObject moveLine;
+
 
 
     public int NumStemCells = 0;
@@ -42,6 +44,7 @@ public class PlayerController : MonoBehaviour
     public Texture selector;
 
     float fps;
+    float initTouchTime;
 
     Rect GUISelectRect;
 
@@ -227,6 +230,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void TouchTargetSelection(Vector2 origin)
+    {
+        Vector2 oneTouchPos = Input.GetTouch(0).position;
+        if (oneTouchPos.x >= origin.x)
+        {
+            GUISelectRect.xMax = oneTouchPos.x;
+        }
+        else
+        {
+            GUISelectRect.xMin = oneTouchPos.x;
+        }
+
+        if (-oneTouchPos.y + Screen.height >= origin.y)
+        { GUISelectRect.yMax = -oneTouchPos.y + Screen.height; }
+        else
+        { GUISelectRect.yMin = -oneTouchPos.y + Screen.height; }
+
+        selectedTargets.Clear();
+        foreach (GameObject item in allSelectableTargets)
+        {
+            Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
+            itemPos.y = -itemPos.y + Screen.height;
+            if (GUISelectRect.Contains(itemPos))
+            {
+                selectedTargets.Add(item);
+            }
+        }
+    }
+
     public void TargetSelection(Vector2 origin)
     {
         if (Input.mousePosition.x >= origin.x)
@@ -363,11 +395,11 @@ public class PlayerController : MonoBehaviour
         {
             if (!isOverUI)
             {
-                if (Input.GetMouseButton(0))
+                if (Input.touchCount == 1)
                 {
                     GUI.color = new Color(0.0f, 0.0f, 1.0f, 0.5f);
                 }
-                else
+                else if (Input.touchCount == 2)
                 {
                     GUI.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
                 }
@@ -455,91 +487,108 @@ public class PlayerController : MonoBehaviour
 
     void TouchUpdate()
     {
-        if (Input.touchCount == 1 && selectedUnits.Count == 0)
+        if (!isOverUI && Time.timeScale > 0.0f)
         {
-            Touch oneTouch = Input.GetTouch(0);
-            switch (oneTouch.phase)
+            if (Input.touchCount == 1 && selectedUnits.Count == 0)
             {
-                case TouchPhase.Began:
+                Touch oneTouch = Input.GetTouch(0);
+                switch (oneTouch.phase)
+                {
+                    case TouchPhase.Began:
 
-                    
-                    GUISelectRect.xMax = oneTouch.position.x;
-                    GUISelectRect.yMax = oneTouch.position.y;
-                    GUISelectRect.xMin = oneTouch.position.x;
-                    GUISelectRect.yMin = -oneTouch.position.y + Screen.height;
 
-                    origin = oneTouch.position;
-                    origin.y = -origin.y + Screen.height;
-                    break;
-                case TouchPhase.Canceled:
-                    break;
-                case TouchPhase.Ended:
-                    RaycastHit hitInfo;
-                    Ray screenRay = Camera.main.ScreenPointToRay(oneTouch.position);
+                        GUISelectRect.xMax = oneTouch.position.x;
+                        GUISelectRect.yMax = oneTouch.position.y;
+                        GUISelectRect.xMin = oneTouch.position.x;
+                        GUISelectRect.yMin = -oneTouch.position.y + Screen.height;
 
-                    if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
-                    {
-                        BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
-                        if (allSelectableUnits.Contains(hitCell))
-                        {
-                            hitInfo.collider.gameObject.GetComponent<BaseCell>().isSelected = true;
-                            selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
-                        }
-                    }
-                    TouchUnitSelection(origin);
-                    break;
-                case TouchPhase.Moved:
-                    TouchUnitSelection(origin);
-                    break;
-                case TouchPhase.Stationary:
-                    TouchUnitSelection(origin);
-                    break;
-                default:
-                    break;
+                        origin = oneTouch.position;
+                        origin.y = -origin.y + Screen.height;
+                        break;
+                    case TouchPhase.Canceled:
+                        break;
+                    case TouchPhase.Ended:
+                        TouchUnitSelection(origin);
+                        break;
+                    case TouchPhase.Moved:
+                        TouchUnitSelection(origin);
+                        break;
+                    case TouchPhase.Stationary:
+                        TouchUnitSelection(origin);
+                        break;
+                    default:
+                        break;
+                }
             }
-        }
 
-        if (Input.touchCount == 1 && selectedUnits.Count > 0)
-        {
-            Vector3 initPos = -Vector3.one;
-            Vector3 lastPos = -Vector3.one;
-            Touch touch = Input.GetTouch(0);
-            switch (touch.phase)
+            if (Input.touchCount == 1 && selectedUnits.Count > 0)
             {
-                case TouchPhase.Began:
-                    RaycastHit hitInfo;
-                    Ray screenRay = Camera.main.ScreenPointToRay(touch.position);
+                GUISelectRect.xMax = GUISelectRect.xMin;
+                GUISelectRect.yMax = GUISelectRect.yMin;
+                Vector3 initPos = -Vector3.one;
+                Vector3 lastPos = -Vector3.one;
+                Touch touch = Input.GetTouch(0);
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        initTouchTime = Time.time;
 
-                    if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer))
-                    {
-                        if (hitInfo.collider.name == "Unit" && hitInfo.collider.GetComponent<BaseCell>().isSelected)
+
+
+                        RaycastHit hitInfo;
+                        Ray screenRay = Camera.main.ScreenPointToRay(touch.position);
+
+                        if (Physics.Raycast(screenRay, out hitInfo, 1000.0f, terrainLayer))
                         {
-                            initPos = hitInfo.point;
-                        }
-                    }
-                    break;
-                case TouchPhase.Canceled:
-                    break;
-                case TouchPhase.Ended:
-                    RaycastHit hitInfo1;
-                    Ray screenRay1 = Camera.main.ScreenPointToRay(touch.position);
+                            if (hitInfo.collider.tag == "Unit" && hitInfo.collider.GetComponent<BaseCell>().isSelected)
+                            {
+                                initPos = hitInfo.point;
+                            }
 
-                    if (Physics.Raycast(screenRay1, out hitInfo1, 1000.0f, terrainLayer))
-                    {
-                        lastPos = hitInfo1.point;
-                    }
-                    break;
-                case TouchPhase.Moved:
-                    break;
-                case TouchPhase.Stationary:
-                    break;
-                default:
-                    break;
-            }
-            if (lastPos != initPos)
-            {
-                EventManager.Move(lastPos);
-                Gizmos.DrawLine(initPos, lastPos);
+                        }
+
+                        break;
+                    case TouchPhase.Canceled:
+                        break;
+                    case TouchPhase.Ended:
+                        if (Time.time - initTouchTime <= 0.5f)
+                        {
+                            initTouchTime = 0.0f;
+                            selectedUnits.Clear();
+                            break;
+                        }
+
+
+                        RaycastHit hitInfo1;
+                        Ray screenRay1 = Camera.main.ScreenPointToRay(touch.position);
+
+                        if (Physics.Raycast(screenRay1, out hitInfo1, 1000.0f, terrainLayer))
+                        {
+                                lastPos = hitInfo1.point;
+                        }
+
+
+                        break;
+                    case TouchPhase.Moved:
+                        RaycastHit hitInfo2;
+                        Ray screenRay2 = Camera.main.ScreenPointToRay(touch.position);
+
+                        if (Physics.Raycast(screenRay2, out hitInfo2, 1000.0f, terrainLayer))
+                        {
+                                lastPos = hitInfo2.point;
+                        }
+                        Instantiate(movePin, lastPos, Quaternion.identity);
+                        break;
+                    case TouchPhase.Stationary:
+                        break;
+                    default:
+                        break;
+                }
+                if (lastPos != initPos)
+                {
+                    EventManager.Move(lastPos);
+                    initPos = lastPos = -Vector3.one;
+                }
             }
         }
     }
@@ -602,51 +651,52 @@ public class PlayerController : MonoBehaviour
 
         if (!isOverUI && Time.timeScale > 0.0f)
         {
-            
-                if (Input.GetMouseButtonDown(0)) // If the player left-clicks
-                {
-                    GUISelectRect.xMin = Input.mousePosition.x;
-                    GUISelectRect.yMin = Input.mousePosition.y;
-                    GUISelectRect.xMax = Input.mousePosition.x;
-                    GUISelectRect.yMax = Input.mousePosition.y;
 
-                    GUISelectRect.xMin = Input.mousePosition.x;
-                    GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
-                    origin = Input.mousePosition;
-                    origin.y = -origin.y + Screen.height;
+            if (Input.GetMouseButtonDown(0)) // If the player left-clicks
+            {
+                GUISelectRect.xMin = Input.mousePosition.x;
+                GUISelectRect.yMin = Input.mousePosition.y;
+                GUISelectRect.xMax = Input.mousePosition.x;
+                GUISelectRect.yMax = Input.mousePosition.y;
 
-                }
-                else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
+                GUISelectRect.xMin = Input.mousePosition.x;
+                GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
+                origin = Input.mousePosition;
+                origin.y = -origin.y + Screen.height;
+
+            }
+            else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
+            {
+                GUISelectRect.yMax = GUISelectRect.yMin;
+                GUISelectRect.xMax = GUISelectRect.xMin;
+                if (selectedUnits.Count == 0)
                 {
-                    GUISelectRect.yMax = GUISelectRect.yMin;
-                    GUISelectRect.xMax = GUISelectRect.xMin;
-                    if (selectedUnits.Count == 0)
+                    RaycastHit hitInfo;
+                    Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                    if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
                     {
-                        RaycastHit hitInfo;
-                        Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                        if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
+                        BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
+                        if (allSelectableUnits.Contains(hitCell))
                         {
-                            BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
-                            if (allSelectableUnits.Contains(hitCell))
-                            {
-                                hitInfo.collider.gameObject.GetComponent<BaseCell>().isSelected = true;
-                                selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
-                            }
+                            hitInfo.collider.gameObject.GetComponent<BaseCell>().isSelected = true;
+                            selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
                         }
                     }
-
                 }
-                else if (Input.GetMouseButton(0)) // If the player has left-click held down
-                {
 
-                    UnitSelection(origin);
+            }
+            else if (Input.GetMouseButton(0)) // If the player has left-click held down
+            {
 
-                }
-            
+                UnitSelection(origin);
+
+            }
+
 
             if (Input.GetMouseButtonDown(1)) // If the player right-clicks
             {
+
                 GUISelectRect.xMin = Input.mousePosition.x;
                 GUISelectRect.yMin = Input.mousePosition.y;
                 GUISelectRect.xMax = Input.mousePosition.x;
@@ -659,6 +709,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetMouseButtonUp(1)) // When the player releases right-click
             {
+
+
 
                 GUISelectRect.yMax = GUISelectRect.yMin;
                 GUISelectRect.xMax = GUISelectRect.xMin;
