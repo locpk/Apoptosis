@@ -27,6 +27,8 @@ public class Lighting : MonoBehaviour
         {
             Vector3 them2me = currentTarget.transform.position - transform.position;
             GetComponent<Rigidbody>().velocity += them2me.normalized * speed;
+            transform.LookAt(currentTarget.transform);
+            //transform.rotation.Set(Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(them2me), 0.1f).x, transform.rotation.y, transform.rotation.z , transform.rotation.w);
         }
     }
 
@@ -73,6 +75,7 @@ public class Lighting : MonoBehaviour
             {
                 previousTarget = currentTarget;
                 currentTarget = nextTarget;
+
             }
 
 
@@ -88,27 +91,3 @@ public class Lighting : MonoBehaviour
         }
     }
 }
-
-//     if (nextTarget != null)
-//     {
-//         if (nextTarget == previousTarget)
-//         {
-//             Destroy(this.gameObject);
-//             Destroy(this);
-//
-//         }
-//         currentTarget = nextTarget;
-//         Vector3 them2me = currentTarget.transform.position - transform.position;
-//         GetComponent<Rigidbody>().velocity += them2me.normalized * speed;
-//     }
-//
-//
-//     if (bounceCounter >= 4 || targetsToBounce.Count == 0 || nextTarget == null)
-//     {
-//         Destroy(this.gameObject);
-//     }
-//
-// }
-
-
-
