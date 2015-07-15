@@ -15,13 +15,15 @@ TagManager:
   - Collider_Dense
   - Collider_Cold
   - Collider_Alkali
+  - MinimapIndicator
   - Highlight
-  - Options_Panel
-  - Sound_Manager
-  - Master_Slider
   - Menu_Canvas
+  - Sound_Manager
+  - Options_Panel
   - Music_Slider
   - SFX_Slider
+  - Master_Slider
+  - PlayerController
   layers:
   - Default
   - TransparentFX
@@ -58,7 +60,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Patricles
-    uniqueID: 504776635
     locked: 0
