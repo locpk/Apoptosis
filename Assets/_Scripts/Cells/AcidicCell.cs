@@ -7,7 +7,8 @@ public class AcidicCell : BaseCell
 
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
-   
+    public GameObject stun;
+    int instanonce = 0;
     void Awake()
     {
         base.bAwake();
@@ -45,74 +46,97 @@ public class AcidicCell : BaseCell
     // Update is called once per frame
     void Update()
     {
-        switch (currentState)
+        if (stunned == true)
         {
-            case CellState.IDLE:
-              
-                break;
-            case CellState.ATTACK:
-                if (primaryTarget != null)
-                {
-                    if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
-                    {
-                        if (!IsInvoking("DamagePreSecond"))
-                        {
-                            InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
+            if (instanonce < 1)
+            {
+                Vector3 trackingPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+                GameObject.Instantiate(stun, trackingPos, transform.rotation);
+            }
+            instanonce++;
 
-                        }
-                    }
-                    else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+            stunTimer -= 1 * Time.fixedDeltaTime;
+            if (this.stunTimer <= 0)
+            {
+                instanonce = 0;
+                // Destroy(stun.gameObject);
+                this.stunTimer = 3;
+                this.stunned = false;
+                this.hitCounter = 0;
+
+            }
+        }
+        else
+        {
+            switch (currentState)
+            {
+                case CellState.IDLE:
+
+                    break;
+                case CellState.ATTACK:
+                    if (primaryTarget != null)
                     {
-                        if (IsInvoking("DamagePreSecond"))
+                        if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                         {
-                            CancelInvoke("DamagePreSecond");
+                            if (!IsInvoking("DamagePreSecond"))
+                            {
+                                InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
+
+                            }
                         }
-                        if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
+                        else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                         {
-                            base.ChaseTarget();
+                            if (IsInvoking("DamagePreSecond"))
+                            {
+                                CancelInvoke("DamagePreSecond");
+                            }
+                            if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
+                            {
+                                base.ChaseTarget();
+                            }
                         }
+                        else
+                        {
+                            SetPrimaryTarget(null);
+                            navAgent.Stop();
+                        }
+
                     }
                     else
                     {
-                        SetPrimaryTarget(null);
-                        navAgent.Stop();
+                        currentState = CellState.IDLE;
                     }
-
-                }
-                else
-                {
-                    currentState = CellState.IDLE;
-                }
-                break;
-            case CellState.MOVING:
-                base.bUpdate();
-                if (primaryTarget != null)
-                {
-                    if (primaryTarget.GetComponent<BaseCell>())
+                    break;
+                case CellState.MOVING:
+                    base.bUpdate();
+                    if (primaryTarget != null)
                     {
-                        currentState = CellState.ATTACK;
+                        if (primaryTarget.GetComponent<BaseCell>())
+                        {
+                            currentState = CellState.ATTACK;
+                        }
+                        else if (primaryTarget.GetComponent<Protein>())
+                        {
+                            currentState = CellState.CONSUMING;
+                        }
+
                     }
-                    else if (primaryTarget.GetComponent<Protein>())
-                    {
-                        currentState = CellState.CONSUMING;
-                    }
-
-                }
-                break;
-            case CellState.ATTACK_MOVING:
-                break;
-            case CellState.CONSUMING:
-                base.bUpdate();
-                break;
-            case CellState.DEAD:
-                base.Die();
-                break;
+                    break;
+                case CellState.ATTACK_MOVING:
+                    break;
+                case CellState.CONSUMING:
+                    base.bUpdate();
+                    break;
+                case CellState.DEAD:
+                    base.Die();
+                    break;
 
 
-            default:
-                break;
+                default:
+                    break;
+            }
+            base.bUpdate();
         }
-        base.bUpdate();
     }
 
     void FixedUpdate()

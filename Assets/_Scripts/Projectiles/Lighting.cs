@@ -42,8 +42,10 @@ public class Lighting : MonoBehaviour
         {
 
             currentTarget.GetComponent<BaseCell>().currentProtein -= realOwner.GetComponent<BaseCell>().attackDamage;
+            currentTarget.GetComponent<BaseCell>().stunned = true;
+            currentTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
             bounceCounter++;
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, bounceRadius);
+            Collider[] hitColliders = Physics.OverlapSphere (transform.position, bounceRadius);
             for (int i = 0; i < hitColliders.Length; i++)
             {
 

@@ -7,7 +7,8 @@ public class AlkaliCell : BaseCell
     public TakeDamage multidamagesources;
     public GameObject DOT;
     GameObject previousTarget;
-
+    public GameObject stun;
+    int instanonce = 0;
 
     void Awake()
     {
@@ -49,75 +50,98 @@ public class AlkaliCell : BaseCell
     // Update is called once per frame
     void Update()
     {
-        switch (currentState)
+        if (stunned == true)
         {
-            case CellState.IDLE:
-      
-                Guarding();
-                break;
-            case CellState.ATTACK:
-                if (primaryTarget != null)
-                {
-                    if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
+            if (instanonce < 1)
+            {
+                Vector3 trackingPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+                GameObject.Instantiate(stun, trackingPos, transform.rotation);
+            }
+            instanonce++;
+
+            stunTimer -= 1 * Time.fixedDeltaTime;
+            if (this.stunTimer <= 0)
+            {
+                instanonce = 0;
+                // Destroy(stun.gameObject);
+                this.stunTimer = 3;
+                this.stunned = false;
+                this.hitCounter = 0;
+
+            }
+        }
+        else
+        {
+            switch (currentState)
+            {
+                case CellState.IDLE:
+
+                    Guarding();
+                    break;
+                case CellState.ATTACK:
+                    if (primaryTarget != null)
                     {
-                        if (!IsInvoking("DamagePreSecond"))
+                        if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                         {
-                            InvokeRepeating("DamagePreSecond", 1.0f, 3.0f);
-                       
+                            if (!IsInvoking("DamagePreSecond"))
+                            {
+                                InvokeRepeating("DamagePreSecond", 1.0f, 3.0f);
+
+                            }
+                        }
+                        else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                        {
+                            if (IsInvoking("DamagePreSecond"))
+                            {
+                                CancelInvoke("DamagePreSecond");
+                            }
+                            base.ChaseTarget();
+                        }
+
+                    }
+                    else
+                    {
+                        currentState = CellState.IDLE;
+                    }
+                    break;
+
+                case CellState.MOVING:
+                    base.bUpdate();
+                    if (primaryTarget && base.isStopped())
+                    {
+                        if (primaryTarget.GetComponent<BaseCell>())
+                        {
+                            currentState = CellState.ATTACK;
+                        }
+                        else if (primaryTarget.GetComponent<Protein>())
+                        {
+                            currentState = CellState.CONSUMING;
                         }
                     }
-                    else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                    else if (!primaryTarget || base.isStopped())
                     {
-                        if (IsInvoking("DamagePreSecond"))
-                        {
-                            CancelInvoke("DamagePreSecond");
-                        }
-                        base.ChaseTarget();
+                        currentState = CellState.IDLE;
                     }
 
-                }
-                else
-                {
-                    currentState = CellState.IDLE;
-                }
-                break;
 
-            case CellState.MOVING:
-                base.bUpdate();
-                if (primaryTarget && base.isStopped())
-                {
-                    if (primaryTarget.GetComponent<BaseCell>())
-                    {
-                        currentState = CellState.ATTACK;
-                    }
-                    else if (primaryTarget.GetComponent<Protein>())
-                    {
-                        currentState = CellState.CONSUMING;
-                    }
-                }
-                else if (!primaryTarget || base.isStopped())
-                {
-                    currentState = CellState.IDLE;
-                }
-              
+                    break;
+                case CellState.ATTACK_MOVING:
+                    // if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+                    // {
+                    //     currentState = CellState.IDLE;
+                    // }
+                    base.bUpdate();
+                    break;
+                case CellState.DEAD:
+                    base.Die();
+                    break;
+                case CellState.CONSUMING:
+                    base.bUpdate();
+                    break;
+                default:
+                    break;
 
-                break;
-            case CellState.ATTACK_MOVING:
-             // if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
-             // {
-             //     currentState = CellState.IDLE;
-             // }
-                base.bUpdate();
-                break;
-            case CellState.DEAD:
-                base.Die();
-                break;
-            case CellState.CONSUMING:
-                base.bUpdate();
-                break;
-            default:
-                break;
-
+            }
         }
     }
 
