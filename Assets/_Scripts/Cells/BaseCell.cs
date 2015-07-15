@@ -681,7 +681,7 @@ public class BaseCell : MonoBehaviour
         {
             transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
-        if (!isMine)
+        if (!isMine && celltype != CellType.CANCER_CELL)
         {
             this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
