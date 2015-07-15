@@ -47,6 +47,7 @@ public class DelayedSpawnEnemyController : MonoBehaviour {
 
             Transform spawnedCell = Instantiate(enermyCellSet[Random.Range(0, enermyCellSet.Count)], spawnPos, spwanAngle) as Transform;
             Debug.Log(spawnedCell.gameObject.GetComponent<BaseCell>().celltype + " alive!!");
+
             if (spawnedCell) {
                 //switch (spawnedCell.GetComponent<BaseCell>().celltype) {
                 //    case CellType.HEAT_CELL:
@@ -70,9 +71,7 @@ public class DelayedSpawnEnemyController : MonoBehaviour {
                 //        break;
                 //}
                 spawnedCell.gameObject.AddComponent<AITrapCell>();
-                if (spawnedCell.gameObject.GetComponent<FogOfWarHider>() == null) {
-                    //spawnedCell.gameObject.AddComponent<FogOfWarHider>();
-                }
+
                 m_spawnedList.Add(spawnedCell);
             }   
         }
