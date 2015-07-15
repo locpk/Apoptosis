@@ -34,4 +34,5 @@ MonoBehaviour:
   - RemoveDeadCell
   - Harvest
   - GameEnd
+  - ApplyDamage
   DisableAutoOpenWizard: 1
