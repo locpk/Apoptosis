@@ -38,6 +38,10 @@ public class SinglePlayerSpawner_Level_1 : MonoBehaviour {
                 m_waveIndex++;
             }
         }
+
+        if (m_waveIndex == spawningWavesInTime.Count) {
+            Destroy(gameObject);
+        }
 	}
 
     void SpawnEnemy(int cellId, int areaId) {

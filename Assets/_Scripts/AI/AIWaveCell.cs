@@ -55,13 +55,11 @@ public class AIWaveCell : MonoBehaviour {
         m_baseCell.isAIPossessed = false;
         m_baseCell.tag = "EnemyCell";
         //m_baseCell.SetSpeed(m_baseCell.navAgent.speed * .5f);
-        m_movingSpeed = m_baseCell.navAgent.speed * 2.0f;
+        m_movingSpeed = m_baseCell.navAgent.speed * 1.5f;
         m_attackSpeed = m_baseCell.navAgent.speed * .5f;
         m_baseCell.currentState = CellState.IDLE;
-        if (GetComponent<FogOfWarHider>() == null) {
-            //gameObject.AddComponent<FogOfWarHider>();
-        }
-
+        if (GetComponent<FogOfWarHider>() == null) gameObject.AddComponent<FogOfWarHider>();
+        if (GetComponent<FogOfWarViewer>()) Destroy(GetComponent<FogOfWarViewer>());
 	}
 	
 	void FixedUpdate () {
@@ -90,10 +88,14 @@ public class AIWaveCell : MonoBehaviour {
                 }
                 break;
             } else {
-                if (m_baseCell.navAgent.speed <= m_movingSpeed) m_baseCell.SetSpeed(m_movingSpeed);
-
+                if (m_baseCell.navAgent.speed <= m_movingSpeed) {
+                    m_baseCell.SetSpeed(m_movingSpeed);
+                }
+                
+                
             }
         }
+
         if (!targetFound && m_baseCell.navAgent.isOnNavMesh) {
             if (m_baseCell.navAgent.remainingDistance < 0.5f) GotoNextPoint();
         }

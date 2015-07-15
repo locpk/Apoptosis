@@ -48,9 +48,8 @@ public class AITrapCell : MonoBehaviour{
         m_baseCell.tag = "EnemyCell";
         m_baseCell.SetSpeed(m_baseCell.navAgent.speed * .5f);
         m_baseCell.currentState = CellState.IDLE;
-        if (GetComponent<FogOfWarHider>() == null) {
-            gameObject.AddComponent<FogOfWarHider>();
-        }
+        if (GetComponent<FogOfWarHider>() == null) gameObject.AddComponent<FogOfWarHider>();
+        if (GetComponent<FogOfWarViewer>() != null) Destroy(GetComponent<FogOfWarViewer>());
     }
 
     void FixedUpdate() {
