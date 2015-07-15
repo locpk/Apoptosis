@@ -89,6 +89,12 @@ public class BaseCell : MonoBehaviour
     public int NumEnemiesLeft = 0;
     public bool hitBylightning = false;
 
+    public int hitCounter = 0;
+    public bool stunned = false;
+    public float stunTimer = 3;
+
+
+
     #region RPC Methods
 
 

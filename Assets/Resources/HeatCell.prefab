@@ -313,10 +313,15 @@ MonoBehaviour:
   attackCooldown: 2
   splitCooldown: 0
   NumEnemiesLeft: 0
+  hitBylightning: 0
+  hitCounter: 0
+  stunned: 0
+  stunTimer: 3
   fireball: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
   Tier2Heat: {fileID: 106386, guid: c4230a3c412c0044bafc5ac2b753aaca, type: 2}
   Inheat: 0
   controller: {fileID: 0}
+  stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
 --- !u!114 &11476450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -639,6 +644,10 @@ Prefab:
       propertyPath: isMine
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: stun
+      value: 
+      objectReference: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174676}

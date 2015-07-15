@@ -237,6 +237,8 @@ MonoBehaviour:
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   gRevertHeatPrefab: {fileID: 0}
+  gRevertColdPrefab: {fileID: 0}
+  gRevertNervePrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: ac2c55435e17c3349bb9f9865c02885f, type: 3}
   health_50: {fileID: 21300000, guid: 405fb9a2dd0de9044a542c898df3d160, type: 3}
   health_100: {fileID: 21300000, guid: a4acf9dd95ac8f24ca0a81888b64cacd, type: 3}
@@ -265,6 +267,11 @@ MonoBehaviour:
   attackCooldown: 2
   splitCooldown: 0
   NumEnemiesLeft: 0
+  hitBylightning: 0
+  hitCounter: 0
+  stunned: 0
+  stunTimer: 3
+  stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
 --- !u!114 &11433158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -545,6 +552,10 @@ Prefab:
       propertyPath: ObservedComponents.Array.data[0]
       value: 
       objectReference: {fileID: 470922}
+    - target: {fileID: 0}
+      propertyPath: stun
+      value: 
+      objectReference: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181396}

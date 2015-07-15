@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b917dd87f75102345baa76cd1c67fa08
-timeCreated: 1434236410
+timeCreated: 1436982150
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -9,12 +9,20 @@ MonoImporter:
   - gStemCellPrefab: {instanceID: 0}
   - gHeatCellPrefab: {instanceID: 0}
   - gColdCellPrefab: {instanceID: 0}
+  - gColdCancerPrefab: {instanceID: 0}
   - gAcidicCellPrefab: {instanceID: 0}
   - gAlkaliCellPrefab: {instanceID: 0}
+  - gRevertHeatPrefab: {instanceID: 0}
+  - gRevertColdPrefab: {instanceID: 0}
+  - gRevertNervePrefab: {instanceID: 0}
+  - health_10: {instanceID: 0}
+  - health_50: {instanceID: 0}
+  - health_100: {instanceID: 0}
   - navAgent: {instanceID: 0}
   - navObstacle: {instanceID: 0}
   - primaryTarget: {instanceID: 0}
   - photonView: {instanceID: 0}
+  - stunthing: {fileID: 185946, guid: 94f64d3e5d5ad1140b76340e8c890d9a, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

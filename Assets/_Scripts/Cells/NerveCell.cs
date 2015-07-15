@@ -9,6 +9,8 @@ public class NerveCell : BaseCell
     public TakeDamage multidamagesources;
     public GameObject Lightning;
     float lightningSpeed = 1.0f;
+    public GameObject stun;
+    int instanonce = 0;
     void Start()
     {
         base.bStart();
