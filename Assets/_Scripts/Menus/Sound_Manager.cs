@@ -38,6 +38,7 @@ public class Sound_Manager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
         mute_button = GameObject.FindGameObjectWithTag("Mute_Button").GetComponent<Button>();
+        backGround_music.Play();
 	}
 
     void Update()
