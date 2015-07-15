@@ -119,7 +119,7 @@ public class OnlineGameController : Photon.PunBehaviour
         base.OnPhotonPlayerConnected(newPlayer);
         InitPlayer();
         SpawnPlayerUnits();
-    
+        Invoke("InitSync", 2.0f);
     }
 
     public void OnLeftRoom()
