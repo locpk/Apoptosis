@@ -43,7 +43,7 @@ public class Sound_Manager : MonoBehaviour {
 
     void Update()
     {
-        master_mixer.GetFloat("MasterVolume", out volume);
+      //  master_mixer.GetFloat("MasterVolume", out volume);
         if (volume > -39.0f) // if the vilume is unmuted
         {
          //   mute_button.om
