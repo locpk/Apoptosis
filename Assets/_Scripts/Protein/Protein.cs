@@ -73,10 +73,10 @@ public class Protein : MonoBehaviour {
         transform.localScale = new Vector3(scale, scale, 1.0f);
         if (value <= 0.0f)
         {
-            PhotonNetwork.Destroy(gameObject);
+            if (PhotonNetwork.connected)
+                PhotonNetwork.Destroy(gameObject);
+            else
+                Destroy(gameObject);
         }
     }
-
-
-   
 }
