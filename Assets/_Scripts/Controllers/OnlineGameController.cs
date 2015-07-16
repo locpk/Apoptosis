@@ -126,7 +126,7 @@ public class OnlineGameController : Photon.PunBehaviour
     {
         gameStarted = false;
         gameEnded = true;
-
+        PhotonNetwork.Disconnect();
         Application.LoadLevel("Multiplayer_Lobby");
     }
 
