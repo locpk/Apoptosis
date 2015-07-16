@@ -50,6 +50,28 @@ public class CancerCell : BaseCell
          }
          else
          {
+             if (targets != null && targets.Count > 1)
+             {
+
+                 if (primaryTarget == null)
+                 {
+                     for (int i = 0; i < targets.Count; i++)
+                     {
+
+                         if (i != targets.Count)
+                         {
+                             Debug.Log(primaryTarget);
+                             primaryTarget = targets[i + 1];
+                             Debug.Log(primaryTarget);
+                             if (primaryTarget.GetComponent<BaseCell>())
+                                 currentState = CellState.ATTACK;
+               
+                             break;
+                         }
+                     }
+                 }
+             }
+
              switch (currentState)
              {
                  case CellState.IDLE:

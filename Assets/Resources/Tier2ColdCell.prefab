@@ -55,7 +55,7 @@ GameObject:
   - 95: {fileID: 9556678}
   - 114: {fileID: 11410362}
   - 114: {fileID: 11432244}
-  - 114: {fileID: 11447472}
+  - 114: {fileID: 11421038}
   m_Layer: 0
   m_Name: Tier2ColdCell
   m_TagString: Unit
@@ -87,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182240}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 86.6560287, y: 2, z: -21.5058918}
+  m_LocalPosition: {x: 99.9291534, y: 2, z: -35.8792}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 451020}
@@ -216,6 +216,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5ec483df34dc84a988179bcb7fa7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11421038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e328a3310f8a0e84b98b86e7bd10f010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gCancerCellPrefab: {fileID: 0}
+  gStemCellPrefab: {fileID: 0}
+  gHeatCellPrefab: {fileID: 0}
+  gColdCellPrefab: {fileID: 0}
+  gColdCancerPrefab: {fileID: 0}
+  gAcidicCellPrefab: {fileID: 0}
+  gAlkaliCellPrefab: {fileID: 0}
+  gRevertHeatPrefab: {fileID: 0}
+  gRevertColdPrefab: {fileID: 0}
+  gRevertNervePrefab: {fileID: 0}
+  health_10: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
+  health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
+  health_100: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
+  currentLevel: 0
+  isSinglePlayer: 1
+  isMine: 1
+  isAlive: 1
+  isAIPossessed: 0
+  isDepleting: 0
+  isSelected: 0
+  celltype: 4
+  currentState: 0
+  navAgent: {fileID: 0}
+  navObstacle: {fileID: 0}
+  destination: {x: 0, y: 0, z: 0}
+  targets: []
+  primaryTarget: {fileID: 0}
+  photonView: {fileID: 0}
+  currentProtein: 250
+  fovRadius: 10
+  attackDamage: 10
+  attackRange: 4
+  defense: 25
+  depleteTimer: 0
+  depleteAmount: 3
+  attackCooldown: 0
+  splitCooldown: 0
+  NumEnemiesLeft: 0
+  hitBylightning: 0
+  hitCounter: 0
+  stunned: 0
+  stunTimer: 3
+  pcontroller: {fileID: 0}
+  stemCell: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
+  particles: {fileID: 107260, guid: ca765baf98f063844b4aed03a257a9fc, type: 2}
+  stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
 --- !u!114 &11432244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,62 +298,6 @@ MonoBehaviour:
   viewIdField: 0
   instantiationId: -1
   isRuntimeInstantiated: 0
---- !u!114 &11447472
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 182240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 311532db1f31d0a4381bf6233bcb6d6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gCancerCellPrefab: {fileID: 0}
-  gStemCellPrefab: {fileID: 0}
-  gHeatCellPrefab: {fileID: 0}
-  gColdCellPrefab: {fileID: 0}
-  gColdCancerPrefab: {fileID: 0}
-  gAcidicCellPrefab: {fileID: 0}
-  gAlkaliCellPrefab: {fileID: 0}
-  gRevertHeatPrefab: {fileID: 0}
-  gRevertColdPrefab: {fileID: 0}
-  gRevertNervePrefab: {fileID: 0}
-  health_10: {fileID: 0}
-  health_50: {fileID: 0}
-  health_100: {fileID: 0}
-  currentLevel: 0
-  isSinglePlayer: 1
-  isMine: 1
-  isAlive: 1
-  isAIPossessed: 0
-  isDepleting: 0
-  isSelected: 0
-  celltype: 4
-  currentState: 0
-  navAgent: {fileID: 0}
-  navObstacle: {fileID: 0}
-  destination: {x: 0, y: 0, z: 0}
-  targets: []
-  primaryTarget: {fileID: 0}
-  photonView: {fileID: 0}
-  currentProtein: 500
-  fovRadius: 4
-  attackDamage: 10
-  attackRange: 3
-  defense: 25
-  depleteTimer: 0
-  depleteAmount: 3
-  attackCooldown: 0
-  splitCooldown: 0
-  NumEnemiesLeft: 0
-  hitBylightning: 0
-  hitCounter: 0
-  stunned: 0
-  stunTimer: 3
-  stunthing: {fileID: 0}
-  stemCell: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-  particles: {fileID: 107260, guid: ca765baf98f063844b4aed03a257a9fc, type: 2}
 --- !u!114 &11453514
 MonoBehaviour:
   m_ObjectHideFlags: 1

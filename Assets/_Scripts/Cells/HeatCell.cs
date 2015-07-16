@@ -59,7 +59,7 @@ public class HeatCell : BaseCell
         {
             Vector3 trackingPos = this.transform.position;
             Quaternion trackingRot = this.transform.rotation;
-            
+
 
 
             GameObject kTier2Heat = Instantiate(Tier2Heat, trackingPos, trackingRot) as GameObject;
@@ -86,8 +86,8 @@ public class HeatCell : BaseCell
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
-        
-  
+
+
     }
 
     void MUltiDMg()
@@ -104,18 +104,20 @@ public class HeatCell : BaseCell
     {
 
     }
-    
+
     public void DamagePreSecond()
     {
-        previousTarget = primaryTarget;
-        Vector3 them2me = primaryTarget.transform.position - transform.position;
-        GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
-        thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
-        thefireball.GetComponent<FireBall>().Target = primaryTarget;
-        Debug.Log(thefireball.GetComponent<FireBall>().Target + " is my current target!!!");
-        thefireball.GetComponent<FireBall>().Owner = this.gameObject;
-        Debug.Log(thefireball.GetComponent<FireBall>().Owner + " is my current owner!!!");
-
+        if (primaryTarget.GetComponent<BaseCell>())
+        {
+            previousTarget = primaryTarget;
+            Vector3 them2me = primaryTarget.transform.position - transform.position;
+            GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
+            thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
+            thefireball.GetComponent<FireBall>().Target = primaryTarget;
+            Debug.Log(thefireball.GetComponent<FireBall>().Target + " is my current target!!!");
+            thefireball.GetComponent<FireBall>().Owner = this.gameObject;
+            Debug.Log(thefireball.GetComponent<FireBall>().Owner + " is my current owner!!!");
+        }
 
     }
 
@@ -158,6 +160,28 @@ public class HeatCell : BaseCell
             }
             else
             {
+                if (targets != null && targets.Count > 1)
+                {
+
+                    if (primaryTarget == null)
+                    {
+                        for(int i = 0; i < targets.Count; i++)
+                        {
+
+                            if (i != targets.Count)
+                            {
+                                Debug.Log(primaryTarget);
+                                primaryTarget = targets[i + 1];
+                                Debug.Log(primaryTarget);
+                                if (primaryTarget.GetComponent<BaseCell>())
+                                    currentState = CellState.ATTACK;
+                                if (primaryTarget.GetComponent<Protein>())
+                                    currentState = CellState.CONSUMING;
+                                break;
+                            }
+                        }
+                    }
+                }
                 switch (currentState)
                 {
                     case CellState.IDLE:
@@ -260,7 +284,7 @@ public class HeatCell : BaseCell
     //LateUpdate is called after all Update functions have been called
     void LateUpdate()
     {
-        
+
         base.bLateUpdate();
     }
 

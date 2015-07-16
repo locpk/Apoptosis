@@ -93,7 +93,7 @@ public class BaseCell : MonoBehaviour
     public bool stunned = false;
     public float stunTimer = 3;
 
-
+    public PlayerController pcontroller;
 
     #region RPC Methods
 
@@ -173,7 +173,7 @@ public class BaseCell : MonoBehaviour
     public void Die()
     {
         isMine = false;
-
+        isAlive = false;
         GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
 
 
@@ -524,6 +524,7 @@ public class BaseCell : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
         navObstacle = GetComponent<NavMeshObstacle>();
         navAgent.speed = moveSpeed;
+        pcontroller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
     }
 
     // Use this for initialization
@@ -533,7 +534,7 @@ public class BaseCell : MonoBehaviour
         navAgent.enabled = false;
         navAgent.updateRotation = false;
         navObstacle.enabled = true;
-
+        isAlive = true;
         if (!isMine && transform.tag != "Animation" && this.celltype != CellType.CANCER_CELL)
         {
 
@@ -544,6 +545,7 @@ public class BaseCell : MonoBehaviour
 
     protected void bUpdate()
     {
+   
         if (currentState == CellState.IDLE)
         {
 

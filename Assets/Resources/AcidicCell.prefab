@@ -271,6 +271,7 @@ MonoBehaviour:
   hitCounter: 0
   stunned: 0
   stunTimer: 3
+  pcontroller: {fileID: 0}
   stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
   Acid: {fileID: 138438, guid: 05a019986af7b5342a9e219e55d5149d, type: 2}
 --- !u!114 &11433158

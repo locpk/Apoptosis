@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111564}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -16.0599995, y: 0, z: -8.35999966}
+  m_LocalPosition: {x: 83.204689, y: 2, z: -30.4040508}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 428644}
@@ -246,6 +246,7 @@ MonoBehaviour:
   hitCounter: 0
   stunned: 0
   stunTimer: 3
+  pcontroller: {fileID: 0}
   DOT: {fileID: 151690, guid: ce2e7885672d3534ca16f22399068182, type: 2}
   stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
 --- !u!114 &11431862

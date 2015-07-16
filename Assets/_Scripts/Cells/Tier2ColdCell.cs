@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class Tier2Coldcell : BaseCell
+
+public class Tier2ColdCell : BaseCell
  {
     public GameObject stemCell;
     public delegate void TakeDamage();
