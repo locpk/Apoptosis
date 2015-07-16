@@ -12,7 +12,7 @@ public class OnlineGameController : Photon.PunBehaviour
 
     void Awake()
     {
-
+        Time.timeScale = 1.0f;
     }
 
     // Use this for initialization
@@ -66,6 +66,7 @@ public class OnlineGameController : Photon.PunBehaviour
     public void GameEnd()
     {
         gameEnded = true;
+        Time.timeScale = 0.0f;
     }
 
     //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -119,14 +120,14 @@ public class OnlineGameController : Photon.PunBehaviour
         base.OnPhotonPlayerConnected(newPlayer);
         InitPlayer();
         SpawnPlayerUnits();
-    
+        Invoke("InitSync", 2.0f);
     }
 
     public void OnLeftRoom()
     {
         gameStarted = false;
         gameEnded = true;
-
+        PhotonNetwork.Disconnect();
         Application.LoadLevel("Multiplayer_Lobby");
     }
 
@@ -151,7 +152,7 @@ public class OnlineGameController : Photon.PunBehaviour
         GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
-            PlayerControls.GetComponent<OnlinePlayerController>().AddNewCell(item.GetComponent<BaseCell>());
+            PlayerControls.GetComponent<PlayerController>().AddNewCell(item.GetComponent<BaseCell>());
         }
         tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
@@ -182,10 +183,10 @@ public class OnlineGameController : Photon.PunBehaviour
         object[] isSingleplayer = new object[1];
         isSingleplayer[0] = (bool)false;
         PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("StemCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer).GetComponent<BaseCell>());
-        if (PhotonNetwork.player.ID == 1)
-        {
-            PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("ColdCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer).GetComponent<BaseCell>());
-        }
+        //if (false/*PhotonNetwork.player.ID == 1*/)
+        //{
+        //    PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("ColdCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer).GetComponent<BaseCell>());
+        //}
     }
 
     void Rematch()

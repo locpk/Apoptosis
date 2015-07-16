@@ -61,10 +61,7 @@ public class StemCell : BaseCell
         }
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        stream.Serialize(ref currentProtein);
-    }
+
 
     void MUltiDMg()
     {
@@ -106,13 +103,6 @@ public class StemCell : BaseCell
                 sound_manager.sounds_attacks[3].Play();
             }
         }
-    }
-
-    [PunRPC]
-    void ApplyDamage(int damage)
-    {
-        currentProtein -= damage;
-        GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
     }
 
     public override void Attack(GameObject _target)
@@ -167,7 +157,7 @@ public class StemCell : BaseCell
             case CellState.ATTACK:
 
                 float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
-                Debug.Log(distance);
+                
                 if (distance > attackRange && distance <= fovRadius)
                 {
                     if (IsInvoking("DamagePerSecond"))

@@ -167,6 +167,10 @@ public class Menu : MonoBehaviour {
         {
             return;
         }
+        if (Input.touchSupported)
+        {
+            Application.Quit(); 
+        }
         System.Diagnostics.Process.GetCurrentProcess().Kill();
       
     }
