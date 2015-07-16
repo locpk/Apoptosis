@@ -59,7 +59,7 @@ GameObject:
   - 114: {fileID: 11406754}
   - 114: {fileID: 11469932}
   - 114: {fileID: 11467484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StemCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -1602,7 +1602,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Radius

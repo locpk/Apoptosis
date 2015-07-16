@@ -37,7 +37,7 @@ GameObject:
   - 114: {fileID: 11454132}
   - 114: {fileID: 11463738}
   - 95: {fileID: 9519400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tier2HeatCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -157,6 +157,7 @@ MonoBehaviour:
   depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
+  NumEnemiesLeft: 0
   fireball: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
   hasteTimer: 0
   stemCell: {fileID: 0}
@@ -388,6 +389,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 9163f774d67e2fb4eab229fabb71f127, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 152348}

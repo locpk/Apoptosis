@@ -21,7 +21,7 @@ GameObject:
   - 114: {fileID: 11430816}
   - 114: {fileID: 11412058}
   - 95: {fileID: 9583442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ColdCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -492,7 +492,7 @@ Prefab:
       objectReference: {fileID: 149900, guid: 054778e6ee0a8c1429b6cbf3bf479fc2, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x

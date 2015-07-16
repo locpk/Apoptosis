@@ -72,8 +72,12 @@ public class ProteinSpawnerController : MonoBehaviour {
         }
         Quaternion spwanAngle = Quaternion.identity;;
         spwanAngle.eulerAngles = new Vector3(90, 0, 0);
-        for (int i = 0; i < spawnPositionList.Count; i++ )
+        for (int i = 0; i < spawnPositionList.Count - 1; i++) {
+            
             currProtein = Instantiate(protein, spawnPositionList[i], spwanAngle) as Protein;
+            currProtein.transform.parent = transform.parent;
+        }
+        Debug.Log(testcases + " cases.");
     }
 
 }

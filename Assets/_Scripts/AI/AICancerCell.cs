@@ -4,7 +4,7 @@ using System.Collections;
 public class AICancerCell : MonoBehaviour {
 
     private float m_visionRange;
-    private RaycastHit[] m_cellsInSight;
+    private Collider[] m_cellsInSight;
     private CancerCell m_cancerCell;
     private delegate void RandomSpliting();
     RandomSpliting dele_randomSet;
@@ -31,10 +31,10 @@ public class AICancerCell : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-        m_cellsInSight = Physics.SphereCastAll(transform.position, m_visionRange, transform.forward);
+        m_cellsInSight = Physics.OverlapSphere(transform.position, m_visionRange);
         bool targetFound = false;
-        foreach (RaycastHit hitInfo in m_cellsInSight) {
-            if (hitInfo.collider.gameObject.tag == "Unit" || hitInfo.collider.gameObject.tag == "EnemyCell") {
+        foreach (Collider hitInfo in m_cellsInSight) {
+            if (hitInfo.gameObject.tag == "Unit" || hitInfo.gameObject.tag == "EnemyCell") {
                 dele_randomSet -= RandomMove;
                 dele_randomSet -= RandomSplit;
 

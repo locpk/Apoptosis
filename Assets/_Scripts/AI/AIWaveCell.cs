@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class AIWaveCell : MonoBehaviour {
 
     private float m_visionRange;
-    private RaycastHit[] m_cellsInSight;
+    private Collider[] m_cellsInSight;
     private BaseCell m_baseCell;
 
     public Transform spawnPointOwner;
@@ -13,6 +13,8 @@ public class AIWaveCell : MonoBehaviour {
     private int currentWaypoint;
     private float m_movingSpeed;
     private float m_attackSpeed;
+
+    private LayerMask unitLayerMask;
 
     void Awake() {
         switch (GetComponent<BaseCell>().celltype) {
@@ -47,6 +49,8 @@ public class AIWaveCell : MonoBehaviour {
         m_waypointList = new List<Transform>();
 
         m_visionRange = GetComponent<BaseCell>().fovRadius;
+
+        unitLayerMask = 1 << LayerMask.NameToLayer("Unit");
     }
 
 	void Start () {
@@ -54,27 +58,24 @@ public class AIWaveCell : MonoBehaviour {
         m_baseCell.isMine = false;
         m_baseCell.isAIPossessed = false;
         m_baseCell.tag = "EnemyCell";
+        m_baseCell.gameObject.layer = LayerMask.NameToLayer("EnemyCell");
         //m_baseCell.SetSpeed(m_baseCell.navAgent.speed * .5f);
         m_movingSpeed = m_baseCell.navAgent.speed * 1.5f;
         m_attackSpeed = m_baseCell.navAgent.speed * .5f;
         m_baseCell.currentState = CellState.IDLE;
         if (GetComponent<FogOfWarHider>() == null) gameObject.AddComponent<FogOfWarHider>();
-        if (GetComponent<FogOfWarViewer>()) Destroy(GetComponent<FogOfWarViewer>());
+        if (GetComponent<FogOfWarViewer>() != null) Destroy(GetComponent<FogOfWarViewer>());
 	}
 	
 	void FixedUpdate () {
         if (m_waypointList.Count <= 0) {
             spawnPointOwner.GetComponentsInChildren<Transform>(m_waypointList);
             GotoNextPoint();
-        }
-
-        m_cellsInSight = Physics.SphereCastAll(transform.position, m_visionRange, transform.forward);
-        bool targetFound = false;
-        foreach (RaycastHit hitInfo in m_cellsInSight) {
-            if (hitInfo.collider.gameObject.tag == "Unit") {
-                if (m_baseCell.navAgent.speed >= m_attackSpeed) m_baseCell.SetSpeed(m_attackSpeed);
-
-
+        } else {
+            m_cellsInSight = Physics.OverlapSphere(transform.position, m_visionRange, unitLayerMask);
+            bool targetFound = false;
+            foreach (Collider hitInfo in m_cellsInSight) {
+                if (m_baseCell.navAgent.speed > m_attackSpeed) m_baseCell.SetSpeed(m_attackSpeed);
                 targetFound = true;
                 if (Vector3.Distance(transform.position, hitInfo.transform.position) > m_baseCell.attackRange) {
                     m_baseCell.primaryTarget = null;
@@ -87,19 +88,16 @@ public class AIWaveCell : MonoBehaviour {
                     }
                 }
                 break;
-            } else {
-                if (m_baseCell.navAgent.speed <= m_movingSpeed) {
-                    m_baseCell.SetSpeed(m_movingSpeed);
-                }
-                
-                
+            }
+
+            if (!targetFound && m_baseCell.navAgent.speed < m_movingSpeed) {
+                m_baseCell.SetSpeed(m_movingSpeed);
+            }
+
+            if (!targetFound && m_baseCell.navAgent.isOnNavMesh) {
+                if (m_baseCell.navAgent.remainingDistance < m_baseCell.navAgent.radius) GotoNextPoint();
             }
         }
-
-        if (!targetFound && m_baseCell.navAgent.isOnNavMesh) {
-            if (m_baseCell.navAgent.remainingDistance < 0.5f) GotoNextPoint();
-        }
-
 	}
 
     void GotoNextPoint() {

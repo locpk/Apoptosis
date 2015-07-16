@@ -5,9 +5,10 @@ using System.Collections.Generic;
 public class AITrapCell : MonoBehaviour{
 
     private float m_visionRange;
-    private RaycastHit[] m_cellsInSight;
+    private Collider[] m_cellsInSight;
     private BaseCell m_baseCell;
 
+    private LayerMask unitLayerMask;
 
     void Awake () {
         switch (GetComponent<BaseCell>().celltype) {
@@ -40,12 +41,14 @@ public class AITrapCell : MonoBehaviour{
         }
 
         m_visionRange = GetComponent<BaseCell>().fovRadius;
+        unitLayerMask = 1 << LayerMask.NameToLayer("Unit");
     }
 
     void Start() {
         m_baseCell.isMine = false;
         m_baseCell.isAIPossessed = false;
         m_baseCell.tag = "EnemyCell";
+        m_baseCell.gameObject.layer = LayerMask.NameToLayer("EnemyCell");
         m_baseCell.SetSpeed(m_baseCell.navAgent.speed * .5f);
         m_baseCell.currentState = CellState.IDLE;
         if (GetComponent<FogOfWarHider>() == null) gameObject.AddComponent<FogOfWarHider>();
@@ -53,26 +56,24 @@ public class AITrapCell : MonoBehaviour{
     }
 
     void FixedUpdate() {
-        m_cellsInSight = Physics.SphereCastAll(transform.position, m_visionRange, transform.forward);
+        m_cellsInSight = Physics.OverlapSphere(transform.position, m_visionRange, unitLayerMask);
         bool targetFound = false;
-        foreach (RaycastHit hitInfo in m_cellsInSight) {
-            if (hitInfo.collider.gameObject.tag == "Unit") {
-                if (IsInvoking("RandomMove")) {
-                    CancelInvoke("RandomMove");
-                }
-                targetFound = true;
-                if (Vector3.Distance(transform.position, hitInfo.transform.position) > m_baseCell.attackRange) {
-                    m_baseCell.primaryTarget = null;
-                    m_baseCell.Move(hitInfo.transform.position);
-
-                } else {
-                    if (m_baseCell.primaryTarget == null) {
-                        m_baseCell.primaryTarget = hitInfo.transform.gameObject;
-                        m_baseCell.currentState = CellState.ATTACK;
-                    }
-                }
-                break;
+        foreach (Collider hitInfo in m_cellsInSight) {
+            if (IsInvoking("RandomMove")) {
+                CancelInvoke("RandomMove");
             }
+            targetFound = true;
+            if (Vector3.Distance(transform.position, hitInfo.transform.position) > m_baseCell.attackRange) {
+                m_baseCell.primaryTarget = null;
+                m_baseCell.Move(hitInfo.transform.position);
+
+            } else {
+                if (m_baseCell.primaryTarget == null) {
+                    m_baseCell.primaryTarget = hitInfo.transform.gameObject;
+                    m_baseCell.currentState = CellState.ATTACK;
+                }
+            }
+            break;
         }
         if (!targetFound) {
             m_baseCell.currentState = CellState.IDLE;
@@ -83,8 +84,9 @@ public class AITrapCell : MonoBehaviour{
 
     }
 
-    void LateUpdate() {
-        
+    void RandomMove() {
+        Vector3 _des = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+        m_baseCell.Move(_des + transform.position);
     }
 
     void OnDrawGizmosSelected() {
@@ -94,8 +96,5 @@ public class AITrapCell : MonoBehaviour{
 		}
     }
 
-    void RandomMove() {
-        Vector3 _des = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
-        m_baseCell.Move(_des + transform.position);
-    }
+
 }
