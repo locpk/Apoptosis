@@ -18,6 +18,7 @@ public class Lighting : MonoBehaviour
     {
         realOwner = realOwner.gameObject;
         currentTarget = realOwner.GetComponent<BaseCell>().primaryTarget;
+        transform.LookAt(currentTarget.transform);
     }
 
     // Update is called once per frame
@@ -27,6 +28,7 @@ public class Lighting : MonoBehaviour
         {
             Vector3 them2me = currentTarget.transform.position - transform.position;
             GetComponent<Rigidbody>().velocity += them2me.normalized * speed;
+            transform.LookAt(currentTarget.transform);
         }
     }
 
@@ -38,8 +40,10 @@ public class Lighting : MonoBehaviour
         {
 
             currentTarget.GetComponent<BaseCell>().currentProtein -= realOwner.GetComponent<BaseCell>().attackDamage;
+            currentTarget.GetComponent<BaseCell>().stunned = true;
+            currentTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
             bounceCounter++;
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, bounceRadius);
+            Collider[] hitColliders = Physics.OverlapSphere (transform.position, bounceRadius);
             for (int i = 0; i < hitColliders.Length; i++)
             {
 
@@ -57,15 +61,6 @@ public class Lighting : MonoBehaviour
                 if (nextTarget == currentTarget || nextTarget == previousTarget ||  nextTarget.GetComponent<BaseCell>().hitBylightning == true)
                 {
                     nextTarget = null;
-                   // for (int j = i + 1; i < targetsToBounce.Count; j++)
-                   // {
-                   //     previousTarget = nextTarget;
-                   //     nextTarget = targetsToBounce[j];
-                   //     if (nextTarget == null)
-                   //     { }
-                   //     break;
-                   // }
-
                 }
                 break;
             }
@@ -73,6 +68,7 @@ public class Lighting : MonoBehaviour
             {
                 previousTarget = currentTarget;
                 currentTarget = nextTarget;
+
             }
 
 
@@ -88,27 +84,3 @@ public class Lighting : MonoBehaviour
         }
     }
 }
-
-//     if (nextTarget != null)
-//     {
-//         if (nextTarget == previousTarget)
-//         {
-//             Destroy(this.gameObject);
-//             Destroy(this);
-//
-//         }
-//         currentTarget = nextTarget;
-//         Vector3 them2me = currentTarget.transform.position - transform.position;
-//         GetComponent<Rigidbody>().velocity += them2me.normalized * speed;
-//     }
-//
-//
-//     if (bounceCounter >= 4 || targetsToBounce.Count == 0 || nextTarget == null)
-//     {
-//         Destroy(this.gameObject);
-//     }
-//
-// }
-
-
-

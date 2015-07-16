@@ -73,7 +73,7 @@ GameObject:
   - 114: {fileID: 11402092}
   - 95: {fileID: 9565508}
   - 114: {fileID: 11470052}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: NerveCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ MonoBehaviour:
   isMine: 1
   isAlive: 1
   isAIPossessed: 0
-  isDepleting: 1
+  isDepleting: 0
   isSelected: 0
   celltype: 8
   currentState: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   primaryTarget: {fileID: 0}
   photonView: {fileID: 0}
   currentProtein: 500
-  fovRadius: 10
+  fovRadius: 6
   attackDamage: 10
   attackRange: 7
   defense: 15
@@ -288,7 +288,11 @@ MonoBehaviour:
   splitCooldown: 0
   NumEnemiesLeft: 0
   hitBylightning: 0
+  hitCounter: 0
+  stunned: 0
+  stunTimer: 3
   Lightning: {fileID: 192010, guid: 3b858b04fa9bb6246ae91b903c94d5fe, type: 2}
+  stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
 --- !u!114 &11470052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -494,17 +498,9 @@ Prefab:
       value: 
       objectReference: {fileID: 158558, guid: 78a1cb68570c129478ecef74bd6e9d13, type: 2}
     - target: {fileID: 0}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: fovRadius
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: isDepleting
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: stun
+      value: 
+      objectReference: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 170144}

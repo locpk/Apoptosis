@@ -21,7 +21,7 @@ GameObject:
   - 114: {fileID: 11431862}
   - 95: {fileID: 9525432}
   - 114: {fileID: 11495496}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: AlkaliCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111564}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -16.0599995, y: 0, z: -8.35999966}
+  m_LocalPosition: {x: 83.204689, y: 2, z: -30.4040508}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 428644}
@@ -222,7 +222,7 @@ MonoBehaviour:
   isMine: 1
   isAlive: 1
   isAIPossessed: 0
-  isDepleting: 1
+  isDepleting: 0
   isSelected: 0
   celltype: 6
   currentState: 0
@@ -243,7 +243,12 @@ MonoBehaviour:
   splitCooldown: 0
   NumEnemiesLeft: 0
   hitBylightning: 0
+  hitCounter: 0
+  stunned: 0
+  stunTimer: 3
+  pcontroller: {fileID: 0}
   DOT: {fileID: 151690, guid: ce2e7885672d3534ca16f22399068182, type: 2}
+  stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
 --- !u!114 &11431862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -517,17 +522,13 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
+      propertyPath: stun
+      value: 
+      objectReference: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
     - target: {fileID: 0}
       propertyPath: DOT
       value: 
       objectReference: {fileID: 151690, guid: ce2e7885672d3534ca16f22399068182, type: 2}
-    - target: {fileID: 0}
-      propertyPath: isDepleting
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 111564}

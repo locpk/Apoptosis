@@ -25,12 +25,14 @@ public class Dot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y, (Target.transform.position.z + Target.GetComponent<SphereCollider>().radius / 4));
-        if (!IsInvoking("DotEffect"))
+        if (Target != null)
         {
-            InvokeRepeating("DotEffect", 1.0f, 1.0f);
+            transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y, (Target.transform.position.z + Target.GetComponent<SphereCollider>().radius + .75f));
+            if (!IsInvoking("DotEffect"))
+            {
+                InvokeRepeating("DotEffect", 1.0f, 1.0f);
 
+            }
         }
         timer += 1* Time.fixedDeltaTime;
         if(timer >= 3)

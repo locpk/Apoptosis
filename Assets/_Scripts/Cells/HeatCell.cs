@@ -15,7 +15,8 @@ public class HeatCell : BaseCell
     public bool Inheat;
     public PlayerController controller;
     GameObject previousTarget;
-
+    public GameObject stun;
+    int instanonce = 0;
 
 
     public void Merge()
@@ -58,7 +59,7 @@ public class HeatCell : BaseCell
         {
             Vector3 trackingPos = this.transform.position;
             Quaternion trackingRot = this.transform.rotation;
-            
+
 
 
             GameObject kTier2Heat = Instantiate(Tier2Heat, trackingPos, trackingRot) as GameObject;
@@ -85,8 +86,8 @@ public class HeatCell : BaseCell
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
-        
-  
+
+
     }
 
     void MUltiDMg()
@@ -103,18 +104,20 @@ public class HeatCell : BaseCell
     {
 
     }
-    
+
     public void DamagePreSecond()
     {
-        previousTarget = primaryTarget;
-        Vector3 them2me = primaryTarget.transform.position - transform.position;
-        GameObject thefireball = PhotonNetwork.connected ? PhotonNetwork.Instantiate("fireball", transform.position, transform.rotation, 0) as GameObject : Instantiate(fireball, transform.position, transform.rotation) as GameObject;
-        thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
-        thefireball.GetComponent<FireBall>().Target = primaryTarget;
-        Debug.Log(thefireball.GetComponent<FireBall>().Target + " is my current target!!!");
-        thefireball.GetComponent<FireBall>().Owner = this.gameObject;
-        Debug.Log(thefireball.GetComponent<FireBall>().Owner + " is my current owner!!!");
+        if (primaryTarget.GetComponent<BaseCell>())
+        {
+            previousTarget = primaryTarget;
+            Vector3 them2me = primaryTarget.transform.position - transform.position;
+            GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
+            thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
+            thefireball.GetComponent<FireBall>().Target = primaryTarget;
 
+            thefireball.GetComponent<FireBall>().Owner = this.gameObject;
+       
+        }
 
     }
 
@@ -129,93 +132,138 @@ public class HeatCell : BaseCell
     // Update is called once per frame
     void Update()
     {
-        if (isAIPossessed)
+        if (stunned == true)
         {
-            transform.position = new Vector3(transform.position.x + .00100f, 0, transform.position.z + .00100f); 
+            if (instanonce < 1)
+            {
+                Vector3 trackingPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+                GameObject.Instantiate(stun, trackingPos, transform.rotation);
+            }
+            instanonce++;
+
+            stunTimer -= 1 * Time.fixedDeltaTime;
+            if (this.stunTimer <= 0)
+            {
+                instanonce = 0;
+                // Destroy(stun.gameObject);
+                this.stunTimer = 3;
+                this.stunned = false;
+                this.hitCounter = 0;
+
+            }
         }
         else
         {
-            switch (currentState)
+            if (isAIPossessed)
             {
-                case CellState.IDLE:
-                    SetPrimaryTarget(null);
-                    if (IsInvoking("DamagePreSecond"))
-                    {
-                        CancelInvoke("DamagePreSecond");
-                    }
-                    //System.Collections.Generic.List<GameObject> enemyUnits = GameObjectManager.FindAIUnits();
-                    //if (enemyUnits != null)
-                    //{
-                    //    for (int i = 0; i < enemyUnits.Count; i++)
-                    //    {
-                    //        if (Vector3.Distance(enemyUnits[i].transform.position, transform.position) <= fovRadius)
-                    //        {
-                    //            if (enemyUnits[i] != this.gameObject)
-                    //            {
-                    //                Attack(enemyUnits[i]);
-                    //            }
-                    //            break;
-
-                    //        }
-                    //    }
-                    //}
-
-                    break;
-                case CellState.ATTACK:
-                    if (primaryTarget != null)
-                    {
-                        if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
-                        {
-                            if (!IsInvoking("DamagePreSecond"))
-                            {
-                                InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
-
-                            }
-                        }
-
-                        else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
-                        {
-                            if (IsInvoking("DamagePreSecond"))
-                            {
-                                CancelInvoke("DamagePreSecond");
-                            }
-                            if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
-                            {
-                                base.ChaseTarget();
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        currentState = CellState.IDLE;
-                    }
-                    break;
-                case CellState.CONSUMING:
-                    base.bUpdate();
-                    break;
-                case CellState.MOVING:
-                    if (IsInvoking("DamagePreSecond"))
-                    {
-                        CancelInvoke("DamagePreSecond");
-                    }
-                    base.bUpdate();
-                    break;
-                case CellState.ATTACK_MOVING:
-                    if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
-                    {
-                        currentState = CellState.IDLE;
-                    }
-                    break;
-                case CellState.DEAD:
-                    base.Die();
-                    break;
-
-                default:
-                    break;
+                transform.position = new Vector3(transform.position.x + .00100f, 0, transform.position.z + .00100f);
             }
-            if (mergePartner != null)
-                MergingTheCells(mergePartner);
+            else
+            {
+                if (targets != null && targets.Count > 1)
+                {
+
+                    if (primaryTarget == null)
+                    {
+                        for(int i = 0; i < targets.Count; i++)
+                        {
+
+                            if (i != targets.Count)
+                            {
+                                Debug.Log(primaryTarget);
+                                primaryTarget = targets[i + 1];
+                                Debug.Log(primaryTarget);
+                                if (primaryTarget.GetComponent<BaseCell>())
+                                    currentState = CellState.ATTACK;
+                                if (primaryTarget.GetComponent<Protein>())
+                                    currentState = CellState.CONSUMING;
+                                break;
+                            }
+                        }
+                    }
+                }
+                switch (currentState)
+                {
+                    case CellState.IDLE:
+                        SetPrimaryTarget(null);
+                        if (IsInvoking("DamagePreSecond"))
+                        {
+                            CancelInvoke("DamagePreSecond");
+                        }
+                        //System.Collections.Generic.List<GameObject> enemyUnits = GameObjectManager.FindAIUnits();
+                        //if (enemyUnits != null)
+                        //{
+                        //    for (int i = 0; i < enemyUnits.Count; i++)
+                        //    {
+                        //        if (Vector3.Distance(enemyUnits[i].transform.position, transform.position) <= fovRadius)
+                        //        {
+                        //            if (enemyUnits[i] != this.gameObject)
+                        //            {
+                        //                Attack(enemyUnits[i]);
+                        //            }
+                        //            break;
+
+                        //        }
+                        //    }
+                        //}
+
+                        break;
+                    case CellState.ATTACK:
+                        if (primaryTarget != null)
+                        {
+                            if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
+                            {
+                                if (!IsInvoking("DamagePreSecond"))
+                                {
+                                    InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
+
+                                }
+                            }
+
+                            else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                            {
+                                if (IsInvoking("DamagePreSecond"))
+                                {
+                                    CancelInvoke("DamagePreSecond");
+                                }
+                                if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
+                                {
+                                    base.ChaseTarget();
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            currentState = CellState.IDLE;
+                        }
+                        break;
+                    case CellState.CONSUMING:
+                        base.bUpdate();
+                        break;
+                    case CellState.MOVING:
+                        if (IsInvoking("DamagePreSecond"))
+                        {
+                            CancelInvoke("DamagePreSecond");
+                        }
+                        base.bUpdate();
+                        break;
+                    case CellState.ATTACK_MOVING:
+                        if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+                        {
+                            currentState = CellState.IDLE;
+                        }
+                        break;
+                    case CellState.DEAD:
+                        base.Die();
+                        break;
+
+                    default:
+                        break;
+                }
+                if (mergePartner != null)
+                    MergingTheCells(mergePartner);
+            }
         }
     }
 
@@ -236,7 +284,7 @@ public class HeatCell : BaseCell
     //LateUpdate is called after all Update functions have been called
     void LateUpdate()
     {
-        
+
         base.bLateUpdate();
     }
 

@@ -11,7 +11,8 @@ public class ColdCell : BaseCell
     public bool InCold;
     public PlayerController controller;
     public GameObject Tier2Cold;
-
+    public GameObject stun;
+    int instanonce = 0;
 
     void Awake()
     {
@@ -130,77 +131,121 @@ public class ColdCell : BaseCell
     // Update is called once per frame
     void Update()
     {
-        switch (currentState)
+        if (stunned == true)
         {
-            case CellState.IDLE:
-                //         Guarding();
-                break;
-            case CellState.ATTACK:
-                if (primaryTarget != null)
-                {
-                    if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
-                    {
-                        if (!IsInvoking("DamagePreSecond"))
-                        {
-                            InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
+            if (instanonce < 1)
+            {
+                Vector3 trackingPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+                GameObject.Instantiate(stun, trackingPos, transform.rotation);
+            }
+            instanonce++;
 
-                        }
-                    }
-                    else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
-                    {
-                        if (IsInvoking("DamagePreSecond"))
-                        {
-                            CancelInvoke("DamagePreSecond");
-                        }
-                        if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
-                        {
-                            base.ChaseTarget();
-                        }
-                    }
+            stunTimer -= 1 * Time.fixedDeltaTime;
+            if (this.stunTimer <= 0)
+            {
+                instanonce = 0;
+                // Destroy(stun.gameObject);
+                this.stunTimer = 3;
+                this.stunned = false;
+                this.hitCounter = 0;
 
-                }
-                else
-                {
-                    currentState = CellState.IDLE;
-                }
-                break;
-            case CellState.MOVING:
-                base.bUpdate();
-                if (primaryTarget != null)
-                {
-                    if (primaryTarget.GetComponent<BaseCell>())
-                    {
-                        currentState = CellState.ATTACK;
-                    }
-                    else if (primaryTarget.GetComponent<Protein>())
-                    {
-                        currentState = CellState.CONSUMING;
-                    }
-
-                }
-
-                break;
-            case CellState.ATTACK_MOVING:
-                //  if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
-                //  {
-                //      currentState = CellState.IDLE;
-                //  }
-                break;
-            case CellState.CONSUMING:
-                base.bUpdate();
-                break;
-            case CellState.DEAD:
-                base.Die();
-                break;
-
-            default:
-                break;
-
+            }
         }
-        if (mergingPartner != null)
-            MergingTheCells(mergingPartner);
-    }
+        else
+        {
+            if (targets != null && targets.Count > 1)
+            {
 
+                if (primaryTarget == null)
+                {
+                    for (int i = 0; i < targets.Count; i++)
+                    {
+
+                        if (i != targets.Count)
+                        {
+                            Debug.Log(primaryTarget);
+                            primaryTarget = targets[i + 1];
+                            Debug.Log(primaryTarget);
+                            if (primaryTarget.GetComponent<BaseCell>())
+                                currentState = CellState.ATTACK;
+                            if (primaryTarget.GetComponent<Protein>())
+                                currentState = CellState.CONSUMING;
+                            break;
+                        }
+                    }
+                }
+            }
+            switch (currentState)
+            {
+                case CellState.IDLE:
+                    //         Guarding();
+                    break;
+                case CellState.ATTACK:
+                    if (primaryTarget != null)
+                    {
+                        if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
+                        {
+                            if (!IsInvoking("DamagePreSecond"))
+                            {
+                                InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
+
+                            }
+                        }
+                        else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                        {
+                            if (IsInvoking("DamagePreSecond"))
+                            {
+                                CancelInvoke("DamagePreSecond");
+                            }
+                            if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
+                            {
+                                base.ChaseTarget();
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        currentState = CellState.IDLE;
+                    }
+                    break;
+                case CellState.MOVING:
+                    base.bUpdate();
+                    if (primaryTarget != null)
+                    {
+                        if (primaryTarget.GetComponent<BaseCell>())
+                        {
+                            currentState = CellState.ATTACK;
+                        }
+                        else if (primaryTarget.GetComponent<Protein>())
+                        {
+                            currentState = CellState.CONSUMING;
+                        }
+
+                    }
+
+                    break;
+                case CellState.ATTACK_MOVING:
+                    //  if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+                    //  {
+                    //      currentState = CellState.IDLE;
+                    //  }
+                    break;
+                case CellState.CONSUMING:
+                    base.bUpdate();
+                    break;
+                case CellState.DEAD:
+                    base.Die();
+                    break;
+
+                default:
+                    break;
+
+            }
+            if (mergingPartner != null)
+                MergingTheCells(mergingPartner);
+        }
+    }
 
 
     //LateUpdate is called after all Update functions have been called

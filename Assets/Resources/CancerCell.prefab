@@ -16,7 +16,7 @@ GameObject:
   - 208: {fileID: 20889860}
   - 95: {fileID: 9584532}
   - 114: {fileID: 11442412}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CancerCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 151272}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 68.5100021, y: 1, z: -47.1899986}
+  m_LocalPosition: {x: 90.1769943, y: 1, z: -22.0447407}
   m_LocalScale: {x: .699999988, y: .699999988, z: 1}
   m_Children:
   - {fileID: 425682}
@@ -223,7 +223,7 @@ MonoBehaviour:
   primaryTarget: {fileID: 0}
   photonView: {fileID: 0}
   currentProtein: 500
-  fovRadius: 10
+  fovRadius: 0
   attackDamage: 5
   attackRange: 1.5
   defense: 10
@@ -233,6 +233,10 @@ MonoBehaviour:
   splitCooldown: 0
   NumEnemiesLeft: 0
   hitBylightning: 0
+  hitCounter: 0
+  stunned: 0
+  stunTimer: 3
+  stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
 --- !u!135 &13511518
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -240,7 +244,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 151272}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .930000007
@@ -356,12 +360,8 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: fovRadius
-      value: 10
+      propertyPath: stun
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
