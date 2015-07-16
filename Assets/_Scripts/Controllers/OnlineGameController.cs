@@ -12,7 +12,7 @@ public class OnlineGameController : Photon.PunBehaviour
 
     void Awake()
     {
-
+        Time.timeScale = 1.0f;
     }
 
     // Use this for initialization
@@ -66,6 +66,7 @@ public class OnlineGameController : Photon.PunBehaviour
     public void GameEnd()
     {
         gameEnded = true;
+        Time.timeScale = 0.0f;
     }
 
     //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

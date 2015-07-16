@@ -141,7 +141,7 @@ public class StemCell : BaseCell
             case CellState.ATTACK:
 
                 float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
-                Debug.Log(distance);
+                
                 if (distance > attackRange && distance <= fovRadius)
                 {
                     if (IsInvoking("DamagePerSecond"))
