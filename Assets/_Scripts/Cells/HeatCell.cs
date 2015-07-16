@@ -60,9 +60,9 @@ public class HeatCell : BaseCell
             Quaternion trackingRot = this.transform.rotation;
             
             // sound evolution
-            if (!sound_manager.sounds_evolution[4].isPlaying)
+            if (!sound_manager.sounds_evolution[5].isPlaying)
             {
-             sound_manager.sounds_evolution[4].Play();
+             sound_manager.sounds_evolution[5].Play();
               
             }
 
@@ -97,7 +97,11 @@ public class HeatCell : BaseCell
     void MUltiDMg()
     {
         multidamagesources();
+        if (!sound_manager.sounds_miscellaneous[6].isPlaying)
+        {
+            sound_manager.sounds_miscellaneous[6].Play();
 
+        }
     }
 
     public void AreaDamage()
@@ -120,7 +124,10 @@ public class HeatCell : BaseCell
         thefireball.GetComponent<FireBall>().Owner = this.gameObject;
         Debug.Log(thefireball.GetComponent<FireBall>().Owner + " is my current owner!!!");
         // play the sound
-
+        if (!sound_manager.sounds_attacks[0].isPlaying)
+        {
+            sound_manager.sounds_attacks[0].Play();
+        }
     }
 
 

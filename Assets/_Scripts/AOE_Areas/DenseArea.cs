@@ -8,8 +8,11 @@ public class DenseArea : BaseArea {
     public float speedCoefficient = 0.2f;
     private float enterCellSpeed;
 
+    private Sound_Manager sound_manager;
+
 	public override void Awake() {
         base.Awake();
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
     }
 
@@ -41,6 +44,11 @@ public class DenseArea : BaseArea {
             enterCellSpeed = enterCell.navAgent.speed;
             enterCell.navAgent.speed *= speedCoefficient;
 
+            if (!sound_manager.sounds_miscellaneous[4].isPlaying)
+            {
+                sound_manager.sounds_miscellaneous[4].Play();
+               
+            }
             //switch (enterCell.celltype) {
             //    case CellType.STEM_CELL:
             //        break;
@@ -74,6 +82,11 @@ public class DenseArea : BaseArea {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
             enterCell.navAgent.speed = enterCellSpeed;
+            if (!sound_manager.sounds_miscellaneous[5].isPlaying)
+            {
+                sound_manager.sounds_miscellaneous[5].Play();
+
+            }
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL:

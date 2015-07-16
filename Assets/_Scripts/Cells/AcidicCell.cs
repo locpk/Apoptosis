@@ -21,9 +21,9 @@ public class AcidicCell : BaseCell
         {
             primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
             primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
-            if (!sound_manager.sounds_attacks[0].isPlaying)
+            if (!sound_manager.sounds_attacks[2].isPlaying)
             {
-                sound_manager.sounds_attacks[0].Play();
+                sound_manager.sounds_attacks[2].Play();
 
             }
         }
@@ -31,7 +31,11 @@ public class AcidicCell : BaseCell
     void MUltiDMg()
     {
         multidamagesources();
+        if (!sound_manager.sounds_miscellaneous[6].isPlaying)
+        {
+            sound_manager.sounds_miscellaneous[6].Play();
 
+        }
     }
     public void AreaDamage()
     {

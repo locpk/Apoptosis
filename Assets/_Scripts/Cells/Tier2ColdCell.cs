@@ -7,6 +7,7 @@ public class Tier2ColdCell : BaseCell
     public GameObject stemCell;
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
+    private Sound_Manager sound_manager;
     // Use this for initialization
     void Start()
     {
@@ -30,11 +31,18 @@ public class Tier2ColdCell : BaseCell
         base.bAwake();
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+
 
     }
     void MUltiDMg()
     {
         multidamagesources();
+        if (!sound_manager.sounds_miscellaneous[6].isPlaying)
+        {
+            sound_manager.sounds_miscellaneous[6].Play();
+
+        }
 
     }
     public void AreaDamage()

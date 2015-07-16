@@ -12,6 +12,7 @@ public class ColdCell : BaseCell
     public PlayerController controller;
     public GameObject Tier2Cold;
 
+    private Sound_Manager sound_manager;
 
     void Awake()
     {
@@ -19,11 +20,17 @@ public class ColdCell : BaseCell
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
     }
     void MUltiDMg()
     {
         multidamagesources();
+        if (!sound_manager.sounds_miscellaneous[6].isPlaying)
+        {
+            sound_manager.sounds_miscellaneous[6].Play();
+
+        }
     }
     public void AreaDamage()
     {
@@ -78,6 +85,8 @@ public class ColdCell : BaseCell
         float distance = Vector3.Distance(this.transform.position, other.transform.position);
         if (distance <= GetComponent<SphereCollider>().radius * 2.0f)
         {
+     
+            
             Vector3 trackingPos = this.transform.position;
             Quaternion trackingRot = this.transform.rotation;
             GameObject cTier2Cold = Instantiate(Tier2Cold, trackingPos, trackingRot) as GameObject;
@@ -86,6 +95,14 @@ public class ColdCell : BaseCell
             cTier2Cold.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
             cTier2Cold.GetComponent<CellSplitAnimation>().originCell = this;
             cTier2Cold.GetComponent<CellSplitAnimation>().originCell1 = other;
+
+            // play the evolution noise
+            if (sound_manager.sounds_evolution[6].isPlaying)
+            {
+                 sound_manager.sounds_evolution[6].Play();  
+            }
+            
+            
             Deactive();
             other.Deactive();
 
@@ -108,6 +125,11 @@ public class ColdCell : BaseCell
         {
             AoeDmg(transform.position, attackRange);
             primaryTarget.GetComponent<BaseCell>().currentProtein -= (attackDamage / primaryTarget.GetComponent<BaseCell>().defense);
+
+            if (!sound_manager.sounds_attacks[1].isPlaying)
+            {
+                sound_manager.sounds_attacks[1].Play();
+            }
         }
     }
 
@@ -236,7 +258,12 @@ public class ColdCell : BaseCell
                 {
                     basecellerino.currentProtein -= (attackDamage / basecellerino.defense);
                 }
-
+                // play sound 
+                if (!sound_manager.sounds_attacks[i].isPlaying)
+                {
+                     sound_manager.sounds_attacks[1].Play();
+          
+                }
             }
         }
     }

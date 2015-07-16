@@ -13,6 +13,9 @@ public class Tier2HeatCell : BaseCell
     bool hasteActive = false;
     public float hasteTimer = 0.0f;
     public GameObject stemCell;
+
+    private Sound_Manager sound_manager;
+
     void Start()
     {
         base.bStart();
@@ -27,7 +30,11 @@ public class Tier2HeatCell : BaseCell
             thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
             thefireball.GetComponent<FireBall>().Target = primaryTarget;
             thefireball.GetComponent<FireBall>().Owner = this.gameObject;
-
+            
+            if (!sound_manager.sounds_attacks[0].isPlaying)
+            {
+                sound_manager.sounds_attacks[0].Play();
+            }
         }
     }
     void HasteDamagePreSecond()
@@ -41,6 +48,10 @@ public class Tier2HeatCell : BaseCell
             thefireball.GetComponent<FireBall>().Target = primaryTarget;
             thefireball.GetComponent<FireBall>().Owner = this.gameObject;
 
+            if (!sound_manager.sounds_attacks[0].isPlaying)
+            {
+                sound_manager.sounds_attacks[0].Play();
+            }
         }
     }
 
@@ -165,11 +176,17 @@ public class Tier2HeatCell : BaseCell
         base.bAwake();
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
     }
     void MUltiDMg()
     {
         multidamagesources();
+        if (!sound_manager.sounds_miscellaneous[6].isPlaying)
+        {
+            sound_manager.sounds_miscellaneous[6].Play();
+
+        }
 
     }
     public void AreaDamage()

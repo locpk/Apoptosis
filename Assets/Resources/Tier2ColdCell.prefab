@@ -265,6 +265,7 @@ MonoBehaviour:
   attackCooldown: 1
   splitCooldown: 0
   NumEnemiesLeft: 0
+  hitBylightning: 0
   InCold: 0
   controller: {fileID: 0}
   Tier2Cold: {fileID: 0}
