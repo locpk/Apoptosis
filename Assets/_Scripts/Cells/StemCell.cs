@@ -66,15 +66,12 @@ public class StemCell : BaseCell
     void MUltiDMg()
     {
         multidamagesources();
-        if (!sound_manager.sounds_miscellaneous[6].isPlaying)
-        {
-            sound_manager.sounds_miscellaneous[6].Play();
-
-        }
+    
     }
     public void AreaDamage()
     {
         currentProtein -= 10;
+ 
     }
     void nothing()
     {

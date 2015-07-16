@@ -17,7 +17,7 @@ public class Sound_Manager : MonoBehaviour {
     public float highPitchRange = 1.0f;
     private float volume = 0.0f;
 
-    Button mute_button; // used for displaying mute, unmute
+   private Button mute_button; // used for displaying mute, unmute
 
     public List<AudioSource> sounds_evolution;
     public List<AudioSource> sounds_attacks;

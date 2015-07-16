@@ -8,9 +8,11 @@ public class HeatArea : BaseArea {
     public float speedCoefficient = 1.5f;
     private float enterCellSpeed;
 
+    private Sound_Manager sound_manager;
+
 	public override void Awake() {
         base.Awake();
-
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
 
 	public override void Start () {
@@ -41,9 +43,16 @@ public class HeatArea : BaseArea {
             if (!enterCell) return;
             enterCellSpeed = enterCell.navAgent.speed;
 
+            if ((!sound_manager.sounds_miscellaneous[6].isPlaying && enterCell.celltype != CellType.HEAT_CELL) || (!sound_manager.sounds_miscellaneous[6].isPlaying && enterCell.celltype != CellType.HEAT_CELL_TIRE2))
+            {
+                sound_manager.sounds_miscellaneous[6].Play();
+            }
+            
+
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL:
                     enterCell.navAgent.speed *= speedCoefficient;
+                    
                     break;
 
                 case CellType.HEAT_CELL:

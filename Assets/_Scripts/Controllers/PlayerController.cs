@@ -79,7 +79,14 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
 
-  
+
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>(); // gets the sound sources
+        winScreen = GameObject.FindGameObjectWithTag("Win_Screen");
+        loseScreen = GameObject.FindGameObjectWithTag("Lose_Screen");
+
+        winScreen.SetActive(false);
+        loseScreen.SetActive(false);
+      
 
         // Initialize variables
         selectedTargets.Clear();
@@ -114,10 +121,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>(); // gets the sound sources
-        winScreen = GameObject.FindGameObjectWithTag("Win_Screen");
-        loseScreen = GameObject.FindGameObjectWithTag("Lose_Screen");
-       
 
     public void ToggleSelecting()
     {
@@ -502,7 +505,7 @@ public class PlayerController : MonoBehaviour
             GUI.EndGroup();
         }
 
-    
+   
 
     }
 
@@ -511,16 +514,20 @@ public class PlayerController : MonoBehaviour
         CheckSelectedUnits();
         CheckEnemiesLeft();
 
-        GameObject touchButton = GameObject.Find("Touch") as GameObject;
-        if (isSelecting)
-        {
-            touchButton.GetComponent<Button>().image.color = touchButton.GetComponent<Button>().colors.pressedColor;
-    }
-        else
-        {
-            touchButton.GetComponent<Button>().image.color = touchButton.GetComponent<Button>().colors.normalColor;
-        }
+    //    GameObject touchButton = GameObject.Find("Touch") as GameObject;
+    //    if (isSelecting)
+    //    {
+    //        touchButton.GetComponent<Button>().image.color = touchButton.GetComponent<Button>().colors.pressedColor;
+    //    }
+    //    else
+    //    {
+    //        touchButton.GetComponent<Button>().image.color = touchButton.GetComponent<Button>().colors.normalColor;
+    //    }
 
+        if (allSelectableUnits.Count == 0) // is the player has no more units, he lost the game
+        {
+            Show_LoseScreen();
+        }
 
         if (selectedUnits.Count == 0)
         {
@@ -561,10 +568,7 @@ public class PlayerController : MonoBehaviour
                 {
                     case TouchPhase.Began:
 
-        if (allSelectableUnits.Count == 0) // is the player has no more units, he lost the game
-        {
-            Show_LoseScreen();
-        }
+   
 
 
         int i = 0;
@@ -937,11 +941,19 @@ public class PlayerController : MonoBehaviour
     void Show_WinningScreen()
     {
         winScreen.SetActive(true);
+
         if (!sound_manager.win_music.isPlaying)
         {
             sound_manager.win_music.Play();
         }
-        winScreen.GetComponent<Image>().enabled = true;
+        winScreen.GetComponentInChildren<Image>().enabled = true;
+        Image[] test = winScreen.GetComponentsInChildren<Image>();
+
+        foreach (Image img in test)
+        {
+            img.enabled = true;
+        
+        }
     }
     void Show_LoseScreen()
     { 
@@ -952,6 +964,14 @@ public class PlayerController : MonoBehaviour
             sound_manager.lose_music.Play();
         }
         loseScreen.GetComponentInChildren<Image>().enabled = true;
+        
+        Image[] test = loseScreen.GetComponentsInChildren<Image>();
+
+        foreach (Image img in test)
+        {
+            img.enabled = true;
+
+        }
     }
 
 } // end of script 

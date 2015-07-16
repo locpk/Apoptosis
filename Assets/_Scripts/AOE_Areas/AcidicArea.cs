@@ -10,9 +10,11 @@ public class AcidicArea : BaseArea {
 
     public GameObject acidicButton;
 
+    private Sound_Manager sound_manager;
+
 	public override void Awake() {
         base.Awake();
-
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
 
 	public override void Start () {
@@ -41,6 +43,12 @@ public class AcidicArea : BaseArea {
         if (collider.gameObject.tag == "Unit") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
+
+            if (!sound_manager.sounds_miscellaneous[6].isPlaying && enterCell.celltype != CellType.ACIDIC_CELL)
+            {
+                sound_manager.sounds_miscellaneous[6].Play();
+            }
+            
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL: {
