@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 
 
 
@@ -60,6 +61,8 @@ public class PlayerController : MonoBehaviour
     // 2. Unit Splits
     // 3. Unit Dies
 
+    private GameObject winScreen;
+    private GameObject loseScreen;
 
     float fps;
 
@@ -88,9 +91,9 @@ public class PlayerController : MonoBehaviour
                     allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
                 }
             }
-            
-        }
 
+        }
+        
         tmpArr.Clear();
         tmpArr = GameObjectManager.FindAllUnits(); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
@@ -113,7 +116,10 @@ public class PlayerController : MonoBehaviour
         }
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>(); // gets the sound sources
-    }
+        winScreen = GameObject.FindGameObjectWithTag("Win_Screen");
+        loseScreen = GameObject.FindGameObjectWithTag("Lose_Screen");
+       
+    }   
 
 
     public void AddNewCell(BaseCell _in)
@@ -404,11 +410,11 @@ public class PlayerController : MonoBehaviour
             GUI.Box(new Rect(400, 0, 75, 60), "Nerve Cells: ");
             GUI.Label(new Rect(435, 35, 50, 50), NumNerveCells.ToString());
 
-            GUI.Box(new Rect(490, 0, 75, 60), "Tier 2\nHeat Cells: ");
-            GUI.Label(new Rect(525, 35, 50, 50), NumTierTwoHeat.ToString());
+            GUI.Box(new Rect(500, 0, 75, 60), "Tier 2\nHeat Cells: ");
+            GUI.Label(new Rect(535, 35, 50, 50), NumTierTwoHeat.ToString());
 
-            GUI.Box(new Rect(570, 0, 75, 60), "Tier 2\nCold Cells: ");
-            GUI.Label(new Rect(605, 35, 50, 50), NumTierTwoCold.ToString());
+            GUI.Box(new Rect(580, 0, 75, 60), "Tier 2\nCold Cells: ");
+            GUI.Label(new Rect(615, 35, 50, 50), NumTierTwoCold.ToString());
 
             GUI.Box(new Rect(690, 0, 75, 60), "Enemies\nLeft: ");
             GUI.Label(new Rect(725, 35, 50, 50), NumEnemiesLeft.ToString());
@@ -455,6 +461,12 @@ public class PlayerController : MonoBehaviour
         selectedTargets.RemoveAll(item => item == null);
         allSelectableTargets.RemoveAll(item => item == null);
 
+        if (allSelectableUnits.Count == 0) // is the player has no more units, he lost the game
+        {
+            Show_LoseScreen();
+        }
+
+
         int i = 0;
         while (i < selectedUnits.Count)
         {
@@ -479,30 +491,30 @@ public class PlayerController : MonoBehaviour
         //Vector3 topleft = new Vector3(GUISelectRect.xMin, GUISelectRect.yMin, Camera.main.transform.position.z);
         //Vector3 bottomright = new Vector3(GUISelectRect.xMax, GUISelectRect.yMin, Camera.main.transform.position.z);
 
-        if (Input.GetKeyDown(KeyCode.D)) // If the player presses D
+        if (Input.GetKeyDown(KeyCode.S)) // If the player presses S (Split)
         {
             UnitSplit();
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) // If the player presses 1
+        if (Input.GetKeyDown(KeyCode.D)) // If the player presses D (Devolve)
         {
             UnitRevert();
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Q)) // If the player presses Q
+        if (Input.GetKeyDown(KeyCode.M)) // If the player presses M (Merge)
         {
             UnitMerge();
 
         }
 
-        if (Input.GetKeyDown(KeyCode.S)) // If the player presses S
+        if (Input.GetKeyDown(KeyCode.Space)) // If the player presses Space (Stop)
         {
             UnitStop();
         }
 
-        if (Input.GetKeyDown(KeyCode.C)) // If the player presses C
+        if (Input.GetKeyDown(KeyCode.E)) // If the player presses E (Evolve)
         {
             EventManager.Evolve(CellType.ACIDIC_CELL);
 
@@ -668,6 +680,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (enemies.Count == 0) // if there are no enemies left, the player has won the game
+        {
+            Show_WinningScreen();
+        }
 
         NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.STEM_CELL).Count;
         NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.HEAT_CELL).Count;
@@ -678,4 +694,25 @@ public class PlayerController : MonoBehaviour
         NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.COLD_CELL_TIRE2).Count;
         NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.NERVE_CELL).Count;
     }
-}
+
+    void Show_WinningScreen()
+    {
+        winScreen.SetActive(true);
+        if (!sound_manager.win_music.isPlaying)
+        {
+            sound_manager.win_music.Play();
+        }
+        winScreen.GetComponent<Image>().enabled = true;
+    }
+    void Show_LoseScreen()
+    { 
+    
+        loseScreen.SetActive(true);
+        if (!sound_manager.lose_music.isPlaying)
+        {
+            sound_manager.lose_music.Play();
+        }
+        loseScreen.GetComponentInChildren<Image>().enabled = true;
+    }
+
+} // end of script 

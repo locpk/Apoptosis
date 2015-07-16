@@ -23,6 +23,9 @@ public class Sound_Manager : MonoBehaviour {
     public List<AudioSource> sounds_attacks;
     public List<AudioSource> sounds_miscellaneous;
 
+    public AudioSource win_music;
+    public AudioSource lose_music;
+    
 	// Use this for initialization
 	void Start ()
     {
