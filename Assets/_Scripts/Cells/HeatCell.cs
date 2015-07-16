@@ -16,7 +16,7 @@ public class HeatCell : BaseCell
     public PlayerController controller;
     GameObject previousTarget;
 
-
+    private Sound_Manager sound_manager;
 
     public void Merge()
     {
@@ -59,7 +59,12 @@ public class HeatCell : BaseCell
             Vector3 trackingPos = this.transform.position;
             Quaternion trackingRot = this.transform.rotation;
             
-
+            // sound evolution
+            if (!sound_manager.sounds_evolution[4].isPlaying)
+            {
+             sound_manager.sounds_evolution[4].Play();
+              
+            }
 
             GameObject kTier2Heat = Instantiate(Tier2Heat, trackingPos, trackingRot) as GameObject;
             kTier2Heat.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
@@ -85,7 +90,7 @@ public class HeatCell : BaseCell
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
-        
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
   
     }
 
@@ -114,7 +119,7 @@ public class HeatCell : BaseCell
         Debug.Log(thefireball.GetComponent<FireBall>().Target + " is my current target!!!");
         thefireball.GetComponent<FireBall>().Owner = this.gameObject;
         Debug.Log(thefireball.GetComponent<FireBall>().Owner + " is my current owner!!!");
-
+        // play the sound
 
     }
 
