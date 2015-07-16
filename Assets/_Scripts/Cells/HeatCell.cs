@@ -114,9 +114,9 @@ public class HeatCell : BaseCell
             GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
             thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
             thefireball.GetComponent<FireBall>().Target = primaryTarget;
-            Debug.Log(thefireball.GetComponent<FireBall>().Target + " is my current target!!!");
+
             thefireball.GetComponent<FireBall>().Owner = this.gameObject;
-            Debug.Log(thefireball.GetComponent<FireBall>().Owner + " is my current owner!!!");
+       
         }
 
     }

@@ -39,10 +39,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471d131ae0e64404b9eb047dfc59791e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movePin: {fileID: 165000, guid: f77dcc63e9f32e946a614abcc9575a63, type: 2}
-  attackPin: {fileID: 142206, guid: c9ae0278b5093004d9dc07422c77a8e3, type: 2}
+  movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
+  attackPin: {fileID: 0}
+  moveWaypoint: {fileID: 110900, guid: 669611cb87dffa74cad959c741ccb043, type: 2}
+  moveWaypoints: []
+  isSelecting: 1
+  NumStemCells: 0
+  NumHeatCells: 0
+  NumColdCells: 0
+  NumAcidicCells: 0
+  NumAlkaliCells: 0
+  NumNerveCells: 0
+  NumTierTwoCold: 0
+  NumTierTwoHeat: 0
+  NumEnemiesLeft: 0
   allSelectableUnits: []
   selectedUnits: []
+  allSelectableTargets: []
+  selectedTargets: []
   selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
 --- !u!1001 &100100000
 Prefab:
@@ -50,7 +64,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: movePin
+      value: 
+      objectReference: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
+    - target: {fileID: 0}
+      propertyPath: attackPin
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: moveLine
+      value: 
+      objectReference: {fileID: 131778, guid: 4d38e6475c4ce624396cf97c5edad811, type: 2}
+    - target: {fileID: 0}
+      propertyPath: moveWaypoint
+      value: 
+      objectReference: {fileID: 110900, guid: 669611cb87dffa74cad959c741ccb043, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 139960}

@@ -22,7 +22,7 @@ public class EvolveButtonController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void FixedUpdate ()
     {
         //if (heatButton.GetActive()
         //    && coldButton.GetActive()
