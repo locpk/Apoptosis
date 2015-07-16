@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class SinglePlayerSpawner_Level_1 : MonoBehaviour {
 
+    public Transform wavesCollection;
     public List<Transform> enermyCellSet;
     public List<Transform> spawnAreas;
     public List<float> spawningWavesInTime;         // in sec, total 8 waves
@@ -57,6 +58,7 @@ public class SinglePlayerSpawner_Level_1 : MonoBehaviour {
         //BaseCell baseReadySpawnCell = enermyCellSet[cellId].gameObject.GetComponent<BaseCell>();
 
         Transform spawnedCell = Instantiate(enermyCellSet[cellId], spawnPos, spwanAngle) as Transform;
+        spawnedCell.parent = wavesCollection.transform;
         
         if (spawnedCell) {
             spawnedCell.gameObject.AddComponent<AIWaveCell>();
@@ -75,7 +77,7 @@ public class SinglePlayerSpawner_Level_1 : MonoBehaviour {
                     m_spawnedList.Add(spawnedCell.gameObject.GetComponent<Tier2HeatCell>());
                     break;
                 case CellType.COLD_CELL_TIRE2:
-                    //m_spawnedList.Add(spawnedCell.gameObject.GetComponent<Tier2ColdCell>());
+                    m_spawnedList.Add(spawnedCell.gameObject.GetComponent<Tier2ColdCell>());
                     break;
                 case CellType.ACIDIC_CELL:
                     m_spawnedList.Add(spawnedCell.gameObject.GetComponent<AcidicCell>());

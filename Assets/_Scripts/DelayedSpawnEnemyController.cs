@@ -46,30 +46,11 @@ public class DelayedSpawnEnemyController : MonoBehaviour {
             spwanAngle.eulerAngles = new Vector3(90, 0, 0);
 
             Transform spawnedCell = Instantiate(enermyCellSet[Random.Range(0, enermyCellSet.Count)], spawnPos, spwanAngle) as Transform;
+            spawnedCell.transform.parent = transform.parent;
             Debug.Log(spawnedCell.gameObject.GetComponent<BaseCell>().celltype + " alive!!");
 
             if (spawnedCell) {
-                //switch (spawnedCell.GetComponent<BaseCell>().celltype) {
-                //    case CellType.HEAT_CELL:
-                //        spawnedCell.gameObject.AddComponent<AITrapCell>();
-                //        break;
-                //    case CellType.COLD_CELL:
-                //        break;
-                //    case CellType.HEAT_CELL_TIRE2:
-                //        break;
-                //    case CellType.COLD_CELL_TIRE2:
-                //        break;
-                //    case CellType.ACIDIC_CELL:
-                //        break;
-                //    case CellType.ALKALI_CELL:
-                //        break;
-                //    case CellType.CANCER_CELL:
-                //        break;
-                //    case CellType.NERVE_CELL:
-                //        break;
-                //    default:
-                //        break;
-                //}
+
                 spawnedCell.gameObject.AddComponent<AITrapCell>();
 
                 m_spawnedList.Add(spawnedCell);

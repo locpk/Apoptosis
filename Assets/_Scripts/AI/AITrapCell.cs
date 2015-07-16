@@ -22,7 +22,7 @@ public class AITrapCell : MonoBehaviour{
                 m_baseCell = GetComponent<Tier2HeatCell>();
                 break;
             case CellType.COLD_CELL_TIRE2:
-                //m_baseCell = GetComponent<Tier2HeatCell>();
+                m_baseCell = GetComponent<Tier2ColdCell>();
                 break;
             case CellType.ACIDIC_CELL:
                 m_baseCell = GetComponent<AcidicCell>();

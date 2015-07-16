@@ -204,11 +204,11 @@ Material:
       data:
         first:
           name: _AlphaCutoff
-        second: .500010014
+        second: .5
       data:
         first:
           name: _AlphaCutoff_2
-        second: .500010014
+        second: .5
     m_Colors:
       data:
         first:
