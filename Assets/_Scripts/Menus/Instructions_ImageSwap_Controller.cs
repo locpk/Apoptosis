@@ -50,8 +50,9 @@ public class Instructions_ImageSwap_Controller : MonoBehaviour
             case 2:
                 canvas.GetComponent<Image>().sprite = Controls_Sprite;
                 break;
-
-
+            case 3:
+                Application.LoadLevel("Tutorial_Level");
+                break;
             default:
                 starting_page = 0;
                 Application.LoadLevel("MainMenu");
