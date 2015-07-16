@@ -523,7 +523,7 @@ public class BaseCell : MonoBehaviour
         {
             gameObject.AddComponent<FogOfWarViewer>();
         }
-        else
+        else if (!isMine && isAIPossessed)
         {
             gameObject.AddComponent<FogOfWarHider>();
 

@@ -12,7 +12,14 @@ public class FogOfWarHider : MonoBehaviour {
 
 	public void Rebuild () { m_update = true; }
 
-	void Awake() { m_trans = transform; }
+    void Awake() 
+    {
+        m_trans = transform;
+        if (gameObject.tag != "Protein")
+        {
+            gameObject.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().material.color = Color.red;
+        }
+    }
 	void LateUpdate() {
         if (m_nextUpdate < Time.time) {
             UpdateNow();
