@@ -8,6 +8,7 @@ public class AcidicCell : BaseCell
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
     public GameObject stun;
+    public GameObject Acid;
     int instanonce = 0;
     void Awake()
     {
@@ -20,8 +21,13 @@ public class AcidicCell : BaseCell
     {
         if (primaryTarget != null)
         {
-            primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
-            primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+            GameObject kAcid = Instantiate(Acid, transform.position, transform.rotation) as GameObject;
+            kAcid.GetComponent<Acidd>().Target = primaryTarget;
+            kAcid.GetComponent<Acidd>().Owner = this.gameObject;
+            Vector3 them2me = kAcid.GetComponent<Acidd>().Target.transform.position - transform.position;
+            kAcid.GetComponent<Rigidbody>().velocity += them2me.normalized * kAcid.GetComponent<Acidd>().speed;
+           //.. primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+          //  primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
         }
     }
     void MUltiDMg()
@@ -80,7 +86,7 @@ public class AcidicCell : BaseCell
                         {
                             if (!IsInvoking("DamagePreSecond"))
                             {
-                                InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
+                                InvokeRepeating("DamagePreSecond", 1.0f, 3.0f);
 
                             }
                         }
