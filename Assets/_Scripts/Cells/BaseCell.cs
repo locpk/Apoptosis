@@ -87,7 +87,7 @@ public class BaseCell : MonoBehaviour
     public float splitCooldown;
 
     public int NumEnemiesLeft = 0;
-
+    public bool hitBylightning = false;
 
     #region RPC Methods
 

@@ -8,7 +8,7 @@ public class NerveCell : BaseCell
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
     public GameObject Lightning;
-    float lightningSpeed = 19.0f;
+    float lightningSpeed = 1.0f;
     void Start()
     {
         base.bStart();
@@ -38,11 +38,11 @@ public class NerveCell : BaseCell
     void DamagePreSecond()
     {
 
-        Vector3 them2me = primaryTarget.transform.position - transform.position;
+       // Vector3 them2me = primaryTarget.transform.position - transform.position;
         GameObject Lightningk = Instantiate(Lightning, transform.position, transform.rotation) as GameObject;
         //      Lightningk.GetComponent<Lighting>().transform.LookAt(primaryTarget.transform);
-        Lightningk.GetComponent<Rigidbody>().velocity += them2me.normalized * lightningSpeed;
-        Lightningk.GetComponent<Lighting>().Target = primaryTarget;
+        //6Lightningk.GetComponent<Rigidbody>().velocity += them2me.normalized * lightningSpeed;
+       Lightningk.GetComponent<Lighting>().currentTarget = primaryTarget;
         Lightningk.GetComponent<Lighting>().realOwner = this.gameObject;
         Lightningk.GetComponent<Lighting>().speed = lightningSpeed;
 
