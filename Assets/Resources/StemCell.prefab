@@ -60,7 +60,7 @@ GameObject:
   - 114: {fileID: 11469932}
   - 114: {fileID: 11467484}
   - 114: {fileID: 11430304}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StemCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -326,6 +326,7 @@ MonoBehaviour:
   attackCooldown: 2
   splitCooldown: 0
   NumEnemiesLeft: 0
+  hitBylightning: 0
   isInAcidic: 0
   isInAlkali: 0
   stemtoHeat: {fileID: 137274, guid: 996a46fa7705a134cbca9e2676ece137, type: 2}
@@ -1550,7 +1551,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ed94fef22ec7c92408aa52b78cc665c1, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: .552999973}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21259276
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1576,7 +1577,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: .627451003}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -1635,7 +1636,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Radius
@@ -1699,7 +1700,7 @@ Prefab:
       objectReference: {fileID: 190572, guid: 03026532dd50e414d91a085b722f86c6, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Color.a
-      value: .652999997
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: stemtoAlkali

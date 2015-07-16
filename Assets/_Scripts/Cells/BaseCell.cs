@@ -505,7 +505,8 @@ public class BaseCell : MonoBehaviour
         depleteTimer = DEPLETE_TIME;
         if (isSinglePlayer)
         {
-            GetComponent<PhotonView>().enabled = false;
+            //GameObject.Destroy(GetComponent<PhotonView>());
+            //GetComponent<PhotonView>().enabled = false;
             
         }
         else

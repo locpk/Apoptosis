@@ -49,6 +49,7 @@ GameObject:
   - 198: {fileID: 19800084}
   - 95: {fileID: 9583038}
   - 114: {fileID: 11420688}
+  - 114: {fileID: 11450304}
   m_Layer: 0
   m_Name: Protein
   m_TagString: Protein
@@ -182,6 +183,17 @@ MonoBehaviour:
   viewIdField: 0
   instantiationId: -1
   isRuntimeInstantiated: 0
+--- !u!114 &11450304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8bcb62798b3fc348993188e1f4a30fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11499318
 MonoBehaviour:
   m_ObjectHideFlags: 1

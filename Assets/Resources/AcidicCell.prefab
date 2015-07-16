@@ -54,7 +54,7 @@ GameObject:
   - 114: {fileID: 11478438}
   - 95: {fileID: 9553798}
   - 114: {fileID: 11407972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AcidicCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -237,6 +237,8 @@ MonoBehaviour:
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   gRevertHeatPrefab: {fileID: 0}
+  gRevertColdPrefab: {fileID: 0}
+  gRevertNervePrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: ac2c55435e17c3349bb9f9865c02885f, type: 3}
   health_50: {fileID: 21300000, guid: 405fb9a2dd0de9044a542c898df3d160, type: 3}
   health_100: {fileID: 21300000, guid: a4acf9dd95ac8f24ca0a81888b64cacd, type: 3}
@@ -245,7 +247,7 @@ MonoBehaviour:
   isMine: 1
   isAlive: 1
   isAIPossessed: 0
-  isDepleting: 0
+  isDepleting: 1
   isSelected: 0
   celltype: 5
   currentState: 0
@@ -256,7 +258,7 @@ MonoBehaviour:
   primaryTarget: {fileID: 0}
   photonView: {fileID: 0}
   currentProtein: 500
-  fovRadius: 2
+  fovRadius: 10
   attackDamage: 50
   attackRange: 1.5
   defense: 15
@@ -265,6 +267,7 @@ MonoBehaviour:
   attackCooldown: 2
   splitCooldown: 0
   NumEnemiesLeft: 0
+  hitBylightning: 0
 --- !u!114 &11433158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -545,6 +548,18 @@ Prefab:
       propertyPath: ObservedComponents.Array.data[0]
       value: 
       objectReference: {fileID: 470922}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fovRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isDepleting
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181396}

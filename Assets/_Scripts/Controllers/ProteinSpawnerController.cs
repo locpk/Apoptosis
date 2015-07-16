@@ -65,7 +65,7 @@ public class ProteinSpawnerController : MonoBehaviour {
                 count = 0;
                 testcases++;
                 if (testcases >= 10000) {
-                    Debug.LogError("MAX TEST CASE REACHED!!!");
+                   // Debug.LogError("MAX TEST CASE REACHED!!!");
                     break;
                 }
             } while (true);
@@ -76,8 +76,9 @@ public class ProteinSpawnerController : MonoBehaviour {
             
             currProtein = Instantiate(protein, spawnPositionList[i], spwanAngle) as Protein;
             currProtein.transform.parent = transform.parent;
+            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewProtein(currProtein);
         }
-        Debug.Log(testcases + " cases.");
+        //Debug.Log(testcases + " cases.");
     }
 
 }

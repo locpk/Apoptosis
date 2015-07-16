@@ -28,7 +28,7 @@ public class AIWaveCell : MonoBehaviour {
                 m_baseCell = GetComponent<Tier2HeatCell>();
                 break;
             case CellType.COLD_CELL_TIRE2:
-                //m_baseCell = GetComponent<Tier2HeatCell>();
+                m_baseCell = GetComponent<Tier2ColdCell>();
                 break;
             case CellType.ACIDIC_CELL:
                 m_baseCell = GetComponent<AcidicCell>();
@@ -56,7 +56,7 @@ public class AIWaveCell : MonoBehaviour {
 	void Start () {
         m_baseCell.navAgent.autoBraking = false;
         m_baseCell.isMine = false;
-        m_baseCell.isAIPossessed = false;
+        m_baseCell.isAIPossessed = true;
         m_baseCell.tag = "EnemyCell";
         m_baseCell.gameObject.layer = LayerMask.NameToLayer("EnemyCell");
         //m_baseCell.SetSpeed(m_baseCell.navAgent.speed * .5f);
@@ -65,6 +65,8 @@ public class AIWaveCell : MonoBehaviour {
         m_baseCell.currentState = CellState.IDLE;
         if (GetComponent<FogOfWarHider>() == null) gameObject.AddComponent<FogOfWarHider>();
         if (GetComponent<FogOfWarViewer>() != null) Destroy(GetComponent<FogOfWarViewer>());
+
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(this.GetComponent<BaseCell>());
 	}
 	
 	void FixedUpdate () {

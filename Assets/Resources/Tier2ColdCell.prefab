@@ -43,7 +43,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 416904}
   - 212: {fileID: 21245858}
-  - 114: {fileID: 11413442}
   - 195: {fileID: 19513160}
   - 54: {fileID: 5405316}
   - 135: {fileID: 13574008}
@@ -56,7 +55,8 @@ GameObject:
   - 95: {fileID: 9556678}
   - 114: {fileID: 11410362}
   - 114: {fileID: 11432244}
-  m_Layer: 0
+  - 114: {fileID: 11494020}
+  m_Layer: 8
   m_Name: Tier2ColdCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -216,58 +216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5ec483df34dc84a988179bcb7fa7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11413442
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 182240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d9072eca16e5ac4b8d3ed6ee1b47389, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gCancerCellPrefab: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
-  gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-  gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
-  gColdCellPrefab: {fileID: 149900, guid: 054778e6ee0a8c1429b6cbf3bf479fc2, type: 2}
-  gColdCancerPrefab: {fileID: 169166, guid: e157488d71bd50240afc0fa1528c42ea, type: 2}
-  gAcidicCellPrefab: {fileID: 0}
-  gAlkaliCellPrefab: {fileID: 0}
-  gRevertHeatPrefab: {fileID: 0}
-  gRevertColdPrefab: {fileID: 196526, guid: 33a86d00844360944a5e55cd994232b4, type: 2}
-  gRevertNervePrefab: {fileID: 0}
-  health_10: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
-  health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
-  health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
-  currentLevel: 0
-  isSinglePlayer: 1
-  isMine: 1
-  isAlive: 1
-  isAIPossessed: 0
-  isDepleting: 0
-  isSelected: 0
-  celltype: 4
-  currentState: 0
-  navAgent: {fileID: 0}
-  navObstacle: {fileID: 0}
-  destination: {x: 0, y: 0, z: 0}
-  targets: []
-  primaryTarget: {fileID: 0}
-  photonView: {fileID: 0}
-  currentProtein: 500
-  fovRadius: 3
-  attackDamage: 6
-  attackRange: 3
-  defense: 15
-  depleteTimer: 20
-  depleteAmount: 3
-  attackCooldown: 1
-  splitCooldown: 0
-  NumEnemiesLeft: 0
-  InCold: 0
-  controller: {fileID: 0}
-  Tier2Cold: {fileID: 0}
 --- !u!114 &11432244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -348,6 +296,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3277305bd7a2f03428631da060b500bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11494020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c478b4d07f64cd4290484795ab1b948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gCancerCellPrefab: {fileID: 0}
+  gStemCellPrefab: {fileID: 0}
+  gHeatCellPrefab: {fileID: 0}
+  gColdCellPrefab: {fileID: 0}
+  gColdCancerPrefab: {fileID: 0}
+  gAcidicCellPrefab: {fileID: 0}
+  gAlkaliCellPrefab: {fileID: 0}
+  gRevertHeatPrefab: {fileID: 0}
+  gRevertColdPrefab: {fileID: 196526, guid: 33a86d00844360944a5e55cd994232b4, type: 2}
+  gRevertNervePrefab: {fileID: 0}
+  health_10: {fileID: 0}
+  health_50: {fileID: 0}
+  health_100: {fileID: 0}
+  currentLevel: 0
+  isSinglePlayer: 1
+  isMine: 1
+  isAlive: 1
+  isAIPossessed: 0
+  isDepleting: 1
+  isSelected: 0
+  celltype: 4
+  currentState: 0
+  navAgent: {fileID: 0}
+  navObstacle: {fileID: 0}
+  destination: {x: 0, y: 0, z: 0}
+  targets: []
+  primaryTarget: {fileID: 0}
+  photonView: {fileID: 0}
+  currentProtein: 100
+  fovRadius: 10
+  attackDamage: 10
+  attackRange: 4
+  defense: 25
+  depleteTimer: 1
+  depleteAmount: 3
+  attackCooldown: 0
+  splitCooldown: 0
+  NumEnemiesLeft: 0
+  hitBylightning: 0
+  stemCell: {fileID: 0}
 --- !u!135 &13553500
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -497,6 +496,42 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: celltype
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isMine
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isDepleting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: currentProtein
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fovRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: defense
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: depleteTimer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

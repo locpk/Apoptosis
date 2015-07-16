@@ -23,7 +23,7 @@ GameObject:
   - 95: {fileID: 9583442}
   - 114: {fileID: 11453262}
   - 114: {fileID: 11494034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ColdCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -242,11 +242,11 @@ MonoBehaviour:
   health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
   health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
   currentLevel: 0
-  isSinglePlayer: 0
+  isSinglePlayer: 1
   isMine: 1
   isAlive: 1
   isAIPossessed: 0
-  isDepleting: 0
+  isDepleting: 1
   isSelected: 0
   celltype: 2
   currentState: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
   primaryTarget: {fileID: 0}
   photonView: {fileID: 0}
   currentProtein: 500
-  fovRadius: 3
+  fovRadius: 10
   attackDamage: 6
   attackRange: 3
   defense: 15
@@ -266,6 +266,7 @@ MonoBehaviour:
   attackCooldown: 1
   splitCooldown: 0
   NumEnemiesLeft: 0
+  hitBylightning: 0
   InCold: 0
   controller: {fileID: 0}
   Tier2Cold: {fileID: 142014, guid: 0b6cd8365c6173c43821731e16828aed, type: 2}
@@ -536,7 +537,7 @@ Prefab:
       objectReference: {fileID: 149900, guid: 054778e6ee0a8c1429b6cbf3bf479fc2, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
@@ -612,7 +613,15 @@ Prefab:
       objectReference: {fileID: 487196}
     - target: {fileID: 0}
       propertyPath: isSinglePlayer
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fovRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isDepleting
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

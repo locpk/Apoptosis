@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     public List<GameObject> moveWaypoints;
     public bool isSelecting = true;
-
+    GameObject touchButton;
 
     public int NumStemCells = 0;
     public int NumHeatCells = 0;
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
 
-  
+        touchButton = GameObject.Find("Touch");
 
         // Initialize variables
         selectedTargets.Clear();
@@ -99,7 +99,11 @@ public class PlayerController : MonoBehaviour
 
     public void AddNewCell(BaseCell _in)
     {
-        if (!_in.gameObject.GetPhotonView().isMine)
+        if (PhotonNetwork.connected && !_in.gameObject.GetPhotonView().isMine)
+        {
+            allSelectableTargets.Add(_in.gameObject);
+        }
+        else if (_in.isSinglePlayer && !_in.isMine)
         {
             allSelectableTargets.Add(_in.gameObject);
         }
@@ -115,7 +119,7 @@ public class PlayerController : MonoBehaviour
     public void AddNewProtein(Protein _in)
     {
         allSelectableTargets.Add(_in.gameObject);
-        selectedTargets.Add(_in.gameObject);
+       // selectedTargets.Add(_in.gameObject);
         CheckSelectedUnits();
     }
 
@@ -466,16 +470,15 @@ public class PlayerController : MonoBehaviour
         CheckSelectedUnits();
         CheckEnemiesLeft();
 
-        GameObject touchButton = GameObject.Find("Touch") as GameObject;
         if (isSelecting)
         {
-            touchButton.GetComponent<Button>().image.color = touchButton.GetComponent<Button>().colors.pressedColor;
+            touchButton.GetComponent<Button>().image.sprite = touchButton.GetComponent<Button>().spriteState.pressedSprite;
+
         }
         else
         {
-            touchButton.GetComponent<Button>().image.color = touchButton.GetComponent<Button>().colors.normalColor;
+            touchButton.GetComponent<Button>().image.sprite = touchButton.GetComponent<Button>().spriteState.disabledSprite;
         }
-
 
         if (selectedUnits.Count == 0)
         {
@@ -509,7 +512,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isOverUI && Time.timeScale > 0.0f)
         {
-            if (Input.touchCount == 1 && isSelecting)
+            if (Input.touchCount == 1 && isSelecting )
             {
                 Touch oneTouch = Input.GetTouch(0);
                 switch (oneTouch.phase)
@@ -855,25 +858,12 @@ public class PlayerController : MonoBehaviour
     {
         NumEnemiesLeft = 0;
 
+        List<GameObject> enemies = allSelectableTargets;
 
-        List<BaseCell> enemies = new List<BaseCell>();
+        enemies.RemoveAll(item => item.tag == "Protein");
 
-        foreach (GameObject item in allSelectableTargets)
-        {
-            if (item.tag == "Unit")
-            {
-                enemies.Add(item.GetComponent<BaseCell>());
-            }
-        }
+        NumEnemiesLeft = enemies.Count;
 
-
-        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.STEM_CELL).Count;
-        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.HEAT_CELL).Count;
-        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.COLD_CELL).Count;
-        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.ACIDIC_CELL).Count;
-        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.ALKALI_CELL).Count;
-        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.HEAT_CELL_TIRE2).Count;
-        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.COLD_CELL_TIRE2).Count;
-        NumEnemiesLeft += enemies.FindAll(item => item.celltype == CellType.NERVE_CELL).Count;
+        
     }
 }

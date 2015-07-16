@@ -16,14 +16,7 @@ public class Tier2ColdCell : BaseCell
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Alpha1) && isSelected)
-        {
-            Vector3 trackingPos = this.transform.position;
-            Quaternion trackingRot = this.transform.rotation;
-            Die();
-            GameObject gstem = Instantiate(stemCell, trackingPos, trackingRot) as GameObject;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(gstem.GetComponent<BaseCell>());
-        }
+        base.bUpdate();
     }
     void Awake()
     {

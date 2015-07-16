@@ -73,7 +73,7 @@ GameObject:
   - 114: {fileID: 11463738}
   - 95: {fileID: 9519400}
   - 114: {fileID: 11425470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tier2HeatCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ MonoBehaviour:
   isMine: 1
   isAlive: 1
   isAIPossessed: 0
-  isDepleting: 0
+  isDepleting: 1
   isSelected: 0
   celltype: 3
   currentState: 0
@@ -279,6 +279,7 @@ MonoBehaviour:
   attackCooldown: 2
   splitCooldown: 0
   NumEnemiesLeft: 0
+  hitBylightning: 0
   fireball: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
   hasteTimer: 0
   stemCell: {fileID: 0}
@@ -553,6 +554,14 @@ Prefab:
       propertyPath: ObservedComponents.Array.data[0]
       value: 
       objectReference: {fileID: 448348}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isDepleting
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 152348}

@@ -46,13 +46,15 @@ public class AITrapCell : MonoBehaviour{
 
     void Start() {
         m_baseCell.isMine = false;
-        m_baseCell.isAIPossessed = false;
+        m_baseCell.isAIPossessed = true;
         m_baseCell.tag = "EnemyCell";
         m_baseCell.gameObject.layer = LayerMask.NameToLayer("EnemyCell");
         m_baseCell.SetSpeed(m_baseCell.navAgent.speed * .5f);
         m_baseCell.currentState = CellState.IDLE;
         if (GetComponent<FogOfWarHider>() == null) gameObject.AddComponent<FogOfWarHider>();
         if (GetComponent<FogOfWarViewer>() != null) Destroy(GetComponent<FogOfWarViewer>());
+
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(this.GetComponent<BaseCell>());
     }
 
     void FixedUpdate() {
