@@ -35,7 +35,7 @@ public class ColdArea : BaseArea {
 
     
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.tag == "Unit") {
+        if (collider.gameObject.tag == "Unit" && collider.gameObject.tag == "EnemyCell") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
             enterCellSpeed = enterCell.navAgent.speed;
@@ -77,7 +77,7 @@ public class ColdArea : BaseArea {
     }
 
     void OnTriggerExit(Collider collider) {
-        if (collider.gameObject.tag == "Unit") {
+        if (collider.gameObject.tag == "Unit" && collider.gameObject.tag == "EnemyCell") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
             enterCell.navAgent.speed = enterCellSpeed;

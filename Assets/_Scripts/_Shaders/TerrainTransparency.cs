@@ -1,7 +1,7 @@
 using UnityEngine;
 using Random = System.Random;
 
-//[ExecuteInEditMode]
+[ExecuteInEditMode]
 public class TerrainTransparency : MonoBehaviour {
 	private bool disableBasemap = true;
 	private float alphaCutoff = .5f;

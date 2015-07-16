@@ -15,6 +15,7 @@ public class CancerCell : BaseCell
     // Use this for initialization
      void Start()
     {
+        base.bStart();
        if (isAIPossessed)
        {
            navAgent.enabled = false;

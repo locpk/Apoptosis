@@ -1,25 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class OptionsMenu : MonoBehaviour
 {
+
+     
     AudioSource volTest;
-    GameObject BGMVolSlider;
     GameObject SEVolSlider;
     GameObject FSToggle;
+    GameObject BGMVolSlider;
+
     Rect BGMBounds;
     Rect SEBounds;
     bool changed;
     byte[] configuration;
     System.IO.FileStream configFile;
 
-    void Awake()
-    {
-    }
+    public AudioMixer master_mixer;
 
     // Use this for initialization
     void Start()
     {
+        
+        
         BGMVolSlider = GameObject.Find("BGM_Vol_Slider");
         SEVolSlider = GameObject.Find("SE_Vol_Slider");
         FSToggle = GameObject.Find("FullScreen_Toggle");
@@ -58,54 +62,67 @@ public class OptionsMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FSToggle.GetActive() && Application.platform == RuntimePlatform.Android)
-        {
-            FSToggle.SetActive(false);
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (BGMBounds.Contains(Input.mousePosition))
-            {
-                volTest = BGMVolSlider.GetComponent<AudioSource>();
-                volTest.loop = true;
-                volTest.Play();
-            }
-            else if (SEBounds.Contains(Input.mousePosition))
-            {
-                volTest = SEVolSlider.GetComponent<AudioSource>();
-                volTest.loop = true;
-                volTest.Play();
-            }
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            volTest.loop = false;
-            changed = true;
-        }
+    
+        
+   //     if (Input.GetMouseButtonDown(0))
+   //     {
+   //         if (BGMBounds.Contains(Input.mousePosition))
+   //         {
+   //             volTest = BGMVolSlider.GetComponent<AudioSource>();
+   //             volTest.loop = true;
+   //             volTest.Play();
+   //         }
+   //         else if (SEBounds.Contains(Input.mousePosition))
+   //         {
+   //             volTest = SEVolSlider.GetComponent<AudioSource>();
+   //             volTest.loop = true;
+   //             volTest.Play();
+   //         }
+   //     }
+   //     if (Input.GetMouseButtonUp(0))
+   //     {
+   //         volTest.loop = false;
+   //         changed = true;
+   //     }
     }
+
+  //  public void SetBackgroundMusicVol(float mus_vol)
+  //  {
+  //      master_mixer.SetFloat("Music_Volume", mus_vol);
+  //  }
+  //  public void SetSFXVoume(float SFX_vol)
+  //  {
+  //      master_mixer.SetFloat("SFX_Volume", SFX_vol);
+  //  }
+  //  public void SetMasterVolume(float mas_vol)
+  //  {
+  //      master_mixer.SetFloat("Master_Volume", mas_vol);
+  //  }
 
     public void ToggleFullscreen()
     {
         Screen.fullScreen = !Screen.fullScreen;
     }
 
-    public void ChangeBGMVolume(float newValue)
-    {
-        BGMVolSlider.GetComponent<AudioSource>().volume = newValue;
-    }
-
-    public void ChangeSEVolume(float newValue)
-    {
-        SEVolSlider.GetComponent<AudioSource>().volume = newValue;
-    }
-
-    void OnDestroy()
-    {
-        if (changed)
-        {
-            configFile.Write(System.BitConverter.GetBytes(BGMVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
-            configFile.Write(System.BitConverter.GetBytes(SEVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
-            configFile.Close();
-        }
-    }
+ //   public void ChangeBGMVolume(float newValue)
+ //   {
+ //       BGMVolSlider.GetComponent<AudioSource>().volume = newValue;
+ //
+ //       
+ //   }
+ //
+ //   public void ChangeSEVolume(float newValue)
+ //   {
+ //       SEVolSlider.GetComponent<AudioSource>().volume = newValue;
+ //   }
+ //
+ //   void OnDestroy()
+ //   {
+ //       if (changed)
+ //       {
+ //           configFile.Write(System.BitConverter.GetBytes(BGMVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
+ //           configFile.Write(System.BitConverter.GetBytes(SEVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
+ //           configFile.Close();
+ //       }
+ //   }
 }

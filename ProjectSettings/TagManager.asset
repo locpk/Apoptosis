@@ -19,6 +19,7 @@ TagManager:
   - Highlight
   - PlayerController
   - EnemyCell
+  - CancerCell
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - 
   - Unit
   - Terrain
-  - 
+  - EnemyCell
   - 
   - 
   - 
