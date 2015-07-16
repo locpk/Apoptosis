@@ -41,7 +41,7 @@ GameObject:
   - 114: {fileID: 11400622}
   - 95: {fileID: 9569438}
   - 114: {fileID: 11420198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeatCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ MonoBehaviour:
   isMine: 1
   isAlive: 1
   isAIPossessed: 0
-  isDepleting: 0
+  isDepleting: 1
   isSelected: 0
   celltype: 1
   currentState: 0
@@ -317,6 +317,7 @@ MonoBehaviour:
   hitCounter: 0
   stunned: 0
   stunTimer: 3
+  pcontroller: {fileID: 0}
   fireball: {fileID: 148298, guid: 33ac30d26faab3c4a95c50fa5c16770c, type: 2}
   Tier2Heat: {fileID: 106386, guid: c4230a3c412c0044bafc5ac2b753aaca, type: 2}
   Inheat: 0
@@ -447,7 +448,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -530,7 +531,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
@@ -648,6 +649,10 @@ Prefab:
       propertyPath: stun
       value: 
       objectReference: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
+    - target: {fileID: 0}
+      propertyPath: isDepleting
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174676}

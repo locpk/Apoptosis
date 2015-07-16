@@ -16,7 +16,7 @@ GameObject:
   - 208: {fileID: 20889860}
   - 95: {fileID: 9584532}
   - 114: {fileID: 11442412}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CancerCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ MonoBehaviour:
   isMine: 0
   isAlive: 1
   isAIPossessed: 1
-  isDepleting: 0
+  isDepleting: 1
   isSelected: 0
   celltype: 7
   currentState: 0
@@ -236,6 +236,7 @@ MonoBehaviour:
   hitCounter: 0
   stunned: 0
   stunTimer: 3
+  pcontroller: {fileID: 0}
   stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
 --- !u!135 &13511518
 SphereCollider:
@@ -362,6 +363,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: stun
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isDepleting
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

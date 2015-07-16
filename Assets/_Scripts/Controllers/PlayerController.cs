@@ -400,11 +400,11 @@ public class PlayerController : MonoBehaviour
         {
             if (!isOverUI)
             {
-                if (Input.touchCount == 1 || Input.GetMouseButtonDown(0))
+                if (Input.touchCount == 1 || Input.GetMouseButton(0))
                 {
                     GUI.color = new Color(0.0f, 0.0f, 1.0f, 0.5f);
                 }
-                else if (Input.touchCount == 2 || Input.GetMouseButtonDown(1))
+                else if (Input.touchCount == 2 || Input.GetMouseButton(1))
                 {
                     GUI.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
                 }
@@ -858,7 +858,7 @@ public class PlayerController : MonoBehaviour
     {
         NumEnemiesLeft = 0;
 
-        List<GameObject> enemies = allSelectableTargets;
+        List<GameObject> enemies = new List<GameObject>(allSelectableTargets);
 
         enemies.RemoveAll(item => item.tag == "Protein");
 

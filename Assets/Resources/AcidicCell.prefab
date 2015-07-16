@@ -54,7 +54,7 @@ GameObject:
   - 114: {fileID: 11478438}
   - 95: {fileID: 9553798}
   - 114: {fileID: 11407972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AcidicCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ MonoBehaviour:
   isMine: 1
   isAlive: 1
   isAIPossessed: 0
-  isDepleting: 0
+  isDepleting: 1
   isSelected: 0
   celltype: 5
   currentState: 0
@@ -558,6 +558,18 @@ Prefab:
       propertyPath: stun
       value: 
       objectReference: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Acid
+      value: 
+      objectReference: {fileID: 138438, guid: 05a019986af7b5342a9e219e55d5149d, type: 2}
+    - target: {fileID: 0}
+      propertyPath: isDepleting
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181396}

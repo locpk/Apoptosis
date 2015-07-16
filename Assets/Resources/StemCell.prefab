@@ -302,7 +302,7 @@ MonoBehaviour:
   health_50: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
   health_100: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
   currentLevel: 0
-  isSinglePlayer: 0
+  isSinglePlayer: 1
   isMine: 1
   isAlive: 1
   isAIPossessed: 0
@@ -327,12 +327,17 @@ MonoBehaviour:
   splitCooldown: 0
   NumEnemiesLeft: 0
   hitBylightning: 0
+  hitCounter: 0
+  stunned: 0
+  stunTimer: 3
+  pcontroller: {fileID: 0}
   isInAcidic: 0
   isInAlkali: 0
   stemtoHeat: {fileID: 137274, guid: 996a46fa7705a134cbca9e2676ece137, type: 2}
   stemtoCold: {fileID: 190572, guid: 03026532dd50e414d91a085b722f86c6, type: 2}
   stemtoAlkali: {fileID: 108478, guid: 0952dbaf7191c144d9f1aac0bb704ced, type: 2}
   stemtoAcidic: {fileID: 146776, guid: 29147b9cb59143a41a45534e611f3390, type: 2}
+  stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
 --- !u!114 &11467484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1759,7 +1764,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isSinglePlayer
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: gColdCancerPrefab
@@ -1773,6 +1778,10 @@ Prefab:
       propertyPath: gAlkaliCellPrefab
       value: 
       objectReference: {fileID: 108478, guid: 0952dbaf7191c144d9f1aac0bb704ced, type: 2}
+    - target: {fileID: 0}
+      propertyPath: stun
+      value: 
+      objectReference: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174676}

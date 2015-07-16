@@ -21,7 +21,7 @@ GameObject:
   - 114: {fileID: 11431862}
   - 95: {fileID: 9525432}
   - 114: {fileID: 11495496}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AlkaliCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ MonoBehaviour:
   isMine: 1
   isAlive: 1
   isAIPossessed: 0
-  isDepleting: 0
+  isDepleting: 1
   isSelected: 0
   celltype: 6
   currentState: 0
@@ -529,6 +529,14 @@ Prefab:
       propertyPath: DOT
       value: 
       objectReference: {fileID: 151690, guid: ce2e7885672d3534ca16f22399068182, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isDepleting
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 111564}

@@ -27,13 +27,15 @@ public class StemCell : BaseCell
                 newCell = GameObject.Instantiate(stemtoHeat, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
                 newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                currentState = CellState.DEAD;
+                newCell.GetComponent<CellSplitAnimation>().originCell = this;
+                this.Deactive();
                 break;
             case CellType.COLD_CELL:
                 newCell = GameObject.Instantiate(stemtoCold, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
                 newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                currentState = CellState.DEAD;
+                newCell.GetComponent<CellSplitAnimation>().originCell = this;
+                this.Deactive();
                 break;
             case CellType.ACIDIC_CELL:
                 if (!isInAcidic)
@@ -43,7 +45,8 @@ public class StemCell : BaseCell
                 newCell = GameObject.Instantiate(stemtoAcidic, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
                 newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                currentState = CellState.DEAD;
+                newCell.GetComponent<CellSplitAnimation>().originCell = this;
+                this.Deactive();
                 break;
             case CellType.ALKALI_CELL:
                 if (!isInAlkali)
@@ -53,7 +56,8 @@ public class StemCell : BaseCell
                 newCell = GameObject.Instantiate(stemtoAlkali, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
                 newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                currentState = CellState.DEAD;
+                newCell.GetComponent<CellSplitAnimation>().originCell = this;
+                this.Deactive();
                 break;
             default:
                 break;

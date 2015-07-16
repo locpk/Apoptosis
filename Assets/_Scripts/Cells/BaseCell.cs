@@ -217,7 +217,7 @@ public class BaseCell : MonoBehaviour
         gameObject.SetActive(false);
         transform.position = new Vector3(2500.0f, 2500.0f, 2500.0f);
 
-        GetComponent<SpriteRenderer>().enabled = false;
+        
 
     }
 
@@ -511,7 +511,7 @@ public class BaseCell : MonoBehaviour
         depleteTimer = DEPLETE_TIME;
         if (isSinglePlayer)
         {
-            GetComponent<PhotonView>().enabled = false;
+           // GetComponent<PhotonView>().enabled = false;
 
         }
         else
@@ -686,14 +686,14 @@ public class BaseCell : MonoBehaviour
         {
             currentState = CellState.DEAD;
         }
-        if (isMine && currentState != CellState.ATTACK && currentState != CellState.IDLE && currentState != CellState.CONSUMING)
-        {
-            transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
-        }
-        if (!isMine && celltype != CellType.CANCER_CELL)
-        {
-            this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
-        }
+        //if (isMine && currentState != CellState.ATTACK && currentState != CellState.IDLE && currentState != CellState.CONSUMING)
+        //{
+        //    transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
+        //}
+        //if (!isMine && celltype != CellType.CANCER_CELL)
+        //{
+        //    this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
+        //}
 
     }
 

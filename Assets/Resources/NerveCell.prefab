@@ -73,7 +73,7 @@ GameObject:
   - 114: {fileID: 11402092}
   - 95: {fileID: 9565508}
   - 114: {fileID: 11470052}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NerveCell
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ MonoBehaviour:
   isMine: 1
   isAlive: 1
   isAIPossessed: 0
-  isDepleting: 0
+  isDepleting: 1
   isSelected: 0
   celltype: 8
   currentState: 0
@@ -291,6 +291,7 @@ MonoBehaviour:
   hitCounter: 0
   stunned: 0
   stunTimer: 3
+  pcontroller: {fileID: 0}
   Lightning: {fileID: 192010, guid: 3b858b04fa9bb6246ae91b903c94d5fe, type: 2}
   stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
 --- !u!114 &11470052
@@ -501,6 +502,14 @@ Prefab:
       propertyPath: stun
       value: 
       objectReference: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: isDepleting
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 170144}

@@ -301,7 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gCancerCellPrefab: {fileID: 0}
   gStemCellPrefab: {fileID: 0}
-  gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
+  gHeatCellPrefab: {fileID: 174676, guid: bdccc567384de904a866a1f67a8dae13, type: 2}
   gTier2HeatCellPrefab: {fileID: 0}
   gColdCellPrefab: {fileID: 0}
   gTier2ColdCellPrefab: {fileID: 0}
@@ -475,7 +475,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: gHeatCellPrefab
+      value: 
+      objectReference: {fileID: 174676, guid: bdccc567384de904a866a1f67a8dae13, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 168428}
