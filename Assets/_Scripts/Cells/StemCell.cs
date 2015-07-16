@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 public class StemCell : BaseCell
 {
     public bool isInAcidic;
@@ -58,6 +59,11 @@ public class StemCell : BaseCell
         }
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        stream.Serialize(ref currentProtein);
+    }
+
     void MUltiDMg()
     {
         multidamagesources();
@@ -70,6 +76,8 @@ public class StemCell : BaseCell
     {
 
     }
+    
+
     void DamagePerSecond()
     {
         if (primaryTarget != null)
@@ -77,6 +85,17 @@ public class StemCell : BaseCell
             primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
             primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
         }
+        if (PhotonNetwork.connected)
+        {
+            primaryTarget.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage);
+        }
+    }
+
+    [PunRPC]
+    void ApplyDamage(int damage)
+    {
+        currentProtein -= damage;
+        GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
     }
 
     public override void Attack(GameObject _target)

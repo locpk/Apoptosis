@@ -13,19 +13,19 @@ EditorBuildSettings:
     path: Assets/_Scenes/OptionsMenu.unity
   - enabled: 1
     path: Assets/_Scenes/Singleplayer_Level1.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Singleplayer_Level2.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Singleplayer_Level3.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Tutorial_Level.unity
   - enabled: 1
     path: Assets/_Scenes/Multiplayer_Lobby.unity
   - enabled: 1
     path: Assets/_Scenes/Multiplayer_Level.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Logo.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Logo.unity
   - enabled: 1
     path: Assets/_Scenes/Credits.unity

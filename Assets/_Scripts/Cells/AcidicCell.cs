@@ -7,7 +7,7 @@ public class AcidicCell : BaseCell
 
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
-   
+    private Sound_Manager sound_manager;
     void Awake()
     {
         base.bAwake();
@@ -21,6 +21,11 @@ public class AcidicCell : BaseCell
         {
             primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
             primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+            if (!sound_manager.sounds_attacks[0].isPlaying)
+            {
+                sound_manager.sounds_attacks[0].Play();
+
+            }
         }
     }
     void MUltiDMg()
@@ -40,6 +45,7 @@ public class AcidicCell : BaseCell
     void Start()
     {
         base.bStart();
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>(); // gets the sound sources
     }
 
     // Update is called once per frame
@@ -58,7 +64,7 @@ public class AcidicCell : BaseCell
                         if (!IsInvoking("DamagePreSecond"))
                         {
                             InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
-
+                       
                         }
                     }
                     else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)

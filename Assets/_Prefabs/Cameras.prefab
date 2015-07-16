@@ -45,6 +45,7 @@ GameObject:
   - 92: {fileID: 9227794}
   - 124: {fileID: 12436434}
   - 81: {fileID: 8128172}
+  - 114: {fileID: 11411776}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -97,6 +98,7 @@ GameObject:
   - 20: {fileID: 2050502}
   - 124: {fileID: 12465608}
   - 92: {fileID: 9279930}
+  - 114: {fileID: 11428892}
   m_Layer: 0
   m_Name: MinimapCamera
   m_TagString: Untagged
@@ -177,7 +179,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149172}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -12.1999998, y: 0, z: -17.2999992}
+  m_LocalPosition: {x: 92.1999969, y: -0, z: -16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 480808}
@@ -382,6 +384,30 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195946}
   m_Enabled: 1
+--- !u!114 &11411776
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b13257b9a124548bd19977017e3002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: d04a25171308f534699dd7c8c35b7c75, type: 3}
+--- !u!114 &11428892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b13257b9a124548bd19977017e3002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: d04a25171308f534699dd7c8c35b7c75, type: 3}
 --- !u!114 &11441316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -404,6 +430,7 @@ MonoBehaviour:
   quad: {fileID: 109128}
   mainCamera: {fileID: 149172}
   minimapCamera: {fileID: 2050502}
+  zoomValue: 0
 --- !u!124 &12436434
 Behaviour:
   m_ObjectHideFlags: 1
