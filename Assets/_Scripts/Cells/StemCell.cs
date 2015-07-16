@@ -59,10 +59,7 @@ public class StemCell : BaseCell
         }
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        stream.Serialize(ref currentProtein);
-    }
+
 
     void MUltiDMg()
     {

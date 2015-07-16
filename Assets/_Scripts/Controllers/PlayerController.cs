@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 
 
 
@@ -14,15 +15,17 @@ public class PlayerController : MonoBehaviour
     public void TurnOffOverUI() { isOverUI = false; }
 
 
-    public bool isTouch = true;
+
     private int terrainLayer;
 
     public const int MAX_CAP = 20;
     public static int cap = 0;
     public GameObject movePin;
     public GameObject attackPin;
-    public GameObject moveLine;
+    public GameObject moveWaypoint;
 
+    public List<GameObject> moveWaypoints;
+    public bool isSelecting = true;
 
 
     public int NumStemCells = 0;
@@ -53,14 +56,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
 
-        if (Input.touchSupported)
-        {
-            isTouch = true;
-        }
-        else
-        {
-            isTouch = false;
-        }
+  
 
         // Initialize variables
         selectedTargets.Clear();
@@ -96,6 +92,11 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    public void ToggleSelecting()
+    {
+        isSelecting = !isSelecting;
+    }
+
     public void AddNewCell(BaseCell _in)
     {
         if (!_in.gameObject.GetPhotonView().isMine)
@@ -129,6 +130,16 @@ public class PlayerController : MonoBehaviour
         _in.isSelected = false;
         selectedUnits.Remove(_in);
     }
+
+    public void DeselectCells()
+    {
+        foreach (BaseCell item in selectedUnits)
+        {
+            item.isSelected = false;
+        }
+        selectedUnits.Clear();
+    }
+
 
     public void RemoveTarget(GameObject _in)
     {
@@ -206,11 +217,8 @@ public class PlayerController : MonoBehaviour
         else
         { GUISelectRect.yMin = -Input.GetTouch(0).position.y + Screen.height; }
 
-        foreach (BaseCell item in selectedUnits)
-        {
-            item.isSelected = false;
-        }
-        selectedUnits.Clear();
+        DeselectCells();
+
         foreach (BaseCell item in allSelectableUnits)
         {
             Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
@@ -388,11 +396,11 @@ public class PlayerController : MonoBehaviour
         {
             if (!isOverUI)
             {
-                if (Input.touchCount == 1)
+                if (Input.touchCount == 1 || Input.GetMouseButtonDown(0))
                 {
                     GUI.color = new Color(0.0f, 0.0f, 1.0f, 0.5f);
                 }
-                else if (Input.touchCount == 2)
+                else if (Input.touchCount == 2 || Input.GetMouseButtonDown(1))
                 {
                     GUI.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
                 }
@@ -457,7 +465,26 @@ public class PlayerController : MonoBehaviour
     {
         CheckSelectedUnits();
         CheckEnemiesLeft();
-        //Debug.Log(allSelectableUnits.Count);
+
+        GameObject touchButton = GameObject.Find("Touch") as GameObject;
+        if (isSelecting)
+        {
+            touchButton.GetComponent<Button>().image.color = touchButton.GetComponent<Button>().colors.pressedColor;
+        }
+        else
+        {
+            touchButton.GetComponent<Button>().image.color = touchButton.GetComponent<Button>().colors.normalColor;
+        }
+
+
+        if (selectedUnits.Count == 0)
+        {
+            foreach (var item in moveWaypoints)
+            {
+                Destroy(item);
+            }
+            moveWaypoints.Clear();
+        }
 
     }
 
@@ -482,7 +509,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isOverUI && Time.timeScale > 0.0f)
         {
-            if (Input.touchCount == 1 && selectedUnits.Count == 0)
+            if (Input.touchCount == 1 && isSelecting)
             {
                 Touch oneTouch = Input.GetTouch(0);
                 switch (oneTouch.phase)
@@ -502,6 +529,9 @@ public class PlayerController : MonoBehaviour
                         break;
                     case TouchPhase.Ended:
                         TouchUnitSelection(origin);
+
+                        GUISelectRect.xMax = GUISelectRect.xMin;
+                        GUISelectRect.yMax = GUISelectRect.yMin;
                         break;
                     case TouchPhase.Moved:
                         TouchUnitSelection(origin);
@@ -514,12 +544,13 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (Input.touchCount == 1 && selectedUnits.Count > 0)
+            if (Input.touchCount == 1 && !isSelecting)
             {
                 GUISelectRect.xMax = GUISelectRect.xMin;
                 GUISelectRect.yMax = GUISelectRect.yMin;
                 Vector3 initPos = -Vector3.one;
                 Vector3 lastPos = -Vector3.one;
+                GameObject waypoint;
                 Touch touch = Input.GetTouch(0);
                 switch (touch.phase)
                 {
@@ -547,7 +578,7 @@ public class PlayerController : MonoBehaviour
                         if (Time.time - initTouchTime <= 0.5f)
                         {
                             initTouchTime = 0.0f;
-                            selectedUnits.Clear();
+                            DeselectCells();
                             break;
                         }
 
@@ -557,8 +588,10 @@ public class PlayerController : MonoBehaviour
 
                         if (Physics.Raycast(screenRay1, out hitInfo1, 1000.0f, terrainLayer))
                         {
-                                lastPos = hitInfo1.point;
+                            lastPos = hitInfo1.point;
+
                         }
+
 
 
                         break;
@@ -568,9 +601,12 @@ public class PlayerController : MonoBehaviour
 
                         if (Physics.Raycast(screenRay2, out hitInfo2, 1000.0f, terrainLayer))
                         {
-                                lastPos = hitInfo2.point;
+                            lastPos = hitInfo2.point;
+                            waypoint = Instantiate(moveWaypoint, lastPos, Quaternion.identity) as GameObject;
+                            moveWaypoints.Add(waypoint);
+                            waypoint = null;
                         }
-                        Instantiate(movePin, lastPos, Quaternion.identity);
+
                         break;
                     case TouchPhase.Stationary:
                         break;
@@ -579,7 +615,7 @@ public class PlayerController : MonoBehaviour
                 }
                 if (lastPos != initPos)
                 {
-                    EventManager.Move(lastPos);
+
                     initPos = lastPos = -Vector3.one;
                 }
             }
@@ -588,169 +624,182 @@ public class PlayerController : MonoBehaviour
 
     void MouseKeyBoardUpdate()
     {
-
-        //Vector3 topleft = new Vector3(GUISelectRect.xMin, GUISelectRect.yMin, Camera.main.transform.position.z);
-        //Vector3 bottomright = new Vector3(GUISelectRect.xMax, GUISelectRect.yMin, Camera.main.transform.position.z);
-
-        if (Input.GetKeyDown(KeyCode.D)) // If the player presses D
-        {
-            UnitSplit();
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1)) // If the player presses 1
-        {
-            UnitRevert();
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q)) // If the player presses Q
-        {
-            UnitMerge();
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.S)) // If the player presses S
-        {
-            UnitStop();
-        }
-
-        if (Input.GetKeyDown(KeyCode.C)) // If the player presses C
-        {
-            EventManager.Evolve(CellType.ACIDIC_CELL);
-
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.V)) // If the player presses V
-        {
-            EventManager.Evolve(CellType.ALKALI_CELL);
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
-        {
-            EventManager.Evolve(CellType.HEAT_CELL);
-
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z)) // If the player presses Z
-        {
-            EventManager.Evolve(CellType.COLD_CELL);
-
-
-        }
-
         if (!isOverUI && Time.timeScale > 0.0f)
         {
+            //Vector3 topleft = new Vector3(GUISelectRect.xMin, GUISelectRect.yMin, Camera.main.transform.position.z);
+            //Vector3 bottomright = new Vector3(GUISelectRect.xMax, GUISelectRect.yMin, Camera.main.transform.position.z);
 
-            if (Input.GetMouseButtonDown(0)) // If the player left-clicks
+            if (Input.GetKeyDown(KeyCode.D)) // If the player presses D
             {
-                GUISelectRect.xMin = Input.mousePosition.x;
-                GUISelectRect.yMin = Input.mousePosition.y;
-                GUISelectRect.xMax = Input.mousePosition.x;
-                GUISelectRect.yMax = Input.mousePosition.y;
-
-                GUISelectRect.xMin = Input.mousePosition.x;
-                GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
-                origin = Input.mousePosition;
-                origin.y = -origin.y + Screen.height;
+                UnitSplit();
 
             }
-            else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
+
+            if (Input.GetKeyDown(KeyCode.Alpha1)) // If the player presses 1
             {
-                GUISelectRect.yMax = GUISelectRect.yMin;
-                GUISelectRect.xMax = GUISelectRect.xMin;
-                if (selectedUnits.Count == 0)
+                UnitRevert();
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q)) // If the player presses Q
+            {
+                UnitMerge();
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.S)) // If the player presses S
+            {
+                UnitStop();
+            }
+
+            if (Input.GetKeyDown(KeyCode.C)) // If the player presses C
+            {
+                EventManager.Evolve(CellType.ACIDIC_CELL);
+
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.V)) // If the player presses V
+            {
+                EventManager.Evolve(CellType.ALKALI_CELL);
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.X)) // If the player presses X
+            {
+                EventManager.Evolve(CellType.HEAT_CELL);
+
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.Z)) // If the player presses Z
+            {
+                EventManager.Evolve(CellType.COLD_CELL);
+
+
+            }
+
+            if (!isOverUI && Time.timeScale > 0.0f)
+            {
+
+                if (Input.GetMouseButtonDown(0)) // If the player left-clicks
                 {
+                    GUISelectRect.xMin = Input.mousePosition.x;
+                    GUISelectRect.yMin = Input.mousePosition.y;
+                    GUISelectRect.xMax = Input.mousePosition.x;
+                    GUISelectRect.yMax = Input.mousePosition.y;
+
+                    GUISelectRect.xMin = Input.mousePosition.x;
+                    GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
+                    origin = Input.mousePosition;
+                    origin.y = -origin.y + Screen.height;
+
+                }
+                else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
+                {
+                    GUISelectRect.yMax = GUISelectRect.yMin;
+                    GUISelectRect.xMax = GUISelectRect.xMin;
+                    if (selectedUnits.Count == 0)
+                    {
+                        RaycastHit hitInfo;
+                        Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                        if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
+                        {
+                            BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
+                            if (allSelectableUnits.Contains(hitCell))
+                            {
+                                hitInfo.collider.gameObject.GetComponent<BaseCell>().isSelected = true;
+                                selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
+                            }
+                        }
+                    }
+
+                }
+                else if (Input.GetMouseButton(0)) // If the player has left-click held down
+                {
+
+                    UnitSelection(origin);
+
+                }
+
+
+                if (Input.GetMouseButtonDown(1)) // If the player right-clicks
+                {
+
+                    GUISelectRect.xMin = Input.mousePosition.x;
+                    GUISelectRect.yMin = Input.mousePosition.y;
+                    GUISelectRect.xMax = Input.mousePosition.x;
+                    GUISelectRect.yMax = Input.mousePosition.y;
+
+                    GUISelectRect.xMin = Input.mousePosition.x;
+                    GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
+                    origin = Input.mousePosition;
+                    origin.y = -origin.y + Screen.height;
+                }
+                else if (Input.GetMouseButtonUp(1)) // When the player releases right-click
+                {
+
+
+
+                    GUISelectRect.yMax = GUISelectRect.yMin;
+                    GUISelectRect.xMax = GUISelectRect.xMin;
+
                     RaycastHit hitInfo;
                     Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                     if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
                     {
-                        BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
-                        if (allSelectableUnits.Contains(hitCell))
+                        GameObject hitObject = hitInfo.collider.gameObject;
+                        if (allSelectableTargets.Contains(hitObject))
                         {
-                            hitInfo.collider.gameObject.GetComponent<BaseCell>().isSelected = true;
-                            selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
+                            selectedTargets.Add(hitObject);
                         }
                     }
+
+
+                    if (selectedTargets.Count > 0)
+                    {
+                        foreach (BaseCell item in selectedUnits)
+                        {
+                            item.SetTargets(selectedTargets);
+                            item.SetPrimaryTarget(selectedTargets[0]);
+                        }
+                        if (selectedTargets[0].tag == "Protein")
+                        {
+                            UnitHarvest();
+                        }
+                        else
+                            UnitAttack();
+                    }
+                    else
+                        UnitMove();
+
+                }
+                else if (Input.GetMouseButton(1)) // If the player has right-click held down
+                {
+                    TargetSelection(origin);
                 }
 
-            }
-            else if (Input.GetMouseButton(0)) // If the player has left-click held down
-            {
 
-                UnitSelection(origin);
 
             }
 
-
-            if (Input.GetMouseButtonDown(1)) // If the player right-clicks
+            if (Input.GetMouseButton(2))
             {
-
-                GUISelectRect.xMin = Input.mousePosition.x;
-                GUISelectRect.yMin = Input.mousePosition.y;
-                GUISelectRect.xMax = Input.mousePosition.x;
-                GUISelectRect.yMax = Input.mousePosition.y;
-
-                GUISelectRect.xMin = Input.mousePosition.x;
-                GUISelectRect.yMin = -Input.mousePosition.y + Screen.height;
-                origin = Input.mousePosition;
-                origin.y = -origin.y + Screen.height;
-            }
-            else if (Input.GetMouseButtonUp(1)) // When the player releases right-click
-            {
-
-
-
-                GUISelectRect.yMax = GUISelectRect.yMin;
-                GUISelectRect.xMax = GUISelectRect.xMin;
+                //UnitAttackMove();
 
                 RaycastHit hitInfo;
                 Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
                 {
-                    GameObject hitObject = hitInfo.collider.gameObject;
-                    if (allSelectableTargets.Contains(hitObject))
-                    {
-                        selectedTargets.Add(hitObject);
-                    }
+                    GameObject waypoint = Instantiate(moveWaypoint, hitInfo.point, Quaternion.identity) as GameObject;
+                    moveWaypoints.Add(waypoint);
+                    waypoint = null;
                 }
 
-
-                if (selectedTargets.Count > 0)
-                {
-                    foreach (BaseCell item in selectedUnits)
-                    {
-                        item.SetTargets(selectedTargets);
-                        item.SetPrimaryTarget(selectedTargets[0]);
-                    }
-                    if (selectedTargets[0].tag == "Protein")
-                    {
-                        UnitHarvest();
-                    }
-                    else
-                        UnitAttack();
-                }
-                else
-                    UnitMove();
-
             }
-            else if (Input.GetMouseButton(1)) // If the player has right-click held down
-            {
-                TargetSelection(origin);
-            }
-
-
-
-        }
-
-        if (Input.GetMouseButton(2))
-        {
-            UnitAttackMove();
         }
     }
     // Update is called once per frame
@@ -762,36 +811,22 @@ public class PlayerController : MonoBehaviour
         selectedTargets.RemoveAll(item => item == null);
         allSelectableTargets.RemoveAll(item => item == null);
 
-        int i = 0;
-        while (i < selectedUnits.Count)
-        {
-            if (selectedUnits[i] == null)
-            {
-                selectedUnits.RemoveAt(i);
-
-            }
-            else
-                i++;
-        }
-        i = 0;
-        while (i < allSelectableUnits.Count)
-        {
-            if (allSelectableUnits[i] == null)
-            {
-                allSelectableUnits.RemoveAt(i);
-            }
-            else
-                i++;
-        }
 
 
-        if (isTouch)
+        if (Input.touchSupported)
         {
             TouchUpdate();
         }
         else
         {
             MouseKeyBoardUpdate();
+        }
+
+
+        if (moveWaypoints.Count > 0)
+        {
+            moveWaypoints.RemoveAll(item => item == null);
+            EventManager.Move(moveWaypoints[0].transform.position);
         }
 
     }

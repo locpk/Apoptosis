@@ -183,10 +183,10 @@ public class OnlineGameController : Photon.PunBehaviour
         object[] isSingleplayer = new object[1];
         isSingleplayer[0] = (bool)false;
         PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("StemCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer).GetComponent<BaseCell>());
-        if (false/*PhotonNetwork.player.ID == 1*/)
-        {
-            PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("ColdCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer).GetComponent<BaseCell>());
-        }
+        //if (false/*PhotonNetwork.player.ID == 1*/)
+        //{
+        //    PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("ColdCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer).GetComponent<BaseCell>());
+        //}
     }
 
     void Rematch()
