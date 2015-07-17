@@ -41,26 +41,6 @@ public class DenseArea : BaseArea {
             enterCellSpeed = enterCell.navAgent.speed;
             enterCell.navAgent.speed *= speedCoefficient;
 
-            //switch (enterCell.celltype) {
-            //    case CellType.STEM_CELL:
-            //        break;
-            //    case CellType.HEAT_CELL:
-            //        break;
-            //    case CellType.COLD_CELL:
-            //        break;
-            //    case CellType.HEAT_CELL_TIRE2:
-            //        break;
-            //    case CellType.COLD_CELL_TIRE2:
-            //        break;
-            //    case CellType.ACIDIC_CELL:
-            //        break;
-            //    case CellType.ALKALI_CELL:
-            //        break;
-            //    case CellType.CANCER_CELL:
-            //        break;
-            //    default:
-            //        break;
-            //}
         }
     }
 
@@ -75,26 +55,6 @@ public class DenseArea : BaseArea {
             if (!enterCell) return;
             enterCell.navAgent.speed = enterCellSpeed;
 
-            switch (enterCell.celltype) {
-                case CellType.STEM_CELL:
-                    break;
-                case CellType.HEAT_CELL:
-                    break;
-                case CellType.COLD_CELL:
-                    break;
-                case CellType.HEAT_CELL_TIRE2:
-                    break;
-                case CellType.COLD_CELL_TIRE2:
-                    break;
-                case CellType.ACIDIC_CELL:
-                    break;
-                case CellType.ALKALI_CELL:
-                    break;
-                case CellType.CANCER_CELL:
-                    break;
-                default:
-                    break;
-            }
         }
     }
 }

@@ -1068,7 +1068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+  protein: {fileID: 11499318, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -2628,7 +2628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+  protein: {fileID: 11499318, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -3153,7 +3153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+  protein: {fileID: 11499318, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -4837,7 +4837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+  protein: {fileID: 11499318, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -5502,7 +5502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+  protein: {fileID: 11499318, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -7226,7 +7226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+  protein: {fileID: 11499318, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10

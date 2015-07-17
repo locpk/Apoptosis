@@ -73,6 +73,10 @@ public class HeatArea : BaseArea {
                     enterCell.navAgent.speed *= speedCoefficient;
                     break;
 
+                case CellType.NERVE_CELL:
+                    enterCell.navAgent.speed *= speedCoefficient;
+                    break;
+
                 default:
                     break;
             }
@@ -92,6 +96,7 @@ public class HeatArea : BaseArea {
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL:
+                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
 
                 case CellType.HEAT_CELL:
@@ -99,23 +104,30 @@ public class HeatArea : BaseArea {
                     break;
 
                 case CellType.COLD_CELL:
+                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
 
                 case CellType.HEAT_CELL_TIRE2:
                     break;
 
                 case CellType.COLD_CELL_TIRE2:
+                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
 
                 case CellType.ACIDIC_CELL:
+                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
 
                 case CellType.ALKALI_CELL:
+                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
 
                 case CellType.CANCER_CELL:
+                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
-
+                case CellType.NERVE_CELL:
+                    enterCell.navAgent.speed /= speedCoefficient;
+                    break;
                 default:
                     break;
             }
