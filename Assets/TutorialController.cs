@@ -35,7 +35,6 @@ class Task
 public class TutorialController : MonoBehaviour
 {
 
-    public Menu mainMenu;
 
     int currentTask = 0;
     public GameObject taskCanvas;

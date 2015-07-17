@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowActivationOnStandalone: 0
+  m_AllowActivationOnStandalone: 1
 --- !u!114 &1167007221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_AllowActivationOnMobileDevice: 0
+  m_AllowActivationOnMobileDevice: 1
 --- !u!114 &1167007222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,6 +452,12 @@ MonoBehaviour:
   backGround: {fileID: 0}
   loadingBar: {fileID: 0}
   brackets: {fileID: 0}
+  audio_muted: {fileID: 0}
+  audio_unmuted: {fileID: 0}
+  master_mixer: {fileID: 0}
+  click_Sound: {fileID: 0}
+  muted: 0
+  b_fullscreen: 0
 --- !u!224 &1363096345
 RectTransform:
   m_ObjectHideFlags: 0
@@ -784,8 +790,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1363096344}
-        m_MethodName: LoadScene
-        m_Mode: 5
+        m_MethodName: LoadMainMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

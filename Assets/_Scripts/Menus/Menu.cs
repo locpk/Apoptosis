@@ -42,6 +42,10 @@ public class Menu : MonoBehaviour {
 	
     // screen stuff 
 
+   public void LoadMainMenu()
+    {
+        Application.LoadLevel("MainMenu");
+    }
     void Awake() 
     {
 

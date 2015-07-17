@@ -96,8 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471d131ae0e64404b9eb047dfc59791e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStarted: 0
   movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
   attackPin: {fileID: 0}
+  moveWaypoint: {fileID: 110900, guid: 669611cb87dffa74cad959c741ccb043, type: 2}
+  moveWaypoints: []
+  isSelecting: 1
   NumStemCells: 0
   NumHeatCells: 0
   NumColdCells: 0
@@ -127,7 +131,7 @@ MonoBehaviour:
   currentTaskText: {fileID: 0}
   showTaskButton: {fileID: 0}
   PlayerControls: {fileID: 11436092}
-  prefabProtein: {fileID: 156482, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
+  prefabProtein: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
