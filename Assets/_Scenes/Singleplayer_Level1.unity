@@ -128,10 +128,6 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &95920990 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 131158, guid: 0f4486f3742390b4ca504232c3058518, type: 2}
-  m_PrefabInternal: {fileID: 1924611486}
 --- !u!1 &107108564
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+  protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -1134,7 +1130,7 @@ Transform:
   m_Children:
   - {fileID: 1941515546}
   m_Father: {fileID: 682248811}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1 &559692523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,8 +1360,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 209496606}
-  - {fileID: 2026591772}
   - {fileID: 553296177}
+  - {fileID: 2026591772}
   - {fileID: 491867490}
   m_Father: {fileID: 1530484546}
   m_RootOrder: 2
@@ -1422,7 +1418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+  protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -1752,7 +1748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+  protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -2468,7 +2464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+  protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -2890,7 +2886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+  protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -3244,7 +3240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: c5f0bded2ede6a9449ee0924e1483cda, type: 2}
+  protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -3277,7 +3273,6 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowActivationOnStandalone: 1
 --- !u!114 &1764264609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3289,13 +3284,6 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: .5
-  m_AllowActivationOnMobileDevice: 1
 --- !u!114 &1764264610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3307,9 +3295,6 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 95920990}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 5
 --- !u!4 &1764264611
 Transform:
   m_ObjectHideFlags: 0
@@ -3964,7 +3949,7 @@ Transform:
   m_Children:
   - {fileID: 1567054354}
   m_Father: {fileID: 682248811}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1001 &2030408684
 Prefab:
   m_ObjectHideFlags: 0
