@@ -65,6 +65,8 @@ public class AIWaveCell : MonoBehaviour {
         m_baseCell.currentState = CellState.IDLE;
         if (GetComponent<FogOfWarHider>() == null) gameObject.AddComponent<FogOfWarHider>();
         if (GetComponent<FogOfWarViewer>() != null) Destroy(GetComponent<FogOfWarViewer>());
+        this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
+
 
         GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(this.GetComponent<BaseCell>());
 	}
@@ -86,8 +88,8 @@ public class AIWaveCell : MonoBehaviour {
                 } else {
                     if (m_baseCell.primaryTarget == null) {
                         m_baseCell.primaryTarget = hitInfo.transform.gameObject;
-                        m_baseCell.currentState = CellState.ATTACK;
                         m_baseCell.primaryTarget.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = true;
+                        m_baseCell.currentState = CellState.ATTACK;
                     }
                 }
                 break;

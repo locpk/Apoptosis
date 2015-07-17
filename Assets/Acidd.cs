@@ -7,7 +7,7 @@ public class Acidd : MonoBehaviour
     public GameObject Target;
     public GameObject Owner;
     public List<GameObject> caughtInAOETargets;
-    public float speed = .5f;
+    public float speed = 8.0f;
     // Use this for initialization
     void Start()
     {
@@ -31,9 +31,18 @@ public class Acidd : MonoBehaviour
             GetComponent<SphereCollider>().radius = 3;
             // myanim.SetTrigger("Acid");
         }
+        if (Owner.GetComponent<BaseCell>().isAIPossessed == true && other.gameObject.GetComponent<BaseCell>().isMine)
+        {
+
+            myanim.SetTrigger("Start");
+            //          other.GetComponent<BaseCell>().currentProtein -= Owner.GetComponent<BaseCell>().attackDamage;
+            GetComponent<SphereCollider>().radius = 3;
+            // myanim.SetTrigger("Acid");
+        }
     }
     void OnTriggerStay(Collider other)
     {
+    
         if (other.gameObject.tag == "Unit" && !other.gameObject.GetComponent<BaseCell>().isMine)
         {
             if (!IsInvoking("AoeDmg"))
@@ -42,6 +51,7 @@ public class Acidd : MonoBehaviour
 
             }
         }
+
     }
 
     void OnTriggerExit(Collider other)

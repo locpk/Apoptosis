@@ -686,14 +686,14 @@ public class BaseCell : MonoBehaviour
         {
             currentState = CellState.DEAD;
         }
-        //if (isMine && currentState != CellState.ATTACK && currentState != CellState.IDLE && currentState != CellState.CONSUMING)
-        //{
-        //    transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
-        //}
-        //if (!isMine && celltype != CellType.CANCER_CELL)
-        //{
-        //    this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
-        //}
+        if (isMine && currentState != CellState.ATTACK && currentState != CellState.IDLE && currentState != CellState.CONSUMING)
+        {
+            transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
+        }
+        if (!isMine && celltype != CellType.CANCER_CELL)
+        {
+            this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
+        }
 
     }
 

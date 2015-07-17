@@ -72,6 +72,7 @@ public class AITrapCell : MonoBehaviour{
             } else {
                 if (m_baseCell.primaryTarget == null) {
                     m_baseCell.primaryTarget = hitInfo.transform.gameObject;
+                    m_baseCell.primaryTarget.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = true;
                     m_baseCell.currentState = CellState.ATTACK;
                 }
             }
