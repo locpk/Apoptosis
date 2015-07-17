@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(MeshRenderer))]
 public class MinimapFOG : MonoBehaviour
 {
+    public AudioMixerSnapshot snapshot_attack;
+    public AudioMixerSnapshot snapshot_normal;
 
     // Use this for initialization
     void Start()
@@ -12,6 +15,7 @@ public class MinimapFOG : MonoBehaviour
         GameObject obj = gameObject.transform.parent.gameObject.transform.parent.gameObject;
         if (obj.tag == "Unit") //check if it is a cell unit
         {
+            
             if (!obj.GetComponent<BaseCell>().isMine) //if the cell is not mine, 
             {
                 obj.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = false; //turn the minimap image of it off
@@ -35,6 +39,7 @@ public class MinimapFOG : MonoBehaviour
         {
             if (!other.GetComponent<BaseCell>().isMine && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
             {
+                snapshot_attack.TransitionTo(3.0f);
                 if (!other.GetComponent<BaseCell>().isMine) //and is not mine
                 {
                     other.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = true; //turn it's minimap image on
@@ -79,6 +84,7 @@ public class MinimapFOG : MonoBehaviour
         {
             if (!other.GetComponent<BaseCell>().isMine && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
             {
+                snapshot_normal.TransitionTo(3.0f);
                 if (!other.GetComponent<BaseCell>().isMine)
                 {
                     GameObject obj = other.gameObject;
