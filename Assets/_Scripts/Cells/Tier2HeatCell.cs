@@ -15,6 +15,8 @@ public class Tier2HeatCell : BaseCell
     public GameObject stemCell;
     public GameObject stun;
     int instanonce = 0;
+
+    private Sound_Manager sound_manager;
     void Start()
     {
         base.bStart();
@@ -210,10 +212,13 @@ public class Tier2HeatCell : BaseCell
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+
     }
     void MUltiDMg()
     {
         multidamagesources();
+
 
     }
     public void AreaDamage()

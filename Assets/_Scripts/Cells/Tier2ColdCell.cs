@@ -14,11 +14,16 @@ public class Tier2ColdCell : BaseCell
 
     public GameObject stun;
     int instanonce = 0;
+
+
+    private Sound_Manager sound_manager;
 	// Use this for initialization
 	void Start ()
     {
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
         base.bStart();
+
+
 	}
     void DamagePreSecond()
     {
@@ -138,10 +143,13 @@ public class Tier2ColdCell : BaseCell
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+
     }
     void MUltiDMg()
     {
         multidamagesources();
+
 
     }
     public void AreaDamage()

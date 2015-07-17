@@ -37,9 +37,11 @@ public class SinglePlayerSpawner_Level_1 : MonoBehaviour {
                     SpawnEnemy(Random.Range(0, enermyCellSet.Count), Random.Range(0, spawnAreas.Count));
                 }
                 m_waveIndex++;
+
             }
         }
 
+        
         if (m_waveIndex == spawningWavesInTime.Count) {
             Destroy(gameObject);
         }
@@ -96,7 +98,10 @@ public class SinglePlayerSpawner_Level_1 : MonoBehaviour {
                 default:
                     break;
             }
-        }   
+        }
+
+
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().gameStarted = true;
     }
 
     public List<BaseCell> GetSpawnedList() {

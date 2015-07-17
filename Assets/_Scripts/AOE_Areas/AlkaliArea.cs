@@ -10,10 +10,11 @@ public class AlkaliArea : BaseArea {
 
     public GameObject alkaliButton;
 
+    private Sound_Manager sound_manager;
 
 	public override void Awake() {
         base.Awake();
-
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
 
 	public override void Start () {
@@ -40,6 +41,13 @@ public class AlkaliArea : BaseArea {
     void OnTriggerEnter(Collider collider) {
         if (collider.gameObject.tag == "Unit" && collider.gameObject.tag == "EnemyCell") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+
+            if (!sound_manager.sounds_miscellaneous[6].isPlaying)
+            {
+                sound_manager.sounds_miscellaneous[6].Play();
+
+            }
+
             if (!enterCell) return;
 
             switch (enterCell.celltype) {

@@ -10,9 +10,11 @@ public class AcidicCell : BaseCell
     public GameObject stun;
     public GameObject Acid;
     int instanonce = 0;
+    Sound_Manager sound_manager;
 
     void Awake()
     {
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         base.bAwake();
         multidamagesources += nothing;
           InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
@@ -27,13 +29,18 @@ public class AcidicCell : BaseCell
             kAcid.GetComponent<Acidd>().Owner = this.gameObject;
             Vector3 them2me = kAcid.GetComponent<Acidd>().Target.transform.position - transform.position;
             kAcid.GetComponent<Rigidbody>().velocity += them2me.normalized * kAcid.GetComponent<Acidd>().speed;
-           //.. primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
-          //  primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+
+            if (!sound_manager.sounds_attacks[2].isPlaying)
+            {
+                sound_manager.sounds_attacks[2].Play();
+
+            }
         }
     }
     void MUltiDMg()
     {
         multidamagesources();
+       
 
     }
     public void AreaDamage()

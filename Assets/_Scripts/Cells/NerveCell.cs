@@ -11,6 +11,8 @@ public class NerveCell : BaseCell
     float lightningSpeed = 1.0f;
     public GameObject stun;
     int instanonce = 0;
+
+    private Sound_Manager sound_manager;
     void Start()
     {
         base.bStart();
@@ -21,6 +23,7 @@ public class NerveCell : BaseCell
         base.bAwake();
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
     void MUltiDMg()
     {
@@ -48,6 +51,10 @@ public class NerveCell : BaseCell
         Lightningk.GetComponent<Lighting>().realOwner = this.gameObject;
         Lightningk.GetComponent<Lighting>().speed = lightningSpeed;
 
+        if (!sound_manager.sounds_attacks[5].isPlaying)
+        {
+            sound_manager.sounds_attacks[5].Play();
+        }
 
     }
 

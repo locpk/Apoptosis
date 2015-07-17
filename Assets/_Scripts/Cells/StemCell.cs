@@ -14,6 +14,8 @@ public class StemCell : BaseCell
     public TakeDamage multidamagesources;
     public GameObject stun;
     int instanonce = 0;
+
+    private Sound_Manager sound_manager;
     public override void Mutation(CellType _newType)
     {
         if (currentProtein <= 50.0f)
@@ -91,6 +93,11 @@ public class StemCell : BaseCell
         {
             primaryTarget.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage);
         }
+
+        //if (!sound_manager.sounds_attacks[3].isPlaying)
+        //{
+        //    sound_manager.sounds_attacks[3].Play();
+        //}
     }
 
     public override void Attack(GameObject _target)
@@ -110,6 +117,7 @@ public class StemCell : BaseCell
         base.bAwake();
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
 
     // Use this for initialization
@@ -155,9 +163,9 @@ public class StemCell : BaseCell
 
                         if (i != targets.Count)
                         {
-                            Debug.Log(primaryTarget);
+                            
                             primaryTarget = targets[i + 1];
-                            Debug.Log(primaryTarget);
+                          
                             if (primaryTarget.GetComponent<BaseCell>())
                                 currentState = CellState.ATTACK;
                             if (primaryTarget.GetComponent<Protein>())

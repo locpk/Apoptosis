@@ -8,6 +8,7 @@ public class DenseArea : BaseArea {
     public float speedCoefficient = 0.2f;
     private float enterCellSpeed;
 
+
 	public override void Awake() {
         base.Awake();
 

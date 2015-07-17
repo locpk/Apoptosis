@@ -9,16 +9,20 @@ public class AlkaliCell : BaseCell
     GameObject previousTarget;
     public GameObject stun;
     int instanonce = 0;
+    private Sound_Manager sound_manager;
 
     void Awake()
     {
         base.bAwake();
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
     void MUltiDMg()
     {
         multidamagesources();
+
     }
     
     public void AreaDamage()
@@ -39,6 +43,12 @@ public class AlkaliCell : BaseCell
     
             theDOT.GetComponent<Dot>().Target = primaryTarget;
             theDOT.GetComponent<Dot>().Owner = this.gameObject;
+
+
+            if (!sound_manager.sounds_attacks[4].isPlaying)
+            {
+                sound_manager.sounds_attacks[4].Play();
+            }
         }
     }
     // Use this for initialization

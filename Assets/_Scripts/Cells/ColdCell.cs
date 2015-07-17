@@ -14,6 +14,8 @@ public class ColdCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
 
+    private Sound_Manager sound_manager;
+
     void Awake()
     {
         base.bAwake();
@@ -21,10 +23,14 @@ public class ColdCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+
     }
     void MUltiDMg()
     {
         multidamagesources();
+
+
     }
     public void AreaDamage()
     {
@@ -87,8 +93,16 @@ public class ColdCell : BaseCell
             cTier2Cold.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
             cTier2Cold.GetComponent<CellSplitAnimation>().originCell = this;
             cTier2Cold.GetComponent<CellSplitAnimation>().originCell1 = other;
+
+            if (sound_manager.sounds_evolution[6].isPlaying)
+            {
+                sound_manager.sounds_evolution[6].Play();
+            }
+
             Deactive();
             other.Deactive();
+
+
 
         }
         else
@@ -109,6 +123,11 @@ public class ColdCell : BaseCell
         {
             AoeDmg(transform.position, attackRange);
             primaryTarget.GetComponent<BaseCell>().currentProtein -= (attackDamage / primaryTarget.GetComponent<BaseCell>().defense);
+
+            if (!sound_manager.sounds_attacks[1].isPlaying)
+            {
+                sound_manager.sounds_attacks[1].Play();
+            }
         }
     }
 
@@ -280,6 +299,12 @@ public class ColdCell : BaseCell
                 if (basecellerino.isAIPossessed && basecellerino != primaryTarget && basecellerino.isMine == false)
                 {
                     basecellerino.currentProtein -= (attackDamage / basecellerino.defense);
+                }
+
+                if (!sound_manager.sounds_attacks[1].isPlaying)
+                {
+                    sound_manager.sounds_attacks[1].Play();
+
                 }
 
             }

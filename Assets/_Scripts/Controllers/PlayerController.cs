@@ -8,6 +8,33 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+
+
+    public bool gameStarted = false;
+
+    private Sound_Manager sound_manager;
+    //**********************************
+    //sounds_evolution
+    //
+    // 0. Heat evolve
+    // 1. Cold Evolve
+    // 2. Acid Evolve
+    // 3. Alkali Evolve 
+    // 4. Nerve Evolve
+    //*********************************
+    //sounds_attacks
+    //
+    // 
+    //*********************************
+    //sounds_miscellaneous
+    // 0. Unit Select
+    // 1. Movement conformation
+    // 2. Unit Splits
+    // 3. Unit Dies
+
+    private GameObject winScreen;
+    private GameObject loseScreen;
+
     private bool isOverUI = false;
 
 
@@ -55,6 +82,18 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        Time.timeScale = 1.0f;
+
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>(); // gets the sound sources
+        winScreen = GameObject.FindGameObjectWithTag("Win_Screen");
+        loseScreen = GameObject.FindGameObjectWithTag("Lose_Screen");
+
+        winScreen.SetActive(false);
+        loseScreen.SetActive(false);
+
+
+
+
 
         touchButton = GameObject.Find("Touch");
 
@@ -200,6 +239,12 @@ public class PlayerController : MonoBehaviour
             {
                 selectedUnits.Add(item);
                 item.isSelected = true;
+
+                if (!sound_manager.sounds_miscellaneous[0].isPlaying)
+                {
+                    sound_manager.sounds_miscellaneous[0].Play();
+                }
+
             }
         }
     }
@@ -231,6 +276,11 @@ public class PlayerController : MonoBehaviour
             {
                 selectedUnits.Add(item);
                 item.isSelected = true;
+
+                if (!sound_manager.sounds_miscellaneous[0].isPlaying)
+                {
+                    sound_manager.sounds_miscellaneous[0].Play();
+                }
             }
         }
     }
@@ -306,6 +356,12 @@ public class PlayerController : MonoBehaviour
         {
             EventManager.Move(hitInfo.point);
             GameObject.Instantiate(movePin, hitInfo.point, Quaternion.Euler(90.0f, 0.0f, 0.0f));
+
+
+            if (!sound_manager.sounds_miscellaneous[1].isPlaying)
+            {
+                sound_manager.sounds_miscellaneous[1].Play();
+            }
         }
 
     }
@@ -335,6 +391,13 @@ public class PlayerController : MonoBehaviour
     {
         EventManager.Split();
 
+
+        if (!sound_manager.sounds_miscellaneous[2].isPlaying)
+        {
+            sound_manager.sounds_miscellaneous[2].Play();
+
+
+        }
     }
 
     public void UnitEvolve(int cellNum)
@@ -343,15 +406,19 @@ public class PlayerController : MonoBehaviour
         {
             case 0: //turn into heat cell
                 EventManager.Evolve(CellType.HEAT_CELL);
+                sound_manager.sounds_evolution[cellNum].Play();
                 break;
             case 1: //turn into cold cell
                 EventManager.Evolve(CellType.COLD_CELL);
+                sound_manager.sounds_evolution[cellNum].Play();
                 break;
             case 2: //turn into acidic cell
                 EventManager.Evolve(CellType.ACIDIC_CELL);
+                sound_manager.sounds_evolution[cellNum].Play();
                 break;
             case 3: //turn into alkali cell
                 EventManager.Evolve(CellType.ALKALI_CELL);
+                sound_manager.sounds_evolution[cellNum].Play();
                 break;
             default:
                 break;
@@ -489,6 +556,10 @@ public class PlayerController : MonoBehaviour
             moveWaypoints.Clear();
         }
 
+        if (allSelectableUnits.Count == 0)
+        {
+            Show_LoseScreen();            
+        }
     }
 
     public void UnitStop()
@@ -864,6 +935,62 @@ public class PlayerController : MonoBehaviour
 
         NumEnemiesLeft = enemies.Count;
 
+        if (enemies.Count == 0 && gameStarted) // if there are no enemies left, the player has won the game
+        {
+            
+            Show_WinningScreen();
+        }
+
         
     }
+
+    void Show_WinningScreen()
+    {
+        winScreen.SetActive(true);
+
+        if (!sound_manager.win_music.isPlaying)
+        {
+            sound_manager.win_music.Play();
+        }
+        winScreen.GetComponentInChildren<Image>().enabled = true;
+        Image[] test = winScreen.GetComponentsInChildren<Image>();
+
+        foreach (Image img in test)
+        {
+            img.enabled = true;
+
+        }
+
+        Time.timeScale = 0.0f;
+        this.gameObject.SetActive(false);
+        Invoke("GoBackToMainMenu", 5.0f);
+    }
+    void Show_LoseScreen()
+    {
+
+        loseScreen.SetActive(true);
+        if (!sound_manager.lose_music.isPlaying)
+        {
+            sound_manager.lose_music.Play();
+        }
+        loseScreen.GetComponentInChildren<Image>().enabled = true;
+
+        Image[] test = loseScreen.GetComponentsInChildren<Image>();
+
+        foreach (Image img in test)
+        {
+            img.enabled = true;
+
+        }
+        Time.timeScale = 0.0f;
+        this.gameObject.SetActive(false);
+        Invoke("GoBackToMainMenu", 5.0f);
+        
+    }
+
+    void GoBackToMainMenu()
+    {
+        Application.LoadLevel("MainMenu");
+    }
+    
 }
