@@ -95,6 +95,9 @@ public class BaseCell : MonoBehaviour
 
     public PlayerController pcontroller;
 
+    private Sound_Manager sound_manager;
+
+
     #region RPC Methods
 
 
@@ -207,6 +210,11 @@ public class BaseCell : MonoBehaviour
         }
         else
         {
+            if (!sound_manager.sounds_miscellaneous[3].isPlaying)
+            {
+                sound_manager.sounds_miscellaneous[3].Play();
+
+            }
             Destroy(gameObject);
         }
 
@@ -497,6 +505,8 @@ public class BaseCell : MonoBehaviour
 
     protected void bAwake()
     {
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+
         photonView = GetComponent<PhotonView>();
         if (PhotonNetwork.connected)
         {

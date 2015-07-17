@@ -49,8 +49,8 @@ public class CellSplitAnimation : MonoBehaviour
     public void CreateTier2HeatCell()
     {
 
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Tier2HeatCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
-            : GameObject.Instantiate(gTier2HeatCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Tier2HeatCell",transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
+            : GameObject.Instantiate(gTier2HeatCellPrefab, transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
@@ -153,8 +153,8 @@ public class CellSplitAnimation : MonoBehaviour
     public void CreateTier2ColdCell()
     {
 
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Tier2ColdCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
-            : GameObject.Instantiate(gTier2ColdCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Tier2ColdCell", transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
+            : GameObject.Instantiate(gTier2ColdCellPrefab, transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;

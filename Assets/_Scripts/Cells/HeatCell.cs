@@ -69,6 +69,11 @@ public class HeatCell : BaseCell
             kTier2Heat.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
             kTier2Heat.GetComponent<CellSplitAnimation>().originCell = this;
             kTier2Heat.GetComponent<CellSplitAnimation>().originCell1 = other;
+
+            if (!sound_manager.sounds_evolution[5].isPlaying)
+            {
+                sound_manager.sounds_evolution[5].Play();
+            }
             Deactive();
             other.Deactive();
 
