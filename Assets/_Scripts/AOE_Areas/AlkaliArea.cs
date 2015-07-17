@@ -50,6 +50,11 @@ public class AlkaliArea : BaseArea {
 
             if (!enterCell) return;
 
+            if (!sound_manager.sounds_miscellaneous[6].isPlaying && enterCell.celltype != CellType.ALKALI_CELL)
+            {
+                sound_manager.sounds_miscellaneous[6].Play();
+            }
+
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL: {
                     StemCell stemCell = enterCell.GetComponent<StemCell>();
