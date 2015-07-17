@@ -45,10 +45,9 @@ public class HeatArea : BaseArea
 
 
 
-    void OnTriggerEnter(Collider collider)
-    {
-        if (collider.gameObject.tag == "Unit" && collider.gameObject.tag == "EnemyCell")
-        {
+    void OnTriggerEnter(Collider collider) {
+        if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
+
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!sound_manager.sounds_miscellaneous[6].isPlaying)
             {
@@ -92,6 +91,10 @@ public class HeatArea : BaseArea
                     enterCell.navAgent.speed *= speedCoefficient;
                     break;
 
+                case CellType.NERVE_CELL:
+                    enterCell.navAgent.speed *= speedCoefficient;
+                    break;
+
                 default:
                     break;
             }
@@ -104,10 +107,8 @@ public class HeatArea : BaseArea
 
     }
 
-    void OnTriggerExit(Collider collider)
-    {
-        if (collider.gameObject.tag == "Unit" && collider.gameObject.tag == "EnemyCell")
-        {
+    void OnTriggerExit(Collider collider) {
+        if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
             enterCell.navAgent.speed = enterCellSpeed;
@@ -115,6 +116,7 @@ public class HeatArea : BaseArea
             switch (enterCell.celltype)
             {
                 case CellType.STEM_CELL:
+                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
 
                 case CellType.HEAT_CELL:
@@ -122,23 +124,30 @@ public class HeatArea : BaseArea
                     break;
 
                 case CellType.COLD_CELL:
+                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
 
                 case CellType.HEAT_CELL_TIRE2:
                     break;
 
                 case CellType.COLD_CELL_TIRE2:
+                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
 
                 case CellType.ACIDIC_CELL:
+                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
 
                 case CellType.ALKALI_CELL:
+                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
 
                 case CellType.CANCER_CELL:
+                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
-
+                case CellType.NERVE_CELL:
+                    enterCell.navAgent.speed /= speedCoefficient;
+                    break;
                 default:
                     break;
             }
