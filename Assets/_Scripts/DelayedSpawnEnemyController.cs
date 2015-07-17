@@ -8,7 +8,6 @@ public class DelayedSpawnEnemyController : MonoBehaviour {
     public float delayedTimeInSecond = 1.0f;
     public int numberOfCells = 1;
     private List<Transform> m_spawnedList;
-    private bool m_alreadySpawned = false;
 
     void Awake () {
         m_spawnedList = new List<Transform>();

@@ -20,8 +20,8 @@ public class CamController : MonoBehaviour {
     public float zoomValue;
 //    private float realtimeTimer;
     private Vector3 smoothFocusTarget;
-    private Vector3 smoothTargetPosition;
-    private Quaternion smoothTargetRotation;
+    //private Vector3 smoothTargetPosition;
+    //private Quaternion smoothTargetRotation;
     private CameraMode mode = CameraMode.GameView;
     
     // Froze mouse when start
@@ -150,11 +150,11 @@ public class CamController : MonoBehaviour {
         smoothFocusTarget = new Vector3(_des.x, 100, _des.z);
     }
 
-    public void SwitchToFocusView(Transform focusOn) {
-        mode = CameraMode.FocusView;
-        smoothTargetPosition = focusOn.position;
-        smoothTargetRotation = focusOn.rotation;
-    }
+    //public void SwitchToFocusView(Transform focusOn) {
+    //    mode = CameraMode.FocusView;
+    //    smoothTargetPosition = focusOn.position;
+    //    smoothTargetRotation = focusOn.rotation;
+    //}
 
     public void SwitchToGameplayView() {
         mode = CameraMode.GameView;
