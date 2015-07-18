@@ -95,6 +95,9 @@ public class BaseCell : MonoBehaviour
 
     public PlayerController pcontroller;
 
+    private Sound_Manager sound_manager;
+
+
     #region RPC Methods
 
 
@@ -207,6 +210,11 @@ public class BaseCell : MonoBehaviour
         }
         else
         {
+            if (!sound_manager.sounds_miscellaneous[3].isPlaying)
+            {
+                sound_manager.sounds_miscellaneous[3].Play();
+
+            }
             Destroy(gameObject);
         }
 
@@ -298,9 +306,7 @@ public class BaseCell : MonoBehaviour
             return;
         }
 
-        Vector3 newposition = this.transform.position;
 
-        newposition += Quaternion.Euler(0, 0, Random.Range(0, 360)) * new Vector3(GetComponent<SphereCollider>().radius * 0.1f, 0, 0);
         GameObject cellSplitAnimation;
         switch (celltype)
         {
@@ -393,9 +399,6 @@ public class BaseCell : MonoBehaviour
                 break;
         }
 
-        //Get a new position around myself
-        Vector3 newposition = this.transform.position;
-
 
         //half my protein
         this.currentProtein *= 0.5f;
@@ -410,7 +413,7 @@ public class BaseCell : MonoBehaviour
             switch (this.celltype)
             {
                 case CellType.HEAT_CELL:
-                    newCell = GameObject.Instantiate(gHeatCellPrefab, newposition, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell = GameObject.Instantiate(gHeatCellPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
                     newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
                     newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                     newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
@@ -418,7 +421,7 @@ public class BaseCell : MonoBehaviour
                     Deactive();
                     break;
                 case CellType.COLD_CELL:
-                    newCell = GameObject.Instantiate(gColdCellPrefab, newposition, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell = GameObject.Instantiate(gColdCellPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
                     newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
                     newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                     newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
@@ -443,7 +446,7 @@ public class BaseCell : MonoBehaviour
 
                     break;
                 case CellType.COLD_CELL:
-                    newCell = GameObject.Instantiate(gColdCancerPrefab, newposition, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell = GameObject.Instantiate(gColdCancerPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
                     newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
                     newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                     newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
@@ -497,6 +500,8 @@ public class BaseCell : MonoBehaviour
 
     protected void bAwake()
     {
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+
         photonView = GetComponent<PhotonView>();
         if (PhotonNetwork.connected)
         {
@@ -548,6 +553,8 @@ public class BaseCell : MonoBehaviour
             this.gameObject.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().material.color = Color.red;
             this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
+
+        Move(transform.position);
     }
 
     protected void bUpdate()

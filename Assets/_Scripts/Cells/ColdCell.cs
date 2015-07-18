@@ -94,7 +94,7 @@ public class ColdCell : BaseCell
             cTier2Cold.GetComponent<CellSplitAnimation>().originCell = this;
             cTier2Cold.GetComponent<CellSplitAnimation>().originCell1 = other;
 
-            if (sound_manager.sounds_evolution[6].isPlaying)
+            if (!sound_manager.sounds_evolution[6].isPlaying)
             {
                 sound_manager.sounds_evolution[6].Play();
             }

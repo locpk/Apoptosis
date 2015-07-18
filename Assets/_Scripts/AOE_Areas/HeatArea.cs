@@ -45,10 +45,9 @@ public class HeatArea : BaseArea
 
 
 
-    void OnTriggerEnter(Collider collider)
-    {
-        if (collider.gameObject.tag == "Unit" && collider.gameObject.tag == "EnemyCell")
-        {
+    void OnTriggerEnter(Collider collider) {
+        if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
+
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!sound_manager.sounds_miscellaneous[6].isPlaying)
             {
@@ -108,10 +107,8 @@ public class HeatArea : BaseArea
 
     }
 
-    void OnTriggerExit(Collider collider)
-    {
-        if (collider.gameObject.tag == "Unit" && collider.gameObject.tag == "EnemyCell")
-        {
+    void OnTriggerExit(Collider collider) {
+        if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
             enterCell.navAgent.speed = enterCellSpeed;
