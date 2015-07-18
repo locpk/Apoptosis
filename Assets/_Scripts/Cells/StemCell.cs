@@ -59,6 +59,11 @@ public class StemCell : BaseCell
                 newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 newCell.GetComponent<CellSplitAnimation>().originCell = this;
+
+                if (!sound_manager.sounds_evolution[3].isPlaying)
+                {
+                    sound_manager.sounds_evolution[3].Play();
+                }
                 this.Deactive();
                 break;
             default:
@@ -94,10 +99,10 @@ public class StemCell : BaseCell
             primaryTarget.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage);
         }
 
-        //if (!sound_manager.sounds_attacks[3].isPlaying)
-        //{
-        //    sound_manager.sounds_attacks[3].Play();
-        //}
+        if (!sound_manager.sounds_attacks[3].isPlaying)
+        {
+            sound_manager.sounds_attacks[3].Play();
+        }
     }
 
     public override void Attack(GameObject _target)
