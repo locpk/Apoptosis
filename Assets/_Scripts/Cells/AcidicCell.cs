@@ -24,7 +24,8 @@ public class AcidicCell : BaseCell
     {
         if (primaryTarget != null)
         {
-            GameObject kAcid = Instantiate(Acid, transform.position, transform.rotation) as GameObject;
+            GameObject kAcid = PhotonNetwork.connected ? PhotonNetwork.Instantiate("AcidStart", transform.position, transform.rotation, 0) 
+                : Instantiate(Acid, transform.position, transform.rotation) as GameObject;
             kAcid.GetComponent<Acidd>().Target = primaryTarget;
             kAcid.GetComponent<Acidd>().Owner = this.gameObject;
             Vector3 them2me = kAcid.GetComponent<Acidd>().Target.transform.position - transform.position;

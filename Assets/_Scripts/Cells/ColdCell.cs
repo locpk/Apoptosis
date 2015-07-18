@@ -299,6 +299,10 @@ public class ColdCell : BaseCell
                 if (basecellerino.isAIPossessed && basecellerino != primaryTarget && basecellerino.isMine == false)
                 {
                     basecellerino.currentProtein -= (attackDamage / basecellerino.defense);
+                    if (PhotonNetwork.connected)
+                    {
+                        basecellerino.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage / basecellerino.defense);
+                    }
                 }
 
                 if (!sound_manager.sounds_attacks[1].isPlaying)

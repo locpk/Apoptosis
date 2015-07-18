@@ -39,7 +39,8 @@ public class AlkaliCell : BaseCell
         {
             previousTarget = primaryTarget;
             Vector3 newvec =  new Vector3(primaryTarget.transform.position.x, primaryTarget.transform.position.y, (primaryTarget.transform.position.z + primaryTarget.GetComponent<SphereCollider>().radius/4));
-            GameObject theDOT= Instantiate(DOT,  newvec ,primaryTarget.transform.rotation) as GameObject;
+            GameObject theDOT= PhotonNetwork.connected ? PhotonNetwork.Instantiate("DOT", newvec, primaryTarget.transform.rotation, 0) 
+                : Instantiate(DOT,  newvec ,primaryTarget.transform.rotation) as GameObject;
     
             theDOT.GetComponent<Dot>().Target = primaryTarget;
             theDOT.GetComponent<Dot>().Owner = this.gameObject;

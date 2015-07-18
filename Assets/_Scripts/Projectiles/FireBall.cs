@@ -41,6 +41,10 @@ public class FireBall : BaseProjectile
         {
             Target.GetComponent<BaseCell>().currentProtein = Target.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
             Target.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+            if (PhotonNetwork.connected)
+            {
+                other.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, Owner.GetComponent<BaseCell>().attackDamage);
+            }
            Destroy(this.gameObject);
         }
 
@@ -49,6 +53,10 @@ public class FireBall : BaseProjectile
 
             Target.GetComponent<BaseCell>().currentProtein = Target.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
             Target.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+            if (PhotonNetwork.connected)
+            {
+                other.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, Owner.GetComponent<BaseCell>().attackDamage);
+            }
             Destroy(this.gameObject);
         }
 

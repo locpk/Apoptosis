@@ -82,6 +82,10 @@ public class Acidd : MonoBehaviour
            caughtInAOETargets[i].GetComponent<BaseCell>().currentProtein -= Owner.GetComponent<AcidicCell>().attackDamage;
 
            caughtInAOETargets[i].GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+           if (PhotonNetwork.connected)
+           {
+               caughtInAOETargets[i].GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, Owner.GetComponent<AcidicCell>().attackDamage);
+           }
        }
     }
 
