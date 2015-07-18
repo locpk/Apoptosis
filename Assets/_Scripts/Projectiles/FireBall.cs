@@ -6,7 +6,7 @@ public class FireBall : BaseProjectile
 {
     public GameObject Target;
     public GameObject Owner;
-    public float lifeTimer = 1.0f;
+    public float lifeTimer = 1.5f;
 
     void Awake()
     {
