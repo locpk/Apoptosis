@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
 
     float fps;
     float initTouchTime;
+    float delay;
 
     Rect GUISelectRect;
 
@@ -620,6 +621,8 @@ public class PlayerController : MonoBehaviour
 
             if (Input.touchCount == 1 && !isSelecting)
             {
+
+                
                 GUISelectRect.xMax = GUISelectRect.xMin;
                 GUISelectRect.yMax = GUISelectRect.yMin;
                 Vector3 initPos = -Vector3.one;
@@ -630,7 +633,7 @@ public class PlayerController : MonoBehaviour
                 {
                     case TouchPhase.Began:
                         initTouchTime = Time.time;
-
+                        delay = Time.time;
 
 
                         RaycastHit hitInfo;
@@ -676,8 +679,13 @@ public class PlayerController : MonoBehaviour
                         if (Physics.Raycast(screenRay2, out hitInfo2, 1000.0f, terrainLayer))
                         {
                             lastPos = hitInfo2.point;
-                            waypoint = Instantiate(moveWaypoint, lastPos, Quaternion.identity) as GameObject;
-                            moveWaypoints.Add(waypoint);
+                            if (Time.time - delay <= 1.0f)
+                            {
+                                waypoint = Instantiate(moveWaypoint, lastPos, Quaternion.identity) as GameObject;
+                                moveWaypoints.Add(waypoint);
+                                delay = Time.time;
+                            }
+                          
                             waypoint = null;
                         }
 

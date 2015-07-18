@@ -151,30 +151,8 @@ public class StemCell : BaseCell
 
             }
         }
-        else
-        {
-            if (targets != null && targets.Count > 1)
-            {
-
-                if (primaryTarget == null)
-                {
-                    for (int i = 0; i < targets.Count; i++)
-                    {
-
-                        if (i != targets.Count)
-                        {
-                            
-                            primaryTarget = targets[i + 1];
-                          
-                            if (primaryTarget.GetComponent<BaseCell>())
-                                currentState = CellState.ATTACK;
-                            if (primaryTarget.GetComponent<Protein>())
-                                currentState = CellState.CONSUMING;
-                            break;
-                        }
-                    }
-                }
-            }
+       
+    
 
 
             switch (currentState)
@@ -278,7 +256,8 @@ public class StemCell : BaseCell
             }
 
         }
-    }
+    
+
 
     void FixedUpdate()
     {
