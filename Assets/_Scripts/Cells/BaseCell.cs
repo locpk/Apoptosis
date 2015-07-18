@@ -553,6 +553,8 @@ public class BaseCell : MonoBehaviour
             this.gameObject.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().material.color = Color.red;
             this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
+
+        Move(transform.position);
     }
 
     protected void bUpdate()
