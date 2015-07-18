@@ -22,7 +22,7 @@ public class ProteinSpawnerController : MonoBehaviour {
 
     void Awake () {
         if (protein == null) {
-            Debug.LogError(protein.ToString() + " has not been set.");
+//            Debug.LogError(protein.ToString() + " has not been set.");
             Destroy(this);
         }
         spawnPositionList = new List<Vector3>();
