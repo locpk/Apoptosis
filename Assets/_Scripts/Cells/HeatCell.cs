@@ -116,7 +116,7 @@ public class HeatCell : BaseCell
 
     public void DamagePreSecond()
     {
-        if (primaryTarget.GetComponent<BaseCell>())
+        if (primaryTarget != null)
         {
             previousTarget = primaryTarget;
             Vector3 them2me = primaryTarget.transform.position - transform.position;
