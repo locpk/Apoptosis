@@ -14,9 +14,6 @@ public class Tier2ColdCell : BaseCell
 
     public GameObject stun;
     int instanonce = 0;
-
-
-    private Sound_Manager sound_manager;
 	// Use this for initialization
 	void Start ()
     {

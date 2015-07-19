@@ -13,7 +13,7 @@ public class particles : MonoBehaviour {
         lifetimer -= 1 * Time.fixedDeltaTime;
         if (lifetimer <= 0)
         {
-            DestroyImmediate(this.gameObject);
+            DestroyImmediate(gameObject);
       
         }
 	}

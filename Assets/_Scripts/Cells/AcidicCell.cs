@@ -10,14 +10,12 @@ public class AcidicCell : BaseCell
     public GameObject stun;
     public GameObject Acid;
     int instanonce = 0;
-    Sound_Manager sound_manager;
 
     void Awake()
     {
-        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         base.bAwake();
         multidamagesources += nothing;
-          InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+        InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
     }
 
     void DamagePreSecond()

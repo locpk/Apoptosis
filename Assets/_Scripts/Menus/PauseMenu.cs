@@ -25,7 +25,7 @@ public class PauseMenu : MonoBehaviour
     //Shows the game end LOSE screen 
   //  public GameObject loseScreen;
 
-    private GameObject playerController;
+    //private GameObject playerController;
     void Awake()
     {
         //set everything to false
@@ -56,7 +56,7 @@ public class PauseMenu : MonoBehaviour
     //    winScreen.SetActive(false);
      //   loseScreen.SetActive(false);
 
-        playerController = GameObject.FindGameObjectWithTag("PlayerController");
+        //playerController = GameObject.FindGameObjectWithTag("PlayerController");
 
     }
 

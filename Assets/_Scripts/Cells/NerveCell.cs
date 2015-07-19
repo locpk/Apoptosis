@@ -12,7 +12,6 @@ public class NerveCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
 
-    private Sound_Manager sound_manager;
     void Start()
     {
         base.bStart();
@@ -23,7 +22,6 @@ public class NerveCell : BaseCell
         base.bAwake();
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
-        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
     void MUltiDMg()
     {

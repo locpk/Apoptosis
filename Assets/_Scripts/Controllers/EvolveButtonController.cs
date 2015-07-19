@@ -9,10 +9,10 @@ public class EvolveButtonController : MonoBehaviour {
     public GameObject acidButton;
     public GameObject alkaliButton;
 
-    private bool isOverUI = false;
+    //private bool isOverUI = false;
 
-    public void TurnOnOverUI() { isOverUI = true; }
-    public void TurnOffOverUI() { isOverUI = false; }
+    //public void TurnOnOverUI() { isOverUI = true; }
+    //public void TurnOffOverUI() { isOverUI = false; }
 
 
 	// Use this for initialization
