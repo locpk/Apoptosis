@@ -136,7 +136,7 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 2800000, guid: 60950583e623e664a9fe2dc8004ecc55, type: 3}
+    - m_Icon: {fileID: 2800000, guid: bda1817239b9b7748a2cf534e5443df6, type: 3}
       m_Size: 128
   m_BuildTargetBatching:
   - m_BuildTarget: Android
