@@ -10,7 +10,7 @@ public class ProteinSpawnerController : MonoBehaviour {
     }
 
     public SpawnMode spawnMode = SpawnMode.Once;
-    public Protein protein;
+    public GameObject protein;
     public float delayTimeInSecond = 5.0f;
     public float spawnCycleInSecond;
     public int maxProteins;
@@ -22,7 +22,7 @@ public class ProteinSpawnerController : MonoBehaviour {
 
     void Awake () {
         if (protein == null) {
-            Debug.LogError(protein.ToString() + " has not been set.");
+//            Debug.LogError(protein.ToString() + " has not been set.");
             Destroy(this);
         }
         spawnPositionList = new List<Vector3>();
@@ -42,7 +42,8 @@ public class ProteinSpawnerController : MonoBehaviour {
 
     IEnumerator SpawnProteinOnce(float delay) {
         yield return new WaitForSeconds(delay);
-        Protein currProtein = null;
+        GameObject currProtein = null;
+
         for (int i = 0; i < maxProteins; i++) {
             Vector3 spawnPos = Vector3.zero;
             int count = 0;
@@ -73,10 +74,11 @@ public class ProteinSpawnerController : MonoBehaviour {
         Quaternion spwanAngle = Quaternion.identity;;
         spwanAngle.eulerAngles = new Vector3(90, 0, 0);
         for (int i = 0; i < spawnPositionList.Count - 1; i++) {
-            
-            currProtein = Instantiate(protein, spawnPositionList[i], spwanAngle) as Protein;
+
+
+            currProtein = PhotonNetwork.connected ? PhotonNetwork.InstantiateSceneObject("Protein", spawnPositionList[i], spwanAngle, 0, null):Instantiate(protein, spawnPositionList[i], spwanAngle) as GameObject;
             currProtein.transform.parent = transform.parent;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewProtein(currProtein);
+            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewProtein(currProtein.GetComponent<Protein>());
         }
         //Debug.Log(testcases + " cases.");
     }

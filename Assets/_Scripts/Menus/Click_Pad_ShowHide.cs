@@ -7,7 +7,10 @@ public class Click_Pad_ShowHide : MonoBehaviour {
     public Animator animator;
     public bool show;
     void Start () {
-	
+        if (Input.touchSupported)
+        {
+            Show_Hide_Panel();
+        }
 	}
 	
 	// Update is called once per frame

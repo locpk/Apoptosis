@@ -78,7 +78,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   Owner: {fileID: 0}
   caughtInAOETargets: []
-  speed: .5
+  speed: 8
 --- !u!135 &13521112
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -126,7 +126,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: speed
-      value: .5
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -304,6 +304,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   Tier2Cold: {fileID: 142014, guid: 0b6cd8365c6173c43821731e16828aed, type: 2}
   stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
+  particle: {fileID: 107260, guid: ca765baf98f063844b4aed03a257a9fc, type: 2}
 --- !u!114 &11434914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,6 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0918649c5b506df4c88a8435ed870de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snapshot_attack: {fileID: 0}
+  snapshot_normal: {fileID: 0}
 --- !u!114 &11486718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -687,6 +690,10 @@ Prefab:
       propertyPath: isDepleting
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: particle
+      value: 
+      objectReference: {fileID: 107260, guid: ca765baf98f063844b4aed03a257a9fc, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100116}
