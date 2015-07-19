@@ -101,7 +101,7 @@ public class HeatCell : BaseCell
     {
         multidamagesources();
 
-
+        
 
     }
 
@@ -167,111 +167,116 @@ public class HeatCell : BaseCell
         }
         else
         {
-
-            if (targets != null && targets.Count > 1)
+            if (isAIPossessed)
             {
-
-                if (primaryTarget == null)
+                transform.position = new Vector3(transform.position.x + .00100f, 0, transform.position.z + .00100f);
+            }
+            else
+            {
+                if (targets != null && targets.Count > 1)
                 {
-                    for (int i = 0; i < targets.Count; i++)
-                    {
 
-                        if (i != targets.Count)
+                    if (primaryTarget == null)
+                    {
+                        for(int i = 0; i < targets.Count; i++)
                         {
-                            Debug.Log(primaryTarget);
-                            primaryTarget = targets[i + 1];
-                            Debug.Log(primaryTarget);
-                            if (primaryTarget.GetComponent<BaseCell>())
-                                currentState = CellState.ATTACK;
-                            if (primaryTarget.GetComponent<Protein>())
-                                currentState = CellState.CONSUMING;
-                            break;
+
+                            if (i != targets.Count)
+                            {
+                                Debug.Log(primaryTarget);
+                                primaryTarget = targets[i + 1];
+                                Debug.Log(primaryTarget);
+                                if (primaryTarget.GetComponent<BaseCell>())
+                                    currentState = CellState.ATTACK;
+                                if (primaryTarget.GetComponent<Protein>())
+                                    currentState = CellState.CONSUMING;
+                                break;
+                            }
                         }
                     }
                 }
-            }
-            switch (currentState)
-            {
-                case CellState.IDLE:
-                    SetPrimaryTarget(null);
-                    if (IsInvoking("DamagePreSecond"))
-                    {
-                        CancelInvoke("DamagePreSecond");
-                    }
-                    //System.Collections.Generic.List<GameObject> enemyUnits = GameObjectManager.FindAIUnits();
-                    //if (enemyUnits != null)
-                    //{
-                    //    for (int i = 0; i < enemyUnits.Count; i++)
-                    //    {
-                    //        if (Vector3.Distance(enemyUnits[i].transform.position, transform.position) <= fovRadius)
-                    //        {
-                    //            if (enemyUnits[i] != this.gameObject)
-                    //            {
-                    //                Attack(enemyUnits[i]);
-                    //            }
-                    //            break;
-
-                    //        }
-                    //    }
-                    //}
-
-                    break;
-                case CellState.ATTACK:
-                    if (primaryTarget != null)
-                    {
-                        if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
+                switch (currentState)
+                {
+                    case CellState.IDLE:
+                        SetPrimaryTarget(null);
+                        if (IsInvoking("DamagePreSecond"))
                         {
-                            if (!IsInvoking("DamagePreSecond"))
-                            {
-                                InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
-
-                            }
+                            CancelInvoke("DamagePreSecond");
                         }
+                        //System.Collections.Generic.List<GameObject> enemyUnits = GameObjectManager.FindAIUnits();
+                        //if (enemyUnits != null)
+                        //{
+                        //    for (int i = 0; i < enemyUnits.Count; i++)
+                        //    {
+                        //        if (Vector3.Distance(enemyUnits[i].transform.position, transform.position) <= fovRadius)
+                        //        {
+                        //            if (enemyUnits[i] != this.gameObject)
+                        //            {
+                        //                Attack(enemyUnits[i]);
+                        //            }
+                        //            break;
 
-                        else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                        //        }
+                        //    }
+                        //}
+
+                        break;
+                    case CellState.ATTACK:
+                        if (primaryTarget != null)
                         {
-                            if (IsInvoking("DamagePreSecond"))
+                            if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                             {
-                                CancelInvoke("DamagePreSecond");
+                                if (!IsInvoking("DamagePreSecond"))
+                                {
+                                    InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
+
+                                }
                             }
-                            if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
+
+                            else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                             {
-                                base.ChaseTarget();
+                                if (IsInvoking("DamagePreSecond"))
+                                {
+                                    CancelInvoke("DamagePreSecond");
+                                }
+                                if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
+                                {
+                                    base.ChaseTarget();
+                                }
                             }
+
                         }
+                        else
+                        {
+                            currentState = CellState.IDLE;
+                        }
+                        break;
+                    case CellState.CONSUMING:
+                        base.bUpdate();
+                        break;
+                    case CellState.MOVING:
+                        if (IsInvoking("DamagePreSecond"))
+                        {
+                            CancelInvoke("DamagePreSecond");
+                        }
+                        base.bUpdate();
+                        break;
+                    case CellState.ATTACK_MOVING:
+                        if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+                        {
+                            currentState = CellState.IDLE;
+                        }
+                        break;
+                    case CellState.DEAD:
+                        base.Die();
+                        break;
 
-                    }
-                    else
-                    {
-                        currentState = CellState.IDLE;
-                    }
-                    break;
-                case CellState.CONSUMING:
-                    base.bUpdate();
-                    break;
-                case CellState.MOVING:
-                    if (IsInvoking("DamagePreSecond"))
-                    {
-                        CancelInvoke("DamagePreSecond");
-                    }
-                    base.bUpdate();
-                    break;
-                case CellState.ATTACK_MOVING:
-                    if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
-                    {
-                        currentState = CellState.IDLE;
-                    }
-                    break;
-                case CellState.DEAD:
-                    base.Die();
-                    break;
-
-                default:
-                    break;
+                    default:
+                        break;
+                }
+                if (mergePartner != null)
+                    MergingTheCells(mergePartner);
             }
-            if (mergePartner != null)
-                MergingTheCells(mergePartner);
-
         }
     }
 

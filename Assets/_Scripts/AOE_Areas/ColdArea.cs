@@ -2,52 +2,60 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ColdArea : BaseArea {
+public class ColdArea : BaseArea
+{
 
     public float damagePerSecond;
     public float speedCoefficient = 0.5f;
     private float enterCellSpeed;
 
-	public override void Awake() {
+    private Sound_Manager sound_manager;
+    public override void Awake()
+    {
         base.Awake();
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+    }
+
+    public override void Start()
+    {
+        base.Start();
 
     }
 
-	public override void Start () {
-        base.Start();
-
-	}
-	
-	public override void Update () {
+    public override void Update()
+    {
         base.Update();
 
-	}
+    }
 
-	public override void FixedUpdate() {
+    public override void FixedUpdate()
+    {
         base.FixedUpdate();
 
     }
 
-	public override void LateUpdate() {
+    public override void LateUpdate()
+    {
         base.LateUpdate();
 
     }
 
-<<<<<<< HEAD
 
     void OnTriggerEnter(Collider collider) {
         if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
 
-=======
-    
-    void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.tag == "Unit" && collider.gameObject.tag == "EnemyCell") {
->>>>>>> origin/master
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
+            if (!sound_manager.sounds_miscellaneous[6].isPlaying)
+            {
+                sound_manager.sounds_miscellaneous[6].Play();
+
+            }
+
             if (!enterCell) return;
             enterCellSpeed = enterCell.navAgent.speed;
 
-            switch (enterCell.celltype) {
+            switch (enterCell.celltype)
+            {
                 case CellType.STEM_CELL:
                     enterCell.navAgent.speed *= speedCoefficient;
                     break;
@@ -81,21 +89,19 @@ public class ColdArea : BaseArea {
     }
 
 
-    void OnTriggerStay(Collider collider) {
+    void OnTriggerStay(Collider collider)
+    {
 
     }
 
     void OnTriggerExit(Collider collider) {
-<<<<<<< HEAD
         if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
-=======
-        if (collider.gameObject.tag == "Unit" && collider.gameObject.tag == "EnemyCell") {
->>>>>>> origin/master
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
             enterCell.navAgent.speed = enterCellSpeed;
 
-            switch (enterCell.celltype) {
+            switch (enterCell.celltype)
+            {
                 case CellType.STEM_CELL:
                     enterCell.navAgent.speed /= speedCoefficient;
                     break;
