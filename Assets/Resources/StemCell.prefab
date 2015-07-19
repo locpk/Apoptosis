@@ -76,7 +76,6 @@ GameObject:
   - 114: {fileID: 11469932}
   - 114: {fileID: 11467484}
   - 114: {fileID: 11430304}
-  - 114: {fileID: 11498602}
   m_Layer: 8
   m_Name: StemCell
   m_TagString: Unit
@@ -119,7 +118,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 84.5, y: 1, z: -15.3000002}
+  m_LocalPosition: {x: 84.5, y: 0, z: -15.3000002}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 495744}
@@ -260,6 +259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0918649c5b506df4c88a8435ed870de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snapshot_attack: {fileID: 0}
+  snapshot_normal: {fileID: 0}
 --- !u!114 &11412848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -347,9 +348,9 @@ MonoBehaviour:
   primaryTarget: {fileID: 0}
   photonView: {fileID: 0}
   currentProtein: 500
-  fovRadius: 10
+  fovRadius: 4
   attackDamage: 5
-  attackRange: 5
+  attackRange: 3
   defense: 10
   depleteTimer: 1
   depleteAmount: 3
@@ -401,20 +402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de4ef090f52247a49b75200aa7ae2228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11498602
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd4d4626c4e696449b7ed92859151a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewOfRange: {x: 3, y: 15}
-  lineOfSightCheck: 2
-  isActive: 1
 --- !u!135 &13565800
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -449,7 +436,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4.69000006
+  m_Radius: 6.42999983
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &19549964
 NavMeshAgent:
@@ -458,7 +445,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_Enabled: 1
-  m_Radius: 4.69000006
+  m_Radius: 6.42999983
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -467,7 +454,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 0
-  m_Height: .199999973
+  m_Height: 5
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -1569,7 +1556,7 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 4.69000006, y: .100000001, z: 4.69000006}
+  m_Extents: {x: 6.42999983, y: 2.5, z: 6.42999983}
   m_MoveThreshold: .100000001
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -1715,7 +1702,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Radius
-      value: 4.69000006
+      value: 6.42999983
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_AutoRepath
@@ -1747,15 +1734,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: fovRadius
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attackRange
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InitialModule.startSize.scalar
@@ -1791,11 +1778,11 @@ Prefab:
       objectReference: {fileID: 146776, guid: 29147b9cb59143a41a45534e611f3390, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Extents.x
-      value: 4.69000006
+      value: 6.42999983
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Extents.z
-      value: 4.69000006
+      value: 6.42999983
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: health_10
@@ -1852,6 +1839,22 @@ Prefab:
       propertyPath: stun
       value: 
       objectReference: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Height
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Extents.y
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174676}

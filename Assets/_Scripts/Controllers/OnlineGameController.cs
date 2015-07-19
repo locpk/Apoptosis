@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class OnlineGameController : Photon.PunBehaviour
 {
     public GameObject PlayerControls;
-    bool gameStarted = false;
-    bool gameEnded = false;
+    public static bool gameStarted = false;
+    public static bool gameEnded = false;
     bool win = false;
     int unitsCount;
 
@@ -120,6 +120,7 @@ public class OnlineGameController : Photon.PunBehaviour
         base.OnPhotonPlayerConnected(newPlayer);
         InitPlayer();
         SpawnPlayerUnits();
+        gameStarted = true;
         Invoke("InitSync", 2.0f);
     }
 
@@ -179,7 +180,7 @@ public class OnlineGameController : Photon.PunBehaviour
 
     void SpawnPlayerUnits()
     {
-        gameStarted = true;
+        
         object[] isSingleplayer = new object[1];
         isSingleplayer[0] = (bool)false;
         PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("StemCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer).GetComponent<BaseCell>());
