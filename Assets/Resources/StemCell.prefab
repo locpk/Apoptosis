@@ -348,9 +348,9 @@ MonoBehaviour:
   primaryTarget: {fileID: 0}
   photonView: {fileID: 0}
   currentProtein: 500
-  fovRadius: 2
+  fovRadius: 4
   attackDamage: 5
-  attackRange: 2
+  attackRange: 3
   defense: 10
   depleteTimer: 1
   depleteAmount: 3
@@ -436,7 +436,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4.69000006
+  m_Radius: 6.42999983
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &19549964
 NavMeshAgent:
@@ -445,7 +445,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_Enabled: 1
-  m_Radius: 4.69000006
+  m_Radius: 6.42999983
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -1556,7 +1556,7 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 4.69000006, y: 2.5, z: 4.69000006}
+  m_Extents: {x: 6.42999983, y: 2.5, z: 6.42999983}
   m_MoveThreshold: .100000001
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -1702,7 +1702,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Radius
-      value: 4.69000006
+      value: 6.42999983
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_AutoRepath
@@ -1738,11 +1738,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: fovRadius
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attackRange
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InitialModule.startSize.scalar
@@ -1778,11 +1778,11 @@ Prefab:
       objectReference: {fileID: 146776, guid: 29147b9cb59143a41a45534e611f3390, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Extents.x
-      value: 4.69000006
+      value: 6.42999983
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Extents.z
-      value: 4.69000006
+      value: 6.42999983
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: health_10

@@ -990,7 +990,7 @@ public class PlayerController : MonoBehaviour
             img.enabled = true;
 
         }
-        Time.timeScale = 0.0f;
+       
         this.gameObject.SetActive(false);
         Invoke("GoBackToMainMenu", 5.0f);
         
