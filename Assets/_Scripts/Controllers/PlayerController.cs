@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> selectedTargets;
     //    List<BaseCell>[] groups;
     public Texture selector;
-
+    public Texture friendly_indicator;
     float fps;
     float initTouchTime;
     float delay;
@@ -488,10 +488,12 @@ public class PlayerController : MonoBehaviour
             if (item)
             {
                 Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
-                float left = drawLoc.x - (float)4;
-                float top = -(drawLoc.y - (float)4) + Screen.height;
-                Rect location = new Rect(left, top, (float)8, (float)8);
-                GUI.DrawTexture(location, selector);
+                float left = drawLoc.x - (float)46;
+                float top = -(drawLoc.y + (float)46) + Screen.height;
+                Rect location = new Rect(left, top, (float)86 , (float)86);
+                // this draws the frirndly unit indicator
+                // GUI.DrawTexture(location, selector); 
+                GUI.DrawTexture(location, friendly_indicator);
             }
         }
 
@@ -780,11 +782,11 @@ public class PlayerController : MonoBehaviour
 
                         if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
                         {
-                            BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
+                            BaseCell hitCell = hitInfo.collider.gameObject.GetComponentInParent<BaseCell>();
                             if (allSelectableUnits.Contains(hitCell))
                             {
-                                hitInfo.collider.gameObject.GetComponent<BaseCell>().isSelected = true;
-                                selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
+                                hitInfo.collider.gameObject.GetComponentInParent<BaseCell>().isSelected = true;
+                                selectedUnits.Add(hitInfo.collider.gameObject.GetComponentInParent<BaseCell>());
                             }
                         }
                     }
@@ -988,7 +990,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void GoBackToMainMenu()
+    public void GoBackToMainMenu()
     {
         Application.LoadLevel("MainMenu");
     }

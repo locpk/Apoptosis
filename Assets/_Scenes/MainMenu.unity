@@ -388,7 +388,7 @@ Prefab:
       objectReference: {fileID: 1659603384}
     - target: {fileID: 11410928, guid: 81ed166dff58a5a469e429e76b0d2ec3, type: 2}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: set_enabled
+      value: Mute_Unmute_Sound
       objectReference: {fileID: 0}
     - target: {fileID: 11410928, guid: 81ed166dff58a5a469e429e76b0d2ec3, type: 2}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
