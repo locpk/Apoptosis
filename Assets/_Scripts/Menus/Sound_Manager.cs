@@ -71,8 +71,11 @@ public class Sound_Manager : MonoBehaviour {
                               
             }
         }
-
-     
+        if (!instance.backGround_music.isPlaying)
+        {
+        instance.backGround_music.Play();
+            
+        }
 
       //  mute_button = GameObject.FindGameObjectWithTag("Mute_Button").GetComponent<Button>();
       //  backGround_music.Play();
