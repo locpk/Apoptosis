@@ -48,7 +48,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 404926}
   - 33: {fileID: 3329028}
-  - 135: {fileID: 13533200}
   - 23: {fileID: 2386620}
   m_Layer: 5
   m_Name: MinimapIndicator
@@ -88,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 151272}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 90.1769943, y: 1, z: -22.0447407}
+  m_LocalPosition: {x: -11.3148193, y: 6, z: 5.72302294}
   m_LocalScale: {x: .699999988, y: .699999988, z: 1}
   m_Children:
   - {fileID: 425682}
@@ -196,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gCancerCellPrefab: {fileID: 151272}
   gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-  gHeatCellPrefab: {fileID: 174676, guid: 24893adb05af5e1478e137fa9d2374ca, type: 2}
+  gHeatCellPrefab: {fileID: 0}
   gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
   gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
@@ -249,18 +248,6 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .930000007
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &13533200
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 194346}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &19543780
 NavMeshAgent:
