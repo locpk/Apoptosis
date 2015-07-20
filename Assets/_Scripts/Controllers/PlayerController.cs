@@ -996,7 +996,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void GoBackToMainMenu()
+    public void GoBackToMainMenu()
     {
         Application.LoadLevel("MainMenu");
     }
