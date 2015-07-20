@@ -163,7 +163,6 @@ public class PlayerController : MonoBehaviour
         CheckSelectedUnits();
     }
 
-    [PunRPC]
     public void RemoveDeadCell(BaseCell _in)
     {
         if (PhotonNetwork.connected && !_in.gameObject.GetPhotonView().isMine)

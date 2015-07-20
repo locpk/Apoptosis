@@ -118,31 +118,32 @@ public class BaseCell : Photon.PunBehaviour
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.isWriting)
-        {
-            // We own this player: send the others our data
-            stream.SendNext(transform.position);
-            stream.SendNext(currentProtein);
-        }
-        else
-        {
-            // Network player, receive data
-            this.transform.position = (Vector3)stream.ReceiveNext();
-            this.currentProtein = (float)stream.ReceiveNext();
-        }
+        //if (stream.isWriting)
+        //{
+        //    // We own this player: send the others our data
+        //    stream.SendNext(transform.position);
+        //    stream.SendNext(currentProtein);
+        //}
+        //else
+        //{
+        //    // Network player, receive data
+        //    this.transform.position = (Vector3)stream.ReceiveNext();
+        //    this.currentProtein = (float)stream.ReceiveNext();
+        //}
     }
 
     public override void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         base.OnPhotonInstantiate(info);
 
-        pcontroller.GetComponent<PlayerController>().AddNewCell(this);
+        pcontroller.AddNewCell(this);
     }
 
 
     #region Standard Actions
     // Public Methods
 
+    [PunRPC]
     public virtual void Move(Vector3 _destination)
     {
 
@@ -187,15 +188,13 @@ public class BaseCell : Photon.PunBehaviour
         }
 
     }
+
+    [PunRPC]
     public void Die()
     {
         isMine = false;
         isAlive = false;
         pcontroller.RemoveDeadCell(this);
-        if (PhotonNetwork.connected)
-        {
-            pcontroller.gameObject.GetPhotonView().RPC("RemoveDeadCell", PhotonTargets.Others, this);
-        }
 
 
         if (celltype != CellType.CANCER_CELL)
@@ -211,10 +210,15 @@ public class BaseCell : Photon.PunBehaviour
         //transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         //GetComponent<SpriteRenderer>().enabled = false;
 
-        if (!isSinglePlayer)
+        if (PhotonNetwork.connected)
         {
             if (photonView.isMine)
             {
+                if (!sound_manager.sounds_miscellaneous[3].isPlaying)
+                {
+                    sound_manager.sounds_miscellaneous[3].Play();
+
+                }
                 PhotonNetwork.Destroy(gameObject);
             }
 
@@ -232,7 +236,7 @@ public class BaseCell : Photon.PunBehaviour
     }
     public void Deactive()
     {
-        GameObject.Find("PlayerControl").GetComponent<PlayerController>().DeselectCell(this);
+        pcontroller.DeselectCell(this);
         gameObject.SetActive(false);
         transform.position = new Vector3(2500.0f, 2500.0f, 2500.0f);
 
@@ -553,7 +557,6 @@ public class BaseCell : Photon.PunBehaviour
     // Use this for initialization
     protected void bStart()
     {
-        pcontroller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
         navAgent.enabled = false;
         navAgent.updateRotation = false;
         navObstacle.enabled = true;
@@ -734,6 +737,10 @@ public class BaseCell : Photon.PunBehaviour
         if (currentProtein <= 0.0f)
         {
             Die();
+            if (PhotonNetwork.connected)
+            {
+                photonView.RPC("Die", PhotonTargets.Others, null);
+            }
             transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
     }

@@ -255,6 +255,10 @@ public class ColdCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
+                    if (PhotonNetwork.connected)
+                    {
+                        photonView.RPC("Die", PhotonTargets.Others, null);
+                    }
                     break;
 
                 default:
@@ -292,46 +296,46 @@ public class ColdCell : BaseCell
     {
         if (this.isAIPossessed == false)
         {
-        Collider[] hitColliders = Physics.OverlapSphere(center, radius);
-        for (int i = 0; i < hitColliders.Length; i++)
-        {
-            BaseCell basecellerino = hitColliders[i].GetComponent<BaseCell>();
-            if (basecellerino != null)
+            Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+            for (int i = 0; i < hitColliders.Length; i++)
             {
-                if (basecellerino.isAIPossessed && basecellerino != primaryTarget && basecellerino.isMine == false)
+                BaseCell basecellerino = hitColliders[i].GetComponent<BaseCell>();
+                if (basecellerino != null)
                 {
-                    basecellerino.currentProtein -= (attackDamage / basecellerino.defense);
+                    if (basecellerino.isAIPossessed && basecellerino != primaryTarget && basecellerino.isMine == false)
+                    {
+                        basecellerino.currentProtein -= (attackDamage / basecellerino.defense);
                         basecellerino.currentProtein -= attackDamage;
                         basecellerino.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
                         Vector3 tracking = new Vector3(basecellerino.transform.position.x, basecellerino.transform.position.y + 2, basecellerino.transform.position.z);
                         // Vector3
                         Instantiate(particle, tracking, basecellerino.transform.rotation);
-                    if (PhotonNetwork.connected)
-                    {
-                        basecellerino.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage / basecellerino.defense);
+                        if (PhotonNetwork.connected)
+                        {
+                            basecellerino.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage / basecellerino.defense);
+                        }
                     }
+
+                    if (!sound_manager.sounds_attacks[1].isPlaying)
+                    {
+                        sound_manager.sounds_attacks[1].Play();
+
+                    }
+
                 }
-
-                if (!sound_manager.sounds_attacks[1].isPlaying)
-                {
-                    sound_manager.sounds_attacks[1].Play();
-
-                }
-
             }
         }
-    }
         else
         {
             Collider[] hitCollider4AI = Physics.OverlapSphere(center, radius);
-            for(int i = 0; i < hitCollider4AI.Length; i++)
+            for (int i = 0; i < hitCollider4AI.Length; i++)
             {
-                if(hitCollider4AI[i].GetComponent<BaseCell>())
+                if (hitCollider4AI[i].GetComponent<BaseCell>())
                 {
                     BaseCell baseSenpaiCell = hitCollider4AI[i].GetComponent<BaseCell>();
-                    if(baseSenpaiCell != null)
+                    if (baseSenpaiCell != null)
                     {
-                        if(baseSenpaiCell.isAIPossessed == false && baseSenpaiCell != this)
+                        if (baseSenpaiCell.isAIPossessed == false && baseSenpaiCell != this)
                         {
                             baseSenpaiCell.currentProtein -= attackDamage;
                             baseSenpaiCell.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
