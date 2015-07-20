@@ -74,7 +74,7 @@ public class BaseCell : Photon.PunBehaviour
     public Vector3 destination;
     public List<GameObject> targets;
     public GameObject primaryTarget;
-    public PhotonView photonView;
+    //public PhotonView photonView;
     // public PhotonView photonView;
     public float currentProtein;
     public float fovRadius;
@@ -191,10 +191,10 @@ public class BaseCell : Photon.PunBehaviour
     {
         isMine = false;
         isAlive = false;
-        GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
+        pcontroller.RemoveDeadCell(this);
         if (PhotonNetwork.connected)
         {
-            GameObject.Find("PlayerControl").GetPhotonView().RPC("RemoveDeadCell", PhotonTargets.Others, this);
+            pcontroller.gameObject.GetPhotonView().RPC("RemoveDeadCell", PhotonTargets.Others, this);
         }
 
 
@@ -513,7 +513,7 @@ public class BaseCell : Photon.PunBehaviour
     {
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
-        photonView = GetComponent<PhotonView>();
+        //photonView = GetComponent<PhotonView>();
         if (PhotonNetwork.connected)
         {
             isSinglePlayer = (bool)photonView.instantiationData[0];
@@ -553,8 +553,7 @@ public class BaseCell : Photon.PunBehaviour
     // Use this for initialization
     protected void bStart()
     {
-        pcontroller = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerController>();
-        pcontroller = GameObject.FindObjectOfType<PlayerController>();
+        pcontroller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
         navAgent.enabled = false;
         navAgent.updateRotation = false;
         navObstacle.enabled = true;

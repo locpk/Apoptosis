@@ -1567,7 +1567,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22448750, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 22448750, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -1654,7 +1654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
+  protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -1804,7 +1804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
+  protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -1976,66 +1976,14 @@ Transform:
   - {fileID: 1139565252}
   m_Father: {fileID: 1700176268}
   m_RootOrder: 0
---- !u!1 &525428403
+--- !u!1 &525428403 stripped
 GameObject:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 139960, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 525428405}
-  - 114: {fileID: 525428404}
-  m_Layer: 0
-  m_Name: PlayerControl
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &525428404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11480174, guid: 80e5f45561476984fb60be01d1bbe24c,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 525428403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 471d131ae0e64404b9eb047dfc59791e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameStarted: 0
-  movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
-  attackPin: {fileID: 0}
-  moveWaypoint: {fileID: 0}
-  moveWaypoints: []
-  isSelecting: 1
-  NumStemCells: 0
-  NumHeatCells: 0
-  NumColdCells: 0
-  NumAcidicCells: 0
-  NumAlkaliCells: 0
-  NumNerveCells: 0
-  NumTierTwoCold: 0
-  NumTierTwoHeat: 0
-  NumEnemiesLeft: 0
-  allSelectableUnits: []
-  selectedUnits: []
-  allSelectableTargets: []
-  selectedTargets: []
-  selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
---- !u!4 &525428405
+  m_PrefabInternal: {fileID: 1130163396}
+--- !u!4 &525428405 stripped
 Transform:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 525428403}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.25199997, y: -.110990644, z: -6.50300026}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1504167608}
-  m_RootOrder: 0
+  m_PrefabInternal: {fileID: 1130163396}
 --- !u!1 &542210720
 GameObject:
   m_ObjectHideFlags: 0
@@ -3388,7 +3336,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 415444, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
@@ -3435,7 +3383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
+  protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -3522,6 +3470,56 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78c83354bbe983a44a6e1e7c583ac496, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1130163396
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1504167608}
+    m_Modifications:
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.25199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.110990644
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -6.50300026
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405606, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: viewIdField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405606, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: instantiationId
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1139565251
 GameObject:
   m_ObjectHideFlags: 0
@@ -3564,7 +3562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
+  protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -3824,7 +3822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
+  protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10
@@ -4687,7 +4685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnMode: 0
-  protein: {fileID: 11499318, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
+  protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
   maxProteins: 10

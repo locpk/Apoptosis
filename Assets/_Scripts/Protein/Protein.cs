@@ -28,7 +28,7 @@ public class Protein : Photon.PunBehaviour {
     public override void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         base.OnPhotonInstantiate(info);
-        PlayerControls.GetComponent<PlayerController>().AddNewProtein(this);
+        PlayerControls.AddNewProtein(this);
     }
 
     [PunRPC]
@@ -41,7 +41,7 @@ public class Protein : Photon.PunBehaviour {
 	void Start () {
         value = Random.Range(70, 110);
         emitter = GetComponent<ParticleSystem>();
-        PlayerControls = FindObjectOfType<PlayerController>();
+        PlayerControls = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerController>();
 	}
 	
 	// Update is called once per frame

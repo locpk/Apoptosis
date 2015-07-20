@@ -124,8 +124,9 @@ public class OnlineGameController : Photon.PunBehaviour
         Invoke("InitSync", 2.0f);
     }
 
-    public void OnLeftRoom()
+    public override void OnLeftRoom()
     {
+        base.OnLeftRoom();
         gameStarted = false;
         gameEnded = true;
         PhotonNetwork.Disconnect();
