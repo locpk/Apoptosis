@@ -39,7 +39,7 @@ public class AlkaliArea : BaseArea {
     }
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.tag == "Unit" && collider.gameObject.tag == "EnemyCell") {
+        if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
 
             if (!sound_manager.sounds_miscellaneous[6].isPlaying)
@@ -125,7 +125,7 @@ public class AlkaliArea : BaseArea {
     }
 
     void OnTriggerExit(Collider collider) {
-        if (collider.gameObject.tag == "Unit" && collider.gameObject.tag == "EnemyCell") {
+        if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
 

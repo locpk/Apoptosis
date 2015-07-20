@@ -59,6 +59,11 @@ public class StemCell : BaseCell
                 newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 newCell.GetComponent<CellSplitAnimation>().originCell = this;
+
+                if (!sound_manager.sounds_evolution[3].isPlaying)
+                {
+                    sound_manager.sounds_evolution[3].Play();
+                }
                 this.Deactive();
                 break;
             default:
@@ -94,10 +99,10 @@ public class StemCell : BaseCell
             primaryTarget.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage);
         }
 
-        //if (!sound_manager.sounds_attacks[3].isPlaying)
-        //{
-        //    sound_manager.sounds_attacks[3].Play();
-        //}
+        if (!sound_manager.sounds_attacks[3].isPlaying)
+        {
+            sound_manager.sounds_attacks[3].Play();
+        }
     }
 
     public override void Attack(GameObject _target)
@@ -151,30 +156,8 @@ public class StemCell : BaseCell
 
             }
         }
-        else
-        {
-            if (targets != null && targets.Count > 1)
-            {
-
-                if (primaryTarget == null)
-                {
-                    for (int i = 0; i < targets.Count; i++)
-                    {
-
-                        if (i != targets.Count)
-                        {
-                            
-                            primaryTarget = targets[i + 1];
-                          
-                            if (primaryTarget.GetComponent<BaseCell>())
-                                currentState = CellState.ATTACK;
-                            if (primaryTarget.GetComponent<Protein>())
-                                currentState = CellState.CONSUMING;
-                            break;
-                        }
-                    }
-                }
-            }
+       
+    
 
 
             switch (currentState)
@@ -278,7 +261,8 @@ public class StemCell : BaseCell
             }
 
         }
-    }
+    
+
 
     void FixedUpdate()
     {
