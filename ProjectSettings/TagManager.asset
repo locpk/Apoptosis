@@ -20,6 +20,14 @@ TagManager:
   - PlayerController
   - EnemyCell
   - CancerCell
+  - Menu_Canvas
+  - Options_Panel
+  - Sound_Manager
+  - Music_Slider
+  - Master_Slider
+  - SFX_Slider
+  - Mute_Button
+  - Levels_Panel
   layers:
   - Default
   - TransparentFX
