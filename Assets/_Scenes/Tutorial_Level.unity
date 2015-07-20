@@ -331,6 +331,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2013883785}
   m_RootOrder: 5
+--- !u!1 &217841579 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 188012, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+  m_PrefabInternal: {fileID: 1894004694}
 --- !u!114 &278803606 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11445132, guid: 117b6a6f277b3a74d97c83444de5a7a9,
@@ -1078,6 +1082,10 @@ Prefab:
       propertyPath: attackPin
       value: 
       objectReference: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
+    - target: {fileID: 11447774, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
+      propertyPath: TouchButton
+      value: 
+      objectReference: {fileID: 217841579}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
   m_IsPrefabParent: 0
@@ -1426,6 +1434,22 @@ Prefab:
     - target: {fileID: 22443398, guid: 117b6a6f277b3a74d97c83444de5a7a9, type: 2}
       propertyPath: m_AnchoredPosition.y
       value: -288
+      objectReference: {fileID: 0}
+    - target: {fileID: 22460984, guid: 117b6a6f277b3a74d97c83444de5a7a9, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22460984, guid: 117b6a6f277b3a74d97c83444de5a7a9, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22460984, guid: 117b6a6f277b3a74d97c83444de5a7a9, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 144
+      objectReference: {fileID: 0}
+    - target: {fileID: 22460984, guid: 117b6a6f277b3a74d97c83444de5a7a9, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -94
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 117b6a6f277b3a74d97c83444de5a7a9, type: 2}
@@ -1927,7 +1951,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22448750, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 22448750, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
       propertyPath: m_AnchoredPosition.x
