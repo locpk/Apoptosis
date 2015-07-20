@@ -52,12 +52,6 @@ public class TutorialController : MonoBehaviour
     public GameObject prefabProtein;
     GameObject spawnedProtein;
 
-    public GameObject acidicAreaText;
-    //public GameObject alkaliAreaText;
-    //public GameObject denseAreaText;
-    //public GameObject heatAreaText;
-    //public GameObject coldAreaText;
-
     // Use this for initialization
     void Start()
     {
