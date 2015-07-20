@@ -95,7 +95,7 @@ public class BaseCell : MonoBehaviour
 
     public PlayerController pcontroller;
 
-    private Sound_Manager sound_manager;
+    protected Sound_Manager sound_manager;
 
 
     #region RPC Methods
@@ -562,7 +562,6 @@ public class BaseCell : MonoBehaviour
    
         if (currentState == CellState.IDLE)
         {
-
 
             if (IsInvoking("ConsumePerSecond"))
             {

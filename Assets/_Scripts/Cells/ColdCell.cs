@@ -14,7 +14,7 @@ public class ColdCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
 
-    private Sound_Manager sound_manager;
+  
 
     void Awake()
     {

@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private GameObject winScreen;
     private GameObject loseScreen;
 
-    private bool isOverUI = false;
+    public static bool isOverUI = false;
 
 
     public void TurnOnOverUI() { isOverUI = true; }
@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
 
 
         touchButton = GameObject.Find("Touch");
+
 
         // Initialize variables
         selectedTargets.Clear();

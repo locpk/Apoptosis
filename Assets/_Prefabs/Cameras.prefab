@@ -424,9 +424,10 @@ MonoBehaviour:
   minY: -100
   maxY: 100
   scrollSpeed: 15
+  touchScrollSpeed: 100
   scrollPercentage: .0500000007
   minZoom: 10
-  maxZoom: 18
+  maxZoom: 20
   quad: {fileID: 109128}
   mainCamera: {fileID: 149172}
   minimapCamera: {fileID: 2050502}
