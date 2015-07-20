@@ -264,7 +264,7 @@ MonoBehaviour:
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   gRevertHeatPrefab: {fileID: 0}
-  gRevertColdPrefab: {fileID: 0}
+  gRevertColdPrefab: {fileID: 196526, guid: 33a86d00844360944a5e55cd994232b4, type: 2}
   gRevertNervePrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
   health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
@@ -371,6 +371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0918649c5b506df4c88a8435ed870de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snapshot_attack: {fileID: 0}
+  snapshot_normal: {fileID: 0}
 --- !u!114 &11488844
 MonoBehaviour:
   m_ObjectHideFlags: 1

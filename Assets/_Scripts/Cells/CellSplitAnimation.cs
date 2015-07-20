@@ -42,8 +42,11 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
-        Destroy(gameObject);
         originCell.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     public void CreateTier2HeatCell()
@@ -59,9 +62,12 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
-        Destroy(gameObject);
         originCell.Die();
         originCell1.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     public void CreateStemCell()
@@ -79,8 +85,11 @@ public class CellSplitAnimation : MonoBehaviour
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
 
-        Destroy(gameObject);
         originCell.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
     public void CreateStemCells()
     {
@@ -100,8 +109,11 @@ public class CellSplitAnimation : MonoBehaviour
 
             
         }
-        Destroy(gameObject);
         originCell.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
 
@@ -121,8 +133,11 @@ public class CellSplitAnimation : MonoBehaviour
                 GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
             }
         }
-        Destroy(gameObject);
         originCell.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     public void CreateHeatandCancerCells()
@@ -148,8 +163,11 @@ public class CellSplitAnimation : MonoBehaviour
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
 
 
-        Destroy(gameObject);
         originCell.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     public void CreateTier2ColdCell()
@@ -165,9 +183,12 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
-        Destroy(gameObject);
         originCell.Die();
         originCell1.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
 
@@ -184,8 +205,11 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
-        Destroy(gameObject);
         originCell.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     public void CreateColdCells()
@@ -204,8 +228,11 @@ public class CellSplitAnimation : MonoBehaviour
                 GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
             }
         }
-        Destroy(gameObject);
         originCell.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     public void CreateColdandCancerCells()
@@ -231,8 +258,11 @@ public class CellSplitAnimation : MonoBehaviour
 
 
 
-        Destroy(gameObject);
         originCell.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     public void CreateCancerCells()
@@ -250,8 +280,11 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.gameObject.transform.Rotate(90, -180, -180);
             pos.x += 1.0f;
         }
-        Destroy(gameObject);
         originCell.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
 
@@ -268,8 +301,11 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
-        Destroy(gameObject);
         originCell.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     public void CreateAcidicCell()
@@ -285,8 +321,11 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
-        Destroy(gameObject);
         originCell.Die();
+        if (PhotonNetwork.connected)
+            PhotonNetwork.Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
 

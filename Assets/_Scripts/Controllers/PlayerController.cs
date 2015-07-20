@@ -163,11 +163,19 @@ public class PlayerController : MonoBehaviour
         CheckSelectedUnits();
     }
 
+    [PunRPC]
     public void RemoveDeadCell(BaseCell _in)
     {
-        _in.isSelected = false;
-        allSelectableUnits.Remove(_in);
-        selectedUnits.Remove(_in);
+        if (PhotonNetwork.connected && !_in.gameObject.GetPhotonView().isMine)
+        {
+            allSelectableTargets.Remove(_in.gameObject);
+        }
+        else
+        {
+            _in.isSelected = false;
+            allSelectableUnits.Remove(_in);
+            selectedUnits.Remove(_in);
+        }
     }
     public void DeselectCell(BaseCell _in)
     {

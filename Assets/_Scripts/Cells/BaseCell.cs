@@ -35,7 +35,7 @@ public enum CellState
 /// <summary>
 /// Define the base cell class
 /// </summary>
-public class BaseCell : MonoBehaviour
+public class BaseCell : Photon.PunBehaviour
 {
     public GameObject gCancerCellPrefab;
     public GameObject gStemCellPrefab;
@@ -132,6 +132,13 @@ public class BaseCell : MonoBehaviour
         }
     }
 
+    public override void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        base.OnPhotonInstantiate(info);
+
+        pcontroller.GetComponent<PlayerController>().AddNewCell(this);
+    }
+
 
     #region Standard Actions
     // Public Methods
@@ -185,6 +192,10 @@ public class BaseCell : MonoBehaviour
         isMine = false;
         isAlive = false;
         GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
+        if (PhotonNetwork.connected)
+        {
+            GameObject.Find("PlayerControl").GetPhotonView().RPC("RemoveDeadCell", PhotonTargets.Others, this);
+        }
 
 
         if (celltype != CellType.CANCER_CELL)
@@ -542,7 +553,8 @@ public class BaseCell : MonoBehaviour
     // Use this for initialization
     protected void bStart()
     {
-
+        pcontroller = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerController>();
+        pcontroller = GameObject.FindObjectOfType<PlayerController>();
         navAgent.enabled = false;
         navAgent.updateRotation = false;
         navObstacle.enabled = true;
