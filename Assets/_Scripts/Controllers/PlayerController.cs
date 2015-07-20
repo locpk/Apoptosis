@@ -790,11 +790,11 @@ public class PlayerController : MonoBehaviour
 
                         if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
                         {
-                            BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
+                            BaseCell hitCell = hitInfo.collider.gameObject.GetComponentInParent<BaseCell>();
                             if (allSelectableUnits.Contains(hitCell))
                             {
-                                hitInfo.collider.gameObject.GetComponent<BaseCell>().isSelected = true;
-                                selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
+                                hitInfo.collider.gameObject.GetComponentInParent<BaseCell>().isSelected = true;
+                                selectedUnits.Add(hitInfo.collider.gameObject.GetComponentInParent<BaseCell>());
                             }
                         }
                     }
@@ -998,7 +998,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void GoBackToMainMenu()
+    public void GoBackToMainMenu()
     {
         Application.LoadLevel("MainMenu");
     }

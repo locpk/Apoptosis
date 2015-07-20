@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 417116}
   - 33: {fileID: 3321056}
-  - 135: {fileID: 13553500}
   - 23: {fileID: 2374952}
   m_Layer: 5
   m_Name: MinimapIndicator
@@ -89,7 +88,7 @@ GameObject:
   - 4: {fileID: 448378}
   - 135: {fileID: 13585906}
   - 114: {fileID: 11478476}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FOWSight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +102,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182240}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 69.3474884, y: 2, z: -25.0199413}
+  m_LocalPosition: {x: -11.987525, y: 6, z: 7.70639467}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 466502}
@@ -371,6 +370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0918649c5b506df4c88a8435ed870de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snapshot_attack: {fileID: 0}
+  snapshot_normal: {fileID: 0}
 --- !u!114 &11488844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -382,18 +383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3277305bd7a2f03428631da060b500bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &13553500
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 133592}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: .5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13574008
 SphereCollider:
   m_ObjectHideFlags: 1

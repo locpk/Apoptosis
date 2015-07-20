@@ -25,7 +25,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 455328}
   - 33: {fileID: 3386680}
-  - 135: {fileID: 13527268}
   - 23: {fileID: 2338148}
   m_Layer: 5
   m_Name: MinimapIndicator
@@ -74,7 +73,7 @@ GameObject:
   - 4: {fileID: 405004}
   - 135: {fileID: 13561182}
   - 114: {fileID: 11482584}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FOWSight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +140,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 64.1158447, y: 2, z: -17.6575165}
+  m_LocalPosition: {x: -11.3817072, y: 6, z: 6.0881753}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 495744}
@@ -304,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a012dff7dc71a14d8606e3f6813704b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gCancerCellPrefab: {fileID: 174676, guid: 9c508ae91df327d4ca839f291dd0a801, type: 2}
+  gCancerCellPrefab: {fileID: 0}
   gStemCellPrefab: {fileID: 0}
   gHeatCellPrefab: {fileID: 168428, guid: d145796a9e2b44b46b824864a6f518ae, type: 2}
   gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
@@ -374,6 +373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0918649c5b506df4c88a8435ed870de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snapshot_attack: {fileID: 0}
+  snapshot_normal: {fileID: 0}
 --- !u!114 &11483244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -396,18 +397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2064ca72bf0d14a4fab78eaff6b9edad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &13527268
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 152052}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: .5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13561182
 SphereCollider:
   m_ObjectHideFlags: 1
