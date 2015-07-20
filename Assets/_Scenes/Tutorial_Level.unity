@@ -1214,6 +1214,12 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 144034, guid: 78c83354bbe983a44a6e1e7c583ac496, type: 2}
   m_PrefabInternal: {fileID: 1270476949}
+--- !u!114 &1270476953 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11484254, guid: 78c83354bbe983a44a6e1e7c583ac496,
+    type: 2}
+  m_PrefabInternal: {fileID: 1270476949}
+  m_Script: {fileID: 11500000, guid: 66b031da25bd3e94ab945340dce2cb2a, type: 3}
 --- !u!1001 &1278723702
 Prefab:
   m_ObjectHideFlags: 0
@@ -2184,6 +2190,14 @@ Prefab:
     - target: {fileID: 11472782, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428782, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1270476953}
+    - target: {fileID: 11428782, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Mute_Unmute_Sound
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
