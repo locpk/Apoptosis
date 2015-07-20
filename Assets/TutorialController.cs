@@ -55,8 +55,8 @@ public class TutorialController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
-       
+
+
 
         Task welcome = new Task();
         welcome.Text = "Welcome to Apoptosis! This tutorial will teach you the controls and basic actions that can be taken in the game. Press any key to continue.";
@@ -164,15 +164,11 @@ public class TutorialController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X)
-            || Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.Q))
+        allSelectableUnits = PlayerControls.GetAllSelectableUnits();
+        foreach (GameObject item in allSelectableUnits)
         {
-            allSelectableUnits = PlayerControls.GetAllSelectableUnits();
-            foreach (GameObject item in allSelectableUnits)
-            {
-                item.GetComponent<BaseCell>().isDepleting = false;
-                item.GetComponent<BaseCell>().currentProtein = 500;
-            }
+            item.GetComponent<BaseCell>().isDepleting = false;
+            item.GetComponent<BaseCell>().currentProtein = 500;
         }
     }
 
@@ -298,5 +294,5 @@ public class TutorialController : MonoBehaviour
         //return PlayerControls.NumNerveCells > 0;
     }
 
-    void EmptyInitialization(){}
+    void EmptyInitialization() { }
 }
