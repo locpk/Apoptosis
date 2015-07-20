@@ -16,7 +16,7 @@ public class Tier2HeatCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
 
-    private Sound_Manager sound_manager;
+   
     void Start()
     {
         base.bStart();

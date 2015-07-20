@@ -25,6 +25,8 @@ public class PauseMenu : MonoBehaviour
     //Shows the game end LOSE screen 
   //  public GameObject loseScreen;
 
+    Sound_Manager manager; 
+
     private GameObject playerController;
     void Awake()
     {
@@ -39,7 +41,7 @@ public class PauseMenu : MonoBehaviour
      //   winScreen.SetActive(false);
      //   loseScreen.SetActive(false);
 
-        
+        manager = Sound_Manager.Instance;
     }
 
     // Use this for initialization
@@ -57,7 +59,7 @@ public class PauseMenu : MonoBehaviour
      //   loseScreen.SetActive(false);
 
         playerController = GameObject.FindGameObjectWithTag("PlayerController");
-
+        
     }
 
     // Update is called once per frame

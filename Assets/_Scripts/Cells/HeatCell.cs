@@ -18,8 +18,7 @@ public class HeatCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
 
-    private Sound_Manager sound_manager;
-
+    
     public void Merge()
     {
 
