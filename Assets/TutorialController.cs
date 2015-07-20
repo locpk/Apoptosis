@@ -164,11 +164,15 @@ public class TutorialController : MonoBehaviour
 
     void FixedUpdate()
     {
-        allSelectableUnits = PlayerControls.GetAllSelectableUnits();
-        foreach (GameObject item in allSelectableUnits)
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X)
+            || Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.Q))
         {
-            item.GetComponent<BaseCell>().isDepleting = false;
-            item.GetComponent<BaseCell>().currentProtein = 500;
+            allSelectableUnits = PlayerControls.GetAllSelectableUnits();
+            foreach (GameObject item in allSelectableUnits)
+            {
+                item.GetComponent<BaseCell>().isDepleting = false;
+                item.GetComponent<BaseCell>().currentProtein = 500;
+            }
         }
     }
 
