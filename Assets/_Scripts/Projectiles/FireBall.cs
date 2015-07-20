@@ -6,6 +6,7 @@ public class FireBall : BaseProjectile
 {
     public GameObject Target;
     public GameObject Owner;
+    public float lifeTimer = 1.5f;
 
     void Awake()
     {
@@ -22,7 +23,11 @@ public class FireBall : BaseProjectile
     // Update is called once per frame
     void Update()
     {
-
+        lifeTimer -= Time.fixedDeltaTime;
+        if(lifeTimer <= 0.0f)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void FixedUpdate()
@@ -37,20 +42,30 @@ public class FireBall : BaseProjectile
     }
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.GetComponent<BaseCell>().isMine == false )
+
+
+        if (Owner.GetComponent<BaseCell>().isAIPossessed == true && other.gameObject.GetComponent<BaseCell>() )
         {
-            Target.GetComponent<BaseCell>().currentProtein = Target.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
-            Target.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
-           Destroy(this.gameObject);
+            if (other.gameObject.GetComponent<BaseCell>().isMine == true)
+            {
+                other.gameObject.GetComponent<BaseCell>().currentProtein = other.gameObject.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
+                other.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                Destroy(this.gameObject);
+            }
         }
 
-        else if (Owner.GetComponent<BaseCell>().isAIPossessed == true && other.gameObject.GetComponent<BaseCell>().isMine == false)
-        {
 
-            Target.GetComponent<BaseCell>().currentProtein = Target.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
-            Target.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
-            Destroy(this.gameObject);
+        if (Owner.GetComponent<BaseCell>().isAIPossessed == false && other.gameObject.GetComponent<BaseCell>())
+        {
+            if (other.gameObject.GetComponent<BaseCell>().isMine == false)
+            {
+                Target.GetComponent<BaseCell>().currentProtein = Target.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
+                Target.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                Destroy(this.gameObject);
+            }
         }
+
+
 
 
 

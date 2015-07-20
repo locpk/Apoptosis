@@ -13,8 +13,8 @@ public class ColdCell : BaseCell
     public GameObject Tier2Cold;
     public GameObject stun;
     int instanonce = 0;
-
-  
+    public GameObject particle;
+    private Sound_Manager sound_manager;
 
     void Awake()
     {
@@ -290,23 +290,57 @@ public class ColdCell : BaseCell
 
     void AoeDmg(Vector3 center, float radius)
     {
-        Collider[] hitColliders = Physics.OverlapSphere(center, radius);
-        for (int i = 0; i < hitColliders.Length; i++)
+        if (this.isAIPossessed == false)
         {
-            BaseCell basecellerino = hitColliders[i].GetComponent<BaseCell>();
-            if (basecellerino != null)
+            Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+            for (int i = 0; i < hitColliders.Length; i++)
             {
-                if (basecellerino.isAIPossessed && basecellerino != primaryTarget && basecellerino.isMine == false)
+                BaseCell basecellerino = hitColliders[i].GetComponent<BaseCell>();
+                if (basecellerino != null)
                 {
-                    basecellerino.currentProtein -= (attackDamage / basecellerino.defense);
-                }
+                    if (basecellerino.isAIPossessed && basecellerino != primaryTarget && basecellerino.isMine == false)
+                    {
+                        basecellerino.currentProtein -= attackDamage;
+                        basecellerino.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                        Vector3 tracking = new Vector3(basecellerino.transform.position.x, basecellerino.transform.position.y + 2, basecellerino.transform.position.z);
+                        // Vector3
+                        Instantiate(particle, tracking, basecellerino.transform.rotation);
+                    }
 
-                if (!sound_manager.sounds_attacks[1].isPlaying)
+                    if (!sound_manager.sounds_attacks[1].isPlaying)
+                    {
+                        sound_manager.sounds_attacks[1].Play();
+
+                    }
+
+                }
+            }
+        }
+        else
+        {
+            Collider[] hitCollider4AI = Physics.OverlapSphere(center, radius);
+            for(int i = 0; i < hitCollider4AI.Length; i++)
+            {
+                if(hitCollider4AI[i].GetComponent<BaseCell>())
                 {
-                    sound_manager.sounds_attacks[1].Play();
+                    BaseCell baseSenpaiCell = hitCollider4AI[i].GetComponent<BaseCell>();
+                    if(baseSenpaiCell != null)
+                    {
+                        if(baseSenpaiCell.isAIPossessed == false && baseSenpaiCell != this)
+                        {
+                            baseSenpaiCell.currentProtein -= attackDamage;
+                            baseSenpaiCell.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                            Vector3 tracking = new Vector3(baseSenpaiCell.transform.position.x, baseSenpaiCell.transform.position.y + 4, baseSenpaiCell.transform.position.z);
+                            // Vector3
+                            Instantiate(particle, tracking, baseSenpaiCell.transform.rotation);
+                        }
+                        if (!sound_manager.sounds_attacks[1].isPlaying)
+                        {
+                            sound_manager.sounds_attacks[1].Play();
 
+                        }
+                    }
                 }
-
             }
         }
     }
