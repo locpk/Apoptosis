@@ -3082,7 +3082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 9506168}
-  show: 0
+  show: 1
 --- !u!114 &11477728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6588,7 +6588,7 @@ RectTransform:
   m_RootOrder: 6
   m_AnchorMin: {x: .5, y: 0}
   m_AnchorMax: {x: .5, y: 0}
-  m_AnchoredPosition: {x: 597, y: 73.2979965}
+  m_AnchoredPosition: {x: 597, y: 73.2980957}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22475774

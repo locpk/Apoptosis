@@ -705,19 +705,23 @@ public class BaseCell : MonoBehaviour
 
     protected void bLateUpdate()
     {
-        float healthRatio = currentProtein / MAX_PROTEIN;
-        if (healthRatio <= 0.5f && healthRatio > 0.1f)
+        if ( transform.FindChild("Nucleus"))
         {
-            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_50;
+            float healthRatio = currentProtein / MAX_PROTEIN;
+            if (healthRatio <= 0.5f && healthRatio > 0.1f)
+            {
+                transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_50;
+            }
+            else if (healthRatio <= 0.1f)
+            {
+                transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_10;
+            }
+            else
+            {
+                transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
+            }
         }
-        else if (healthRatio <= 0.1f)
-        {
-            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_10;
-        }
-        else
-        {
-            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
-        }
+       
 
         if (currentProtein <= 0.0f)
         {
