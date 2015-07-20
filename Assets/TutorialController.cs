@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 
 class Task
 {
@@ -43,13 +46,24 @@ public class TutorialController : MonoBehaviour
     System.Collections.Generic.List<Task> Tasklist = new System.Collections.Generic.List<Task>();
 
     public PlayerController PlayerControls;
+    public List<GameObject> allSelectableUnits;
+
 
     public GameObject prefabProtein;
     GameObject spawnedProtein;
 
+    public GameObject acidicAreaText;
+    //public GameObject alkaliAreaText;
+    //public GameObject denseAreaText;
+    //public GameObject heatAreaText;
+    //public GameObject coldAreaText;
+
     // Use this for initialization
     void Start()
     {
+        
+       
+
         Task welcome = new Task();
         welcome.Text = "Welcome to Apoptosis! This tutorial will teach you the controls and basic actions that can be taken in the game. Press any key to continue.";
         welcome.Initialize = EmptyInitialization;
@@ -151,6 +165,16 @@ public class TutorialController : MonoBehaviour
         if (currentTask < Tasklist.Count && Tasklist[currentTask].IsComplete())
         {
             NextTask();
+        }
+    }
+
+    void FixedUpdate()
+    {
+        allSelectableUnits = PlayerControls.GetAllSelectableUnits();
+        foreach (GameObject item in allSelectableUnits)
+        {
+            item.GetComponent<BaseCell>().isDepleting = false;
+            item.GetComponent<BaseCell>().currentProtein = 500;
         }
     }
 
