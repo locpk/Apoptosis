@@ -1447,7 +1447,7 @@ RectTransform:
   m_Children:
   - {fileID: 255636926}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -3246,6 +3246,22 @@ Prefab:
     - target: {fileID: 473134, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11441316, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: minX
+      value: -95
+      objectReference: {fileID: 0}
+    - target: {fileID: 11441316, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: maxX
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: 11441316, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: minY
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11441316, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: maxY
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
