@@ -3231,7 +3231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 9506168}
-  show: 0
+  show: 1
 --- !u!114 &11477728
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -10,7 +10,7 @@ public class AcidicCell : BaseCell
     public GameObject stun;
     public GameObject Acid;
     int instanonce = 0;
-    Sound_Manager sound_manager;
+    
 
     void Awake()
     {

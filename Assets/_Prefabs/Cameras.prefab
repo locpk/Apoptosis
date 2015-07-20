@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 480808}
   - 33: {fileID: 3396330}
+  - 64: {fileID: 6442582}
   - 23: {fileID: 2345164}
   m_Layer: 5
   m_Name: Quad
@@ -127,8 +128,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195946}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.30959995e-06}
+  m_LocalScale: {x: 5.33861399, y: 246.234177, z: 1}
   m_Children:
   - {fileID: 464704}
   m_Father: {fileID: 415444}
@@ -178,7 +179,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149172}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -10.6000004, y: -0, z: -9.60000038}
+  m_LocalPosition: {x: 92.1999969, y: -0, z: -16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 480808}
@@ -218,8 +219,8 @@ Camera:
   m_GameObject: {fileID: 127174}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -230,7 +231,7 @@ Camera:
   far clip plane: 1000
   field of view: 35
   orthographic: 1
-  orthographic size: 30
+  orthographic size: 18
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -257,13 +258,13 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: .100000001
-    height: .159999996
+    width: .140000001
+    height: .25999999
   near clip plane: .300000012
-  far clip plane: 1000
+  far clip plane: 287.619995
   field of view: 60
   orthographic: 1
-  orthographic size: 100
+  orthographic size: 124.722771
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -338,6 +339,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109128}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &6442582
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &6466372
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -406,14 +419,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d09384ec709d7043bd7d2a1c74e3315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -40
-  maxX: 40
-  minY: -42
-  maxY: 42
-  scrollSpeed: 18
+  minX: -95
+  maxX: 95
+  minY: -100
+  maxY: 100
+  scrollSpeed: 15
+  touchScrollSpeed: 100
   scrollPercentage: .0500000007
   minZoom: 10
-  maxZoom: 30
+  maxZoom: 20
   quad: {fileID: 109128}
   mainCamera: {fileID: 149172}
   minimapCamera: {fileID: 2050502}

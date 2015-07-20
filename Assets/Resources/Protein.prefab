@@ -218,7 +218,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: .910000026
+  m_Radius: 2.23000002
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &19800084
 ParticleSystem:
@@ -1318,7 +1318,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: .910000026, y: 1.88999999, z: .910000026}
+  m_Extents: {x: 2.23000002, y: 1.88999999, z: 2.23000002}
   m_MoveThreshold: .100000001
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -1359,15 +1359,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Radius
-      value: .910000026
+      value: 2.23000002
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Extents.x
-      value: .910000026
+      value: 2.23000002
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Extents.z
-      value: .910000026
+      value: 2.23000002
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InitialModule.startSize.scalar
