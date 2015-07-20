@@ -16,7 +16,7 @@ public class Tier2ColdCell : BaseCell
     int instanonce = 0;
 
 
-    private Sound_Manager sound_manager;
+   
     // Use this for initialization
     void Start()
     {

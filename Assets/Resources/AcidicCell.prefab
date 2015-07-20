@@ -26,7 +26,7 @@ GameObject:
   - 4: {fileID: 402856}
   - 135: {fileID: 13579478}
   - 114: {fileID: 11454296}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FOWSight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 442828}
   - 33: {fileID: 3396202}
-  - 135: {fileID: 13582108}
   - 23: {fileID: 2319410}
   m_Layer: 5
   m_Name: MinimapIndicator
@@ -151,7 +150,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181396}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 73.8238754, y: 1, z: -15.4994183}
+  m_LocalPosition: {x: -9.69762897, y: 6, z: 5.90886068}
   m_LocalScale: {x: .364455462, y: .364455462, z: .364455462}
   m_Children:
   - {fileID: 461388}
@@ -394,18 +393,6 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 14.0467081
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &13582108
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188876}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &19549726
 NavMeshAgent:

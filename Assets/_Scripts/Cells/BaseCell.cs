@@ -95,7 +95,7 @@ public class BaseCell : Photon.PunBehaviour
 
     public PlayerController pcontroller;
 
-    private Sound_Manager sound_manager;
+    protected Sound_Manager sound_manager;
 
 
     #region RPC Methods
@@ -316,7 +316,7 @@ public class BaseCell : Photon.PunBehaviour
     #region Special abilities
     public void PerfectSplit()
     {
-        if (currentLevel >= 5 || currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
+        if (currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
         {
             return;
         }
@@ -387,7 +387,7 @@ public class BaseCell : Photon.PunBehaviour
 
     public void CancerousSplit()
     {
-        if (currentLevel >= 5 || currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
+        if ( currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
         {
             return;
         }
@@ -411,6 +411,7 @@ public class BaseCell : Photon.PunBehaviour
                 cancerousChance = CancerChance.LEVEL_5;
                 break;
             default:
+                cancerousChance = CancerChance.LEVEL_5;
                 break;
         }
 
@@ -577,7 +578,6 @@ public class BaseCell : Photon.PunBehaviour
         if (currentState == CellState.IDLE)
         {
 
-
             if (IsInvoking("ConsumePerSecond"))
             {
                 CancelInvoke("ConsumePerSecond");
@@ -720,19 +720,23 @@ public class BaseCell : Photon.PunBehaviour
 
     protected void bLateUpdate()
     {
-        float healthRatio = currentProtein / MAX_PROTEIN;
-        if (healthRatio <= 0.5f && healthRatio > 0.1f)
+        if ( transform.FindChild("Nucleus"))
         {
-            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_50;
+            float healthRatio = currentProtein / MAX_PROTEIN;
+            if (healthRatio <= 0.5f && healthRatio > 0.1f)
+            {
+                transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_50;
+            }
+            else if (healthRatio <= 0.1f)
+            {
+                transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_10;
+            }
+            else
+            {
+                transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
+            }
         }
-        else if (healthRatio <= 0.1f)
-        {
-            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_10;
-        }
-        else
-        {
-            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
-        }
+       
 
         if (currentProtein <= 0.0f)
         {

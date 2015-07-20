@@ -49,22 +49,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &143986
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 413926}
-  - 212: {fileID: 21277746}
-  m_Layer: 0
-  m_Name: Nucleus
-  m_TagString: Nucleus
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &156784
 GameObject:
   m_ObjectHideFlags: 1
@@ -92,6 +76,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 426442}
   - 212: {fileID: 21245960}
+  - 114: {fileID: 11499516}
   m_Layer: 0
   m_Name: StemCell
   m_TagString: Animation
@@ -118,23 +103,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104778}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .502279341, y: .502279341, z: .502279341}
-  m_Children:
-  - {fileID: 413926}
-  m_Father: {fileID: 426200}
-  m_RootOrder: 0
---- !u!4 &413926
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 143986}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.109999999, y: -0, z: -.330000013}
-  m_LocalScale: {x: .351417392, y: .351417422, z: .351417422}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 402286}
+  m_Father: {fileID: 426200}
   m_RootOrder: 0
 --- !u!4 &426200
 Transform:
@@ -158,7 +130,7 @@ Transform:
   m_GameObject: {fileID: 168656}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 401356}
   - {fileID: 452390}
@@ -249,6 +221,20 @@ MonoBehaviour:
   currentLevel: 0
   currentProtein: 0
   isAIPossessed: 0
+--- !u!114 &11499516
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health_10: {fileID: 21300000, guid: 6c2d348af91b78e488eef3a81f5c5187, type: 3}
+  health_50: {fileID: 21300000, guid: ef16570bcc2ddfe4f9b4511edce53bdf, type: 3}
+  health_100: {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
 --- !u!135 &13510896
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -285,8 +271,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ed94fef22ec7c92408aa52b78cc665c1, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: .552999973}
+  m_Sprite: {fileID: 21300000, guid: 70e5e2ba561872b4bb15ce914155a22c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21257116
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -311,8 +297,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 51340f57955ca644191ead970577d3ab, type: 3}
-  m_Color: {r: .904411793, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ca5ea6d3b321ec74bbd273aa00571178, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21263458
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -337,33 +323,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: .627451003}
---- !u!212 &21277746
-SpriteRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 143986}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 329b8784e03e9e34da03027670486068, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

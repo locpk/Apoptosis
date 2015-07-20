@@ -40,7 +40,18 @@ AnimationClip:
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-    path: Alkali Cell/Nucleus
+    path: StemCell
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: 1, y: 1, z: 1}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: Alkali Cell
   m_FloatCurves:
   - curve:
       serializedVersion: 2
@@ -126,14 +137,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .552999973
-        inSlope: -.0441249982
-        outSlope: -.0441249982
+        value: 1
+        inSlope: -.100000001
+        outSlope: -.100000001
         tangentMode: 10
       - time: 8
         value: .200000003
-        inSlope: -.123757392
-        outSlope: -.123757392
+        inSlope: -.151694894
+        outSlope: -.151694894
         tangentMode: 10
       - time: 8.98333359
         value: 0
@@ -268,14 +279,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .627451003
-        inSlope: -.0409313738
-        outSlope: -.0409313738
+        value: 1
+        inSlope: -.0874999985
+        outSlope: -.0874999985
         tangentMode: 10
       - time: 8
         value: .300000012
-        inSlope: -.0409313738
-        outSlope: -.0409313738
+        inSlope: -.0874999985
+        outSlope: -.0874999985
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -283,63 +294,70 @@ AnimationClip:
     path: StemCell/Nucleus
     classID: 212
     script: {fileID: 0}
+  m_PPtrCurves:
   - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .289684236
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.r
-    path: Alkali Cell/Nucleus
+    - time: 0
+      value: {fileID: 21300000, guid: 70e5e2ba561872b4bb15ce914155a22c, type: 3}
+    attribute: m_Sprite
+    path: StemCell
     classID: 212
     script: {fileID: 0}
   - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .609000027
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.g
-    path: Alkali Cell/Nucleus
+    - time: 0
+      value: {fileID: 21300000, guid: 6c2d348af91b78e488eef3a81f5c5187, type: 3}
+    attribute: health_10
+    path: StemCell
+    classID: 114
+    script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+  - curve:
+    - time: 0
+      value: {fileID: 21300000, guid: ef16570bcc2ddfe4f9b4511edce53bdf, type: 3}
+    attribute: health_50
+    path: StemCell
+    classID: 114
+    script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+  - curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
+    attribute: health_100
+    path: StemCell
+    classID: 114
+    script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+  - curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
+    attribute: m_Sprite
+    path: StemCell/Nucleus
     classID: 212
     script: {fileID: 0}
   - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .41911763
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.b
-    path: Alkali Cell/Nucleus
+    - time: 0
+      value: {fileID: 21300000, guid: 0411488f24058234993debeb61b28cea, type: 3}
+    attribute: m_Sprite
+    path: Alkali Cell
     classID: 212
     script: {fileID: 0}
   - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .802999973
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Color.a
-    path: Alkali Cell/Nucleus
-    classID: 212
-    script: {fileID: 0}
-  m_PPtrCurves: []
+    - time: 0
+      value: {fileID: 21300000, guid: 0411488f24058234993debeb61b28cea, type: 3}
+    attribute: health_100
+    path: Alkali Cell
+    classID: 114
+    script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+  - curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 89b9a71168a963b4bb385132a95f2451, type: 3}
+    attribute: health_50
+    path: Alkali Cell
+    classID: 114
+    script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+  - curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 54a8a7a030e30fd4193e0cdcf8360956, type: 3}
+    attribute: health_10
+    path: Alkali Cell
+    classID: 114
+    script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
@@ -395,7 +413,67 @@ AnimationClip:
       classID: 212
       customType: 0
       isPPtrCurve: 0
-    - path: 2129483420
+    - path: 3586524577
+      attribute: 0
+      script: {fileID: 0}
+      classID: 212
+      customType: 23
+      isPPtrCurve: 1
+    - path: 3586524577
+      attribute: 3203061453
+      script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+      classID: 114
+      customType: 0
+      isPPtrCurve: 1
+    - path: 3586524577
+      attribute: 3666219977
+      script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+      classID: 114
+      customType: 0
+      isPPtrCurve: 1
+    - path: 3586524577
+      attribute: 296782842
+      script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+      classID: 114
+      customType: 0
+      isPPtrCurve: 1
+    - path: 3270383912
+      attribute: 0
+      script: {fileID: 0}
+      classID: 212
+      customType: 23
+      isPPtrCurve: 1
+    - path: 2637204646
+      attribute: 0
+      script: {fileID: 0}
+      classID: 212
+      customType: 23
+      isPPtrCurve: 1
+    - path: 2637204646
+      attribute: 296782842
+      script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+      classID: 114
+      customType: 0
+      isPPtrCurve: 1
+    - path: 2637204646
+      attribute: 3666219977
+      script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+      classID: 114
+      customType: 0
+      isPPtrCurve: 1
+    - path: 2637204646
+      attribute: 3203061453
+      script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
+      classID: 114
+      customType: 0
+      isPPtrCurve: 1
+    - path: 3586524577
+      attribute: 3
+      script: {fileID: 0}
+      classID: 4
+      customType: 0
+      isPPtrCurve: 0
+    - path: 2637204646
       attribute: 3
       script: {fileID: 0}
       classID: 4
@@ -443,31 +521,16 @@ AnimationClip:
       classID: 212
       customType: 0
       isPPtrCurve: 0
-    - path: 2129483420
-      attribute: 2526845255
-      script: {fileID: 0}
-      classID: 212
-      customType: 0
-      isPPtrCurve: 0
-    - path: 2129483420
-      attribute: 4215373228
-      script: {fileID: 0}
-      classID: 212
-      customType: 0
-      isPPtrCurve: 0
-    - path: 2129483420
-      attribute: 2334886179
-      script: {fileID: 0}
-      classID: 212
-      customType: 0
-      isPPtrCurve: 0
-    - path: 2129483420
-      attribute: 304273561
-      script: {fileID: 0}
-      classID: 212
-      customType: 0
-      isPPtrCurve: 0
-    pptrCurveMapping: []
+    pptrCurveMapping:
+    - {fileID: 21300000, guid: 70e5e2ba561872b4bb15ce914155a22c, type: 3}
+    - {fileID: 21300000, guid: 6c2d348af91b78e488eef3a81f5c5187, type: 3}
+    - {fileID: 21300000, guid: ef16570bcc2ddfe4f9b4511edce53bdf, type: 3}
+    - {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
+    - {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
+    - {fileID: 21300000, guid: 0411488f24058234993debeb61b28cea, type: 3}
+    - {fileID: 21300000, guid: 0411488f24058234993debeb61b28cea, type: 3}
+    - {fileID: 21300000, guid: 89b9a71168a963b4bb385132a95f2451, type: 3}
+    - {fileID: 21300000, guid: 54a8a7a030e30fd4193e0cdcf8360956, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
@@ -570,14 +633,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .552999973
-        inSlope: -.0441249982
-        outSlope: -.0441249982
+        value: 1
+        inSlope: -.100000001
+        outSlope: -.100000001
         tangentMode: 10
       - time: 8
         value: .200000003
-        inSlope: -.123757392
-        outSlope: -.123757392
+        inSlope: -.151694894
+        outSlope: -.151694894
         tangentMode: 10
       - time: 8.98333359
         value: 0
@@ -718,48 +781,6 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_LocalScale.x
-    path: Alkali Cell/Nucleus
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_LocalScale.y
-    path: Alkali Cell/Nucleus
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_LocalScale.z
-    path: Alkali Cell/Nucleus
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 1
         inSlope: -.100000001
         outSlope: -.100000001
         tangentMode: 10
@@ -811,14 +832,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .627451003
-        inSlope: -.0409313738
-        outSlope: -.0409313738
+        value: 1
+        inSlope: -.0874999985
+        outSlope: -.0874999985
         tangentMode: 10
       - time: 8
         value: .300000012
-        inSlope: -.0409313738
-        outSlope: -.0409313738
+        inSlope: -.0874999985
+        outSlope: -.0874999985
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -830,57 +851,85 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .289684236
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: m_Color.r
-    path: Alkali Cell/Nucleus
-    classID: 212
+    attribute: m_LocalScale.x
+    path: StemCell
+    classID: 4
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .609000027
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: m_Color.g
-    path: Alkali Cell/Nucleus
-    classID: 212
+    attribute: m_LocalScale.y
+    path: StemCell
+    classID: 4
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .41911763
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: m_Color.b
-    path: Alkali Cell/Nucleus
-    classID: 212
+    attribute: m_LocalScale.z
+    path: StemCell
+    classID: 4
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .802999973
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: m_Color.a
-    path: Alkali Cell/Nucleus
-    classID: 212
+    attribute: m_LocalScale.x
+    path: Alkali Cell
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.y
+    path: Alkali Cell
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalScale.z
+    path: Alkali Cell
+    classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
