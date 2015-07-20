@@ -61,7 +61,7 @@ public class AlkaliArea : BaseArea {
                     StopCoroutine("ReadyToConvert");
                     StartCoroutine(ReadyToConvert(pendingConvertDelayed, stemCell));
                     alkaliButton.GetComponent<Button>().interactable = true;
-
+                    stemCell.isInAlkali = true;
                     break;
                 }
                     
