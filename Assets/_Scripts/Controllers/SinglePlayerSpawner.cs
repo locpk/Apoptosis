@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SinglePlayerSpawner_Level_1 : MonoBehaviour {
+public class SinglePlayerSpawner : MonoBehaviour {
 
     public Transform wavesCollection;
     public List<Transform> enermyCellSet;

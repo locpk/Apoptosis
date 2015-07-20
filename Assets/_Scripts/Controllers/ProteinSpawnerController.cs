@@ -14,7 +14,7 @@ public class ProteinSpawnerController : MonoBehaviour {
     public float delayTimeInSecond = 5.0f;
     public float spawnCycleInSecond;
     public int maxProteins;
-    private int currentProteins;
+    private int currentProteins = 0;
     private float proteinRadius;
     private List<Vector3> spawnPositionList;
 
@@ -35,9 +35,45 @@ public class ProteinSpawnerController : MonoBehaviour {
 
     void FixedUpdate() {
 
-        if (spawnMode == SpawnMode.Regenerate) {
-
+        if (spawnMode == SpawnMode.Regenerate && currentProteins < transform.parent.childCount - 1) {
+            if (!IsInvoking("RepeatingSpawnProtein")) {
+                InvokeRepeating("RepeatingSpawnProtein", 1.0f, spawnCycleInSecond);
+            }
+        } else {
+            if (IsInvoking("RepeatingSpawnProtein")) {
+                CancelInvoke("RepeatingSpawnProtein");
+            }
         }
+    }
+
+    void RepeatingSpawnProtein() {
+        Vector3 spawnPos = Vector3.zero;
+        GameObject currProtein = null;
+        Quaternion spwanAngle = Quaternion.identity;
+        spwanAngle.eulerAngles = new Vector3(90, 0, 0);
+        int count = 0;
+
+        List<Vector3> currProteinList = new List<Vector3>();
+        do {
+            float _x = transform.position.x + Random.Range(-transform.localScale.x * 5, transform.localScale.x * 5);
+            float _z = transform.position.z + Random.Range(-transform.localScale.z * 5, transform.localScale.z * 5);
+            spawnPos = new Vector3(_x, transform.position.y + 0.5f, _z);
+            foreach (Transform child in transform.parent) {
+                if ((Vector3.Distance(child.position, spawnPos) > proteinRadius * 2.5f) && (child.tag == "Protein")) count++;
+            }
+
+            if (count == transform.parent.childCount) {
+                currProtein = PhotonNetwork.connected ? PhotonNetwork.InstantiateSceneObject("Protein", spawnPos, spwanAngle, 0, null) : Instantiate(protein, spawnPos, spwanAngle) as GameObject;
+                currProtein.transform.parent = transform.parent;
+                GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewProtein(currProtein.GetComponent<Protein>());
+                currentProteins++;
+
+                break;
+            }
+
+        } while (true);
+
+
     }
 
     IEnumerator SpawnProteinOnce(float delay) {
@@ -53,10 +89,10 @@ public class ProteinSpawnerController : MonoBehaviour {
                 spawnPos = new Vector3(_x, transform.position.y + 0.5f, _z);
 
                 if (spawnPositionList.Count <= 0) {
-                    spawnPositionList.Add(spawnPos);
+                    spawnPositionList.Add(spawnPos); break;
                 } 
                 foreach (var tmp in spawnPositionList) {
-                    if (Vector3.Distance(tmp, spawnPos) > proteinRadius)
+                    if (Vector3.Distance(tmp, spawnPos) > proteinRadius * 2.5f)
                         count++;
                 }
                 if (count == spawnPositionList.Count) {
@@ -66,21 +102,27 @@ public class ProteinSpawnerController : MonoBehaviour {
                 count = 0;
                 testcases++;
                 if (testcases >= 10000) {
-                   // Debug.LogError("MAX TEST CASE REACHED!!!");
+                    Debug.LogError("MAX TEST CASE REACHED!!!");
                     break;
                 }
             } while (true);
         }
         Quaternion spwanAngle = Quaternion.identity;;
         spwanAngle.eulerAngles = new Vector3(90, 0, 0);
-        for (int i = 0; i < spawnPositionList.Count - 1; i++) {
+        for (int i = 0; i < spawnPositionList.Count; i++) {
 
 
             currProtein = PhotonNetwork.connected ? PhotonNetwork.InstantiateSceneObject("Protein", spawnPositionList[i], spwanAngle, 0, null):Instantiate(protein, spawnPositionList[i], spwanAngle) as GameObject;
             currProtein.transform.parent = transform.parent;
+            
+            Destroy(currProtein.GetComponent<FogOfWarHider>()); // using for debug!!!!
+
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewProtein(currProtein.GetComponent<Protein>());
+
+            if (spawnMode == SpawnMode.Regenerate)
+                currentProteins++;
         }
-        //Debug.Log(testcases + " cases.");
+        Debug.Log(testcases + " cases.");
     }
 
 }
