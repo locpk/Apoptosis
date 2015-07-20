@@ -1206,6 +1206,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78c83354bbe983a44a6e1e7c583ac496, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1270476950 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 144034, guid: 78c83354bbe983a44a6e1e7c583ac496, type: 2}
+  m_PrefabInternal: {fileID: 1270476949}
 --- !u!1001 &1278723702
 Prefab:
   m_ObjectHideFlags: 0
@@ -2264,6 +2268,22 @@ Prefab:
     - target: {fileID: 11441932, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GoBackToMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 11490330, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 299872085}
+    - target: {fileID: 11490330, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: UnitRevert
+      objectReference: {fileID: 0}
+    - target: {fileID: 11472782, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1270476950}
+    - target: {fileID: 11472782, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
