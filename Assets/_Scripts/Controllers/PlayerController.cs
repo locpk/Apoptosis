@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
     public void AddNewProtein(Protein _in)
     {
         allSelectableTargets.Add(_in.gameObject);
-       // selectedTargets.Add(_in.gameObject);
+        // selectedTargets.Add(_in.gameObject);
         CheckSelectedUnits();
     }
 
@@ -560,7 +560,7 @@ public class PlayerController : MonoBehaviour
 
         if (allSelectableUnits.Count == 0)
         {
-            Show_LoseScreen();            
+            Show_LoseScreen();
         }
     }
 
@@ -585,13 +585,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!isOverUI && Time.timeScale > 0.0f)
         {
-            if (Input.touchCount == 1 && isSelecting )
+            if (Input.touchCount == 1 && isSelecting)
             {
                 Touch oneTouch = Input.GetTouch(0);
                 switch (oneTouch.phase)
                 {
                     case TouchPhase.Began:
-
 
                         GUISelectRect.xMax = oneTouch.position.x;
                         GUISelectRect.yMax = oneTouch.position.y;
@@ -623,18 +622,16 @@ public class PlayerController : MonoBehaviour
             if (Input.touchCount == 1 && !isSelecting)
             {
 
-                
+
                 GUISelectRect.xMax = GUISelectRect.xMin;
                 GUISelectRect.yMax = GUISelectRect.yMin;
                 Vector3 initPos = -Vector3.one;
                 Vector3 lastPos = -Vector3.one;
-                GameObject waypoint;
                 Touch touch = Input.GetTouch(0);
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
-                        initTouchTime = Time.time;
-                        delay = Time.time;
+
 
 
                         RaycastHit hitInfo;
@@ -653,13 +650,6 @@ public class PlayerController : MonoBehaviour
                     case TouchPhase.Canceled:
                         break;
                     case TouchPhase.Ended:
-                        if (Time.time - initTouchTime <= 0.5f)
-                        {
-                            initTouchTime = 0.0f;
-                            DeselectCells();
-                            break;
-                        }
-
 
                         RaycastHit hitInfo1;
                         Ray screenRay1 = Camera.main.ScreenPointToRay(touch.position);
@@ -667,29 +657,30 @@ public class PlayerController : MonoBehaviour
                         if (Physics.Raycast(screenRay1, out hitInfo1, 1000.0f, terrainLayer))
                         {
                             lastPos = hitInfo1.point;
-
+                            if (hitInfo1.collider.tag == "Unit")
+                            {
+                                EventManager.Attack(hitInfo1.collider.gameObject);
+                            }
+                            else if (hitInfo1.collider.tag == "Protein")
+                            {
+                                EventManager.Consume(hitInfo1.collider.gameObject);
+                            }
+                            else
+                            {
+                                EventManager.Move(lastPos);
+                                GameObject.Instantiate(movePin, hitInfo1.point, Quaternion.Euler(90.0f, 0.0f, 0.0f));
+                                if (!sound_manager.sounds_miscellaneous[1].isPlaying)
+                                {
+                                    sound_manager.sounds_miscellaneous[1].Play();
+                                }
+                            }
+                            
                         }
 
 
 
                         break;
                     case TouchPhase.Moved:
-                        RaycastHit hitInfo2;
-                        Ray screenRay2 = Camera.main.ScreenPointToRay(touch.position);
-
-                        if (Physics.Raycast(screenRay2, out hitInfo2, 1000.0f, terrainLayer))
-                        {
-                            lastPos = hitInfo2.point;
-                            if (Time.time - delay <= 1.0f)
-                            {
-                                waypoint = Instantiate(moveWaypoint, lastPos, Quaternion.identity) as GameObject;
-                                moveWaypoints.Add(waypoint);
-                                delay = Time.time;
-                            }
-                          
-                            waypoint = null;
-                        }
-
                         break;
                     case TouchPhase.Stationary:
                         break;
@@ -946,11 +937,11 @@ public class PlayerController : MonoBehaviour
 
         if (enemies.Count == 0 && gameStarted) // if there are no enemies left, the player has won the game
         {
-            
+
             Show_WinningScreen();
         }
 
-        
+
     }
 
     void Show_WinningScreen()
@@ -991,15 +982,15 @@ public class PlayerController : MonoBehaviour
             img.enabled = true;
 
         }
-       
+
         this.gameObject.SetActive(false);
         Invoke("GoBackToMainMenu", 5.0f);
-        
+
     }
 
     void GoBackToMainMenu()
     {
         Application.LoadLevel("MainMenu");
     }
-    
+
 }

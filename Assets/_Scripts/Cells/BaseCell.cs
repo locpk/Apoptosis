@@ -301,7 +301,7 @@ public class BaseCell : MonoBehaviour
     #region Special abilities
     public void PerfectSplit()
     {
-        if (currentLevel >= 5 || currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
+        if (currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
         {
             return;
         }
@@ -372,7 +372,7 @@ public class BaseCell : MonoBehaviour
 
     public void CancerousSplit()
     {
-        if (currentLevel >= 5 || currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
+        if ( currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
         {
             return;
         }
@@ -396,6 +396,7 @@ public class BaseCell : MonoBehaviour
                 cancerousChance = CancerChance.LEVEL_5;
                 break;
             default:
+                cancerousChance = CancerChance.LEVEL_5;
                 break;
         }
 
