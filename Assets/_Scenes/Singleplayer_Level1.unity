@@ -301,11 +301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ca297f7c9df0b41967a79f9e72efc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnMode: 0
+  spawnMode: 1
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
-  delayTimeInSecond: 5
-  spawnCycleInSecond: 60
-  maxProteins: 10
+  delayTimeInSecond: 3
+  spawnCycleInSecond: 180
+  maxProteins: 12
 --- !u!64 &138158813
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -880,9 +880,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
-  delayTimeInSecond: 5
-  spawnCycleInSecond: 60
-  maxProteins: 10
+  delayTimeInSecond: 3
+  spawnCycleInSecond: 180
+  maxProteins: 12
 --- !u!64 &370131195
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1257,7 +1257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &594137391
 Transform:
   m_ObjectHideFlags: 0
@@ -1374,9 +1374,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
-  delayTimeInSecond: 5
-  spawnCycleInSecond: 60
-  maxProteins: 10
+  delayTimeInSecond: 3
+  spawnCycleInSecond: 180
+  maxProteins: 12
 --- !u!64 &628390191
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1483,9 +1483,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
-  delayTimeInSecond: 5
-  spawnCycleInSecond: 60
-  maxProteins: 10
+  delayTimeInSecond: 3
+  spawnCycleInSecond: 180
+  maxProteins: 12
 --- !u!64 &659581649
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5180,9 +5180,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
-  delayTimeInSecond: 5
-  spawnCycleInSecond: 60
-  maxProteins: 10
+  delayTimeInSecond: 3
+  spawnCycleInSecond: 180
+  maxProteins: 12
 --- !u!64 &1700419652
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5386,11 +5386,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ca297f7c9df0b41967a79f9e72efc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnMode: 1
+  spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
-  delayTimeInSecond: 5
-  spawnCycleInSecond: 120
-  maxProteins: 10
+  delayTimeInSecond: 3
+  spawnCycleInSecond: 180
+  maxProteins: 12
 --- !u!64 &1811337902
 MeshCollider:
   m_ObjectHideFlags: 0

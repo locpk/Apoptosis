@@ -14,12 +14,11 @@ public class ProteinSpawnerController : MonoBehaviour {
     public float delayTimeInSecond = 5.0f;
     public float spawnCycleInSecond;
     public int maxProteins;
-    private int currentProteins = 0;
     private float proteinRadius;
     private List<Vector3> spawnPositionList;
 
     private int testcases = 0;
-
+    private bool preSpawned = false;
     void Awake () {
         if (protein == null) {
             Debug.LogError(this.ToString() + " has not been set.");
@@ -35,7 +34,7 @@ public class ProteinSpawnerController : MonoBehaviour {
 
     void FixedUpdate() {
 
-        if (spawnMode == SpawnMode.Regenerate && currentProteins < transform.parent.childCount - 1) {
+        if (spawnMode == SpawnMode.Regenerate && maxProteins > transform.parent.childCount - 1 && preSpawned) {
             if (!IsInvoking("RepeatingSpawnProtein")) {
                 InvokeRepeating("RepeatingSpawnProtein", 1.0f, spawnCycleInSecond);
             }
@@ -52,6 +51,8 @@ public class ProteinSpawnerController : MonoBehaviour {
         Quaternion spwanAngle = Quaternion.identity;
         spwanAngle.eulerAngles = new Vector3(90, 0, 0);
         int count = 0;
+        int currentProteinListCount = transform.parent.childCount;
+        testcases = 0;
 
         List<Vector3> currProteinList = new List<Vector3>();
         do {
@@ -59,18 +60,25 @@ public class ProteinSpawnerController : MonoBehaviour {
             float _z = transform.position.z + Random.Range(-transform.localScale.z * 5, transform.localScale.z * 5);
             spawnPos = new Vector3(_x, transform.position.y + 0.5f, _z);
             foreach (Transform child in transform.parent) {
-                if ((Vector3.Distance(child.position, spawnPos) > proteinRadius * 2.5f) && (child.tag == "Protein")) count++;
+                if ((Vector3.Distance(child.position, spawnPos) > proteinRadius * 2.5f) && (child.tag == "Protein"))
+                    count++;
             }
 
-            if (count == transform.parent.childCount) {
+            if (count == currentProteinListCount - 1) {
                 currProtein = PhotonNetwork.connected ? PhotonNetwork.InstantiateSceneObject("Protein", spawnPos, spwanAngle, 0, null) : Instantiate(protein, spawnPos, spwanAngle) as GameObject;
                 currProtein.transform.parent = transform.parent;
                 GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewProtein(currProtein.GetComponent<Protein>());
-                currentProteins++;
+
+                //Destroy(currProtein.GetComponent<FogOfWarHider>()); // using for debug!!!!
 
                 break;
             }
 
+            testcases++;
+            if (testcases >= 5000) {
+                Debug.LogError("MAX TEST CASE REACHED!!!");
+                break;
+            }
         } while (true);
 
 
@@ -115,14 +123,13 @@ public class ProteinSpawnerController : MonoBehaviour {
             currProtein = PhotonNetwork.connected ? PhotonNetwork.InstantiateSceneObject("Protein", spawnPositionList[i], spwanAngle, 0, null):Instantiate(protein, spawnPositionList[i], spwanAngle) as GameObject;
             currProtein.transform.parent = transform.parent;
             
-            Destroy(currProtein.GetComponent<FogOfWarHider>()); // using for debug!!!!
+            //Destroy(currProtein.GetComponent<FogOfWarHider>()); // using for debug!!!!
 
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewProtein(currProtein.GetComponent<Protein>());
-
-            if (spawnMode == SpawnMode.Regenerate)
-                currentProteins++;
         }
         Debug.Log(testcases + " cases.");
+        testcases = 0;
+        preSpawned = true;
     }
 
 }

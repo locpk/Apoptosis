@@ -5,7 +5,7 @@ public class FogOfWarViewer : MonoBehaviour
 {
     Transform m_trans;
     public Vector2 viewOfRange = new Vector2(2.0f, 6.0f);
-    public FogOfWarController.LOSChecks lineOfSightCheck = FogOfWarController.LOSChecks.None;
+    public FogOfWarController.LOSChecks lineOfSightCheck = FogOfWarController.LOSChecks.EveryUpdate;
     public bool isActive = true;
 
     FogOfWarController.Viewer m_viewer;
