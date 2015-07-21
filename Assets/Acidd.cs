@@ -23,42 +23,51 @@ public class Acidd : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-      
-         if (Owner.GetComponent<BaseCell>().isAIPossessed == true && other.gameObject.GetComponent<BaseCell>() )
+
+        if (Owner.GetComponent<BaseCell>().isAIPossessed == true && other.gameObject.GetComponent<BaseCell>())
         {
             if (other.gameObject.GetComponent<BaseCell>().isMine == true)
             {
-               GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                myanim.SetTrigger("Acid");
+                GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                myanim.SetTrigger("Start");
                 other.gameObject.GetComponent<BaseCell>().currentProtein = other.gameObject.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
                 other.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                if (PhotonNetwork.connected)
+                {
+                    other.gameObject.GetComponent<BaseCell>().photonView.RPC("ApplyDamage", PhotonTargets.Others, Owner.GetComponent<AcidicCell>().attackDamage);
+                }
                 GetComponent<SphereCollider>().radius = 3;
-   
+
             }
         }
 
-         if (Owner.GetComponent<BaseCell>().isAIPossessed == false && other.gameObject.GetComponent<BaseCell>())
-         {
-             if (other.gameObject.GetComponent<BaseCell>().isMine == false)
-             {
+        if (Owner.GetComponent<BaseCell>().isAIPossessed == false && other.gameObject.GetComponent<BaseCell>())
+        {
+            if (other.gameObject.GetComponent<BaseCell>().isMine == false)
+            {
                 GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                 myanim.SetTrigger("Acid");
-                 other.gameObject.GetComponent<BaseCell>().currentProtein = other.gameObject.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
-                 other.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
-             }
-         }
+                myanim.SetTrigger("Start");
+                other.gameObject.GetComponent<BaseCell>().currentProtein = other.gameObject.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
+                other.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                if (PhotonNetwork.connected)
+                {
+                    other.gameObject.GetComponent<BaseCell>().photonView.RPC("ApplyDamage", PhotonTargets.Others, Owner.GetComponent<AcidicCell>().attackDamage);
+                }
+                GetComponent<SphereCollider>().radius = 3;
+            }
+        }
 
     }
     void OnTriggerStay(Collider other)
     {
-    
-       
-            if (!IsInvoking("AoeDmg"))
-            {
-                InvokeRepeating("AoeDmg", 1.0f, 1.0f);
 
-           }
-        
+
+        if (!IsInvoking("AoeDmg"))
+        {
+            InvokeRepeating("AoeDmg", 1.0f, 1.0f);
+
+        }
+
 
     }
 
@@ -69,7 +78,7 @@ public class Acidd : MonoBehaviour
             CancelInvoke("AoeDmg");
         }
     }
-    
+
     void DestroyMyself()
     {
         Destroy(this.gameObject);
@@ -80,6 +89,30 @@ public class Acidd : MonoBehaviour
         {
             caughtInAOETargets = new List<GameObject>();
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+            Debug.Break();
+            for (int i = 0; i < hitColliders.Length; i++)
+            {
+                if (hitColliders[i].gameObject != Owner && hitColliders[i].GetComponent<BaseCell>() && hitColliders[i].GetComponent<BaseCell>().isMine == true)
+                {
+                    caughtInAOETargets.Add(hitColliders[i].gameObject);
+                }
+            }
+            for (int i = 0; i < caughtInAOETargets.Count; i++)
+            {
+                caughtInAOETargets[i].GetComponent<BaseCell>().currentProtein -= Owner.GetComponent<AcidicCell>().attackDamage;
+
+                caughtInAOETargets[i].GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                if (PhotonNetwork.connected)
+                {
+                    caughtInAOETargets[i].GetComponent<BaseCell>().photonView.RPC("ApplyDamage", PhotonTargets.Others, Owner.GetComponent<AcidicCell>().attackDamage);
+                }
+            }
+        }
+        else
+        {
+            caughtInAOETargets = new List<GameObject>();
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+
             for (int i = 0; i < hitColliders.Length; i++)
             {
                 if (hitColliders[i].gameObject != Owner && hitColliders[i].GetComponent<BaseCell>() && hitColliders[i].GetComponent<BaseCell>().isMine == false)
@@ -92,30 +125,13 @@ public class Acidd : MonoBehaviour
                 caughtInAOETargets[i].GetComponent<BaseCell>().currentProtein -= Owner.GetComponent<AcidicCell>().attackDamage;
 
                 caughtInAOETargets[i].GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
-            }
-        }
-        else
-        {
-            caughtInAOETargets = new List<GameObject>();
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
-
-            for (int i = 0; i < hitColliders.Length; i++)
-            {
-                if(hitColliders[i].gameObject != Owner && hitColliders[i].GetComponent<BaseCell>() && hitColliders[i].GetComponent<BaseCell>().isMine == true)
+                if (PhotonNetwork.connected)
                 {
-                    caughtInAOETargets.Add(hitColliders[i].gameObject);
+                    caughtInAOETargets[i].GetComponent<BaseCell>().photonView.RPC("ApplyDamage", PhotonTargets.Others, Owner.GetComponent<AcidicCell>().attackDamage);
                 }
-            }
-            for (int i = 0; i < caughtInAOETargets.Count; i++)
-            {
-                caughtInAOETargets[i].GetComponent<BaseCell>().currentProtein -= Owner.GetComponent<AcidicCell>().attackDamage;
-
-                caughtInAOETargets[i].GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
             }
         }
     }
-    
-
 }
 
 

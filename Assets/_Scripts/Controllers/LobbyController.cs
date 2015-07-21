@@ -46,16 +46,9 @@ public class LobbyController : Photon.PunBehaviour
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        if (Application.isEditor)
+        if (PhotonNetwork.room.playerCount >= 2)
         {
-
-        }
-        else
-        {
-            if (PhotonNetwork.room.playerCount >= 2)
-            {
-                PhotonNetwork.room.open = false;
-            }
+            PhotonNetwork.room.open = false;
         }
         PhotonNetwork.LoadLevel("Multiplayer_Level");
     }

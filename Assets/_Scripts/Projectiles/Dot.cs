@@ -19,6 +19,10 @@ public class Dot : MonoBehaviour
         {
             Target.GetComponent<BaseCell>().currentProtein -= Owner.GetComponent<BaseCell>().attackDamage;
             Target.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+            if (PhotonNetwork.connected)
+            {
+                Target.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, Owner.GetComponent<BaseCell>().attackDamage);
+            }
         }
         
     }

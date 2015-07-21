@@ -43,11 +43,12 @@ public class NerveCell : BaseCell
     void DamagePreSecond()
     {
 
-       // Vector3 them2me = primaryTarget.transform.position - transform.position;
-        GameObject Lightningk = Instantiate(Lightning, transform.position, transform.rotation) as GameObject;
+        // Vector3 them2me = primaryTarget.transform.position - transform.position;
+        GameObject Lightningk = PhotonNetwork.connected ? PhotonNetwork.Instantiate(Lightning.name, transform.position, transform.rotation, 0)
+            : Instantiate(Lightning, transform.position, transform.rotation) as GameObject;
         //      Lightningk.GetComponent<Lighting>().transform.LookAt(primaryTarget.transform);
         //6Lightningk.GetComponent<Rigidbody>().velocity += them2me.normalized * lightningSpeed;
-       Lightningk.GetComponent<Lighting>().currentTarget = primaryTarget;
+        Lightningk.GetComponent<Lighting>().currentTarget = primaryTarget;
         Lightningk.GetComponent<Lighting>().realOwner = this.gameObject;
         Lightningk.GetComponent<Lighting>().speed = lightningSpeed;
 
@@ -158,6 +159,10 @@ public class NerveCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
+                    if (PhotonNetwork.connected)
+                    {
+                        photonView.RPC("Die", PhotonTargets.Others, null);
+                    }
                     break;
                 case CellState.MERGING:
                     break;

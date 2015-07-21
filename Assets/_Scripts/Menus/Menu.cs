@@ -55,36 +55,36 @@ public class Menu : MonoBehaviour {
         brackets.SetActive(false);
         backGround.SetActive(false);
         loadingBar.SetActive(false);
-        
-        MasterVolSlider = GameObject.FindGameObjectWithTag("Master_Slider");
-        mas_slider = MasterVolSlider.GetComponent<Slider>();
-        mas_slider_bounds = mas_slider.GetComponent<RectTransform>().rect;
-        mas_slider_bounds.xMin += mas_slider.GetComponent<RectTransform>().position.x;
-        mas_slider_bounds.xMax += mas_slider.GetComponent<RectTransform>().position.x;
-        mas_slider_bounds.yMin += mas_slider.GetComponent<RectTransform>().position.y;
-        mas_slider_bounds.yMax += mas_slider.GetComponent<RectTransform>().position.y;
 
-        MusicVolSlider = GameObject.FindGameObjectWithTag("Music_Slider");
-        SFXVolSlider = GameObject.FindGameObjectWithTag("SFX_Slider");
+      //  MasterVolSlider = GameObject.FindGameObjectWithTag("Master_Slider");
+      //  mas_slider = MasterVolSlider.GetComponent<Slider>();
+      //  mas_slider_bounds = mas_slider.GetComponent<RectTransform>().rect;
+      //  mas_slider_bounds.xMin += mas_slider.GetComponent<RectTransform>().position.x;
+      //  mas_slider_bounds.xMax += mas_slider.GetComponent<RectTransform>().position.x;
+      //  mas_slider_bounds.yMin += mas_slider.GetComponent<RectTransform>().position.y;
+      //  mas_slider_bounds.yMax += mas_slider.GetComponent<RectTransform>().position.y;
 
-        if (!System.IO.File.Exists("OptionsMenu.cfg"))
-        {
-            configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.Write, System.IO.FileShare.None);
-            byte[] emptyparams = new byte[8];
-            configFile.Write(emptyparams, 0, 8);
-            configFile.Close();
-        }
-        else
-        {
-            configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.None);
-            configuration = new byte[9];
-            configFile.Read(configuration, 0, 9);
-            MasterVolSlider.GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, 0);
-            MusicVolSlider. GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, sizeof(float));
-            SFXVolSlider.   GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, sizeof(float));
-            b_fullscreen = System.BitConverter.ToBoolean(configuration,sizeof(float)); //ToSingle(configuration, sizeof(float));
-            configFile.Close();
-        }
+       // MusicVolSlider = GameObject.FindGameObjectWithTag("Music_Slider");
+       // SFXVolSlider = GameObject.FindGameObjectWithTag("SFX_Slider");
+
+     // if (!System.IO.File.Exists("OptionsMenu.cfg"))
+     // {
+     //     configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.Write, System.IO.FileShare.None);
+     //     byte[] emptyparams = new byte[8];
+     //     configFile.Write(emptyparams, 0, 8);
+     //     configFile.Close();
+     // }
+     // else
+     // {
+     //     configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.None);
+     //     configuration = new byte[9];
+     //     configFile.Read(configuration, 0, 9);
+     //     MasterVolSlider.GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, 0);
+     //     MusicVolSlider. GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, sizeof(float));
+     //     SFXVolSlider.   GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, sizeof(float));
+     //     b_fullscreen = System.BitConverter.ToBoolean(configuration,sizeof(float)); //ToSingle(configuration, sizeof(float));
+     //     configFile.Close();
+     // }
 
           
         // make fullscreen

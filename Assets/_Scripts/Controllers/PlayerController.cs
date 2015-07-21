@@ -172,9 +172,16 @@ public class PlayerController : MonoBehaviour
 
     public void RemoveDeadCell(BaseCell _in)
     {
-        _in.isSelected = false;
-        allSelectableUnits.Remove(_in);
-        selectedUnits.Remove(_in);
+        if (PhotonNetwork.connected && !_in.gameObject.GetPhotonView().isMine)
+        {
+            allSelectableTargets.Remove(_in.gameObject);
+        }
+        else
+        {
+            _in.isSelected = false;
+            allSelectableUnits.Remove(_in);
+            selectedUnits.Remove(_in);
+        }
     }
     public void DeselectCell(BaseCell _in)
     {
@@ -220,6 +227,22 @@ public class PlayerController : MonoBehaviour
 
     public void UnitSelection(Vector2 origin)
     {
+        List<BaseCell> toRemove = new List<BaseCell>();
+        foreach (BaseCell item in allSelectableUnits)
+        {
+            if (item == null)
+            {
+                toRemove.Add(item);
+                allSelectableUnits.Remove(item);
+            }
+        }
+        foreach (BaseCell item in toRemove)
+        {
+            if (item == null)
+            {
+                allSelectableUnits.Remove(item);
+            }
+        }
         if (Input.mousePosition.x >= origin.x)
         {
             GUISelectRect.xMax = Input.mousePosition.x;

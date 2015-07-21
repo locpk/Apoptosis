@@ -85,7 +85,7 @@ public class StemCell : BaseCell
     {
 
     }
-    
+
 
     void DamagePerSecond()
     {
@@ -114,7 +114,7 @@ public class StemCell : BaseCell
         }
     }
 
-   
+
 
 
     void Awake()
@@ -157,17 +157,17 @@ public class StemCell : BaseCell
 
             }
         }
-       
-    
 
 
-            switch (currentState)
-            {
 
-                case CellState.IDLE:
-                    SetPrimaryTarget(null);
-                    if (IsInvoking("DamagePerSecond"))
-                    {
+
+        switch (currentState)
+        {
+
+            case CellState.IDLE:
+                SetPrimaryTarget(null);
+                if (IsInvoking("DamagePerSecond"))
+                {
                         CancelInvoke("DamagePerSecond");
                     }
                     if (particleSystem.isPlaying)
@@ -176,10 +176,10 @@ public class StemCell : BaseCell
                         particleSystem.Stop();
                     }
 
-                    //guard mode auto attack enemy in range
-                    //base.Guarding();
-                    break;
-                case CellState.ATTACK:
+                //guard mode auto attack enemy in range
+                //base.Guarding();
+                break;
+            case CellState.ATTACK:
                     if (primaryTarget == null)
                     {
                         if (IsInvoking("DamagePerSecond"))
@@ -195,12 +195,12 @@ public class StemCell : BaseCell
                         return;
                     }
 
-                    float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
+                float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
 
                     if (distance >  attackRange * attackRange && distance <= fovRadius * fovRadius)
+                {
+                    if (IsInvoking("DamagePerSecond"))
                     {
-                        if (IsInvoking("DamagePerSecond"))
-                        {
                             CancelInvoke("DamagePerSecond");
                         }
                         if (particleSystem.isPlaying)
@@ -208,25 +208,25 @@ public class StemCell : BaseCell
 
                             particleSystem.Stop();
                         }
-                        base.ChaseTarget();
+                    base.ChaseTarget();
                         return;
-                    }
+                }
                     else if (distance <= attackRange * attackRange )
+                {
+                    if (!IsInvoking("DamagePerSecond"))
                     {
-                        if (!IsInvoking("DamagePerSecond"))
-                        {
-                            InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
-                        }
-                        if (particleSystem.isStopped || particleSystem.isPaused)
-                        {
-                            particleSystem.Play();
-                        }
-                        return;
+                        InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
                     }
-                    else
+                        if (particleSystem.isStopped || particleSystem.isPaused)
                     {
-                        if (IsInvoking("DamagePerSecond"))
-                        {
+                            particleSystem.Play();
+                    }
+                        return;
+                }
+                else
+                {
+                    if (IsInvoking("DamagePerSecond"))
+                    {
                             CancelInvoke("DamagePerSecond");
                         }
                         if (particleSystem.isPlaying)
@@ -234,51 +234,55 @@ public class StemCell : BaseCell
 
                             particleSystem.Stop();
                         }
-                        currentState = CellState.IDLE;
+                    currentState = CellState.IDLE;
 
-                    }
-                    break;
-                case CellState.CONSUMING:
-                    base.bUpdate();
+                }
+                break;
+            case CellState.CONSUMING:
+                base.bUpdate();
 
-                    break;
-                case CellState.MOVING:
+                break;
+            case CellState.MOVING:
 
-                    base.bUpdate();
+                base.bUpdate();
                     if (primaryTarget )
+                {
+                    if (primaryTarget.GetComponent<BaseCell>())
                     {
-                        if (primaryTarget.GetComponent<BaseCell>())
-                        {
-                            currentState = CellState.ATTACK;
-                            return;
-                        }
-                        else if (primaryTarget.GetComponent<Protein>())
-                        {
-                            currentState = CellState.CONSUMING;
-                            return;
-                        }
-                    }
-                    else if (!primaryTarget || base.isStopped())
-                    {
-                        currentState = CellState.IDLE;
+                        currentState = CellState.ATTACK;
                         return;
                     }
+                    else if (primaryTarget.GetComponent<Protein>())
+                    {
+                        currentState = CellState.CONSUMING;
+                        return;
+                    }
+                }
+                else if (!primaryTarget || base.isStopped())
+                {
+                    currentState = CellState.IDLE;
+                    return;
+                }
 
 
-                    break;
-                case CellState.ATTACK_MOVING:
-                    base.bUpdate();
+                break;
+            case CellState.ATTACK_MOVING:
+                base.bUpdate();
 
-                    break;
-                case CellState.DEAD:
-                    base.Die();
-                    break;
-                default:
-                    break;
-            }
-
+                break;
+            case CellState.DEAD:
+                base.Die();
+                if (PhotonNetwork.connected)
+                {
+                    photonView.RPC("Die", PhotonTargets.Others, null);
+                }
+                break;
+            default:
+                break;
         }
-    
+
+    }
+
 
 
     void FixedUpdate()

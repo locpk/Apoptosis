@@ -234,7 +234,7 @@ MonoBehaviour:
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
   gRevertHeatPrefab: {fileID: 0}
-  gRevertColdPrefab: {fileID: 0}
+  gRevertColdPrefab: {fileID: 196526, guid: 33a86d00844360944a5e55cd994232b4, type: 2}
   gRevertNervePrefab: {fileID: 0}
   health_10: {fileID: 21300000, guid: eea9fa1213e55b848bb48e2674fa380f, type: 3}
   health_50: {fileID: 21300000, guid: eea9fa1213e55b848bb48e2674fa380f, type: 3}

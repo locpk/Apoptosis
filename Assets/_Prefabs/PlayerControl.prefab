@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11480174}
   m_Layer: 0
   m_Name: PlayerControl
-  m_TagString: Untagged
+  m_TagString: PlayerController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,6 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471d131ae0e64404b9eb047dfc59791e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStarted: 0
   movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
   attackPin: {fileID: 0}
   moveWaypoint: {fileID: 110900, guid: 669611cb87dffa74cad959c741ccb043, type: 2}
@@ -57,7 +58,8 @@ MonoBehaviour:
   selectedUnits: []
   allSelectableTargets: []
   selectedTargets: []
-  selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
+  selector: {fileID: 2800000, guid: 5137f53af8d01754284143d25351853e, type: 3}
+  friendly_indicator: {fileID: 2800000, guid: 2891a1c9bf4b09b4098df9cf5af206a0, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -81,6 +83,30 @@ Prefab:
       propertyPath: moveWaypoint
       value: 
       objectReference: {fileID: 110900, guid: 669611cb87dffa74cad959c741ccb043, type: 2}
+    - target: {fileID: 0}
+      propertyPath: synchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ObservedComponents.Array.data[0]
+      value: 
+      objectReference: {fileID: 11480174}
+    - target: {fileID: 0}
+      propertyPath: instantiationId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: PlayerController
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: friendly_indicator
+      value: 
+      objectReference: {fileID: 2800000, guid: 2891a1c9bf4b09b4098df9cf5af206a0, type: 3}
+    - target: {fileID: 0}
+      propertyPath: selector
+      value: 
+      objectReference: {fileID: 2800000, guid: 5137f53af8d01754284143d25351853e, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 139960}

@@ -24,7 +24,7 @@ public class FireBall : BaseProjectile
     void Update()
     {
         lifeTimer -= Time.fixedDeltaTime;
-        if(lifeTimer <= 0.0f)
+        if (lifeTimer <= 0.0f)
         {
             Destroy(this.gameObject);
         }
@@ -44,12 +44,16 @@ public class FireBall : BaseProjectile
     {
 
 
-        if (Owner.GetComponent<BaseCell>().isAIPossessed == true && other.gameObject.GetComponent<BaseCell>() )
+        if (Owner.GetComponent<BaseCell>().isAIPossessed == true && other.gameObject.GetComponent<BaseCell>())
         {
             if (other.gameObject.GetComponent<BaseCell>().isMine == true)
             {
                 other.gameObject.GetComponent<BaseCell>().currentProtein = other.gameObject.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
                 other.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                if (PhotonNetwork.connected)
+                {
+                    other.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, Owner.GetComponent<BaseCell>().attackDamage);
+                }
                 Destroy(this.gameObject);
             }
         }
@@ -59,10 +63,15 @@ public class FireBall : BaseProjectile
         {
             if (other.gameObject.GetComponent<BaseCell>().isMine == false)
             {
-                Target.GetComponent<BaseCell>().currentProtein = Target.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
-                Target.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                other.gameObject.GetComponent<BaseCell>().currentProtein = Target.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
+                other.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                if (PhotonNetwork.connected)
+                {
+                    other.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, Owner.GetComponent<BaseCell>().attackDamage);
+                }
                 Destroy(this.gameObject);
             }
+
         }
 
 
