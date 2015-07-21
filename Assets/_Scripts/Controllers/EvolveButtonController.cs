@@ -9,6 +9,8 @@ public class EvolveButtonController : MonoBehaviour {
     public GameObject acidButton;
     public GameObject alkaliButton;
     public Animator animator;
+  
+
     private bool isOverUI = false;
 
     private bool show = false;
@@ -20,6 +22,7 @@ public class EvolveButtonController : MonoBehaviour {
 	void Start () 
     {
         animator = GetComponent<Animator>();
+        
 	}
 	
 	// Update is called once per frame
@@ -45,7 +48,7 @@ public class EvolveButtonController : MonoBehaviour {
             acidButton.SetActive(true);
             alkaliButton.SetActive(true);
             animator.SetBool("SHOW_BUTTONS", show);
-          
+           
         }
         else
         {
