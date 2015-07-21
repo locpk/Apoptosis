@@ -4910,7 +4910,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 11430304, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: viewIdField
@@ -4919,20 +4919,6 @@ Prefab:
     - target: {fileID: 11430304, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: instantiationId
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11408550, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-      propertyPath: attack_music
-      value: 
-      objectReference: {fileID: 24528994, guid: 32570da66a9a5a2498737b8610ebb903,
-        type: 2}
-    - target: {fileID: 11408550, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-      propertyPath: normal_music
-      value: 
-      objectReference: {fileID: 24500003, guid: 32570da66a9a5a2498737b8610ebb903,
-        type: 2}
-    - target: {fileID: 11454602, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-      propertyPath: currentProtein
-      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
