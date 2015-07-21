@@ -35,7 +35,7 @@ public enum CellState
 /// <summary>
 /// Define the base cell class
 /// </summary>
-public class BaseCell : Photon.PunBehaviour
+public class BaseCell : MonoBehaviour
 {
     public GameObject gCancerCellPrefab;
     public GameObject gStemCellPrefab;
@@ -74,7 +74,7 @@ public class BaseCell : Photon.PunBehaviour
     public Vector3 destination;
     public List<GameObject> targets;
     public GameObject primaryTarget;
-    //public PhotonView photonView;
+    public PhotonView photonView;
     // public PhotonView photonView;
     public float currentProtein;
     public float fovRadius;
@@ -118,32 +118,24 @@ public class BaseCell : Photon.PunBehaviour
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        //if (stream.isWriting)
-        //{
-        //    // We own this player: send the others our data
-        //    stream.SendNext(transform.position);
-        //    stream.SendNext(currentProtein);
-        //}
-        //else
-        //{
-        //    // Network player, receive data
-        //    this.transform.position = (Vector3)stream.ReceiveNext();
-        //    this.currentProtein = (float)stream.ReceiveNext();
-        //}
-    }
-
-    public override void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        base.OnPhotonInstantiate(info);
-
-        pcontroller.AddNewCell(this);
+        if (stream.isWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(transform.position);
+            stream.SendNext(currentProtein);
+        }
+        else
+        {
+            // Network player, receive data
+            this.transform.position = (Vector3)stream.ReceiveNext();
+            this.currentProtein = (float)stream.ReceiveNext();
+        }
     }
 
 
     #region Standard Actions
     // Public Methods
 
-    [PunRPC]
     public virtual void Move(Vector3 _destination)
     {
 
@@ -188,13 +180,11 @@ public class BaseCell : Photon.PunBehaviour
         }
 
     }
-
-    [PunRPC]
     public void Die()
     {
         isMine = false;
         isAlive = false;
-        pcontroller.RemoveDeadCell(this);
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
 
 
         if (celltype != CellType.CANCER_CELL)
@@ -210,15 +200,10 @@ public class BaseCell : Photon.PunBehaviour
         //transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         //GetComponent<SpriteRenderer>().enabled = false;
 
-        if (PhotonNetwork.connected)
+        if (!isSinglePlayer)
         {
             if (photonView.isMine)
             {
-                if (!sound_manager.sounds_miscellaneous[3].isPlaying)
-                {
-                    sound_manager.sounds_miscellaneous[3].Play();
-
-                }
                 PhotonNetwork.Destroy(gameObject);
             }
 
@@ -236,7 +221,7 @@ public class BaseCell : Photon.PunBehaviour
     }
     public void Deactive()
     {
-        pcontroller.DeselectCell(this);
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().DeselectCell(this);
         gameObject.SetActive(false);
         transform.position = new Vector3(2500.0f, 2500.0f, 2500.0f);
 
@@ -518,7 +503,7 @@ public class BaseCell : Photon.PunBehaviour
     {
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
-        //photonView = GetComponent<PhotonView>();
+        photonView = GetComponent<PhotonView>();
         if (PhotonNetwork.connected)
         {
             isSinglePlayer = (bool)photonView.instantiationData[0];
@@ -558,6 +543,7 @@ public class BaseCell : Photon.PunBehaviour
     // Use this for initialization
     protected void bStart()
     {
+
         navAgent.enabled = false;
         navAgent.updateRotation = false;
         navObstacle.enabled = true;
@@ -741,10 +727,6 @@ public class BaseCell : Photon.PunBehaviour
         if (currentProtein <= 0.0f)
         {
             Die();
-            if (PhotonNetwork.connected)
-            {
-                photonView.RPC("Die", PhotonTargets.Others, null);
-            }
             transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
     }

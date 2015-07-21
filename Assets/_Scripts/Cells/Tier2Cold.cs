@@ -1,57 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Tier2HeatCell : BaseCell
+public class Tier2Coldcell : BaseCell
 {
-
+    public GameObject stemCell;
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
-    public GameObject fireball;
-    // Use this for initialization
-    float fireballSpeed = 15;
-    GameObject previousTarget;
-    bool hasteActive = false;
-    public float hasteTimer = 0.0f;
-    public GameObject stemCell;
+    public GameObject particles;
+
+    PlayerController controller;
+
     public GameObject stun;
     int instanonce = 0;
-
-   
+    // Use this for initialization
     void Start()
     {
+        controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
         base.bStart();
     }
     void DamagePreSecond()
     {
         if (primaryTarget != null)
         {
-            previousTarget = primaryTarget;
-            Vector3 them2me = primaryTarget.transform.position - transform.position;
-            GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
-            thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
-            thefireball.GetComponent<FireBall>().Target = primaryTarget;
-            thefireball.GetComponent<FireBall>().Owner = this.gameObject;
-
+            AoeDmg(transform.position, attackRange);
+            //  primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
         }
     }
-    void HasteDamagePreSecond()
-    {
-        if (primaryTarget != null)
-        {
-            previousTarget = primaryTarget;
-            Vector3 them2me = primaryTarget.transform.position - transform.position;
-            GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
-            thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
-            thefireball.GetComponent<FireBall>().Target = primaryTarget;
-            thefireball.GetComponent<FireBall>().Owner = this.gameObject;
-
-        }
-    }
-
-
-
-
-
     // Update is called once per frame
     void Update()
     {
@@ -77,24 +51,6 @@ public class Tier2HeatCell : BaseCell
         }
         else
         {
-            hasteTimer += 1 * Time.deltaTime;
-            if (hasteTimer >= 5)
-            {
-                hasteActive = true;
-                if (hasteTimer >= 10)
-                {
-                    hasteTimer = 0.0f;
-                    hasteActive = false;
-                }
-            }
-            if (hasteActive)
-            {
-                navAgent.speed = 5.0f;
-            }
-            else
-            {
-                navAgent.speed = moveSpeed;
-            }
             if (targets != null && targets.Count > 1)
             {
 
@@ -120,57 +76,33 @@ public class Tier2HeatCell : BaseCell
             switch (currentState)
             {
                 case CellState.IDLE:
-                    SetPrimaryTarget(null);
-                    if (hasteActive)
+
+                    if (Input.GetKeyUp(KeyCode.Alpha1) && isSelected == true)
                     {
-                        if (IsInvoking("HasteDamagePreSecond"))
-                        {
-                            CancelInvoke("HasteDamagePreSecond");
-                        }
+                        Vector3 trackingPos = this.transform.position;
+                        Quaternion trackingRot = this.transform.rotation;
+                        Die();
+                        GameObject gstem = Instantiate(stemCell, trackingPos, trackingRot) as GameObject;
+                        controller.AddNewCell(gstem.GetComponent<BaseCell>());
                     }
-                    if (IsInvoking("DamagePreSecond"))
-                    {
-                        CancelInvoke("DamagePreSecond");
-                    }
+                    //         Guarding();
                     break;
                 case CellState.ATTACK:
                     if (primaryTarget != null)
                     {
                         if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                         {
-                            if (hasteActive)
+                            if (!IsInvoking("DamagePreSecond"))
                             {
-                                if (!IsInvoking("HasteDamagePreSecond"))
-                                {
-                                    InvokeRepeating("HasteDamagePreSecond", 1.0f, 0.6f);
+                                InvokeRepeating("DamagePreSecond", 1.0f, 1.5f);
 
-                                }
-                            }
-                            else
-                            {
-                                if (!IsInvoking("DamagePreSecond"))
-                                {
-                                    InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
-
-                                }
                             }
                         }
-
                         else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                         {
-                            if (hasteActive)
+                            if (IsInvoking("DamagePreSecond"))
                             {
-                                if (IsInvoking("HasteDamagePreSecond"))
-                                {
-                                    CancelInvoke("HasteDamagePreSecond");
-                                }
-                            }
-                            else
-                            {
-                                if (IsInvoking("DamagePreSecond"))
-                                {
-                                    CancelInvoke("DamagePreSecond");
-                                }
+                                CancelInvoke("DamagePreSecond");
                             }
                             if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
                             {
@@ -184,18 +116,30 @@ public class Tier2HeatCell : BaseCell
                         currentState = CellState.IDLE;
                     }
                     break;
-                case CellState.CONSUMING:
-                    base.bUpdate();
-                    break;
                 case CellState.MOVING:
-
                     base.bUpdate();
+                    if (primaryTarget != null)
+                    {
+                        if (primaryTarget.GetComponent<BaseCell>())
+                        {
+                            currentState = CellState.ATTACK;
+                        }
+                        else if (primaryTarget.GetComponent<Protein>())
+                        {
+                            currentState = CellState.CONSUMING;
+                        }
+
+                    }
+
                     break;
                 case CellState.ATTACK_MOVING:
-                    if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
-                    {
-                        currentState = CellState.IDLE;
-                    }
+                    //  if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+                    //  {
+                    //      currentState = CellState.IDLE;
+                    //  }
+                    break;
+                case CellState.CONSUMING:
+                    base.bUpdate();
                     break;
                 case CellState.DEAD:
                     base.Die();
@@ -203,6 +147,7 @@ public class Tier2HeatCell : BaseCell
 
                 default:
                     break;
+
             }
         }
     }
@@ -212,13 +157,10 @@ public class Tier2HeatCell : BaseCell
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
-        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
-
     }
     void MUltiDMg()
     {
         multidamagesources();
-
 
     }
     public void AreaDamage()
@@ -248,6 +190,31 @@ public class Tier2HeatCell : BaseCell
     void FixedUpdate()
     {
         base.bFixedUpdate();
+    }
+    void AoeDmg(Vector3 center, float radius)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+        for (int i = 0; i < hitColliders.Length; i++)
+        {
+            BaseCell basecellerino = hitColliders[i].GetComponent<BaseCell>();
+            if (basecellerino != null)
+            {
+                if (basecellerino.isAIPossessed && basecellerino != primaryTarget && basecellerino.isMine == false)
+                {
+                    basecellerino.currentProtein -= attackDamage;
+                    basecellerino.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                    ++basecellerino.hitCounter;
+                    Vector3 tracking = new Vector3(basecellerino.transform.position.x, basecellerino.transform.position.y + 2, basecellerino.transform.position.z);
+                    // Vector3
+                    Instantiate(particles, tracking, basecellerino.transform.rotation);
+                    if (basecellerino.hitCounter >= 4)
+                    {
+                        basecellerino.stunned = true;
+                    }
+                }
+
+            }
+        }
     }
 
 }

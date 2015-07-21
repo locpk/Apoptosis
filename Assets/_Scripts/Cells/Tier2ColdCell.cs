@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 
 public class Tier2ColdCell : BaseCell
-{
+ {
     public GameObject stemCell;
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
@@ -17,23 +17,23 @@ public class Tier2ColdCell : BaseCell
 
 
    
-    // Use this for initialization
-    void Start()
+	// Use this for initialization
+	void Start ()
     {
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
         base.bStart();
 
 
-    }
+	}
     void DamagePreSecond()
     {
         if (primaryTarget != null)
         {
             AoeDmg(transform.position, attackRange);
-            //  primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+          //  primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
         }
     }
-    // Update is called once per frame
+	// Update is called once per frame
     void Update()
     {
         if (stunned == true)
@@ -68,10 +68,6 @@ public class Tier2ColdCell : BaseCell
                         Vector3 trackingPos = this.transform.position;
                         Quaternion trackingRot = this.transform.rotation;
                         Die();
-                        if (PhotonNetwork.connected)
-                        {
-                            photonView.RPC("Die", PhotonTargets.Others, null);
-                        }
                         GameObject gstem = Instantiate(stemCell, trackingPos, trackingRot) as GameObject;
                         controller.AddNewCell(gstem.GetComponent<BaseCell>());
                     }
@@ -133,10 +129,6 @@ public class Tier2ColdCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
-                    if (PhotonNetwork.connected)
-                    {
-                        photonView.RPC("Die", PhotonTargets.Others, null);
-                    }
                     break;
 
                 default:
@@ -202,14 +194,14 @@ public class Tier2ColdCell : BaseCell
                     basecellerino.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
                     ++basecellerino.hitCounter;
                     Vector3 tracking = new Vector3(basecellerino.transform.position.x, basecellerino.transform.position.y + 2, basecellerino.transform.position.z);
-                    // Vector3
+                   // Vector3
                     Instantiate(particles, tracking, basecellerino.transform.rotation);
-                    if (basecellerino.hitCounter >= 4)
+                    if(basecellerino.hitCounter >= 4)
                     {
                         basecellerino.stunned = true;
                     }
                 }
-
+                
             }
         }
     }

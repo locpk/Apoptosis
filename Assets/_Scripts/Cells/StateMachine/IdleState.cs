@@ -15,10 +15,6 @@ public class IdleState : BaseState {
         if (_cell.currentProtein <= 0.0f)
         {
             _cell.Die();
-            if (PhotonNetwork.connected)
-            {
-                _cell.photonView.RPC("Die", PhotonTargets.Others, null);
-            }
         }
     }
 }

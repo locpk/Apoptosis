@@ -42,10 +42,6 @@ public class Lighting : MonoBehaviour
             currentTarget.GetComponent<BaseCell>().currentProtein -= realOwner.GetComponent<BaseCell>().attackDamage;
             currentTarget.GetComponent<BaseCell>().stunned = true;
             currentTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
-            if (PhotonNetwork.connected)
-            {
-                currentTarget.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, realOwner.GetComponent<BaseCell>().attackDamage);
-            }
             bounceCounter++;
             Collider[] hitColliders = Physics.OverlapSphere (transform.position, bounceRadius);
             for (int i = 0; i < hitColliders.Length; i++)

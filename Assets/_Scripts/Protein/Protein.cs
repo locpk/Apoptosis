@@ -2,15 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Protein : Photon.PunBehaviour {
+public class Protein : MonoBehaviour {
 
     public float value;
     public bool beingConsumed = false;
     ParticleSystem emitter;
     public List<BaseCell> consumers;
-
-    public PlayerController PlayerControls;
-
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.isWriting)
@@ -25,12 +22,6 @@ public class Protein : Photon.PunBehaviour {
         }
     }
 
-    public override void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        base.OnPhotonInstantiate(info);
-        PlayerControls = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerController>();
-    }
-
     [PunRPC]
     public float Harvest()
     {
@@ -41,11 +32,6 @@ public class Protein : Photon.PunBehaviour {
 	void Start () {
         value = Random.Range(70, 110);
         emitter = GetComponent<ParticleSystem>();
-        if (PlayerControls == null)
-        {
-            PlayerControls = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerController>();
-        }
-        PlayerControls.AddNewProtein(this);
 	}
 	
 	// Update is called once per frame

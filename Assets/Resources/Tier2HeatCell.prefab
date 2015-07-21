@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 449628}
   - 33: {fileID: 3351220}
-  - 135: {fileID: 13522784}
   - 23: {fileID: 2365594}
   m_Layer: 5
   m_Name: MinimapIndicator
@@ -28,7 +27,7 @@ GameObject:
   - 4: {fileID: 414818}
   - 114: {fileID: 11472102}
   - 135: {fileID: 13588258}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FOWSight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 151068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 149.100006}
+  m_LocalPosition: {x: 0, y: -0, z: 76.8000031}
   m_LocalScale: {x: .100000001, y: .099999994, z: 1}
   m_Children: []
   m_Father: {fileID: 449628}
@@ -111,7 +110,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152348}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 69.392952, y: 2, z: -22.2028008}
+  m_LocalPosition: {x: -16.195528, y: 1.5, z: -14.43433}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 449628}
@@ -125,8 +124,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129152}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: -149.100006}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -76.6999969}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 414818}
   m_Father: {fileID: 448348}
@@ -356,18 +355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd88def841af1747840697bd7deef13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &13522784
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 129152}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: .5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13583240
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -390,7 +377,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 13.3280811
+  m_Radius: 11.7037678
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &19542924
 NavMeshAgent:

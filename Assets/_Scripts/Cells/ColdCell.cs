@@ -258,10 +258,6 @@ public class ColdCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
-                    if (PhotonNetwork.connected)
-                    {
-                        photonView.RPC("Die", PhotonTargets.Others, null);
-                    }
                     break;
 
                 default:
@@ -316,7 +312,6 @@ public class ColdCell : BaseCell
                         {
                             basecellerino.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage);
                         }
-                    }
 
                     if (!sound_manager.sounds_attacks[1].isPlaying)
                     {

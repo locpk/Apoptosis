@@ -32,7 +32,7 @@ public class CellSplitAnimation : MonoBehaviour
     public void CreateHeatCell()
     {
 
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("HeatCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("HeatCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] {(bool)false}) as GameObject 
             : GameObject.Instantiate(gHeatCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -42,18 +42,14 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
-        originCell.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateTier2HeatCell()
     {
 
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Tier2HeatCell", transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Tier2HeatCell", transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
             : GameObject.Instantiate(gTier2HeatCellPrefab, transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -63,20 +59,15 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
+        Destroy(gameObject);
         originCell.Die();
         originCell1.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-            originCell1.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
-        Destroy(gameObject);
     }
 
     public void CreateStemCell()
     {
 
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("StemCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("StemCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
             : GameObject.Instantiate(gStemCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -88,18 +79,14 @@ public class CellSplitAnimation : MonoBehaviour
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
 
-        originCell.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
         Destroy(gameObject);
+        originCell.Die();
     }
     public void CreateStemCells()
     {
         for (int i = 0; i < 2; i++)
         {
-            GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("StemCell", transform.GetChild(i).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+            GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("StemCell", transform.GetChild(i).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
                 : GameObject.Instantiate(gStemCellPrefab, transform.GetChild(i).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
             newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
             newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -111,14 +98,10 @@ public class CellSplitAnimation : MonoBehaviour
                 GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
             }
 
-
-        }
-        originCell.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
+            
         }
         Destroy(gameObject);
+        originCell.Die();
     }
 
 
@@ -126,7 +109,7 @@ public class CellSplitAnimation : MonoBehaviour
     {
         for (int i = 0; i < 2; i++)
         {
-            GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("HeatCell", transform.GetChild(i).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+            GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("HeatCell", transform.GetChild(i).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
                 : GameObject.Instantiate(gHeatCellPrefab, transform.GetChild(i).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
             newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
             newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -138,12 +121,8 @@ public class CellSplitAnimation : MonoBehaviour
                 GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
             }
         }
-        originCell.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateHeatandCancerCells()
@@ -151,7 +130,7 @@ public class CellSplitAnimation : MonoBehaviour
         Vector3 pos = transform.position;
 
         pos.x -= 0.5f;
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("CancerCell", transform.GetChild(0).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("CancerCell", transform.GetChild(0).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
             : GameObject.Instantiate(gCancerCellPrefab, transform.GetChild(0).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -161,7 +140,7 @@ public class CellSplitAnimation : MonoBehaviour
 
 
         pos.x += 1.0f;
-        newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("HeatCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+        newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("HeatCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
             : GameObject.Instantiate(gHeatCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -169,19 +148,15 @@ public class CellSplitAnimation : MonoBehaviour
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
 
 
-        originCell.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateTier2ColdCell()
     {
 
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Tier2ColdCell", transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
-            : GameObject.Instantiate(gTier2ColdCellPrefab, transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Tier2ColdCell", transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
+            : GameObject.Instantiate(gTier2ColdCellPrefab,transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
@@ -190,21 +165,16 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
+        Destroy(gameObject);
         originCell.Die();
         originCell1.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-            originCell1.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
-        Destroy(gameObject);
     }
 
 
     public void CreateColdCell()
     {
 
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("ColdCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("ColdCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
             : GameObject.Instantiate(gColdCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -214,19 +184,15 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
-        originCell.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateColdCells()
     {
         for (int i = 0; i < 2; i++)
         {
-            GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("ColdCell", transform.GetChild(i).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+            GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("ColdCell", transform.GetChild(i).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
                 : GameObject.Instantiate(gColdCellPrefab, transform.GetChild(i).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
             newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
             newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -238,17 +204,13 @@ public class CellSplitAnimation : MonoBehaviour
                 GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
             }
         }
-        originCell.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateColdandCancerCells()
     {
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("ColdCell", transform.GetChild(0).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("ColdCell", transform.GetChild(0).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
             : GameObject.Instantiate(gColdCellPrefab, transform.GetChild(0).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -261,7 +223,7 @@ public class CellSplitAnimation : MonoBehaviour
         }
 
 
-        newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("CancerCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+        newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("CancerCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
             : GameObject.Instantiate(gCancerCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().currentLevel = currentLevel;
@@ -269,12 +231,8 @@ public class CellSplitAnimation : MonoBehaviour
 
 
 
-        originCell.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateCancerCells()
@@ -283,7 +241,7 @@ public class CellSplitAnimation : MonoBehaviour
         pos.x -= 0.5f;
         for (int i = 0; i < 2; i++)
         {
-            GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("CancerCell", transform.GetChild(i).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+            GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("CancerCell", transform.GetChild(i).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
                 : GameObject.Instantiate(gCancerCellPrefab, transform.GetChild(i).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
             newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
             newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -292,19 +250,15 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.gameObject.transform.Rotate(90, -180, -180);
             pos.x += 1.0f;
         }
-        originCell.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
         Destroy(gameObject);
+        originCell.Die();
     }
 
 
     public void CreateAlkaliCell()
     {
 
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("AlkaliCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("AlkaliCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
             : GameObject.Instantiate(gAlkaliCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -314,18 +268,14 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
-        originCell.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
         Destroy(gameObject);
+        originCell.Die();
     }
 
     public void CreateAcidicCell()
     {
 
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("AcidicCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("AcidicCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject 
             : GameObject.Instantiate(gAcidicCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
@@ -335,12 +285,8 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
-        originCell.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
         Destroy(gameObject);
+        originCell.Die();
     }
 
 

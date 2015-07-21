@@ -73,6 +73,9 @@ public class PlayerController : MonoBehaviour
     //    List<BaseCell>[] groups;
     public Texture selector;
     public Texture friendly_indicator;
+
+    public Camera minimapCamera;
+
     float fps;
     float initTouchTime;
     float delay;
@@ -166,16 +169,9 @@ public class PlayerController : MonoBehaviour
 
     public void RemoveDeadCell(BaseCell _in)
     {
-        if (PhotonNetwork.connected && !_in.gameObject.GetPhotonView().isMine)
-        {
-            allSelectableTargets.Remove(_in.gameObject);
-        }
-        else
-        {
-            _in.isSelected = false;
-            allSelectableUnits.Remove(_in);
-            selectedUnits.Remove(_in);
-        }
+        _in.isSelected = false;
+        allSelectableUnits.Remove(_in);
+        selectedUnits.Remove(_in);
     }
     public void DeselectCell(BaseCell _in)
     {
@@ -219,57 +215,54 @@ public class PlayerController : MonoBehaviour
         return allSelectableObjects; // Return the list
     }
 
-    public void UnitSelection(Vector2 origin)
+    public List<GameObject> GetSelectedUnits()
     {
-        List<BaseCell> toRemove = new List<BaseCell>();
-        foreach (BaseCell item in allSelectableUnits)
-        {
-            if (item == null)
-            {
-                toRemove.Add(item);
-                allSelectableUnits.Remove(item);
-            }
-        }
-        foreach (BaseCell item in toRemove)
-        {
-            if (item == null)
-            {
-                allSelectableUnits.Remove(item);
-            }
-        }
-        if (Input.mousePosition.x >= origin.x)
-        {
-            GUISelectRect.xMax = Input.mousePosition.x;
-        }
-        else
-        {
-            GUISelectRect.xMin = Input.mousePosition.x;
-        }
-
-        if (-Input.mousePosition.y + Screen.height >= origin.y)
-        { GUISelectRect.yMax = -Input.mousePosition.y + Screen.height; }
-        else
-        { GUISelectRect.yMin = -Input.mousePosition.y + Screen.height; }
-
+        List<GameObject> allSelectedUnits = new List<GameObject>();
         foreach (BaseCell item in selectedUnits)
         {
-            item.isSelected = false;
+            allSelectedUnits.Add(item.gameObject);
         }
-        selectedUnits.Clear();
-        foreach (BaseCell item in allSelectableUnits)
+        return allSelectedUnits;
+    }
+
+    public void UnitSelection(Vector2 origin)
+    {
+        if (!minimapCamera.pixelRect.Contains(Input.mousePosition))
         {
-            Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
-            itemPos.y = -itemPos.y + Screen.height;
-            if (GUISelectRect.Contains(itemPos))
+            if (Input.mousePosition.x >= origin.x)
             {
-                selectedUnits.Add(item);
-                item.isSelected = true;
+                GUISelectRect.xMax = Input.mousePosition.x;
+            }
+            else
+            {
+                GUISelectRect.xMin = Input.mousePosition.x;
+            }
 
-                if (!sound_manager.sounds_miscellaneous[0].isPlaying)
+            if (-Input.mousePosition.y + Screen.height >= origin.y)
+            { GUISelectRect.yMax = -Input.mousePosition.y + Screen.height; }
+            else
+            { GUISelectRect.yMin = -Input.mousePosition.y + Screen.height; }
+
+            foreach (BaseCell item in selectedUnits)
+            {
+                item.isSelected = false;
+            }
+            selectedUnits.Clear();
+            foreach (BaseCell item in allSelectableUnits)
+            {
+                Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
+                itemPos.y = -itemPos.y + Screen.height;
+                if (GUISelectRect.Contains(itemPos))
                 {
-                    sound_manager.sounds_miscellaneous[0].Play();
-                }
+                    selectedUnits.Add(item);
+                    item.isSelected = true;
 
+                    if (!sound_manager.sounds_miscellaneous[0].isPlaying)
+                    {
+                        sound_manager.sounds_miscellaneous[0].Play();
+                    }
+
+                }
             }
         }
     }

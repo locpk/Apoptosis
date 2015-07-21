@@ -58,8 +58,8 @@ public class PauseMenu : MonoBehaviour
     //    winScreen.SetActive(false);
      //   loseScreen.SetActive(false);
 
-        playerController = GameObject.FindObjectOfType<PlayerController>().gameObject;
-
+        playerController = GameObject.FindGameObjectWithTag("PlayerController");
+        
     }
 
     // Update is called once per frame
