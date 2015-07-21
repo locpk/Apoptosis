@@ -45,15 +45,25 @@ public class Tier2ColdCell : BaseCell
             }
             instanonce++;
 
-            stunTimer -= 1 * Time.fixedDeltaTime;
+          
+            stunTimer -= 1.0f * Time.fixedDeltaTime;
+        if(stunTimer > 0)
+        {
+            navAgent.enabled = false;
+            navObstacle.enabled = true;
+            primaryTarget = null;
+
+            return;
+        }
             if (this.stunTimer <= 0)
             {
                 instanonce = 0;
                 // Destroy(stun.gameObject);
-                this.stunTimer = 3;
+                this.stunTimer = 2;
                 this.stunned = false;
                 this.hitCounter = 0;
-
+                navObstacle.enabled = false;
+                navAgent.enabled = true;
             }
         }
         else

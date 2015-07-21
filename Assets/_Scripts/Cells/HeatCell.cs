@@ -154,6 +154,15 @@ public class HeatCell : BaseCell
             instanonce++;
 
             stunTimer -= 1 * Time.fixedDeltaTime;
+
+            if (stunTimer > 0)
+            {
+                navAgent.enabled = false;
+                navObstacle.enabled = true;
+                primaryTarget = null;
+
+                return;
+            }
             if (this.stunTimer <= 0)
             {
                 instanonce = 0;

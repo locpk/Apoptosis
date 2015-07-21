@@ -29,7 +29,7 @@ public class Acidd : MonoBehaviour
             if (other.gameObject.GetComponent<BaseCell>().isMine == true)
             {
                GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                myanim.SetTrigger("Acid");
+               myanim.SetTrigger("Start");
                 other.gameObject.GetComponent<BaseCell>().currentProtein = other.gameObject.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
                 other.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
                 GetComponent<SphereCollider>().radius = 3;
@@ -42,7 +42,7 @@ public class Acidd : MonoBehaviour
              if (other.gameObject.GetComponent<BaseCell>().isMine == false)
              {
                 GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                 myanim.SetTrigger("Acid");
+                 myanim.SetTrigger("Start");
                  other.gameObject.GetComponent<BaseCell>().currentProtein = other.gameObject.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
                  other.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
              }
