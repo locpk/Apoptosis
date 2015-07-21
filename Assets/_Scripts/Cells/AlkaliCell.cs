@@ -9,7 +9,7 @@ public class AlkaliCell : BaseCell
     GameObject previousTarget;
     public GameObject stun;
     int instanonce = 0;
-    private Sound_Manager sound_manager;
+   
 
     void Awake()
     {
