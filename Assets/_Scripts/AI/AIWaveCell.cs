@@ -58,6 +58,7 @@ public class AIWaveCell : MonoBehaviour {
         m_baseCell.isMine = false;
         m_baseCell.isAIPossessed = true;
         m_baseCell.isDepleting = false;
+        m_baseCell.currentProtein *= 0.5f;  // lower enemy power
         m_baseCell.tag = "EnemyCell";
         m_baseCell.gameObject.layer = LayerMask.NameToLayer("EnemyCell");
         //m_baseCell.SetSpeed(m_baseCell.navAgent.speed * .5f);

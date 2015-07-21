@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 0
   m_FogColor: {r: .5, g: .5, b: .5, a: 1}
   m_FogMode: 3
-  m_FogDensity: .00999999978
+  m_FogDensity: 9.99999975e-05
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: .211999997, g: .226999998, b: .259000003, a: 1}
@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: .0469999984, g: .0430000015, b: .0350000001, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: e980bc7fbb00dc34b86b95ac842d1920, type: 2}
   m_HaloStrength: .5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -206,6 +206,7 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 0}
   delayTimeInSecond: 5
+  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 60
   maxProteins: 10
 --- !u!64 &142778243
@@ -263,6 +264,7 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 0}
   delayTimeInSecond: 5
+  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 60
   maxProteins: 10
 --- !u!64 &285401765
@@ -1619,6 +1621,7 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 0}
   delayTimeInSecond: 5
+  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 60
   maxProteins: 10
 --- !u!64 &891553182
@@ -2379,6 +2382,7 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 0}
   delayTimeInSecond: 5
+  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 60
   maxProteins: 10
 --- !u!64 &1229165636
@@ -4118,6 +4122,7 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 0}
   delayTimeInSecond: 5
+  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 60
   maxProteins: 10
 --- !u!64 &1562987212
@@ -5316,6 +5321,7 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 0}
   delayTimeInSecond: 5
+  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 60
   maxProteins: 10
 --- !u!64 &1664044647
@@ -5529,7 +5535,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967287
+  m_StaticEditorFlags: 4294967286
   m_IsActive: 1
 --- !u!4 &1728450849
 Transform:

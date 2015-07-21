@@ -11,7 +11,8 @@ public class ProteinSpawnerController : MonoBehaviour {
 
     public SpawnMode spawnMode = SpawnMode.Once;
     public GameObject protein;
-    public float delayTimeInSecond = 5.0f;
+    public float delayTimeInSecond = 5f;
+    public float currSpawnCycleInSecond;
     public float spawnCycleInSecond;
     public int maxProteins;
     private float proteinRadius;
@@ -25,23 +26,24 @@ public class ProteinSpawnerController : MonoBehaviour {
             Destroy(this);
         }
         spawnPositionList = new List<Vector3>();
+        
     }
 
     void Start() {
         proteinRadius = protein.GetComponent<NavMeshObstacle>().radius;
         StartCoroutine(SpawnProteinOnce(delayTimeInSecond));
+
+        currSpawnCycleInSecond = spawnCycleInSecond;
     }
 
-    void FixedUpdate() {
-
-        if (spawnMode == SpawnMode.Regenerate && maxProteins > transform.parent.childCount - 1 && preSpawned) {
-            if (!IsInvoking("RepeatingSpawnProtein")) {
-                InvokeRepeating("RepeatingSpawnProtein", 1.0f, spawnCycleInSecond);
+    void Update() {
+        currSpawnCycleInSecond -= Time.deltaTime;
+        if (currSpawnCycleInSecond <= 0 && (spawnMode == SpawnMode.Regenerate)&&preSpawned) {
+            if (maxProteins > transform.parent.childCount - 1) {
+                //Debug.Log("Regenerate protein spawn");
+                RepeatingSpawnProtein();
             }
-        } else {
-            if (IsInvoking("RepeatingSpawnProtein")) {
-                CancelInvoke("RepeatingSpawnProtein");
-            }
+            currSpawnCycleInSecond = spawnCycleInSecond;
         }
     }
 
@@ -56,11 +58,12 @@ public class ProteinSpawnerController : MonoBehaviour {
 
         List<Vector3> currProteinList = new List<Vector3>();
         do {
+            count = 0;
             float _x = transform.position.x + Random.Range(-transform.localScale.x * 5, transform.localScale.x * 5);
             float _z = transform.position.z + Random.Range(-transform.localScale.z * 5, transform.localScale.z * 5);
             spawnPos = new Vector3(_x, transform.position.y + 0.5f, _z);
             foreach (Transform child in transform.parent) {
-                if ((Vector3.Distance(child.position, spawnPos) > proteinRadius * 2.5f) && (child.tag == "Protein"))
+                if ((Vector3.Distance(child.position, spawnPos) >= proteinRadius * 2.0f) && (child.tag == "Protein"))
                     count++;
             }
 
@@ -75,7 +78,7 @@ public class ProteinSpawnerController : MonoBehaviour {
             }
 
             testcases++;
-            if (testcases >= 5000) {
+            if (testcases >= 10000) {
                 Debug.LogError("MAX TEST CASE REACHED!!!");
                 break;
             }

@@ -44,7 +44,7 @@ LevelGameManager:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -80,9 +80,9 @@ NavMeshSettings:
     agentRadius: .5
     agentHeight: 2
     agentSlope: 45
-    agentClimb: 1
-    ledgeDropHeight: 0
-    maxJumpAcrossDistance: 0
+    agentClimb: 1.29999995
+    ledgeDropHeight: 1
+    maxJumpAcrossDistance: 1
     accuratePlacement: 0
     minRegionArea: 2
     cellSize: .166666672
@@ -100,7 +100,7 @@ GameObject:
   - 23: {fileID: 108523016}
   - 33: {fileID: 108523015}
   - 114: {fileID: 108523014}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Heat
   m_TagString: Collider_Heat
   m_Icon: {fileID: 0}
@@ -114,8 +114,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 108523012}
   m_LocalRotation: {x: .499999762, y: -.5, z: -.5, w: .500000298}
-  m_LocalPosition: {x: -46.2000008, y: -0, z: -63.2999992}
-  m_LocalScale: {x: 1, y: 9.5, z: 9.5}
+  m_LocalPosition: {x: -46.2000008, y: 1.10000002, z: -63.2999992}
+  m_LocalScale: {x: .100000001, y: 9.5, z: 9.5}
   m_Children: []
   m_Father: {fileID: 505657769}
   m_RootOrder: 5
@@ -304,6 +304,7 @@ MonoBehaviour:
   spawnMode: 1
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 3
+  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
   maxProteins: 12
 --- !u!64 &138158813
@@ -331,7 +332,7 @@ GameObject:
   - 23: {fileID: 139972872}
   - 33: {fileID: 139972871}
   - 114: {fileID: 139972870}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cold
   m_TagString: Collider_Cold
   m_Icon: {fileID: 0}
@@ -345,8 +346,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 139972868}
   m_LocalRotation: {x: .499999762, y: -.5, z: -.5, w: .500000298}
-  m_LocalPosition: {x: -43.0999985, y: 0, z: 33.0999985}
-  m_LocalScale: {x: 1, y: 9.89999962, z: 9.89999962}
+  m_LocalPosition: {x: -43.0999985, y: 1.10000002, z: 33.0999985}
+  m_LocalScale: {x: .100000001, y: 9.89999962, z: 9.89999962}
   m_Children: []
   m_Father: {fileID: 505657769}
   m_RootOrder: 3
@@ -728,7 +729,7 @@ GameObject:
   - 23: {fileID: 352410563}
   - 33: {fileID: 352410562}
   - 114: {fileID: 352410561}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Acidic-2
   m_TagString: Collider_Acidic
   m_Icon: {fileID: 0}
@@ -742,8 +743,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 352410559}
   m_LocalRotation: {x: .499999762, y: -.5, z: -.5, w: .500000298}
-  m_LocalPosition: {x: -51.7000008, y: 0, z: -21.7000008}
-  m_LocalScale: {x: 1, y: 10.5, z: 10.5}
+  m_LocalPosition: {x: -51.7000008, y: 1.10000002, z: -21.7000008}
+  m_LocalScale: {x: .100000001, y: 10.5, z: 10.5}
   m_Children: []
   m_Father: {fileID: 505657769}
   m_RootOrder: 2
@@ -881,6 +882,7 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 3
+  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
   maxProteins: 12
 --- !u!64 &370131195
@@ -1085,12 +1087,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 505657769}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AreaColliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &505657769
 Transform:
@@ -1257,7 +1259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &594137391
 Transform:
   m_ObjectHideFlags: 0
@@ -1294,7 +1296,7 @@ MonoBehaviour:
   - {fileID: 2067389544}
   - {fileID: 393016205}
   spawningWavesInTime:
-  - 0
+  - 5
   - 300
   - 500
   spawnAmountPerWave: 050000000a0000000f000000
@@ -1375,6 +1377,7 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 3
+  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
   maxProteins: 12
 --- !u!64 &628390191
@@ -1484,6 +1487,7 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 3
+  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
   maxProteins: 12
 --- !u!64 &659581649
@@ -2169,7 +2173,7 @@ GameObject:
   - 23: {fileID: 1119996416}
   - 33: {fileID: 1119996415}
   - 114: {fileID: 1119996414}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dense
   m_TagString: Collider_Dense
   m_Icon: {fileID: 0}
@@ -2183,8 +2187,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1119996412}
   m_LocalRotation: {x: .499999762, y: -.5, z: -.5, w: .500000298}
-  m_LocalPosition: {x: 18.7099991, y: 0, z: -48.75}
-  m_LocalScale: {x: 1, y: 10, z: 10}
+  m_LocalPosition: {x: 18.7099991, y: 1.73000002, z: -48.75}
+  m_LocalScale: {x: .100000001, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 505657769}
   m_RootOrder: 4
@@ -2311,10 +2315,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 1212499266}
   - 64: {fileID: 1212499270}
-  - 33: {fileID: 1212499269}
   - 23: {fileID: 1212499268}
+  - 33: {fileID: 1212499269}
   - 114: {fileID: 1212499267}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Alkali
   m_TagString: Collider_Alkali
   m_Icon: {fileID: 0}
@@ -2328,8 +2332,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1212499265}
   m_LocalRotation: {x: .500000119, y: -.5, z: -.5, w: .49999994}
-  m_LocalPosition: {x: .600000024, y: -0, z: -8}
-  m_LocalScale: {x: 1, y: 21, z: 21}
+  m_LocalPosition: {x: .600000024, y: 1.10000002, z: -8}
+  m_LocalScale: {x: .100000001, y: 21, z: 21}
   m_Children: []
   m_Father: {fileID: 505657769}
   m_RootOrder: 0
@@ -2409,8 +2413,8 @@ GameObject:
   m_Name: Layer 0 - Terrain - Areas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1222330211
 Transform:
@@ -5181,6 +5185,7 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 3
+  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
   maxProteins: 12
 --- !u!64 &1700419652
@@ -5389,6 +5394,7 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 3
+  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
   maxProteins: 12
 --- !u!64 &1811337902
@@ -5524,7 +5530,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
 --- !u!1 &1921257996
 GameObject:
   m_ObjectHideFlags: 0
@@ -5775,7 +5781,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11430304, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: viewIdField
@@ -5810,7 +5816,7 @@ GameObject:
   - 23: {fileID: 2049578239}
   - 33: {fileID: 2049578238}
   - 114: {fileID: 2049578237}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Acidic-1
   m_TagString: Collider_Acidic
   m_Icon: {fileID: 0}
@@ -5824,8 +5830,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2049578235}
   m_LocalRotation: {x: .429479301, y: -.42947951, z: -.561735988, w: .561736286}
-  m_LocalPosition: {x: 43.7999992, y: -0, z: 14.3000002}
-  m_LocalScale: {x: 1, y: 10.5, z: 5}
+  m_LocalPosition: {x: 43.7999992, y: 1.10000002, z: 14.3000002}
+  m_LocalScale: {x: .100000001, y: 10.5, z: 5}
   m_Children: []
   m_Father: {fileID: 505657769}
   m_RootOrder: 1
