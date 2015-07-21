@@ -57,10 +57,10 @@ public class AlkaliArea : BaseArea {
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL: {
+                    alkaliButton.GetComponent<Button>().interactable = true;
                     StemCell stemCell = enterCell.GetComponent<StemCell>();
                     StopCoroutine("ReadyToConvert");
                     StartCoroutine(ReadyToConvert(pendingConvertDelayed, stemCell));
-                    alkaliButton.GetComponent<Button>().interactable = true;
                     stemCell.isInAlkali = true;
                     break;
                 }

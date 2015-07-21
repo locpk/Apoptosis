@@ -55,10 +55,10 @@ public class AcidicArea : BaseArea {
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL: {
+                    acidicButton.GetComponent<Button>().interactable = true;
                     StemCell stemCell = enterCell.GetComponent<StemCell>();
                     StopCoroutine("ReadyToConvert");
                     StartCoroutine(ReadyToConvert(pendingConvertDelayed, stemCell));
-                    acidicButton.GetComponent<Button>().interactable = true;
                     break;
                 }
                     

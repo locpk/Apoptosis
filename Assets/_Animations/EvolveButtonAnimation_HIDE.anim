@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: RadarAnimation
+  m_Name: EvolveButtonAnimation_HIDE
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -18,84 +18,77 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: .687379658, y: .605723977, z: .687379658}
-        inSlope: {x: .302620351, y: .434275985, z: 0}
-        outSlope: {x: .302620351, y: .434275985, z: 0}
+        value: {x: 1.5875001, y: 6.17504406, z: 1}
+        inSlope: {x: 0, y: -.771833897, z: 0}
+        outSlope: {x: 0, y: -.771833897, z: 0}
         tangentMode: 0
       - time: 1
-        value: {x: .99000001, y: 1.03999996, z: .687379658}
-        inSlope: {x: .302620351, y: .434275985, z: 0}
-        outSlope: {x: .302620351, y: .434275985, z: 0}
+        value: {x: 1.5875001, y: 5.40321016, z: 1}
+        inSlope: {x: 0, y: -.771833897, z: 0}
+        outSlope: {x: 0, y: -.771833897, z: 0}
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-    path: 
+    path: Panel
   m_FloatCurves:
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: -581
-        inSlope: 570
-        outSlope: 570
+        value: -8.01086426e-05
+        inSlope: 325.000092
+        outSlope: 325.000092
         tangentMode: 10
       - time: 1
-        value: -11
-        inSlope: 570
-        outSlope: 570
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_AnchoredPosition.x
-    path: 
-    classID: 224
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      - time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_SizeDelta.x
-    path: 
-    classID: 224
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: -174
-        inSlope: 188
-        outSlope: 188
-        tangentMode: 10
-      - time: 1
-        value: 14
-        inSlope: 188
-        outSlope: 188
+        value: 325
+        inSlope: 325.000092
+        outSlope: 325.000092
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_AnchoredPosition.y
-    path: 
+    path: Panel
     classID: 224
     script: {fileID: 0}
-  m_PPtrCurves:
   - curve:
-    - time: 0
-      value: {fileID: 0}
-    attribute: m_Sprite
-    path: 
-    classID: 212
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: -7
+        outSlope: -7
+        tangentMode: 10
+      - time: 1
+        value: -7
+        inSlope: -7
+        outSlope: -7
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.x
+    path: Panel
+    classID: 224
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: 1
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_IsActive
+    path: Evolve_Panel/HeatButton
+    classID: 1
+    script: {fileID: 0}
+  m_PPtrCurves: []
   m_SampleRate: 12
   m_WrapMode: 0
   m_Bounds:
@@ -103,38 +96,31 @@ AnimationClip:
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
     genericBindings:
-    - path: 0
+    - path: 1668086795
       attribute: 3
       script: {fileID: 0}
       classID: 4
       customType: 0
       isPPtrCurve: 0
-    - path: 0
-      attribute: 1460864421
-      script: {fileID: 0}
-      classID: 224
-      customType: 0
-      isPPtrCurve: 0
-    - path: 0
+    - path: 1668086795
       attribute: 538195251
       script: {fileID: 0}
       classID: 224
       customType: 0
       isPPtrCurve: 0
-    - path: 0
-      attribute: 0
-      script: {fileID: 0}
-      classID: 212
-      customType: 23
-      isPPtrCurve: 1
-    - path: 0
-      attribute: 1967290853
+    - path: 1668086795
+      attribute: 1460864421
       script: {fileID: 0}
       classID: 224
       customType: 0
       isPPtrCurve: 0
-    pptrCurveMapping:
-    - {fileID: 0}
+    - path: 2156351952
+      attribute: 2086281974
+      script: {fileID: 0}
+      classID: 1
+      customType: 0
+      isPPtrCurve: 0
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
@@ -157,115 +143,115 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: -581
-        inSlope: 570
-        outSlope: 570
+        value: -8.01086426e-05
+        inSlope: 325.000092
+        outSlope: 325.000092
         tangentMode: 10
       - time: 1
-        value: -11
-        inSlope: 570
-        outSlope: 570
+        value: 325
+        inSlope: 325.000092
+        outSlope: 325.000092
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: Panel
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: -7
+        outSlope: -7
+        tangentMode: 10
+      - time: 1
+        value: -7
+        inSlope: -7
+        outSlope: -7
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_AnchoredPosition.x
-    path: 
+    path: Panel
     classID: 224
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 0
+        value: 1.5875001
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       - time: 1
-        value: 0
+        value: 1.5875001
         inSlope: 0
         outSlope: 0
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_SizeDelta.x
-    path: 
-    classID: 224
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: .687379658
-        inSlope: .302620351
-        outSlope: .302620351
-        tangentMode: 10
-      - time: 1
-        value: .99000001
-        inSlope: .302620351
-        outSlope: .302620351
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_LocalScale.x
-    path: 
+    path: Panel
     classID: 224
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .605723977
-        inSlope: .434275985
-        outSlope: .434275985
+        value: 6.17504406
+        inSlope: -.771833897
+        outSlope: -.771833897
         tangentMode: 10
       - time: 1
-        value: 1.03999996
-        inSlope: .434275985
-        outSlope: .434275985
+        value: 5.40321016
+        inSlope: -.771833897
+        outSlope: -.771833897
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_LocalScale.y
-    path: 
+    path: Panel
     classID: 224
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: .687379658
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       - time: 1
-        value: .687379658
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_LocalScale.z
-    path: 
+    path: Panel
     classID: 224
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: -174
-        inSlope: 188
-        outSlope: 188
-        tangentMode: 10
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 1
-        value: 14
-        inSlope: 188
-        outSlope: 188
-        tangentMode: 10
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       m_PreInfinity: 2
       m_PostInfinity: 2
-    attribute: m_AnchoredPosition.y
-    path: 
-    classID: 224
+    attribute: m_IsActive
+    path: Evolve_Panel/HeatButton
+    classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
