@@ -122,7 +122,10 @@ public class ColdCell : BaseCell
         if (primaryTarget != null)
         {
             AoeDmg(transform.position, attackRange);
-            primaryTarget.GetComponent<BaseCell>().currentProtein -= (attackDamage / primaryTarget.GetComponent<BaseCell>().defense);
+            if (PhotonNetwork.connected)
+            {
+                primaryTarget.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage);
+            }
 
             if (!sound_manager.sounds_attacks[1].isPlaying)
             {
@@ -302,9 +305,8 @@ public class ColdCell : BaseCell
                 BaseCell basecellerino = hitColliders[i].GetComponent<BaseCell>();
                 if (basecellerino != null)
                 {
-                    if (basecellerino.isAIPossessed && basecellerino != primaryTarget && basecellerino.isMine == false)
+                    if (basecellerino.isMine == false)
                     {
-                        basecellerino.currentProtein -= (attackDamage / basecellerino.defense);
                         basecellerino.currentProtein -= attackDamage;
                         basecellerino.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
                         Vector3 tracking = new Vector3(basecellerino.transform.position.x, basecellerino.transform.position.y + 2, basecellerino.transform.position.z);
@@ -312,7 +314,7 @@ public class ColdCell : BaseCell
                         Instantiate(particle, tracking, basecellerino.transform.rotation);
                         if (PhotonNetwork.connected)
                         {
-                            basecellerino.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage / basecellerino.defense);
+                            basecellerino.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage);
                         }
                     }
 
@@ -335,13 +337,17 @@ public class ColdCell : BaseCell
                     BaseCell baseSenpaiCell = hitCollider4AI[i].GetComponent<BaseCell>();
                     if (baseSenpaiCell != null)
                     {
-                        if (baseSenpaiCell.isAIPossessed == false && baseSenpaiCell != this)
+                        if (baseSenpaiCell.isMine == true)
                         {
                             baseSenpaiCell.currentProtein -= attackDamage;
                             baseSenpaiCell.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
                             Vector3 tracking = new Vector3(baseSenpaiCell.transform.position.x, baseSenpaiCell.transform.position.y + 4, baseSenpaiCell.transform.position.z);
                             // Vector3
                             Instantiate(particle, tracking, baseSenpaiCell.transform.rotation);
+                            if (PhotonNetwork.connected)
+                            {
+                                baseSenpaiCell.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage);
+                            }
                         }
                         if (!sound_manager.sounds_attacks[1].isPlaying)
                         {
