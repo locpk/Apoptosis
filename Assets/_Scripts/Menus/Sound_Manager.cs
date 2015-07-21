@@ -34,7 +34,7 @@ public class Sound_Manager : MonoBehaviour {
 
     public float lowPitchRange = .95f;
     public float highPitchRange = 1.0f;
-    private float volume = 0.0f;
+    private float volume_Stored = 0.0f;
 
    private Button mute_button; // used for displaying mute, unmute
 
@@ -71,14 +71,14 @@ public class Sound_Manager : MonoBehaviour {
                               
             }
         }
-
-        else  
+        if (!instance.backGround_music.isPlaying)
         {
-            Destroy(gameObject);
+        instance.backGround_music.Play();
+            
         }
 
       //  mute_button = GameObject.FindGameObjectWithTag("Mute_Button").GetComponent<Button>();
-        backGround_music.Play();
+      //  backGround_music.Play();
 
      //   snapshot_muted = Sound_Manager.instance.GetComponent<AudioMixerSnapshot>().audioMixer.FindSnapshot("Snapshot_muted");
      //   snapshot_muted = Sound_Manager.instance.snapshot_muted.TransitionTo(3.0f); 
@@ -98,10 +98,17 @@ public class Sound_Manager : MonoBehaviour {
     public void Mute_Unmute_Sound(bool _mute)
     {
         if (_mute)
-            snapshot_muted.TransitionTo(0.5f);
+        {
+            // snapshot_muted.TransitionTo(0.5f);
+           instance.master_mixer.GetFloat("MasterVolume", out volume_Stored);
+           instance.master_mixer.SetFloat("MasterVolume", -45.0f);
+        }
         else
-            snapshot_normal.TransitionTo(0.5f);
+           
+            instance.master_mixer.SetFloat("MasterVolume", volume_Stored);
     }
+
+    
 
     public void PlaySingleAudio( AudioClip clip )
     {
