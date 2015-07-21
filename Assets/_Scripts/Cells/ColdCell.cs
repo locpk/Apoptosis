@@ -312,7 +312,7 @@ public class ColdCell : BaseCell
                         {
                             basecellerino.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage);
                         }
-
+                    }
                     if (!sound_manager.sounds_attacks[1].isPlaying)
                     {
                         sound_manager.sounds_attacks[1].Play();

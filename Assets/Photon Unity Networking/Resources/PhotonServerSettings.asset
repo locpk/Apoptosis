@@ -35,4 +35,6 @@ MonoBehaviour:
   - Harvest
   - GameEnd
   - ApplyDamage
+  - Die
+  - Move
   DisableAutoOpenWizard: 1
