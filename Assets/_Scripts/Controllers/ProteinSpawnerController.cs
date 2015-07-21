@@ -12,8 +12,8 @@ public class ProteinSpawnerController : MonoBehaviour {
     public SpawnMode spawnMode = SpawnMode.Once;
     public GameObject protein;
     public float delayTimeInSecond = 5f;
+    public float spawnCycleInSecond = 60.0f;
     public float currSpawnCycleInSecond;
-    public float spawnCycleInSecond;
     public int maxProteins;
     private float proteinRadius;
     private List<Vector3> spawnPositionList;

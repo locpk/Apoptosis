@@ -2,40 +2,34 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ColdArea : BaseArea
-{
+public class ColdArea:BaseArea {
 
     public float damagePerSecond;
     public float speedCoefficient = 0.5f;
     private float enterCellSpeed;
 
     private Sound_Manager sound_manager;
-    public override void Awake()
-    {
+    public override void Awake() {
         base.Awake();
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
 
-    public override void Start()
-    {
+    public override void Start() {
         base.Start();
 
     }
 
-    public override void Update()
-    {
+    public override void Update() {
         base.Update();
 
     }
 
-    public override void FixedUpdate()
-    {
+    public override void FixedUpdate() {
         base.FixedUpdate();
 
     }
 
-    public override void LateUpdate()
-    {
+    public override void LateUpdate() {
         base.LateUpdate();
 
     }
@@ -45,8 +39,7 @@ public class ColdArea : BaseArea
         if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
 
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
-            if (!sound_manager.sounds_miscellaneous[6].isPlaying)
-            {
+            if (!sound_manager.sounds_miscellaneous[6].isPlaying) {
                 sound_manager.sounds_miscellaneous[6].Play();
 
             }
@@ -54,8 +47,7 @@ public class ColdArea : BaseArea
             if (!enterCell) return;
             enterCellSpeed = enterCell.navAgent.speed;
 
-            switch (enterCell.celltype)
-            {
+            switch (enterCell.celltype) {
                 case CellType.STEM_CELL:
                     enterCell.navAgent.speed *= speedCoefficient;
                     break;
@@ -89,8 +81,7 @@ public class ColdArea : BaseArea
     }
 
 
-    void OnTriggerStay(Collider collider)
-    {
+    void OnTriggerStay(Collider collider) {
 
     }
 
@@ -100,8 +91,7 @@ public class ColdArea : BaseArea
             if (!enterCell) return;
             enterCell.navAgent.speed = enterCellSpeed;
 
-            switch (enterCell.celltype)
-            {
+            switch (enterCell.celltype) {
                 case CellType.STEM_CELL:
                     enterCell.navAgent.speed /= speedCoefficient;
                     break;

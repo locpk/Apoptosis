@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class AlkaliArea : BaseArea {
+public class AlkaliArea:BaseArea {
 
     public float damagePerSecond;
     public float pendingConvertDelayed = 5.0f;
@@ -12,28 +12,32 @@ public class AlkaliArea : BaseArea {
 
     private Sound_Manager sound_manager;
 
-	public override void Awake() {
+    public override void Awake() {
         base.Awake();
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
 
-	public override void Start () {
-        alkaliButton.GetComponent<Button>().interactable = false;
+    public override void Start() {
+        if (alkaliButton) {
+            alkaliButton.GetComponent<Button>().interactable = false;
+        } else {
+            Debug.LogError("The Alkali Button has not yet been set up!");
+        }
         base.Start();
 
-	}
-	
-	public override void Update () {
+    }
+
+    public override void Update() {
         base.Update();
 
-	}
+    }
 
-	public override void FixedUpdate() {
+    public override void FixedUpdate() {
         base.FixedUpdate();
 
     }
 
-	public override void LateUpdate() {
+    public override void LateUpdate() {
         base.LateUpdate();
 
     }
@@ -42,29 +46,27 @@ public class AlkaliArea : BaseArea {
         if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
 
-            if (!sound_manager.sounds_miscellaneous[6].isPlaying)
-            {
+            if (!sound_manager.sounds_miscellaneous[6].isPlaying) {
                 sound_manager.sounds_miscellaneous[6].Play();
 
             }
 
             if (!enterCell) return;
 
-            if (!sound_manager.sounds_miscellaneous[6].isPlaying && enterCell.celltype != CellType.ALKALI_CELL)
-            {
+            if (!sound_manager.sounds_miscellaneous[6].isPlaying && enterCell.celltype != CellType.ALKALI_CELL) {
                 sound_manager.sounds_miscellaneous[6].Play();
             }
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL: {
-                    StemCell stemCell = enterCell.GetComponent<StemCell>();
-                    StopCoroutine("ReadyToConvert");
-                    StartCoroutine(ReadyToConvert(pendingConvertDelayed, stemCell));
-                    alkaliButton.GetComponent<Button>().interactable = true;
+                        StemCell stemCell = enterCell.GetComponent<StemCell>();
+                        StopCoroutine("ReadyToConvert");
+                        StartCoroutine(ReadyToConvert(pendingConvertDelayed, stemCell));
+                        alkaliButton.GetComponent<Button>().interactable = true;
 
-                    break;
-                }
-                    
+                        break;
+                    }
+
                 case CellType.HEAT_CELL:
                     HeatCell heatCell = enterCell.GetComponent<HeatCell>();
                     heatCell.multidamagesources += heatCell.AreaDamage;
@@ -108,15 +110,12 @@ public class AlkaliArea : BaseArea {
     }
 
     void OnTriggerStay(Collider collider) {
-        if (collider.gameObject.tag == "Unit")
-        {
+        if (collider.gameObject.tag == "Unit") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
 
-            switch (enterCell.celltype)
-            {
-                case CellType.STEM_CELL:
-                    {
+            switch (enterCell.celltype) {
+                case CellType.STEM_CELL: {
                         alkaliButton.GetComponent<Button>().interactable = true;
                         break;
                     }
@@ -131,13 +130,13 @@ public class AlkaliArea : BaseArea {
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL: {
-                    StemCell stemCell = collider.gameObject.GetComponent<StemCell>();
-                    if (stemCell) {
-                        stemCell.isInAlkali = false;
+                        StemCell stemCell = collider.gameObject.GetComponent<StemCell>();
+                        if (stemCell) {
+                            stemCell.isInAlkali = false;
+                        }
+                        break;
                     }
-                    break;
-                }
-                    
+
                 case CellType.HEAT_CELL:
                     HeatCell heatCell = enterCell.GetComponent<HeatCell>();
                     heatCell.multidamagesources -= heatCell.AreaDamage;

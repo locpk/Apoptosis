@@ -304,8 +304,8 @@ MonoBehaviour:
   spawnMode: 1
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 3
-  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
+  currSpawnCycleInSecond: 0
   maxProteins: 12
 --- !u!64 &138158813
 MeshCollider:
@@ -882,8 +882,8 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 3
-  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
+  currSpawnCycleInSecond: 0
   maxProteins: 12
 --- !u!64 &370131195
 MeshCollider:
@@ -1377,8 +1377,8 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 3
-  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
+  currSpawnCycleInSecond: 0
   maxProteins: 12
 --- !u!64 &628390191
 MeshCollider:
@@ -1487,8 +1487,8 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 3
-  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
+  currSpawnCycleInSecond: 0
   maxProteins: 12
 --- !u!64 &659581649
 MeshCollider:
@@ -5185,8 +5185,8 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 3
-  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
+  currSpawnCycleInSecond: 0
   maxProteins: 12
 --- !u!64 &1700419652
 MeshCollider:
@@ -5394,8 +5394,8 @@ MonoBehaviour:
   spawnMode: 0
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 3
-  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
+  currSpawnCycleInSecond: 0
   maxProteins: 12
 --- !u!64 &1811337902
 MeshCollider:
