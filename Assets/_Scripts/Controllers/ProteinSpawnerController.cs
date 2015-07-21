@@ -37,6 +37,7 @@ public class ProteinSpawnerController : MonoBehaviour {
     }
 
     void Update() {
+
         currSpawnCycleInSecond -= Time.deltaTime;
         if (currSpawnCycleInSecond <= 0 && (spawnMode == SpawnMode.Regenerate)&&preSpawned) {
             if (maxProteins > transform.parent.childCount - 1) {

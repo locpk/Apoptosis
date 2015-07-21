@@ -12,6 +12,9 @@ public class AITrapCell : MonoBehaviour{
 
     void Awake () {
         switch (GetComponent<BaseCell>().celltype) {
+            case CellType.STEM_CELL:
+                m_baseCell = GetComponent<StemCell>();
+                break;
             case CellType.HEAT_CELL:
                 m_baseCell = GetComponent<HeatCell>();
                 break;
@@ -83,7 +86,7 @@ public class AITrapCell : MonoBehaviour{
         if (!targetFound) {
             m_baseCell.currentState = CellState.IDLE;
             if (!IsInvoking("RandomMove")) {
-                InvokeRepeating("RandomMove", 1.0f, 5.0f);
+                InvokeRepeating("RandomMove", 1.0f, 15.0f);
             }
         }
 
