@@ -28,14 +28,14 @@ public class StemCell : BaseCell
         {
             case CellType.HEAT_CELL:
                 newCell = GameObject.Instantiate(stemtoHeat, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
-                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 newCell.GetComponent<CellSplitAnimation>().originCell = this;
                 this.Deactive();
                 break;
             case CellType.COLD_CELL:
                 newCell = GameObject.Instantiate(stemtoCold, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
-                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 newCell.GetComponent<CellSplitAnimation>().originCell = this;
                 this.Deactive();
@@ -46,7 +46,7 @@ public class StemCell : BaseCell
                     return;
                 }
                 newCell = GameObject.Instantiate(stemtoAcidic, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
-                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 newCell.GetComponent<CellSplitAnimation>().originCell = this;
                 this.Deactive();
@@ -57,10 +57,9 @@ public class StemCell : BaseCell
                     return;
                 }
                 newCell = GameObject.Instantiate(stemtoAlkali, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
-                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 newCell.GetComponent<CellSplitAnimation>().originCell = this;
-
                 if (!sound_manager.sounds_evolution[3].isPlaying)
                 {
                     sound_manager.sounds_evolution[3].Play();

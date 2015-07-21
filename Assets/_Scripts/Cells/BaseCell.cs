@@ -225,7 +225,7 @@ public class BaseCell : MonoBehaviour
         gameObject.SetActive(false);
         transform.position = new Vector3(2500.0f, 2500.0f, 2500.0f);
 
-        
+
 
     }
 
@@ -301,7 +301,7 @@ public class BaseCell : MonoBehaviour
     #region Special abilities
     public void PerfectSplit()
     {
-        if (currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
+        if (currentProtein <= 50.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
         {
             return;
         }
@@ -372,7 +372,7 @@ public class BaseCell : MonoBehaviour
 
     public void CancerousSplit()
     {
-        if ( currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
+        if (currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
         {
             return;
         }
@@ -452,6 +452,7 @@ public class BaseCell : MonoBehaviour
                     newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                     newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<CellSplitAnimation>().originCell = this;
+                    newCell.gameObject.AddComponent<FogOfWarHider>();
                     Deactive();
                     break;
                 default:
@@ -517,7 +518,7 @@ public class BaseCell : MonoBehaviour
         depleteTimer = DEPLETE_TIME;
         if (isSinglePlayer)
         {
-           // GetComponent<PhotonView>().enabled = false;
+            // GetComponent<PhotonView>().enabled = false;
 
         }
         else
@@ -560,7 +561,7 @@ public class BaseCell : MonoBehaviour
 
     protected void bUpdate()
     {
-   
+
         if (currentState == CellState.IDLE)
         {
 
@@ -706,7 +707,7 @@ public class BaseCell : MonoBehaviour
 
     protected void bLateUpdate()
     {
-        if ( transform.FindChild("Nucleus"))
+        if (transform.FindChild("Nucleus"))
         {
             float healthRatio = currentProtein / MAX_PROTEIN;
             if (healthRatio <= 0.5f && healthRatio > 0.1f)
@@ -722,7 +723,7 @@ public class BaseCell : MonoBehaviour
                 transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
             }
         }
-       
+
 
         if (currentProtein <= 0.0f)
         {

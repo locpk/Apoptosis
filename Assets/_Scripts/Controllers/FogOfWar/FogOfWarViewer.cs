@@ -4,7 +4,7 @@ using System.Collections;
 public class FogOfWarViewer : MonoBehaviour
 {
     Transform m_trans;
-    public Vector2 viewOfRange = new Vector2(2.0f, 6.0f);
+    public Vector2 viewOfRange = new Vector2(5.0f, 10.0f);
     public FogOfWarController.LOSChecks lineOfSightCheck = FogOfWarController.LOSChecks.None;
     public bool isActive = true;
 

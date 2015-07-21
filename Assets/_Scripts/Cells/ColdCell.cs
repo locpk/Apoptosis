@@ -14,7 +14,7 @@ public class ColdCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
     public GameObject particle;
-    private Sound_Manager sound_manager;
+
 
     void Awake()
     {
@@ -93,6 +93,7 @@ public class ColdCell : BaseCell
             cTier2Cold.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
             cTier2Cold.GetComponent<CellSplitAnimation>().originCell = this;
             cTier2Cold.GetComponent<CellSplitAnimation>().originCell1 = other;
+            
 
             if (!sound_manager.sounds_evolution[6].isPlaying)
             {
