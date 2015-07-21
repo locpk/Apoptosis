@@ -14,12 +14,15 @@ public class HeatCell : BaseCell
     float fireballSpeed = 10;
     public bool Inheat;
     public PlayerController controller;
+    GameObject previousTarget;
     public GameObject stun;
     int instanonce = 0;
 
-
+    
     public void Merge()
     {
+
+
 
         List<BaseCell> heatCellsMerge;
         List<BaseCell> possibleMergers = controller.selectedUnits;
@@ -89,6 +92,8 @@ public class HeatCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+
     }
 
     void MUltiDMg()
@@ -112,6 +117,7 @@ public class HeatCell : BaseCell
     {
         if (primaryTarget != null)
         {
+            previousTarget = primaryTarget;
             Vector3 them2me = primaryTarget.transform.position - transform.position;
             GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
             thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;

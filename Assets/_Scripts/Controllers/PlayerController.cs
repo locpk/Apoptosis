@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private GameObject winScreen;
     private GameObject loseScreen;
 
-    private bool isOverUI = false;
+    public static bool isOverUI = false;
 
 
     public void TurnOnOverUI() { isOverUI = true; }
@@ -72,6 +72,9 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> selectedTargets;
     //    List<BaseCell>[] groups;
     public Texture selector;
+    public Texture friendly_indicator;
+
+    public Camera minimapCamera;
 
     float fps;
     float initTouchTime;
@@ -97,6 +100,7 @@ public class PlayerController : MonoBehaviour
 
 
         touchButton = GameObject.Find("Touch");
+
 
         // Initialize variables
         selectedTargets.Clear();
@@ -159,7 +163,7 @@ public class PlayerController : MonoBehaviour
     public void AddNewProtein(Protein _in)
     {
         allSelectableTargets.Add(_in.gameObject);
-       // selectedTargets.Add(_in.gameObject);
+        // selectedTargets.Add(_in.gameObject);
         CheckSelectedUnits();
     }
 
@@ -211,41 +215,54 @@ public class PlayerController : MonoBehaviour
         return allSelectableObjects; // Return the list
     }
 
-    public void UnitSelection(Vector2 origin)
+    public List<GameObject> GetSelectedUnits()
     {
-        if (Input.mousePosition.x >= origin.x)
-        {
-            GUISelectRect.xMax = Input.mousePosition.x;
-        }
-        else
-        {
-            GUISelectRect.xMin = Input.mousePosition.x;
-        }
-
-        if (-Input.mousePosition.y + Screen.height >= origin.y)
-        { GUISelectRect.yMax = -Input.mousePosition.y + Screen.height; }
-        else
-        { GUISelectRect.yMin = -Input.mousePosition.y + Screen.height; }
-
+        List<GameObject> allSelectedUnits = new List<GameObject>();
         foreach (BaseCell item in selectedUnits)
         {
-            item.isSelected = false;
+            allSelectedUnits.Add(item.gameObject);
         }
-        selectedUnits.Clear();
-        foreach (BaseCell item in allSelectableUnits)
+        return allSelectedUnits;
+    }
+
+    public void UnitSelection(Vector2 origin)
+    {
+        if (!minimapCamera.pixelRect.Contains(Input.mousePosition))
         {
-            Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
-            itemPos.y = -itemPos.y + Screen.height;
-            if (GUISelectRect.Contains(itemPos))
+            if (Input.mousePosition.x >= origin.x)
             {
-                selectedUnits.Add(item);
-                item.isSelected = true;
+                GUISelectRect.xMax = Input.mousePosition.x;
+            }
+            else
+            {
+                GUISelectRect.xMin = Input.mousePosition.x;
+            }
 
-                if (!sound_manager.sounds_miscellaneous[0].isPlaying)
+            if (-Input.mousePosition.y + Screen.height >= origin.y)
+            { GUISelectRect.yMax = -Input.mousePosition.y + Screen.height; }
+            else
+            { GUISelectRect.yMin = -Input.mousePosition.y + Screen.height; }
+
+            foreach (BaseCell item in selectedUnits)
+            {
+                item.isSelected = false;
+            }
+            selectedUnits.Clear();
+            foreach (BaseCell item in allSelectableUnits)
+            {
+                Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
+                itemPos.y = -itemPos.y + Screen.height;
+                if (GUISelectRect.Contains(itemPos))
                 {
-                    sound_manager.sounds_miscellaneous[0].Play();
-                }
+                    selectedUnits.Add(item);
+                    item.isSelected = true;
 
+                    if (!sound_manager.sounds_miscellaneous[0].isPlaying)
+                    {
+                        sound_manager.sounds_miscellaneous[0].Play();
+                    }
+
+                }
             }
         }
     }
@@ -487,10 +504,12 @@ public class PlayerController : MonoBehaviour
             if (item)
             {
                 Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
-                float left = drawLoc.x - (float)4;
-                float top = -(drawLoc.y - (float)4) + Screen.height;
-                Rect location = new Rect(left, top, (float)8, (float)8);
-                GUI.DrawTexture(location, selector);
+                float left = drawLoc.x - (float)46;
+                float top = -(drawLoc.y + (float)46) + Screen.height;
+                Rect location = new Rect(left, top, (float)86 , (float)86);
+                // this draws the frirndly unit indicator
+                // GUI.DrawTexture(location, selector); 
+                GUI.DrawTexture(location, friendly_indicator);
             }
         }
 
@@ -559,7 +578,7 @@ public class PlayerController : MonoBehaviour
 
         if (allSelectableUnits.Count == 0)
         {
-            Show_LoseScreen();            
+            Show_LoseScreen();
         }
     }
 
@@ -584,13 +603,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!isOverUI && Time.timeScale > 0.0f)
         {
-            if (Input.touchCount == 1 && isSelecting )
+            if (Input.touchCount == 1 && isSelecting)
             {
                 Touch oneTouch = Input.GetTouch(0);
                 switch (oneTouch.phase)
                 {
                     case TouchPhase.Began:
-
 
                         GUISelectRect.xMax = oneTouch.position.x;
                         GUISelectRect.yMax = oneTouch.position.y;
@@ -622,18 +640,16 @@ public class PlayerController : MonoBehaviour
             if (Input.touchCount == 1 && !isSelecting)
             {
 
-                
+
                 GUISelectRect.xMax = GUISelectRect.xMin;
                 GUISelectRect.yMax = GUISelectRect.yMin;
                 Vector3 initPos = -Vector3.one;
                 Vector3 lastPos = -Vector3.one;
-                GameObject waypoint;
                 Touch touch = Input.GetTouch(0);
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
-                        initTouchTime = Time.time;
-                        delay = Time.time;
+
 
 
                         RaycastHit hitInfo;
@@ -652,13 +668,6 @@ public class PlayerController : MonoBehaviour
                     case TouchPhase.Canceled:
                         break;
                     case TouchPhase.Ended:
-                        if (Time.time - initTouchTime <= 0.5f)
-                        {
-                            initTouchTime = 0.0f;
-                            DeselectCells();
-                            break;
-                        }
-
 
                         RaycastHit hitInfo1;
                         Ray screenRay1 = Camera.main.ScreenPointToRay(touch.position);
@@ -666,29 +675,30 @@ public class PlayerController : MonoBehaviour
                         if (Physics.Raycast(screenRay1, out hitInfo1, 1000.0f, terrainLayer))
                         {
                             lastPos = hitInfo1.point;
-
+                            if (hitInfo1.collider.tag == "Unit")
+                            {
+                                EventManager.Attack(hitInfo1.collider.gameObject);
+                            }
+                            else if (hitInfo1.collider.tag == "Protein")
+                            {
+                                EventManager.Consume(hitInfo1.collider.gameObject);
+                            }
+                            else
+                            {
+                                EventManager.Move(lastPos);
+                                GameObject.Instantiate(movePin, hitInfo1.point, Quaternion.Euler(90.0f, 0.0f, 0.0f));
+                                if (!sound_manager.sounds_miscellaneous[1].isPlaying)
+                                {
+                                    sound_manager.sounds_miscellaneous[1].Play();
+                                }
+                            }
+                            
                         }
 
 
 
                         break;
                     case TouchPhase.Moved:
-                        RaycastHit hitInfo2;
-                        Ray screenRay2 = Camera.main.ScreenPointToRay(touch.position);
-
-                        if (Physics.Raycast(screenRay2, out hitInfo2, 1000.0f, terrainLayer))
-                        {
-                            lastPos = hitInfo2.point;
-                            if (Time.time - delay <= 1.0f)
-                            {
-                                waypoint = Instantiate(moveWaypoint, lastPos, Quaternion.identity) as GameObject;
-                                moveWaypoints.Add(waypoint);
-                                delay = Time.time;
-                            }
-                          
-                            waypoint = null;
-                        }
-
                         break;
                     case TouchPhase.Stationary:
                         break;
@@ -788,11 +798,11 @@ public class PlayerController : MonoBehaviour
 
                         if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
                         {
-                            BaseCell hitCell = hitInfo.collider.gameObject.GetComponent<BaseCell>();
+                            BaseCell hitCell = hitInfo.collider.gameObject.GetComponentInParent<BaseCell>();
                             if (allSelectableUnits.Contains(hitCell))
                             {
-                                hitInfo.collider.gameObject.GetComponent<BaseCell>().isSelected = true;
-                                selectedUnits.Add(hitInfo.collider.gameObject.GetComponent<BaseCell>());
+                                hitInfo.collider.gameObject.GetComponentInParent<BaseCell>().isSelected = true;
+                                selectedUnits.Add(hitInfo.collider.gameObject.GetComponentInParent<BaseCell>());
                             }
                         }
                     }
@@ -945,11 +955,11 @@ public class PlayerController : MonoBehaviour
 
         if (enemies.Count == 0 && gameStarted) // if there are no enemies left, the player has won the game
         {
-            
+
             Show_WinningScreen();
         }
 
-        
+
     }
 
     void Show_WinningScreen()
@@ -990,15 +1000,15 @@ public class PlayerController : MonoBehaviour
             img.enabled = true;
 
         }
-       
+
         this.gameObject.SetActive(false);
         Invoke("GoBackToMainMenu", 5.0f);
-        
+
     }
 
-    void GoBackToMainMenu()
+    public void GoBackToMainMenu()
     {
         Application.LoadLevel("MainMenu");
     }
-    
+
 }

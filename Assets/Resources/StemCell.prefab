@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 499994}
   - 33: {fileID: 3308310}
-  - 135: {fileID: 13565800}
   - 23: {fileID: 2334288}
   m_Layer: 5
   m_Name: MinimapIndicator
@@ -28,7 +27,7 @@ GameObject:
   - 4: {fileID: 485658}
   - 135: {fileID: 13573652}
   - 114: {fileID: 11408550}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FOWSight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,8 +117,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 84.5, y: 0, z: -15.3000002}
-  m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
+  m_LocalPosition: {x: -2.53999996, y: 1.5, z: 6.63000011}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 495744}
   - {fileID: 499994}
@@ -133,7 +132,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 433.700012}
+  m_LocalPosition: {x: 0, y: 0, z: 73.9100037}
   m_LocalScale: {x: .0333333351, y: .0333333351, z: 1}
   m_Children: []
   m_Father: {fileID: 499994}
@@ -157,8 +156,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: -433.700012}
-  m_LocalScale: {x: 30, y: 30, z: 1}
+  m_LocalPosition: {x: 0, y: -0, z: -73.5999985}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 485658}
   m_Father: {fileID: 471618}
@@ -329,9 +328,9 @@ MonoBehaviour:
   gRevertHeatPrefab: {fileID: 0}
   gRevertColdPrefab: {fileID: 0}
   gRevertNervePrefab: {fileID: 0}
-  health_10: {fileID: 21300000, guid: 12be41204cae34947867bd18306abafe, type: 3}
-  health_50: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
-  health_100: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
+  health_10: {fileID: 21300000, guid: 6c2d348af91b78e488eef3a81f5c5187, type: 3}
+  health_50: {fileID: 21300000, guid: ef16570bcc2ddfe4f9b4511edce53bdf, type: 3}
+  health_100: {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 1
@@ -402,18 +401,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de4ef090f52247a49b75200aa7ae2228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &13565800
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 102864}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: .5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13573652
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -424,7 +411,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 35
+  m_Radius: 4.97027111
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13587872
 SphereCollider:
@@ -436,7 +423,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 6.42999983
+  m_Radius: 1.23000002
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &19549964
 NavMeshAgent:
@@ -445,7 +432,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_Enabled: 1
-  m_Radius: 6.42999983
+  m_Radius: 1.23000002
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -454,7 +441,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 0
-  m_Height: 5
+  m_Height: .349999994
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -632,7 +619,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4278232280
+        rgba: 4292380039
       minMaxState: 0
     startSize:
       scalar: 3.78999996
@@ -707,7 +694,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     type: 4
-    radius: 6.67999983
+    radius: 1.23000002
     angle: 25
     length: 5
     boxX: 1
@@ -1556,7 +1543,7 @@ NavMeshObstacle:
   m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 6.42999983, y: 2.5, z: 6.42999983}
+  m_Extents: {x: 1.23000002, y: .174999997, z: 1.23000002}
   m_MoveThreshold: .100000001
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -1586,7 +1573,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ed94fef22ec7c92408aa52b78cc665c1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 70e5e2ba561872b4bb15ce914155a22c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21259276
 SpriteRenderer:
@@ -1612,7 +1599,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21286270
 SpriteRenderer:

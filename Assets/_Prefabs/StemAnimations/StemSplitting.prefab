@@ -103,7 +103,7 @@ Transform:
   m_GameObject: {fileID: 107522}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 491136}
   m_Father: {fileID: 444650}
@@ -115,7 +115,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 146472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.0772934, y: 0, z: -19.6772919}
+  m_LocalPosition: {x: -27.0772934, y: 1, z: -19.6772919}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 438022}
@@ -130,7 +130,7 @@ Transform:
   m_GameObject: {fileID: 186174}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 411700}
   m_Father: {fileID: 444650}
@@ -175,9 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health_10: {fileID: 21300000, guid: 12be41204cae34947867bd18306abafe, type: 3}
-  health_50: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
-  health_100: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
+  health_10: {fileID: 21300000, guid: 6c2d348af91b78e488eef3a81f5c5187, type: 3}
+  health_50: {fileID: 21300000, guid: ef16570bcc2ddfe4f9b4511edce53bdf, type: 3}
+  health_100: {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
 --- !u!114 &11430198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,9 +189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7dc4ff4972f584f83a72a5f9dc2176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health_10: {fileID: 21300000, guid: 12be41204cae34947867bd18306abafe, type: 3}
-  health_50: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
-  health_100: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
+  health_10: {fileID: 21300000, guid: 6c2d348af91b78e488eef3a81f5c5187, type: 3}
+  health_50: {fileID: 21300000, guid: ef16570bcc2ddfe4f9b4511edce53bdf, type: 3}
+  health_100: {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
 --- !u!114 &11489284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,8 +241,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ed94fef22ec7c92408aa52b78cc665c1, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: .552999973}
+  m_Sprite: {fileID: 21300000, guid: 70e5e2ba561872b4bb15ce914155a22c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21255356
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -267,8 +267,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: .627451003}
+  m_Sprite: {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21260182
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -293,8 +293,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: .627451003}
+  m_Sprite: {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21281084
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -319,8 +319,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ed94fef22ec7c92408aa52b78cc665c1, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: .552999973}
+  m_Sprite: {fileID: 21300000, guid: 70e5e2ba561872b4bb15ce914155a22c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -379,22 +379,27 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: health_10
       value: 
-      objectReference: {fileID: 21300000, guid: 12be41204cae34947867bd18306abafe,
+      objectReference: {fileID: 21300000, guid: 6c2d348af91b78e488eef3a81f5c5187,
         type: 3}
     - target: {fileID: 0}
       propertyPath: health_50
       value: 
-      objectReference: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded,
+      objectReference: {fileID: 21300000, guid: ef16570bcc2ddfe4f9b4511edce53bdf,
         type: 3}
     - target: {fileID: 0}
       propertyPath: health_100
       value: 
-      objectReference: {fileID: 21300000, guid: 9197425240af972498df7599f5ff0ded,
+      objectReference: {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_Name
       value: StemCell
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 70e5e2ba561872b4bb15ce914155a22c,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 146472}

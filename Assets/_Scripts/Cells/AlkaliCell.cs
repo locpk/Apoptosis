@@ -6,8 +6,10 @@ public class AlkaliCell : BaseCell
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
     public GameObject DOT;
+    GameObject previousTarget;
     public GameObject stun;
     int instanonce = 0;
+   
 
     void Awake()
     {
@@ -15,6 +17,7 @@ public class AlkaliCell : BaseCell
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
     void MUltiDMg()
     {
@@ -34,6 +37,7 @@ public class AlkaliCell : BaseCell
     {
         if (primaryTarget != null)
         {
+            previousTarget = primaryTarget;
             Vector3 newvec =  new Vector3(primaryTarget.transform.position.x, primaryTarget.transform.position.y, (primaryTarget.transform.position.z + primaryTarget.GetComponent<SphereCollider>().radius/4));
             GameObject theDOT= Instantiate(DOT,  newvec ,primaryTarget.transform.rotation) as GameObject;
     

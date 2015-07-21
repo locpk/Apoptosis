@@ -9,12 +9,14 @@ public class Tier2HeatCell : BaseCell
     public GameObject fireball;
     // Use this for initialization
     float fireballSpeed = 15;
+    GameObject previousTarget;
     bool hasteActive = false;
     public float hasteTimer = 0.0f;
     public GameObject stemCell;
     public GameObject stun;
     int instanonce = 0;
 
+   
     void Start()
     {
         base.bStart();
@@ -23,6 +25,7 @@ public class Tier2HeatCell : BaseCell
     {
         if (primaryTarget != null)
         {
+            previousTarget = primaryTarget;
             Vector3 them2me = primaryTarget.transform.position - transform.position;
             GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
             thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
@@ -35,6 +38,7 @@ public class Tier2HeatCell : BaseCell
     {
         if (primaryTarget != null)
         {
+            previousTarget = primaryTarget;
             Vector3 them2me = primaryTarget.transform.position - transform.position;
             GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
             thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
@@ -207,6 +211,8 @@ public class Tier2HeatCell : BaseCell
         base.bAwake();
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
     }
     void MUltiDMg()

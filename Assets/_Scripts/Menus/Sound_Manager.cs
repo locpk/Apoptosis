@@ -9,13 +9,32 @@ public class Sound_Manager : MonoBehaviour {
 
     public AudioSource backGround_music;
     public AudioSource SFX_clip;
-    public static Sound_Manager instance = null;
+    private static Sound_Manager instance = null;
+    private static Object single_lock = new Object();
+    public static Sound_Manager Instance
+    {
+        get {
+
+            if (instance == null)
+            {
+                lock (single_lock)
+                {
+                    if (instance == null)
+                    {
+                        instance = ((GameObject)Instantiate(Resources.Load("Sound_Manager"))).GetComponent<Sound_Manager>();
+                        DontDestroyOnLoad(instance.gameObject);
+                    }
+                }
+            }
+            return instance;
+        }
+    }
 
     public AudioMixer master_mixer;
 
     public float lowPitchRange = .95f;
     public float highPitchRange = 1.0f;
-    private float volume = 0.0f;
+    private float volume_Stored = 0.0f;
 
    private Button mute_button; // used for displaying mute, unmute
 
@@ -25,61 +44,71 @@ public class Sound_Manager : MonoBehaviour {
 
     public AudioSource win_music;
     public AudioSource lose_music;
-    
+
+    private AudioMixerSnapshot snapshot_normal;
+    private AudioMixerSnapshot snapshot_muted;
+
 	// Use this for initialization
-	void Start ()
+	void Awake ()
     {
+        if (this == instance)
+        {
+            return;
+        }
         // singleton check and creation for the sound manager.
         if (instance == null)
         {
-            instance = this;
+            lock (single_lock)
+            {
+                if (instance == null)
+                {
+
+                    instance = this;
+                    DontDestroyOnLoad(gameObject);
+                }
+                else
+                    DestroyObject(gameObject);
+                              
+            }
         }
-        else if (instance == this)
+        if (!instance.backGround_music.isPlaying)
         {
-            Destroy(gameObject);
+        instance.backGround_music.Play();
+            
         }
 
-        DontDestroyOnLoad(gameObject);
-        mute_button = GameObject.FindGameObjectWithTag("Mute_Button").GetComponent<Button>();
-        backGround_music.Play();
+      //  mute_button = GameObject.FindGameObjectWithTag("Mute_Button").GetComponent<Button>();
+      //  backGround_music.Play();
+
+     //   snapshot_muted = Sound_Manager.instance.GetComponent<AudioMixerSnapshot>().audioMixer.FindSnapshot("Snapshot_muted");
+     //   snapshot_muted = Sound_Manager.instance.snapshot_muted.TransitionTo(3.0f); 
+        snapshot_muted = instance.master_mixer.FindSnapshot("Snapshot_muted");
+        snapshot_normal = instance.master_mixer.FindSnapshot("Snapshot");
 
         DontDestroyOnLoad(instance);
 	}
 
     void Update()
     {
-      //  master_mixer.GetFloat("MasterVolume", out volume);
-        if (volume > -39.0f) // if the vilume is unmuted
-        {
-         //   mute_button.om
-         //   mute_button.animationTriggers.;
-        } 
     
-        var pointer = new PointerEventData(EventSystem.current); // pointer event for Execute
- 
-         if (Input.GetKeyDown(KeyCode.H)) // force hover
-         {
-             ExecuteEvents.Execute(mute_button.gameObject, pointer, ExecuteEvents.pointerEnterHandler);
-         }
-         if (Input.GetKeyDown(KeyCode.U)) // un-hover (end hovering)
-         {
-             ExecuteEvents.Execute(mute_button.gameObject, pointer, ExecuteEvents.pointerExitHandler);
-         }
-         if (Input.GetKeyDown(KeyCode.S)) // submit (~click)
-         {
-             ExecuteEvents.Execute(mute_button.gameObject, pointer, ExecuteEvents.submitHandler);
-         }
-         if (Input.GetKeyDown(KeyCode.P)) // down: press
-         {
-             ExecuteEvents.Execute(mute_button.gameObject, pointer, ExecuteEvents.pointerDownHandler);
-         }
-         if (Input.GetKeyUp(KeyCode.P)) // up: release
-         {
-             ExecuteEvents.Execute(mute_button.gameObject, pointer, ExecuteEvents.pointerUpHandler);
-         }
-
+     
 
     }
+
+    public void Mute_Unmute_Sound(bool _mute)
+    {
+        if (_mute)
+        {
+            // snapshot_muted.TransitionTo(0.5f);
+           instance.master_mixer.GetFloat("MasterVolume", out volume_Stored);
+           instance.master_mixer.SetFloat("MasterVolume", -45.0f);
+        }
+        else
+           
+            instance.master_mixer.SetFloat("MasterVolume", volume_Stored);
+    }
+
+    
 
     public void PlaySingleAudio( AudioClip clip )
     {
@@ -103,4 +132,21 @@ public class Sound_Manager : MonoBehaviour {
 
     }
 
+    public void SetMASTER_volume(float _volume)
+    {
+        master_mixer.SetFloat("MasterVolume", _volume);
+    
+    }
+
+    public void SetMUSIC_volume(float _volume)
+    {
+        master_mixer.SetFloat("Music_Volume", _volume);
+    
+    }
+
+    public void SetSFX_volume(float _volume)
+    {
+        master_mixer.SetFloat("SFX_Volume", _volume);
+
+    }
 }

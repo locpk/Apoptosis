@@ -14,6 +14,9 @@ public class Tier2ColdCell : BaseCell
 
     public GameObject stun;
     int instanonce = 0;
+
+
+   
 	// Use this for initialization
 	void Start ()
     {

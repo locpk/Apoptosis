@@ -15,6 +15,8 @@ public class StemCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
 
+    ParticleSystem particleSystem;
+   
     public override void Mutation(CellType _newType)
     {
         if (currentProtein <= 50.0f)
@@ -121,14 +123,16 @@ public class StemCell : BaseCell
         base.bAwake();
         multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
 
     // Use this for initialization
     void Start()
     {
         base.bStart();
-
+        particleSystem = GetComponent<ParticleSystem>();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -165,58 +169,74 @@ public class StemCell : BaseCell
                     SetPrimaryTarget(null);
                     if (IsInvoking("DamagePerSecond"))
                     {
-                        if (GetComponent<ParticleSystem>().isPlaying)
-                        {
-
-                            GetComponent<ParticleSystem>().Stop();
-                        }
                         CancelInvoke("DamagePerSecond");
+                    }
+                    if (particleSystem.isPlaying)
+                    {
+
+                        particleSystem.Stop();
                     }
 
                     //guard mode auto attack enemy in range
                     //base.Guarding();
                     break;
                 case CellState.ATTACK:
-
-                    float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
-
-                    if (distance > attackRange && distance <= fovRadius)
+                    if (primaryTarget == null)
                     {
                         if (IsInvoking("DamagePerSecond"))
                         {
-                            if (GetComponent<ParticleSystem>().isPlaying)
-                            {
-
-                                GetComponent<ParticleSystem>().Stop();
-                            }
                             CancelInvoke("DamagePerSecond");
                         }
-                        base.ChaseTarget();
+                        if (particleSystem.isPlaying)
+                        {
+
+                            particleSystem.Stop();
+                        }
+                        currentState = CellState.IDLE;
+                        return;
                     }
-                    else if (distance <= attackRange)
+
+                    float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
+
+                    if (distance >  attackRange * attackRange && distance <= fovRadius * fovRadius)
+                    {
+                        if (IsInvoking("DamagePerSecond"))
+                        {
+                            CancelInvoke("DamagePerSecond");
+                        }
+                        if (particleSystem.isPlaying)
+                        {
+
+                            particleSystem.Stop();
+                        }
+                        base.ChaseTarget();
+                        return;
+                    }
+                    else if (distance <= attackRange * attackRange )
                     {
                         if (!IsInvoking("DamagePerSecond"))
                         {
                             InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
                         }
-                        if (GetComponent<ParticleSystem>().isStopped || GetComponent<ParticleSystem>().isPaused)
+                        if (particleSystem.isStopped || particleSystem.isPaused)
                         {
-                            GetComponent<ParticleSystem>().Play();
+                            particleSystem.Play();
                         }
-
+                        return;
                     }
                     else
                     {
                         if (IsInvoking("DamagePerSecond"))
                         {
-                            if (GetComponent<ParticleSystem>().isPlaying)
-                            {
-
-                                GetComponent<ParticleSystem>().Stop();
-                            }
                             CancelInvoke("DamagePerSecond");
                         }
+                        if (particleSystem.isPlaying)
+                        {
+
+                            particleSystem.Stop();
+                        }
                         currentState = CellState.IDLE;
+
                     }
                     break;
                 case CellState.CONSUMING:
@@ -226,7 +246,7 @@ public class StemCell : BaseCell
                 case CellState.MOVING:
 
                     base.bUpdate();
-                    if (primaryTarget && base.isStopped())
+                    if (primaryTarget )
                     {
                         if (primaryTarget.GetComponent<BaseCell>())
                         {

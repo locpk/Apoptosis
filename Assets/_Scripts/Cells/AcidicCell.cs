@@ -10,12 +10,14 @@ public class AcidicCell : BaseCell
     public GameObject stun;
     public GameObject Acid;
     int instanonce = 0;
+    
 
     void Awake()
     {
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         base.bAwake();
         multidamagesources += nothing;
-        InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+          InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
     }
 
     void DamagePreSecond()
@@ -71,15 +73,14 @@ public class AcidicCell : BaseCell
             if (this.stunTimer <= 0)
             {
                 instanonce = 0;
-                // Destroy(stun.gameObject);
+                Destroy(stun.gameObject);
                 this.stunTimer = 3;
                 this.stunned = false;
                 this.hitCounter = 0;
-
+                return;
             }
         }
-        else
-        {
+    
             if (targets != null && targets.Count > 1)
             {
 
@@ -105,7 +106,11 @@ public class AcidicCell : BaseCell
             switch (currentState)
             {
                 case CellState.IDLE:
-
+                       SetPrimaryTarget(null);
+                    if (IsInvoking("DamagePreSecond"))
+                    {
+                        CancelInvoke("DamagePreSecond");
+                    }
                     break;
                 case CellState.ATTACK:
                     if (primaryTarget != null)
@@ -129,17 +134,15 @@ public class AcidicCell : BaseCell
                                 base.ChaseTarget();
                             }
                         }
+                    }
                         else
                         {
-                            SetPrimaryTarget(null);
-                            navAgent.Stop();
+                            currentState = CellState.IDLE;
                         }
+                    
 
-                    }
-                    else
-                    {
-                        currentState = CellState.IDLE;
-                    }
+                    
+                
                     break;
                 case CellState.MOVING:
                     base.bUpdate();
@@ -170,7 +173,7 @@ public class AcidicCell : BaseCell
                     break;
             }
             base.bUpdate();
-        }
+        
     }
 
     void FixedUpdate()

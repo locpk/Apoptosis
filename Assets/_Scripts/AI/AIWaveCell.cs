@@ -91,6 +91,7 @@ public class AIWaveCell : MonoBehaviour {
                     if (m_baseCell.primaryTarget == null) {
                         m_baseCell.primaryTarget = hitInfo.transform.gameObject;
                         m_baseCell.primaryTarget.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = true;
+                        gameObject.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = true;
                         m_baseCell.currentState = CellState.ATTACK;
                     }
                 }
