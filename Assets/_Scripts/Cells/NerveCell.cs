@@ -94,7 +94,7 @@ public class NerveCell : BaseCell
         }
         else
         {
-            if (targets != null && targets.Count > 1)
+            if (targets != null && targets.Count >= 1)
             {
 
                 if (primaryTarget == null)
