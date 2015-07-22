@@ -14,7 +14,6 @@ public class ColdCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
     public GameObject particle;
-    private Sound_Manager sound_manager;
 
     void Awake()
     {
@@ -23,7 +22,6 @@ public class ColdCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
-        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
     }
     void MUltiDMg()

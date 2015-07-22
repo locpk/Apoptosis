@@ -20,7 +20,7 @@ public class AcidicArea : BaseArea {
     }
 
 	public override void Start () {
-            acidicButton.GetComponent<Button>().interactable = false;
+        acidicButton.GetComponent<Button>().interactable = false;
         base.Start();
 
 	}
