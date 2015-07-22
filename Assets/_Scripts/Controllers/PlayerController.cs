@@ -296,7 +296,7 @@ public class PlayerController : MonoBehaviour
         {
             DeselectCells();
         }
-        
+
 
         foreach (BaseCell item in allSelectableUnits)
         {
@@ -586,7 +586,7 @@ public class PlayerController : MonoBehaviour
             moveWaypoints.Clear();
         }
 
-        if (allSelectableUnits.Count == 0)
+        if (allSelectableUnits.Count == 0 && gameStarted)
         {
             Show_LoseScreen();
         }
@@ -700,7 +700,7 @@ public class PlayerController : MonoBehaviour
                             {
                                 selectedTargets.Add(hitInfo.collider.gameObject);
                             }
-                            else if (hitInfo.collider.name == "Layer 2 - Terrain - Areas" && selectedTargets.Count == 0)
+                            else if (selectedTargets.Count == 0)
                             {
                                 EventManager.Move(hitInfo.point);
                                 GameObject.Instantiate(movePin, hitInfo.point, Quaternion.Euler(90.0f, 0.0f, 0.0f));
@@ -1032,27 +1032,42 @@ public class PlayerController : MonoBehaviour
 
     public void NextLevel()
     {
-        if (Application.loadedLevelName == "Singleplayer_Level3")
+        if (PhotonNetwork.connected)
         {
-            Application.LoadLevel("Singleplayer_Level2");
+            PhotonNetwork.LeaveRoom();
+            Application.LoadLevel("Mulitplayer_Lobby");
         }
-        else if (Application.loadedLevelName == "Singleplayer_Level2")
+        else
         {
-            Application.LoadLevel("Singleplayer_Level1");
-        }
-        else if (Application.loadedLevelName == "Singleplayer_Level1")
-        {
-            Application.LoadLevel("Credits");
-        }
-        else if (Application.loadedLevelName == "Multiplayer_Level")
-        {
-            Application.LoadLevel("MainMenu");
+            if (Application.loadedLevelName == "Singleplayer_Level3")
+            {
+                Application.LoadLevel("Singleplayer_Level2");
+            }
+            else if (Application.loadedLevelName == "Singleplayer_Level2")
+            {
+                Application.LoadLevel("Singleplayer_Level1");
+            }
+            else if (Application.loadedLevelName == "Singleplayer_Level1")
+            {
+                Application.LoadLevel("Credits");
+            }
+            else if (Application.loadedLevelName == "Multiplayer_Level")
+            {
+                Application.LoadLevel("MainMenu");
+            }
         }
     }
 
+
     public void GoBackToMainMenu()
     {
-        Application.LoadLevel("MainMenu");
+        if (PhotonNetwork.connected)
+        {
+            PhotonNetwork.LeaveRoom();
+            Application.LoadLevel("Mulitplayer_Lobby");
+        }
+        else
+            Application.LoadLevel("MainMenu");
     }
 
 }
