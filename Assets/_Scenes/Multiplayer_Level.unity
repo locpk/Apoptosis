@@ -1949,6 +1949,7 @@ MonoBehaviour:
   protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!64 &179468519
 MeshCollider:
@@ -2173,6 +2174,7 @@ MonoBehaviour:
   protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!64 &337191879
 MeshCollider:
@@ -3812,6 +3814,7 @@ MonoBehaviour:
   protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!64 &743187300
 MeshCollider:
@@ -3941,6 +3944,7 @@ MonoBehaviour:
   protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!64 &1139565254
 MeshCollider:
@@ -4193,6 +4197,7 @@ MonoBehaviour:
   protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!64 &1561626713
 MeshCollider:
@@ -5069,6 +5074,7 @@ MonoBehaviour:
   protein: {fileID: 0}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!64 &2094951579
 MeshCollider:

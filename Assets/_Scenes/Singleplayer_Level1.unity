@@ -634,6 +634,7 @@ MonoBehaviour:
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!1 &255636925
 GameObject:
@@ -1907,6 +1908,7 @@ MonoBehaviour:
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!1 &747809416
 GameObject:
@@ -2227,6 +2229,7 @@ MonoBehaviour:
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!1 &832163503 stripped
 GameObject:
@@ -2694,6 +2697,14 @@ Prefab:
     - target: {fileID: 11441316, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
       propertyPath: scrollSpeed
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050502, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: orthographic size
+      value: 116.074547
+      objectReference: {fileID: 0}
+    - target: {fileID: 401210, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 12.8000002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
@@ -3349,6 +3360,7 @@ MonoBehaviour:
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!1 &1449905695
 GameObject:
@@ -3832,6 +3844,7 @@ MonoBehaviour:
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!1 &1643113656
 GameObject:
@@ -4240,6 +4253,7 @@ MonoBehaviour:
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!1 &1764264607
 GameObject:

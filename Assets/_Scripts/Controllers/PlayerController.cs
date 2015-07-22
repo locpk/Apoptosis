@@ -1022,7 +1022,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Application.loadedLevelName == "Multiplayer_Level")
         {
-            Application.LoadLevel("Credits");
+            Application.LoadLevel("MainMenu");
         }
     }
 
