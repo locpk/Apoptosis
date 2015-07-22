@@ -40,6 +40,7 @@ public class BaseCell : MonoBehaviour
     public GameObject gCancerCellPrefab;
     public GameObject gStemCellPrefab;
     public GameObject gHeatCellPrefab;
+    public GameObject gHeatCancerPrefab;
     public GameObject gColdCellPrefab;
     public GameObject gColdCancerPrefab;
     public GameObject gAcidicCellPrefab;
@@ -225,7 +226,7 @@ public class BaseCell : MonoBehaviour
         gameObject.SetActive(false);
         transform.position = new Vector3(2500.0f, 2500.0f, 2500.0f);
 
-        
+
 
     }
 
@@ -301,7 +302,7 @@ public class BaseCell : MonoBehaviour
     #region Special abilities
     public void PerfectSplit()
     {
-        if (currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
+        if (currentProtein <= 50.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
         {
             return;
         }
@@ -372,7 +373,7 @@ public class BaseCell : MonoBehaviour
 
     public void CancerousSplit()
     {
-        if ( currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
+        if (currentProtein <= 1.0f || PlayerController.cap + 1 > PlayerController.MAX_CAP)
         {
             return;
         }
@@ -380,6 +381,7 @@ public class BaseCell : MonoBehaviour
         float cancerousChance = 0.0f;
         switch (currentLevel)
         {
+            case 0:
             case 1:
                 cancerousChance = CancerChance.LEVEL_1;
                 break;
@@ -435,15 +437,17 @@ public class BaseCell : MonoBehaviour
         }
         else
         {
-            //newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-            //newCell.GetComponent<BaseCell>().currentProtein = currentProtein;
-            //newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
-            //newCell.GetComponent<BaseCell>().isAIPossessed = false;
-            //newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
+
 
             switch (this.celltype)
             {
                 case CellType.HEAT_CELL:
+                    newCell = GameObject.Instantiate(gHeatCancerPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+                    newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                    newCell.GetComponent<CellSplitAnimation>().originCell = this;
+                    Deactive();
 
                     break;
                 case CellType.COLD_CELL:
@@ -517,7 +521,7 @@ public class BaseCell : MonoBehaviour
         depleteTimer = DEPLETE_TIME;
         if (isSinglePlayer)
         {
-           // GetComponent<PhotonView>().enabled = false;
+            // GetComponent<PhotonView>().enabled = false;
 
         }
         else
@@ -560,7 +564,7 @@ public class BaseCell : MonoBehaviour
 
     protected void bUpdate()
     {
-   
+
         if (currentState == CellState.IDLE)
         {
 
@@ -706,7 +710,7 @@ public class BaseCell : MonoBehaviour
 
     protected void bLateUpdate()
     {
-        if ( transform.FindChild("Nucleus"))
+        if (transform.FindChild("Nucleus"))
         {
             float healthRatio = currentProtein / MAX_PROTEIN;
             if (healthRatio <= 0.5f && healthRatio > 0.1f)
@@ -722,7 +726,7 @@ public class BaseCell : MonoBehaviour
                 transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
             }
         }
-       
+
 
         if (currentProtein <= 0.0f)
         {

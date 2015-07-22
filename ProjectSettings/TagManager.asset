@@ -34,6 +34,7 @@ TagManager:
   - Shader_Left
   - Shader_Top
   - Shader_Bottom
+  - Terrain
   layers:
   - Default
   - TransparentFX
