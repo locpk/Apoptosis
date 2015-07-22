@@ -117,7 +117,7 @@ Transform:
   m_LocalScale: {x: 17.4736614, y: .513931334, z: 17.4736633}
   m_Children: []
   m_Father: {fileID: 428882016}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!23 &41651990
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1460,6 +1460,11 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!20 &180629590 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 2050502, guid: 7bf6043f85fca314daf18b82ee44fff5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1010221502}
 --- !u!1 &182170028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,7 +1569,7 @@ MonoBehaviour:
   gameStarted: 0
   movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
   attackPin: {fileID: 0}
-  moveWaypoint: {fileID: 0}
+  moveWaypoint: {fileID: 110900, guid: 669611cb87dffa74cad959c741ccb043, type: 2}
   moveWaypoints: []
   isSelecting: 1
   NumStemCells: 0
@@ -1581,6 +1586,8 @@ MonoBehaviour:
   allSelectableTargets: []
   selectedTargets: []
   selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
+  friendly_indicator: {fileID: 2800000, guid: 2891a1c9bf4b09b4098df9cf5af206a0, type: 3}
+  minimapCamera: {fileID: 180629590}
 --- !u!4 &245173500
 Transform:
   m_ObjectHideFlags: 0
@@ -1593,6 +1600,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 212733604}
   m_RootOrder: 0
+--- !u!1 &289113159 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 116600, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+  m_PrefabInternal: {fileID: 2070887925}
 --- !u!1 &295965090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,8 +1647,8 @@ MonoBehaviour:
   spawnMode: 1
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
-  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 30
+  currSpawnCycleInSecond: 0
   maxProteins: 5
 --- !u!64 &295965093
 MeshCollider:
@@ -1911,13 +1922,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2072396789}
-  - {fileID: 1146848640}
-  - {fileID: 498861140}
   - {fileID: 891238400}
+  - {fileID: 1146848640}
   - {fileID: 41651989}
+  - {fileID: 1854998210}
+  - {fileID: 498861140}
   - {fileID: 1468538118}
   - {fileID: 1873729586}
-  - {fileID: 1854998210}
   m_Father: {fileID: 765305222}
   m_RootOrder: 6
 --- !u!1 &430797722
@@ -1977,7 +1988,7 @@ Transform:
   m_LocalScale: {x: 22.481163, y: .661210895, z: 22.4811687}
   m_Children: []
   m_Father: {fileID: 428882016}
-  m_RootOrder: 2
+  m_RootOrder: 5
 --- !u!23 &498861141
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2133,8 +2144,8 @@ MonoBehaviour:
   spawnMode: 1
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
-  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 120
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!64 &625317977
 MeshCollider:
@@ -3496,8 +3507,8 @@ MonoBehaviour:
   spawnMode: 1
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
-  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!64 &791628519
 MeshCollider:
@@ -3796,7 +3807,7 @@ Transform:
   m_LocalScale: {x: 25.0472126, y: .736682892, z: 25.0472164}
   m_Children: []
   m_Father: {fileID: 428882016}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!23 &891238401
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3854,7 +3865,7 @@ MonoBehaviour:
   areaType: 2
   damagePerSecond: 5
   pendingConvertDelayed: 5
-  acidicButton: {fileID: 0}
+  acidicButton: {fileID: 289113159}
 --- !u!1 &892552857
 GameObject:
   m_ObjectHideFlags: 0
@@ -4038,8 +4049,8 @@ MonoBehaviour:
   spawnMode: 1
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
-  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 60
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!64 &974878585
 MeshCollider:
@@ -4081,6 +4092,10 @@ Transform:
   - {fileID: 625317975}
   m_Father: {fileID: 1255619616}
   m_RootOrder: 2
+--- !u!1 &984818088 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 170346, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+  m_PrefabInternal: {fileID: 2070887925}
 --- !u!1 &990142219
 GameObject:
   m_ObjectHideFlags: 0
@@ -4347,8 +4362,8 @@ MonoBehaviour:
   spawnMode: 1
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
-  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!64 &1081717656
 MeshCollider:
@@ -4464,7 +4479,7 @@ Transform:
   m_LocalScale: {x: 28.3428135, y: .833612263, z: 28.3428154}
   m_Children: []
   m_Father: {fileID: 428882016}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!23 &1146848641
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4742,8 +4757,8 @@ MonoBehaviour:
   spawnMode: 1
   protein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   delayTimeInSecond: 5
-  currSpawnCycleInSecond: 0
   spawnCycleInSecond: 180
+  currSpawnCycleInSecond: 0
   maxProteins: 10
 --- !u!64 &1333931946
 MeshCollider:
@@ -4875,7 +4890,7 @@ Transform:
   m_LocalScale: {x: 18.6968174, y: .549906492, z: 18.6968193}
   m_Children: []
   m_Father: {fileID: 428882016}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!23 &1468538119
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5400,7 +5415,7 @@ Transform:
   m_LocalScale: {x: 50.1610718, y: 1, z: 50.1610947}
   m_Children: []
   m_Father: {fileID: 428882016}
-  m_RootOrder: 7
+  m_RootOrder: 4
 --- !u!114 &1854998211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5445,7 +5460,7 @@ Transform:
   m_LocalScale: {x: 65.2077408, y: 1.91787553, z: 65.2077637}
   m_Children: []
   m_Father: {fileID: 428882016}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!23 &1873729587
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5768,4 +5783,4 @@ MonoBehaviour:
   areaType: 3
   damagePerSecond: 5
   pendingConvertDelayed: 5
-  alkaliButton: {fileID: 0}
+  alkaliButton: {fileID: 984818088}
