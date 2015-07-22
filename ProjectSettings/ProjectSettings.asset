@@ -35,7 +35,7 @@ PlayerSettings:
   useOSAutorotation: 1
   use32BitDisplayBuffer: 0
   disableDepthAndStencilBuffers: 0
-  defaultIsFullScreen: 0
+  defaultIsFullScreen: 1
   defaultIsNativeResolution: 0
   runInBackground: 1
   captureSingleScreen: 0
@@ -44,10 +44,10 @@ PlayerSettings:
   submitAnalytics: 1
   usePlayerLog: 1
   bakeCollisionMeshes: 0
-  forceSingleInstance: 0
-  resizableWindow: 1
+  forceSingleInstance: 1
+  resizableWindow: 0
   useMacAppStoreValidation: 0
-  gpuSkinning: 0
+  gpuSkinning: 1
   xboxPIXTextureCapture: 0
   xboxEnableAvatar: 0
   xboxEnableKinect: 0
@@ -70,7 +70,7 @@ PlayerSettings:
     5:4: 0
     16:10: 1
     16:9: 0
-    Others: 1
+    Others: 0
   bundleIdentifier: com.KewlalaGameZ.Apoptosis
   bundleVersion: 1.0
   preloadedAssets: []
