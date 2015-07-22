@@ -45,20 +45,54 @@ public class Tier2ColdCell : BaseCell
             }
             instanonce++;
 
-            stunTimer -= 1 * Time.fixedDeltaTime;
+          
+            stunTimer -= 1.0f * Time.fixedDeltaTime;
+        if(stunTimer > 0)
+        {
+            navAgent.enabled = false;
+            navObstacle.enabled = true;
+            primaryTarget = null;
+
+            return;
+        }
             if (this.stunTimer <= 0)
             {
                 instanonce = 0;
                 // Destroy(stun.gameObject);
-                this.stunTimer = 3;
+                this.stunTimer = 2;
                 this.stunned = false;
                 this.hitCounter = 0;
-
+                navObstacle.enabled = false;
+                navAgent.enabled = true;
             }
         }
         else
         {
+            if (targets != null && targets.Count >= 1)
+            {
 
+                if (primaryTarget == null)
+                {
+                    for (int i = 0; i < targets.Count; i++)
+                    {
+
+                        if (i != targets.Count)
+                        {
+
+                            if (i == 0 && targets.Count == 1)
+                                primaryTarget = targets[i];
+                            else
+                                primaryTarget = targets[i + 1];
+
+                            if (primaryTarget.GetComponent<BaseCell>())
+                                currentState = CellState.ATTACK;
+                            if (primaryTarget.GetComponent<Protein>())
+                                currentState = CellState.CONSUMING;
+                            break;
+                        }
+                    }
+                }
+            }
             switch (currentState)
             {
                 case CellState.IDLE:
@@ -182,26 +216,65 @@ public class Tier2ColdCell : BaseCell
     }
     void AoeDmg(Vector3 center, float radius)
     {
-        Collider[] hitColliders = Physics.OverlapSphere(center, radius);
-        for (int i = 0; i < hitColliders.Length; i++)
+        if (isAIPossessed == false)
         {
-            BaseCell basecellerino = hitColliders[i].GetComponent<BaseCell>();
-            if (basecellerino != null)
+            Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+            for (int i = 0; i < hitColliders.Length; i++)
             {
-                if (basecellerino.isAIPossessed && basecellerino != primaryTarget && basecellerino.isMine == false)
+                BaseCell basecellerino = hitColliders[i].GetComponent<BaseCell>();
+                if (basecellerino != null)
                 {
-                    basecellerino.currentProtein -= attackDamage;
-                    basecellerino.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
-                    ++basecellerino.hitCounter;
-                    Vector3 tracking = new Vector3(basecellerino.transform.position.x, basecellerino.transform.position.y + 2, basecellerino.transform.position.z);
-                   // Vector3
-                    Instantiate(particles, tracking, basecellerino.transform.rotation);
-                    if(basecellerino.hitCounter >= 4)
+                    if (basecellerino.isMine == false)
                     {
-                        basecellerino.stunned = true;
+                        basecellerino.currentProtein -= attackDamage;
+                        basecellerino.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                        ++basecellerino.hitCounter;
+                        Vector3 tracking = new Vector3(basecellerino.transform.position.x, basecellerino.transform.position.y + 2, basecellerino.transform.position.z);
+                        // Vector3
+                        Instantiate(particles, tracking, basecellerino.transform.rotation);
+                        if (PhotonNetwork.connected)
+                        {
+                            basecellerino.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage);
+                        }
+                        if (basecellerino.hitCounter >= 4)
+                        {
+                            basecellerino.stunned = true;
+                        }
                     }
+
                 }
-                
+            }
+        }
+        else
+        {
+
+            Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+            for (int i = 0; i < hitColliders.Length; i++)
+            {
+                BaseCell basecellerino = hitColliders[i].GetComponent<BaseCell>();
+                if (basecellerino != null)
+                {
+                    if (basecellerino.isMine == true)
+                    {
+                        basecellerino.currentProtein -= attackDamage;
+                        basecellerino.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                        ++basecellerino.hitCounter;
+                        Vector3 tracking = new Vector3(basecellerino.transform.position.x, basecellerino.transform.position.y + 2, basecellerino.transform.position.z);
+
+                        // Vector3
+                        Instantiate(particles, tracking, basecellerino.transform.rotation);
+                        if (PhotonNetwork.connected)
+                        {
+                            basecellerino.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, attackDamage);
+                        }
+                        if (basecellerino.hitCounter >= 4)
+                        {
+                            basecellerino.stunned = true;
+                        }
+
+                    }
+
+                }
             }
         }
     }

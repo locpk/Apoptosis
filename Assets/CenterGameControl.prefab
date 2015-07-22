@@ -31,22 +31,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &149686
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 496050}
-  - 114: {fileID: 11473488}
-  m_Layer: 0
-  m_Name: FogOfWarController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &162260
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,7 +40,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 429780}
   - 114: {fileID: 11447774}
-  - 114: {fileID: 11401218}
   m_Layer: 0
   m_Name: CenterGameControl
   m_TagString: Untagged
@@ -100,32 +83,8 @@ Transform:
   m_Children:
   - {fileID: 407378}
   - {fileID: 406002}
-  - {fileID: 496050}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!4 &496050
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 149686}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 429780}
-  m_RootOrder: 2
---- !u!114 &11401218
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 162260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 397059811a662274bb595eca7faecdc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11436092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,32 +131,7 @@ MonoBehaviour:
   currentTaskText: {fileID: 0}
   showTaskButton: {fileID: 0}
   PlayerControls: {fileID: 11436092}
-  prefabProtein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
---- !u!114 &11473488
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 149686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1772ad53328240458df9f581d96918d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unexploredColor: {r: .242647052, g: .239078715, b: .239078715, a: 1}
-  exploredColor: {r: .426470578, g: .426470578, b: .426470578, a: 1}
-  worldSize: 256
-  textureSize: 128
-  updateFrequency: .25
-  textureBlendTime: 1
-  blurIterations: 2
-  heightRange: {x: 0, y: 10}
-  raycastMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  raycastRadius: 1
-  margin: .400000006
-  debug: 0
+  prefabProtein: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -59,8 +59,8 @@ public class FireBall : BaseProjectile
         {
             if (other.gameObject.GetComponent<BaseCell>().isMine == false)
             {
-                Target.GetComponent<BaseCell>().currentProtein = Target.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
-                Target.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                other.GetComponent<BaseCell>().currentProtein = Target.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
+                other.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
                 Destroy(this.gameObject);
             }
         }

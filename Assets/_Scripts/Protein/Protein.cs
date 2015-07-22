@@ -30,7 +30,7 @@ public class Protein : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
-        value = Random.Range(80, 150);
+        value = Random.Range(70, 110);
         emitter = GetComponent<ParticleSystem>();
 	}
 	

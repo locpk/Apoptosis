@@ -29,7 +29,7 @@ public class Acidd : MonoBehaviour
             if (other.gameObject.GetComponent<BaseCell>().isMine == true)
             {
                GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                myanim.SetTrigger("Acid");
+               myanim.SetTrigger("Start");
                 other.gameObject.GetComponent<BaseCell>().currentProtein = other.gameObject.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
                 other.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
                 GetComponent<SphereCollider>().radius = 3;
@@ -42,7 +42,7 @@ public class Acidd : MonoBehaviour
              if (other.gameObject.GetComponent<BaseCell>().isMine == false)
              {
                 GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                 myanim.SetTrigger("Acid");
+                 myanim.SetTrigger("Start");
                  other.gameObject.GetComponent<BaseCell>().currentProtein = other.gameObject.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
                  other.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
              }
@@ -76,13 +76,13 @@ public class Acidd : MonoBehaviour
     }
     void AoeDmg()
     {
-        if (Owner.GetComponent<BaseCell>().isAIPossessed == true)
+        if (Owner.GetComponent<BaseCell>().isAIPossessed == true) // Ai attack
         {
             caughtInAOETargets = new List<GameObject>();
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
             for (int i = 0; i < hitColliders.Length; i++)
             {
-                if (hitColliders[i].gameObject != Owner && hitColliders[i].GetComponent<BaseCell>() && hitColliders[i].GetComponent<BaseCell>().isMine == false)
+                if (hitColliders[i].gameObject != Owner && hitColliders[i].GetComponent<BaseCell>() && hitColliders[i].GetComponent<BaseCell>().isMine == true)
                 {
                     caughtInAOETargets.Add(hitColliders[i].gameObject);
                 }
@@ -101,7 +101,7 @@ public class Acidd : MonoBehaviour
 
             for (int i = 0; i < hitColliders.Length; i++)
             {
-                if(hitColliders[i].gameObject != Owner && hitColliders[i].GetComponent<BaseCell>() && hitColliders[i].GetComponent<BaseCell>().isMine == true)
+                if(hitColliders[i].gameObject != Owner && hitColliders[i].GetComponent<BaseCell>() && hitColliders[i].GetComponent<BaseCell>().isMine == false  )
                 {
                     caughtInAOETargets.Add(hitColliders[i].gameObject);
                 }

@@ -362,7 +362,7 @@ public class TutorialController : MonoBehaviour
     void TargetSelectionInitialization()
     {
         Vector3 spawnPos = Camera.main.transform.position;
-        spawnPos.y = 1.05f;
+        spawnPos.y = 0;
         spawnedProtein = GameObject.Instantiate(prefabProtein, spawnPos, Quaternion.Euler(90, 0, 0)) as GameObject;
         PlayerControls.allSelectableTargets.Add(spawnedProtein);
     }
@@ -388,7 +388,7 @@ public class TutorialController : MonoBehaviour
         {
             Vector3 spawnPos = Camera.main.transform.position;
             spawnPos.x = 4 * i;
-            spawnPos.y = 1.05f;
+            spawnPos.y = 0;
             spawnedProtein = GameObject.Instantiate(prefabProtein, spawnPos, Quaternion.Euler(90, 0, 0)) as GameObject;
             PlayerControls.allSelectableTargets.Add(spawnedProtein);
         }

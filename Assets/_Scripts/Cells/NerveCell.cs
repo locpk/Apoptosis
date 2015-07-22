@@ -44,13 +44,15 @@ public class NerveCell : BaseCell
     {
 
        // Vector3 them2me = primaryTarget.transform.position - transform.position;
+ 
         GameObject Lightningk = Instantiate(Lightning, transform.position, transform.rotation) as GameObject;
         //      Lightningk.GetComponent<Lighting>().transform.LookAt(primaryTarget.transform);
         //6Lightningk.GetComponent<Rigidbody>().velocity += them2me.normalized * lightningSpeed;
        Lightningk.GetComponent<Lighting>().currentTarget = primaryTarget;
         Lightningk.GetComponent<Lighting>().realOwner = this.gameObject;
         Lightningk.GetComponent<Lighting>().speed = lightningSpeed;
-
+        Debug.Log(Lightningk.transform.rotation);
+        Lightningk.transform.rotation = this.transform.rotation;
         if (!sound_manager.sounds_attacks[5].isPlaying)
         {
             sound_manager.sounds_attacks[5].Play();
@@ -72,6 +74,14 @@ public class NerveCell : BaseCell
             instanonce++;
 
             stunTimer -= 1 * Time.fixedDeltaTime;
+            if (stunTimer > 0)
+            {
+                navAgent.enabled = false;
+                navObstacle.enabled = true;
+                primaryTarget = null;
+
+                return;
+            }
             if (this.stunTimer <= 0)
             {
                 instanonce = 0;
@@ -79,12 +89,12 @@ public class NerveCell : BaseCell
                 this.stunTimer = 3;
                 this.stunned = false;
                 this.hitCounter = 0;
-
+                return;
             }
         }
         else
         {
-            if (targets != null && targets.Count > 1)
+            if (targets != null && targets.Count >= 1)
             {
 
                 if (primaryTarget == null)

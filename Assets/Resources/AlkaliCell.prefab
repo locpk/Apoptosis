@@ -234,7 +234,7 @@ MonoBehaviour:
   currentProtein: 500
   fovRadius: 10
   attackDamage: 9
-  attackRange: 4
+  attackRange: 5
   defense: 20
   depleteTimer: 0
   depleteAmount: 3
@@ -528,7 +528,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attackRange
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attackDamage
