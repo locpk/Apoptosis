@@ -2424,7 +2424,7 @@ GameObject:
   - 4: {fileID: 1222330211}
   - 154: {fileID: 1222330212}
   - 218: {fileID: 1222330213}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Layer 0 - Terrain - Areas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5704,8 +5704,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1772ad53328240458df9f581d96918d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unexploredColor: {r: .242647052, g: .239078715, b: .239078715, a: 1}
-  exploredColor: {r: .426470578, g: .426470578, b: .426470578, a: 1}
+  unexploredColor: {r: .0980392173, g: .0980392173, b: .0980392173, a: 1}
+  exploredColor: {r: .294117659, g: .294117659, b: .294117659, a: 1}
   worldSize: 256
   textureSize: 128
   updateFrequency: .25
