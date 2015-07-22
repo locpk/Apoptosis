@@ -693,6 +693,25 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 9c5ba8398f9ba0d41a48471fb35bbb3b,
         type: 3}
+    - target: {fileID: 11480678, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_Text
+      value: Split
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453402, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_Text
+      value: Evolve
+      objectReference: {fileID: 0}
+    - target: {fileID: 11472512, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_Text
+      value: 'Devolve
+
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 11478488, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_Text
+      value: Merge
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
   m_IsPrefabParent: 0
@@ -1985,6 +2004,14 @@ Prefab:
     - target: {fileID: 473134, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
       propertyPath: m_LocalPosition.x
       value: 86.8499985
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050502, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: orthographic size
+      value: 112.854477
+      objectReference: {fileID: 0}
+    - target: {fileID: 401210, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 4.5999999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
