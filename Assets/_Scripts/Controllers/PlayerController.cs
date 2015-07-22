@@ -981,7 +981,7 @@ public class PlayerController : MonoBehaviour
 
         Time.timeScale = 0.0f;
         this.gameObject.SetActive(false);
-        Invoke("GoBackToMainMenu", 5.0f);
+        Invoke("NextLevel", 5.0f);
     }
     void Show_LoseScreen()
     {
@@ -1004,6 +1004,26 @@ public class PlayerController : MonoBehaviour
         this.gameObject.SetActive(false);
         Invoke("GoBackToMainMenu", 5.0f);
 
+    }
+
+    public void NextLevel()
+    {
+        if (Application.loadedLevelName == "Singleplayer_Level3")
+        {
+            Application.LoadLevel("Singleplayer_Level2");
+        }
+        else if (Application.loadedLevelName == "Singleplayer_Level2")
+        {
+            Application.LoadLevel("Singleplayer_Level1");
+        }
+        else if (Application.loadedLevelName == "Singleplayer_Level1")
+        {
+            Application.LoadLevel("Credits");
+        }
+        else if (Application.loadedLevelName == "Multiplayer_Level")
+        {
+            Application.LoadLevel("Credits");
+        }
     }
 
     public void GoBackToMainMenu()

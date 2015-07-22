@@ -32,7 +32,6 @@ public class SinglePlayerSpawner : MonoBehaviour {
         if (spawningWavesInTime.Count >= m_waveIndex) {
             m_timeSinceLevelStart += Time.deltaTime;
             if (m_timeSinceLevelStart >= spawningWavesInTime[m_waveIndex]) {
-         //       Debug.Log("Time: " + m_timeSinceLevelStart + " wave: " + m_waveIndex + " count: " + spawningWavesInTime [m_waveIndex]);
                 for (int i = 0; i < spawnAmountPerWave[m_waveIndex]; i++) {
                     SpawnEnemy(Random.Range(0, enermyCellSet.Count), Random.Range(0, spawnAreas.Count));
                 }
@@ -57,7 +56,6 @@ public class SinglePlayerSpawner : MonoBehaviour {
         float _z = area.transform.position.z + Random.Range(-area.transform.localScale.z * 5, area.transform.localScale.z * 5);
         spawnPos = new Vector3(_x, area.transform.position.y + 0.5f, _z);
         spwanAngle.eulerAngles = new Vector3(90, 0, 0);
-        //BaseCell baseReadySpawnCell = enermyCellSet[cellId].gameObject.GetComponent<BaseCell>();
 
         Transform spawnedCell = Instantiate(enermyCellSet[cellId], spawnPos, spwanAngle) as Transform;
         spawnedCell.parent = wavesCollection.transform;
