@@ -32,7 +32,7 @@ public class CamController : MonoBehaviour
     private Image shader_left;
     private Image shader_top;
     private Image shader_bottom;
-   
+
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
 
@@ -58,15 +58,16 @@ public class CamController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         smoothFocusTarget = transform.position;
         zoomValue = Mathf.Clamp(zoomValue, minZoom, maxZoom);
         GetComponentInChildren<Camera>().orthographicSize = zoomValue;
         StartCoroutine(ZoomOutWhenStart(2.0f, 2.0f));
 
-        shader_right    = GameObject.FindGameObjectWithTag("Shader_Right").GetComponent<Image>();
-        shader_left     = GameObject.FindGameObjectWithTag("Shader_Left").GetComponent<Image>();
-        shader_top      = GameObject.FindGameObjectWithTag("Shader_Top").GetComponent<Image>();
-        shader_bottom   = GameObject.FindGameObjectWithTag("Shader_Bottom").GetComponent<Image>();
+        shader_right = GameObject.FindGameObjectWithTag("Shader_Right").GetComponent<Image>();
+        shader_left = GameObject.FindGameObjectWithTag("Shader_Left").GetComponent<Image>();
+        shader_top = GameObject.FindGameObjectWithTag("Shader_Top").GetComponent<Image>();
+        shader_bottom = GameObject.FindGameObjectWithTag("Shader_Bottom").GetComponent<Image>();
         shader_top.enabled = false;
         shader_bottom.enabled = false;
         shader_left.enabled = false;
@@ -87,7 +88,7 @@ public class CamController : MonoBehaviour
     {
         if (Input.touchCount == 1)
         {
-             //get the position of the click
+            //get the position of the click
             RaycastHit hitPosition;
             Ray ray = minimapCamera.ScreenPointToRay(Input.GetTouch(0).position);
 
@@ -95,7 +96,6 @@ public class CamController : MonoBehaviour
             {
                 //move the camera to that position
                 smoothMoveTo(hitPosition.point);
-                
             }
         }
 
@@ -107,193 +107,169 @@ public class CamController : MonoBehaviour
 
             Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
             Vector2 touchTwoPrevPos = touchTwo.position - touchTwo.deltaPosition;
-
             float prevTouchDeltaMag = (touchOnePrevPos - touchTwoPrevPos).magnitude;
             float touchDeltaMag = (touchOne.position - touchTwo.position).magnitude;
-
-            float deltaMagDiff = (prevTouchDeltaMag - touchDeltaMag)*0.1f;
-
+            float deltaMagDiff = (prevTouchDeltaMag - touchDeltaMag) * 0.1f;
             Camera camera = GetComponentInChildren<Camera>();
-
-            
-           // camera.orthographicSize += deltaMagDiff / Time.deltaTime;
-
             camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, camera.orthographicSize + deltaMagDiff / Time.deltaTime, Time.deltaTime);
-
-
             camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, minZoom, maxZoom);
 
-          
+
         }
-      
+
 
         if (Input.touchCount >= 2)
         {
             Touch oneTouch = Input.GetTouch(0);
             float fingerID = oneTouch.fingerId;
-            Vector2 initPos = Vector2.zero;
-            Vector2 lastPos = Vector2.zero;
             if (oneTouch.phase == TouchPhase.Began)
             {
                 fingerID = oneTouch.fingerId;
-                initPos = oneTouch.position;
             }
             else if (oneTouch.phase == TouchPhase.Moved)
             {
                 if (fingerID == oneTouch.fingerId)
                 {
-                    lastPos = oneTouch.position;
                     float speed = oneTouch.deltaPosition.magnitude / Time.deltaTime;
                     Vector2 dirV2 = oneTouch.deltaPosition;
-                    Vector3 dirV3 = new Vector3(dirV2.x, transform.position.y,dirV2.y);
+                    Vector3 dirV3 = new Vector3(dirV2.x, transform.position.y, dirV2.y);
                     smoothMoveTo(transform.position + -dirV3.normalized * speed);
-                    initPos = lastPos;
-                   
-
                 }
             }
-            else if (oneTouch.phase == TouchPhase.Ended)
-            {
-                initPos = Vector2.zero;
-                lastPos = Vector2.zero;
-            }
-
-         
-
         }
 
         transform.position = Vector3.Lerp(transform.position, smoothFocusTarget, Time.deltaTime);
-      
-        
+
+
     }
 
     void MouseKeyboardUpdate()
     {
-            float deltaTime = Time.deltaTime;
+        float deltaTime = Time.deltaTime;
 
-            if (mode == CameraMode.GameView)
+        if (mode == CameraMode.GameView)
+        {
+            Camera camera = GetComponentInChildren<Camera>();
+
+            float camZoom = camera.orthographicSize;
+
+            if (!m_frozeMouse)
             {
-                Camera camera = GetComponentInChildren<Camera>();
-
-                float camZoom = camera.orthographicSize;
-
-                if (!m_frozeMouse)
-                {
-                    //Scroll zooming
-                    zoomValue -= Input.mouseScrollDelta.y;
-                    zoomValue = Mathf.Clamp(zoomValue, minZoom, maxZoom);
-                    camZoom = Mathf.Lerp(camZoom, zoomValue, deltaTime * 10.0f);
-                }
-                else
-                {
-                    if (m_zoomingTime > Time.time)
-                    {
-                        zoomValue = Mathf.Lerp(zoomValue, maxZoom, deltaTime * 2.0f);
-                        camZoom = zoomValue;
-                    }
-                }
-
-                camera.orthographicSize = camZoom;
-
-
-                // smooth movement
-                transform.position = Vector3.Lerp(transform.position, smoothFocusTarget, deltaTime * 2.5f);
-                // scoller
-                Vector3 viewPoint = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-                Vector3 nodePos = Vector3.zero;
-
-                bool isScrolled = false;
-                Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
-
-                //resets the cersor to normal if not in edge
-                Cursor.SetCursor(null, Vector2.zero, cursorMode);
-                shader_top.enabled = false;
-                shader_bottom.enabled = false;
-                shader_left.enabled = false;
-                shader_right.enabled = false;
-
-                if (screenRect.Contains(Input.mousePosition) && !minimapCamera.pixelRect.Contains(Input.mousePosition))
-                {
-                    // to go up 
-                    if ((Input.GetKey(KeyCode.UpArrow) || viewPoint.y > 1.0f - scrollPercentage))
-                    {
-                        nodePos.z = 1.0f;
-                        isScrolled = true;
-                        Cursor.SetCursor(cursor_Up, hotSpot, cursorMode);
-                        shader_top.enabled = true;
-                    } 
-                    
-                    // to go down
-                    if (Input.GetKey(KeyCode.DownArrow) || viewPoint.y < scrollPercentage)
-                    {
-                        nodePos.z = -1.0f;
-                        isScrolled = true;
-                        Cursor.SetCursor(cursor_Down, hotSpot, cursorMode);
-                        shader_bottom.enabled = true;
-                    }
-                    
-                    // to go left
-                    if (Input.GetKey(KeyCode.LeftArrow) || viewPoint.x < scrollPercentage)
-                    {
-                        nodePos.x = -1.0f;
-                        isScrolled = true;
-                        Cursor.SetCursor(cursor_Left, hotSpot, cursorMode);
-                        shader_left.enabled = true;
-                    }
-                    
-                    // to go right
-                    if ((Input.GetKey(KeyCode.RightArrow) || viewPoint.x > 1.0f - scrollPercentage) && !isOverUI)
-                    {
-                        nodePos.x = 1.0f;
-                        isScrolled = true;
-                        Cursor.SetCursor(cursor_Right, hotSpot, cursorMode);
-                        shader_right.enabled = true;
-                    }
-                }
-                
-                  
-                
-
-                Vector3 boundPos = transform.position + nodePos.normalized * deltaTime * scrollSpeed;
-
-                if (boundPos.x < minX)
-                    boundPos.x = minX;
-                if (boundPos.x > maxX)
-                    boundPos.x = maxX;
-                if (boundPos.z < minY)
-                    boundPos.z = minY;
-                if (boundPos.z > maxY)
-                    boundPos.z = maxY;
-
-                transform.position = boundPos;
-                if (isScrolled)
-                    smoothFocusTarget = transform.position;
-
-
+                //Scroll zooming
+                zoomValue -= Input.mouseScrollDelta.y;
+                zoomValue = Mathf.Clamp(zoomValue, minZoom, maxZoom);
+                camZoom = Mathf.Lerp(camZoom, zoomValue, deltaTime * 10.0f);
             }
-            else if (mode == CameraMode.FocusView)
+            else
             {
-                //Camera camera = GetComponentInChildren<Camera>();
-                //if (camera) {
-                //    camera.transform.position = Vector3.Lerp(camera.transform.position, smoothTargetPosition, deltaTime * 2.5f);
-                //    camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, smoothTargetRotation, deltaTime * 2.5f);
-                //}
+                if (m_zoomingTime > Time.time)
+                {
+                    zoomValue = Mathf.Lerp(zoomValue, maxZoom, deltaTime * 2.0f);
+                    camZoom = zoomValue;
+                }
             }
 
-            if (Input.GetMouseButtonDown(0)) // if the player clicks on the minimap
-            {
-                
-                //get the position of the click
-                RaycastHit hitPosition;
-                Ray ray = minimapCamera.ScreenPointToRay(Input.mousePosition);
+            camera.orthographicSize = camZoom;
 
-                if (Physics.Raycast(ray, out hitPosition))
+
+            // smooth movement
+            transform.position = Vector3.Lerp(transform.position, smoothFocusTarget, deltaTime * 2.5f);
+            // scoller
+            Vector3 viewPoint = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            Vector3 nodePos = Vector3.zero;
+
+            bool isScrolled = false;
+            Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
+
+            //resets the cersor to normal if not in edge
+            Cursor.SetCursor(null, Vector2.zero, cursorMode);
+            shader_top.enabled = false;
+            shader_bottom.enabled = false;
+            shader_left.enabled = false;
+            shader_right.enabled = false;
+
+            if (screenRect.Contains(Input.mousePosition) && !minimapCamera.pixelRect.Contains(Input.mousePosition))
+            {
+                // to go up 
+                if ((Input.GetKey(KeyCode.UpArrow) || viewPoint.y > 1.0f - scrollPercentage))
                 {
-                    //move the camera to that position
-                    smoothMoveTo(hitPosition.point);
-                    
+                    nodePos.z = 1.0f;
+                    isScrolled = true;
+                    Cursor.SetCursor(cursor_Up, hotSpot, cursorMode);
+                    shader_top.enabled = true;
+                }
+
+                // to go down
+                if (Input.GetKey(KeyCode.DownArrow) || viewPoint.y < scrollPercentage)
+                {
+                    nodePos.z = -1.0f;
+                    isScrolled = true;
+                    Cursor.SetCursor(cursor_Down, hotSpot, cursorMode);
+                    shader_bottom.enabled = true;
+                }
+
+                // to go left
+                if (Input.GetKey(KeyCode.LeftArrow) || viewPoint.x < scrollPercentage)
+                {
+                    nodePos.x = -1.0f;
+                    isScrolled = true;
+                    Cursor.SetCursor(cursor_Left, hotSpot, cursorMode);
+                    shader_left.enabled = true;
+                }
+
+                // to go right
+                if ((Input.GetKey(KeyCode.RightArrow) || viewPoint.x > 1.0f - scrollPercentage) && !isOverUI)
+                {
+                    nodePos.x = 1.0f;
+                    isScrolled = true;
+                    Cursor.SetCursor(cursor_Right, hotSpot, cursorMode);
+                    shader_right.enabled = true;
                 }
             }
+
+
+
+
+            Vector3 boundPos = transform.position + nodePos.normalized * deltaTime * scrollSpeed;
+
+            if (boundPos.x < minX)
+                boundPos.x = minX;
+            if (boundPos.x > maxX)
+                boundPos.x = maxX;
+            if (boundPos.z < minY)
+                boundPos.z = minY;
+            if (boundPos.z > maxY)
+                boundPos.z = maxY;
+
+            transform.position = boundPos;
+            if (isScrolled)
+                smoothFocusTarget = transform.position;
+
+
+        }
+        else if (mode == CameraMode.FocusView)
+        {
+            //Camera camera = GetComponentInChildren<Camera>();
+            //if (camera) {
+            //    camera.transform.position = Vector3.Lerp(camera.transform.position, smoothTargetPosition, deltaTime * 2.5f);
+            //    camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, smoothTargetRotation, deltaTime * 2.5f);
+            //}
+        }
+
+        if (Input.GetMouseButtonDown(0)) // if the player clicks on the minimap
+        {
+
+            //get the position of the click
+            RaycastHit hitPosition;
+            Ray ray = minimapCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hitPosition))
+            {
+                //move the camera to that position
+                smoothMoveTo(hitPosition.point);
+
+            }
+        }
     }
 
     // Update is called once per frame
@@ -306,9 +282,9 @@ public class CamController : MonoBehaviour
         }
         else
         {
-            {
-                MouseKeyboardUpdate();
-            }
+
+            MouseKeyboardUpdate();
+
         }
 
     }
