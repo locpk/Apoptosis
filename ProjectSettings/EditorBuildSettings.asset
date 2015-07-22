@@ -6,28 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/TEST_STUFFS_HERE/Test_Ground.unity
-  - enabled: 1
     path: Assets/_Scenes/MainMenu.unity
   - enabled: 0
     path: Assets/_Scenes/OptionsMenu.unity
   - enabled: 1
     path: Assets/_Scenes/Singleplayer_Level1.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Singleplayer_Level2.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Singleplayer_Level3.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Tutorial_Level.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Multiplayer_Lobby.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Multiplayer_Level.unity
   - enabled: 0
     path: Assets/_Scenes/Logo.unity
   - enabled: 0
-    path: Assets/_Scenes/Logo.unity
-  - enabled: 1
     path: Assets/_Scenes/Credits.unity
   - enabled: 0
     path: Assets/_Scenes/Instructions.unity
