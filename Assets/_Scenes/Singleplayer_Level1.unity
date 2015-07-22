@@ -478,6 +478,22 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11440574, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 22448750, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -684,6 +700,246 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 9c5ba8398f9ba0d41a48471fb35bbb3b,
         type: 3}
+    - target: {fileID: 11440574, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11440574, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11440574, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Hide_Evolve_Buttons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11440574, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11440574, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11440574, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: Hide_Evolve_Buttons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11440574, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11440574, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 11440574, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11440574, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CheckButtons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11440574, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Hide_Evolve_Buttons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: Hide_Evolve_Buttons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CheckButtons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 747809418}
+    - target: {fileID: 11460666, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UnitEvolve
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: CheckButtons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: CheckButtons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: CheckButtons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Hide_Evolve_Buttons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 747809418}
+    - target: {fileID: 11406686, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UnitEvolve
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Hide_Evolve_Buttons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1347777071}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: Hide_Evolve_Buttons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CheckButtons
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401736, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11444256, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 747809418}
+    - target: {fileID: 11444256, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: UnitMerge
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428782, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 670827646}
+    - target: {fileID: 11428782, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Mute_Unmute_Sound
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
   m_IsPrefabParent: 0
@@ -1503,6 +1759,12 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &670827646 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11484254, guid: 78c83354bbe983a44a6e1e7c583ac496,
+    type: 2}
+  m_PrefabInternal: {fileID: 801023287}
+  m_Script: {fileID: 11500000, guid: 66b031da25bd3e94ab945340dce2cb2a, type: 3}
 --- !u!4 &680654562
 Transform:
   m_ObjectHideFlags: 0
@@ -1576,6 +1838,8 @@ MonoBehaviour:
   allSelectableTargets: []
   selectedTargets: []
   selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
+  friendly_indicator: {fileID: 2800000, guid: 2891a1c9bf4b09b4098df9cf5af206a0, type: 3}
+  minimapCamera: {fileID: 857766396}
 --- !u!1 &757268511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,6 +2029,11 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 189978, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
   m_PrefabInternal: {fileID: 286927039}
+--- !u!20 &857766396 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 2050502, guid: 7bf6043f85fca314daf18b82ee44fff5,
+    type: 2}
+  m_PrefabInternal: {fileID: 945812544}
 --- !u!1 &883428107
 GameObject:
   m_ObjectHideFlags: 0
@@ -2610,6 +2879,12 @@ Transform:
   - {fileID: 757268512}
   m_Father: {fileID: 199516087}
   m_RootOrder: 1
+--- !u!114 &1347777071 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11492236, guid: dbdecc5e06c65274faf9bd603da3a5cd,
+    type: 2}
+  m_PrefabInternal: {fileID: 286927039}
+  m_Script: {fileID: 11500000, guid: 42b9a66547b8a28458bb300ff0f32c16, type: 3}
 --- !u!1 &1427757683
 GameObject:
   m_ObjectHideFlags: 0

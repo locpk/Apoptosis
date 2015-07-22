@@ -1094,6 +1094,10 @@ Prefab:
       propertyPath: minimapCamera
       value: 
       objectReference: {fileID: 1347024961}
+    - target: {fileID: 11436092, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
+      propertyPath: friendly_indicator
+      value: 
+      objectReference: {fileID: 2800000, guid: 2891a1c9bf4b09b4098df9cf5af206a0, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
   m_IsPrefabParent: 0
