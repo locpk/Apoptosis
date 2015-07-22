@@ -12,6 +12,9 @@ public class AITrapCell : MonoBehaviour{
 
     void Awake () {
         switch (GetComponent<BaseCell>().celltype) {
+            case CellType.STEM_CELL:
+                m_baseCell = GetComponent<StemCell>();
+                break;
             case CellType.HEAT_CELL:
                 m_baseCell = GetComponent<HeatCell>();
                 break;
@@ -47,6 +50,8 @@ public class AITrapCell : MonoBehaviour{
     void Start() {
         m_baseCell.isMine = false;
         m_baseCell.isAIPossessed = true;
+        m_baseCell.isDepleting = false;
+        m_baseCell.currentProtein *= 0.5f;  // lower enemy power
         m_baseCell.tag = "EnemyCell";
         m_baseCell.gameObject.layer = LayerMask.NameToLayer("EnemyCell");
         m_baseCell.SetSpeed(m_baseCell.navAgent.speed * .5f);
@@ -81,7 +86,7 @@ public class AITrapCell : MonoBehaviour{
         if (!targetFound) {
             m_baseCell.currentState = CellState.IDLE;
             if (!IsInvoking("RandomMove")) {
-                InvokeRepeating("RandomMove", 1.0f, 5.0f);
+                InvokeRepeating("RandomMove", 1.0f, 15.0f);
             }
         }
 

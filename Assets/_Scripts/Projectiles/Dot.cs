@@ -27,7 +27,7 @@ public class Dot : MonoBehaviour
     {
         if (Target != null)
         {
-            transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y, (Target.transform.position.z + Target.GetComponent<SphereCollider>().radius + .75f));
+            transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y + 1, (Target.transform.position.z + Target.GetComponent<SphereCollider>().radius ));
             if (!IsInvoking("DotEffect"))
             {
                 InvokeRepeating("DotEffect", 1.0f, 1.0f);

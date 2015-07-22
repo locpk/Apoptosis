@@ -14,7 +14,6 @@ public class ColdCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
     public GameObject particle;
-    private Sound_Manager sound_manager;
 
     void Awake()
     {
@@ -23,7 +22,6 @@ public class ColdCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
-        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
     }
     void MUltiDMg()
@@ -163,6 +161,15 @@ public class ColdCell : BaseCell
             instanonce++;
 
             stunTimer -= 1 * Time.fixedDeltaTime;
+
+            if (stunTimer > 0)
+            {
+                navAgent.enabled = false;
+                navObstacle.enabled = true;
+                primaryTarget = null;
+
+                return;
+            }
             if (this.stunTimer <= 0)
             {
                 instanonce = 0;
@@ -175,7 +182,7 @@ public class ColdCell : BaseCell
         }
         else
         {
-            if (targets != null && targets.Count > 1)
+            if (targets != null && targets.Count >= 1)
             {
 
                 if (primaryTarget == null)
@@ -185,9 +192,12 @@ public class ColdCell : BaseCell
 
                         if (i != targets.Count)
                         {
-                            Debug.Log(primaryTarget);
-                            primaryTarget = targets[i + 1];
-                            Debug.Log(primaryTarget);
+
+                            if (i == 0 && targets.Count == 1)
+                                primaryTarget = targets[i];
+                            else
+                                primaryTarget = targets[i + 1];
+
                             if (primaryTarget.GetComponent<BaseCell>())
                                 currentState = CellState.ATTACK;
                             if (primaryTarget.GetComponent<Protein>())

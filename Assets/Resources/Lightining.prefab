@@ -28,8 +28,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192010}
   m_LocalRotation: {x: .475368559, y: -.523473859, z: .523473799, w: .47536844}
-  m_LocalPosition: {x: 80.966774, y: 2, z: -21.7031021}
-  m_LocalScale: {x: .67922318, y: 1.56652224, z: 2.5804348}
+  m_LocalPosition: {x: -2.86945081, y: 1.5, z: 2.95566559}
+  m_LocalScale: {x: .212898389, y: .491016835, z: .808821499}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -83,8 +83,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe3291d4db3b874cb01f56cddff1901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  Owner: {fileID: 0}
   realOwner: {fileID: 0}
   nextTarget: {fileID: 0}
   targetsToBounce: []
@@ -127,7 +125,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: .280000001
+  m_Radius: 1.13999999
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &21287816
 SpriteRenderer:

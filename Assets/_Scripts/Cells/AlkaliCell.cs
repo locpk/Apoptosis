@@ -38,7 +38,7 @@ public class AlkaliCell : BaseCell
         if (primaryTarget != null)
         {
             previousTarget = primaryTarget;
-            Vector3 newvec =  new Vector3(primaryTarget.transform.position.x, primaryTarget.transform.position.y, (primaryTarget.transform.position.z + primaryTarget.GetComponent<SphereCollider>().radius/4));
+            Vector3 newvec =  new Vector3(primaryTarget.transform.position.x, primaryTarget.transform.position.y, (primaryTarget.transform.position.z + primaryTarget.GetComponent<SphereCollider>().radius));
             GameObject theDOT= Instantiate(DOT,  newvec ,primaryTarget.transform.rotation) as GameObject;
     
             theDOT.GetComponent<Dot>().Target = primaryTarget;
@@ -70,6 +70,14 @@ public class AlkaliCell : BaseCell
             instanonce++;
 
             stunTimer -= 1 * Time.fixedDeltaTime;
+            if (stunTimer > 0)
+            {
+                navAgent.enabled = false;
+                navObstacle.enabled = true;
+                primaryTarget = null;
+
+                return;
+            }
             if (this.stunTimer <= 0)
             {
                 instanonce = 0;
@@ -82,7 +90,7 @@ public class AlkaliCell : BaseCell
         }
         else
         {
-            if (targets != null && targets.Count > 1)
+            if (targets != null && targets.Count >= 1)
             {
 
                 if (primaryTarget == null)
@@ -92,9 +100,12 @@ public class AlkaliCell : BaseCell
 
                         if (i != targets.Count)
                         {
-                            Debug.Log(primaryTarget);
-                            primaryTarget = targets[i + 1];
-                            Debug.Log(primaryTarget);
+
+                            if (i == 0 && targets.Count == 1)
+                                primaryTarget = targets[i];
+                            else
+                                primaryTarget = targets[i + 1];
+
                             if (primaryTarget.GetComponent<BaseCell>())
                                 currentState = CellState.ATTACK;
                             if (primaryTarget.GetComponent<Protein>())
