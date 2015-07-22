@@ -22,6 +22,18 @@ public class LobbyController : Photon.PunBehaviour
         ConnectionStatusText.text = PhotonNetwork.connectionStateDetailed.ToString();
     }
 
+    public void Disconnect()
+    {
+        PhotonNetwork.LeaveLobby();
+        PhotonNetwork.LoadLevel("MainMenu");
+        if (PhotonNetwork.connected)
+        {
+            PhotonNetwork.Disconnect();
+        }
+        
+
+    }
+
     public void JoinRandomRoom()
     {
         base.OnJoinedLobby();
