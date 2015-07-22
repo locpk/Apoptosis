@@ -114,7 +114,7 @@ public class ProteinSpawnerController : MonoBehaviour {
                 count = 0;
                 testcases++;
                 if (testcases >= 10000) {
-                    Debug.LogError("MAX TEST CASE REACHED!!!");
+                   // Debug.LogError("MAX TEST CASE REACHED!!!");
                     break;
                 }
             } while (true);
@@ -131,7 +131,7 @@ public class ProteinSpawnerController : MonoBehaviour {
 
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewProtein(currProtein.GetComponent<Protein>());
         }
-        Debug.Log(testcases + " cases.");
+       // Debug.Log(testcases + " cases.");
         testcases = 0;
         preSpawned = true;
     }
