@@ -87,7 +87,7 @@ public class CamController : MonoBehaviour
     {
         if (Input.touchCount == 1)
         {
-             //get the position of the click
+            //get the position of the click
             RaycastHit hitPosition;
             Ray ray = minimapCamera.ScreenPointToRay(Input.GetTouch(0).position);
 
@@ -95,7 +95,6 @@ public class CamController : MonoBehaviour
             {
                 //move the camera to that position
                 smoothMoveTo(hitPosition.point);
-                
             }
         }
 
@@ -107,64 +106,40 @@ public class CamController : MonoBehaviour
 
             Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
             Vector2 touchTwoPrevPos = touchTwo.position - touchTwo.deltaPosition;
-
             float prevTouchDeltaMag = (touchOnePrevPos - touchTwoPrevPos).magnitude;
             float touchDeltaMag = (touchOne.position - touchTwo.position).magnitude;
-
-            float deltaMagDiff = (prevTouchDeltaMag - touchDeltaMag)*0.1f;
-
+            float deltaMagDiff = (prevTouchDeltaMag - touchDeltaMag) * 0.1f;
             Camera camera = GetComponentInChildren<Camera>();
-
-            
-           // camera.orthographicSize += deltaMagDiff / Time.deltaTime;
-
             camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, camera.orthographicSize + deltaMagDiff / Time.deltaTime, Time.deltaTime);
-
-
             camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, minZoom, maxZoom);
 
-          
+
         }
-      
+
 
         if (Input.touchCount >= 2)
         {
             Touch oneTouch = Input.GetTouch(0);
             float fingerID = oneTouch.fingerId;
-            Vector2 initPos = Vector2.zero;
-            Vector2 lastPos = Vector2.zero;
             if (oneTouch.phase == TouchPhase.Began)
             {
                 fingerID = oneTouch.fingerId;
-                initPos = oneTouch.position;
             }
             else if (oneTouch.phase == TouchPhase.Moved)
             {
                 if (fingerID == oneTouch.fingerId)
                 {
-                    lastPos = oneTouch.position;
                     float speed = oneTouch.deltaPosition.magnitude / Time.deltaTime;
                     Vector2 dirV2 = oneTouch.deltaPosition;
-                    Vector3 dirV3 = new Vector3(dirV2.x, transform.position.y,dirV2.y);
+                    Vector3 dirV3 = new Vector3(dirV2.x, transform.position.y, dirV2.y);
                     smoothMoveTo(transform.position + -dirV3.normalized * speed);
-                    initPos = lastPos;
-                   
-
                 }
             }
-            else if (oneTouch.phase == TouchPhase.Ended)
-            {
-                initPos = Vector2.zero;
-                lastPos = Vector2.zero;
-            }
-
-         
-
         }
 
         transform.position = Vector3.Lerp(transform.position, smoothFocusTarget, Time.deltaTime);
-      
-        
+
+
     }
 
     void MouseKeyboardUpdate()

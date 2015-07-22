@@ -60,7 +60,6 @@ public class StemCell : BaseCell
                 newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 newCell.GetComponent<CellSplitAnimation>().originCell = this;
-
                 if (!sound_manager.sounds_evolution[3].isPlaying)
                 {
                     sound_manager.sounds_evolution[3].Play();
