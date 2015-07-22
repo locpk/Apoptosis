@@ -97,7 +97,7 @@ public class Lighting : MonoBehaviour
                 }
             }
         }
-        else
+        else if (realOwner.GetComponent<BaseCell>().isAIPossessed == true && other.gameObject.GetComponent<BaseCell>())
 
             if (other.gameObject.GetComponent<BaseCell>().isMine == true)
             {
@@ -110,7 +110,7 @@ public class Lighting : MonoBehaviour
                 {
 
 
-                    if (hitColliders[i].gameObject != realOwner && hitColliders[i].GetComponent<BaseCell>() && hitColliders[i].GetComponent<BaseCell>().isMine == false)
+                    if (hitColliders[i].gameObject != realOwner && hitColliders[i].GetComponent<BaseCell>() && hitColliders[i].GetComponent<BaseCell>().isMine == true)
                     {
                         targetsToBounce.Add(hitColliders[i].gameObject);
                     }
