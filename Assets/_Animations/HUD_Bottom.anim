@@ -496,8 +496,13 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 869.5
-        inSlope: 0
-        outSlope: 0
+        inSlope: -6.5
+        outSlope: -6.5
+        tangentMode: 10
+      - time: 1
+        value: 863
+        inSlope: -6.5
+        outSlope: -6.5
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -510,8 +515,13 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: -296.399994
-        inSlope: 104.399994
-        outSlope: 104.399994
+        inSlope: 106.399994
+        outSlope: 106.399994
+        tangentMode: 10
+      - time: 1
+        value: -190
+        inSlope: 106.399994
+        outSlope: 106.399994
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -547,6 +557,44 @@ AnimationClip:
     path: Toggle
     classID: 224
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -529.099976
+        inSlope: 58.0999756
+        outSlope: 58.0999756
+        tangentMode: 10
+      - time: 1
+        value: -471
+        inSlope: 58.0999756
+        outSlope: 58.0999756
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: Button_Mute
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 974.299988
+        inSlope: -9.29998779
+        outSlope: -9.29998779
+        tangentMode: 10
+      - time: 1
+        value: 965
+        inSlope: -9.29998779
+        outSlope: -9.29998779
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.x
+    path: Button_Mute
+    classID: 224
+    script: {fileID: 0}
   m_PPtrCurves:
   - curve:
     - time: 0
@@ -569,7 +617,25 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - path: 1970611299
+      attribute: 1460864421
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 1970611299
       attribute: 538195251
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3357170671
+      attribute: 538195251
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3357170671
+      attribute: 1460864421
       script: {fileID: 0}
       classID: 224
       customType: 0
@@ -780,12 +846,6 @@ AnimationClip:
       isPPtrCurve: 0
     - path: 1896997536
       attribute: 538195251
-      script: {fileID: 0}
-      classID: 224
-      customType: 0
-      isPPtrCurve: 0
-    - path: 1970611299
-      attribute: 1460864421
       script: {fileID: 0}
       classID: 224
       customType: 0
@@ -1467,8 +1527,13 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 869.5
-        inSlope: 0
-        outSlope: 0
+        inSlope: -6.5
+        outSlope: -6.5
+        tangentMode: 10
+      - time: 1
+        value: 863
+        inSlope: -6.5
+        outSlope: -6.5
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -1523,8 +1588,13 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: -296.399994
-        inSlope: 104.399994
-        outSlope: 104.399994
+        inSlope: 106.399994
+        outSlope: 106.399994
+        tangentMode: 10
+      - time: 1
+        value: -190
+        inSlope: 106.399994
+        outSlope: 106.399994
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -1600,6 +1670,44 @@ AnimationClip:
       m_PostInfinity: 2
     attribute: m_AnchoredPosition.x
     path: Toggle
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -529.099976
+        inSlope: 58.0999756
+        outSlope: 58.0999756
+        tangentMode: 10
+      - time: 1
+        value: -471
+        inSlope: 58.0999756
+        outSlope: 58.0999756
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: Button_Mute
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 974.299988
+        inSlope: -9.29998779
+        outSlope: -9.29998779
+        tangentMode: 10
+      - time: 1
+        value: 965
+        inSlope: -9.29998779
+        outSlope: -9.29998779
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.x
+    path: Button_Mute
     classID: 224
     script: {fileID: 0}
   m_EulerEditorCurves: []
