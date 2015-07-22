@@ -410,14 +410,20 @@ MonoBehaviour:
   maxX: 95
   minY: -100
   maxY: 100
-  scrollSpeed: 15
+  scrollSpeed: 40
   touchScrollSpeed: 100
-  scrollPercentage: .0500000007
+  scrollPercentage: .0299999993
   minZoom: 10
   maxZoom: 20
   quad: {fileID: 109128}
   mainCamera: {fileID: 149172}
   minimapCamera: {fileID: 2050502}
+  cursor_Right: {fileID: 2800000, guid: f6539feb9968a234b8ae3a2c468e7fac, type: 3}
+  cursor_Left: {fileID: 2800000, guid: a439a9f86654b2a498a93bbf314724bf, type: 3}
+  cursor_Up: {fileID: 2800000, guid: bd38bae495755c54994919047f4ee2b8, type: 3}
+  cursor_Down: {fileID: 2800000, guid: 92342086e01388b40b71d41469539afe, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
   PlayerControls: {fileID: 0}
   allSelectableUnits: []
   zoomValue: 0

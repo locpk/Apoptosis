@@ -28,6 +28,12 @@ TagManager:
   - SFX_Slider
   - Mute_Button
   - Levels_Panel
+  - Win_Screen
+  - Lose_Screen
+  - Shader_Right
+  - Shader_Left
+  - Shader_Top
+  - Shader_Bottom
   layers:
   - Default
   - TransparentFX
