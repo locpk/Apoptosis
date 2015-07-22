@@ -21,6 +21,16 @@ public class CamController : MonoBehaviour
     public GameObject mainCamera;
     public Camera minimapCamera;
 
+    // for cursor stuff
+    public Texture2D cursor_Right;
+    public Texture2D cursor_Left;
+    public Texture2D cursor_Up;
+    public Texture2D cursor_Down;
+
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+
+
     public PlayerController PlayerControls;
     public List<GameObject> allSelectableUnits;
 
@@ -179,37 +189,48 @@ public class CamController : MonoBehaviour
 
                 bool isScrolled = false;
                 Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
+
+                Cursor.SetCursor(null, Vector2.zero, cursorMode);
+
                 if (screenRect.Contains(Input.mousePosition) && !minimapCamera.pixelRect.Contains(Input.mousePosition))
                 {
                     // to go up 
-                    if (Input.GetKey(KeyCode.UpArrow) || viewPoint.y > 1.0f - scrollPercentage)
+                    if ((Input.GetKey(KeyCode.UpArrow) || viewPoint.y > 1.0f - scrollPercentage))
                     {
                         nodePos.z = 1.0f;
                         isScrolled = true;
-                    }
+                        Cursor.SetCursor(cursor_Up, hotSpot, cursorMode);
+                    } 
+                    
                     // to go down
                     if (Input.GetKey(KeyCode.DownArrow) || viewPoint.y < scrollPercentage)
                     {
                         nodePos.z = -1.0f;
                         isScrolled = true;
+                        Cursor.SetCursor(cursor_Down, hotSpot, cursorMode);
                     }
+                    
                     // to go left
                     if (Input.GetKey(KeyCode.LeftArrow) || viewPoint.x < scrollPercentage)
                     {
                         nodePos.x = -1.0f;
                         isScrolled = true;
+                        Cursor.SetCursor(cursor_Left, hotSpot, cursorMode);
                     }
+                    
                     // to go right
-                    if (Input.GetKey(KeyCode.RightArrow) || viewPoint.x > 1.0f - scrollPercentage)
+                    if ((Input.GetKey(KeyCode.RightArrow) || viewPoint.x > 1.0f - scrollPercentage) && !isOverUI)
                     {
                         nodePos.x = 1.0f;
                         isScrolled = true;
+                        Cursor.SetCursor(cursor_Right, hotSpot, cursorMode);
                     }
                 }
+                
+                  
+                
 
                 Vector3 boundPos = transform.position + nodePos.normalized * deltaTime * scrollSpeed;
-
-
 
                 if (boundPos.x < minX)
                     boundPos.x = minX;
@@ -219,7 +240,6 @@ public class CamController : MonoBehaviour
                     boundPos.z = minY;
                 if (boundPos.z > maxY)
                     boundPos.z = maxY;
-
 
                 transform.position = boundPos;
                 if (isScrolled)

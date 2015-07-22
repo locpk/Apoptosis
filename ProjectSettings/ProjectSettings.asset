@@ -11,7 +11,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: Kewlala GameZ
   productName: Apoptosis
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 7a410fc4fa410e041a11e0704d6c3e42, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
   defaultScreenWidth: 1440
