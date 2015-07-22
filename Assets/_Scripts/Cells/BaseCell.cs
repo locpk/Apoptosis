@@ -40,6 +40,7 @@ public class BaseCell : Photon.PunBehaviour
     public GameObject gCancerCellPrefab;
     public GameObject gStemCellPrefab;
     public GameObject gHeatCellPrefab;
+    public GameObject gHeatCancerPrefab;
     public GameObject gColdCellPrefab;
     public GameObject gColdCancerPrefab;
     public GameObject gAcidicCellPrefab;
@@ -395,6 +396,7 @@ public class BaseCell : Photon.PunBehaviour
         float cancerousChance = 0.0f;
         switch (currentLevel)
         {
+            case 0:
             case 1:
                 cancerousChance = CancerChance.LEVEL_1;
                 break;
@@ -450,15 +452,17 @@ public class BaseCell : Photon.PunBehaviour
         }
         else
         {
-            //newCell = GameObject.Instantiate(gCancerCellPrefab, newposition, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-            //newCell.GetComponent<BaseCell>().currentProtein = currentProtein;
-            //newCell.GetComponent<BaseCell>().currentLevel = currentLevel;
-            //newCell.GetComponent<BaseCell>().isAIPossessed = false;
-            //newCell.GetComponent<BaseCell>().navAgent.updateRotation = false;
+
 
             switch (this.celltype)
             {
                 case CellType.HEAT_CELL:
+                    newCell = GameObject.Instantiate(gHeatCancerPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+                    newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+                    newCell.GetComponent<CellSplitAnimation>().originCell = this;
+                    Deactive();
 
                     break;
                 case CellType.COLD_CELL:
@@ -467,7 +471,6 @@ public class BaseCell : Photon.PunBehaviour
                     newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                     newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                     newCell.GetComponent<CellSplitAnimation>().originCell = this;
-                    newCell.gameObject.AddComponent<FogOfWarHider>();
                     Deactive();
                     break;
                 default:

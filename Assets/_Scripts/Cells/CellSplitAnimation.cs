@@ -148,25 +148,25 @@ public class CellSplitAnimation : MonoBehaviour
 
     public void CreateHeatandCancerCells()
     {
-        Vector3 pos = transform.position;
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("HeatCell", transform.GetChild(2).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+            : GameObject.Instantiate(gHeatCellPrefab, transform.GetChild(2).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
+        newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
+        newcell.GetComponent<BaseCell>().currentLevel = currentLevel;
+        newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
+        if (!isAIPossessed)
+        {
+            newcell.GetComponent<BaseCell>().isMine = true;
+            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
+        }
 
-        pos.x -= 0.5f;
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("CancerCell", transform.GetChild(0).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+
+        newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("CancerCell", transform.GetChild(0).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
             : GameObject.Instantiate(gCancerCellPrefab, transform.GetChild(0).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
-        newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
         newcell.GetComponent<BaseCell>().currentLevel = currentLevel;
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
 
-
-
-        pos.x += 1.0f;
-        newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("HeatCell", transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
-            : GameObject.Instantiate(gHeatCellPrefab, transform.GetChild(1).transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-        newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
-        newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
-        newcell.GetComponent<BaseCell>().currentLevel = currentLevel;
-        newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
 
 
         originCell.Die();

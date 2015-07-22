@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public static bool isOverUI = false;
 
 
+
     public void TurnOnOverUI()
     {
         isOverUI = true;
@@ -281,22 +282,22 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void TouchUnitSelection(Vector2 origin, Touch touchOne)
+    public void TouchUnitSelection(Vector2 origin)
     {
 
-        if (touchOne.position.x >= origin.x)
+        if (Input.GetTouch(0).position.x >= origin.x)
         {
-            GUISelectRect.xMax = touchOne.position.x;
+            GUISelectRect.xMax = Input.GetTouch(0).position.x;
         }
         else
         {
-            GUISelectRect.xMin = touchOne.position.x;
+            GUISelectRect.xMin = Input.GetTouch(0).position.x;
         }
 
-        if (-touchOne.position.y + Screen.height >= origin.y)
-        { GUISelectRect.yMax = -touchOne.position.y + Screen.height; }
+        if (-Input.GetTouch(0).position.y + Screen.height >= origin.y)
+        { GUISelectRect.yMax = -Input.GetTouch(0).position.y + Screen.height; }
         else
-        { GUISelectRect.yMin = -touchOne.position.y + Screen.height; }
+        { GUISelectRect.yMin = -Input.GetTouch(0).position.y + Screen.height; }
 
         if (selectedUnits.Count > 0)
         {
@@ -321,21 +322,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TouchTargetSelection(Vector2 origin, Touch touchOne)
+    public void TouchTargetSelection(Vector2 origin)
     {
-        if (touchOne.position.x >= origin.x)
+        if (Input.GetTouch(0).position.x >= origin.x)
         {
-            GUISelectRect.xMax = touchOne.position.x;
+            GUISelectRect.xMax = Input.GetTouch(0).position.x;
         }
         else
         {
-            GUISelectRect.xMin = touchOne.position.x;
+            GUISelectRect.xMin = Input.GetTouch(0).position.x;
         }
 
-        if (-touchOne.position.y + Screen.height >= origin.y)
-        { GUISelectRect.yMax = -touchOne.position.y + Screen.height; }
+        if (-Input.GetTouch(0).position.y + Screen.height >= origin.y)
+        { GUISelectRect.yMax = -Input.GetTouch(0).position.y + Screen.height; }
         else
-        { GUISelectRect.yMin = -touchOne.position.y + Screen.height; }
+        { GUISelectRect.yMin = -Input.GetTouch(0).position.y + Screen.height; }
 
         selectedTargets.Clear();
         foreach (GameObject item in allSelectableTargets)
@@ -618,6 +619,7 @@ public class PlayerController : MonoBehaviour
 
     void TouchUpdate()
     {
+
         if (!isOverUI && Time.timeScale > 0.0f)
         {
             if (Input.touchCount == 1)
@@ -652,26 +654,23 @@ public class PlayerController : MonoBehaviour
                     case TouchPhase.Canceled:
                         break;
                     case TouchPhase.Ended:
-                        TouchUnitSelection(origin, oneTouch);
+                        TouchUnitSelection(origin);
                         GUISelectRect.xMax = GUISelectRect.xMin;
                         GUISelectRect.yMax = GUISelectRect.yMin;
                         break;
                     case TouchPhase.Moved:
-                        TouchUnitSelection(origin, oneTouch);
+                        TouchUnitSelection(origin);
                         break;
                     case TouchPhase.Stationary:
-                        TouchUnitSelection(origin, oneTouch);
                         break;
                     default:
                         break;
                 }
             }
 
-            if (Input.touchCount == 1 && !isSelecting)
+            if (Input.touchCount == 1 && !isSelecting && !isOverUI)
             {
                 Touch touchOne = Input.GetTouch(0);
-                GUISelectRect.xMax = GUISelectRect.xMin;
-                GUISelectRect.yMax = GUISelectRect.yMin;
                 switch (touchOne.phase)
                 {
                     case TouchPhase.Began:
@@ -689,7 +688,8 @@ public class PlayerController : MonoBehaviour
                     case TouchPhase.Canceled:
                         break;
                     case TouchPhase.Ended:
-
+                        GUISelectRect.xMax = GUISelectRect.xMin;
+                        GUISelectRect.yMax = GUISelectRect.yMin;
 
                         if (selectedUnits.Count == 0)
                         {
@@ -722,10 +722,10 @@ public class PlayerController : MonoBehaviour
 
                         break;
                     case TouchPhase.Moved:
-                        TouchTargetSelection(origin, touchOne);
+                        TouchTargetSelection(origin);
                         break;
                     case TouchPhase.Stationary:
-                        TouchTargetSelection(origin, touchOne);
+                        TouchTargetSelection(origin);
                         break;
                     default:
                         break;
