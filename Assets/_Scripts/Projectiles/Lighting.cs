@@ -61,8 +61,8 @@ public class Lighting : MonoBehaviour
                 if (nextTarget == currentTarget || nextTarget == previousTarget ||  nextTarget.GetComponent<BaseCell>().hitBylightning == true)
                 {
                     nextTarget = null;
+                    break;
                 }
-                break;
             }
             if (nextTarget != null)
             {
