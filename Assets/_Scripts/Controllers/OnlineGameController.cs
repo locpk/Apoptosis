@@ -9,6 +9,7 @@ public class OnlineGameController : Photon.PunBehaviour
     public static bool gameEnded = false;
     bool win = false;
     int unitsCount;
+    public GameObject PauseMenu;
 
     void Awake()
     {
@@ -54,12 +55,19 @@ public class OnlineGameController : Photon.PunBehaviour
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            PhotonNetwork.LeaveRoom();
+            //PhotonNetwork.LeaveRoom();
+            PauseMenu.SetActive(true);
         }
         if (gameEnded && Input.GetKeyUp(KeyCode.Return))
         {
            PhotonNetwork.LeaveRoom();
         }
+    }
+
+    public void Disconnect()
+    {
+        PhotonNetwork.LeaveRoom();
+        
     }
 
     [PunRPC]
@@ -126,10 +134,10 @@ public class OnlineGameController : Photon.PunBehaviour
 
     public void OnLeftRoom()
     {
-        gameStarted = false;
-        gameEnded = true;
-        PhotonNetwork.Disconnect();
-        Application.LoadLevel("Multiplayer_Lobby");
+        //gameStarted = false;
+        //gameEnded = true;
+        
+        PhotonNetwork.LoadLevel("Multiplayer_Lobby");
     }
 
     public override void OnPhotonInstantiate(PhotonMessageInfo info)

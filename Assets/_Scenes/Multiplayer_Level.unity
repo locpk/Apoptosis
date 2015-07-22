@@ -3268,6 +3268,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 850321935}
+  - 114: {fileID: 850321934}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -3275,6 +3276,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &850321934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 850321933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab40975e74ac9764b8e4deb7bf55719e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerControls: {fileID: 1482255657}
+  PauseMenu: {fileID: 1774622333}
 --- !u!4 &850321935
 Transform:
   m_ObjectHideFlags: 0
@@ -4587,7 +4601,7 @@ Prefab:
     - target: {fileID: 11410292, guid: 0f4486f3742390b4ca504232c3058518, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1482255658}
+      objectReference: {fileID: 850321934}
     - target: {fileID: 11423780, guid: 0f4486f3742390b4ca504232c3058518, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -4666,11 +4680,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11410292, guid: 0f4486f3742390b4ca504232c3058518, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoBackToMainMenu
+      value: Disconnect
       objectReference: {fileID: 0}
     - target: {fileID: 22376072, guid: 0f4486f3742390b4ca504232c3058518, type: 2}
       propertyPath: m_SortingOrder
       value: 1607
+      objectReference: {fileID: 0}
+    - target: {fileID: 11466040, guid: 0f4486f3742390b4ca504232c3058518, type: 2}
+      propertyPath: m_Text
+      value: Back to Lobby
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f4486f3742390b4ca504232c3058518, type: 2}
