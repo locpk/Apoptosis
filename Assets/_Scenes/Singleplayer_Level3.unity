@@ -98,6 +98,7 @@ GameObject:
   - 33: {fileID: 41651992}
   - 135: {fileID: 41651991}
   - 23: {fileID: 41651990}
+  - 114: {fileID: 41651993}
   m_Layer: 0
   m_Name: Heat - 2
   m_TagString: Untagged
@@ -148,7 +149,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 41651988}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5
@@ -160,6 +161,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 41651988}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &41651993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 41651988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c18ba72b6e08c429d584143c6f3aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaType: 0
+  damagePerSecond: 5
+  speedCoefficient: 1.5
 --- !u!1 &47519376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,6 +1958,7 @@ GameObject:
   - 33: {fileID: 498861143}
   - 135: {fileID: 498861142}
   - 23: {fileID: 498861141}
+  - 114: {fileID: 498861144}
   m_Layer: 0
   m_Name: Cold - 1
   m_TagString: Untagged
@@ -1993,7 +2009,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 498861139}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5
@@ -2005,6 +2021,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 498861139}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &498861144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 498861139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6d043a6b410bd478e25f5f8f2f5813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaType: 1
+  damagePerSecond: 5
+  speedCoefficient: .5
 --- !u!1 &507134820
 GameObject:
   m_ObjectHideFlags: 0
@@ -3747,6 +3777,7 @@ GameObject:
   - 33: {fileID: 891238403}
   - 135: {fileID: 891238402}
   - 23: {fileID: 891238401}
+  - 114: {fileID: 891238404}
   m_Layer: 0
   m_Name: Acidic - 1
   m_TagString: Untagged
@@ -3797,7 +3828,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 891238399}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5
@@ -3809,6 +3840,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 891238399}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &891238404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 891238399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdee0aba1a054c2488c81f776d1f8df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaType: 2
+  damagePerSecond: 5
+  pendingConvertDelayed: 5
+  acidicButton: {fileID: 0}
 --- !u!1 &892552857
 GameObject:
   m_ObjectHideFlags: 0
@@ -4399,6 +4445,7 @@ GameObject:
   - 33: {fileID: 1146848643}
   - 135: {fileID: 1146848642}
   - 23: {fileID: 1146848641}
+  - 114: {fileID: 1146848644}
   m_Layer: 0
   m_Name: Heat - 1
   m_TagString: Untagged
@@ -4449,7 +4496,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1146848639}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5
@@ -4461,6 +4508,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1146848639}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1146848644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1146848639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c18ba72b6e08c429d584143c6f3aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaType: 0
+  damagePerSecond: 5
+  speedCoefficient: 1.5
 --- !u!1 &1195157306
 GameObject:
   m_ObjectHideFlags: 0
@@ -4613,7 +4674,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: m_Name
-      value: StemCell - Enemy
+      value: StemCell - Enemy - Final Target
       objectReference: {fileID: 0}
     - target: {fileID: 11454602, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: isMine
@@ -4795,6 +4856,7 @@ GameObject:
   - 33: {fileID: 1468538121}
   - 135: {fileID: 1468538120}
   - 23: {fileID: 1468538119}
+  - 114: {fileID: 1468538122}
   m_Layer: 0
   m_Name: Cold - 2
   m_TagString: Untagged
@@ -4845,7 +4907,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1468538117}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5
@@ -4857,6 +4919,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1468538117}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1468538122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1468538117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6d043a6b410bd478e25f5f8f2f5813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaType: 1
+  damagePerSecond: 5
+  speedCoefficient: .5
 --- !u!1001 &1516593491
 Prefab:
   m_ObjectHideFlags: 0
@@ -5262,6 +5338,7 @@ GameObject:
   - 33: {fileID: 1854998209}
   - 135: {fileID: 1854998208}
   - 23: {fileID: 1854998207}
+  - 114: {fileID: 1854998211}
   m_Layer: 0
   m_Name: Heat - 3
   m_TagString: Untagged
@@ -5300,7 +5377,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1854998206}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5
@@ -5324,6 +5401,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 428882016}
   m_RootOrder: 7
+--- !u!114 &1854998211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1854998206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c18ba72b6e08c429d584143c6f3aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaType: 0
+  damagePerSecond: 5
+  speedCoefficient: 1.5
 --- !u!1 &1873729585
 GameObject:
   m_ObjectHideFlags: 0
@@ -5335,6 +5426,7 @@ GameObject:
   - 33: {fileID: 1873729589}
   - 135: {fileID: 1873729588}
   - 23: {fileID: 1873729587}
+  - 114: {fileID: 1873729590}
   m_Layer: 0
   m_Name: Dense - 1
   m_TagString: Untagged
@@ -5385,7 +5477,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1873729585}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5
@@ -5397,6 +5489,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1873729585}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1873729590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1873729585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6dd98929ad18a3459117fe2a034d5c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaType: 4
+  speedCoefficient: .200000003
 --- !u!1 &1876253811
 GameObject:
   m_ObjectHideFlags: 0
@@ -5586,6 +5691,7 @@ GameObject:
   - 33: {fileID: 2072396792}
   - 135: {fileID: 2072396791}
   - 23: {fileID: 2072396790}
+  - 114: {fileID: 2072396793}
   m_Layer: 0
   m_Name: Alkali - 1
   m_TagString: Untagged
@@ -5636,7 +5742,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2072396788}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5
@@ -5648,3 +5754,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2072396788}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2072396793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2072396788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e216ce44e86399343890261ae5485d5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaType: 3
+  damagePerSecond: 5
+  pendingConvertDelayed: 5
+  alkaliButton: {fileID: 0}
