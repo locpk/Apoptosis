@@ -18,7 +18,7 @@ public class Tier2Coldcell : BaseCell
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
         base.bStart();
     }
-    void DamagePreSecond()
+    void DamagePerSecond()
     {
         if (primaryTarget != null)
         {
@@ -92,17 +92,17 @@ public class Tier2Coldcell : BaseCell
                     {
                         if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                         {
-                            if (!IsInvoking("DamagePreSecond"))
+                            if (!IsInvoking("DamagePerSecond"))
                             {
-                                InvokeRepeating("DamagePreSecond", 1.0f, 1.5f);
+                                InvokeRepeating("DamagePerSecond", 1.0f, 1.5f);
 
                             }
                         }
                         else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                         {
-                            if (IsInvoking("DamagePreSecond"))
+                            if (IsInvoking("DamagePerSecond"))
                             {
-                                CancelInvoke("DamagePreSecond");
+                                CancelInvoke("DamagePerSecond");
                             }
                             if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
                             {
@@ -154,23 +154,16 @@ public class Tier2Coldcell : BaseCell
     void Awake()
     {
         base.bAwake();
-        multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
     }
-    void MUltiDMg()
-    {
-        multidamagesources();
-
+    void MUltiDMg() {
+        if (multidamagesources != null)
+            multidamagesources();
     }
     public void AreaDamage()
     {
         currentProtein -= 10;
-    }
-    void nothing()
-    {
-
-
     }
 
     public override void Attack(GameObject _target)

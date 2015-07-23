@@ -21,9 +21,9 @@ public class PauseMenu : MonoBehaviour
     //Capture the pause menu button
     public GameObject pauseMenuButton;
 
-    Sound_Manager manager; 
+    //Sound_Manager manager; 
 
-    private GameObject playerController;
+    //private GameObject playerController;
     void Awake()
     {
         //set everything to false
@@ -36,7 +36,7 @@ public class PauseMenu : MonoBehaviour
         instructionsMenu.SetActive(false);
 
 
-        manager = Sound_Manager.Instance;
+        //manager = Sound_Manager.Instance;
     }
 
     // Use this for initialization
@@ -51,7 +51,7 @@ public class PauseMenu : MonoBehaviour
         optionsMenu.SetActive(false);
         instructionsMenu.SetActive(false);
 
-        playerController = GameObject.FindGameObjectWithTag("PlayerController");
+        //playerController = GameObject.FindGameObjectWithTag("PlayerController");
         
     }
 

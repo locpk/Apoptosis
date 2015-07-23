@@ -45,8 +45,8 @@ public class Sound_Manager : MonoBehaviour {
     public AudioSource win_music;
     public AudioSource lose_music;
 
-    private AudioMixerSnapshot snapshot_normal;
-    private AudioMixerSnapshot snapshot_muted;
+    //private AudioMixerSnapshot snapshot_normal;
+    //private AudioMixerSnapshot snapshot_muted;
 
 	// Use this for initialization
 	void Awake ()
@@ -82,8 +82,8 @@ public class Sound_Manager : MonoBehaviour {
 
      //   snapshot_muted = Sound_Manager.instance.GetComponent<AudioMixerSnapshot>().audioMixer.FindSnapshot("Snapshot_muted");
      //   snapshot_muted = Sound_Manager.instance.snapshot_muted.TransitionTo(3.0f); 
-        snapshot_muted = instance.master_mixer.FindSnapshot("Snapshot_muted");
-        snapshot_normal = instance.master_mixer.FindSnapshot("Snapshot");
+        //snapshot_muted = instance.master_mixer.FindSnapshot("Snapshot_muted");
+        //snapshot_normal = instance.master_mixer.FindSnapshot("Snapshot");
 
         DontDestroyOnLoad(instance);
 	}

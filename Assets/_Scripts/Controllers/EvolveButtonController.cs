@@ -11,11 +11,11 @@ public class EvolveButtonController : MonoBehaviour {
     public Animator animator;
   
 
-    private bool isOverUI = false;
+    //private bool isOverUI = false;
 
     private bool show = false;
-    public void TurnOnOverUI() { isOverUI = true; }
-    public void TurnOffOverUI() { isOverUI = false; }
+    //public void TurnOnOverUI() { isOverUI = true; }
+    //public void TurnOffOverUI() { isOverUI = false; }
 
 
 	// Use this for initialization

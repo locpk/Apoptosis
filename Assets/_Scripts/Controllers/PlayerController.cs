@@ -957,14 +957,14 @@ public class PlayerController : MonoBehaviour
         NumTierTwoCold = 0;
         NumTierTwoHeat = 0;
 
-        NumStemCells = selectedUnits.FindAll(item => item.celltype == CellType.STEM_CELL).Count;
-        NumHeatCells = selectedUnits.FindAll(item => item.celltype == CellType.HEAT_CELL).Count;
-        NumColdCells = selectedUnits.FindAll(item => item.celltype == CellType.COLD_CELL).Count;
-        NumAcidicCells = selectedUnits.FindAll(item => item.celltype == CellType.ACIDIC_CELL).Count;
-        NumAlkaliCells = selectedUnits.FindAll(item => item.celltype == CellType.ALKALI_CELL).Count;
-        NumTierTwoCold = selectedUnits.FindAll(item => item.celltype == CellType.COLD_CELL_TIRE2).Count;
-        NumTierTwoHeat = selectedUnits.FindAll(item => item.celltype == CellType.HEAT_CELL_TIRE2).Count;
-        NumNerveCells = selectedUnits.FindAll(item => item.celltype == CellType.NERVE_CELL).Count;
+        NumStemCells   = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.STEM_CELL)).Count;
+        NumHeatCells   = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.HEAT_CELL)).Count;
+        NumColdCells   = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.COLD_CELL)).Count;
+        NumAcidicCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.ACIDIC_CELL)).Count;
+        NumAlkaliCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.ALKALI_CELL)).Count;
+        NumTierTwoCold = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.COLD_CELL_TIRE2)).Count;
+        NumTierTwoHeat = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.HEAT_CELL_TIRE2)).Count;
+        NumNerveCells  = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.NERVE_CELL)).Count;
     }
 
     public void CheckEnemiesLeft()
@@ -973,7 +973,7 @@ public class PlayerController : MonoBehaviour
 
         List<GameObject> enemies = new List<GameObject>(allSelectableTargets);
 
-        enemies.RemoveAll(item => item.tag == "Protein");
+        enemies.RemoveAll(item => (item != null) && (item.tag == "Protein"));
 
         NumEnemiesLeft = enemies.Count;
 

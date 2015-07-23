@@ -57,7 +57,7 @@ public class ProteinSpawnerController : MonoBehaviour {
         int currentProteinListCount = transform.parent.childCount;
         testcases = 0;
 
-        List<Vector3> currProteinList = new List<Vector3>();
+        //List<Vector3> currProteinList = new List<Vector3>();
         do {
             count = 0;
             float _x = transform.position.x + Random.Range(-transform.localScale.x * 5, transform.localScale.x * 5);

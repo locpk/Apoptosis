@@ -9,7 +9,7 @@ public class Tier2HeatCell : BaseCell
     public GameObject fireball;
     // Use this for initialization
     float fireballSpeed = 15;
-    GameObject previousTarget;
+    //GameObject previousTarget;
     bool hasteActive = false;
     public float hasteTimer = 0.0f;
     public GameObject stemCell;
@@ -21,11 +21,11 @@ public class Tier2HeatCell : BaseCell
     {
         base.bStart();
     }
-    void DamagePreSecond()
+    void DamagePerSecond()
     {
         if (primaryTarget != null)
         {
-            previousTarget = primaryTarget;
+            //previousTarget = primaryTarget;
             Vector3 them2me = primaryTarget.transform.position - transform.position;
             GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
             thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
@@ -34,11 +34,11 @@ public class Tier2HeatCell : BaseCell
 
         }
     }
-    void HasteDamagePreSecond()
+    void HasteDamagePerSecond()
     {
         if (primaryTarget != null)
         {
-            previousTarget = primaryTarget;
+            //previousTarget = primaryTarget;
             Vector3 them2me = primaryTarget.transform.position - transform.position;
             GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
             thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
@@ -135,14 +135,14 @@ public class Tier2HeatCell : BaseCell
                     SetPrimaryTarget(null);
                     if (hasteActive)
                     {
-                        if (IsInvoking("HasteDamagePreSecond"))
+                        if (IsInvoking("HasteDamagePerSecond"))
                         {
-                            CancelInvoke("HasteDamagePreSecond");
+                            CancelInvoke("HasteDamagePerSecond");
                         }
                     }
-                    if (IsInvoking("DamagePreSecond"))
+                    if (IsInvoking("DamagePerSecond"))
                     {
-                        CancelInvoke("DamagePreSecond");
+                        CancelInvoke("DamagePerSecond");
                     }
                     break;
                 case CellState.ATTACK:
@@ -152,17 +152,17 @@ public class Tier2HeatCell : BaseCell
                         {
                             if (hasteActive)
                             {
-                                if (!IsInvoking("HasteDamagePreSecond"))
+                                if (!IsInvoking("HasteDamagePerSecond"))
                                 {
-                                    InvokeRepeating("HasteDamagePreSecond", 1.0f, 0.6f);
+                                    InvokeRepeating("HasteDamagePerSecond", 1.0f, 0.6f);
 
                                 }
                             }
                             else
                             {
-                                if (!IsInvoking("DamagePreSecond"))
+                                if (!IsInvoking("DamagePerSecond"))
                                 {
-                                    InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
+                                    InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
 
                                 }
                             }
@@ -172,16 +172,16 @@ public class Tier2HeatCell : BaseCell
                         {
                             if (hasteActive)
                             {
-                                if (IsInvoking("HasteDamagePreSecond"))
+                                if (IsInvoking("HasteDamagePerSecond"))
                                 {
-                                    CancelInvoke("HasteDamagePreSecond");
+                                    CancelInvoke("HasteDamagePerSecond");
                                 }
                             }
                             else
                             {
-                                if (IsInvoking("DamagePreSecond"))
+                                if (IsInvoking("DamagePerSecond"))
                                 {
-                                    CancelInvoke("DamagePreSecond");
+                                    CancelInvoke("DamagePerSecond");
                                 }
                             }
                             if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
@@ -221,26 +221,18 @@ public class Tier2HeatCell : BaseCell
     void Awake()
     {
         base.bAwake();
-        multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
     }
-    void MUltiDMg()
-    {
-        multidamagesources();
-
-
+    void MUltiDMg() {
+        if (multidamagesources != null)
+            multidamagesources();
     }
     public void AreaDamage()
     {
         currentProtein -= 10;
-    }
-    void nothing()
-    {
-
-
     }
 
     public override void Attack(GameObject _target)
