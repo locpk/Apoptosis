@@ -15,7 +15,7 @@ public class StemCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
 
-    ParticleSystem particleSystem;
+    ParticleSystem m_particleSystem;
    
     public override void Mutation(CellType _newType)
     {
@@ -60,7 +60,6 @@ public class StemCell : BaseCell
                 newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 newCell.GetComponent<CellSplitAnimation>().originCell = this;
-
                 if (!sound_manager.sounds_evolution[3].isPlaying)
                 {
                     sound_manager.sounds_evolution[3].Play();
@@ -74,17 +73,13 @@ public class StemCell : BaseCell
 
 
 
-    void MUltiDMg()
-    {
-        multidamagesources();
+    void MUltiDMg() {
+        if (multidamagesources != null)
+            multidamagesources();
     }
     public void AreaDamage()
     {
         currentProtein -= 10;
-    }
-    void nothing()
-    {
-
     }
     
 
@@ -92,8 +87,8 @@ public class StemCell : BaseCell
     {
         if (primaryTarget != null)
         {
-            primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
-            primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+            if (primaryTarget.GetComponent<BaseCell>()) primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+            if (primaryTarget.GetComponent<Animator>()) primaryTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
         }
         if (PhotonNetwork.connected)
         {
@@ -121,7 +116,6 @@ public class StemCell : BaseCell
     void Awake()
     {
         base.bAwake();
-        multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
@@ -130,7 +124,7 @@ public class StemCell : BaseCell
     void Start()
     {
         base.bStart();
-        particleSystem = GetComponent<ParticleSystem>();
+        m_particleSystem = GetComponent<ParticleSystem>();
     }
 
 
@@ -179,10 +173,10 @@ public class StemCell : BaseCell
                     {
                         CancelInvoke("DamagePerSecond");
                     }
-                    if (particleSystem.isPlaying)
+                    if (m_particleSystem.isPlaying)
                     {
 
-                        particleSystem.Stop();
+                        m_particleSystem.Stop();
                     }
 
                     //guard mode auto attack enemy in range
@@ -195,10 +189,10 @@ public class StemCell : BaseCell
                         {
                             CancelInvoke("DamagePerSecond");
                         }
-                        if (particleSystem.isPlaying)
+                        if (m_particleSystem.isPlaying)
                         {
 
-                            particleSystem.Stop();
+                            m_particleSystem.Stop();
                         }
                         currentState = CellState.IDLE;
                         return;
@@ -212,10 +206,10 @@ public class StemCell : BaseCell
                         {
                             CancelInvoke("DamagePerSecond");
                         }
-                        if (particleSystem.isPlaying)
+                        if (m_particleSystem.isPlaying)
                         {
 
-                            particleSystem.Stop();
+                            m_particleSystem.Stop();
                         }
                         base.ChaseTarget();
                         return;
@@ -226,9 +220,9 @@ public class StemCell : BaseCell
                         {
                             InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
                         }
-                        if (particleSystem.isStopped || particleSystem.isPaused)
+                        if (m_particleSystem.isStopped || m_particleSystem.isPaused)
                         {
-                            particleSystem.Play();
+                            m_particleSystem.Play();
                         }
                         return;
                     }
@@ -238,10 +232,10 @@ public class StemCell : BaseCell
                         {
                             CancelInvoke("DamagePerSecond");
                         }
-                        if (particleSystem.isPlaying)
+                        if (m_particleSystem.isPlaying)
                         {
 
-                            particleSystem.Stop();
+                            m_particleSystem.Stop();
                         }
                         currentState = CellState.IDLE;
 

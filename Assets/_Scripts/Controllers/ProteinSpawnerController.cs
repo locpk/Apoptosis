@@ -57,7 +57,7 @@ public class ProteinSpawnerController : MonoBehaviour {
         int currentProteinListCount = transform.parent.childCount;
         testcases = 0;
 
-        List<Vector3> currProteinList = new List<Vector3>();
+        //List<Vector3> currProteinList = new List<Vector3>();
         do {
             count = 0;
             float _x = transform.position.x + Random.Range(-transform.localScale.x * 5, transform.localScale.x * 5);
@@ -114,7 +114,7 @@ public class ProteinSpawnerController : MonoBehaviour {
                 count = 0;
                 testcases++;
                 if (testcases >= 10000) {
-                    Debug.LogError("MAX TEST CASE REACHED!!!");
+                   // Debug.LogError("MAX TEST CASE REACHED!!!");
                     break;
                 }
             } while (true);
@@ -131,7 +131,7 @@ public class ProteinSpawnerController : MonoBehaviour {
 
             GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewProtein(currProtein.GetComponent<Protein>());
         }
-        Debug.Log(testcases + " cases.");
+       // Debug.Log(testcases + " cases.");
         testcases = 0;
         preSpawned = true;
     }

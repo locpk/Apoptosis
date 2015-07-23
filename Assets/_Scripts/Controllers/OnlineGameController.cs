@@ -1,18 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class OnlineGameController : Photon.PunBehaviour
 {
+    private GameObject winScreen;
+    private GameObject loseScreen;
+    private Sound_Manager sound_manager;
     public GameObject PlayerControls;
     public static bool gameStarted = false;
     public static bool gameEnded = false;
-    bool win = false;
+    //bool win = false;
     int unitsCount;
+    public GameObject PauseMenu;
 
     void Awake()
     {
         Time.timeScale = 1.0f;
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>(); // gets the sound sources
+        winScreen = GameObject.FindGameObjectWithTag("Win_Screen");
+        loseScreen = GameObject.FindGameObjectWithTag("Lose_Screen");
     }
 
     // Use this for initialization
@@ -37,7 +45,6 @@ public class OnlineGameController : Photon.PunBehaviour
         unitsCount = PlayerControls.GetComponent<PlayerController>().allSelectableUnits.Count;
         if (unitsCount <= 0 && gameStarted && !gameEnded)
         {
-            
             photonView.RPC("GameEnd", PhotonTargets.AllViaServer, null);
         }
         if (gameEnded)
@@ -54,12 +61,19 @@ public class OnlineGameController : Photon.PunBehaviour
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            PhotonNetwork.LeaveRoom();
+            //PhotonNetwork.LeaveRoom();
+            PauseMenu.SetActive(true);
         }
         if (gameEnded && Input.GetKeyUp(KeyCode.Return))
         {
            PhotonNetwork.LeaveRoom();
         }
+    }
+
+    public void Disconnect()
+    {
+        PhotonNetwork.LeaveRoom();
+        
     }
 
     [PunRPC]
@@ -88,18 +102,18 @@ public class OnlineGameController : Photon.PunBehaviour
         if (gameEnded)
         {
 
-            if (unitsCount <= 0)
-            {
-                GUI.BeginGroup(new Rect(Screen.width * 0.5f - 300, Screen.height * 0.5f - 100, 500, 300));
-                GUI.Box(new Rect(0, 0, 500, 300), "\n\n\n\n\n\n\nYou Lose\nPress Enter to Continue");
-                GUI.EndGroup();
-            }
-            else
-            {
-                GUI.BeginGroup(new Rect(Screen.width * 0.5f - 300, Screen.height * 0.5f - 100, 500, 300));
-                GUI.Box(new Rect(0, 0, 500, 300), "\n\n\n\n\n\n\nYou Win\nPress Enter to Continue");
-                GUI.EndGroup();
-            }
+            //if (unitsCount <= 0)
+            //{
+            //    GUI.BeginGroup(new Rect(Screen.width * 0.5f - 300, Screen.height * 0.5f - 100, 500, 300));
+            //    GUI.Box(new Rect(0, 0, 500, 300), "\n\n\n\n\n\n\nYou Lose\nPress Enter to Continue");
+            //    GUI.EndGroup();
+            //}
+            //else
+            //{
+            //    GUI.BeginGroup(new Rect(Screen.width * 0.5f - 300, Screen.height * 0.5f - 100, 500, 300));
+            //    GUI.Box(new Rect(0, 0, 500, 300), "\n\n\n\n\n\n\nYou Win\nPress Enter to Continue");
+            //    GUI.EndGroup();
+            //}
         }
     }
 
@@ -111,7 +125,17 @@ public class OnlineGameController : Photon.PunBehaviour
     //LateUpdate is called after all Update functions have been called
     void LateUpdate()
     {
-        
+        if (gameEnded)
+        {
+            if (unitsCount <= 0)
+            {
+                Show_LoseScreen();
+            }
+            else
+            {
+                Show_WinningScreen();
+            }
+        }
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
@@ -120,15 +144,16 @@ public class OnlineGameController : Photon.PunBehaviour
         base.OnPhotonPlayerConnected(newPlayer);
         InitPlayer();
         SpawnPlayerUnits();
-        gameStarted = true;
+       
+        
         Invoke("InitSync", 2.0f);
     }
 
-    public void OnLeftRoom()
+    public new void OnLeftRoom()
     {
-        gameStarted = false;
-        gameEnded = true;
-        PhotonNetwork.Disconnect();
+        //gameStarted = false;
+        //gameEnded = true;
+        
         Application.LoadLevel("Multiplayer_Lobby");
     }
 
@@ -160,6 +185,7 @@ public class OnlineGameController : Photon.PunBehaviour
         {
             PlayerControls.GetComponent<PlayerController>().AddNewProtein(item.GetComponent<Protein>()); // Add the cell to the players controllable units
         }
+        gameStarted = true;
     }
 
     void InitPlayer()
@@ -183,7 +209,7 @@ public class OnlineGameController : Photon.PunBehaviour
         
         object[] isSingleplayer = new object[1];
         isSingleplayer[0] = (bool)false;
-        PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("StemCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer).GetComponent<BaseCell>());
+        PhotonNetwork.Instantiate("StemCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer);
         //if (false/*PhotonNetwork.player.ID == 1*/)
         //{
         //    PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("ColdCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer).GetComponent<BaseCell>());
@@ -196,6 +222,51 @@ public class OnlineGameController : Photon.PunBehaviour
         {
             ResetPlayers();
         }
+    }
+
+
+    void Show_WinningScreen()
+    {
+        winScreen.SetActive(true);
+
+        if (!sound_manager.win_music.isPlaying)
+        {
+            sound_manager.win_music.Play();
+        }
+        winScreen.GetComponentInChildren<Image>().enabled = true;
+        Image[] test = winScreen.GetComponentsInChildren<Image>();
+
+        foreach (Image img in test)
+        {
+            img.enabled = true;
+
+        }
+
+        Time.timeScale = 0.0f;
+        this.gameObject.SetActive(false);
+        Invoke("Disconnect", 2.0f);
+    }
+    void Show_LoseScreen()
+    {
+
+        loseScreen.SetActive(true);
+        if (!sound_manager.lose_music.isPlaying)
+        {
+            sound_manager.lose_music.Play();
+        }
+        loseScreen.GetComponentInChildren<Image>().enabled = true;
+
+        Image[] test = loseScreen.GetComponentsInChildren<Image>();
+
+        foreach (Image img in test)
+        {
+            img.enabled = true;
+
+        }
+
+        this.gameObject.SetActive(false);
+        Invoke("Disconnect", 2.0f);
+
     }
 
 }

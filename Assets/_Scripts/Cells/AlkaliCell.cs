@@ -6,7 +6,7 @@ public class AlkaliCell : BaseCell
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
     public GameObject DOT;
-    GameObject previousTarget;
+
     public GameObject stun;
     int instanonce = 0;
     public AcidicCell mergePartner;
@@ -16,25 +16,20 @@ public class AlkaliCell : BaseCell
     void Awake()
     {
         base.bAwake();
-        multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         pcontroller = base.pcontroller;
     }
-    void MUltiDMg()
-    {
         multidamagesources();
-
+    void MUltiDMg() {
+        if (multidamagesources != null)
+            multidamagesources();
     }
     
     public void AreaDamage()
     {
         currentProtein -= 10;
-    }
-    void nothing()
-    {
-
     }
     public void Merge()
     {
@@ -96,7 +91,7 @@ public class AlkaliCell : BaseCell
     {
         if (primaryTarget != null)
         {
-            previousTarget = primaryTarget;
+            //previousTarget = primaryTarget;
             Vector3 newvec =  new Vector3(primaryTarget.transform.position.x, primaryTarget.transform.position.y, (primaryTarget.transform.position.z + primaryTarget.GetComponent<SphereCollider>().radius));
             GameObject theDOT= Instantiate(DOT,  newvec ,primaryTarget.transform.rotation) as GameObject;
     
