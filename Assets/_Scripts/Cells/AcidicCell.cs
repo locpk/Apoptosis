@@ -10,15 +10,74 @@ public class AcidicCell : BaseCell
     public GameObject stun;
     public GameObject Acid;
     int instanonce = 0;
-    
+    public AlkaliCell mergePartner;
+    public bool haveMergePartner = false;
+    public GameObject nerveCell;
 
     void Awake()
     {
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         base.bAwake();
-        InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+        
     }
 
+    public void Merge()
+    {
+        List<BaseCell> alkaliCellMerge;
+        List<BaseCell> possibleMergers = pcontroller.selectedUnits;
+
+        alkaliCellMerge = possibleMergers.FindAll(item => item.celltype == CellType.ALKALI_CELL && item.GetComponent<AlkaliCell>());
+
+        if (alkaliCellMerge.Count >= 1)
+        {
+            for (int i = 0; i < alkaliCellMerge.Count; i++)
+            {
+                if (mergePartner == null || Vector3.Distance(this.transform.position, alkaliCellMerge[i].transform.position)
+                          < Vector3.Distance(this.transform.position, mergePartner.transform.position) ||
+                     (haveMergePartner == false && mergePartner.haveMergePartner == false))
+                {
+                    if (mergePartner != null)
+                    {
+                        break;
+                    }
+                    mergePartner = alkaliCellMerge[i].GetComponent<AlkaliCell>();
+                    mergePartner.mergePartner = this;
+                    haveMergePartner = true;
+                    mergePartner.haveMergePartner = true;
+                }
+            }
+        }
+    }
+
+    void MergingTheCells(AlkaliCell other)
+    {
+
+        float distance = Vector3.Distance(this.transform.position, other.transform.position);
+        if (distance < GetComponent<SphereCollider>().radius *1.3f)
+        {
+            Vector3 trackingPos = this.transform.position;
+            Quaternion trackingRot = this.transform.rotation;
+
+
+
+            GameObject knerveCell = Instantiate(nerveCell, trackingPos, trackingRot) as GameObject;
+
+            if (!sound_manager.sounds_evolution[5].isPlaying)
+            {
+                sound_manager.sounds_evolution[5].Play();
+            }
+            Deactive();
+            other.Deactive();
+            pcontroller.AddNewCell(knerveCell.GetComponent<BaseCell>());
+        }
+        else
+        {
+
+            Move(other.transform.position);
+
+        }
+
+    }
     void DamagePreSecond()
     {
         if (primaryTarget != null)
@@ -180,7 +239,8 @@ public class AcidicCell : BaseCell
                     break;
             }
             base.bUpdate();
-        
+            if (mergePartner != null)
+                MergingTheCells(mergePartner);
     }
 
     void FixedUpdate()

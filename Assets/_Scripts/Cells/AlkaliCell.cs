@@ -6,18 +6,22 @@ public class AlkaliCell : BaseCell
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
     public GameObject DOT;
-    //GameObject previousTarget;
+
     public GameObject stun;
     int instanonce = 0;
-   
-
+    public AcidicCell mergePartner;
+    public bool haveMergePartner = false;
+    public GameObject nerveCell;
+    
     void Awake()
     {
         base.bAwake();
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+        pcontroller = base.pcontroller;
     }
+   
     void MUltiDMg() {
         if (multidamagesources != null)
             multidamagesources();
@@ -26,6 +30,62 @@ public class AlkaliCell : BaseCell
     public void AreaDamage()
     {
         currentProtein -= 10;
+    }
+    public void Merge()
+    {
+        List<BaseCell> acidicCellMerge;
+        List<BaseCell> possibleMergers = pcontroller.selectedUnits;
+
+        acidicCellMerge = possibleMergers.FindAll(item => item.celltype == CellType.ACIDIC_CELL && item.GetComponent<AcidicCell>());
+
+        if (acidicCellMerge.Count >= 1)
+        {
+            for (int i = 0; i < acidicCellMerge.Count; i++)
+            {
+                if (mergePartner == null || Vector3.Distance(this.transform.position, acidicCellMerge[i].transform.position)
+                          < Vector3.Distance(this.transform.position, mergePartner.transform.position) ||
+                     (haveMergePartner == false && mergePartner.haveMergePartner == false))
+                {
+                    if (mergePartner != null)
+                    {
+                        break;
+                    }
+                    mergePartner = acidicCellMerge[i].GetComponent<AcidicCell>();
+                    mergePartner.mergePartner = this;
+                    haveMergePartner = true;
+                    mergePartner.haveMergePartner = true;
+                }
+            }
+        }
+    }
+    void MergingTheCells(AcidicCell other)
+    {
+
+        float distance = Vector3.Distance(this.transform.position, other.transform.position);
+        if (distance < GetComponent<SphereCollider>().radius *1.3f)
+        {
+            Vector3 trackingPos = this.transform.position;
+            Quaternion trackingRot = this.transform.rotation;
+
+
+
+            GameObject knerveCell = Instantiate(nerveCell, trackingPos, trackingRot) as GameObject;
+
+            if (!sound_manager.sounds_evolution[5].isPlaying)
+            {
+                sound_manager.sounds_evolution[5].Play();
+            }
+            Deactive();
+            other.Deactive();
+            pcontroller.AddNewCell(knerveCell.GetComponent<BaseCell>());
+        }
+        else
+        {
+
+            Move(other.transform.position);
+
+        }
+
     }
     void DamagePreSecond()
     {
@@ -180,8 +240,9 @@ public class AlkaliCell : BaseCell
                     break;
                 default:
                     break;
-
             }
+            if (mergePartner != null)
+                MergingTheCells(mergePartner);
         }
     }
 
