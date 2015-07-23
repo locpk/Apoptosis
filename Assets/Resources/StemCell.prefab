@@ -321,6 +321,7 @@ MonoBehaviour:
   gCancerCellPrefab: {fileID: 0}
   gStemCellPrefab: {fileID: 146472, guid: f68bc9c3ba37b4741a32f07628606e80, type: 2}
   gHeatCellPrefab: {fileID: 0}
+  gHeatCancerPrefab: {fileID: 0}
   gColdCellPrefab: {fileID: 0}
   gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
@@ -1841,6 +1842,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Extents.y
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: currentProtein
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

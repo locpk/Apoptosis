@@ -15,28 +15,22 @@ public class ColdCell : BaseCell
     int instanonce = 0;
     public GameObject particle;
 
+
+
     void Awake()
     {
         base.bAwake();
-        multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
-
     }
-    void MUltiDMg()
-    {
-        multidamagesources();
-
-
+    void MUltiDMg() {
+        if (multidamagesources != null)
+            multidamagesources();
     }
     public void AreaDamage()
     {
         currentProtein -= 10;
-    }
-    void nothing()
-    {
-
     }
 
 
@@ -91,6 +85,7 @@ public class ColdCell : BaseCell
             cTier2Cold.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
             cTier2Cold.GetComponent<CellSplitAnimation>().originCell = this;
             cTier2Cold.GetComponent<CellSplitAnimation>().originCell1 = other;
+            
 
             if (!sound_manager.sounds_evolution[6].isPlaying)
             {

@@ -21,26 +21,20 @@ public class NerveCell : BaseCell
     void Awake()
     {
         base.bAwake();
-        multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
-    void MUltiDMg()
-    {
-        multidamagesources();
-
+    void MUltiDMg() {
+        if (multidamagesources != null)
+            multidamagesources();
     }
 
     public void AreaDamage()
     {
         currentProtein -= 10;
     }
-    void nothing()
-    {
 
-    }
-
-    void DamagePreSecond()
+    void DamagePerSecond()
     {
 
        // Vector3 them2me = primaryTarget.transform.position - transform.position;
@@ -121,9 +115,9 @@ public class NerveCell : BaseCell
 
                 case CellState.IDLE:
                     SetPrimaryTarget(null);
-                    if (IsInvoking("DamagePreSecond"))
+                    if (IsInvoking("DamagePerSecond"))
                     {
-                        CancelInvoke("DamagePreSecond");
+                        CancelInvoke("DamagePerSecond");
                     }
                     break;
                 case CellState.ATTACK:
@@ -131,18 +125,18 @@ public class NerveCell : BaseCell
                     {
                         if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                         {
-                            if (!IsInvoking("DamagePreSecond"))
+                            if (!IsInvoking("DamagePerSecond"))
                             {
-                                InvokeRepeating("DamagePreSecond", 1.0f, 4.0f);
+                                InvokeRepeating("DamagePerSecond", 1.0f, 4.0f);
 
                             }
                         }
 
                         else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                         {
-                            if (IsInvoking("DamagePreSecond"))
+                            if (IsInvoking("DamagePerSecond"))
                             {
-                                CancelInvoke("DamagePreSecond");
+                                CancelInvoke("DamagePerSecond");
                             }
                             if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
                             {
@@ -160,9 +154,9 @@ public class NerveCell : BaseCell
                     base.bUpdate();
                     break;
                 case CellState.MOVING:
-                    if (IsInvoking("DamagePreSecond"))
+                    if (IsInvoking("DamagePerSecond"))
                     {
-                        CancelInvoke("DamagePreSecond");
+                        CancelInvoke("DamagePerSecond");
                     }
                     base.bUpdate();
                     break;

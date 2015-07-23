@@ -6,14 +6,14 @@ public class OptionsMenu : MonoBehaviour
 {
 
      
-    AudioSource volTest;
+    //AudioSource volTest;
     GameObject SEVolSlider;
     GameObject FSToggle;
     GameObject BGMVolSlider;
 
     Rect BGMBounds;
     Rect SEBounds;
-    bool changed;
+    //bool changed;
     byte[] configuration;
     System.IO.FileStream configFile;
 
@@ -27,7 +27,7 @@ public class OptionsMenu : MonoBehaviour
         BGMVolSlider = GameObject.Find("BGM_Vol_Slider");
         SEVolSlider = GameObject.Find("SE_Vol_Slider");
         FSToggle = GameObject.Find("FullScreen_Toggle");
-        volTest = BGMVolSlider.GetComponent<AudioSource>();
+        //volTest = BGMVolSlider.GetComponent<AudioSource>();
         BGMBounds = BGMVolSlider.GetComponent<RectTransform>().rect;
         BGMBounds.xMin += BGMVolSlider.GetComponent<RectTransform>().position.x;
         BGMBounds.xMax += BGMVolSlider.GetComponent<RectTransform>().position.x;
@@ -56,7 +56,7 @@ public class OptionsMenu : MonoBehaviour
             configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Open, System.IO.FileAccess.Write, System.IO.FileShare.None);
             FSToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = Screen.fullScreen;
         }
-        changed = false;
+        //changed = false;
     }
 
     // Update is called once per frame
