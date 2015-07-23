@@ -14,7 +14,7 @@ public class HeatCell : BaseCell
     float fireballSpeed = 10;
     public bool Inheat;
     public PlayerController controller;
-    GameObject previousTarget;
+    //GameObject previousTarget;
     public GameObject stun;
     int instanonce = 0;
 
@@ -68,6 +68,7 @@ public class HeatCell : BaseCell
             kTier2Heat.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
             kTier2Heat.GetComponent<CellSplitAnimation>().originCell = this;
             kTier2Heat.GetComponent<CellSplitAnimation>().originCell1 = other;
+           
 
             if (!sound_manager.sounds_evolution[5].isPlaying)
             {
@@ -88,7 +89,6 @@ public class HeatCell : BaseCell
     void Awake()
     {
         base.bAwake();
-        multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
@@ -96,28 +96,21 @@ public class HeatCell : BaseCell
 
     }
 
-    void MUltiDMg()
-    {
-        multidamagesources();
-
-
-
+    void MUltiDMg() {
+        if (multidamagesources != null)
+            multidamagesources();
     }
 
     public void AreaDamage()
     {
         currentProtein -= 10;
     }
-    void nothing()
-    {
 
-    }
-
-    public void DamagePreSecond()
+    public void DamagePerSecond()
     {
         if (primaryTarget != null)
         {
-            previousTarget = primaryTarget;
+            //previousTarget = primaryTarget;
             Vector3 them2me = primaryTarget.transform.position - transform.position;
             GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
             thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
@@ -205,9 +198,9 @@ public class HeatCell : BaseCell
             {
                 case CellState.IDLE:
                     SetPrimaryTarget(null);
-                    if (IsInvoking("DamagePreSecond"))
+                    if (IsInvoking("DamagePerSecond"))
                     {
-                        CancelInvoke("DamagePreSecond");
+                        CancelInvoke("DamagePerSecond");
                     }
                     //System.Collections.Generic.List<GameObject> enemyUnits = GameObjectManager.FindAIUnits();
                     //if (enemyUnits != null)
@@ -232,18 +225,18 @@ public class HeatCell : BaseCell
                     {
                         if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                         {
-                            if (!IsInvoking("DamagePreSecond"))
+                            if (!IsInvoking("DamagePerSecond"))
                             {
-                                InvokeRepeating("DamagePreSecond", 1.0f, 1.0f);
+                                InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
 
                             }
                         }
 
                         else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                         {
-                            if (IsInvoking("DamagePreSecond"))
+                            if (IsInvoking("DamagePerSecond"))
                             {
-                                CancelInvoke("DamagePreSecond");
+                                CancelInvoke("DamagePerSecond");
                             }
                             if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
                             {
@@ -261,9 +254,9 @@ public class HeatCell : BaseCell
                     base.bUpdate();
                     break;
                 case CellState.MOVING:
-                    if (IsInvoking("DamagePreSecond"))
+                    if (IsInvoking("DamagePerSecond"))
                     {
-                        CancelInvoke("DamagePreSecond");
+                        CancelInvoke("DamagePerSecond");
                     }
                     base.bUpdate();
                     break;

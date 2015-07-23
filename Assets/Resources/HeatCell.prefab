@@ -306,7 +306,8 @@ MonoBehaviour:
   gCancerCellPrefab: {fileID: 0}
   gStemCellPrefab: {fileID: 0}
   gHeatCellPrefab: {fileID: 168428, guid: d145796a9e2b44b46b824864a6f518ae, type: 2}
-  gColdCellPrefab: {fileID: 100116, guid: 6be5ea99c0bef5e40b0c75d3c57676d7, type: 2}
+  gHeatCancerPrefab: {fileID: 166566, guid: 2f3953be46bfb8046a4c0ddebeb230ea, type: 2}
+  gColdCellPrefab: {fileID: 0}
   gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
   gAlkaliCellPrefab: {fileID: 0}
@@ -330,7 +331,6 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
-  photonView: {fileID: 0}
   currentProtein: 500
   fovRadius: 10
   attackDamage: 3
@@ -696,6 +696,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: isDepleting
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gHeatCancerPrefab
+      value: 
+      objectReference: {fileID: 166566, guid: 2f3953be46bfb8046a4c0ddebeb230ea, type: 2}
+    - target: {fileID: 0}
+      propertyPath: gColdCellPrefab
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

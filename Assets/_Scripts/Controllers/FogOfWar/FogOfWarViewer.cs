@@ -3,8 +3,8 @@ using System.Collections;
 
 public class FogOfWarViewer:MonoBehaviour {
     Transform m_trans;
-    public Vector2 viewOfRange = new Vector2(2.0f, 6.0f);
-    public FogOfWarController.LOSChecks lineOfSightCheck = FogOfWarController.LOSChecks.EveryUpdate;
+    public Vector2 viewOfRange = new Vector2(5.0f, 10.0f);
+    public FogOfWarController.LOSChecks lineOfSightCheck = FogOfWarController.LOSChecks.None;
     public bool isActive = true;
 
     FogOfWarController.Viewer m_viewer;
@@ -15,13 +15,15 @@ public class FogOfWarViewer:MonoBehaviour {
 
         if (GetComponent<BaseCell>()) {
             viewOfRange.x = GetComponent<BaseCell>().fovRadius;
-            viewOfRange.y = viewOfRange.x * 2.0f;
+            viewOfRange.y = viewOfRange.x * 3.0f;
         }
 
     }
 
     void OnDisable() {
-        m_viewer.isActive = false;
+        if (m_viewer != null) {
+            m_viewer.isActive = false;
+        }
     }
 
     void OnDestroy() {
@@ -31,7 +33,8 @@ public class FogOfWarViewer:MonoBehaviour {
 
     void LateUpdate() {
         if (isActive) {
-            if (lineOfSightCheck != FogOfWarController.LOSChecks.OnlyOnce) m_viewer.cachedBuffer = null;
+            if (lineOfSightCheck != FogOfWarController.LOSChecks.OnlyOnce)
+                m_viewer.cachedBuffer = null;
 
             m_viewer.pos = m_trans.position;
             m_viewer.inner = viewOfRange.x;

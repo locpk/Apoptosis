@@ -20,14 +20,10 @@ public class PauseMenu : MonoBehaviour
     public GameObject instructionsMenu;
     //Capture the pause menu button
     public GameObject pauseMenuButton;
-    //Shows the game end  WIN screen when you win
-  //  public GameObject winScreen;
-    //Shows the game end LOSE screen 
-  //  public GameObject loseScreen;
 
-    Sound_Manager manager; 
+    //Sound_Manager manager; 
 
-    private GameObject playerController;
+    //private GameObject playerController;
     void Awake()
     {
         //set everything to false
@@ -38,10 +34,9 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
         instructionsMenu.SetActive(false);
-     //   winScreen.SetActive(false);
-     //   loseScreen.SetActive(false);
 
-        manager = Sound_Manager.Instance;
+
+        //manager = Sound_Manager.Instance;
     }
 
     // Use this for initialization
@@ -55,10 +50,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
         instructionsMenu.SetActive(false);
-    //    winScreen.SetActive(false);
-     //   loseScreen.SetActive(false);
 
-        playerController = GameObject.FindGameObjectWithTag("PlayerController");
+        //playerController = GameObject.FindGameObjectWithTag("PlayerController");
         
     }
 
@@ -118,11 +111,6 @@ public class PauseMenu : MonoBehaviour
             //set the timescale to 0 to pause the game
             Time.timeScale = 0.0f;
         } 
-        // when the player does not have any units to control, means you lost
-      //  else if (playerController.GetComponent<PlayerController>().allSelectableUnits.Count == 0)
-      //  {
-          //  loseScreen.SetActive(true);
-      //  }
         else
         {
             //turn the all menus off
@@ -218,7 +206,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
         instructionsMenu.SetActive(false);
-    //    winScreen.SetActive(false);
-    //   loseScreen.SetActive(false);
+
     }
 }

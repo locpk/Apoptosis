@@ -18,7 +18,7 @@ public class Dot : MonoBehaviour
         if (Target)
         {
             Target.GetComponent<BaseCell>().currentProtein -= Owner.GetComponent<BaseCell>().attackDamage;
-            Target.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+            if (Target.GetComponent<Animator>()) Target.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
         }
         
     }
