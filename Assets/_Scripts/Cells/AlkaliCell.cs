@@ -9,7 +9,7 @@ public class AlkaliCell : BaseCell
     //GameObject previousTarget;
     public GameObject stun;
     int instanonce = 0;
-   
+
 
     void Awake()
     {
@@ -18,11 +18,12 @@ public class AlkaliCell : BaseCell
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
-    void MUltiDMg() {
+    void MUltiDMg()
+    {
         if (multidamagesources != null)
             multidamagesources();
     }
-    
+
     public void AreaDamage()
     {
         currentProtein -= 10;
@@ -32,9 +33,10 @@ public class AlkaliCell : BaseCell
         if (primaryTarget != null)
         {
             //previousTarget = primaryTarget;
-            Vector3 newvec =  new Vector3(primaryTarget.transform.position.x, primaryTarget.transform.position.y, (primaryTarget.transform.position.z + primaryTarget.GetComponent<SphereCollider>().radius));
-            GameObject theDOT= Instantiate(DOT,  newvec ,primaryTarget.transform.rotation) as GameObject;
-    
+            Vector3 newvec = new Vector3(primaryTarget.transform.position.x, primaryTarget.transform.position.y, (primaryTarget.transform.position.z + primaryTarget.GetComponent<SphereCollider>().radius));
+            GameObject theDOT = PhotonNetwork.connected ? PhotonNetwork.Instantiate("DOT", newvec, primaryTarget.transform.rotation, 0)
+                : Instantiate(DOT, newvec, primaryTarget.transform.rotation) as GameObject;
+
             theDOT.GetComponent<Dot>().Target = primaryTarget;
             theDOT.GetComponent<Dot>().Owner = this.gameObject;
 
@@ -171,6 +173,10 @@ public class AlkaliCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
+                    if (PhotonNetwork.connected)
+                    {
+                        photonView.RPC("Die", PhotonTargets.Others, null);
+                    }
                     break;
                 case CellState.CONSUMING:
                     base.bUpdate();
@@ -193,7 +199,7 @@ public class AlkaliCell : BaseCell
         }
     }
 
-    
+
 
     void FixedUpdate()
     {

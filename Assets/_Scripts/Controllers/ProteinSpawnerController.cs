@@ -69,7 +69,8 @@ public class ProteinSpawnerController : MonoBehaviour {
             }
 
             if (count == currentProteinListCount - 1) {
-                currProtein = PhotonNetwork.connected ? PhotonNetwork.InstantiateSceneObject("Protein", spawnPos, spwanAngle, 0, null) : Instantiate(protein, spawnPos, spwanAngle) as GameObject;
+                currProtein = PhotonNetwork.connected ? PhotonNetwork.InstantiateSceneObject("Protein", spawnPos, spwanAngle, 0, null)
+                    : Instantiate(protein, spawnPos, spwanAngle) as GameObject;
                 currProtein.transform.parent = transform.parent;
                 GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewProtein(currProtein.GetComponent<Protein>());
 
@@ -124,7 +125,8 @@ public class ProteinSpawnerController : MonoBehaviour {
         for (int i = 0; i < spawnPositionList.Count; i++) {
 
 
-            currProtein = PhotonNetwork.connected ? PhotonNetwork.InstantiateSceneObject("Protein", spawnPositionList[i], spwanAngle, 0, null):Instantiate(protein, spawnPositionList[i], spwanAngle) as GameObject;
+            currProtein = PhotonNetwork.connected ? PhotonNetwork.InstantiateSceneObject("Protein", spawnPositionList[i], spwanAngle, 0, null)
+                : Instantiate(protein, spawnPositionList[i], spwanAngle) as GameObject;
             currProtein.transform.parent = transform.parent;
             
             //Destroy(currProtein.GetComponent<FogOfWarHider>()); // using for debug!!!!

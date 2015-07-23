@@ -35,7 +35,7 @@ public enum CellState
 /// <summary>
 /// Define the base cell class
 /// </summary>
-public class BaseCell : MonoBehaviour
+public class BaseCell : Photon.PunBehaviour
 {
     public GameObject gCancerCellPrefab;
     public GameObject gStemCellPrefab;
@@ -75,8 +75,6 @@ public class BaseCell : MonoBehaviour
     public Vector3 destination;
     public List<GameObject> targets;
     public GameObject primaryTarget;
-    public PhotonView photonView;
-    // public PhotonView photonView;
     public float currentProtein;
     public float fovRadius;
     public float attackDamage;
@@ -113,6 +111,7 @@ public class BaseCell : MonoBehaviour
     public void ApplyDamage(float damage)
     {
         currentProtein -= damage;
+        Debug.Log("Thing");
         GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
     }
     #endregion
@@ -137,6 +136,7 @@ public class BaseCell : MonoBehaviour
     #region Standard Actions
     // Public Methods
 
+    [PunRPC]
     public virtual void Move(Vector3 _destination)
     {
 
@@ -181,6 +181,8 @@ public class BaseCell : MonoBehaviour
         }
 
     }
+    
+    [PunRPC]
     public void Die()
     {
         isMine = false;
@@ -506,8 +508,11 @@ public class BaseCell : MonoBehaviour
     protected void bAwake()
     {
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+        navAgent = GetComponent<NavMeshAgent>();
+        navObstacle = GetComponent<NavMeshObstacle>();
+        navAgent.speed = moveSpeed;
+        pcontroller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
-        photonView = GetComponent<PhotonView>();
         if (PhotonNetwork.connected)
         {
             isSinglePlayer = (bool)photonView.instantiationData[0];
@@ -538,10 +543,10 @@ public class BaseCell : MonoBehaviour
             gameObject.AddComponent<FogOfWarHider>();
 
         }
-        navAgent = GetComponent<NavMeshAgent>();
-        navObstacle = GetComponent<NavMeshObstacle>();
-        navAgent.speed = moveSpeed;
-        pcontroller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
+        else if (!isMine)
+        {
+            gameObject.AddComponent<FogOfWarHider>();
+        }
     }
 
     // Use this for initialization
@@ -731,6 +736,10 @@ public class BaseCell : MonoBehaviour
         if (currentProtein <= 0.0f)
         {
             Die();
+            if (PhotonNetwork.connected)
+            {
+                photonView.RPC("Die", PhotonTargets.Others, null);
+            }
             transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
     }

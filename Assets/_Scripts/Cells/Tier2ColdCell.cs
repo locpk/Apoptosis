@@ -102,6 +102,10 @@ public class Tier2ColdCell : BaseCell
                         Vector3 trackingPos = this.transform.position;
                         Quaternion trackingRot = this.transform.rotation;
                         Die();
+                        if (PhotonNetwork.connected)
+                        {
+                            photonView.RPC("Die", PhotonTargets.Others, null);
+                        }
                         GameObject gstem = Instantiate(stemCell, trackingPos, trackingRot) as GameObject;
                         controller.AddNewCell(gstem.GetComponent<BaseCell>());
                     }
@@ -163,6 +167,10 @@ public class Tier2ColdCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
+            if (PhotonNetwork.connected)
+            {
+                photonView.RPC("Die", PhotonTargets.Others, null);
+            }
                     break;
 
                 default:

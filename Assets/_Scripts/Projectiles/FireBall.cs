@@ -24,9 +24,14 @@ public class FireBall : BaseProjectile
     void Update()
     {
         lifeTimer -= Time.fixedDeltaTime;
-        if(lifeTimer <= 0.0f)
+        if (lifeTimer <= 0.0f)
         {
-            Destroy(this.gameObject);
+            if (PhotonNetwork.connected)
+            {
+                PhotonNetwork.Destroy(this.gameObject);
+            }
+            else
+                Destroy(this.gameObject);
         }
     }
 
@@ -43,20 +48,39 @@ public class FireBall : BaseProjectile
     void OnTriggerEnter(Collider other)
     {
 
-        if (Owner && other) {
-            if (Owner.GetComponent<BaseCell>().isAIPossessed == true && other.gameObject.GetComponent<BaseCell>()) {
-                if (other.gameObject.GetComponent<BaseCell>().isMine == true) {
+        if (Owner && other)
+        {
+            if (Owner.GetComponent<BaseCell>().isAIPossessed == true && other.gameObject.GetComponent<BaseCell>())
+            {
+                if (other.gameObject.GetComponent<BaseCell>().isMine == true)
+                {
                     other.gameObject.GetComponent<BaseCell>().currentProtein = other.gameObject.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
-                    if(other.GetComponent<Animator>()) other.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
-                    Destroy(this.gameObject);
+                    if (other.GetComponent<Animator>()) other.gameObject.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                    if (PhotonNetwork.connected)
+                    {
+                        other.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, Owner.GetComponent<BaseCell>().attackDamage);
+                    }
+                    if (PhotonNetwork.connected)
+                        PhotonNetwork.Destroy(this.gameObject);
+                    else
+                        Destroy(this.gameObject);
                 }
             }
 
-            if (Owner.GetComponent<BaseCell>().isAIPossessed == false && other.gameObject.GetComponent<BaseCell>()) {
-                if (other.gameObject.GetComponent<BaseCell>().isMine == false) {
+            if (Owner.GetComponent<BaseCell>().isAIPossessed == false && other.gameObject.GetComponent<BaseCell>())
+            {
+                if (other.gameObject.GetComponent<BaseCell>().isMine == false)
+                {
                     other.GetComponent<BaseCell>().currentProtein = Target.GetComponent<BaseCell>().currentProtein - Owner.GetComponent<BaseCell>().attackDamage;
-                    if(other.GetComponent<Animator>()) other.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
-                    Destroy(this.gameObject);
+                    if (other.GetComponent<Animator>()) other.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+                    if (PhotonNetwork.connected)
+                    {
+                        other.gameObject.GetPhotonView().RPC("ApplyDamage", PhotonTargets.Others, Owner.GetComponent<BaseCell>().attackDamage);
+                    }
+                    if (PhotonNetwork.connected)
+                        PhotonNetwork.Destroy(this.gameObject);
+                    else
+                        Destroy(this.gameObject);
                 }
             }
         }

@@ -162,6 +162,10 @@ public class NerveCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
+            if (PhotonNetwork.connected)
+            {
+                photonView.RPC("Die", PhotonTargets.Others, null);
+            }
                     break;
                 case CellState.MERGING:
                     break;

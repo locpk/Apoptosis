@@ -16,7 +16,7 @@ public class Tier2HeatCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
 
-   
+
     void Start()
     {
         base.bStart();
@@ -27,7 +27,8 @@ public class Tier2HeatCell : BaseCell
         {
             //previousTarget = primaryTarget;
             Vector3 them2me = primaryTarget.transform.position - transform.position;
-            GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
+            GameObject thefireball = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Fireball", transform.position, transform.rotation, 0) as GameObject
+                : Instantiate(fireball, transform.position, transform.rotation) as GameObject;
             thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
             thefireball.GetComponent<FireBall>().Target = primaryTarget;
             thefireball.GetComponent<FireBall>().Owner = this.gameObject;
@@ -40,7 +41,8 @@ public class Tier2HeatCell : BaseCell
         {
             //previousTarget = primaryTarget;
             Vector3 them2me = primaryTarget.transform.position - transform.position;
-            GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
+            GameObject thefireball = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Fireball", transform.position, transform.rotation, 0) as GameObject
+                : Instantiate(fireball, transform.position, transform.rotation) as GameObject;
             thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
             thefireball.GetComponent<FireBall>().Target = primaryTarget;
             thefireball.GetComponent<FireBall>().Owner = this.gameObject;
@@ -211,6 +213,10 @@ public class Tier2HeatCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
+                    if (PhotonNetwork.connected)
+                    {
+                        photonView.RPC("Die", PhotonTargets.Others, null);
+                    }
                     break;
 
                 default:
@@ -226,7 +232,8 @@ public class Tier2HeatCell : BaseCell
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
     }
-    void MUltiDMg() {
+    void MUltiDMg()
+    {
         if (multidamagesources != null)
             multidamagesources();
     }
