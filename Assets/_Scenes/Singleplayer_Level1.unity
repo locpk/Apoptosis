@@ -2034,6 +2034,14 @@ Prefab:
       propertyPath: cursor_Normal
       value: 
       objectReference: {fileID: 2800000, guid: 7a410fc4fa410e041a11e0704d6c3e42, type: 3}
+    - target: {fileID: 2050502, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: orthographic size
+      value: 114.50705
+      objectReference: {fileID: 0}
+    - target: {fileID: 401210, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
   m_IsPrefabParent: 0
