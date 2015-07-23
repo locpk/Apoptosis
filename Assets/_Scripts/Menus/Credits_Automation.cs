@@ -7,56 +7,79 @@ public class Credits_Automation : MonoBehaviour {
     public GameObject credit_role;
     public GameObject credit_Description;
 
-    private Animator animator;
+   
     public float displayDuration;
     private float counter;
-    private int index;
+    private int index = 0;
 
-    private List<string> names;
-    private List<string> roles;
-    private List<string> descriptions;
+    private string[] names = {   "JOHN oleske",
+                                 "SHAWN paris",
+                                 "CARIS frazier",
+                                 "GREG bey",
+                                 "DEVIN dellamano",
+                                 "JAMEEL knight", 
+                                 "JUNSHU chen",
+                                 "DMITRII roets",
+                                 "DAMIEN mullen",
+                                 "CHEN lu",
+                                 "THANK you",
+                                 ""};
 
-    struct Credit
-	{
-        GameObject role;
-        GameObject name;
-        GameObject description;
-	}
+    private string[] roles = {"Executive Producer",
+                             "Associate Producer",
+                             "Artist",
+                             "Artist",
+                             "Scripting / Cameras",
+                             "Scripting / Mechanics",
+                             "Platforms / Animation",
+                             "Graphics / UI Scripting / Design",
+                             "Networks / Concept / Mechanics",
+                             "Level Design / Mechanics",
+                             "",
+                             ""};
+
+    private string[] descriptions = { "He was kind to his people...at first",// john
+                                    "", // paris
+                                    "", // caris
+                                    "", // greg
+                                    "",//devin
+                                    "Units, Gameplay",//jameel
+                                    "cross-platform, animations, units, gameplay", // JUNSHU chen 
+                                    "game design, graphics, menus, HUD",// dmitrii
+                                    "tutorial, controlls, multiplayer",// damien
+                                    "AI, levels, fog of war", // chen
+                                    "Divide and conquer",
+                                    ""}; // end
+
+   
+
+
 
 
     // Use this for initialization
 	void Start () {
-
-        index = 0;
-
-        animator = credit_name.GetComponent<Animator>();
-      
+  
         
-        names.Add("JOHN folseke");       roles.Add("Executive Producer");                descriptions.Add("He was kind to his people...at first");
-        names.Add("SHAWN paris");       roles.Add("Associate Producer");                descriptions.Add("");
-        names.Add("CARIS frazier");     roles.Add("Artist");                            descriptions.Add("");
-        names.Add("GREG bey");          roles.Add("Artist");                            descriptions.Add("");
-        names.Add("DEVIN dellamo");     roles.Add("Scripting / Cameras");               descriptions.Add("");
-        names.Add("JAMEEL knigh");      roles.Add("Scripting / Mechanics");             descriptions.Add("");
-        names.Add("JENSHU chen");       roles.Add("Platforms / Animation");             descriptions.Add("");
-        names.Add("DMITRII roets");     roles.Add("Graphics / UI Scripting / Design");  descriptions.Add("");
-        names.Add("DAMIEN mullen");     roles.Add("Networks / Concept / Mechanics");    descriptions.Add("");
-        names.Add("CHEN lu");           roles.Add("Level Design / Mechanics");          descriptions.Add("");
+        
 	}
 	
 	// Update is called once per frame
 	void Update ()  
     {
         counter += Time.deltaTime;
-      
-        credit_name.GetComponent<Text>().text = names[index];
-        if ( (counter >= displayDuration) && !(index < names.Count))
+        if ( counter > displayDuration )
         {
+            
             credit_name.GetComponent<Text>().text = names[index];
-            credit_role.GetComponent<Text>().text = roles[index];
+            credit_role.GetComponent<Text>().text = roles[index] + index.ToString();
             credit_Description.GetComponent<Text>().text = descriptions[index];
             index++;
             counter = 0.0f;
+        }
+        if (index > 11)
+        {
+            Application.LoadLevel("MainMenu");
+           
         }
 	}
 }

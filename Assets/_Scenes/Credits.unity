@@ -238,7 +238,7 @@ MonoBehaviour:
   credit_name: {fileID: 1279298842}
   credit_role: {fileID: 1595499271}
   credit_Description: {fileID: 435374719}
-  displayDuration: 10
+  displayDuration: 8
 --- !u!1 &287521913
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +372,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: He was kind to his people...at first
+  m_Text: 
 --- !u!222 &435374722
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -500,7 +500,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "JOHN\toleske"
+  m_Text: APOPTOSIS
 --- !u!222 &1279298846
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -895,7 +895,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Executive Producer
+  m_Text: 
 --- !u!222 &1595499274
 CanvasRenderer:
   m_ObjectHideFlags: 0
