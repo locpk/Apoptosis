@@ -112,7 +112,8 @@ public class HeatCell : BaseCell
         {
             //previousTarget = primaryTarget;
             Vector3 them2me = primaryTarget.transform.position - transform.position;
-            GameObject thefireball = Instantiate(fireball, transform.position, transform.rotation) as GameObject;
+            GameObject thefireball = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Fireball", transform.position, transform.rotation, 0) as GameObject
+                : Instantiate(fireball, transform.position, transform.rotation) as GameObject;
             thefireball.GetComponent<Rigidbody>().velocity += them2me.normalized * fireballSpeed;
             thefireball.GetComponent<FireBall>().Target = primaryTarget;
 
@@ -185,10 +186,13 @@ public class HeatCell : BaseCell
                             else
                                 primaryTarget = targets[i + 1];
 
-                            if (primaryTarget.GetComponent<BaseCell>())
-                                currentState = CellState.ATTACK;
-                            if (primaryTarget.GetComponent<Protein>())
-                                currentState = CellState.CONSUMING;
+                            if (primaryTarget != null)
+                            {
+                                if (primaryTarget.GetComponent<BaseCell>())
+                                    currentState = CellState.ATTACK;
+                                if (primaryTarget.GetComponent<Protein>())
+                                    currentState = CellState.CONSUMING;
+                            }
                             break;
                         }
                     }
@@ -268,6 +272,10 @@ public class HeatCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
+            if (PhotonNetwork.connected)
+            {
+                photonView.RPC("Die", PhotonTargets.Others, null);
+            }
                     break;
 
                 default:

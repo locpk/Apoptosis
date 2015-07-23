@@ -39,7 +39,8 @@ public class NerveCell : BaseCell
 
        // Vector3 them2me = primaryTarget.transform.position - transform.position;
  
-        GameObject Lightningk = Instantiate(Lightning, transform.position, transform.rotation) as GameObject;
+        GameObject Lightningk = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Lightining", transform.position, transform.rotation, 0) 
+            : Instantiate(Lightning, transform.position, transform.rotation) as GameObject;
         //      Lightningk.GetComponent<Lighting>().transform.LookAt(primaryTarget.transform);
         //6Lightningk.GetComponent<Rigidbody>().velocity += them2me.normalized * lightningSpeed;
        Lightningk.GetComponent<Lighting>().currentTarget = primaryTarget;
@@ -101,10 +102,13 @@ public class NerveCell : BaseCell
                             Debug.Log(primaryTarget);
                             primaryTarget = targets[i + 1];
                             Debug.Log(primaryTarget);
-                            if (primaryTarget.GetComponent<BaseCell>())
-                                currentState = CellState.ATTACK;
-                            if (primaryTarget.GetComponent<Protein>())
-                                currentState = CellState.CONSUMING;
+                            if (primaryTarget != null)
+                            {
+                                if (primaryTarget.GetComponent<BaseCell>())
+                                    currentState = CellState.ATTACK;
+                                if (primaryTarget.GetComponent<Protein>())
+                                    currentState = CellState.CONSUMING;
+                            }
                             break;
                         }
                     }
@@ -162,6 +166,10 @@ public class NerveCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
+            if (PhotonNetwork.connected)
+            {
+                photonView.RPC("Die", PhotonTargets.Others, null);
+            }
                     break;
                 case CellState.MERGING:
                     break;

@@ -157,22 +157,6 @@ public class OnlineGameController : Photon.PunBehaviour
         Application.LoadLevel("Multiplayer_Lobby");
     }
 
-    public override void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        base.OnPhotonInstantiate(info);
-        switch (info.photonView.gameObject.tag)
-        {
-            case "Protein":
-                PlayerControls.GetComponent<PlayerController>().AddNewProtein(info.photonView.gameObject.GetComponent<Protein>());
-                break;
-            case "Unit":
-                PlayerControls.GetComponent<PlayerController>().AddNewCell(info.photonView.gameObject.GetComponent<BaseCell>());
-                break;
-            default:
-                break;
-        }
-    }
-
     void InitSync()
     {
         GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game

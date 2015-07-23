@@ -8,18 +8,21 @@ public class UpdateProtein : MonoBehaviour {
     public Sprite health_100;
 	void FixedUpdate()
     {
-        float healthRatio = transform.parent.GetComponent<CellSplitAnimation>().currentProtein / BaseCell.MAX_PROTEIN;
-        if (healthRatio <= 0.5f && healthRatio > 0.1f)
+        if (transform.FindChild("Nucleus") != null)
         {
-            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_50;
-        }
-        else if (healthRatio <= 0.1f)
-        {
-            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_10;
-        }
-        else
-        {
-            transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
+            float healthRatio = transform.parent.GetComponent<CellSplitAnimation>().currentProtein / BaseCell.MAX_PROTEIN;
+            if (healthRatio <= 0.5f && healthRatio > 0.1f)
+            {
+                transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_50;
+            }
+            else if (healthRatio <= 0.1f)
+            {
+                transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_10;
+            }
+            else
+            {
+                transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
+            }
         }
     }
 }

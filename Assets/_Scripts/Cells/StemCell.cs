@@ -275,6 +275,10 @@ public class StemCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
+            if (PhotonNetwork.connected)
+            {
+                pcontroller.gameObject.GetPhotonView().RPC("Die", PhotonTargets.Others, null);
+            }
                     break;
                 default:
                     break;
