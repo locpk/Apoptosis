@@ -21,7 +21,7 @@ public class AlkaliCell : BaseCell
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         pcontroller = base.pcontroller;
     }
-        multidamagesources();
+   
     void MUltiDMg() {
         if (multidamagesources != null)
             multidamagesources();
