@@ -182,7 +182,7 @@ public class BaseCell : Photon.PunBehaviour
     {
         if (_targets.Count > 0)
         {
-            targets = _targets;
+            targets = new List<GameObject>(_targets);
         }
 
     }

@@ -24,7 +24,8 @@ public class ColdCell : BaseCell
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
     }
-    void MUltiDMg() {
+    void MUltiDMg()
+    {
         if (multidamagesources != null)
             multidamagesources();
     }
@@ -85,7 +86,7 @@ public class ColdCell : BaseCell
             cTier2Cold.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
             cTier2Cold.GetComponent<CellSplitAnimation>().originCell = this;
             cTier2Cold.GetComponent<CellSplitAnimation>().originCell1 = other;
-            
+
 
             if (!sound_manager.sounds_evolution[6].isPlaying)
             {
@@ -193,10 +194,13 @@ public class ColdCell : BaseCell
                             else
                                 primaryTarget = targets[i + 1];
 
-                            if (primaryTarget.GetComponent<BaseCell>())
-                                currentState = CellState.ATTACK;
-                            if (primaryTarget.GetComponent<Protein>())
-                                currentState = CellState.CONSUMING;
+                            if (primaryTarget != null)
+                            {
+                                if (primaryTarget.GetComponent<BaseCell>())
+                                    currentState = CellState.ATTACK;
+                                if (primaryTarget.GetComponent<Protein>())
+                                    currentState = CellState.CONSUMING;
+                            }
                             break;
                         }
                     }

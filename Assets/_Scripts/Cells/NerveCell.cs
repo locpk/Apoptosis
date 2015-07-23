@@ -102,10 +102,13 @@ public class NerveCell : BaseCell
                             Debug.Log(primaryTarget);
                             primaryTarget = targets[i + 1];
                             Debug.Log(primaryTarget);
-                            if (primaryTarget.GetComponent<BaseCell>())
-                                currentState = CellState.ATTACK;
-                            if (primaryTarget.GetComponent<Protein>())
-                                currentState = CellState.CONSUMING;
+                            if (primaryTarget != null)
+                            {
+                                if (primaryTarget.GetComponent<BaseCell>())
+                                    currentState = CellState.ATTACK;
+                                if (primaryTarget.GetComponent<Protein>())
+                                    currentState = CellState.CONSUMING;
+                            }
                             break;
                         }
                     }
