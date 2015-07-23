@@ -53,6 +53,11 @@ public class Lighting : MonoBehaviour
                
                 currentTarget.GetComponent<BaseCell>().currentProtein -= realOwner.GetComponent<BaseCell>().attackDamage;
                 currentTarget.GetComponent<BaseCell>().stunned = true;
+                if (PhotonNetwork.connected)
+                {
+                    currentTarget.GetComponent<BaseCell>().photonView.RPC("StunMe", PhotonTargets.Others, null);
+                    currentTarget.GetComponent<BaseCell>().photonView.RPC("ApplyDamage", PhotonTargets.Others, realOwner.GetComponent<BaseCell>().attackDamage);
+                }
                 currentTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
                 bounceCounter++;
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position, bounceRadius);
@@ -103,6 +108,11 @@ public class Lighting : MonoBehaviour
             {
                 currentTarget.GetComponent<BaseCell>().currentProtein -= realOwner.GetComponent<BaseCell>().attackDamage;
                 currentTarget.GetComponent<BaseCell>().stunned = true;
+                if (PhotonNetwork.connected)
+                {
+                    currentTarget.GetComponent<BaseCell>().photonView.RPC("StunMe", PhotonTargets.Others, null);
+                    currentTarget.GetComponent<BaseCell>().photonView.RPC("ApplyDamage", PhotonTargets.Others, realOwner.GetComponent<BaseCell>().attackDamage);
+                }
                 currentTarget.GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
                 bounceCounter++;
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position, bounceRadius);

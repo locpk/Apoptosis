@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 
 public class Tier2ColdCell : BaseCell
- {
+{
     public GameObject stemCell;
     public delegate void TakeDamage();
     public TakeDamage multidamagesources;
@@ -16,24 +16,24 @@ public class Tier2ColdCell : BaseCell
     int instanonce = 0;
 
 
-   
-	// Use this for initialization
-	void Start ()
+
+    // Use this for initialization
+    void Start()
     {
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
         base.bStart();
 
 
-	}
+    }
     void DamagePreSecond()
     {
         if (primaryTarget != null)
         {
             AoeDmg(transform.position, attackRange);
-          //  primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
+            //  primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
         }
     }
-	// Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
         if (stunned == true)
@@ -45,16 +45,16 @@ public class Tier2ColdCell : BaseCell
             }
             instanonce++;
 
-          
-            stunTimer -= 1.0f * Time.fixedDeltaTime;
-        if(stunTimer > 0)
-        {
-            navAgent.enabled = false;
-            navObstacle.enabled = true;
-            primaryTarget = null;
 
-            return;
-        }
+            stunTimer -= 1.0f * Time.fixedDeltaTime;
+            if (stunTimer > 0)
+            {
+                navAgent.enabled = false;
+                navObstacle.enabled = true;
+                primaryTarget = null;
+
+                return;
+            }
             if (this.stunTimer <= 0)
             {
                 instanonce = 0;
@@ -167,10 +167,10 @@ public class Tier2ColdCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
-            if (PhotonNetwork.connected)
-            {
-                photonView.RPC("Die", PhotonTargets.Others, null);
-            }
+                    if (PhotonNetwork.connected)
+                    {
+                        photonView.RPC("Die", PhotonTargets.Others, null);
+                    }
                     break;
 
                 default:
@@ -187,7 +187,8 @@ public class Tier2ColdCell : BaseCell
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
     }
-    void MUltiDMg() {
+    void MUltiDMg()
+    {
         if (multidamagesources != null)
             multidamagesources();
     }
@@ -239,6 +240,10 @@ public class Tier2ColdCell : BaseCell
                         if (basecellerino.hitCounter >= 4)
                         {
                             basecellerino.stunned = true;
+                            if (PhotonNetwork.connected)
+                            {
+                                basecellerino.gameObject.GetPhotonView().RPC("StunMe", PhotonTargets.Others, null);
+                            }
                         }
                     }
 
@@ -270,6 +275,10 @@ public class Tier2ColdCell : BaseCell
                         if (basecellerino.hitCounter >= 4)
                         {
                             basecellerino.stunned = true;
+                            if (PhotonNetwork.connected)
+                            {
+                                basecellerino.gameObject.GetPhotonView().RPC("StunMe", PhotonTargets.Others, null);
+                            }
                         }
 
                     }

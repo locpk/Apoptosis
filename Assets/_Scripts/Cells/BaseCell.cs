@@ -111,8 +111,13 @@ public class BaseCell : Photon.PunBehaviour
     public void ApplyDamage(float damage)
     {
         currentProtein -= damage;
-        Debug.Log("Thing");
         GetComponent<Animator>().SetTrigger("BeingAttackTrigger");
+    }
+
+    [PunRPC]
+    public void StunMe()
+    {
+        stunned = true;
     }
     #endregion
 
