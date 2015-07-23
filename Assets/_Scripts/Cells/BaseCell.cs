@@ -236,7 +236,7 @@ public class BaseCell : MonoBehaviour
 
     void ConsumePerSecond()
     {
-        if (primaryTarget)
+        if (primaryTarget && primaryTarget.GetComponent<Protein>())
         {
             primaryTarget.GetComponent<PhotonView>().RPC("Harvest", PhotonTargets.Others, null);
             currentProtein += primaryTarget.GetComponent<Protein>().Harvest();

@@ -41,14 +41,14 @@ public class Protein : MonoBehaviour {
 	}
     void FixedUpdate()
     {
-        if (consumers.FindAll(item => item.GetComponent<BaseCell>().currentState == CellState.CONSUMING).Count == 0)
+        if (consumers.FindAll(item => (item != null)&&(item.GetComponent<BaseCell>().currentState == CellState.CONSUMING)).Count == 0)
 	    {
             beingConsumed = false;
             consumers.Clear();
 	    }
         else
         {
-            consumers.RemoveAll(item => item.GetComponent<BaseCell>().currentState != CellState.CONSUMING);
+            consumers.RemoveAll(item => (item != null)&&(item.GetComponent<BaseCell>().currentState != CellState.CONSUMING));
             beingConsumed = true;
         }
         

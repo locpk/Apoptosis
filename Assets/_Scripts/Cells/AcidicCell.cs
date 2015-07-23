@@ -16,8 +16,7 @@ public class AcidicCell : BaseCell
     {
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         base.bAwake();
-        multidamagesources += nothing;
-          InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+        InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
     }
 
     void DamagePreSecond()
@@ -37,19 +36,13 @@ public class AcidicCell : BaseCell
             }
         }
     }
-    void MUltiDMg()
-    {
-        multidamagesources();
-       
-
+    void MUltiDMg() {
+        if (multidamagesources != null)
+            multidamagesources();
     }
     public void AreaDamage()
     {
         currentProtein -= 10;
-    }
-    void nothing()
-    {
-
     }
     // Use this for initialization
     void Start()

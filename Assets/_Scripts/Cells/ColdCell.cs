@@ -20,25 +20,17 @@ public class ColdCell : BaseCell
     void Awake()
     {
         base.bAwake();
-        multidamagesources += nothing;
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
-
     }
-    void MUltiDMg()
-    {
-        multidamagesources();
-
-
+    void MUltiDMg() {
+        if (multidamagesources != null)
+            multidamagesources();
     }
     public void AreaDamage()
     {
         currentProtein -= 10;
-    }
-    void nothing()
-    {
-
     }
 
 

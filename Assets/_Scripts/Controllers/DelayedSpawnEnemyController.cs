@@ -46,7 +46,7 @@ public class DelayedSpawnEnemyController : MonoBehaviour {
 
             Transform spawnedCell = Instantiate(enermyCellSet[Random.Range(0, enermyCellSet.Count)], spawnPos, spwanAngle) as Transform;
             spawnedCell.transform.parent = transform.parent;
-            Debug.Log(spawnedCell.gameObject.GetComponent<BaseCell>().celltype + " alive!!");
+            //Debug.Log(spawnedCell.gameObject.GetComponent<BaseCell>().celltype + " alive!!");
 
             if (spawnedCell) {
 

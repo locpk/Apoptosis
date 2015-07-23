@@ -11,7 +11,7 @@ public class OnlineGameController : Photon.PunBehaviour
     public GameObject PlayerControls;
     public static bool gameStarted = false;
     public static bool gameEnded = false;
-    bool win = false;
+    //bool win = false;
     int unitsCount;
     public GameObject PauseMenu;
 
@@ -149,7 +149,7 @@ public class OnlineGameController : Photon.PunBehaviour
         Invoke("InitSync", 2.0f);
     }
 
-    public void OnLeftRoom()
+    public new void OnLeftRoom()
     {
         //gameStarted = false;
         //gameEnded = true;

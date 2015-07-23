@@ -66,16 +66,16 @@ public class Lighting : MonoBehaviour
                     }
 
                 }
-                for (int i = 0; i < targetsToBounce.Count; i++)
-                {
+                //for (int i = 0; i < targetsToBounce.Count; i++)
+                //{
 
-                    nextTarget = targetsToBounce[i];
+                    nextTarget = targetsToBounce[0];
                     if (nextTarget == currentTarget || nextTarget == previousTarget || nextTarget.GetComponent<BaseCell>().hitBylightning == true)
                     {
                         nextTarget = null;
                     }
-                    break;
-                }
+                    //break;
+                //}
                 if (nextTarget != null)
                 {
                     previousTarget = currentTarget;
@@ -116,16 +116,16 @@ public class Lighting : MonoBehaviour
                     }
 
                 }
-                for (int i = 0; i < targetsToBounce.Count; i++)
-                {
+                //for (int i = 0; i < targetsToBounce.Count; i++)
+                //{
 
-                    nextTarget = targetsToBounce[i];
+                    nextTarget = targetsToBounce[0];
                     if (nextTarget == currentTarget || nextTarget == previousTarget || nextTarget.GetComponent<BaseCell>().hitBylightning == true )
                     {
                         nextTarget = null;
                     }
-                    break;
-                }
+                //    break;
+                //}
                 if (nextTarget != null)
                 {
                     previousTarget = currentTarget;
