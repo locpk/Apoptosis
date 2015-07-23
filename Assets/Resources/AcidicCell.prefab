@@ -70,6 +70,7 @@ GameObject:
   - 114: {fileID: 11478438}
   - 95: {fileID: 9553798}
   - 114: {fileID: 11407972}
+  - 114: {fileID: 11472794}
   m_Layer: 8
   m_Name: AcidicCell
   m_TagString: Unit
@@ -302,6 +303,9 @@ MonoBehaviour:
   pcontroller: {fileID: 0}
   stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
   Acid: {fileID: 138438, guid: 05a019986af7b5342a9e219e55d5149d, type: 2}
+  mergePartner: {fileID: 0}
+  haveMergePartner: 0
+  nerveCell: {fileID: 170144, guid: 55a2aff50b439ec44b2364ba4bcd3616, type: 2}
 --- !u!114 &11433158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,6 +350,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2064ca72bf0d14a4fab78eaff6b9edad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11472794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3083db6dfd461994ab13129b4ec176ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11478438
@@ -614,6 +629,10 @@ Prefab:
       propertyPath: isDepleting
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: nerveCell
+      value: 
+      objectReference: {fileID: 170144, guid: 55a2aff50b439ec44b2364ba4bcd3616, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181396}

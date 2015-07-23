@@ -37,6 +37,7 @@ GameObject:
   - 114: {fileID: 11431862}
   - 95: {fileID: 9525432}
   - 114: {fileID: 11495496}
+  - 114: {fileID: 11464620}
   m_Layer: 8
   m_Name: AlkaliCell
   m_TagString: Unit
@@ -248,6 +249,9 @@ MonoBehaviour:
   pcontroller: {fileID: 0}
   DOT: {fileID: 151690, guid: ce2e7885672d3534ca16f22399068182, type: 2}
   stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
+  mergePartner: {fileID: 0}
+  haveMergePartner: 0
+  nerveCell: {fileID: 170144, guid: 55a2aff50b439ec44b2364ba4bcd3616, type: 2}
 --- !u!114 &11431862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -303,6 +307,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2064ca72bf0d14a4fab78eaff6b9edad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11464620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3083db6dfd461994ab13129b4ec176ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11490784
@@ -534,6 +549,10 @@ Prefab:
       propertyPath: attackDamage
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: nerveCell
+      value: 
+      objectReference: {fileID: 170144, guid: 55a2aff50b439ec44b2364ba4bcd3616, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 111564}

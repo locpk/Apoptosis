@@ -29,6 +29,12 @@ public class MergeEventListener : MonoBehaviour {
             case CellType.COLD_CELL:
                 curCell.GetComponent<ColdCell>().Merge();
                 break;
+            case CellType.ACIDIC_CELL:
+                curCell.GetComponent<AcidicCell>().Merge();
+                break;
+            case CellType.ALKALI_CELL:
+                curCell.GetComponent<AlkaliCell>().Merge();
+                break;
             default:
                 break;
         }
