@@ -277,6 +277,7 @@ public class TutorialController : MonoBehaviour
             Tasklist.Add(tutorialComplete);
         }
         currentTaskText.text = Tasklist[0].Text;
+        
     }
 
     // Update is called once per frame
@@ -294,7 +295,7 @@ public class TutorialController : MonoBehaviour
         foreach (GameObject item in allSelectableUnits)
         {
             item.GetComponent<BaseCell>().isDepleting = false;
-            item.GetComponent<BaseCell>().currentProtein = 500;
+            item.GetComponent<BaseCell>().currentProtein = 400;
         }
     }
 
