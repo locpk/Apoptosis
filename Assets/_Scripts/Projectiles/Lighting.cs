@@ -18,7 +18,7 @@ public class Lighting : MonoBehaviour
     {
       //  realOwner = realOwner.gameObject;
         currentTarget = realOwner.GetComponent<BaseCell>().primaryTarget;
-        transform.LookAt(currentTarget.transform);
+
     }
 
     // Update is called once per frame

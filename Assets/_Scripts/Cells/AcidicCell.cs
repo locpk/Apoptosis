@@ -60,7 +60,8 @@ public class AcidicCell : BaseCell
 
 
 
-            GameObject knerveCell = Instantiate(nerveCell, trackingPos, trackingRot) as GameObject;
+            GameObject knerveCell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("NerveCell", trackingPos, trackingRot, 0, new object[] { (bool)false })
+                : Instantiate(nerveCell, trackingPos, trackingRot) as GameObject;
 
             if (!sound_manager.sounds_evolution[5].isPlaying)
             {
@@ -68,7 +69,6 @@ public class AcidicCell : BaseCell
             }
             Deactive();
             other.Deactive();
-            pcontroller.AddNewCell(knerveCell.GetComponent<BaseCell>());
         }
         else
         {

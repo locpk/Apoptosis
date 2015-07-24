@@ -186,7 +186,7 @@ public class BaseCell : Photon.PunBehaviour
         }
 
     }
-    
+
     [PunRPC]
     public void Die()
     {
@@ -552,6 +552,8 @@ public class BaseCell : Photon.PunBehaviour
         {
             gameObject.AddComponent<FogOfWarHider>();
         }
+
+        pcontroller.AddNewCell(this);
     }
 
     // Use this for initialization
