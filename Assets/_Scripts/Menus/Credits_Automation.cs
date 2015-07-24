@@ -22,33 +22,33 @@ public class Credits_Automation : MonoBehaviour {
                                  "DMITRII roets",
                                  "DAMIEN mullen",
                                  "CHEN lu",
-                                 "THANK you",
+                                 "APOPTOSIS",
                                  ""};
 
-    private string[] roles = {"Executive Producer",
-                             "Associate Producer",
-                             "Artist",
-                             "Artist",
-                             "Scripting / Cameras",
-                             "Scripting / Mechanics",
-                             "Platforms / Animation",
-                             "Graphics / UI Scripting / Design",
-                             "Networks / Concept / Mechanics",
-                             "Level Design / Mechanics",
-                             "",
-                             ""};
+    private string[] roles = {"Executive Producer",// john
+                             "Associate Producer",// paris
+                             "Artist",// caris
+                             "Artist", // greg
+                             "Scripting / Cameras",//devin
+                             "Scripting / Mechanics",//jameel
+                             "Platforms / Animation",// JUNSHU chen
+                             "Graphics / UI Scripting / Design",// dmitrii
+                             "Networks / Concept / Mechanics",// damien
+                             "Level Design / Mechanics",// chen
+                             "Thank you for playing",
+                             ""};// end
 
     private string[] descriptions = { "He was kind to his people...at first",// john
                                     "", // paris
                                     "", // caris
                                     "", // greg
                                     "",//devin
-                                    "Units, Gameplay",//jameel
+                                    "dank , units, gameplay",//jameel
                                     "cross-platform, animations, units, gameplay", // JUNSHU chen 
-                                    "game design, graphics, menus, HUD",// dmitrii
+                                    "game design, graphics / texturing, menus, HUD",// dmitrii
                                     "tutorial, controlls, multiplayer",// damien
                                     "AI, levels, fog of war", // chen
-                                    "Divide and conquer",
+                                    "Divide and Conquer              July 2015",
                                     ""}; // end
 
    
@@ -71,7 +71,7 @@ public class Credits_Automation : MonoBehaviour {
         {
             
             credit_name.GetComponent<Text>().text = names[index];
-            credit_role.GetComponent<Text>().text = roles[index] + index.ToString();
+            credit_role.GetComponent<Text>().text = roles[index];
             credit_Description.GetComponent<Text>().text = descriptions[index];
             index++;
             counter = 0.0f;
