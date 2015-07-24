@@ -40,7 +40,6 @@ public class CellSplitAnimation : MonoBehaviour
         if (!isAIPossessed)
         {
             newcell.GetComponent<BaseCell>().isMine = true;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         originCell.Die();
         if (PhotonNetwork.connected)
@@ -61,7 +60,6 @@ public class CellSplitAnimation : MonoBehaviour
         if (!isAIPossessed)
         {
             newcell.GetComponent<BaseCell>().isMine = true;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         originCell.Die();
         originCell1.Die();
@@ -85,7 +83,6 @@ public class CellSplitAnimation : MonoBehaviour
         if (!isAIPossessed)
         {
             newcell.GetComponent<BaseCell>().isMine = true;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
 
         originCell.Die();
@@ -108,7 +105,6 @@ public class CellSplitAnimation : MonoBehaviour
             if (!isAIPossessed)
             {
                 newcell.GetComponent<BaseCell>().isMine = true;
-                GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
             }
 
 
@@ -135,7 +131,6 @@ public class CellSplitAnimation : MonoBehaviour
             if (!isAIPossessed)
             {
                 newcell.GetComponent<BaseCell>().isMine = true;
-                GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
             }
         }
         originCell.Die();
@@ -157,7 +152,6 @@ public class CellSplitAnimation : MonoBehaviour
         if (!isAIPossessed)
         {
             newcell.GetComponent<BaseCell>().isMine = true;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
 
 
@@ -188,7 +182,6 @@ public class CellSplitAnimation : MonoBehaviour
         if (!isAIPossessed)
         {
             newcell.GetComponent<BaseCell>().isMine = true;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         originCell.Die();
         originCell1.Die();
@@ -212,7 +205,6 @@ public class CellSplitAnimation : MonoBehaviour
         if (!isAIPossessed)
         {
             newcell.GetComponent<BaseCell>().isMine = true;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         originCell.Die();
         if (PhotonNetwork.connected)
@@ -235,7 +227,6 @@ public class CellSplitAnimation : MonoBehaviour
             if (!isAIPossessed)
             {
                 newcell.GetComponent<BaseCell>().isMine = true;
-                GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
             }
         }
         originCell.Die();
@@ -257,7 +248,6 @@ public class CellSplitAnimation : MonoBehaviour
         if (!isAIPossessed)
         {
             newcell.GetComponent<BaseCell>().isMine = true;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
 
 
@@ -312,7 +302,6 @@ public class CellSplitAnimation : MonoBehaviour
         if (!isAIPossessed)
         {
             newcell.GetComponent<BaseCell>().isMine = true;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         originCell.Die();
         if (PhotonNetwork.connected)
@@ -333,7 +322,6 @@ public class CellSplitAnimation : MonoBehaviour
         if (!isAIPossessed)
         {
             newcell.GetComponent<BaseCell>().isMine = true;
-            GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(newcell.GetComponent<BaseCell>());
         }
         originCell.Die();
         if (PhotonNetwork.connected)

@@ -59,7 +59,6 @@ public class AITrapCell : MonoBehaviour{
         if (GetComponent<FogOfWarHider>() == null) gameObject.AddComponent<FogOfWarHider>();
         if (GetComponent<FogOfWarViewer>() != null) Destroy(GetComponent<FogOfWarViewer>());
 
-        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(this.GetComponent<BaseCell>());
     }
 
     void FixedUpdate() {

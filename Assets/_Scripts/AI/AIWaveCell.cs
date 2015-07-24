@@ -70,7 +70,6 @@ public class AIWaveCell : MonoBehaviour {
         this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
 
 
-        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(this.GetComponent<BaseCell>());
 	}
 	
 	void FixedUpdate () {

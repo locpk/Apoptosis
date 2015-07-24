@@ -37,4 +37,5 @@ MonoBehaviour:
   - ApplyDamage
   - Die
   - Move
+  - StunMe
   DisableAutoOpenWizard: 1

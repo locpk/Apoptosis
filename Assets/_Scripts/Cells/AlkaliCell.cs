@@ -19,14 +19,13 @@ public class AlkaliCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
-        pcontroller = base.pcontroller;
     }
    
     void MUltiDMg() {
         if (multidamagesources != null)
             multidamagesources();
     }
-    
+
     public void AreaDamage()
     {
         currentProtein -= 10;
@@ -69,7 +68,8 @@ public class AlkaliCell : BaseCell
 
 
 
-            GameObject knerveCell = Instantiate(nerveCell, trackingPos, trackingRot) as GameObject;
+            GameObject knerveCell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("NerveCell", trackingPos, trackingRot, 0, new object[] {(bool)false} )
+                : Instantiate(nerveCell, trackingPos, trackingRot) as GameObject;
 
             if (!sound_manager.sounds_evolution[5].isPlaying)
             {
@@ -77,7 +77,6 @@ public class AlkaliCell : BaseCell
             }
             Deactive();
             other.Deactive();
-            pcontroller.AddNewCell(knerveCell.GetComponent<BaseCell>());
         }
         else
         {
@@ -92,9 +91,10 @@ public class AlkaliCell : BaseCell
         if (primaryTarget != null)
         {
             //previousTarget = primaryTarget;
-            Vector3 newvec =  new Vector3(primaryTarget.transform.position.x, primaryTarget.transform.position.y, (primaryTarget.transform.position.z + primaryTarget.GetComponent<SphereCollider>().radius));
-            GameObject theDOT= Instantiate(DOT,  newvec ,primaryTarget.transform.rotation) as GameObject;
-    
+            Vector3 newvec = new Vector3(primaryTarget.transform.position.x, primaryTarget.transform.position.y, (primaryTarget.transform.position.z + primaryTarget.GetComponent<SphereCollider>().radius));
+            GameObject theDOT = PhotonNetwork.connected ? PhotonNetwork.Instantiate("DOT", newvec, primaryTarget.transform.rotation, 0)
+                : Instantiate(DOT, newvec, primaryTarget.transform.rotation) as GameObject;
+
             theDOT.GetComponent<Dot>().Target = primaryTarget;
             theDOT.GetComponent<Dot>().Owner = this.gameObject;
 
@@ -162,10 +162,10 @@ public class AlkaliCell : BaseCell
 
                             if (primaryTarget != null)
                             {
-                                if (primaryTarget.GetComponent<BaseCell>())
-                                    currentState = CellState.ATTACK;
-                                if (primaryTarget.GetComponent<Protein>())
-                                    currentState = CellState.CONSUMING;
+                            if (primaryTarget.GetComponent<BaseCell>())
+                                currentState = CellState.ATTACK;
+                            if (primaryTarget.GetComponent<Protein>())
+                                currentState = CellState.CONSUMING;
                             }
                             break;
                         }
@@ -234,6 +234,10 @@ public class AlkaliCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
+                    if (PhotonNetwork.connected)
+                    {
+                        photonView.RPC("Die", PhotonTargets.Others, null);
+                    }
                     break;
                 case CellState.CONSUMING:
                     base.bUpdate();
@@ -257,7 +261,7 @@ public class AlkaliCell : BaseCell
         }
     }
 
-    
+
 
     void FixedUpdate()
     {
