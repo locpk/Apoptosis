@@ -1371,6 +1371,7 @@ MonoBehaviour:
   selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
   friendly_indicator: {fileID: 2800000, guid: 2891a1c9bf4b09b4098df9cf5af206a0, type: 3}
   minimapCamera: {fileID: 43275963}
+  target_indicator: {fileID: 2800000, guid: 4e1879e39f4ffcf4fa2d9ac510b95bac, type: 3}
 --- !u!1 &757268511
 GameObject:
   m_ObjectHideFlags: 0

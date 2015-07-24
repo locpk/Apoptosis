@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     public static bool isOverUI = false;
 
+   
 
 
     public void TurnOnOverUI()
@@ -82,6 +83,8 @@ public class PlayerController : MonoBehaviour
     public Texture friendly_indicator;
 
     public Camera minimapCamera;
+    
+    public Texture target_indicator;
 
     float fps;
     float initTouchTime;
@@ -365,7 +368,8 @@ public class PlayerController : MonoBehaviour
             Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
             itemPos.y = -itemPos.y + Screen.height;
             if (GUISelectRect.Contains(itemPos))
-            {
+            { 
+           
                 selectedTargets.Add(item);
             }
         }
@@ -508,17 +512,33 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        GUI.color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+        float scale = .7f;
+        GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+        foreach (GameObject item in selectedTargets)
+        {
+            if (item && selectedUnits.Count > 0)
+            {
+         Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
+       
+        float left = drawLoc.x - (float)43 * scale;
+        float top = -(drawLoc.y + (float)43 * scale) + Screen.height;
+        Rect location = new Rect(left, top, (float)86 * scale, (float)86 * scale);
+        // this draws the target unit indicator
+        GUI.DrawTexture(location, target_indicator);
+            }
+        }
+
+        scale = 0.6f; // the size of the circle to draw circle 
+        GUI.color = new Color(0.0f, 1.0f, 0.5f, 1.0f);
         foreach (BaseCell item in selectedUnits)
         {
             if (item)
             {
                 Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
-                float left = drawLoc.x - (float)46;
-                float top = -(drawLoc.y + (float)46) + Screen.height;
+                float left = drawLoc.x - (float)43;
+                float top = -(drawLoc.y + (float)43) + Screen.height;
                 Rect location = new Rect(left, top, (float)86, (float)86);
                 // this draws the frirndly unit indicator
-                // GUI.DrawTexture(location, selector); 
                 GUI.DrawTexture(location, friendly_indicator);
             }
         }
