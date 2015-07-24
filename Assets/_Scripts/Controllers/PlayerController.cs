@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     public static bool isOverUI = false;
 
-   
+
 
 
     public void TurnOnOverUI()
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
     public Texture friendly_indicator;
 
     public Camera minimapCamera;
-    
+
     public Texture target_indicator;
 
     float fps;
@@ -157,16 +157,19 @@ public class PlayerController : MonoBehaviour
         {
             allSelectableTargets.Add(_in.gameObject);
         }
-        else if (_in.isSinglePlayer && !_in.isMine)
+        else if (_in.isSinglePlayer && !_in.isMine && !allSelectableTargets.Contains(_in.gameObject))
         {
             allSelectableTargets.Add(_in.gameObject);
         }
-        else
+        else if (!allSelectableUnits.Contains(_in) && _in.isMine)
         {
+
             _in.isSelected = true;
             allSelectableUnits.Add(_in);
             selectedUnits.Add(_in);
             CheckSelectedUnits();
+
+
         }
     }
 
@@ -182,6 +185,7 @@ public class PlayerController : MonoBehaviour
         _in.isSelected = false;
         allSelectableUnits.Remove(_in);
         selectedUnits.Remove(_in);
+        CheckSelectedUnits();
     }
     public void DeselectCell(BaseCell _in)
     {
@@ -368,8 +372,8 @@ public class PlayerController : MonoBehaviour
             Vector3 itemPos = Camera.main.WorldToScreenPoint(item.transform.position);
             itemPos.y = -itemPos.y + Screen.height;
             if (GUISelectRect.Contains(itemPos))
-            { 
-           
+            {
+
                 selectedTargets.Add(item);
             }
         }
@@ -518,13 +522,13 @@ public class PlayerController : MonoBehaviour
         {
             if (item && selectedUnits.Count > 0)
             {
-         Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
-       
-        float left = drawLoc.x - (float)43 * scale;
-        float top = -(drawLoc.y + (float)43 * scale) + Screen.height;
-        Rect location = new Rect(left, top, (float)86 * scale, (float)86 * scale);
-        // this draws the target unit indicator
-        GUI.DrawTexture(location, target_indicator);
+                Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
+
+                float left = drawLoc.x - (float)43 * scale;
+                float top = -(drawLoc.y + (float)43 * scale) + Screen.height;
+                Rect location = new Rect(left, top, (float)86 * scale, (float)86 * scale);
+                // this draws the target unit indicator
+                GUI.DrawTexture(location, target_indicator);
             }
         }
 
@@ -977,14 +981,14 @@ public class PlayerController : MonoBehaviour
         NumTierTwoCold = 0;
         NumTierTwoHeat = 0;
 
-        NumStemCells   = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.STEM_CELL)).Count;
-        NumHeatCells   = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.HEAT_CELL)).Count;
-        NumColdCells   = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.COLD_CELL)).Count;
+        NumStemCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.STEM_CELL)).Count;
+        NumHeatCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.HEAT_CELL)).Count;
+        NumColdCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.COLD_CELL)).Count;
         NumAcidicCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.ACIDIC_CELL)).Count;
         NumAlkaliCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.ALKALI_CELL)).Count;
         NumTierTwoCold = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.COLD_CELL_TIRE2)).Count;
         NumTierTwoHeat = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.HEAT_CELL_TIRE2)).Count;
-        NumNerveCells  = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.NERVE_CELL)).Count;
+        NumNerveCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.NERVE_CELL)).Count;
     }
 
     public void CheckEnemiesLeft()

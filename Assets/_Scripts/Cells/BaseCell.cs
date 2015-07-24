@@ -553,6 +553,13 @@ public class BaseCell : Photon.PunBehaviour
             gameObject.AddComponent<FogOfWarHider>();
         }
 
+        Invoke("AddNewCell", 1.0f);
+
+        
+    }
+
+    void AddNewCell()
+    {
         pcontroller.AddNewCell(this);
     }
 
@@ -572,6 +579,7 @@ public class BaseCell : Photon.PunBehaviour
         }
 
         Move(transform.position);
+        
     }
 
     protected void bUpdate()
