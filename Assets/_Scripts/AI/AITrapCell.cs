@@ -95,6 +95,10 @@ public class AITrapCell : MonoBehaviour{
     void RandomMove() {
         Vector3 _des = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
         m_baseCell.Move(_des + transform.position);
+        if (!m_baseCell.navAgent.isOnNavMesh) {
+            Debug.LogError(ToString() + " is off navi mesh. Now destoried.");
+            Destroy(gameObject);
+        }
     }
 
     void OnDrawGizmosSelected() {
