@@ -207,6 +207,7 @@ MonoBehaviour:
   gCancerCellPrefab: {fileID: 0}
   gStemCellPrefab: {fileID: 0}
   gHeatCellPrefab: {fileID: 0}
+  gHeatCancerPrefab: {fileID: 0}
   gColdCellPrefab: {fileID: 0}
   gColdCancerPrefab: {fileID: 0}
   gAcidicCellPrefab: {fileID: 0}
@@ -231,7 +232,6 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
-  photonView: {fileID: 0}
   currentProtein: 500
   fovRadius: 10
   attackDamage: 9
@@ -251,7 +251,7 @@ MonoBehaviour:
   stun: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
   mergePartner: {fileID: 0}
   haveMergePartner: 0
-  nerveCell: {fileID: 170144, guid: 55a2aff50b439ec44b2364ba4bcd3616, type: 2}
+  nerveCell: {fileID: 168740, guid: 58bad4bda06b73949b6e89e378535b44, type: 2}
 --- !u!114 &11431862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -552,7 +552,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: nerveCell
       value: 
-      objectReference: {fileID: 170144, guid: 55a2aff50b439ec44b2364ba4bcd3616, type: 2}
+      objectReference: {fileID: 168740, guid: 58bad4bda06b73949b6e89e378535b44, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 111564}
