@@ -40,9 +40,9 @@ public class MinimapFOG : MonoBehaviour
         if (other.tag == "Unit") //if the object that entered the sphere radius is a unit
         {
           
+                snapshot_attack.TransitionTo(3.0f);
             if (!other.GetComponent<BaseCell>().isMine && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
             {
-                snapshot_attack.TransitionTo(3.0f);
             }
         }
         
@@ -54,9 +54,9 @@ public class MinimapFOG : MonoBehaviour
         if (other.tag == "Unit")
         {
          
+                snapshot_normal.TransitionTo(3.0f);
             if (!other.GetComponent<BaseCell>().isMine && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
             {
-                snapshot_normal.TransitionTo(3.0f);
             }
         }
     }

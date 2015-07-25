@@ -106,38 +106,11 @@ public class Tier2HeatCell : BaseCell
             {
                 navAgent.speed = moveSpeed;
             }
-            if (targets != null && targets.Count >= 1)
-            {
 
-                if (primaryTarget == null)
-                {
-                    for (int i = 0; i < targets.Count; i++)
-                    {
-
-                        if (i != targets.Count)
-                        {
-
-                            if (i == 0 && targets.Count == 1)
-                                primaryTarget = targets[i];
-                            else
-                                primaryTarget = targets[i + 1];
-
-                            if (primaryTarget != null)
-                            {
-                                if (primaryTarget.GetComponent<BaseCell>())
-                                    currentState = CellState.ATTACK;
-                                if (primaryTarget.GetComponent<Protein>())
-                                    currentState = CellState.CONSUMING;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
             switch (currentState)
             {
                 case CellState.IDLE:
-                    SetPrimaryTarget(null);
+                   
                     if (hasteActive)
                     {
                         if (IsInvoking("HasteDamagePerSecond"))
@@ -149,8 +122,20 @@ public class Tier2HeatCell : BaseCell
                     {
                         CancelInvoke("DamagePerSecond");
                     }
+                    base.bUpdate();
                     break;
                 case CellState.ATTACK:
+
+                    if (primaryTarget == null)
+                    {
+                        if (IsInvoking("DamagePerSecond"))
+                        {
+                            CancelInvoke("DamagePerSecond");
+                        }
+                        currentState = CellState.IDLE;
+                        return;
+                    }
+
                     if (primaryTarget != null)
                     {
                         if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
@@ -199,19 +184,20 @@ public class Tier2HeatCell : BaseCell
                     else
                     {
                         currentState = CellState.IDLE;
+                        return;
                     }
                     break;
                 case CellState.CONSUMING:
                     base.bUpdate();
                     break;
                 case CellState.MOVING:
-
                     base.bUpdate();
                     break;
                 case CellState.ATTACK_MOVING:
                     if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
                     {
                         currentState = CellState.IDLE;
+                        return;
                     }
                     break;
                 case CellState.DEAD:

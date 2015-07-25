@@ -8,6 +8,7 @@ public class DelayedSpawnEnemyController : MonoBehaviour {
     public float delayedTimeInSecond = 1.0f;
     public int numberOfCells = 1;
     private List<Transform> m_spawnedList;
+    private bool isTriggered = false;
 
     void Awake () {
         m_spawnedList = new List<Transform>();
@@ -22,9 +23,9 @@ public class DelayedSpawnEnemyController : MonoBehaviour {
 	}
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.tag == "Unit" && enermyCellSet.Count > 0) {
-            Debug.Log(this + ": Someone in my place");
-            StopCoroutine("ReadyToConvert");
+        if (collider.gameObject.tag == "Unit" && enermyCellSet.Count > 0 && !isTriggered) {
+            //StopCoroutine("ReadyToConvert");
+            isTriggered = true;
             StartCoroutine(ReadyToConvert(delayedTimeInSecond));
 
         }
@@ -57,9 +58,5 @@ public class DelayedSpawnEnemyController : MonoBehaviour {
         }
 
         DestroyObject(gameObject);
-    }
-
-    public List<Transform> GetSpawnedList() {
-        return m_spawnedList;
     }
 }

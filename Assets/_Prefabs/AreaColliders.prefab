@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2329970}
   - 33: {fileID: 3317062}
   - 114: {fileID: 11488550}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Dense
   m_TagString: Collider_Dense
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ GameObject:
   - 33: {fileID: 3358832}
   - 23: {fileID: 2399404}
   - 114: {fileID: 11421858}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Alkali
   m_TagString: Collider_Alkali
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ GameObject:
   - 23: {fileID: 2355862}
   - 33: {fileID: 3391930}
   - 114: {fileID: 11451456}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cold
   m_TagString: Collider_Cold
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ GameObject:
   - 4: {fileID: 484670}
   - 198: {fileID: 19863254}
   - 199: {fileID: 19938266}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - 23: {fileID: 2344496}
   - 33: {fileID: 3316554}
   - 114: {fileID: 11407914}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Acidic-2
   m_TagString: Collider_Acidic
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - 23: {fileID: 2356072}
   - 33: {fileID: 3389694}
   - 114: {fileID: 11455334}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Acidic-1
   m_TagString: Collider_Acidic
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - 23: {fileID: 2360396}
   - 33: {fileID: 3352184}
   - 114: {fileID: 11413660}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Heat
   m_TagString: Collider_Heat
   m_Icon: {fileID: 0}
@@ -1668,7 +1668,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 189334}

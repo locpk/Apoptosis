@@ -49,7 +49,7 @@ public class AcidicArea:BaseArea {
         if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
 
-            if (!sound_manager.sounds_miscellaneous[6].isPlaying) {
+            if (!sound_manager.sounds_miscellaneous[6].isPlaying && collider.gameObject.tag == "Unit") {
                 sound_manager.sounds_miscellaneous[6].Play();
 
             }
@@ -116,9 +116,11 @@ public class AcidicArea:BaseArea {
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL: {
+                    if (!acidicButton.GetComponent<Button>().interactable) {
                         acidicButton.GetComponent<Button>().interactable = true;
-                        break;
                     }
+                    break;
+                }
             }
         }
     }

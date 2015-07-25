@@ -37,16 +37,21 @@ public class Dot : MonoBehaviour
                 InvokeRepeating("DotEffect", 1.0f, 1.0f);
 
             }
-        }
-        timer += 1 * Time.fixedDeltaTime;
-        if (timer >= 3)
-        {
-            if (PhotonNetwork.connected)
-                PhotonNetwork.Destroy(this.gameObject);
-            else
-                Destroy(this.gameObject);
+
+            timer += 1 * Time.fixedDeltaTime;
+            if (timer >= 3)
+            {
+                if (PhotonNetwork.connected)
+                    PhotonNetwork.Destroy(this.gameObject);
+                else
+                    Destroy(this.gameObject);
+            }
+
         }
 
+
+
+        
     }
 
 

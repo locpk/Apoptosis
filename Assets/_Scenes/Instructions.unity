@@ -389,6 +389,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11493970, guid: cbfd684879b192f4b95249028d7e02e6, type: 2}
+      propertyPath: Controls_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c479c7f3e9a739843a4a2eab5e8dba25,
+        type: 3}
+    - target: {fileID: 11493970, guid: cbfd684879b192f4b95249028d7e02e6, type: 2}
+      propertyPath: EvolutionTree_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 360cd9201f987e74ba8ff197fd849546,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbfd684879b192f4b95249028d7e02e6, type: 2}
   m_IsPrefabParent: 0

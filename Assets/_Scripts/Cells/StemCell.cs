@@ -16,7 +16,7 @@ public class StemCell : BaseCell
     int instanonce = 0;
 
     ParticleSystem m_particleSystem;
-   
+
     public override void Mutation(CellType _newType)
     {
         if (currentProtein <= 50.0f)
@@ -73,7 +73,8 @@ public class StemCell : BaseCell
 
 
 
-    void MUltiDMg() {
+    void MUltiDMg()
+    {
         if (multidamagesources != null)
             multidamagesources();
     }
@@ -81,7 +82,7 @@ public class StemCell : BaseCell
     {
         currentProtein -= 10;
     }
-    
+
 
     void DamagePerSecond()
     {
@@ -110,7 +111,7 @@ public class StemCell : BaseCell
         }
     }
 
-   
+
 
 
     void Awake()
@@ -160,15 +161,14 @@ public class StemCell : BaseCell
 
             }
         }
-       
-    
 
-
+        else
+        {
             switch (currentState)
             {
 
                 case CellState.IDLE:
-                    SetPrimaryTarget(null);
+                    
                     if (IsInvoking("DamagePerSecond"))
                     {
                         CancelInvoke("DamagePerSecond");
@@ -178,9 +178,7 @@ public class StemCell : BaseCell
 
                         m_particleSystem.Stop();
                     }
-
-                    //guard mode auto attack enemy in range
-                    //base.Guarding();
+                    base.bUpdate();
                     break;
                 case CellState.ATTACK:
                     if (primaryTarget == null)
@@ -200,7 +198,7 @@ public class StemCell : BaseCell
 
                     float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
 
-                    if (distance >  attackRange * attackRange && distance <= fovRadius * fovRadius)
+                    if (distance > attackRange * attackRange && distance <= fovRadius * fovRadius)
                     {
                         if (IsInvoking("DamagePerSecond"))
                         {
@@ -214,7 +212,7 @@ public class StemCell : BaseCell
                         base.ChaseTarget();
                         return;
                     }
-                    else if (distance <= attackRange * attackRange )
+                    else if (distance <= attackRange * attackRange)
                     {
                         if (!IsInvoking("DamagePerSecond"))
                         {
@@ -243,31 +241,9 @@ public class StemCell : BaseCell
                     break;
                 case CellState.CONSUMING:
                     base.bUpdate();
-
                     break;
                 case CellState.MOVING:
-
                     base.bUpdate();
-                    if (primaryTarget )
-                    {
-                        if (primaryTarget.GetComponent<BaseCell>())
-                        {
-                            currentState = CellState.ATTACK;
-                            return;
-                        }
-                        else if (primaryTarget.GetComponent<Protein>())
-                        {
-                            currentState = CellState.CONSUMING;
-                            return;
-                        }
-                    }
-                    else if (!primaryTarget || base.isStopped())
-                    {
-                        currentState = CellState.IDLE;
-                        return;
-                    }
-
-
                     break;
                 case CellState.ATTACK_MOVING:
                     base.bUpdate();
@@ -275,17 +251,17 @@ public class StemCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
-            if (PhotonNetwork.connected)
-            {
-                pcontroller.gameObject.GetPhotonView().RPC("Die", PhotonTargets.Others, null);
-            }
+                    if (PhotonNetwork.connected)
+                    {
+                        pcontroller.gameObject.GetPhotonView().RPC("Die", PhotonTargets.Others, null);
+                    }
                     break;
                 default:
                     break;
             }
-
         }
-    
+    }
+
 
 
     void FixedUpdate()

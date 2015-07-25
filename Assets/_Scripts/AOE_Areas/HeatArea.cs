@@ -43,12 +43,12 @@ public class HeatArea:BaseArea {
         if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
 
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
-            if (!sound_manager.sounds_miscellaneous[6].isPlaying) {
-                sound_manager.sounds_miscellaneous[6].Play();
+            if (!enterCell) return;
 
+            if (!sound_manager.sounds_miscellaneous[6].isPlaying && collider.gameObject.tag == "Unit") {
+                sound_manager.sounds_miscellaneous[6].Play();
             }
 
-            if (!enterCell) return;
             enterCellSpeed = enterCell.navAgent.speed;
 
             switch (enterCell.celltype) {
@@ -106,37 +106,25 @@ public class HeatArea:BaseArea {
 
             switch (enterCell.celltype) {
                 case CellType.STEM_CELL:
-                    enterCell.navAgent.speed /= speedCoefficient;
+                    //enterCell.navAgent.speed /= speedCoefficient;
                     break;
 
                 case CellType.HEAT_CELL:
                     enterCell.GetComponent<HeatCell>().Inheat = false;
                     break;
-
                 case CellType.COLD_CELL:
-                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
-
                 case CellType.HEAT_CELL_TIRE2:
                     break;
-
                 case CellType.COLD_CELL_TIRE2:
-                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
-
                 case CellType.ACIDIC_CELL:
-                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
-
                 case CellType.ALKALI_CELL:
-                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
-
                 case CellType.CANCER_CELL:
-                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
                 case CellType.NERVE_CELL:
-                    enterCell.navAgent.speed /= speedCoefficient;
                     break;
                 default:
                     break;

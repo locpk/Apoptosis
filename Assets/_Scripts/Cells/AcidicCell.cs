@@ -60,15 +60,21 @@ public class AcidicCell : BaseCell
 
 
 
-            GameObject knerveCell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("NerveCell", trackingPos, trackingRot, 0, new object[] { (bool)false })
+            GameObject knerveCell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("AlkaliAcidicMerging", trackingPos, trackingRot, 0, new object[] { (bool)false })
                 : Instantiate(nerveCell, trackingPos, trackingRot) as GameObject;
+            knerveCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+            knerveCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+            knerveCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+            knerveCell.GetComponent<CellSplitAnimation>().originCell = this;
+            knerveCell.GetComponent<CellSplitAnimation>().originCell1 = other;
+            Deactive();
+            other.Deactive();
 
             if (!sound_manager.sounds_evolution[5].isPlaying)
             {
                 sound_manager.sounds_evolution[5].Play();
             }
-            Deactive();
-            other.Deactive();
+
         }
         else
         {
@@ -78,7 +84,7 @@ public class AcidicCell : BaseCell
         }
 
     }
-    void DamagePreSecond()
+    void DamagePerSecond()
     {
         if (primaryTarget != null)
         {
@@ -175,9 +181,9 @@ public class AcidicCell : BaseCell
         {
             case CellState.IDLE:
                 SetPrimaryTarget(null);
-                if (IsInvoking("DamagePreSecond"))
+                if (IsInvoking("DamagePerSecond"))
                 {
-                    CancelInvoke("DamagePreSecond");
+                    CancelInvoke("DamagePerSecond");
                 }
                 break;
             case CellState.ATTACK:
@@ -185,17 +191,17 @@ public class AcidicCell : BaseCell
                 {
                     if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                     {
-                        if (!IsInvoking("DamagePreSecond"))
+                        if (!IsInvoking("DamagePerSecond"))
                         {
-                            InvokeRepeating("DamagePreSecond", 1.0f, 3.0f);
+                            InvokeRepeating("DamagePerSecond", 1.0f, 3.0f);
 
                         }
                     }
                     else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                     {
-                        if (IsInvoking("DamagePreSecond"))
+                        if (IsInvoking("DamagePerSecond"))
                         {
-                            CancelInvoke("DamagePreSecond");
+                            CancelInvoke("DamagePerSecond");
                         }
                         if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
                         {
@@ -214,18 +220,6 @@ public class AcidicCell : BaseCell
                 break;
             case CellState.MOVING:
                 base.bUpdate();
-                if (primaryTarget != null)
-                {
-                    if (primaryTarget.GetComponent<BaseCell>())
-                    {
-                        currentState = CellState.ATTACK;
-                    }
-                    else if (primaryTarget.GetComponent<Protein>())
-                    {
-                        currentState = CellState.CONSUMING;
-                    }
-
-                }
                 break;
             case CellState.ATTACK_MOVING:
                 break;

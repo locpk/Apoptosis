@@ -168,8 +168,6 @@ public class PlayerController : MonoBehaviour
             allSelectableUnits.Add(_in);
             selectedUnits.Add(_in);
             CheckSelectedUnits();
-
-
         }
     }
 
@@ -614,6 +612,8 @@ public class PlayerController : MonoBehaviour
         {
             Show_LoseScreen();
         }
+
+        
     }
 
     public void UnitStop()
