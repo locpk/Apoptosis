@@ -18,9 +18,18 @@ public class AcidicCell : BaseCell
     {
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         base.bAwake();
-        
+       
     }
 
+
+    public override void Move(Vector3 _destination)
+    {
+        base.Move(_destination);
+        navAgent.SetAreaCost(3, 3);
+        navAgent.SetAreaCost(4, 1);
+        navAgent.SetAreaCost(5, 3);
+        navAgent.SetAreaCost(6, 5);
+    }
     public void Merge()
     {
         List<BaseCell> alkaliCellMerge;

@@ -19,8 +19,18 @@ public class AlkaliCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+
+        
     }
-   
+
+    public override void Move(Vector3 _destination)
+    {
+        base.Move(_destination);
+        navAgent.SetAreaCost(3, 3);
+        navAgent.SetAreaCost(4, 5);
+        navAgent.SetAreaCost(5, 3);
+        navAgent.SetAreaCost(6, 1);
+    }
     void MUltiDMg() {
         if (multidamagesources != null)
             multidamagesources();
