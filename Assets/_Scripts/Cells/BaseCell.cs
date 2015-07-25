@@ -79,7 +79,7 @@ public class BaseCell : Photon.PunBehaviour
     public float fovRadius;
     public float attackDamage;
     public float attackRange;
-    public float defense;
+    //public float defense;
     public float depleteTimer;
     public float depleteAmount = 3.0f; // per second
     public float attackCooldown;
@@ -190,12 +190,8 @@ public class BaseCell : Photon.PunBehaviour
     [PunRPC]
     public void Die()
     {
-        isMine = false;
-        isAlive = false;
-        GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
 
-
-        if (celltype != CellType.CANCER_CELL)
+        if (isMine)
         {
             PlayerController.cap--;
             if (PlayerController.cap < 0)
@@ -204,25 +200,23 @@ public class BaseCell : Photon.PunBehaviour
             }
         }
 
+        isMine = false;
+        isAlive = false;
+        pcontroller.RemoveDeadCell(this);
 
-        //transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-        //GetComponent<SpriteRenderer>().enabled = false;
-
+        if (!sound_manager.sounds_miscellaneous[3].isPlaying)
+        {
+            sound_manager.sounds_miscellaneous[3].Play();
+        }
         if (!isSinglePlayer)
         {
             if (photonView.isMine)
             {
                 PhotonNetwork.Destroy(gameObject);
             }
-
         }
         else
         {
-            if (!sound_manager.sounds_miscellaneous[3].isPlaying)
-            {
-                sound_manager.sounds_miscellaneous[3].Play();
-
-            }
             Destroy(gameObject);
         }
 

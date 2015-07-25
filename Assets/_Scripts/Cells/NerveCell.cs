@@ -46,7 +46,6 @@ public class NerveCell : BaseCell
        Lightningk.GetComponent<Lighting>().currentTarget = primaryTarget;
         Lightningk.GetComponent<Lighting>().realOwner = this.gameObject;
         Lightningk.GetComponent<Lighting>().speed = lightningSpeed;
-        Debug.Log(Lightningk.transform.rotation);
         Lightningk.transform.rotation = this.transform.rotation;
         if (!sound_manager.sounds_attacks[5].isPlaying)
         {
@@ -99,9 +98,7 @@ public class NerveCell : BaseCell
 
                         if (i != targets.Count)
                         {
-                            Debug.Log(primaryTarget);
                             primaryTarget = targets[i + 1];
-                            Debug.Log(primaryTarget);
                             if (primaryTarget != null)
                             {
                                 if (primaryTarget.GetComponent<BaseCell>())
@@ -158,10 +155,6 @@ public class NerveCell : BaseCell
                     base.bUpdate();
                     break;
                 case CellState.MOVING:
-                    if (IsInvoking("DamagePerSecond"))
-                    {
-                        CancelInvoke("DamagePerSecond");
-                    }
                     base.bUpdate();
                     break;
                 case CellState.DEAD:

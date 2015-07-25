@@ -213,23 +213,6 @@ public class AlkaliCell : BaseCell
 
                 case CellState.MOVING:
                     base.bUpdate();
-                    if (primaryTarget && base.isStopped())
-                    {
-                        if (primaryTarget.GetComponent<BaseCell>())
-                        {
-                            currentState = CellState.ATTACK;
-                        }
-                        else if (primaryTarget.GetComponent<Protein>())
-                        {
-                            currentState = CellState.CONSUMING;
-                        }
-                    }
-                    else if (!primaryTarget || base.isStopped())
-                    {
-                        currentState = CellState.IDLE;
-                    }
-
-
                     break;
                 case CellState.ATTACK_MOVING:
                     // if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)

@@ -144,19 +144,6 @@ public class Tier2ColdCell : BaseCell
                     break;
                 case CellState.MOVING:
                     base.bUpdate();
-                    if (primaryTarget != null)
-                    {
-                        if (primaryTarget.GetComponent<BaseCell>())
-                        {
-                            currentState = CellState.ATTACK;
-                        }
-                        else if (primaryTarget.GetComponent<Protein>())
-                        {
-                            currentState = CellState.CONSUMING;
-                        }
-
-                    }
-
                     break;
                 case CellState.ATTACK_MOVING:
                     //  if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)

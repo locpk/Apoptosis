@@ -205,7 +205,6 @@ public class Tier2HeatCell : BaseCell
                     base.bUpdate();
                     break;
                 case CellState.MOVING:
-
                     base.bUpdate();
                     break;
                 case CellState.ATTACK_MOVING:
