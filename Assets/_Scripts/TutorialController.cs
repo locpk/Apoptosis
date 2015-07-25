@@ -199,6 +199,11 @@ public class TutorialController : MonoBehaviour
             targetSelection.Initialize = TargetSelectionInitialization;
             targetSelection.IsComplete = TargetSelectionCondition;
             Tasklist.Add(targetSelection);
+            Task proteinDegeneration = new Task();
+            proteinDegeneration.Text = "Your health degrades over time in other Game modes.";
+            proteinDegeneration.Initialize = EmptyInitialization;
+            proteinDegeneration.IsComplete = AnyKeyCondition;
+            Tasklist.Add(proteinDegeneration);
             Task proteinConsumption = new Task();
             proteinConsumption.Text = "Targeting a protein will tell your selected units to consume it. Consume the protein.";
             proteinConsumption.Initialize = EmptyInitialization;
