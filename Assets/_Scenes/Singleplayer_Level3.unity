@@ -99,7 +99,7 @@ GameObject:
   - 135: {fileID: 41651991}
   - 23: {fileID: 41651990}
   - 114: {fileID: 41651993}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Heat - 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1987,7 +1987,7 @@ GameObject:
   - 135: {fileID: 498861142}
   - 23: {fileID: 498861141}
   - 114: {fileID: 498861144}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cold - 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3806,7 +3806,7 @@ GameObject:
   - 135: {fileID: 891238402}
   - 23: {fileID: 891238401}
   - 114: {fileID: 891238404}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Acidic - 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4482,7 +4482,7 @@ GameObject:
   - 135: {fileID: 1146848642}
   - 23: {fileID: 1146848641}
   - 114: {fileID: 1146848644}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Heat - 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4893,7 +4893,7 @@ GameObject:
   - 135: {fileID: 1468538120}
   - 23: {fileID: 1468538119}
   - 114: {fileID: 1468538122}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cold - 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5375,7 +5375,7 @@ GameObject:
   - 135: {fileID: 1854998208}
   - 23: {fileID: 1854998207}
   - 114: {fileID: 1854998211}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Heat - 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5463,7 +5463,7 @@ GameObject:
   - 135: {fileID: 1873729588}
   - 23: {fileID: 1873729587}
   - 114: {fileID: 1873729590}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Dense - 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5916,7 +5916,7 @@ GameObject:
   - 135: {fileID: 2072396791}
   - 23: {fileID: 2072396790}
   - 114: {fileID: 2072396793}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Alkali - 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

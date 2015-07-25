@@ -105,7 +105,7 @@ GameObject:
   - 23: {fileID: 108523016}
   - 33: {fileID: 108523015}
   - 114: {fileID: 108523014}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Heat
   m_TagString: Collider_Heat
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   - 23: {fileID: 139972872}
   - 33: {fileID: 139972871}
   - 114: {fileID: 139972870}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Cold
   m_TagString: Collider_Cold
   m_Icon: {fileID: 0}
@@ -522,7 +522,7 @@ GameObject:
   - 23: {fileID: 352410563}
   - 33: {fileID: 352410562}
   - 114: {fileID: 352410561}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Acidic-2
   m_TagString: Collider_Acidic
   m_Icon: {fileID: 0}
@@ -2309,7 +2309,7 @@ GameObject:
   - 23: {fileID: 1119996416}
   - 33: {fileID: 1119996415}
   - 114: {fileID: 1119996414}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Dense
   m_TagString: Collider_Dense
   m_Icon: {fileID: 0}
@@ -2454,7 +2454,7 @@ GameObject:
   - 23: {fileID: 1212499268}
   - 33: {fileID: 1212499269}
   - 114: {fileID: 1212499267}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Alkali
   m_TagString: Collider_Alkali
   m_Icon: {fileID: 0}
@@ -6021,7 +6021,7 @@ GameObject:
   - 23: {fileID: 2049578239}
   - 33: {fileID: 2049578238}
   - 114: {fileID: 2049578237}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Acidic-1
   m_TagString: Collider_Acidic
   m_Icon: {fileID: 0}
