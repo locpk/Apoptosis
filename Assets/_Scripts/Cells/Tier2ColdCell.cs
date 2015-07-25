@@ -25,7 +25,7 @@ public class Tier2ColdCell : BaseCell
 
 
     }
-    void DamagePreSecond()
+    void DamagePerSecond()
     {
         if (primaryTarget != null)
         {
@@ -99,36 +99,28 @@ public class Tier2ColdCell : BaseCell
             switch (currentState)
             {
                 case CellState.IDLE:
-
-                    if (Input.GetKeyUp(KeyCode.Alpha1) && isSelected == true)
+                    if (IsInvoking("DamagePerSecond"))
                     {
-                        Vector3 trackingPos = this.transform.position;
-                        Quaternion trackingRot = this.transform.rotation;
-                        Die();
-                        if (PhotonNetwork.connected)
-                        {
-                            photonView.RPC("Die", PhotonTargets.Others, null);
-                        }
-                        GameObject gstem = Instantiate(stemCell, trackingPos, trackingRot) as GameObject;
+                        CancelInvoke("DamagePerSecond");
                     }
-                    //         Guarding();
+                    base.bUpdate();
                     break;
                 case CellState.ATTACK:
                     if (primaryTarget != null)
                     {
                         if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                         {
-                            if (!IsInvoking("DamagePreSecond"))
+                            if (!IsInvoking("DamagePerSecond"))
                             {
-                                InvokeRepeating("DamagePreSecond", 1.0f, 1.5f);
+                                InvokeRepeating("DamagePerSecond", 1.0f, 1.5f);
 
                             }
                         }
                         else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                         {
-                            if (IsInvoking("DamagePreSecond"))
+                            if (IsInvoking("DamagePerSecond"))
                             {
-                                CancelInvoke("DamagePreSecond");
+                                CancelInvoke("DamagePerSecond");
                             }
                             if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
                             {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Protein : MonoBehaviour {
 
     public float value;
+    public float consumeRate = 30.0f;
     public bool beingConsumed = false;
     ParticleSystem emitter;
     public List<BaseCell> consumers;
@@ -25,12 +26,12 @@ public class Protein : MonoBehaviour {
     [PunRPC]
     public float Harvest()
     {
-        value -= 5.0f;
-        return value >= 0 ? 5.0f : 5.0f + value;
+        value -= consumeRate;
+        return value >= 0 ? consumeRate : consumeRate + value;
     }
 	// Use this for initialization
 	void Start () {
-        value = Random.Range(70, 110);
+        value = Random.Range(200, 300);
         emitter = GetComponent<ParticleSystem>();
 	}
 	
@@ -69,7 +70,7 @@ public class Protein : MonoBehaviour {
     }
     void LateUpdate()
     {
-        float scale = 0.3f * value / 110 + .2f;
+        float scale = 0.3f * value / 300.0f + .2f;
         transform.localScale = new Vector3(scale, scale, 1.0f);
         if (value <= 0.0f)
         {

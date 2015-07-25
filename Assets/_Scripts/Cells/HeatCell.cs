@@ -170,44 +170,14 @@ public class HeatCell : BaseCell
         }
         else
         {
-
-            if (targets != null && targets.Count >= 1)
-            {
-
-                if (primaryTarget == null)
-                {
-                    for (int i = 0; i < targets.Count; i++)
-                    {
-
-                        if (i != targets.Count)
-                        {
-
-                            if (i == 0 && targets.Count == 1)
-                                primaryTarget = targets[i];
-                            else
-                                primaryTarget = targets[i + 1];
-
-                            if (primaryTarget != null)
-                            {
-                                if (primaryTarget.GetComponent<BaseCell>())
-                                    currentState = CellState.ATTACK;
-                                if (primaryTarget.GetComponent<Protein>())
-                                    currentState = CellState.CONSUMING;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
             switch (currentState)
             {
                 case CellState.IDLE:
-                    SetPrimaryTarget(null);
-                    if (IsInvoking("DamagePerSecond"))
+                     if (IsInvoking("DamagePerSecond"))
                     {
                         CancelInvoke("DamagePerSecond");
                     }
-
+                    base.bUpdate();
                     break;
                 case CellState.ATTACK:
                     if (primaryTarget != null)

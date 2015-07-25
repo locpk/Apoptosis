@@ -92,7 +92,7 @@ public class AlkaliCell : BaseCell
         }
 
     }
-    void DamagePreSecond()
+    void DamagePerSecond()
     {
         if (primaryTarget != null)
         {
@@ -150,56 +150,32 @@ public class AlkaliCell : BaseCell
         }
         else
         {
-            if (targets != null && targets.Count >= 1)
-            {
-
-                if (primaryTarget == null)
-                {
-                    for (int i = 0; i < targets.Count; i++)
-                    {
-
-                        if (i != targets.Count)
-                        {
-
-                            if (i == 0 && targets.Count == 1)
-                                primaryTarget = targets[i];
-                            else
-                                primaryTarget = targets[i + 1];
-
-                            if (primaryTarget != null)
-                            {
-                            if (primaryTarget.GetComponent<BaseCell>())
-                                currentState = CellState.ATTACK;
-                            if (primaryTarget.GetComponent<Protein>())
-                                currentState = CellState.CONSUMING;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
+          
             switch (currentState)
             {
                 case CellState.IDLE:
-
-                    Guarding();
+                     if (IsInvoking("DamagePerSecond"))
+                    {
+                        CancelInvoke("DamagePerSecond");
+                    }
+                    base.bUpdate();
                     break;
                 case CellState.ATTACK:
                     if (primaryTarget != null)
                     {
                         if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                         {
-                            if (!IsInvoking("DamagePreSecond"))
+                            if (!IsInvoking("DamagePerSecond"))
                             {
-                                InvokeRepeating("DamagePreSecond", 1.0f, 3.0f);
+                                InvokeRepeating("DamagePerSecond", 1.0f, 3.0f);
 
                             }
                         }
                         else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                         {
-                            if (IsInvoking("DamagePreSecond"))
+                            if (IsInvoking("DamagePerSecond"))
                             {
-                                CancelInvoke("DamagePreSecond");
+                                CancelInvoke("DamagePerSecond");
                             }
                             base.ChaseTarget();
                         }

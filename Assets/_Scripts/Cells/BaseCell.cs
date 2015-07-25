@@ -549,7 +549,7 @@ public class BaseCell : Photon.PunBehaviour
 
 
         pcontroller.AddNewCell(this);
-        
+
     }
 
 
@@ -570,7 +570,7 @@ public class BaseCell : Photon.PunBehaviour
         }
 
         Move(transform.position);
-        
+
     }
 
     protected void bUpdate()
@@ -582,6 +582,45 @@ public class BaseCell : Photon.PunBehaviour
             if (IsInvoking("ConsumePerSecond"))
             {
                 CancelInvoke("ConsumePerSecond");
+            }
+
+            if (targets.Count >= 1)
+            {
+                targets.RemoveAll(item => item == null);
+                if (targets.Count == 0)
+                {
+                    return;
+                }
+
+                if (primaryTarget == null)
+                {
+                    for (int i = 0; i < targets.Count; i++)
+                    {
+
+                        if (i != targets.Count)
+                        {
+
+                            if (i == 0 && targets.Count == 1)
+                                primaryTarget = targets[i];
+                            else
+                                primaryTarget = targets[i + 1];
+
+                            if (primaryTarget != null)
+                            {
+                                if (primaryTarget.GetComponent<BaseCell>())
+                                {
+                                    currentState = CellState.ATTACK;
+                                    return;
+                                }
+                                else if (primaryTarget.GetComponent<Protein>())
+                                {
+                                    currentState = CellState.CONSUMING;
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         if (currentState == CellState.MOVING)

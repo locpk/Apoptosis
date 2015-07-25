@@ -164,37 +164,11 @@ public class StemCell : BaseCell
 
         else
         {
-            if (targets != null && targets.Count >= 1)
-            {
-
-                if (primaryTarget == null)
-                {
-                    for (int i = 0; i < targets.Count; i++)
-                    {
-
-                        if (i != targets.Count)
-                        {
-                            primaryTarget = targets[i + 1];
-                            if (primaryTarget != null)
-                            {
-                                if (primaryTarget.GetComponent<BaseCell>())
-                                    currentState = CellState.ATTACK;
-                                if (primaryTarget.GetComponent<Protein>())
-                                    currentState = CellState.CONSUMING;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-
-
-
             switch (currentState)
             {
 
                 case CellState.IDLE:
-                    SetPrimaryTarget(null);
+                    
                     if (IsInvoking("DamagePerSecond"))
                     {
                         CancelInvoke("DamagePerSecond");
@@ -204,9 +178,7 @@ public class StemCell : BaseCell
 
                         m_particleSystem.Stop();
                     }
-
-                    //guard mode auto attack enemy in range
-                    //base.Guarding();
+                    base.bUpdate();
                     break;
                 case CellState.ATTACK:
                     if (primaryTarget == null)
