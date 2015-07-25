@@ -57,9 +57,6 @@ public class PlayerController : MonoBehaviour
     public static int cap = 0;
     public GameObject movePin;
     public GameObject attackPin;
-    public GameObject moveWaypoint;
-
-    public List<GameObject> moveWaypoints;
     public bool isSelecting = true;
     GameObject touchButton;
 
@@ -599,14 +596,6 @@ public class PlayerController : MonoBehaviour
             touchButton.GetComponent<Button>().image.sprite = touchButton.GetComponent<Button>().spriteState.disabledSprite;
         }
 
-        if (selectedUnits.Count == 0)
-        {
-            foreach (var item in moveWaypoints)
-            {
-                Destroy(item);
-            }
-            moveWaypoints.Clear();
-        }
 
         if (allSelectableUnits.Count == 0 && gameStarted)
         {
@@ -764,6 +753,11 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
+        }
+        else
+        {
+            GUISelectRect.xMax = GUISelectRect.xMin;
+            GUISelectRect.yMax = GUISelectRect.yMin;
         }
     }
 
@@ -929,22 +923,15 @@ public class PlayerController : MonoBehaviour
 
 
             }
-
             if (Input.GetMouseButton(2))
             {
-                //UnitAttackMove();
-
-                RaycastHit hitInfo;
-                Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
-                {
-                    GameObject waypoint = Instantiate(moveWaypoint, hitInfo.point, Quaternion.identity) as GameObject;
-                    moveWaypoints.Add(waypoint);
-                    waypoint = null;
-                }
-
+                UnitAttackMove();
             }
+        }
+        else
+        {
+            GUISelectRect.xMax = GUISelectRect.xMin;
+            GUISelectRect.yMax = GUISelectRect.yMin;
         }
     }
     // Update is called once per frame
