@@ -236,5 +236,18 @@ public class AlkaliCell : BaseCell
     void LateUpdate()
     {
         base.bLateUpdate();
+        float healthRatio = currentProtein / MAX_PROTEIN;
+        if (healthRatio <= 0.5f && healthRatio > 0.1f)
+        {
+            transform.GetComponent<SpriteRenderer>().sprite = health_50;
+        }
+        else if (healthRatio <= 0.1f)
+        {
+            transform.GetComponent<SpriteRenderer>().sprite = health_10;
+        }
+        else
+        {
+            transform.GetComponent<SpriteRenderer>().sprite = health_100;
+        }
     }
 }
