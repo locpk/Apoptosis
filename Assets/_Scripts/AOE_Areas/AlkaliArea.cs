@@ -45,15 +45,9 @@ public class AlkaliArea:BaseArea {
     void OnTriggerEnter(Collider collider) {
         if (collider.gameObject.tag == "Unit" || collider.gameObject.tag == "EnemyCell") {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
-
-            if (!sound_manager.sounds_miscellaneous[6].isPlaying) {
-                sound_manager.sounds_miscellaneous[6].Play();
-
-            }
-
             if (!enterCell) return;
 
-            if (!sound_manager.sounds_miscellaneous[6].isPlaying && enterCell.celltype != CellType.ALKALI_CELL) {
+            if (!sound_manager.sounds_miscellaneous[6].isPlaying && enterCell.celltype != CellType.ALKALI_CELL && collider.gameObject.tag == "Unit") {
                 sound_manager.sounds_miscellaneous[6].Play();
             }
 
@@ -115,10 +109,12 @@ public class AlkaliArea:BaseArea {
             if (!enterCell) return;
 
             switch (enterCell.celltype) {
-                case CellType.STEM_CELL: {
+                case CellType.STEM_CELL: { 
+                    if (!alkaliButton.GetComponent<Button>().interactable) {
                         alkaliButton.GetComponent<Button>().interactable = true;
-                        break;
                     }
+                    break;
+                }
             }
         }
     }
