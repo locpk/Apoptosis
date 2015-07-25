@@ -34,9 +34,7 @@ public class Menu : MonoBehaviour {
     GameObject MusicVolSlider;
     GameObject SFXVolSlider;
     public bool b_fullscreen; 
-    //Slider mas_slider;
-    //Slider mus_slider;
-    //Slider sfx_slider;
+
 
     Rect mas_slider_bounds;
 	
@@ -224,10 +222,7 @@ public class Menu : MonoBehaviour {
     {
         if (changed)
         {
-            //configFile.Write(System.BitConverter.GetBytes(mas_slider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
-            //configFile.Write(System.BitConverter.GetBytes(mus_slider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
-            //configFile.Write(System.BitConverter.GetBytes(sfx_slider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
-            //configFile.Write(System.BitConverter.GetBytes(b_fullscreen), 0, sizeof(float));
+ 
        
             //configFile.Close();
         }

@@ -110,7 +110,6 @@ public class Tier2ColdCell : BaseCell
                             photonView.RPC("Die", PhotonTargets.Others, null);
                         }
                         GameObject gstem = Instantiate(stemCell, trackingPos, trackingRot) as GameObject;
-                        controller.AddNewCell(gstem.GetComponent<BaseCell>());
                     }
                     //         Guarding();
                     break;

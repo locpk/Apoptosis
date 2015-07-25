@@ -68,9 +68,9 @@ public class AIWaveCell : MonoBehaviour {
         if (GetComponent<FogOfWarHider>() == null) gameObject.AddComponent<FogOfWarHider>();
         if (GetComponent<FogOfWarViewer>() != null) Destroy(GetComponent<FogOfWarViewer>());
         this.gameObject.transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(m_baseCell);
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(m_baseCell);
 
-
-        GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(this.GetComponent<BaseCell>());
 	}
 	
 	void FixedUpdate () {

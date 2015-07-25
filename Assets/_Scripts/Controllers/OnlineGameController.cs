@@ -34,7 +34,7 @@ public class OnlineGameController : Photon.PunBehaviour
         {
             InitPlayer();
             SpawnPlayerUnits();
-            Invoke("InitSync", 2.0f);
+            InitSync();
         }
         //PlayerControls.AddComponent<PhotonView>();
     }
@@ -72,7 +72,8 @@ public class OnlineGameController : Photon.PunBehaviour
 
     public void Disconnect()
     {
-        PhotonNetwork.LeaveRoom();
+      PhotonNetwork.LeaveRoom();
+     Application.LoadLevel("Multiplayer_Lobby");
         
     }
 
@@ -80,7 +81,7 @@ public class OnlineGameController : Photon.PunBehaviour
     public void GameEnd()
     {
         gameEnded = true;
-        Time.timeScale = 0.0f;
+        
     }
 
     //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -127,6 +128,7 @@ public class OnlineGameController : Photon.PunBehaviour
     {
         if (gameEnded)
         {
+            gameEnded = false;
             if (unitsCount <= 0)
             {
                 Show_LoseScreen();
@@ -149,22 +151,10 @@ public class OnlineGameController : Photon.PunBehaviour
         Invoke("InitSync", 2.0f);
     }
 
-    public new void OnLeftRoom()
-    {
-        //gameStarted = false;
-        //gameEnded = true;
-        
-        Application.LoadLevel("Multiplayer_Lobby");
-    }
 
     void InitSync()
     {
-        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Unit"); // Get every cell in the game
-        foreach (GameObject item in tmpArr) // Iterate through all the cells
-        {
-            PlayerControls.GetComponent<PlayerController>().AddNewCell(item.GetComponent<BaseCell>());
-        }
-        tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
+        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
         foreach (GameObject item in tmpArr) // Iterate through all the cells
         {
             PlayerControls.GetComponent<PlayerController>().AddNewProtein(item.GetComponent<Protein>()); // Add the cell to the players controllable units
@@ -226,7 +216,7 @@ public class OnlineGameController : Photon.PunBehaviour
 
         }
 
-        Time.timeScale = 0.0f;
+       
         this.gameObject.SetActive(false);
         Invoke("Disconnect", 2.0f);
     }

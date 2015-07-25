@@ -8,7 +8,7 @@ public class EvolveButtonController : MonoBehaviour {
     public GameObject coldButton;
     public GameObject acidButton;
     public GameObject alkaliButton;
-    public Animator animator;
+    private Animator animator;
   
 
     //private bool isOverUI = false;
@@ -21,7 +21,7 @@ public class EvolveButtonController : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-        animator = GetComponent<Animator>();
+        animator = GameObject.FindGameObjectWithTag("Evolve_Animator").GetComponent<Animator>();
         
 	}
 	

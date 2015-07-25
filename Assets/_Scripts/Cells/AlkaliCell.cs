@@ -19,7 +19,6 @@ public class AlkaliCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
-        //pcontroller = base.pcontroller;
     }
    
     void MUltiDMg() {
@@ -69,15 +68,21 @@ public class AlkaliCell : BaseCell
 
 
 
-            GameObject knerveCell = Instantiate(nerveCell, trackingPos, trackingRot) as GameObject;
+            GameObject knerveCell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("AlkaliAcidicMerging", trackingPos, trackingRot, 0, new object[] { (bool)false })
+                : Instantiate(nerveCell, trackingPos, trackingRot) as GameObject;
+            knerveCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+            knerveCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+            knerveCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+            knerveCell.GetComponent<CellSplitAnimation>().originCell = this;
+            knerveCell.GetComponent<CellSplitAnimation>().originCell1 = other;
+            Deactive();
+            other.Deactive();
 
             if (!sound_manager.sounds_evolution[5].isPlaying)
             {
                 sound_manager.sounds_evolution[5].Play();
             }
-            Deactive();
-            other.Deactive();
-            pcontroller.AddNewCell(knerveCell.GetComponent<BaseCell>());
+            
         }
         else
         {

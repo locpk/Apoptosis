@@ -134,19 +134,23 @@ public class Sound_Manager : MonoBehaviour {
 
     public void SetMASTER_volume(float _volume)
     {
-        master_mixer.SetFloat("MasterVolume", _volume);
+        instance.master_mixer.SetFloat("MasterVolume", _volume);
     
     }
 
+    public Sound_Manager GetInstance()
+    {
+        return instance;
+    }
     public void SetMUSIC_volume(float _volume)
     {
-        master_mixer.SetFloat("Music_Volume", _volume);
+        instance.master_mixer.SetFloat("Music_Volume", _volume);
     
     }
 
     public void SetSFX_volume(float _volume)
     {
-        master_mixer.SetFloat("SFX_Volume", _volume);
+        instance.master_mixer.SetFloat("SFX_Volume", _volume);
 
     }
 }
