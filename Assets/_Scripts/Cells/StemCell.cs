@@ -117,6 +117,7 @@ public class StemCell : BaseCell
     {
         base.bAwake();
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
+        navAgent.speed = 3;
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
 
@@ -160,9 +161,33 @@ public class StemCell : BaseCell
 
             }
         }
-       
-    
+        else
+        {
+            if (targets != null && targets.Count >= 1)
+            {
 
+                if (primaryTarget == null)
+                {
+                    for (int i = 0; i < targets.Count; i++)
+                    {
+
+                        if (i != targets.Count)
+                        {
+
+                            if (i == 0 && targets.Count == 1)
+                                primaryTarget = targets[i];
+                            else
+                                primaryTarget = targets[i + 1];
+
+                            if (primaryTarget.GetComponent<BaseCell>())
+                                currentState = CellState.ATTACK;
+                            if (primaryTarget.GetComponent<Protein>())
+                                currentState = CellState.CONSUMING;
+                            break;
+                        }
+                    }
+                }
+            }
 
             switch (currentState)
             {
@@ -200,7 +225,7 @@ public class StemCell : BaseCell
 
                     float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
 
-                    if (distance >  attackRange * attackRange && distance <= fovRadius * fovRadius)
+                    if (distance > attackRange * attackRange && distance <= fovRadius * fovRadius)
                     {
                         if (IsInvoking("DamagePerSecond"))
                         {
@@ -214,7 +239,7 @@ public class StemCell : BaseCell
                         base.ChaseTarget();
                         return;
                     }
-                    else if (distance <= attackRange * attackRange )
+                    else if (distance <= attackRange * attackRange)
                     {
                         if (!IsInvoking("DamagePerSecond"))
                         {
@@ -248,7 +273,7 @@ public class StemCell : BaseCell
                 case CellState.MOVING:
 
                     base.bUpdate();
-                    if (primaryTarget )
+                    if (primaryTarget)
                     {
                         if (primaryTarget.GetComponent<BaseCell>())
                         {
@@ -281,9 +306,9 @@ public class StemCell : BaseCell
             }
 
         }
-    
 
 
+    }
     void FixedUpdate()
     {
         base.bFixedUpdate();

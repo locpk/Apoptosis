@@ -222,7 +222,7 @@ public class Tier2HeatCell : BaseCell
     {
         base.bAwake();
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
-
+        navAgent.speed = 7;
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
     }

@@ -22,7 +22,7 @@ public class ColdCell : BaseCell
         base.bAwake();
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
-
+        navAgent.speed = 2;
     }
     void MUltiDMg() {
         if (multidamagesources != null)

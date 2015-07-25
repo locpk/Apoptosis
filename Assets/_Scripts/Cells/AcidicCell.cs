@@ -18,6 +18,8 @@ public class AcidicCell : BaseCell
     {
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         base.bAwake();
+        navAgent.speed = 3;
+        
         
     }
 

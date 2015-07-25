@@ -175,7 +175,7 @@ public class Tier2ColdCell : BaseCell
     {
         base.bAwake();
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
-
+        navAgent.speed = 2;
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
     }
