@@ -29,10 +29,7 @@ public class TestRadialButtonScript : MonoBehaviour {
 	void OnMouseDown(){
 		if (Time.timeScale > 0.0f) {
 			mousePosition = Input.mousePosition;
-			Debug.Log ("Object Clicked");
-			Debug.Log (mousePosition);
 			objectClicked = true;
-			Debug.Log (objectClicked);
 			radialButton.SetActive (true);
 		}
 

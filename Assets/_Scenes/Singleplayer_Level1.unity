@@ -105,7 +105,7 @@ GameObject:
   - 23: {fileID: 108523016}
   - 33: {fileID: 108523015}
   - 114: {fileID: 108523014}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Heat
   m_TagString: Collider_Heat
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   - 23: {fileID: 139972872}
   - 33: {fileID: 139972871}
   - 114: {fileID: 139972870}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Cold
   m_TagString: Collider_Cold
   m_Icon: {fileID: 0}
@@ -522,7 +522,7 @@ GameObject:
   - 23: {fileID: 352410563}
   - 33: {fileID: 352410562}
   - 114: {fileID: 352410561}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Acidic-2
   m_TagString: Collider_Acidic
   m_Icon: {fileID: 0}
@@ -2309,7 +2309,7 @@ GameObject:
   - 23: {fileID: 1119996416}
   - 33: {fileID: 1119996415}
   - 114: {fileID: 1119996414}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Dense
   m_TagString: Collider_Dense
   m_Icon: {fileID: 0}
@@ -2454,7 +2454,7 @@ GameObject:
   - 23: {fileID: 1212499268}
   - 33: {fileID: 1212499269}
   - 114: {fileID: 1212499267}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Alkali
   m_TagString: Collider_Alkali
   m_Icon: {fileID: 0}
@@ -6002,50 +6002,12 @@ Prefab:
       value: 
       objectReference: {fileID: 24500003, guid: 32570da66a9a5a2498737b8610ebb903,
         type: 2}
+    - target: {fileID: 19549964, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
+      propertyPath: m_StoppingDistance
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
-  m_IsPrefabParent: 0
---- !u!1001 &2044347444
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 430562, guid: 58bad4bda06b73949b6e89e378535b44, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 76.3177719
-      objectReference: {fileID: 0}
-    - target: {fileID: 430562, guid: 58bad4bda06b73949b6e89e378535b44, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.30000019
-      objectReference: {fileID: 0}
-    - target: {fileID: 430562, guid: 58bad4bda06b73949b6e89e378535b44, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -12.1636591
-      objectReference: {fileID: 0}
-    - target: {fileID: 430562, guid: 58bad4bda06b73949b6e89e378535b44, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: .707106829
-      objectReference: {fileID: 0}
-    - target: {fileID: 430562, guid: 58bad4bda06b73949b6e89e378535b44, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 430562, guid: 58bad4bda06b73949b6e89e378535b44, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 430562, guid: 58bad4bda06b73949b6e89e378535b44, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: .707106709
-      objectReference: {fileID: 0}
-    - target: {fileID: 430562, guid: 58bad4bda06b73949b6e89e378535b44, type: 2}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 58bad4bda06b73949b6e89e378535b44, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2049578235
 GameObject:
@@ -6059,7 +6021,7 @@ GameObject:
   - 23: {fileID: 2049578239}
   - 33: {fileID: 2049578238}
   - 114: {fileID: 2049578237}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Acidic-1
   m_TagString: Collider_Acidic
   m_Icon: {fileID: 0}

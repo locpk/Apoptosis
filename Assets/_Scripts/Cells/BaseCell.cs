@@ -79,7 +79,7 @@ public class BaseCell : Photon.PunBehaviour
     public float fovRadius;
     public float attackDamage;
     public float attackRange;
-    public float defense;
+    //public float defense;
     public float depleteTimer;
     public float depleteAmount = 3.0f; // per second
     public float attackCooldown;
@@ -190,12 +190,8 @@ public class BaseCell : Photon.PunBehaviour
     [PunRPC]
     public void Die()
     {
-        isMine = false;
-        isAlive = false;
-        GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(this);
 
-
-        if (celltype != CellType.CANCER_CELL)
+        if (isMine)
         {
             PlayerController.cap--;
             if (PlayerController.cap < 0)
@@ -204,25 +200,23 @@ public class BaseCell : Photon.PunBehaviour
             }
         }
 
+        isMine = false;
+        isAlive = false;
+        pcontroller.RemoveDeadCell(this);
 
-        //transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-        //GetComponent<SpriteRenderer>().enabled = false;
-
+        if (!sound_manager.sounds_miscellaneous[3].isPlaying)
+        {
+            sound_manager.sounds_miscellaneous[3].Play();
+        }
         if (!isSinglePlayer)
         {
             if (photonView.isMine)
             {
                 PhotonNetwork.Destroy(gameObject);
             }
-
         }
         else
         {
-            if (!sound_manager.sounds_miscellaneous[3].isPlaying)
-            {
-                sound_manager.sounds_miscellaneous[3].Play();
-
-            }
             Destroy(gameObject);
         }
 
@@ -555,7 +549,7 @@ public class BaseCell : Photon.PunBehaviour
 
 
         pcontroller.AddNewCell(this);
-        
+
     }
 
 
@@ -576,7 +570,7 @@ public class BaseCell : Photon.PunBehaviour
         }
 
         Move(transform.position);
-        
+
     }
 
     protected void bUpdate()
@@ -588,6 +582,45 @@ public class BaseCell : Photon.PunBehaviour
             if (IsInvoking("ConsumePerSecond"))
             {
                 CancelInvoke("ConsumePerSecond");
+            }
+
+            if (targets.Count >= 1)
+            {
+                targets.RemoveAll(item => item == null);
+                if (targets.Count == 0)
+                {
+                    return;
+                }
+
+                if (primaryTarget == null)
+                {
+                    for (int i = 0; i < targets.Count; i++)
+                    {
+
+                        if (i != targets.Count)
+                        {
+
+                            if (i == 0 && targets.Count == 1)
+                                primaryTarget = targets[i];
+                            else
+                                primaryTarget = targets[i + 1];
+
+                            if (primaryTarget != null)
+                            {
+                                if (primaryTarget.GetComponent<BaseCell>())
+                                {
+                                    currentState = CellState.ATTACK;
+                                    return;
+                                }
+                                else if (primaryTarget.GetComponent<Protein>())
+                                {
+                                    currentState = CellState.CONSUMING;
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         if (currentState == CellState.MOVING)

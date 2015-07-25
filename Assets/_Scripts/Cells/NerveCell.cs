@@ -12,7 +12,7 @@ public class NerveCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
 
-  
+
     void Start()
     {
         base.bStart();
@@ -24,7 +24,8 @@ public class NerveCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
     }
-    void MUltiDMg() {
+    void MUltiDMg()
+    {
         if (multidamagesources != null)
             multidamagesources();
     }
@@ -37,16 +38,15 @@ public class NerveCell : BaseCell
     void DamagePerSecond()
     {
 
-       // Vector3 them2me = primaryTarget.transform.position - transform.position;
- 
-        GameObject Lightningk = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Lightining", transform.position, transform.rotation, 0) 
+        // Vector3 them2me = primaryTarget.transform.position - transform.position;
+
+        GameObject Lightningk = PhotonNetwork.connected ? PhotonNetwork.Instantiate("Lightining", transform.position, transform.rotation, 0)
             : Instantiate(Lightning, transform.position, transform.rotation) as GameObject;
         //      Lightningk.GetComponent<Lighting>().transform.LookAt(primaryTarget.transform);
         //6Lightningk.GetComponent<Rigidbody>().velocity += them2me.normalized * lightningSpeed;
-       Lightningk.GetComponent<Lighting>().currentTarget = primaryTarget;
+        Lightningk.GetComponent<Lighting>().currentTarget = primaryTarget;
         Lightningk.GetComponent<Lighting>().realOwner = this.gameObject;
         Lightningk.GetComponent<Lighting>().speed = lightningSpeed;
-        Debug.Log(Lightningk.transform.rotation);
         Lightningk.transform.rotation = this.transform.rotation;
         if (!sound_manager.sounds_attacks[5].isPlaying)
         {
@@ -89,40 +89,15 @@ public class NerveCell : BaseCell
         }
         else
         {
-            if (targets != null && targets.Count >= 1)
-            {
-
-                if (primaryTarget == null)
-                {
-                    for (int i = 0; i < targets.Count; i++)
-                    {
-
-                        if (i != targets.Count)
-                        {
-                            Debug.Log(primaryTarget);
-                            primaryTarget = targets[i + 1];
-                            Debug.Log(primaryTarget);
-                            if (primaryTarget != null)
-                            {
-                                if (primaryTarget.GetComponent<BaseCell>())
-                                    currentState = CellState.ATTACK;
-                                if (primaryTarget.GetComponent<Protein>())
-                                    currentState = CellState.CONSUMING;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
             switch (currentState)
             {
 
                 case CellState.IDLE:
-                    SetPrimaryTarget(null);
                     if (IsInvoking("DamagePerSecond"))
                     {
                         CancelInvoke("DamagePerSecond");
                     }
+                    base.bUpdate();
                     break;
                 case CellState.ATTACK:
                     if (primaryTarget != null)
@@ -158,18 +133,14 @@ public class NerveCell : BaseCell
                     base.bUpdate();
                     break;
                 case CellState.MOVING:
-                    if (IsInvoking("DamagePerSecond"))
-                    {
-                        CancelInvoke("DamagePerSecond");
-                    }
                     base.bUpdate();
                     break;
                 case CellState.DEAD:
                     base.Die();
-            if (PhotonNetwork.connected)
-            {
-                photonView.RPC("Die", PhotonTargets.Others, null);
-            }
+                    if (PhotonNetwork.connected)
+                    {
+                        photonView.RPC("Die", PhotonTargets.Others, null);
+                    }
                     break;
                 case CellState.MERGING:
                     break;

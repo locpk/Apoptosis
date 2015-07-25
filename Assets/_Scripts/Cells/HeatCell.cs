@@ -18,7 +18,7 @@ public class HeatCell : BaseCell
     public GameObject stun;
     int instanonce = 0;
 
-    
+
     public void Merge()
     {
 
@@ -68,7 +68,7 @@ public class HeatCell : BaseCell
             kTier2Heat.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
             kTier2Heat.GetComponent<CellSplitAnimation>().originCell = this;
             kTier2Heat.GetComponent<CellSplitAnimation>().originCell1 = other;
-           
+
 
             if (!sound_manager.sounds_evolution[5].isPlaying)
             {
@@ -96,7 +96,8 @@ public class HeatCell : BaseCell
 
     }
 
-    void MUltiDMg() {
+    void MUltiDMg()
+    {
         if (multidamagesources != null)
             multidamagesources();
     }
@@ -169,60 +170,14 @@ public class HeatCell : BaseCell
         }
         else
         {
-
-            if (targets != null && targets.Count >= 1)
-            {
-
-                if (primaryTarget == null)
-                {
-                    for (int i = 0; i < targets.Count; i++)
-                    {
-
-                        if (i != targets.Count)
-                        {
-
-                            if (i == 0 && targets.Count == 1)
-                                primaryTarget = targets[i];
-                            else
-                                primaryTarget = targets[i + 1];
-
-                            if (primaryTarget != null)
-                            {
-                                if (primaryTarget.GetComponent<BaseCell>())
-                                    currentState = CellState.ATTACK;
-                                if (primaryTarget.GetComponent<Protein>())
-                                    currentState = CellState.CONSUMING;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
             switch (currentState)
             {
                 case CellState.IDLE:
-                    SetPrimaryTarget(null);
-                    if (IsInvoking("DamagePerSecond"))
+                     if (IsInvoking("DamagePerSecond"))
                     {
                         CancelInvoke("DamagePerSecond");
                     }
-                    //System.Collections.Generic.List<GameObject> enemyUnits = GameObjectManager.FindAIUnits();
-                    //if (enemyUnits != null)
-                    //{
-                    //    for (int i = 0; i < enemyUnits.Count; i++)
-                    //    {
-                    //        if (Vector3.Distance(enemyUnits[i].transform.position, transform.position) <= fovRadius)
-                    //        {
-                    //            if (enemyUnits[i] != this.gameObject)
-                    //            {
-                    //                Attack(enemyUnits[i]);
-                    //            }
-                    //            break;
-
-                    //        }
-                    //    }
-                    //}
-
+                    base.bUpdate();
                     break;
                 case CellState.ATTACK:
                     if (primaryTarget != null)
@@ -258,10 +213,6 @@ public class HeatCell : BaseCell
                     base.bUpdate();
                     break;
                 case CellState.MOVING:
-                    if (IsInvoking("DamagePerSecond"))
-                    {
-                        CancelInvoke("DamagePerSecond");
-                    }
                     base.bUpdate();
                     break;
                 case CellState.ATTACK_MOVING:
@@ -272,10 +223,10 @@ public class HeatCell : BaseCell
                     break;
                 case CellState.DEAD:
                     base.Die();
-            if (PhotonNetwork.connected)
-            {
-                photonView.RPC("Die", PhotonTargets.Others, null);
-            }
+                    if (PhotonNetwork.connected)
+                    {
+                        photonView.RPC("Die", PhotonTargets.Others, null);
+                    }
                     break;
 
                 default:

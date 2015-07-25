@@ -84,7 +84,7 @@ public class AcidicCell : BaseCell
         }
 
     }
-    void DamagePreSecond()
+    void DamagePerSecond()
     {
         if (primaryTarget != null)
         {
@@ -181,9 +181,9 @@ public class AcidicCell : BaseCell
         {
             case CellState.IDLE:
                 SetPrimaryTarget(null);
-                if (IsInvoking("DamagePreSecond"))
+                if (IsInvoking("DamagePerSecond"))
                 {
-                    CancelInvoke("DamagePreSecond");
+                    CancelInvoke("DamagePerSecond");
                 }
                 break;
             case CellState.ATTACK:
@@ -191,17 +191,17 @@ public class AcidicCell : BaseCell
                 {
                     if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                     {
-                        if (!IsInvoking("DamagePreSecond"))
+                        if (!IsInvoking("DamagePerSecond"))
                         {
-                            InvokeRepeating("DamagePreSecond", 1.0f, 3.0f);
+                            InvokeRepeating("DamagePerSecond", 1.0f, 3.0f);
 
                         }
                     }
                     else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                     {
-                        if (IsInvoking("DamagePreSecond"))
+                        if (IsInvoking("DamagePerSecond"))
                         {
-                            CancelInvoke("DamagePreSecond");
+                            CancelInvoke("DamagePerSecond");
                         }
                         if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
                         {
@@ -220,18 +220,6 @@ public class AcidicCell : BaseCell
                 break;
             case CellState.MOVING:
                 base.bUpdate();
-                if (primaryTarget != null)
-                {
-                    if (primaryTarget.GetComponent<BaseCell>())
-                    {
-                        currentState = CellState.ATTACK;
-                    }
-                    else if (primaryTarget.GetComponent<Protein>())
-                    {
-                        currentState = CellState.CONSUMING;
-                    }
-
-                }
                 break;
             case CellState.ATTACK_MOVING:
                 break;

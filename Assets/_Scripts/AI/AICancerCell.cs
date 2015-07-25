@@ -68,7 +68,6 @@ public class AICancerCell : MonoBehaviour {
 
     void RandomSplit() {
         int rnd = Random.Range(0, 100);
-        Debug.Log("chance: " + rnd);
         if (rnd <= 10) {
             Instantiate(gameObject, new Vector3(transform.position.x, 1f, transform.position.z), transform.rotation);
             Instantiate(gameObject, new Vector3(transform.position.x, 1f, transform.position.z), transform.rotation);

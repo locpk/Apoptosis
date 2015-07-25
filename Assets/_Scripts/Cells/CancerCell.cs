@@ -61,9 +61,7 @@ public class CancerCell : BaseCell
 
                          if (i != targets.Count)
                          {
-                             Debug.Log(primaryTarget);
                              primaryTarget = targets[i + 1];
-                             Debug.Log(primaryTarget);
                              if (primaryTarget.GetComponent<BaseCell>())
                                  currentState = CellState.ATTACK;
                

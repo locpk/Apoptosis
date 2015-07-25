@@ -24,7 +24,6 @@ public class DelayedSpawnEnemyController : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider) {
         if (collider.gameObject.tag == "Unit" && enermyCellSet.Count > 0 && !isTriggered) {
-            Debug.Log(this + ": Someone in my place");
             //StopCoroutine("ReadyToConvert");
             isTriggered = true;
             StartCoroutine(ReadyToConvert(delayedTimeInSecond));
