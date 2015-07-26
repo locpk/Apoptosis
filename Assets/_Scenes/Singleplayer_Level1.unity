@@ -1402,8 +1402,6 @@ MonoBehaviour:
   gameStarted: 0
   movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
   attackPin: {fileID: 0}
-  moveWaypoint: {fileID: 110900, guid: 669611cb87dffa74cad959c741ccb043, type: 2}
-  moveWaypoints: []
   isSelecting: 1
   NumStemCells: 0
   NumHeatCells: 0

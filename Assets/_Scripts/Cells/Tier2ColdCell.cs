@@ -33,7 +33,16 @@ public class Tier2ColdCell : BaseCell
             //  primaryTarget.GetComponent<BaseCell>().currentProtein -= attackDamage;
         }
     }
-    // Update is called once per frame
+
+
+    public override void Move(Vector3 _destination)
+    {
+        base.Move(_destination);
+        navAgent.SetAreaCost(3, 5);
+        navAgent.SetAreaCost(4, 5);
+        navAgent.SetAreaCost(5, 1);
+        navAgent.SetAreaCost(6, 5);
+    }
     void Update()
     {
         if (stunned == true)
@@ -135,6 +144,7 @@ public class Tier2ColdCell : BaseCell
                     }
                     break;
                 case CellState.MOVING:
+                    
                     base.bUpdate();
                     break;
                 case CellState.ATTACK_MOVING:
@@ -166,6 +176,7 @@ public class Tier2ColdCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+
 
     }
     void MUltiDMg()

@@ -23,6 +23,8 @@ public class ColdCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
+        
+
     }
     void MUltiDMg()
     {
@@ -34,7 +36,14 @@ public class ColdCell : BaseCell
         currentProtein -= 10;
     }
 
-
+    public override void Move(Vector3 _destination)
+    {
+        base.Move(_destination);
+        navAgent.SetAreaCost(3, 5);
+        navAgent.SetAreaCost(4, 5);
+        navAgent.SetAreaCost(5, 1);
+        navAgent.SetAreaCost(6, 5);
+    }
     public void Merge()
     {
         List<ColdCell> coldCellsMerge = new List<ColdCell>();

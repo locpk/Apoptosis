@@ -50,7 +50,14 @@ public class Tier2HeatCell : BaseCell
         }
     }
 
-
+    public override void Move(Vector3 _destination)
+{
+ 	 base.Move(_destination);
+     navAgent.SetAreaCost(3, 1);
+     navAgent.SetAreaCost(4, 5);
+     navAgent.SetAreaCost(5, 5);
+     navAgent.SetAreaCost(6, 5);
+}
 
 
 
@@ -110,7 +117,7 @@ public class Tier2HeatCell : BaseCell
             switch (currentState)
             {
                 case CellState.IDLE:
-                   
+
                     if (hasteActive)
                     {
                         if (IsInvoking("HasteDamagePerSecond"))
@@ -191,6 +198,7 @@ public class Tier2HeatCell : BaseCell
                     base.bUpdate();
                     break;
                 case CellState.MOVING:
+                    
                     base.bUpdate();
                     break;
                 case CellState.ATTACK_MOVING:
@@ -219,6 +227,7 @@ public class Tier2HeatCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+
 
     }
     void MUltiDMg()

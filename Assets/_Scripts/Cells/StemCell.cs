@@ -119,6 +119,7 @@ public class StemCell : BaseCell
         base.bAwake();
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+
     }
 
     // Use this for initialization
@@ -128,6 +129,14 @@ public class StemCell : BaseCell
         m_particleSystem = GetComponent<ParticleSystem>();
     }
 
+    public override void Move(Vector3 _destination)
+    {
+        base.Move(_destination);
+        navAgent.SetAreaCost(3, 5);
+        navAgent.SetAreaCost(4, 1);
+        navAgent.SetAreaCost(5, 5);
+        navAgent.SetAreaCost(6, 1);
+    }
 
     // Update is called once per frame
     void Update()
@@ -168,7 +177,7 @@ public class StemCell : BaseCell
             {
 
                 case CellState.IDLE:
-                    
+
                     if (IsInvoking("DamagePerSecond"))
                     {
                         CancelInvoke("DamagePerSecond");
@@ -243,6 +252,7 @@ public class StemCell : BaseCell
                     base.bUpdate();
                     break;
                 case CellState.MOVING:
+                    
                     base.bUpdate();
                     break;
                 case CellState.ATTACK_MOVING:
