@@ -38,4 +38,5 @@ MonoBehaviour:
   - Die
   - Move
   - StunMe
+  - GameStarted
   DisableAutoOpenWizard: 1
