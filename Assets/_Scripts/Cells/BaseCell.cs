@@ -67,7 +67,7 @@ public class BaseCell : Photon.PunBehaviour
     public bool isAlive = true;
     public bool isAIPossessed;
     public bool isDepleting;
-    public bool isSelected;
+    public bool isSelected = false;
     public CellType celltype;
     public CellState currentState;
     public NavMeshAgent navAgent;
