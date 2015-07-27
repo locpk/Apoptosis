@@ -10,10 +10,10 @@ public class Instructions_ImageSwap_Controller : MonoBehaviour
     public Sprite EvolutionTree_Sprite;
     public Sprite Gameplay_Sprite;
     public Sprite Tablet_Controls;
-
+    public GameObject Loading_Screen;
     public int starting_page;
     public GameObject canvas;
-
+  
 
     // Use this for initialization
     void Start()
@@ -24,18 +24,13 @@ public class Instructions_ImageSwap_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-
-
-
-
-
+        
     }
 
     public void MainMenu()
     {
-        Application.LoadLevel("MainMenu");
+       Loading_Screen.GetComponent<Menu>().LoadScene("MainMenu");
+       canvas.SetActive(false);
     }
 
     public void PreviousPage()
@@ -43,7 +38,8 @@ public class Instructions_ImageSwap_Controller : MonoBehaviour
 
         if (canvas.GetComponent<Image>().sprite == Gameplay_Sprite)
         {
-            Application.LoadLevel("MainMenu");
+            canvas.SetActive(false);
+            Loading_Screen.GetComponent<Menu>().LoadScene("MainMenu");
         }
         else if (canvas.GetComponent<Image>().sprite == EvolutionTree_Sprite)
         {
@@ -98,7 +94,9 @@ public class Instructions_ImageSwap_Controller : MonoBehaviour
         }
         else if (canvas.GetComponent<Image>().sprite == Tablet_Controls)
         {
-            Application.LoadLevel("Tutorial_Level");
+            canvas.SetActive(false);
+            Loading_Screen.GetComponent<Menu>().LoadScene("Tutorial_Level");
+           // Application.LoadLevel("Tutorial_Level");
         }
 
         //starting_page++;
