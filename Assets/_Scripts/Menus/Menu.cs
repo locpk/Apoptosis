@@ -39,7 +39,6 @@ public class Menu : MonoBehaviour
     public bool b_fullscreen;
 
 
-    Rect mas_slider_bounds;
 
     // screen stuff 
 
@@ -59,13 +58,6 @@ public class Menu : MonoBehaviour
         sound_manager = GameObject.Find("Sound_Manager").GetComponent<Sound_Manager>();
 
         MasterVolSlider = GameObject.FindGameObjectWithTag("Master_Slider");
-        //  mas_slider = MasterVolSlider.GetComponent<Slider>();
-        //  mas_slider_bounds = mas_slider.GetComponent<RectTransform>().rect;
-        //  mas_slider_bounds.xMin += mas_slider.GetComponent<RectTransform>().position.x;
-        //  mas_slider_bounds.xMax += mas_slider.GetComponent<RectTransform>().position.x;
-        //  mas_slider_bounds.yMin += mas_slider.GetComponent<RectTransform>().position.y;
-        //  mas_slider_bounds.yMax += mas_slider.GetComponent<RectTransform>().position.y;
-
         MusicVolSlider = GameObject.FindGameObjectWithTag("Music_Slider");
         SFXVolSlider = GameObject.FindGameObjectWithTag("SFX_Slider");
         FullscreenToggle = GameObject.Find("Fullscreen_Toggle");

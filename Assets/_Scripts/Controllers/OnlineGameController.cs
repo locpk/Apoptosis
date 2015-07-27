@@ -135,6 +135,8 @@ public class OnlineGameController : Photon.PunBehaviour
         base.OnPhotonPlayerConnected(newPlayer);
         InitPlayer();
         SpawnPlayerUnits();
+        PhotonNetwork.room.open = false;
+        PhotonNetwork.room.visible = false;
     }
 
 
