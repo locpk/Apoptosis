@@ -869,7 +869,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 574502184}
+      - m_Target: {fileID: 913848795}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -4870,7 +4870,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11441932, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11441932, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -4879,7 +4879,7 @@ Prefab:
     - target: {fileID: 11441932, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 574502184}
+      objectReference: {fileID: 913848795}
     - target: {fileID: 11441932, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
@@ -4888,10 +4888,19 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 11494398, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 299872085}
+    - target: {fileID: 11494398, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: UnitStop
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11437338, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
     - {fileID: 11422526, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
     - {fileID: 11471210, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
+    - {fileID: 11456350, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: dbdecc5e06c65274faf9bd603da3a5cd, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1914547458
