@@ -119,7 +119,7 @@ public class StemCell : BaseCell
         base.bAwake();
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
-
+        navAgent.speed = 7.0f;
     }
 
     // Use this for initialization
@@ -132,9 +132,9 @@ public class StemCell : BaseCell
     public override void Move(Vector3 _destination)
     {
         base.Move(_destination);
-        navAgent.SetAreaCost(3, 5);
+        navAgent.SetAreaCost(3, 2);
         navAgent.SetAreaCost(4, 1);
-        navAgent.SetAreaCost(5, 5);
+        navAgent.SetAreaCost(5, 2);
         navAgent.SetAreaCost(6, 1);
     }
 

@@ -93,7 +93,7 @@ public class HeatCell : BaseCell
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
-
+        navAgent.speed = 9.0f;
         
     }
 

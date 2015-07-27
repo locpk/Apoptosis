@@ -23,7 +23,7 @@ public class NerveCell : BaseCell
         base.bAwake();
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
-        
+        navAgent.speed = 8.0f;
     }
     void MUltiDMg()
     {

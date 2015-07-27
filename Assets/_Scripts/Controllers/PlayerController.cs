@@ -613,7 +613,7 @@ public class PlayerController : MonoBehaviour
 
             }
 
-            if (Input.touchCount == 1 && isSelecting)
+            if (Input.touchCount == 1 && isSelecting && !minimapCamera.pixelRect.Contains(Input.GetTouch(0).position))
             {
                 Touch oneTouch = Input.GetTouch(0);
                 switch (oneTouch.phase)
@@ -645,7 +645,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (Input.touchCount == 1 && !isSelecting && !isOverUI)
+            if (Input.touchCount == 1 && !isSelecting && !isOverUI && !minimapCamera.pixelRect.Contains(Input.GetTouch(0).position))
             {
                 Touch touchOne = Input.GetTouch(0);
                 switch (touchOne.phase)
@@ -792,7 +792,7 @@ public class PlayerController : MonoBehaviour
             if (!isOverUI && Time.timeScale > 0.0f)
             {
 
-                if (Input.GetMouseButtonDown(0)) // If the player left-clicks
+                if (Input.GetMouseButtonDown(0) && !minimapCamera.pixelRect.Contains(Input.mousePosition)) // If the player left-clicks
                 {
                     GUISelectRect.xMin = Input.mousePosition.x;
                     GUISelectRect.yMin = Input.mousePosition.y;
@@ -805,7 +805,7 @@ public class PlayerController : MonoBehaviour
                     origin.y = -origin.y + Screen.height;
 
                 }
-                else if (Input.GetMouseButtonUp(0)) // When the player releases left-click
+                else if (Input.GetMouseButtonUp(0) && !minimapCamera.pixelRect.Contains(Input.mousePosition)) // When the player releases left-click
                 {
                     GUISelectRect.yMax = GUISelectRect.yMin;
                     GUISelectRect.xMax = GUISelectRect.xMin;
@@ -826,7 +826,7 @@ public class PlayerController : MonoBehaviour
                     }
 
                 }
-                else if (Input.GetMouseButton(0)) // If the player has left-click held down
+                else if (Input.GetMouseButton(0) && !minimapCamera.pixelRect.Contains(Input.mousePosition)) // If the player has left-click held down
                 {
 
                     UnitSelection(origin);
@@ -834,7 +834,7 @@ public class PlayerController : MonoBehaviour
                 }
 
 
-                if (Input.GetMouseButtonDown(1)) // If the player right-clicks
+                if (Input.GetMouseButtonDown(1) && !minimapCamera.pixelRect.Contains(Input.mousePosition)) // If the player right-clicks
                 {
 
                     GUISelectRect.xMin = Input.mousePosition.x;
@@ -847,7 +847,7 @@ public class PlayerController : MonoBehaviour
                     origin = Input.mousePosition;
                     origin.y = -origin.y + Screen.height;
                 }
-                else if (Input.GetMouseButtonUp(1)) // When the player releases right-click
+                else if (Input.GetMouseButtonUp(1) && !minimapCamera.pixelRect.Contains(Input.mousePosition)) // When the player releases right-click
                 {
 
 
@@ -886,7 +886,7 @@ public class PlayerController : MonoBehaviour
                         UnitMove();
 
                 }
-                else if (Input.GetMouseButton(1)) // If the player has right-click held down
+                else if (Input.GetMouseButton(1) && !minimapCamera.pixelRect.Contains(Input.mousePosition)) // If the player has right-click held down
                 {
                     TargetSelection(origin);
                 }
@@ -894,7 +894,7 @@ public class PlayerController : MonoBehaviour
 
 
             }
-            if (Input.GetMouseButton(2))
+            if (Input.GetMouseButton(2) && !minimapCamera.pixelRect.Contains(Input.mousePosition))
             {
                 UnitAttackMove();
             }
