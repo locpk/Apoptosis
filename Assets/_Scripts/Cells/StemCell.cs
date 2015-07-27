@@ -132,9 +132,9 @@ public class StemCell : BaseCell
     public override void Move(Vector3 _destination)
     {
         base.Move(_destination);
-        navAgent.SetAreaCost(3, 5);
+        navAgent.SetAreaCost(3, 2);
         navAgent.SetAreaCost(4, 1);
-        navAgent.SetAreaCost(5, 5);
+        navAgent.SetAreaCost(5, 2);
         navAgent.SetAreaCost(6, 1);
     }
 

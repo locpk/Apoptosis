@@ -80,6 +80,7 @@ public class BaseCell : Photon.PunBehaviour
     public float attackDamage;
     public float attackRange;
     //public float defense;
+    public float consumeRadius = 5.0f;
     public float depleteTimer;
     public float depleteAmount = 3.0f; // per second
     public float attackCooldown;
@@ -662,7 +663,7 @@ public class BaseCell : Photon.PunBehaviour
                 }
                 float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
 
-                if (distance > attackRange && distance <= fovRadius)
+                if (distance > consumeRadius && distance <= fovRadius)
                 {
                     if (IsInvoking("ConsumePerSecond"))
                     {
@@ -671,7 +672,7 @@ public class BaseCell : Photon.PunBehaviour
                     }
                     ChaseTarget();
                 }
-                else if (distance <= attackRange)
+                else if (distance <= consumeRadius)
                 {
                     if (!IsInvoking("ConsumePerSecond"))
                     {
