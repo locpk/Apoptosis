@@ -9,7 +9,7 @@ public class MinimapFOG : MonoBehaviour
     public AudioMixerSnapshot snapshot_normal;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         //grab the object's "grandparent" that is attached to this script
         GameObject obj = gameObject.transform.parent.gameObject.transform.parent.gameObject;
@@ -25,8 +25,8 @@ public class MinimapFOG : MonoBehaviour
         {
             obj.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = false; //turn the minimap image of it off
         }
-        snapshot_normal = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>().GetInstance().master_mixer.FindSnapshot("Snapshot");// .instance.master_mixer.FindSnapshot("Snapshot");
-        snapshot_attack = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>().GetInstance().master_mixer.FindSnapshot("Snapshot_Attack");
+       // snapshot_normal = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>().GetInstance().master_mixer.FindSnapshot("Snapshot");
+      //  snapshot_attack = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>().GetInstance().master_mixer.FindSnapshot("Snapshot_Attack");
     }
 
     // Update is called once per frame

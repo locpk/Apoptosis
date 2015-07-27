@@ -5243,8 +5243,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 161306011}
-        m_MethodName: SetBackgroundMusicVol
+      - m_Target: {fileID: 1659603384}
+        m_MethodName: SetMUSIC_volume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7808,7 +7808,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 9ce128ff66ad5134a8e80e0d60333b90, type: 3}
-    m_FontSize: 14
+    m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -7818,7 +7818,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Full Screen
+  m_Text: Full Screen Toggle
 --- !u!222 &1094765136
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9391,8 +9391,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 161306011}
-        m_MethodName: SetMasterVolume
+      - m_Target: {fileID: 1659603384}
+        m_MethodName: SetMASTER_volume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10916,8 +10916,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 161306011}
-        m_MethodName: SetSFXVoume
+      - m_Target: {fileID: 1659603384}
+        m_MethodName: SetSFX_volume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

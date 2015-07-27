@@ -55,7 +55,8 @@ public class Menu : MonoBehaviour
         brackets.SetActive(false);
         backGround.SetActive(false);
         loadingBar.SetActive(false);
-        sound_manager = GameObject.Find("Sound_Manager").GetComponent<Sound_Manager>();
+        //sound_manager = GameObject.Find("Sound_Manager").GetComponent<Sound_Manager>().GetInstance();
+
 
         MasterVolSlider = GameObject.FindGameObjectWithTag("Master_Slider");
         MusicVolSlider = GameObject.FindGameObjectWithTag("Music_Slider");
@@ -83,17 +84,17 @@ public class Menu : MonoBehaviour
 
 
         // make fullscreen
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            Screen.fullScreen = true;
-            FullscreenToggle.SetActive(false);
-        }
-        else
-        {
-            Screen.fullScreen = b_fullscreen;
-            FullscreenToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = b_fullscreen;
+        //if (Application.platform == RuntimePlatform.Android)
+        //{
+        //    Screen.fullScreen = true;
+        //    FullscreenToggle.SetActive(false);
+        //}
+        //else
+        //{
+        //    Screen.fullScreen = b_fullscreen;
+        //    FullscreenToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = b_fullscreen;
 
-        }
+        //}
         changed = false; // must not forget to reset x
     }
 
@@ -110,6 +111,7 @@ public class Menu : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
+        sound_manager = GameObject.Find("Sound_Manager").GetComponent<Sound_Manager>().GetInstance();
     }
 
 
@@ -122,29 +124,14 @@ public class Menu : MonoBehaviour
     void FixedUpdate()
     {
 
-    }
+    
 
-    public void SetBackgroundMusicVol(float mus_vol)
-    {
-        master_mixer.SetFloat("Music_Volume", mus_vol);
-        changed = true;
+  
     }
-    public void SetSFXVoume(float SFX_vol)
-    {
-        master_mixer.SetFloat("SFX_Volume", SFX_vol);
-        if (!sound_manager.sounds_attacks[0].isPlaying && Time.timeSinceLevelLoad > .5f)
-            sound_manager.sounds_attacks[0].Play();
-        changed = true;
-    }
-    public void SetMasterVolume(float mas_vol)
-    {
-        master_mixer.SetFloat("MasterVolume", mas_vol);
-        volume_master_stored = mas_vol;
-        changed = true;
-    }
+   
     public void ClearVolume()
     {
-        master_mixer.ClearFloat("Master_Volume");
+        //master_mixer.ClearFloat("Master_Volume");
 
     }
 
@@ -214,6 +201,7 @@ public class Menu : MonoBehaviour
         else
         {
             // mute the Vibe
+            
             master_mixer.GetFloat("MasterVolume", out volume_master_stored);
             master_mixer.SetFloat("MasterVolume", -40.0f);
             muted = !muted;

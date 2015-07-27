@@ -19,10 +19,13 @@ public class OptionsMenu : MonoBehaviour
 
     public AudioMixer master_mixer;
 
+    private Sound_Manager sound_manager;
+
+
     // Use this for initialization
     void Start()
     {
-        
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         
         BGMVolSlider = GameObject.Find("BGM_Vol_Slider");
         SEVolSlider = GameObject.Find("SE_Vol_Slider");
@@ -125,4 +128,27 @@ public class OptionsMenu : MonoBehaviour
  //           configFile.Close();
  //       }
  //   }
+
+    public void SetMASTER_volume(float _volume)
+    {
+        sound_manager.GetInstance().SetMASTER_volume(_volume);
+    
+
+    }
+
+
+    public void SetMUSIC_volume(float _volume)
+    {
+        sound_manager.GetInstance().SetMUSIC_volume(_volume);
+      
+
+    }
+
+    public void SetSFX_volume(float _volume)
+    {
+        
+        sound_manager.GetInstance().SetSFX_volume(_volume);
+    }
+   
+
 }

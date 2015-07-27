@@ -49,7 +49,7 @@ public class Sound_Manager : MonoBehaviour {
     //private AudioMixerSnapshot snapshot_muted;
 
 	// Use this for initialization
-	void Awake ()
+	void Start ()
     {
         if (this == instance)
         {
@@ -134,7 +134,11 @@ public class Sound_Manager : MonoBehaviour {
 
     public void SetMASTER_volume(float _volume)
     {
+        if (instance != null)
+        {
         instance.master_mixer.SetFloat("MasterVolume", _volume);
+            
+        }
     
     }
 
@@ -144,13 +148,25 @@ public class Sound_Manager : MonoBehaviour {
     }
     public void SetMUSIC_volume(float _volume)
     {
+        if (instance != null)
+        {
         instance.master_mixer.SetFloat("Music_Volume", _volume);
+            
+        }
     
     }
 
     public void SetSFX_volume(float _volume)
     {
+        if (instance != null)
+        {
         instance.master_mixer.SetFloat("SFX_Volume", _volume);
+        if (!instance.sounds_miscellaneous[2].isPlaying)
+        {
+            instance.sounds_miscellaneous[2].Play();    
+          
+        }
+        }
 
     }
 }
