@@ -886,7 +886,7 @@ public class PlayerController : MonoBehaviour
                         UnitMove();
 
                 }
-                else if (Input.GetMouseButton(1)) // If the player has right-click held down
+                else if (Input.GetMouseButton(1) && !minimapCamera.pixelRect.Contains(Input.mousePosition)) // If the player has right-click held down
                 {
                     TargetSelection(origin);
                 }
