@@ -23,6 +23,7 @@ public class NerveCell : BaseCell
         base.bAwake();
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+        
     }
     void MUltiDMg()
     {
@@ -30,6 +31,15 @@ public class NerveCell : BaseCell
             multidamagesources();
     }
 
+
+    public override void Move(Vector3 _destination)
+    {
+        base.Move(_destination);
+        navAgent.SetAreaCost(3, 3);
+        navAgent.SetAreaCost(4, 1);
+        navAgent.SetAreaCost(5, 3);
+        navAgent.SetAreaCost(6, 1);
+    }
     public void AreaDamage()
     {
         currentProtein -= 10;

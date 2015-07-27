@@ -43,7 +43,7 @@ public class Credits_Automation : MonoBehaviour {
                                     "", // caris
                                     "", // greg
                                     "minimap, tutorial, HUD mechanics",//devin
-                                    "dank , units, gameplay",//jameel
+                                    "  units, gameplay",//jameel
                                     "cross-platform, animations, units, gameplay", // JUNSHU chen 
                                     "game design, graphics / texturing, menus, HUD",// dmitrii
                                     "tutorial, controlls, multiplayer",// damien

@@ -57,9 +57,6 @@ public class PlayerController : MonoBehaviour
     public static int cap = 0;
     public GameObject movePin;
     public GameObject attackPin;
-    public GameObject moveWaypoint;
-
-    public List<GameObject> moveWaypoints;
     public bool isSelecting = true;
     GameObject touchButton;
 
@@ -110,39 +107,14 @@ public class PlayerController : MonoBehaviour
 
 
         touchButton = GameObject.Find("Touch");
+        if (!Input.touchSupported)
+        {
+            GameObject.Find("RIGHT_CLICK_Panel").SetActive(false);
+            isSelecting = false;
+        }
 
-
-        // Initialize variables
-        selectedTargets.Clear();
-        //        groups = new List<BaseCell>[10];
-        allSelectableUnits = new List<BaseCell>();
-        selectedUnits = new List<BaseCell>();
         terrainLayer = 1 << LayerMask.NameToLayer("Terrain");  // Layer masking for raycast clicking
         // ----------
-
-        List<GameObject> tmpArr = GameObjectManager.FindAllUnits(); // Get every cell in the game
-        foreach (GameObject item in tmpArr) // Iterate through all the cells
-        {
-            BaseCell bCell = item.GetComponent<BaseCell>(); // Upcast each cell to a base cell
-            if (bCell)
-            {
-                if (PhotonNetwork.connected && item.GetPhotonView().isMine || !bCell.isAIPossessed && bCell.isMine) // If the cell belongs to this player
-                {
-                    allSelectableUnits.Add(item.GetComponent<BaseCell>()); // Add the cell to the players controllable units
-                }
-                else if (PhotonNetwork.connected && !item.GetPhotonView().isMine || bCell.isAIPossessed && !bCell.isMine) // If the cell belongs to this player
-                {
-                    allSelectableTargets.Add(item); // Add the cell to the players controllable units
-                }
-            }
-        }
-
-        tmpArr.Clear();
-        tmpArr = GameObject.FindGameObjectsWithTag("Protein").ToList<GameObject>(); // Get every cell in the game
-        foreach (GameObject item in tmpArr) // Iterate through all the cells
-        {
-            allSelectableTargets.Add(item); // Add the cell to the players controllable units
-        }
     }
 
 
@@ -501,7 +473,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!isOverUI)
             {
-                if (isSelecting)
+                if (isSelecting || Input.GetMouseButton(0))
                 {
                     GUI.color = new Color(0.0f, 0.0f, 1.0f, 0.5f);
                 }
@@ -515,7 +487,7 @@ public class PlayerController : MonoBehaviour
 
         }
         float scale = .7f;
-        GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+        //GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
         foreach (GameObject item in selectedTargets)
         {
             if (item && selectedUnits.Count > 0)
@@ -586,32 +558,20 @@ public class PlayerController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        CheckSelectedUnits();
-        CheckEnemiesLeft();
+        
 
-        if (isSelecting)
+        if (isSelecting && Input.touchSupported)
         {
             touchButton.GetComponent<Button>().image.sprite = touchButton.GetComponent<Button>().spriteState.pressedSprite;
 
         }
-        else
+        else if (Input.touchSupported)
         {
             touchButton.GetComponent<Button>().image.sprite = touchButton.GetComponent<Button>().spriteState.disabledSprite;
         }
 
-        if (selectedUnits.Count == 0)
-        {
-            foreach (var item in moveWaypoints)
-            {
-                Destroy(item);
-            }
-            moveWaypoints.Clear();
-        }
 
-        if (allSelectableUnits.Count == 0 && gameStarted)
-        {
-            Show_LoseScreen();
-        }
+        
 
         
     }
@@ -764,6 +724,11 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
+        }
+        else
+        {
+            GUISelectRect.xMax = GUISelectRect.xMin;
+            GUISelectRect.yMax = GUISelectRect.yMin;
         }
     }
 
@@ -929,26 +894,19 @@ public class PlayerController : MonoBehaviour
 
 
             }
-
             if (Input.GetMouseButton(2))
             {
-                //UnitAttackMove();
-
-                RaycastHit hitInfo;
-                Ray screenRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(screenRay, out hitInfo, 1000.0f))
-                {
-                    GameObject waypoint = Instantiate(moveWaypoint, hitInfo.point, Quaternion.identity) as GameObject;
-                    moveWaypoints.Add(waypoint);
-                    waypoint = null;
-                }
-
+                UnitAttackMove();
             }
+        }
+        else
+        {
+            GUISelectRect.xMax = GUISelectRect.xMin;
+            GUISelectRect.yMax = GUISelectRect.yMin;
         }
     }
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         fps = 1.0f / Time.deltaTime;
         cap = allSelectableUnits.Count;
@@ -966,21 +924,18 @@ public class PlayerController : MonoBehaviour
             MouseKeyBoardUpdate();
         }
 
-
+        CheckSelectedUnits();
+        CheckEnemiesLeft();
+        if (allSelectableUnits.Count == 0 && gameStarted)
+        {
+            Show_LoseScreen();
+        }
 
 
     }
 
     public void CheckSelectedUnits()
     {
-        NumStemCells = 0;
-        NumHeatCells = 0;
-        NumColdCells = 0;
-        NumAcidicCells = 0;
-        NumAlkaliCells = 0;
-        NumTierTwoCold = 0;
-        NumTierTwoHeat = 0;
-
         NumStemCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.STEM_CELL)).Count;
         NumHeatCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.HEAT_CELL)).Count;
         NumColdCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.COLD_CELL)).Count;
@@ -993,7 +948,6 @@ public class PlayerController : MonoBehaviour
 
     public void CheckEnemiesLeft()
     {
-        NumEnemiesLeft = 0;
 
         List<GameObject> enemies = new List<GameObject>(allSelectableTargets);
 

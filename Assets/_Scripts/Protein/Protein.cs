@@ -29,6 +29,11 @@ public class Protein : MonoBehaviour {
         value -= consumeRate;
         return value >= 0 ? consumeRate : consumeRate + value;
     }
+
+    void Awake()
+    {
+        GameObject.Find("PlayerControl").GetComponent<PlayerController>().allSelectableTargets.Add(gameObject);
+    }
 	// Use this for initialization
 	void Start () {
         value = Random.Range(200, 300);

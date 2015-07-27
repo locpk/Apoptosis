@@ -94,6 +94,7 @@ public class HeatCell : BaseCell
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
 
+        
     }
 
     void MUltiDMg()
@@ -102,6 +103,14 @@ public class HeatCell : BaseCell
             multidamagesources();
     }
 
+    public override void Move(Vector3 _destination)
+    {
+        base.Move(_destination);
+        navAgent.SetAreaCost(3, 1);
+        navAgent.SetAreaCost(4, 5);
+        navAgent.SetAreaCost(5, 5);
+        navAgent.SetAreaCost(6, 5);
+    }
     public void AreaDamage()
     {
         currentProtein -= 10;

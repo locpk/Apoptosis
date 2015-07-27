@@ -17,7 +17,7 @@ public class OnlineGameController : Photon.PunBehaviour
 
     void Awake()
     {
-        Time.timeScale = 1.0f;
+        PhotonNetwork.automaticallySyncScene = true;
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>(); // gets the sound sources
         winScreen = GameObject.FindGameObjectWithTag("Win_Screen");
         loseScreen = GameObject.FindGameObjectWithTag("Lose_Screen");
@@ -34,7 +34,7 @@ public class OnlineGameController : Photon.PunBehaviour
         {
             InitPlayer();
             SpawnPlayerUnits();
-            InitSync();
+
         }
         //PlayerControls.AddComponent<PhotonView>();
     }
@@ -66,62 +66,31 @@ public class OnlineGameController : Photon.PunBehaviour
         }
         if (gameEnded && Input.GetKeyUp(KeyCode.Return))
         {
-           PhotonNetwork.LeaveRoom();
+            PhotonNetwork.LeaveRoom();
         }
     }
 
     public void Disconnect()
     {
-      PhotonNetwork.LeaveRoom();
-     Application.LoadLevel("Multiplayer_Lobby");
-        
+        PhotonNetwork.LeaveRoom();
+        Application.LoadLevel("Multiplayer_Lobby");
+
+    }
+
+    [PunRPC]
+    public void GameStarted()
+    {
+        gameStarted = true;
+
     }
 
     [PunRPC]
     public void GameEnd()
     {
         gameEnded = true;
-        
-    }
-
-    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    //{
-    //    if (stream.isWriting)
-    //    {
-    //        // We own this player: send the others our data
-    //        stream.SendNext(gameEnded);
-
-    //    }
-    //    else
-    //    {
-    //        // Network player, receive data
-    //        this.gameEnded = (bool)stream.ReceiveNext();
-    //    }
-    //}
-    void OnGUI()
-    {
-        if (gameEnded)
-        {
-
-            //if (unitsCount <= 0)
-            //{
-            //    GUI.BeginGroup(new Rect(Screen.width * 0.5f - 300, Screen.height * 0.5f - 100, 500, 300));
-            //    GUI.Box(new Rect(0, 0, 500, 300), "\n\n\n\n\n\n\nYou Lose\nPress Enter to Continue");
-            //    GUI.EndGroup();
-            //}
-            //else
-            //{
-            //    GUI.BeginGroup(new Rect(Screen.width * 0.5f - 300, Screen.height * 0.5f - 100, 500, 300));
-            //    GUI.Box(new Rect(0, 0, 500, 300), "\n\n\n\n\n\n\nYou Win\nPress Enter to Continue");
-            //    GUI.EndGroup();
-            //}
-        }
-    }
-
-    void FixedUpdate()
-    {
 
     }
+
 
     //LateUpdate is called after all Update functions have been called
     void LateUpdate()
@@ -140,27 +109,34 @@ public class OnlineGameController : Photon.PunBehaviour
         }
     }
 
+    void OnGUI()
+    {
+        if (!gameStarted)
+        {
+            GUI.BeginGroup(new Rect(Screen.width * 0.5f - 300, Screen.height * 0.5f - 100, 500, 300));
+            GUI.Box(new Rect(0, 0, 500, 300), "\n\n\n\n\n\n\nWait for the second player.\n");
+            GUI.EndGroup();
+        }
+
+    }
+
+    void OnLevelWasLoaded()
+    {
+        if (PhotonNetwork.player.ID == 2)
+        {
+            photonView.RPC("GameStarted", PhotonTargets.AllViaServer, null);
+        }
+
+    }
+
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
 
         base.OnPhotonPlayerConnected(newPlayer);
         InitPlayer();
         SpawnPlayerUnits();
-       
-        
-        Invoke("InitSync", 2.0f);
     }
 
-
-    void InitSync()
-    {
-        GameObject[] tmpArr = GameObject.FindGameObjectsWithTag("Protein"); // Get every cell in the game
-        foreach (GameObject item in tmpArr) // Iterate through all the cells
-        {
-            PlayerControls.GetComponent<PlayerController>().AddNewProtein(item.GetComponent<Protein>()); // Add the cell to the players controllable units
-        }
-        gameStarted = true;
-    }
 
     void InitPlayer()
     {
@@ -180,14 +156,19 @@ public class OnlineGameController : Photon.PunBehaviour
 
     void SpawnPlayerUnits()
     {
-        
-        object[] isSingleplayer = new object[1];
-        isSingleplayer[0] = (bool)false;
-        PhotonNetwork.Instantiate("StemCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer);
-        //if (false/*PhotonNetwork.player.ID == 1*/)
-        //{
-        //    PlayerControls.GetComponent<PlayerController>().AddNewCell(PhotonNetwork.Instantiate("ColdCell", Vector3.right * PhotonNetwork.player.ID, Quaternion.Euler(90, 0, 0), 0, isSingleplayer).GetComponent<BaseCell>());
-        //}
+
+        switch (PhotonNetwork.player.ID)
+        {
+            case 1:
+                PhotonNetwork.Instantiate("StemCell", GameObject.Find("Player - 1").transform.position, Quaternion.Euler(90, 0, 0), 0, new object[] { (bool)false });
+                break;
+            case 2:
+                PhotonNetwork.Instantiate("StemCell", GameObject.Find("Player - 2").transform.position, Quaternion.Euler(90, 0, 0), 0, new object[] { (bool)false });
+                break;
+            default:
+                break;
+        }
+
     }
 
     void Rematch()
@@ -216,7 +197,7 @@ public class OnlineGameController : Photon.PunBehaviour
 
         }
 
-       
+
         this.gameObject.SetActive(false);
         Invoke("Disconnect", 2.0f);
     }
