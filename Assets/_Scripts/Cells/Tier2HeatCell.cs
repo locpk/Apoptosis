@@ -107,11 +107,11 @@ public class Tier2HeatCell : BaseCell
             }
             if (hasteActive)
             {
-                navAgent.speed = 5.0f;
+                navAgent.speed = 15.0f;
             }
             else
             {
-                navAgent.speed = moveSpeed;
+                navAgent.speed = 9.0f;
             }
 
             switch (currentState)
@@ -227,7 +227,7 @@ public class Tier2HeatCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
-
+        navAgent.speed = 9.0f;
 
     }
     void MUltiDMg()

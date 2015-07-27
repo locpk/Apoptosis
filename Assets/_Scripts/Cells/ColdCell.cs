@@ -23,7 +23,7 @@ public class ColdCell : BaseCell
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
-        
+        navAgent.speed = 6.0f;
 
     }
     void MUltiDMg()

@@ -119,7 +119,7 @@ public class StemCell : BaseCell
         base.bAwake();
         InvokeRepeating("MUltiDMg", 1.0f, 1.0f);
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
-
+        navAgent.speed = 7.0f;
     }
 
     // Use this for initialization
