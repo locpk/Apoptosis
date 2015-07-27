@@ -9,6 +9,7 @@ public class Instructions_ImageSwap_Controller : MonoBehaviour
     public Sprite Controls_Sprite;
     public Sprite EvolutionTree_Sprite;
     public Sprite Gameplay_Sprite;
+    public Sprite Tablet_Controls;
 
     public int starting_page;
     public GameObject canvas;
@@ -46,17 +47,19 @@ public class Instructions_ImageSwap_Controller : MonoBehaviour
         }
         else if (canvas.GetComponent<Image>().sprite == EvolutionTree_Sprite)
         {
-            starting_page = 0;
+             canvas.GetComponent<Image>().sprite = Gameplay_Sprite;
+        }
 
-            canvas.GetComponent<Image>().sprite = Gameplay_Sprite;
+        else if (canvas.GetComponent<Image>().sprite == Tablet_Controls)
+        {
+
+            canvas.GetComponent<Image>().sprite = Controls_Sprite;
         }
         else if (canvas.GetComponent<Image>().sprite == Controls_Sprite)
         {
-            starting_page = 1;
-
+ 
             canvas.GetComponent<Image>().sprite = EvolutionTree_Sprite;
         }
-
         //starting_page--;
 
         //switch(starting_page)
@@ -90,6 +93,10 @@ public class Instructions_ImageSwap_Controller : MonoBehaviour
             canvas.GetComponent<Image>().sprite = Controls_Sprite;
         }
         else if (canvas.GetComponent<Image>().sprite == Controls_Sprite)
+        {
+            canvas.GetComponent<Image>().sprite = Tablet_Controls;
+        }
+        else if (canvas.GetComponent<Image>().sprite == Tablet_Controls)
         {
             Application.LoadLevel("Tutorial_Level");
         }
