@@ -39,7 +39,7 @@ public class LobbyController : Photon.PunBehaviour
         base.OnJoinedLobby();
         if (PhotonNetwork.countOfRooms == 0)
         {
-            PhotonNetwork.CreateRoom("Kewlala-SGP" + PhotonNetwork.time.ToString(), new RoomOptions() { maxPlayers = 2 }, null);
+            PhotonNetwork.CreateRoom(null, new RoomOptions() { maxPlayers = 2 }, null);
         }
             
         else
@@ -76,6 +76,6 @@ public class LobbyController : Photon.PunBehaviour
     public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
     {
         base.OnPhotonRandomJoinFailed(codeAndMsg);
-        PhotonNetwork.CreateRoom("Kewlala-SGP" + PhotonNetwork.time.ToString(), new RoomOptions() { maxPlayers = 2 }, null);
+        PhotonNetwork.CreateRoom(null, new RoomOptions() { maxPlayers = 2 }, null);
     }
 }
