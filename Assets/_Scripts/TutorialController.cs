@@ -61,7 +61,7 @@ public class TutorialController : MonoBehaviour
         if (Input.touchSupported)
         {
             Task welcome = new Task();
-            welcome.Text = "Welcome to Apoptosis! This tutorial will teach you the controls and basic actions that can be taken in the game. Press Skip to continue.";
+            welcome.Text = "Welcome to Apoptosis! This tutorial will teach you the controls and basic actions that can be taken in the game. Press Next to continue.";
             welcome.Initialize = EmptyInitialization;
             welcome.IsComplete = AnyKeyCondition;
             Tasklist.Add(welcome);
@@ -71,27 +71,32 @@ public class TutorialController : MonoBehaviour
             unitButtonSelect.IsComplete = UnitSelectionButton;
             Tasklist.Add(unitButtonSelect);
             Task unitSelect = new Task();
-            unitSelect.Text = "One finger touch your units or one finger touch and drag over any of your units to select them.";
+            unitSelect.Text = "One finger touch your units or one finger touch and drag over any of your units to select them. Press Next to continue.";
             unitSelect.Initialize = EmptyInitialization;
             unitSelect.IsComplete = UnitSelectionCondition;
             Tasklist.Add(unitSelect);
             Task targetButtonSelect = new Task();
             targetButtonSelect.Text = "If the Button is on, touch the Big Circle Button to turn it off.";
             targetButtonSelect.Initialize = EmptyInitialization;
-            targetButtonSelect.IsComplete = UnitSelectionButton;
+            targetButtonSelect.IsComplete = TargetSelectionButton;
             Tasklist.Add(unitButtonSelect);
             Task targetSelection = new Task();
             targetSelection.Text = "Now enemy units and proteins can be targeted. One finger touch or one finger touch and drag over many to set them as a target.";
             targetSelection.Initialize = TargetSelectionInitialization;
             targetSelection.IsComplete = TargetSelectionCondition;
             Tasklist.Add(targetSelection);
+            Task proteinDegeneration = new Task();
+            proteinDegeneration.Text = "Your health degrades over time in other Game modes.";
+            proteinDegeneration.Initialize = EmptyInitialization;
+            proteinDegeneration.IsComplete = AnyKeyCondition;
+            Tasklist.Add(proteinDegeneration);
             Task proteinConsumption = new Task();
             proteinConsumption.Text = "Targeting a protein will tell your selected units to consume it. Consume the protein.";
             proteinConsumption.Initialize = EmptyInitialization;
             proteinConsumption.IsComplete = ProteinConsumptionCondition;
             Tasklist.Add(proteinConsumption);
             Task stemLesson = new Task();
-            stemLesson.Text = "The Stem Cell you've been controlling is the basis of your army. It's important not to lose all of these units. Let's Start by making more. Press Skip to continue.";
+            stemLesson.Text = "The Stem Cell you've been controlling is the basis of your army. It's important not to lose all of these units. Let's Start by making more. Press Next to continue.";
             stemLesson.Initialize = EmptyInitialization;
             stemLesson.IsComplete = AnyKeyCondition;
             Tasklist.Add(stemLesson);
@@ -111,7 +116,7 @@ public class TutorialController : MonoBehaviour
             mutateButton.IsComplete = EvolveButtonPressed;
             Tasklist.Add(mutateButton);
             Task mutateHeat = new Task();
-            mutateHeat.Text = "Now press the Flame Button to mutate your cell into a faster heat cell. Remember to leave at least one stem cell.";
+            mutateHeat.Text = "Now press the Heat Button to mutate your cell into a faster heat cell. Remember to leave at least one stem cell.";
             mutateHeat.Initialize = EmptyInitialization;
             mutateHeat.IsComplete = MutateHeatCondition;
             Tasklist.Add(mutateHeat);
@@ -121,7 +126,7 @@ public class TutorialController : MonoBehaviour
             checkEvolveButton.IsComplete = EvolveButtonPressed;
             Tasklist.Add(checkEvolveButton);
             Task mutateCold = new Task();
-            mutateCold.Text = "Now press the Snow Flake to mutate it into a tougher cold cell. Remember to leave at least one stem cell.";
+            mutateCold.Text = "Now press the Cold Button to mutate it into a tougher cold cell. Remember to leave at least one stem cell.";
             mutateCold.Initialize = EmptyInitialization;
             mutateCold.IsComplete = MutateColdCondition;
             Tasklist.Add(mutateCold);
@@ -131,7 +136,7 @@ public class TutorialController : MonoBehaviour
             checkAlkaliArea.IsComplete = EvolveButtonPressed;
             Tasklist.Add(checkAlkaliArea);
             Task mutateAlkali = new Task();
-            mutateAlkali.Text = "Press the Bubble Button to mutate your cell into an alkali cell. Remember to leave at least one stem cell.";
+            mutateAlkali.Text = "Press the Alkali Button to mutate your cell into an alkali cell. Remember to leave at least one stem cell.";
             mutateAlkali.Initialize = EmptyInitialization;
             mutateAlkali.IsComplete = MutateAlkaliCondition;
             Tasklist.Add(mutateAlkali);
@@ -141,22 +146,22 @@ public class TutorialController : MonoBehaviour
             checkAcidicArea.IsComplete = EvolveButtonPressed;
             Tasklist.Add(checkAcidicArea);
             Task mutateAcidic = new Task();
-            mutateAcidic.Text = "Press the Skull&Crossbones to mutate your cell into an acidic cell. Remember to leave at least one stem cell.";
+            mutateAcidic.Text = "Press the Acidic Button to mutate your cell into an acidic cell. Remember to leave at least one stem cell.";
             mutateAcidic.Initialize = EmptyInitialization;
             mutateAcidic.IsComplete = MutateAcidicCondition;
             Tasklist.Add(mutateAcidic);
             Task cancerLesson = new Task();
-            cancerLesson.Text = "Stem cells can divide indefinitely with no repurcussions. Heat and cold cells can divide too, but the more they divide the higher the chance they have of becoming cancerous. Press Skip to continue.";
+            cancerLesson.Text = "Stem cells can divide indefinitely with no repurcussions. Heat and cold cells can divide too, but the more they divide the higher the chance they have of becoming cancerous. Press Next to continue.";
             cancerLesson.Initialize = EmptyInitialization;
             cancerLesson.IsComplete = AnyKeyCondition;
             Tasklist.Add(cancerLesson);
             Task cancerLesson2 = new Task();
-            cancerLesson2.Text = "Cancer cells cannot be controlled and will attack everything. Select at least one stem, heat and cold cell then press 'D' to divide each one. Make at least 2 of each.";
+            cancerLesson2.Text = "Cancer cells cannot be controlled and will attack everything. Select at least one stem, heat and cold cell then divide each one. Make at least 2 of each.";
             cancerLesson2.Initialize = EmptyInitialization;
             cancerLesson2.IsComplete = CancerLesson2Condition;
             Tasklist.Add(cancerLesson2);
             Task evolutionLesson = new Task();
-            evolutionLesson.Text = "Some cells can be combined to evolve into a more powerfull cell. Stem cells cannot be merged. Press Skip to continue.";
+            evolutionLesson.Text = "Some cells can be combined to evolve into a more powerfull cell. Stem cells cannot be merged. Press Next to continue.";
             evolutionLesson.Initialize = EmptyInitialization;
             evolutionLesson.IsComplete = AnyKeyCondition;
             Tasklist.Add(evolutionLesson);
@@ -177,7 +182,7 @@ public class TutorialController : MonoBehaviour
             Tasklist.Add(evolutionNerve);
 
             Task tutorialComplete = new Task();
-            tutorialComplete.Text = "This completes the tutorial for Apoptosis. Good luck in your future games! Press Skip to return to the main menu.";
+            tutorialComplete.Text = "This completes the tutorial for Apoptosis. Good luck in your future games! Press Next to return to the main menu.";
             tutorialComplete.Initialize = EmptyInitialization;
             tutorialComplete.IsComplete = AnyKeyCondition;
             Tasklist.Add(tutorialComplete);
@@ -200,7 +205,7 @@ public class TutorialController : MonoBehaviour
             targetSelection.IsComplete = TargetSelectionCondition;
             Tasklist.Add(targetSelection);
             Task proteinDegeneration = new Task();
-            proteinDegeneration.Text = "Your health degrades over time in other Game modes.";
+            proteinDegeneration.Text = "Your health degrades over time in other Game modes. Press any key to continue.";
             proteinDegeneration.Initialize = EmptyInitialization;
             proteinDegeneration.IsComplete = AnyKeyCondition;
             Tasklist.Add(proteinDegeneration);

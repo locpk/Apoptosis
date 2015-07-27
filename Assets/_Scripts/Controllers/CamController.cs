@@ -58,8 +58,25 @@ public class CamController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (PhotonNetwork.connected)
+        {
+            switch (PhotonNetwork.player.ID)
+            {
+                case 1:
+                    smoothFocusTarget = GameObject.Find("Player - 1").transform.position;
+                    break;
+                case 2:
+                    smoothFocusTarget = GameObject.Find("Player - 2").transform.position;
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            smoothFocusTarget = transform.position;
+        }
 
-        smoothFocusTarget = transform.position;
         zoomValue = Mathf.Clamp(zoomValue, minZoom, maxZoom);
         GetComponentInChildren<Camera>().orthographicSize = zoomValue;
         StartCoroutine(ZoomOutWhenStart(2.0f, 2.0f));
