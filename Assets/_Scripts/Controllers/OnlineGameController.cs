@@ -17,6 +17,8 @@ public class OnlineGameController : Photon.PunBehaviour
 
     void Awake()
     {
+        gameEnded = false;
+        gameStarted = false;
         PhotonNetwork.automaticallySyncScene = true;
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>(); // gets the sound sources
         winScreen = GameObject.FindGameObjectWithTag("Win_Screen");
