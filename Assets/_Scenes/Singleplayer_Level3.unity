@@ -1758,6 +1758,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11466066, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 22413414, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1866,6 +1870,38 @@ Prefab:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetMUSIC_volume
       objectReference: {fileID: 0}
+    - target: {fileID: 166372, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
+      propertyPath: m_TagString
+      value: Music_Slider
+      objectReference: {fileID: 0}
+    - target: {fileID: 187096, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
+      propertyPath: m_TagString
+      value: SFX_Slider
+      objectReference: {fileID: 0}
+    - target: {fileID: 11466066, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11466066, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11466066, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 391456394}
+    - target: {fileID: 11466066, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SaveCFGFile
+      objectReference: {fileID: 0}
+    - target: {fileID: 11466066, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 174214, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
+      propertyPath: m_TagString
+      value: Fullscreen_Toggle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
   m_IsPrefabParent: 0
@@ -1873,6 +1909,12 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 124580, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
   m_PrefabInternal: {fileID: 391456392}
+--- !u!114 &391456394 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11422142, guid: 56198160582e17d4e85cb5bcda4e8e26,
+    type: 2}
+  m_PrefabInternal: {fileID: 391456392}
+  m_Script: {fileID: 11500000, guid: adf1ef89993ffb74e9f6e5d35a7af046, type: 3}
 --- !u!1 &414473843
 GameObject:
   m_ObjectHideFlags: 0

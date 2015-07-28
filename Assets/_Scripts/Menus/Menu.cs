@@ -65,7 +65,7 @@ public class Menu : MonoBehaviour
 
         if (!System.IO.File.Exists("OptionsMenu.cfg"))
         {
-            configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.Write, System.IO.FileShare.None);
+            configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
             byte[] emptyparams = new byte[13];
             configFile.Write(emptyparams, 0, 13);
             configFile.Close();
@@ -83,18 +83,18 @@ public class Menu : MonoBehaviour
         }
 
 
-        // make fullscreen
-        //if (Application.platform == RuntimePlatform.Android)
-        //{
-        //    Screen.fullScreen = true;
-        //    FullscreenToggle.SetActive(false);
-        //}
-        //else
-        //{
-        //    Screen.fullScreen = b_fullscreen;
-        //    FullscreenToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = b_fullscreen;
+         //make fullscreen
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            Screen.fullScreen = true;
+            FullscreenToggle.SetActive(false);
+        }
+        else
+        {
+            Screen.fullScreen = b_fullscreen;
+            FullscreenToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = b_fullscreen;
 
-        //}
+        }
         changed = false; // must not forget to reset x
     }
 
@@ -213,16 +213,15 @@ public class Menu : MonoBehaviour
     public void SaveToFile()
     {
 
-        if (changed)
-        {
+       
             configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Open, System.IO.FileAccess.Write, System.IO.FileShare.None);
             configFile.Write(System.BitConverter.GetBytes(MasterVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
             configFile.Write(System.BitConverter.GetBytes(MusicVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
             configFile.Write(System.BitConverter.GetBytes(SFXVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
             configFile.Write(System.BitConverter.GetBytes(b_fullscreen), 0, sizeof(bool));
             configFile.Close();
-            changed = false;
-        }
+            
+    
 
     }
 
@@ -231,4 +230,5 @@ public class Menu : MonoBehaviour
     {
         Application.OpenURL(link);
     }
+
 }

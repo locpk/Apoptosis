@@ -35,6 +35,8 @@ TagManager:
   - Shader_Top
   - Shader_Bottom
   - Terrain
+  - Evolve_Animator
+  - Fullscreen_Toggle
   layers:
   - Default
   - TransparentFX
