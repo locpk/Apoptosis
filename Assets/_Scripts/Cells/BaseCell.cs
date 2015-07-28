@@ -507,7 +507,7 @@ public class BaseCell : Photon.PunBehaviour
 
     protected void bAwake()
     {
-        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>().GetInstance();
         navAgent = GetComponent<NavMeshAgent>();
         navObstacle = GetComponent<NavMeshObstacle>();
         navAgent.speed = moveSpeed;
@@ -751,6 +751,8 @@ public class BaseCell : Photon.PunBehaviour
         if (isMine && currentState != CellState.ATTACK && currentState != CellState.IDLE && currentState != CellState.CONSUMING)
         {
             transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
+            // returns the music back to normal after the alert ping
+            sound_manager.GetInstance().master_mixer.FindSnapshot("Snapshot").TransitionTo(3.0f);
         }
         if (!isMine && celltype != CellType.CANCER_CELL)
         {
