@@ -1406,6 +1406,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStarted: 0
+  friendlySelector: {fileID: 155366, guid: 3912fbb8d5c6beb4dba246a49ba5d10d, type: 2}
+  targetSelector: {fileID: 175858, guid: 10654ac488349b64888c8a297e3e3890, type: 2}
   movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
   attackPin: {fileID: 0}
   isSelecting: 1
@@ -4027,6 +4029,8 @@ MonoBehaviour:
   optionsMenu: {fileID: 507487571}
   instructionsMenu: {fileID: 137517897}
   pauseMenuButton: {fileID: 832163503}
+  mouseInstructButton: {fileID: 0}
+  touchInstructButton: {fileID: 0}
 --- !u!114 &1552430458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6037,7 +6041,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471618, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 11430304, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
       propertyPath: viewIdField

@@ -1585,6 +1585,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStarted: 1
+  friendlySelector: {fileID: 155366, guid: 3912fbb8d5c6beb4dba246a49ba5d10d, type: 2}
+  targetSelector: {fileID: 175858, guid: 10654ac488349b64888c8a297e3e3890, type: 2}
   movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
   attackPin: {fileID: 0}
   isSelecting: 1
@@ -1602,9 +1604,7 @@ MonoBehaviour:
   allSelectableTargets: []
   selectedTargets: []
   selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
-  friendly_indicator: {fileID: 2800000, guid: 2891a1c9bf4b09b4098df9cf5af206a0, type: 3}
   minimapCamera: {fileID: 180629590}
-  target_indicator: {fileID: 2800000, guid: 4e1879e39f4ffcf4fa2d9ac510b95bac, type: 3}
 --- !u!4 &245173500
 Transform:
   m_ObjectHideFlags: 0
