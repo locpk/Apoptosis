@@ -314,6 +314,15 @@ public class TutorialController : MonoBehaviour
         {
             NextTask();
         }
+        if (Time.timeScale == 0.0f)
+        {
+            taskCanvas.gameObject.SetActive(false);
+            showTaskButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            taskCanvas.gameObject.SetActive(true);
+        }
     }
 
     void FixedUpdate()
@@ -323,6 +332,11 @@ public class TutorialController : MonoBehaviour
         {
             item.GetComponent<BaseCell>().isDepleting = false;
             item.GetComponent<BaseCell>().currentProtein = 400;
+        }
+        if (Time.timeScale == 0.0f)
+        {
+            taskCanvas.gameObject.SetActive(false);
+            showTaskButton.gameObject.SetActive(false);
         }
     }
 
