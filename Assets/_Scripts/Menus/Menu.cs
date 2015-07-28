@@ -48,7 +48,7 @@ public class Menu : MonoBehaviour
     }
     void Awake()
     {
-
+        Time.timeScale = 1.0f;
         //   testAudio = GameObject.FindGameObjectWithTag("Menu_Canvas").GetComponent<AudioSource>();
 
         // hides the loaging screen.

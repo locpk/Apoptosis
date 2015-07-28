@@ -191,6 +191,7 @@ public class PauseMenu : MonoBehaviour
     //call this function to exit single player and go back to the main menu
     public void ExitToMainMenu()
     {
+        Time.timeScale = 1.0f;
         //load the main menu scene
         Application.LoadLevel("MainMenu");
     }
