@@ -47,7 +47,8 @@ public class AlkaliArea:BaseArea {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
 
-            if (!sound_manager.sounds_miscellaneous[6].isPlaying && enterCell.celltype != CellType.ALKALI_CELL && collider.gameObject.tag == "Unit") {
+            if (!sound_manager.sounds_miscellaneous[6].isPlaying && enterCell.celltype != CellType.ALKALI_CELL && collider.gameObject.tag == "Unit" && collider.GetComponent<BaseCell>().isMine)
+            {
                 sound_manager.sounds_miscellaneous[6].Play();
             }
 
