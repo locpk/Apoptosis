@@ -10,7 +10,7 @@ public class Tier2ColdCell : BaseCell
     public TakeDamage multidamagesources;
     public GameObject particles;
 
-    PlayerController controller;
+    //PlayerController controller;
 
     public GameObject stun;
     int instanonce = 0;
@@ -20,7 +20,7 @@ public class Tier2ColdCell : BaseCell
     // Use this for initialization
     void Start()
     {
-        controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
+        //controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
         base.bStart();
 
 

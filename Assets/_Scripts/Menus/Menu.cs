@@ -24,11 +24,11 @@ public class Menu : MonoBehaviour
     public AudioSource click_Sound;
     public bool muted;
     private float volume_master_stored;
-    Sound_Manager sound_manager;
+    //Sound_Manager sound_manager;
 
 
     // for file IO 
-    bool changed;
+    //bool changed;
     byte[] configuration;
     System.IO.FileStream configFile;
 
@@ -95,14 +95,14 @@ public class Menu : MonoBehaviour
             FullscreenToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = b_fullscreen;
 
         }
-        changed = false; // must not forget to reset x
+        //changed = false; // must not forget to reset x
     }
 
     public void ToggleMakeFullScreen(bool full)
     {
         Screen.fullScreen = full;
         b_fullscreen = full;
-        changed = true;
+        //changed = true;
     }
 
 
@@ -111,7 +111,7 @@ public class Menu : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
-        sound_manager = GameObject.Find("Sound_Manager").GetComponent<Sound_Manager>().GetInstance();
+        //sound_manager = GameObject.Find("Sound_Manager").GetComponent<Sound_Manager>().GetInstance();
     }
 
 

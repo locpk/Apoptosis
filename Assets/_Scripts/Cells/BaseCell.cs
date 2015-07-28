@@ -49,6 +49,7 @@ public class BaseCell : Photon.PunBehaviour
     public GameObject gRevertColdPrefab;
     public GameObject gRevertNervePrefab;
 
+
     public Sprite health_10;
     public Sprite health_50;
     public Sprite health_100;
@@ -777,6 +778,24 @@ public class BaseCell : Photon.PunBehaviour
             else
             {
                 transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
+            }
+        }
+
+        if (!isSelected)
+        {
+            if (transform.FindChild("FriendlySelector(Clone)"))
+            {
+                Transform  tCatch = transform.FindChild("FriendlySelector(Clone)");
+                GameObject.Destroy(tCatch.gameObject);
+            }
+        }
+
+        if (!pcontroller.selectedTargets.Contains(this.gameObject))
+        {
+            if (transform.FindChild("TargetSelector(Clone)"))
+            {
+                Transform  tCatch = transform.FindChild("TargetSelector(Clone)");
+                GameObject.Destroy(tCatch.gameObject);
             }
         }
 

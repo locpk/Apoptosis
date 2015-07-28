@@ -50,7 +50,8 @@ public class Lighting : MonoBehaviour
         {
             if (other.gameObject.GetComponent<BaseCell>().isMine == false)
             {
-               
+                other.gameObject.GetComponent<BaseCell>().currentProtein -= realOwner.GetComponent<BaseCell>().attackDamage;
+                other.gameObject.GetComponent<BaseCell>().stunned = true;
                 currentTarget.GetComponent<BaseCell>().currentProtein -= realOwner.GetComponent<BaseCell>().attackDamage;
                 currentTarget.GetComponent<BaseCell>().stunned = true;
                 if (PhotonNetwork.connected)

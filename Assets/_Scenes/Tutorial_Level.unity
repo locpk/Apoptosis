@@ -2180,7 +2180,7 @@ Prefab:
     - target: {fileID: 11436092, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
       propertyPath: attackPin
       value: 
-      objectReference: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 11447774, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
       propertyPath: TouchButton
       value: 
@@ -2201,6 +2201,14 @@ Prefab:
       propertyPath: target_indicator
       value: 
       objectReference: {fileID: 2800000, guid: 4e1879e39f4ffcf4fa2d9ac510b95bac, type: 3}
+    - target: {fileID: 11436092, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
+      propertyPath: friendlySelector
+      value: 
+      objectReference: {fileID: 155366, guid: 3912fbb8d5c6beb4dba246a49ba5d10d, type: 2}
+    - target: {fileID: 11436092, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
+      propertyPath: targetSelector
+      value: 
+      objectReference: {fileID: 175858, guid: 10654ac488349b64888c8a297e3e3890, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
   m_IsPrefabParent: 0
