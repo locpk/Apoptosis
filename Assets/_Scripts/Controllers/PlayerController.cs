@@ -37,7 +37,8 @@ public class PlayerController : MonoBehaviour
 
     public static bool isOverUI = false;
 
-
+    public GameObject friendlySelector;
+    public GameObject targetSelector;
 
 
     public void TurnOnOverUI()
@@ -77,11 +78,10 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> selectedTargets;
     //    List<BaseCell>[] groups;
     public Texture selector;
-    public Texture friendly_indicator;
+
 
     public Camera minimapCamera;
 
-    public Texture target_indicator;
 
     float fps;
     float initTouchTime;
@@ -137,6 +137,11 @@ public class PlayerController : MonoBehaviour
         {
 
             _in.isSelected = true;
+            if (!_in.transform.FindChild("FriendlySelector(Clone)"))
+            {
+                GameObject tFriendlySelector = GameObject.Instantiate(friendlySelector, _in.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                tFriendlySelector.transform.parent = _in.transform;
+            }
             allSelectableUnits.Add(_in);
             selectedUnits.Add(_in);
             CheckSelectedUnits();
@@ -241,6 +246,13 @@ public class PlayerController : MonoBehaviour
                     selectedUnits.Add(item);
                     item.isSelected = true;
 
+
+                    if (!item.transform.FindChild("FriendlySelector(Clone)"))
+                    {
+                        GameObject tFriendlySelector = GameObject.Instantiate(friendlySelector, item.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                        tFriendlySelector.transform.parent = item.transform;
+                    }
+
                     if (!sound_manager.sounds_miscellaneous[0].isPlaying)
                     {
                         sound_manager.sounds_miscellaneous[0].Play();
@@ -284,6 +296,13 @@ public class PlayerController : MonoBehaviour
                 selectedUnits.Add(item);
                 item.isSelected = true;
 
+                //draw selector
+                if (!item.transform.FindChild("FriendlySelector(Clone)"))
+                {
+                    GameObject tFriendlySelector = GameObject.Instantiate(friendlySelector, item.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                    tFriendlySelector.transform.parent = item.transform;
+                }
+
                 if (!sound_manager.sounds_miscellaneous[0].isPlaying)
                 {
                     sound_manager.sounds_miscellaneous[0].Play();
@@ -316,6 +335,11 @@ public class PlayerController : MonoBehaviour
             if (GUISelectRect.Contains(itemPos))
             {
                 selectedTargets.Add(item);
+                if (!item.transform.FindChild("TargetSelector(Clone)"))
+                {
+                    GameObject tTargetSelector = GameObject.Instantiate(targetSelector, item.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                    tTargetSelector.transform.parent = item.transform;
+                }
             }
         }
     }
@@ -345,6 +369,12 @@ public class PlayerController : MonoBehaviour
             {
 
                 selectedTargets.Add(item);
+
+                if (!item.transform.FindChild("TargetSelector(Clone)"))
+                {
+                    GameObject tTargetSelector = GameObject.Instantiate(targetSelector, item.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                    tTargetSelector.transform.parent = item.transform;
+                }
             }
         }
     }
@@ -488,36 +518,7 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
-            float scale = .7f;
-            //GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-            foreach (GameObject item in selectedTargets)
-            {
-                if (item && selectedUnits.Count > 0)
-                {
-                    Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
 
-                    float left = drawLoc.x - (float)43 * scale;
-                    float top = -(drawLoc.y + (float)43 * scale) + Screen.height;
-                    Rect location = new Rect(left, top, (float)86 * scale, (float)86 * scale);
-                    // this draws the target unit indicator
-                    GUI.DrawTexture(location, target_indicator);
-                }
-            }
-
-            scale = 0.6f; // the size of the circle to draw circle 
-            GUI.color = new Color(0.0f, 1.0f, 0.5f, 1.0f);
-            foreach (BaseCell item in selectedUnits)
-            {
-                if (item)
-                {
-                    Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
-                    float left = drawLoc.x - (float)43;
-                    float top = -(drawLoc.y + (float)43) + Screen.height;
-                    Rect location = new Rect(left, top, (float)86, (float)86);
-                    // this draws the frirndly unit indicator
-                    GUI.DrawTexture(location, friendly_indicator);
-                }
-            }
 
             if (Time.timeScale > 0.0f)
             {
@@ -555,13 +556,13 @@ public class PlayerController : MonoBehaviour
             }
 
 
-            
+
         }
     }
 
     public void FixedUpdate()
     {
-        
+
 
         if (isSelecting && Input.touchSupported)
         {
@@ -574,9 +575,9 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        
 
-        
+
+
     }
 
     public void UnitStop()
@@ -686,6 +687,12 @@ public class PlayerController : MonoBehaviour
                             if (hitInfo.collider.tag == "Unit" || hitInfo.collider.tag == "Protein")
                             {
                                 selectedTargets.Add(hitInfo.collider.gameObject);
+                                if (!hitInfo.transform.FindChild("TargetSelector(Clone)"))
+                                {
+                                    GameObject tTargetSelector = GameObject.Instantiate(targetSelector, hitInfo.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                                    tTargetSelector.transform.parent = hitInfo.transform;
+                                }
+
                             }
                             else if (selectedTargets.Count == 0)
                             {
@@ -867,6 +874,11 @@ public class PlayerController : MonoBehaviour
                         if (allSelectableTargets.Contains(hitObject))
                         {
                             selectedTargets.Add(hitObject);
+                            if (!hitObject.transform.FindChild("TargetSelector(Clone)"))
+                            {
+                                GameObject tTargetSelector = GameObject.Instantiate(targetSelector, hitObject.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                                tTargetSelector.transform.parent = hitObject.transform;
+                            }
                         }
                     }
 

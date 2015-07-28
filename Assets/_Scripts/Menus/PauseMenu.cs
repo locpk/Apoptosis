@@ -20,6 +20,10 @@ public class PauseMenu : MonoBehaviour
     public GameObject instructionsMenu;
     //Capture the pause menu button
     public GameObject pauseMenuButton;
+    //get the Instructions button
+    public GameObject mouseInstructButton;
+    //get the tablet instructions button
+    public GameObject touchInstructButton;
 
     //Sound_Manager manager; 
 
