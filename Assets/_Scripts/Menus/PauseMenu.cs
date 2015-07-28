@@ -55,15 +55,6 @@ public class PauseMenu : MonoBehaviour
         optionsMenu.SetActive(false);
         instructionsMenu.SetActive(false);
 
-        if (Input.touchSupported)
-        {
-            touchInstructButton.SetActive(true);
-        }
-        else
-        {
-            mouseInstructButton.SetActive(true);
-        }
-
         //playerController = GameObject.FindGameObjectWithTag("PlayerController");
         
     }

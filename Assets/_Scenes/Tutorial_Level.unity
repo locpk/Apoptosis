@@ -5890,3 +5890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de68ee5c035c8146b94bd8f2206c8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  Mouse_Controls_Sprite: {fileID: 21300000, guid: c479c7f3e9a739843a4a2eab5e8dba25,
+    type: 3}
+  Tablet_Controls_Sprite: {fileID: 21300000, guid: 69bd9b69ac7b9794f9b3bd8271a1c482,
+    type: 3}
