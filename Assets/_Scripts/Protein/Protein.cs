@@ -42,8 +42,15 @@ public class Protein : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
-        
+
+        if (!GameObject.Find("PlayerControl").GetComponent<PlayerController>().selectedTargets.Contains(this.gameObject))
+        {
+            if (transform.FindChild("TargetSelector(Clone)"))
+            {
+                Transform tCatch = transform.FindChild("TargetSelector(Clone)");
+                GameObject.Destroy(tCatch.gameObject);
+            }
+        }
 	}
     void FixedUpdate()
     {
