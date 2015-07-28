@@ -334,11 +334,14 @@ public class PlayerController : MonoBehaviour
             itemPos.y = -itemPos.y + Screen.height;
             if (GUISelectRect.Contains(itemPos))
             {
-                selectedTargets.Add(item);
-                if (!item.transform.FindChild("TargetSelector(Clone)"))
+                if (item.GetComponent<FogOfWarHider>().isVisible)
                 {
-                    GameObject tTargetSelector = GameObject.Instantiate(targetSelector, item.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                    tTargetSelector.transform.parent = item.transform;
+                    selectedTargets.Add(item);
+                    if (!item.transform.FindChild("TargetSelector(Clone)"))
+                    {
+                        GameObject tTargetSelector = GameObject.Instantiate(targetSelector, item.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                        tTargetSelector.transform.parent = item.transform;
+                    }
                 }
             }
         }
@@ -367,14 +370,17 @@ public class PlayerController : MonoBehaviour
             itemPos.y = -itemPos.y + Screen.height;
             if (GUISelectRect.Contains(itemPos))
             {
-
-                selectedTargets.Add(item);
-
-                if (!item.transform.FindChild("TargetSelector(Clone)"))
+                if (item.GetComponent<FogOfWarHider>().isVisible)
                 {
-                    GameObject tTargetSelector = GameObject.Instantiate(targetSelector, item.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                    tTargetSelector.transform.parent = item.transform;
+                    selectedTargets.Add(item);
+
+                    if (!item.transform.FindChild("TargetSelector(Clone)"))
+                    {
+                        GameObject tTargetSelector = GameObject.Instantiate(targetSelector, item.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                        tTargetSelector.transform.parent = item.transform;
+                    }
                 }
+
             }
         }
     }
@@ -520,8 +526,10 @@ public class PlayerController : MonoBehaviour
             }
 
 
+
             if (Time.timeScale > 0.0f)
             {
+                GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
                 GUI.BeginGroup(new Rect(Screen.width * 0.5f - 400, 25, Screen.width * 0.5f + 500, 100));
                 GUI.Box(new Rect(0, 0, 75, 60), "Stem Cells: ");
                 GUI.Label(new Rect(35, 35, 50, 50), NumStemCells.ToString());
@@ -686,13 +694,15 @@ public class PlayerController : MonoBehaviour
                         {
                             if (hitInfo.collider.tag == "Unit" || hitInfo.collider.tag == "Protein")
                             {
-                                selectedTargets.Add(hitInfo.collider.gameObject);
-                                if (!hitInfo.transform.FindChild("TargetSelector(Clone)"))
+                                if (hitInfo.collider.GetComponent<FogOfWarHider>().isVisible)
                                 {
-                                    GameObject tTargetSelector = GameObject.Instantiate(targetSelector, hitInfo.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                                    tTargetSelector.transform.parent = hitInfo.transform;
+                                    selectedTargets.Add(hitInfo.collider.gameObject);
+                                    if (!hitInfo.transform.FindChild("TargetSelector(Clone)"))
+                                    {
+                                        GameObject tTargetSelector = GameObject.Instantiate(targetSelector, hitInfo.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                                        tTargetSelector.transform.parent = hitInfo.transform;
+                                    }
                                 }
-
                             }
                             else if (selectedTargets.Count == 0)
                             {
@@ -878,11 +888,14 @@ public class PlayerController : MonoBehaviour
                         GameObject hitObject = hitInfo.collider.gameObject;
                         if (allSelectableTargets.Contains(hitObject))
                         {
-                            selectedTargets.Add(hitObject);
-                            if (!hitObject.transform.FindChild("TargetSelector(Clone)"))
+                            if (hitObject.GetComponent<FogOfWarHider>().isVisible)
                             {
-                                GameObject tTargetSelector = GameObject.Instantiate(targetSelector, hitObject.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
-                                tTargetSelector.transform.parent = hitObject.transform;
+                                selectedTargets.Add(hitObject);
+                                if (!hitObject.transform.FindChild("TargetSelector(Clone)"))
+                                {
+                                    GameObject tTargetSelector = GameObject.Instantiate(targetSelector, hitObject.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                                    tTargetSelector.transform.parent = hitObject.transform;
+                                }
                             }
                         }
                     }
