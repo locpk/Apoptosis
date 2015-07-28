@@ -205,6 +205,10 @@ public class AcidicCell : BaseCell
                 base.bUpdate();
                 break;
             case CellState.ATTACK_MOVING:
+                if (!navAgent.isActiveAndEnabled && !primaryTarget && targets.Count == 0)
+                {
+                    currentState = CellState.IDLE;
+                }
                 break;
             case CellState.CONSUMING:
                 base.bUpdate();
