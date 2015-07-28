@@ -118,7 +118,8 @@ public class LobbyController : Photon.PunBehaviour
                 PhotonNetwork.room.open = false;
             }
         }
-        PhotonNetwork.LoadLevel("Multiplayer_Level");
+        PhotonNetwork.isMessageQueueRunning = false;
+        GetComponent<Menu>().LoadScene("Multiplayer_Level");
     }
 
     public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
