@@ -7,7 +7,7 @@ public class AITrapCell : MonoBehaviour{
     private float m_visionRange;
     private Collider[] m_cellsInSight;
     private BaseCell m_baseCell;
-
+    private Sound_Manager sound_manager;
     private LayerMask unitLayerMask;
 
     void Awake () {
@@ -60,7 +60,13 @@ public class AITrapCell : MonoBehaviour{
         if (GetComponent<FogOfWarViewer>() != null) Destroy(GetComponent<FogOfWarViewer>());
         GameObject.Find("PlayerControl").GetComponent<PlayerController>().RemoveDeadCell(m_baseCell);
         GameObject.Find("PlayerControl").GetComponent<PlayerController>().AddNewCell(m_baseCell);
-
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>().GetInstance();
+        sound_manager.GetInstance().master_mixer.FindSnapshot("Snapshot_Attack").TransitionTo(3.0f);
+        if (!sound_manager.GetInstance().battle_music.isPlaying)
+        {
+        sound_manager.GetInstance().battle_music.Play();
+            
+        }
     }
 
     void FixedUpdate() {
@@ -83,6 +89,12 @@ public class AITrapCell : MonoBehaviour{
                 }
             }
             break;
+        }
+        // starts the music if there is an attack 
+        if ( m_baseCell.currentState == CellState.ATTACK)
+        {
+            sound_manager.GetInstance().master_mixer.FindSnapshot("Snapshot_Attack").TransitionTo(3.0f);
+            
         }
         if (!targetFound) {
             m_baseCell.currentState = CellState.IDLE;

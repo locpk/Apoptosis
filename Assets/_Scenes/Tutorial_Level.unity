@@ -4825,8 +4825,6 @@ MonoBehaviour:
   optionsMenu: {fileID: 922180830}
   instructionsMenu: {fileID: 2049554541}
   pauseMenuButton: {fileID: 1047440844}
-  mouseInstructButton: {fileID: 436759239}
-  touchInstructButton: {fileID: 0}
 --- !u!1 &2013883784
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,7 +43,8 @@ public class DenseArea:BaseArea {
             if (!enterCell) return;
             enterCellSpeed = enterCell.navAgent.speed;
             enterCell.navAgent.speed *= speedCoefficient;
-            if (!sound_manager.sounds_miscellaneous[4].isPlaying && collider.gameObject.tag == "Unit") {
+            if (!sound_manager.sounds_miscellaneous[4].isPlaying && collider.gameObject.tag == "Unit" && collider.GetComponent<BaseCell>().isMine)
+            {
                 sound_manager.sounds_miscellaneous[4].Play();
 
             }
@@ -60,7 +61,8 @@ public class DenseArea:BaseArea {
             BaseCell enterCell = collider.gameObject.GetComponent<BaseCell>();
             if (!enterCell) return;
             enterCell.navAgent.speed = enterCellSpeed;
-            if (!sound_manager.sounds_miscellaneous[5].isPlaying && collider.gameObject.tag == "Unit") {
+            if (!sound_manager.sounds_miscellaneous[5].isPlaying && collider.gameObject.tag == "Unit" && collider.GetComponent<BaseCell>().isMine)
+            {
                 sound_manager.sounds_miscellaneous[5].Play();
 
             }

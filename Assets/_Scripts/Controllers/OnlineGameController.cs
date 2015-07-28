@@ -124,6 +124,7 @@ public class OnlineGameController : Photon.PunBehaviour
 
     void OnLevelWasLoaded()
     {
+        PhotonNetwork.isMessageQueueRunning = true;
         if (PhotonNetwork.player.ID == 2)
         {
             photonView.RPC("GameStarted", PhotonTargets.AllViaServer, null);

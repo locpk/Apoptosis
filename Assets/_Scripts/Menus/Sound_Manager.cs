@@ -44,7 +44,7 @@ public class Sound_Manager : MonoBehaviour {
 
     public AudioSource win_music;
     public AudioSource lose_music;
-
+    public AudioSource battle_music;
     //private AudioMixerSnapshot snapshot_normal;
     //private AudioMixerSnapshot snapshot_muted;
 

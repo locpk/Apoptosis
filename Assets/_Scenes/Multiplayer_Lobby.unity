@@ -249,7 +249,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 199943000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1190112450}
@@ -257,7 +257,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -132.5, y: -29.2999992}
+  m_AnchoredPosition: {x: -2500, y: -2500}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &256948177
@@ -566,6 +566,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4670a09271c0ea4b9415433610fc795, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &671262697 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 176274, guid: d4670a09271c0ea4b9415433610fc795, type: 2}
+  m_PrefabInternal: {fileID: 671262696}
 --- !u!1 &699175363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1975,6 +1979,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1996880576}
   - 114: {fileID: 1996880577}
+  - 114: {fileID: 1996880575}
   m_Layer: 0
   m_Name: Lobby Controller
   m_TagString: Untagged
@@ -1982,6 +1987,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1996880575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1996880574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a229af5388c6b4c908aa8bb2cf2f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backGround: {fileID: 62064749}
+  loadingBar: {fileID: 926743536}
+  brackets: {fileID: 671262697}
+  audio_muted: {fileID: 0}
+  audio_unmuted: {fileID: 0}
+  master_mixer: {fileID: 0}
+  click_Sound: {fileID: 0}
+  muted: 0
+  b_fullscreen: 0
 --- !u!4 &1996880576
 Transform:
   m_ObjectHideFlags: 0

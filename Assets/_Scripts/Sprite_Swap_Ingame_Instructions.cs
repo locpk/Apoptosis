@@ -20,7 +20,6 @@ public class Sprite_Swap_Ingame_Instructions : MonoBehaviour
         {
             canvas.GetComponent<Image>().sprite = Mouse_Controls_Sprite;
         }
-
     }
 
     // Update is called once per frame

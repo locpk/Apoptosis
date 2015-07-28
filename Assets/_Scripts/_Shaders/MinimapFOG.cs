@@ -5,8 +5,10 @@ using UnityEngine.Audio;
 [RequireComponent(typeof(MeshRenderer))]
 public class MinimapFOG : MonoBehaviour
 {
-    public AudioMixerSnapshot snapshot_attack;
-    public AudioMixerSnapshot snapshot_normal;
+    private AudioMixerSnapshot snapshot_attack;
+    private AudioMixerSnapshot snapshot_normal;
+
+    private Sound_Manager sound_manager; 
 
     // Use this for initialization
     void Awake()
@@ -25,23 +27,38 @@ public class MinimapFOG : MonoBehaviour
         {
             obj.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = false; //turn the minimap image of it off
         }
+      //  sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>().GetInstance();
+        
+      //  snapshot_normal = sound_manager.GetInstance().master_mixer.FindSnapshot("Snapshot");
+      //  snapshot_attack = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>().GetInstance().master_mixer.FindSnapshot("Snapshot_Attack");
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
+        sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>().GetInstance();
 
+        snapshot_normal = sound_manager.GetInstance().master_mixer.FindSnapshot("Snapshot");
+        snapshot_attack = sound_manager.GetInstance().master_mixer.FindSnapshot("Snapshot_Attack");
+    
+    }
+   
+
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Unit") //if the object that entered the sphere radius is a unit
+        if (other.tag == "Unit" && other.GetComponent<BaseCell>().isAIPossessed ) //if the object that entered the sphere radius is a unit
         {
           
-            if(snapshot_attack) snapshot_attack.TransitionTo(3.0f);
-            //if (!other.GetComponent<BaseCell>().isMine && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
-            //{
-            //}
+   //         snapshot_attack.TransitionTo(3.0f);
+            if (!other.GetComponent<BaseCell>().isMine && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
+            {
+            }
         }
         
     }
@@ -52,10 +69,10 @@ public class MinimapFOG : MonoBehaviour
         if (other.tag == "Unit")
         {
          
-            if (snapshot_normal) snapshot_normal.TransitionTo(3.0f);
-            //if (!other.GetComponent<BaseCell>().isMine && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
-            //{
-            //}
+            if (!other.GetComponent<BaseCell>().isMine && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
+            {
+    //            snapshot_normal.TransitionTo(3.0f);
+            }
         }
     }
 }
