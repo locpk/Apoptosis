@@ -57,7 +57,6 @@ public class TutorialController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         if (Input.touchSupported)
         {
             Task welcome = new Task();
@@ -76,22 +75,22 @@ public class TutorialController : MonoBehaviour
             unitSelect.IsComplete = UnitSelectionCondition;
             Tasklist.Add(unitSelect);
             Task targetButtonSelect = new Task();
-            targetButtonSelect.Text = "If the Button is on, touch the Big Circle Button to turn it off.";
+            targetButtonSelect.Text = "If the Button is on (it'll be yellow), touch the Big Circle Button to turn it off.";
             targetButtonSelect.Initialize = EmptyInitialization;
             targetButtonSelect.IsComplete = TargetSelectionButton;
             Tasklist.Add(unitButtonSelect);
             Task targetSelection = new Task();
-            targetSelection.Text = "Now enemy units and proteins can be targeted. One finger touch or one finger touch and drag over many to set them as a target.";
+            targetSelection.Text = "Now enemy units and proteins can be targeted. One finger touch or one finger touch and drag over many to set them as a target. Press Next to continue.";
             targetSelection.Initialize = TargetSelectionInitialization;
             targetSelection.IsComplete = TargetSelectionCondition;
             Tasklist.Add(targetSelection);
             Task proteinDegeneration = new Task();
-            proteinDegeneration.Text = "Your health degrades over time in other Game modes.";
+            proteinDegeneration.Text = "Your health degrades over time in other Game modes. Press Next to continue.";
             proteinDegeneration.Initialize = EmptyInitialization;
             proteinDegeneration.IsComplete = AnyKeyCondition;
             Tasklist.Add(proteinDegeneration);
             Task proteinConsumption = new Task();
-            proteinConsumption.Text = "Targeting a protein will tell your selected units to consume it. Consume the protein.";
+            proteinConsumption.Text = "Targeting a protein will tell your selected units to consume it. Consume the protein to replenish some health.";
             proteinConsumption.Initialize = EmptyInitialization;
             proteinConsumption.IsComplete = ProteinConsumptionCondition;
             Tasklist.Add(proteinConsumption);
@@ -105,6 +104,11 @@ public class TutorialController : MonoBehaviour
             mitosis.Initialize = EmptyInitialization;
             mitosis.IsComplete = MitosisCondition;
             Tasklist.Add(mitosis);
+            Task losingHealth = new Task();
+            losingHealth.Text = "Splitting your cell divides that cell's health equally between the two new cells. Press Next to continue.";
+            losingHealth.Initialize = EmptyInitialization;
+            losingHealth.IsComplete = AnyKeyCondition;
+            Tasklist.Add(losingHealth);
             Task replenish = new Task();
             replenish.Text = "Protein acts as your cells health. Every cell that divides splits their protein with the new cell. All those divides has left your cells starved. Eat these proteins to replenish.";
             replenish.Initialize = ReplenishInitialization;
@@ -151,7 +155,7 @@ public class TutorialController : MonoBehaviour
             mutateAcidic.IsComplete = MutateAcidicCondition;
             Tasklist.Add(mutateAcidic);
             Task cancerLesson = new Task();
-            cancerLesson.Text = "Stem cells can divide indefinitely with no repurcussions. Heat and cold cells can divide too, but the more they divide the higher the chance they have of becoming cancerous. Press Next to continue.";
+            cancerLesson.Text = "Heat and cold cells can divide too, but the more they divide the higher the chance they have of becoming cancerous. Stem cells can divide without that risk. Press Next to continue.";
             cancerLesson.Initialize = EmptyInitialization;
             cancerLesson.IsComplete = AnyKeyCondition;
             Tasklist.Add(cancerLesson);
@@ -180,7 +184,11 @@ public class TutorialController : MonoBehaviour
             evolutionNerve.Initialize = EmptyInitialization;
             evolutionNerve.IsComplete = EvolutionNerveCondition;
             Tasklist.Add(evolutionNerve);
-
+            Task revertCell = new Task();
+            revertCell.Text = "Nerve, Tier 2 Heat, and Tier 2 Cold are the only cells that can revert back to a stem cell. Try reverting one now by selecting one and hitting the Devolve Button, then press Next to continue.";
+            revertCell.Initialize = EmptyInitialization;
+            revertCell.IsComplete = AnyKeyCondition;
+            Tasklist.Add(revertCell);
             Task tutorialComplete = new Task();
             tutorialComplete.Text = "This completes the tutorial for Apoptosis. Good luck in your future games! Press Next to return to the main menu.";
             tutorialComplete.Initialize = EmptyInitialization;
@@ -210,7 +218,7 @@ public class TutorialController : MonoBehaviour
             proteinDegeneration.IsComplete = AnyKeyCondition;
             Tasklist.Add(proteinDegeneration);
             Task proteinConsumption = new Task();
-            proteinConsumption.Text = "Targeting a protein will tell your selected units to consume it. Consume the protein.";
+            proteinConsumption.Text = "Targeting a protein will tell your selected units to consume it. Consume the protein to replenish some health.";
             proteinConsumption.Initialize = EmptyInitialization;
             proteinConsumption.IsComplete = ProteinConsumptionCondition;
             Tasklist.Add(proteinConsumption);
@@ -224,6 +232,11 @@ public class TutorialController : MonoBehaviour
             mitosis.Initialize = EmptyInitialization;
             mitosis.IsComplete = MitosisCondition;
             Tasklist.Add(mitosis);
+            Task losingHealth = new Task();
+            losingHealth.Text = "Splitting your cell divides that cell's health equally between the two new cells. Press any key to continue.";
+            losingHealth.Initialize = EmptyInitialization;
+            losingHealth.IsComplete = AnyKeyCondition;
+            Tasklist.Add(losingHealth);
             Task replenish = new Task();
             replenish.Text = "Protein acts as your cells health. Every cell that divides splits their protein with the new cell. All those divides has left your cells starved. Eat these proteins to replenish.";
             replenish.Initialize = ReplenishInitialization;
@@ -250,7 +263,7 @@ public class TutorialController : MonoBehaviour
             mutateAcidic.IsComplete = MutateAcidicCondition;
             Tasklist.Add(mutateAcidic);
             Task cancerLesson = new Task();
-            cancerLesson.Text = "Stem cells can divide indefinitely with no repurcussions. Heat and cold cells can divide too, but the more they divide the higher the chance they have of becoming cancerous. Press any key to continue.";
+            cancerLesson.Text = "Heat and cold cells can divide too, but the more they divide the higher the chance they have of becoming cancerous. Stem cells can divide without that risk. Press any key to continue.";
             cancerLesson.Initialize = EmptyInitialization;
             cancerLesson.IsComplete = AnyKeyCondition;
             Tasklist.Add(cancerLesson);
@@ -279,7 +292,11 @@ public class TutorialController : MonoBehaviour
             evolutionNerve.Initialize = EmptyInitialization;
             evolutionNerve.IsComplete = EvolutionNerveCondition;
             Tasklist.Add(evolutionNerve);
-
+            Task revertCell = new Task();
+            revertCell.Text = "Nerve, Tier 2 Heat, and Tier 2 Cold are the only cells that can revert back to a stem cell. Try reverting one now by selecting one and pressing 1, then press any key to continue.";
+            revertCell.Initialize = EmptyInitialization;
+            revertCell.IsComplete = AnyKeyCondition;
+            Tasklist.Add(revertCell);
             Task tutorialComplete = new Task();
             tutorialComplete.Text = "This completes the tutorial for Apoptosis. Good luck in your future games! Press any key to return to the main menu.";
             tutorialComplete.Initialize = EmptyInitialization;
@@ -340,7 +357,7 @@ public class TutorialController : MonoBehaviour
 
     bool AnyKeyCondition()
     {
-        return Input.anyKeyDown && !Input.GetMouseButtonDown(0);
+        return Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetKeyDown(KeyCode.Alpha1);
     }
 
     bool UnitSelectionButton()
@@ -449,8 +466,8 @@ public class TutorialController : MonoBehaviour
 
     bool EvolutionNerveCondition()
     {
-        return true; // dependent on nerve merge
-        //return PlayerControls.NumNerveCells > 0;
+        //return true; // dependent on nerve merge
+        return PlayerControls.NumNerveCells > 0;
     }
 
     void EmptyInitialization() { }
