@@ -198,7 +198,10 @@ public class Tier2HeatCell : BaseCell
                     base.bUpdate();
                     break;
                 case CellState.MOVING:
-                    
+                    if (IsInvoking("DamagePerSecond"))
+                    {
+                        CancelInvoke("DamagePerSecond");
+                    }
                     base.bUpdate();
                     break;
                 case CellState.ATTACK_MOVING:
