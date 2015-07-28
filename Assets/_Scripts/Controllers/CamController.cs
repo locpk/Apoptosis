@@ -26,6 +26,7 @@ public class CamController : MonoBehaviour
     public Texture2D cursor_Left;
     public Texture2D cursor_Up;
     public Texture2D cursor_Down;
+    public Texture2D cursor_Normal;
 
     // for screen adges
     private Image shader_right;
@@ -55,6 +56,7 @@ public class CamController : MonoBehaviour
     // Froze mouse when start
     private bool m_frozeMouse = true;
     private float m_zoomingTime;
+    private bool tablet_mode = false;
     // Use this for initialization
     void Start()
     {
@@ -89,6 +91,12 @@ public class CamController : MonoBehaviour
         shader_bottom.enabled = false;
         shader_left.enabled = false;
         shader_right.enabled = false;
+
+        // sets the cursor if not in tablet
+        if (Input.touchSupported)
+        {
+            tablet_mode = true;
+        }
     }
 
     IEnumerator ZoomOutWhenStart(float firstDelayed, float secondDelayed)
@@ -199,7 +207,12 @@ public class CamController : MonoBehaviour
             Rect screenRect = new Rect(0, 0, Screen.width, Screen.height);
 
             //resets the cersor to normal if not in edge
-            Cursor.SetCursor(null, Vector2.zero, cursorMode);
+            if (tablet_mode)
+            {
+                Cursor.SetCursor(null, Vector2.zero, cursorMode);
+            }
+            else
+                Cursor.SetCursor(cursor_Normal, Vector2.zero, cursorMode);
             shader_top.enabled = false;
             shader_bottom.enabled = false;
             shader_left.enabled = false;
