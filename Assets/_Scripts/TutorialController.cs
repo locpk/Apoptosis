@@ -488,6 +488,10 @@ public class TutorialController : MonoBehaviour
 
     bool ClearSelected()
     {
+        foreach (BaseCell item in PlayerControls.selectedUnits)
+        {
+            item.isSelected = false;
+        }
         PlayerControls.selectedUnits.Clear();
         return AnyKeyCondition();
     }
