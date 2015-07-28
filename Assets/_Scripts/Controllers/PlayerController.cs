@@ -468,92 +468,95 @@ public class PlayerController : MonoBehaviour
 
     public void OnGUI()
     {
-        GUI.Label(Rect.MinMaxRect(0, 0, Screen.width, Screen.height), fps.ToString());
-        if (GUISelectRect.height != 0 && GUISelectRect.width != 0)
-        {
-            if (!isOverUI)
-            {
-                if (isSelecting || Input.GetMouseButton(0))
-                {
-                    GUI.color = new Color(0.0f, 0.0f, 1.0f, 0.5f);
-                }
-                else if (!isSelecting || Input.GetMouseButton(1))
-                {
-                    GUI.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
-                }
-
-                GUI.DrawTexture(GUISelectRect, selector, ScaleMode.StretchToFill, true);
-            }
-
-        }
-        float scale = .7f;
-        //GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-        foreach (GameObject item in selectedTargets)
-        {
-            if (item && selectedUnits.Count > 0)
-            {
-                Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
-
-                float left = drawLoc.x - (float)43 * scale;
-                float top = -(drawLoc.y + (float)43 * scale) + Screen.height;
-                Rect location = new Rect(left, top, (float)86 * scale, (float)86 * scale);
-                // this draws the target unit indicator
-                GUI.DrawTexture(location, target_indicator);
-            }
-        }
-
-        scale = 0.6f; // the size of the circle to draw circle 
-        GUI.color = new Color(0.0f, 1.0f, 0.5f, 1.0f);
-        foreach (BaseCell item in selectedUnits)
-        {
-            if (item)
-            {
-                Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
-                float left = drawLoc.x - (float)43;
-                float top = -(drawLoc.y + (float)43) + Screen.height;
-                Rect location = new Rect(left, top, (float)86, (float)86);
-                // this draws the frirndly unit indicator
-                GUI.DrawTexture(location, friendly_indicator);
-            }
-        }
-
         if (Time.timeScale > 0.0f)
         {
-            GUI.BeginGroup(new Rect(Screen.width * 0.5f - 400, 15, Screen.width * 0.5f + 500, 100));
-            GUI.Box(new Rect(0, 0, 75, 60), "Stem Cells: ");
-            GUI.Label(new Rect(35, 35, 50, 50), NumStemCells.ToString());
+            GUI.Label(Rect.MinMaxRect(0, 0, Screen.width, Screen.height), fps.ToString());
+            if (GUISelectRect.height != 0 && GUISelectRect.width != 0)
+            {
+                if (!isOverUI)
+                {
+                    if (isSelecting || Input.GetMouseButton(0))
+                    {
+                        GUI.color = new Color(0.0f, 0.0f, 1.0f, 0.5f);
+                    }
+                    else if (!isSelecting || Input.GetMouseButton(1))
+                    {
+                        GUI.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+                    }
 
-            GUI.Box(new Rect(80, 0, 75, 60), "Heat Cells: ");
-            GUI.Label(new Rect(115, 35, 50, 50), NumHeatCells.ToString());
+                    GUI.DrawTexture(GUISelectRect, selector, ScaleMode.StretchToFill, true);
+                }
 
-            GUI.Box(new Rect(160, 0, 75, 60), "Cold Cells: ");
-            GUI.Label(new Rect(195, 35, 50, 50), NumColdCells.ToString());
+            }
+            float scale = .7f;
+            //GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+            foreach (GameObject item in selectedTargets)
+            {
+                if (item && selectedUnits.Count > 0)
+                {
+                    Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
 
-            GUI.Box(new Rect(240, 0, 75, 60), "Acidic Cells: ");
-            GUI.Label(new Rect(275, 35, 50, 50), NumAcidicCells.ToString());
+                    float left = drawLoc.x - (float)43 * scale;
+                    float top = -(drawLoc.y + (float)43 * scale) + Screen.height;
+                    Rect location = new Rect(left, top, (float)86 * scale, (float)86 * scale);
+                    // this draws the target unit indicator
+                    GUI.DrawTexture(location, target_indicator);
+                }
+            }
 
-            GUI.Box(new Rect(320, 0, 75, 60), "Alkali Cells: ");
-            GUI.Label(new Rect(355, 35, 50, 50), NumAlkaliCells.ToString());
+            scale = 0.6f; // the size of the circle to draw circle 
+            GUI.color = new Color(0.0f, 1.0f, 0.5f, 1.0f);
+            foreach (BaseCell item in selectedUnits)
+            {
+                if (item)
+                {
+                    Vector3 drawLoc = Camera.main.WorldToScreenPoint(item.transform.position);
+                    float left = drawLoc.x - (float)43;
+                    float top = -(drawLoc.y + (float)43) + Screen.height;
+                    Rect location = new Rect(left, top, (float)86, (float)86);
+                    // this draws the frirndly unit indicator
+                    GUI.DrawTexture(location, friendly_indicator);
+                }
+            }
 
-            GUI.Box(new Rect(400, 0, 75, 60), "Nerve Cells: ");
-            GUI.Label(new Rect(435, 35, 50, 50), NumNerveCells.ToString());
+            if (Time.timeScale > 0.0f)
+            {
+                GUI.BeginGroup(new Rect(Screen.width * 0.5f - 400, 15, Screen.width * 0.5f + 500, 100));
+                GUI.Box(new Rect(0, 0, 75, 60), "Stem Cells: ");
+                GUI.Label(new Rect(35, 35, 50, 50), NumStemCells.ToString());
 
-            GUI.Box(new Rect(480, 0, 75, 60), "Tier 2\nHeat Cells: ");
-            GUI.Label(new Rect(515, 35, 50, 50), NumTierTwoHeat.ToString());
+                GUI.Box(new Rect(80, 0, 75, 60), "Heat Cells: ");
+                GUI.Label(new Rect(115, 35, 50, 50), NumHeatCells.ToString());
 
-            GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
-            GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
+                GUI.Box(new Rect(160, 0, 75, 60), "Cold Cells: ");
+                GUI.Label(new Rect(195, 35, 50, 50), NumColdCells.ToString());
 
-            GUI.Box(new Rect(640, 0, 75, 60), "Enemies\nLeft: ");
-            GUI.Label(new Rect(675, 35, 50, 50), NumEnemiesLeft.ToString());
+                GUI.Box(new Rect(240, 0, 75, 60), "Acidic Cells: ");
+                GUI.Label(new Rect(275, 35, 50, 50), NumAcidicCells.ToString());
 
-            GUI.Box(new Rect(720, 0, 75, 60), "Cap: ");
-            GUI.Label(new Rect(755, 35, 50, 50), cap.ToString());
-            GUI.EndGroup();
+                GUI.Box(new Rect(320, 0, 75, 60), "Alkali Cells: ");
+                GUI.Label(new Rect(355, 35, 50, 50), NumAlkaliCells.ToString());
+
+                GUI.Box(new Rect(400, 0, 75, 60), "Nerve Cells: ");
+                GUI.Label(new Rect(435, 35, 50, 50), NumNerveCells.ToString());
+
+                GUI.Box(new Rect(480, 0, 75, 60), "Tier 2\nHeat Cells: ");
+                GUI.Label(new Rect(515, 35, 50, 50), NumTierTwoHeat.ToString());
+
+                GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
+                GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
+
+                GUI.Box(new Rect(640, 0, 75, 60), "Enemies\nLeft: ");
+                GUI.Label(new Rect(675, 35, 50, 50), NumEnemiesLeft.ToString());
+
+                GUI.Box(new Rect(720, 0, 75, 60), "Cap: ");
+                GUI.Label(new Rect(755, 35, 50, 50), cap.ToString());
+                GUI.EndGroup();
+            }
+
+
+            
         }
-
-
-
     }
 
     public void FixedUpdate()
