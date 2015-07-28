@@ -6,6 +6,7 @@ public class LobbyController : Photon.PunBehaviour
 
     public UnityEngine.UI.Text ConnectionStatusText;
     public GameObject RandomJoinButton;
+    System.Collections.Generic.List<GameObject> roomButtons = new System.Collections.Generic.List<GameObject>();
 
     // Use this for initialization
     void Start()
@@ -48,7 +49,30 @@ public class LobbyController : Photon.PunBehaviour
 
     public override void OnJoinedLobby()
     {
+        base.OnJoinedLobby();
         RandomJoinButton.SetActive(true);
+        InvokeRepeating("RefreshOpenRooms", 0.0f, 5.0f);
+    }
+
+    public void RefreshOpenRooms()
+    {
+        for (int i = 0; i < roomButtons.Count;)
+        {
+            Destroy(roomButtons[i]);
+            roomButtons.RemoveAt(i);
+        }
+        GameObject joinButton = GameObject.Find("RoomJoinButton");
+        GameObject theCanvas = GameObject.Find("Canvas");
+        int count = 0;
+        foreach (RoomInfo item in PhotonNetwork.GetRoomList())
+        {
+            joinButton = Instantiate(joinButton, Vector3.zero, Quaternion.identity) as GameObject;
+            joinButton.transform.SetParent(theCanvas.transform, false);
+            joinButton.GetComponent<RectTransform>().position.Set(count % 3 * 120, count++ / 3 * 120, 0);
+            joinButton.GetComponentInChildren<UnityEngine.UI.Text>().text = item.name;
+            joinButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => PhotonNetwork.JoinRoom(item.name));
+            roomButtons.Add(joinButton);
+        }
     }
 
     public override void OnCreatedRoom()
