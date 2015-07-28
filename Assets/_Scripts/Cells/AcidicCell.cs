@@ -21,6 +21,14 @@ public class AcidicCell : BaseCell
         navAgent.speed = 7.0f;
        
     }
+    public override void Attack(GameObject _target)
+    {
+        if (_target && _target != this.gameObject)
+        {
+            SetPrimaryTarget(_target);
+            currentState = CellState.ATTACK;
+        }
+    }
 
 
     public override void Move(Vector3 _destination)
@@ -104,7 +112,7 @@ public class AcidicCell : BaseCell
             kAcid.GetComponent<Acidd>().Owner = this.gameObject;
             Vector3 them2me = kAcid.GetComponent<Acidd>().Target.transform.position - transform.position;
             kAcid.GetComponent<Rigidbody>().velocity += them2me.normalized * kAcid.GetComponent<Acidd>().speed;
-
+            currentState = CellState.ATTACK;
             if (!sound_manager.sounds_attacks[2].isPlaying)
             {
                 sound_manager.sounds_attacks[2].Play();
@@ -197,11 +205,13 @@ public class AcidicCell : BaseCell
                     currentState = CellState.IDLE;
                 }
 
-
-
-
                 break;
             case CellState.MOVING:
+                   if (IsInvoking("DamagePerSecond"))
+                        {
+                            CancelInvoke("DamagePerSecond");
+                        }
+                        
                 base.bUpdate();
                 break;
             case CellState.ATTACK_MOVING:
