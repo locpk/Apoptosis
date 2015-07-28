@@ -9,7 +9,7 @@ public class OptionsMenu : MonoBehaviour
 
     //AudioSource volTest;
     GameObject SEVolSlider;
-    GameObject FSToggle;
+    //GameObject FSToggle;
     GameObject BGMVolSlider;
 
     Rect BGMBounds;
@@ -32,7 +32,7 @@ public class OptionsMenu : MonoBehaviour
 
         BGMVolSlider = GameObject.Find("BGM_Vol_Slider");
         SEVolSlider = GameObject.Find("SE_Vol_Slider");
-        FSToggle = GameObject.Find("FullScreen_Toggle");
+        //FSToggle = GameObject.Find("FullScreen_Toggle");
         //volTest = BGMVolSlider.GetComponent<AudioSource>();
         BGMBounds = BGMVolSlider.GetComponent<RectTransform>().rect;
         BGMBounds.xMin += BGMVolSlider.GetComponent<RectTransform>().position.x;

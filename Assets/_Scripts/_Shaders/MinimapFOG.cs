@@ -25,8 +25,6 @@ public class MinimapFOG : MonoBehaviour
         {
             obj.transform.FindChild("MinimapIndicator").GetComponent<MeshRenderer>().enabled = false; //turn the minimap image of it off
         }
-       // snapshot_normal = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>().GetInstance().master_mixer.FindSnapshot("Snapshot");
-      //  snapshot_attack = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>().GetInstance().master_mixer.FindSnapshot("Snapshot_Attack");
     }
 
     // Update is called once per frame
@@ -40,10 +38,10 @@ public class MinimapFOG : MonoBehaviour
         if (other.tag == "Unit") //if the object that entered the sphere radius is a unit
         {
           
-                snapshot_attack.TransitionTo(3.0f);
-            if (!other.GetComponent<BaseCell>().isMine && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
-            {
-            }
+            if(snapshot_attack) snapshot_attack.TransitionTo(3.0f);
+            //if (!other.GetComponent<BaseCell>().isMine && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
+            //{
+            //}
         }
         
     }
@@ -54,10 +52,10 @@ public class MinimapFOG : MonoBehaviour
         if (other.tag == "Unit")
         {
          
-                snapshot_normal.TransitionTo(3.0f);
-            if (!other.GetComponent<BaseCell>().isMine && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
-            {
-            }
+            if (snapshot_normal) snapshot_normal.TransitionTo(3.0f);
+            //if (!other.GetComponent<BaseCell>().isMine && this.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<BaseCell>().isMine)
+            //{
+            //}
         }
     }
 }
