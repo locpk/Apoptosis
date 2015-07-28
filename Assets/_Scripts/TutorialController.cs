@@ -62,7 +62,7 @@ public class TutorialController : MonoBehaviour
             Task welcome = new Task();
             welcome.Text = "Welcome to Apoptosis! This tutorial will teach you the controls and basic actions that can be taken in the game. Press Next to continue.";
             welcome.Initialize = EmptyInitialization;
-            welcome.IsComplete = AnyKeyCondition;
+            welcome.IsComplete = ClearSelected;
             Tasklist.Add(welcome);
             Task unitButtonSelect = new Task();
             unitButtonSelect.Text = "Touch the Big Circle Button to turn it on.";
@@ -85,7 +85,7 @@ public class TutorialController : MonoBehaviour
             targetSelection.IsComplete = TargetSelectionCondition;
             Tasklist.Add(targetSelection);
             Task proteinDegeneration = new Task();
-            proteinDegeneration.Text = "Your health degrades over time in other Game modes. Press Next to continue.";
+            proteinDegeneration.Text = "Your health degrades over time in other Game modes. The smaller your nucleus(circle inside your cell) is, the closer to death that cell is. Press Next to continue.";
             proteinDegeneration.Initialize = EmptyInitialization;
             proteinDegeneration.IsComplete = AnyKeyCondition;
             Tasklist.Add(proteinDegeneration);
@@ -200,7 +200,7 @@ public class TutorialController : MonoBehaviour
             Task welcome = new Task();
             welcome.Text = "Welcome to Apoptosis! This tutorial will teach you the controls and basic actions that can be taken in the game. Press any key to continue.";
             welcome.Initialize = EmptyInitialization;
-            welcome.IsComplete = AnyKeyCondition;
+            welcome.IsComplete = ClearSelected;
             Tasklist.Add(welcome);
             Task unitSelect = new Task();
             unitSelect.Text = "Left-click one of your units or left-click and drag over any of your units to select them.";
@@ -213,7 +213,7 @@ public class TutorialController : MonoBehaviour
             targetSelection.IsComplete = TargetSelectionCondition;
             Tasklist.Add(targetSelection);
             Task proteinDegeneration = new Task();
-            proteinDegeneration.Text = "Your health degrades over time in other Game modes. Press any key to continue.";
+            proteinDegeneration.Text = "Your health degrades over time in other Game modes. The smaller your nucleus(circle inside your cell) is, the closer to death that cell is. Press any key to continue.";
             proteinDegeneration.Initialize = EmptyInitialization;
             proteinDegeneration.IsComplete = AnyKeyCondition;
             Tasklist.Add(proteinDegeneration);
@@ -485,4 +485,10 @@ public class TutorialController : MonoBehaviour
     }
 
     void EmptyInitialization() { }
+
+    bool ClearSelected()
+    {
+        PlayerControls.selectedUnits.Clear();
+        return AnyKeyCondition();
+    }
 }

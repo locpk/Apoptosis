@@ -292,16 +292,18 @@ public class CamController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.touchSupported)
+        if (Time.timeScale > 0.0f)
         {
-            TouchUpdate();
-        }
-        else
-        {
+            if (Input.touchSupported)
+            {
+                TouchUpdate();
+            }
+            else
+            {
 
-            MouseKeyboardUpdate();
+                MouseKeyboardUpdate();
 
+            }
         }
 
     }
