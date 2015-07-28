@@ -20,6 +20,10 @@ public class PauseMenu : MonoBehaviour
     public GameObject instructionsMenu;
     //Capture the pause menu button
     public GameObject pauseMenuButton;
+    //get the Instructions button
+    public GameObject mouseInstructButton;
+    //get the tablet instructions button
+    public GameObject touchInstructButton;
 
     //Sound_Manager manager; 
 
@@ -50,6 +54,15 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
         instructionsMenu.SetActive(false);
+
+        if (Input.touchSupported)
+        {
+            touchInstructButton.SetActive(true);
+        }
+        else
+        {
+            mouseInstructButton.SetActive(true);
+        }
 
         //playerController = GameObject.FindGameObjectWithTag("PlayerController");
         
