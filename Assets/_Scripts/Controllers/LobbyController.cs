@@ -62,13 +62,12 @@ public class LobbyController : Photon.PunBehaviour
             roomButtons.RemoveAt(i);
         }
         GameObject joinButton = GameObject.Find("RoomJoinButton");
-        GameObject theCanvas = GameObject.Find("Canvas");
+        GameObject thePanel = GameObject.Find("RoomListPanel");
         int count = 0;
         foreach (RoomInfo item in PhotonNetwork.GetRoomList())
         {
             joinButton = Instantiate(joinButton, Vector3.zero, Quaternion.identity) as GameObject;
-            joinButton.transform.SetParent(theCanvas.transform, false);
-            joinButton.GetComponent<RectTransform>().position.Set(count % 3 * 120, count++ / 3 * 120, 0);
+            joinButton.transform.SetParent(thePanel.transform, false);
             joinButton.GetComponentInChildren<UnityEngine.UI.Text>().text = item.name;
             joinButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => PhotonNetwork.JoinRoom(item.name));
             roomButtons.Add(joinButton);
@@ -83,6 +82,10 @@ public class LobbyController : Photon.PunBehaviour
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
+        if (IsInvoking("RefreshOpenRooms"))
+        {
+            CancelInvoke("RefreshOpenRooms");
+        }
         if (Application.isEditor)
         {
 
