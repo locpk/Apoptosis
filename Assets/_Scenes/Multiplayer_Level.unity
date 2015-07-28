@@ -5176,7 +5176,7 @@ Prefab:
       objectReference: {fileID: 1774622333}
     - target: {fileID: 11466066, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11466066, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -5193,10 +5193,10 @@ Prefab:
     - target: {fileID: 11466066, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1819062281}
+      objectReference: {fileID: 1819062283}
     - target: {fileID: 11466066, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+      value: SaveCFGFile
       objectReference: {fileID: 0}
     - target: {fileID: 11466066, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5210,6 +5210,18 @@ Prefab:
       propertyPath: m_SortingOrder
       value: 1067
       objectReference: {fileID: 0}
+    - target: {fileID: 166372, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
+      propertyPath: m_TagString
+      value: Music_Slider
+      objectReference: {fileID: 0}
+    - target: {fileID: 187096, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
+      propertyPath: m_TagString
+      value: SFX_Slider
+      objectReference: {fileID: 0}
+    - target: {fileID: 174214, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
+      propertyPath: m_TagString
+      value: Fullscreen_Toggle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
   m_IsPrefabParent: 0
@@ -5217,6 +5229,12 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 124580, guid: 56198160582e17d4e85cb5bcda4e8e26, type: 2}
   m_PrefabInternal: {fileID: 1819062280}
+--- !u!114 &1819062283 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11422142, guid: 56198160582e17d4e85cb5bcda4e8e26,
+    type: 2}
+  m_PrefabInternal: {fileID: 1819062280}
+  m_Script: {fileID: 11500000, guid: adf1ef89993ffb74e9f6e5d35a7af046, type: 3}
 --- !u!1 &1858444306
 GameObject:
   m_ObjectHideFlags: 0
