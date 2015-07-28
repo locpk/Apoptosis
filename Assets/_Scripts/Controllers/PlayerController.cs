@@ -522,7 +522,7 @@ public class PlayerController : MonoBehaviour
 
             if (Time.timeScale > 0.0f)
             {
-                GUI.BeginGroup(new Rect(Screen.width * 0.5f - 400, 15, Screen.width * 0.5f + 500, 100));
+                GUI.BeginGroup(new Rect(Screen.width * 0.5f - 400, 25, Screen.width * 0.5f + 500, 100));
                 GUI.Box(new Rect(0, 0, 75, 60), "Stem Cells: ");
                 GUI.Label(new Rect(35, 35, 50, 50), NumStemCells.ToString());
 
@@ -904,6 +904,20 @@ public class PlayerController : MonoBehaviour
                 else if (Input.GetMouseButton(1) && !minimapCamera.pixelRect.Contains(Input.mousePosition)) // If the player has right-click held down
                 {
                     TargetSelection(origin);
+                }
+                if (Input.GetMouseButtonDown(1) && minimapCamera.pixelRect.Contains(Input.mousePosition))
+                {
+                    RaycastHit hitPosition;
+                    Ray ray = minimapCamera.ScreenPointToRay(Input.mousePosition);
+
+                    if (Physics.Raycast(ray, out hitPosition))
+                    {
+                        //move selected units to that position
+                        foreach (BaseCell item in selectedUnits)
+                        {
+                            item.Move(hitPosition.point);
+                        }
+                    }
                 }
 
 
