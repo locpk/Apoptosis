@@ -85,7 +85,7 @@ public class TutorialController : MonoBehaviour
             targetSelection.IsComplete = TargetSelectionCondition;
             Tasklist.Add(targetSelection);
             Task proteinDegeneration = new Task();
-            proteinDegeneration.Text = "Your health degrades over time in other Game modes. Press Next to continue.";
+            proteinDegeneration.Text = "Your health degrades over time in other Game modes. The smaller your nucleus(circle inside your cell) is, the closer to death that cell is. Press Next to continue.";
             proteinDegeneration.Initialize = EmptyInitialization;
             proteinDegeneration.IsComplete = AnyKeyCondition;
             Tasklist.Add(proteinDegeneration);
@@ -213,7 +213,7 @@ public class TutorialController : MonoBehaviour
             targetSelection.IsComplete = TargetSelectionCondition;
             Tasklist.Add(targetSelection);
             Task proteinDegeneration = new Task();
-            proteinDegeneration.Text = "Your health degrades over time in other Game modes. Press any key to continue.";
+            proteinDegeneration.Text = "Your health degrades over time in other Game modes. The smaller your nucleus(circle inside your cell) is, the closer to death that cell is. Press any key to continue.";
             proteinDegeneration.Initialize = EmptyInitialization;
             proteinDegeneration.IsComplete = AnyKeyCondition;
             Tasklist.Add(proteinDegeneration);
