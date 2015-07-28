@@ -61,7 +61,7 @@ public class Menu : MonoBehaviour
         MasterVolSlider = GameObject.FindGameObjectWithTag("Master_Slider");
         MusicVolSlider = GameObject.FindGameObjectWithTag("Music_Slider");
         SFXVolSlider = GameObject.FindGameObjectWithTag("SFX_Slider");
-        FullscreenToggle = GameObject.Find("Fullscreen_Toggle");
+        FullscreenToggle = GameObject.FindGameObjectWithTag("Fullscreen_Toggle");
 
         if (!System.IO.File.Exists("OptionsMenu.cfg"))
         {
@@ -83,18 +83,7 @@ public class Menu : MonoBehaviour
         }
 
 
-         //make fullscreen
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            Screen.fullScreen = true;
-            FullscreenToggle.SetActive(false);
-        }
-        else
-        {
-            Screen.fullScreen = b_fullscreen;
-            FullscreenToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = b_fullscreen;
-
-        }
+        
         //changed = false; // must not forget to reset x
     }
 
@@ -110,7 +99,19 @@ public class Menu : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Time.timeScale = 1.0f;
+        
+
+        //make fullscreen
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            Screen.fullScreen = true;
+            //GameObject.FindGameObjectWithTag("Fullscreen_Toggle").SetActive(false);
+        }
+        else
+        {
+            Screen.fullScreen = b_fullscreen;
+            GameObject.FindGameObjectWithTag("Fullscreen_Toggle").GetComponent<UnityEngine.UI.Toggle>().isOn = b_fullscreen;
+        }
         //sound_manager = GameObject.Find("Sound_Manager").GetComponent<Sound_Manager>().GetInstance();
     }
 

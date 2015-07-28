@@ -507,7 +507,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (isSelecting || Input.GetMouseButton(0))
                     {
-                        GUI.color = new Color(0.0f, 0.0f, 1.0f, 0.5f);
+                        GUI.color = new Color(0.0f, 1.0f, 0.0f, 0.5f);
                     }
                     else if (!isSelecting || Input.GetMouseButton(1))
                     {
@@ -831,6 +831,11 @@ public class PlayerController : MonoBehaviour
                             {
                                 hitInfo.collider.gameObject.GetComponentInParent<BaseCell>().isSelected = true;
                                 selectedUnits.Add(hitInfo.collider.gameObject.GetComponentInParent<BaseCell>());
+                                if (!hitInfo.transform.FindChild("FriendlySelector(Clone)"))
+                                {
+                                    GameObject tFriendlySelector = GameObject.Instantiate(friendlySelector, hitInfo.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                                    tFriendlySelector.transform.parent = hitInfo.transform;
+                                }
                             }
                         }
                     }

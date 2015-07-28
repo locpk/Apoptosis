@@ -44,25 +44,12 @@ public class OptionsMenu : MonoBehaviour
         SEBounds.xMax += SEVolSlider.GetComponent<RectTransform>().position.x;
         SEBounds.yMin += SEVolSlider.GetComponent<RectTransform>().position.y;
         SEBounds.yMax += SEVolSlider.GetComponent<RectTransform>().position.y;
-        //if (!System.IO.File.Exists("OptionsMenu.cfg"))
-        //{
-        //    configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.Write, System.IO.FileShare.None);
-        //    byte[] emptyparams = new byte[8];
-        //    configFile.Write(emptyparams, 0, 8);
-        //    configFile.Close();
-        //}
-        //else
-        //{
-        //    configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.None);
-        //    configuration = new byte[8];
-        //    configFile.Read(configuration, 0, 8);
-        //    BGMVolSlider.GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, 0);
-        //    SEVolSlider.GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, sizeof(float));
-        //    configFile.Close();
-        //    configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Open, System.IO.FileAccess.Write, System.IO.FileShare.None);
-        //    FSToggle.GetComponent<UnityEngine.UI.Toggle>().isOn = Screen.fullScreen;
-        //}
-        //changed = false;
+
+
+        //make fullscreen
+        
+
+
     }
 
     // Update is called once per frame
@@ -155,6 +142,15 @@ public class OptionsMenu : MonoBehaviour
 
     void OnEnable()
     {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            Screen.fullScreen = true;
+            GameObject.FindGameObjectWithTag("Fullscreen_Toggle").SetActive(false);
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Fullscreen_Toggle").GetComponent<UnityEngine.UI.Toggle>().isOn = Screen.fullScreen;
+        }
         LoadCFGFile();
     }
 
