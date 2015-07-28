@@ -335,6 +335,11 @@ public class PlayerController : MonoBehaviour
             if (GUISelectRect.Contains(itemPos))
             {
                 selectedTargets.Add(item);
+                if (!item.transform.FindChild("TargetSelector(Clone)"))
+                {
+                    GameObject tTargetSelector = GameObject.Instantiate(targetSelector, item.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                    tTargetSelector.transform.parent = item.transform;
+                }
             }
         }
     }
@@ -682,6 +687,12 @@ public class PlayerController : MonoBehaviour
                             if (hitInfo.collider.tag == "Unit" || hitInfo.collider.tag == "Protein")
                             {
                                 selectedTargets.Add(hitInfo.collider.gameObject);
+                                if (!hitInfo.transform.FindChild("TargetSelector(Clone)"))
+                                {
+                                    GameObject tTargetSelector = GameObject.Instantiate(targetSelector, hitInfo.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                                    tTargetSelector.transform.parent = hitInfo.transform;
+                                }
+
                             }
                             else if (selectedTargets.Count == 0)
                             {
@@ -863,6 +874,11 @@ public class PlayerController : MonoBehaviour
                         if (allSelectableTargets.Contains(hitObject))
                         {
                             selectedTargets.Add(hitObject);
+                            if (!hitObject.transform.FindChild("TargetSelector(Clone)"))
+                            {
+                                GameObject tTargetSelector = GameObject.Instantiate(targetSelector, hitObject.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+                                tTargetSelector.transform.parent = hitObject.transform;
+                            }
                         }
                     }
 
