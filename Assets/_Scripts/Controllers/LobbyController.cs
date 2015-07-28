@@ -7,6 +7,8 @@ public class LobbyController : Photon.PunBehaviour
     public UnityEngine.UI.Text ConnectionStatusText;
     public GameObject RandomJoinButton;
     System.Collections.Generic.List<GameObject> roomButtons = new System.Collections.Generic.List<GameObject>();
+    public GameObject CreateRoomPanel;
+    public UnityEngine.UI.InputField CreateRoomInput;
 
     // Use this for initialization
     void Start()
@@ -15,6 +17,7 @@ public class LobbyController : Photon.PunBehaviour
         {
             PhotonNetwork.ConnectUsingSettings("0.0");
         }
+        CreateRoomPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,7 +34,7 @@ public class LobbyController : Photon.PunBehaviour
         {
             PhotonNetwork.Disconnect();
         }
-        
+
 
     }
 
@@ -42,9 +45,27 @@ public class LobbyController : Photon.PunBehaviour
         {
             PhotonNetwork.CreateRoom(null, new RoomOptions() { maxPlayers = 2 }, null);
         }
-            
+
         else
             PhotonNetwork.JoinRandomRoom();
+    }
+
+    public void CreateRoom()
+    {
+        bool unique = true;
+        foreach (RoomInfo item in PhotonNetwork.GetRoomList())
+        {
+            if (item.name == CreateRoomInput.text)
+            {
+                unique = false;
+            }
+        }
+        if (unique)
+        {
+            PhotonNetwork.CreateRoom(CreateRoomInput.text, new RoomOptions() { maxPlayers = 2 }, null);
+        }
+        else
+            CreateRoomInput.text = "That room name already exists";
     }
 
     public override void OnJoinedLobby()
@@ -56,7 +77,7 @@ public class LobbyController : Photon.PunBehaviour
 
     public void RefreshOpenRooms()
     {
-        for (int i = 0; i < roomButtons.Count;)
+        for (int i = 0; i < roomButtons.Count; )
         {
             Destroy(roomButtons[i]);
             roomButtons.RemoveAt(i);
