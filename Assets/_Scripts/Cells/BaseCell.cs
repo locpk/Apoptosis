@@ -664,7 +664,7 @@ public class BaseCell : Photon.PunBehaviour
                 }
                 float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
 
-                if (distance > consumeRadius && distance <= fovRadius)
+                if (distance > consumeRadius && distance <= 15.0f)
                 {
                     if (IsInvoking("ConsumePerSecond"))
                     {
@@ -684,8 +684,15 @@ public class BaseCell : Photon.PunBehaviour
                 }
                 else
                 {
+                    SetPrimaryTarget(null);
+                    
+                    if (IsInvoking("ConsumePerSecond"))
+                    {
 
-                    ChaseTarget();
+                        CancelInvoke("ConsumePerSecond");
+                    }
+                    
+                   // 
                 }
             }
             else
