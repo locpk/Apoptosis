@@ -506,7 +506,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Time.timeScale > 0.0f)
         {
+#if UNITY_EDITOR
             GUI.Label(Rect.MinMaxRect(0, 0, Screen.width, Screen.height), fps.ToString());
+#endif
             if (GUISelectRect.height != 0 && GUISelectRect.width != 0)
             {
                 if (!isOverUI)
@@ -955,8 +957,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+#if UNITY_EDITOR
         fps = 1.0f / Time.deltaTime;
+#endif
         cap = allSelectableUnits.Count;
+
         selectedUnits.RemoveAll(item => item == null);
         selectedTargets.RemoveAll(item => item == null);
         allSelectableTargets.RemoveAll(item => item == null);
