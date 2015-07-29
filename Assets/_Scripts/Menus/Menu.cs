@@ -63,27 +63,30 @@ public class Menu : MonoBehaviour
         SFXVolSlider = GameObject.FindGameObjectWithTag("SFX_Slider");
         FullscreenToggle = GameObject.FindGameObjectWithTag("Fullscreen_Toggle");
 
-        if (!System.IO.File.Exists("OptionsMenu.cfg"))
+        if (Application.loadedLevelName == "MainMenu")
         {
-            configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
-            byte[] emptyparams = new byte[13];
-            configFile.Write(emptyparams, 0, 13);
-            configFile.Close();
-        }
-        else
-        {
-            configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.None);
-            configuration = new byte[13];
-            configFile.Read(configuration, 0, 13);
-            MasterVolSlider.GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, 0);
-            MusicVolSlider.GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, sizeof(float));
-            SFXVolSlider.GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, sizeof(float) * 2);
-            b_fullscreen = System.BitConverter.ToBoolean(configuration, sizeof(float) * 3); //ToSingle(configuration, sizeof(float));
-            configFile.Close();
+            if (!System.IO.File.Exists("OptionsMenu.cfg"))
+            {
+                configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None);
+                byte[] emptyparams = new byte[13];
+                configFile.Write(emptyparams, 0, 13);
+                configFile.Close();
+            }
+            else
+            {
+                configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.None);
+                configuration = new byte[13];
+                configFile.Read(configuration, 0, 13);
+                MasterVolSlider.GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, 0);
+                MusicVolSlider.GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, sizeof(float));
+                SFXVolSlider.GetComponent<UnityEngine.UI.Slider>().value = System.BitConverter.ToSingle(configuration, sizeof(float) * 2);
+                b_fullscreen = System.BitConverter.ToBoolean(configuration, sizeof(float) * 3); //ToSingle(configuration, sizeof(float));
+                configFile.Close();
+            }
         }
 
 
-        
+
         //changed = false; // must not forget to reset x
     }
 
@@ -99,20 +102,23 @@ public class Menu : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
 
-        //make fullscreen
-        if (Application.platform == RuntimePlatform.Android)
+        if (Application.loadedLevelName == "MainMenu")
         {
-            Screen.fullScreen = true;
-            //GameObject.FindGameObjectWithTag("Fullscreen_Toggle").SetActive(false);
+            //make fullscreen
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                Screen.fullScreen = true;
+                //GameObject.FindGameObjectWithTag("Fullscreen_Toggle").SetActive(false);
+            }
+            else
+            {
+                Screen.fullScreen = b_fullscreen;
+
+                GameObject.FindGameObjectWithTag("Fullscreen_Toggle").GetComponent<UnityEngine.UI.Toggle>().isOn = b_fullscreen;
+
+            }
         }
-        else
-        {
-            Screen.fullScreen = b_fullscreen;
-            GameObject.FindGameObjectWithTag("Fullscreen_Toggle").GetComponent<UnityEngine.UI.Toggle>().isOn = b_fullscreen;
-        }
-        //sound_manager = GameObject.Find("Sound_Manager").GetComponent<Sound_Manager>().GetInstance();
     }
 
 
@@ -125,11 +131,11 @@ public class Menu : MonoBehaviour
     void FixedUpdate()
     {
 
-    
 
-  
+
+
     }
-   
+
     public void ClearVolume()
     {
         //master_mixer.ClearFloat("Master_Volume");
@@ -202,7 +208,7 @@ public class Menu : MonoBehaviour
         else
         {
             // mute the Vibe
-            
+
             master_mixer.GetFloat("MasterVolume", out volume_master_stored);
             master_mixer.SetFloat("MasterVolume", -40.0f);
             muted = !muted;
@@ -214,15 +220,15 @@ public class Menu : MonoBehaviour
     public void SaveToFile()
     {
 
-       
-            configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Open, System.IO.FileAccess.Write, System.IO.FileShare.None);
-            configFile.Write(System.BitConverter.GetBytes(MasterVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
-            configFile.Write(System.BitConverter.GetBytes(MusicVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
-            configFile.Write(System.BitConverter.GetBytes(SFXVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
-            configFile.Write(System.BitConverter.GetBytes(b_fullscreen), 0, sizeof(bool));
-            configFile.Close();
-            
-    
+
+        configFile = new System.IO.FileStream("OptionsMenu.cfg", System.IO.FileMode.Open, System.IO.FileAccess.Write, System.IO.FileShare.None);
+        configFile.Write(System.BitConverter.GetBytes(MasterVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
+        configFile.Write(System.BitConverter.GetBytes(MusicVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
+        configFile.Write(System.BitConverter.GetBytes(SFXVolSlider.GetComponent<UnityEngine.UI.Slider>().value), 0, sizeof(float));
+        configFile.Write(System.BitConverter.GetBytes(b_fullscreen), 0, sizeof(bool));
+        configFile.Close();
+
+
 
     }
 

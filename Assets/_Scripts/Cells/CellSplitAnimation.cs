@@ -33,8 +33,8 @@ public class CellSplitAnimation : MonoBehaviour
     public void CreateNerveCell()
     {
 
-        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("NerveCell", transform.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
-            : GameObject.Instantiate(gNerveCellPrefab, transform.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
+        GameObject newcell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("NerveCell", transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f), 0, new object[] { (bool)false }) as GameObject
+            : GameObject.Instantiate(gNerveCellPrefab, transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f)) as GameObject;
         newcell.GetComponent<BaseCell>().currentProtein = currentProtein;
         newcell.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
         newcell.GetComponent<BaseCell>().currentState = CellState.IDLE;
@@ -43,15 +43,13 @@ public class CellSplitAnimation : MonoBehaviour
             newcell.GetComponent<BaseCell>().isMine = true;
         }
         originCell.Die();
-        if (PhotonNetwork.connected)
-        {
-            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
-        }
         originCell1.Die();
         if (PhotonNetwork.connected)
         {
+            originCell.photonView.RPC("Die", PhotonTargets.Others, null);
             originCell1.photonView.RPC("Die", PhotonTargets.Others, null);
         }
+
         Destroy(gameObject);
     }
 

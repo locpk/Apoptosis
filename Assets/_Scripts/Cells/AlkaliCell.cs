@@ -78,8 +78,7 @@ public class AlkaliCell : BaseCell
 
 
 
-            GameObject knerveCell = PhotonNetwork.connected ? PhotonNetwork.Instantiate("AlkaliAcidicMerging", trackingPos, trackingRot, 0, new object[] { (bool)false })
-                : Instantiate(nerveCell, trackingPos, trackingRot) as GameObject;
+            GameObject knerveCell = Instantiate(nerveCell, trackingPos, trackingRot) as GameObject;
             knerveCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
             knerveCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
             knerveCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
