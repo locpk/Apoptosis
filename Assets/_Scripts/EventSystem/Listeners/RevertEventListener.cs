@@ -21,6 +21,10 @@ public class RevertEventListener : MonoBehaviour {
         {
             return;
         }
+        curCell.targets.Clear();
+        curCell.SetPrimaryTarget(null);
+        curCell.Move(curCell.transform.position);
+        curCell.currentState = CellState.IDLE;
         curCell.Revert();
         
     }

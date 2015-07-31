@@ -207,7 +207,7 @@ public class StemCell : BaseCell
 
                     float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
 
-                    if (distance > attackRange * attackRange && distance <= fovRadius * fovRadius)
+                    if (distance > attackRange && distance <= fovRadius)
                     {
                         if (IsInvoking("DamagePerSecond"))
                         {
@@ -221,7 +221,7 @@ public class StemCell : BaseCell
                         base.ChaseTarget();
                         return;
                     }
-                    else if (distance <= attackRange * attackRange)
+                    else if (distance <=  attackRange)
                     {
                         if (!IsInvoking("DamagePerSecond"))
                         {

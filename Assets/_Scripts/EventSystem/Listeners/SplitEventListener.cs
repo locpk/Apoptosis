@@ -22,6 +22,10 @@ public class SplitEventListener : MonoBehaviour
         {
             return;
         }
+        curCell.targets.Clear();
+        curCell.SetPrimaryTarget(null);
+        curCell.Move(curCell.transform.position);
+        curCell.currentState = CellState.IDLE;
         switch (curCell.celltype)
         {
             case CellType.STEM_CELL:
