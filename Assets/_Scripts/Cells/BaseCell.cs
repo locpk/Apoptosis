@@ -128,13 +128,13 @@ public class BaseCell : Photon.PunBehaviour
         if (stream.isWriting)
         {
             // We own this player: send the others our data
-            stream.SendNext(transform.position);
+            //stream.SendNext(transform.position);
             stream.SendNext(currentProtein);
         }
         else
         {
             // Network player, receive data
-            this.transform.position = (Vector3)stream.ReceiveNext();
+            //this.transform.position = (Vector3)stream.ReceiveNext();
             this.currentProtein = (float)stream.ReceiveNext();
         }
     }

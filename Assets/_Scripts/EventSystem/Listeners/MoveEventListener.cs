@@ -25,7 +25,7 @@ public class MoveEventListener : MonoBehaviour {
         curCell.Move(_dest);
         if (PhotonNetwork.connected)
         {
-            curCell.photonView.RPC("Move", PhotonTargets.Others, _dest);
+            curCell.gameObject.GetPhotonView().RPC("Move", PhotonTargets.Others, _dest);
         }
     }
 }
