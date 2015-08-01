@@ -179,6 +179,8 @@ MonoBehaviour:
   fadeSpeed: 1.5
   sceneStarting: 1
   timer: 4
+  cursor_Normal: {fileID: 2800000, guid: 7a410fc4fa410e041a11e0704d6c3e42, type: 3}
+  cursorMode: 0
 --- !u!1 &1292172569
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1679158768
 RectTransform:
   m_ObjectHideFlags: 0

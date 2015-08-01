@@ -9,13 +9,28 @@ public class SceneFadeInOut : MonoBehaviour
     public bool sceneStarting = true;
 
      public float timer = 4.0f;
-
-
+     public Texture2D cursor_Normal;
+     public CursorMode cursorMode = CursorMode.Auto;
+     private bool tablet_mode = false;
 
        
     void Awake()
     {
         FadeImg.rectTransform.localScale = new Vector2(Screen.width, Screen.height);
+       
+        if (Input.touchSupported)
+        {
+            tablet_mode = true;
+        }
+
+        //resets the cersor to normal if not in edge
+        if (tablet_mode)
+        {
+           
+            Cursor.SetCursor(null, Vector2.zero, cursorMode);
+        }
+        else
+            Cursor.SetCursor(cursor_Normal, Vector2.zero, cursorMode);
     }
 
     void Update()
