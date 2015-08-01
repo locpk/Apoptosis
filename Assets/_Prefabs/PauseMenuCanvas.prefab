@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &167990
 GameObject:
   m_ObjectHideFlags: 1
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: .39199999}
+  m_Color: {r: 1, g: 1, b: 1, a: .566999972}
   m_Sprite: {fileID: 21300000, guid: cda1a7751cc4c1d47b2dbdd6ac33f802, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -964,7 +964,7 @@ RectTransform:
   m_GameObject: {fileID: 184524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.15499556, z: 1}
+  m_LocalScale: {x: .903431475, y: 1.00433004, z: .903431475}
   m_Children:
   - {fileID: 22445676}
   - {fileID: 22412464}
