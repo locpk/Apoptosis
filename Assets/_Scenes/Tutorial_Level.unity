@@ -2169,10 +2169,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 11447774, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
-      propertyPath: prefabProtein
+    - target: {fileID: 11436092, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
+      propertyPath: minimapCamera
       value: 
-      objectReference: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
+      objectReference: {fileID: 1347024961}
+    - target: {fileID: 11447774, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
+      propertyPath: taskCanvas
+      value: 
+      objectReference: {fileID: 574502184}
     - target: {fileID: 11447774, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
       propertyPath: currentTaskText
       value: 
@@ -2182,18 +2186,6 @@ Prefab:
       value: 
       objectReference: {fileID: 1497328688}
     - target: {fileID: 11447774, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
-      propertyPath: taskCanvas
-      value: 
-      objectReference: {fileID: 574502184}
-    - target: {fileID: 11447774, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
-      propertyPath: acidicAreaText
-      value: 
-      objectReference: {fileID: 1976635213}
-    - target: {fileID: 11436092, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
-      propertyPath: attackPin
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 11447774, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
       propertyPath: TouchButton
       value: 
       objectReference: {fileID: 217841579}
@@ -2201,26 +2193,22 @@ Prefab:
       propertyPath: HeatButton
       value: 
       objectReference: {fileID: 1221624519}
-    - target: {fileID: 11436092, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
-      propertyPath: minimapCamera
+    - target: {fileID: 11449998, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
+      propertyPath: pauseMenu
       value: 
-      objectReference: {fileID: 1347024961}
-    - target: {fileID: 11436092, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
-      propertyPath: friendly_indicator
+      objectReference: {fileID: 1292527258}
+    - target: {fileID: 11449998, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
+      propertyPath: optionsMenu
       value: 
-      objectReference: {fileID: 2800000, guid: 2891a1c9bf4b09b4098df9cf5af206a0, type: 3}
-    - target: {fileID: 11436092, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
-      propertyPath: target_indicator
+      objectReference: {fileID: 922180830}
+    - target: {fileID: 11449998, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
+      propertyPath: instructionsMenu
       value: 
-      objectReference: {fileID: 2800000, guid: 4e1879e39f4ffcf4fa2d9ac510b95bac, type: 3}
-    - target: {fileID: 11436092, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
-      propertyPath: friendlySelector
+      objectReference: {fileID: 2049554541}
+    - target: {fileID: 11449998, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
+      propertyPath: pauseMenuButton
       value: 
-      objectReference: {fileID: 155366, guid: 3912fbb8d5c6beb4dba246a49ba5d10d, type: 2}
-    - target: {fileID: 11436092, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
-      propertyPath: targetSelector
-      value: 
-      objectReference: {fileID: 175858, guid: 10654ac488349b64888c8a297e3e3890, type: 2}
+      objectReference: {fileID: 1047440844}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
   m_IsPrefabParent: 0
@@ -4728,42 +4716,18 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!1 &1996319721 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 162260, guid: 3fa72cf7f91b11d4d9c3c84130c34626, type: 2}
-  m_PrefabInternal: {fileID: 1012241775}
---- !u!114 &1996319722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1996319721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 397059811a662274bb595eca7faecdc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1996319724 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11447774, guid: 3fa72cf7f91b11d4d9c3c84130c34626,
     type: 2}
   m_PrefabInternal: {fileID: 1012241775}
   m_Script: {fileID: 11500000, guid: 5f99f2942194c46409154fdc8b146dfc, type: 3}
---- !u!114 &1996319725
+--- !u!114 &1996319725 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1996319721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
+  m_PrefabParentObject: {fileID: 11449998, guid: 3fa72cf7f91b11d4d9c3c84130c34626,
+    type: 2}
+  m_PrefabInternal: {fileID: 1012241775}
   m_Script: {fileID: 11500000, guid: 6d747c0d6a9ad7b49924dfe75bc75386, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 1292527258}
-  optionsMenu: {fileID: 922180830}
-  instructionsMenu: {fileID: 2049554541}
-  pauseMenuButton: {fileID: 1047440844}
 --- !u!1 &2013883784
 GameObject:
   m_ObjectHideFlags: 0

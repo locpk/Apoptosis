@@ -80,7 +80,8 @@ public class PlayerController : MonoBehaviour
     private int NumTierTwoCold_counter = 0;
     private int NumTierTwoHeat_counter = 0;
     private int NumEnemiesLeft_counter = 0;
-    
+
+    private int NumCells_counter = 0; 
 
     public List<BaseCell> allSelectableUnits;
     public List<BaseCell> selectedUnits;
@@ -92,6 +93,9 @@ public class PlayerController : MonoBehaviour
 
     public Camera minimapCamera;
 
+    public GUIStyle style_for_badges;
+    public Texture2D Stem_Badge;
+    public int Icon_Spacing;
 
     float fps;
     float initTouchTime;
@@ -542,31 +546,39 @@ public class PlayerController : MonoBehaviour
             if (Time.timeScale > 0.0f)
             {
                 GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-                GUI.BeginGroup(new Rect(Screen.width * 0.5f - 400, 20, Screen.width * 0.5f + 500, 512));
+                GUI.BeginGroup(new Rect(Screen.width * 0.18f , 20, Screen.width * 0.5f , 512));
 
     
                 
                 foreach (BaseCell item in selectedUnits)
                 {
-                    if (item.celltype == CellType.STEM_CELL)
-                    {
-                        NumStemCells_counter++;
-               
-                        GUI.Box(new Rect(0, 0 , 75, 60), "Stem Cells: ");
-                        GUI.Label(new Rect(35, 10 + NumStemCells_counter*15, 50, 50  + NumStemCells_counter*11), item.currentProtein.ToString());//NumStemCells.ToString());
+                   // if (item.celltype == CellType.STEM_CELL)
+                   // {
+                     //   NumStemCells_counter++;
+                    NumCells_counter++;
+
+                    float health_ratio = item.currentProtein / item.GetMaxPretein();
+
+                    GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing, 0, 86, 86), Stem_Badge, style_for_badges);
                         
-                    }
-                    if (item.celltype == CellType.HEAT_CELL)
-                    {
-                       GUI.Box(new Rect(80, 0 + NumHeatCells_counter * 75 , 75, 60 + NumHeatCells_counter * 75 ), "Heat Cells: ");                     
-                       GUI.Label(new Rect(115, 35, 50, 50), item.currentProtein.ToString());
-                       NumHeatCells_counter++;
-                    }
+                        Texture2D texture = new Texture2D(1, 1);
+                        texture.SetPixel(0, 0, Color.green);  
+                        if (health_ratio <= 0.3f)               
+                            texture.SetPixel(0, 0, Color.red);                                               
+                        else if (health_ratio <= 0.6f)
+                            texture.SetPixel(0, 0, Color.yellow);                         
+                        texture.Apply();
+
+                        GUI.DrawTexture(new Rect(15 + NumCells_counter * Icon_Spacing, 4, 58 * health_ratio, 4), texture);
+                        GUI.Label(new Rect(35, 10 + NumCells_counter * 15, 50, 50 + NumCells_counter * 11), health_ratio.ToString());//NumStemCells.ToString());
+                        
+                 //   }
+                   
                 }
 
-                if (NumStemCells_counter >= NumStemCells)
+                if (NumCells_counter >= selectedUnits.Count)
                 {
-                    NumStemCells_counter = NumStemCells;
+                    NumCells_counter = 0;
                 }
 
                    // NumHeatCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.HEAT_CELL)).Count;
@@ -574,29 +586,29 @@ public class PlayerController : MonoBehaviour
                 
              
 
-                GUI.Box(new Rect(160, 0, 75, 60), "Cold Cells: ");
-                GUI.Label(new Rect(195, 35, 50, 50), NumColdCells.ToString());
-
-                GUI.Box(new Rect(240, 0, 75, 60), "Acidic Cells: ");
-                GUI.Label(new Rect(275, 35, 50, 50), NumAcidicCells.ToString());
-
-                GUI.Box(new Rect(320, 0, 75, 60), "Alkali Cells: ");
-                GUI.Label(new Rect(355, 35, 50, 50), NumAlkaliCells.ToString());
-
-                GUI.Box(new Rect(400, 0, 75, 60), "Nerve Cells: ");
-                GUI.Label(new Rect(435, 35, 50, 50), NumNerveCells.ToString());
-
-                GUI.Box(new Rect(480, 0, 75, 60), "Tier 2\nHeat Cells: ");
-                GUI.Label(new Rect(515, 35, 50, 50), NumTierTwoHeat.ToString());
-
-                GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
-                GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
-
-                GUI.Box(new Rect(640, 0, 75, 60), "Enemies\nLeft: ");
-                GUI.Label(new Rect(675, 35, 50, 50), NumEnemiesLeft.ToString());
-
-                GUI.Box(new Rect(720, 0, 75, 60), "Cap: ");
-                GUI.Label(new Rect(755, 35, 50, 50), cap.ToString());
+         //       GUI.Box(new Rect(160, 0, 75, 60), "Cold Cells: ");
+         //       GUI.Label(new Rect(195, 35, 50, 50), NumColdCells.ToString());
+         //
+         //       GUI.Box(new Rect(240, 0, 75, 60), "Acidic Cells: ");
+         //       GUI.Label(new Rect(275, 35, 50, 50), NumAcidicCells.ToString());
+         //
+         //       GUI.Box(new Rect(320, 0, 75, 60), "Alkali Cells: ");
+         //       GUI.Label(new Rect(355, 35, 50, 50), NumAlkaliCells.ToString());
+         //
+         //       GUI.Box(new Rect(400, 0, 75, 60), "Nerve Cells: ");
+         //       GUI.Label(new Rect(435, 35, 50, 50), NumNerveCells.ToString());
+         //
+         //       GUI.Box(new Rect(480, 0, 75, 60), "Tier 2\nHeat Cells: ");
+         //       GUI.Label(new Rect(515, 35, 50, 50), NumTierTwoHeat.ToString());
+         //
+         //       GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
+         //       GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
+         //
+         //       GUI.Box(new Rect(640, 0, 75, 60), "Enemies\nLeft: ");
+         //       GUI.Label(new Rect(675, 35, 50, 50), NumEnemiesLeft.ToString());
+         //
+         //       GUI.Box(new Rect(720, 0, 75, 60), "Cap: ");
+         //       GUI.Label(new Rect(755, 35, 50, 50), cap.ToString());
                 GUI.EndGroup();
             }
 

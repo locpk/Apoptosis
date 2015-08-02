@@ -40,6 +40,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 429780}
   - 114: {fileID: 11447774}
+  - 114: {fileID: 11409160}
+  - 114: {fileID: 11449998}
   m_Layer: 0
   m_Name: CenterGameControl
   m_TagString: Untagged
@@ -85,6 +87,17 @@ Transform:
   - {fileID: 406002}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11409160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397059811a662274bb595eca7faecdc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11436092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,10 +110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStarted: 0
+  friendlySelector: {fileID: 155366, guid: 3912fbb8d5c6beb4dba246a49ba5d10d, type: 2}
+  targetSelector: {fileID: 175858, guid: 10654ac488349b64888c8a297e3e3890, type: 2}
   movePin: {fileID: 140004, guid: 8b33004cf5198cb439e39c5ee7650ae0, type: 2}
   attackPin: {fileID: 0}
-  moveWaypoint: {fileID: 110900, guid: 669611cb87dffa74cad959c741ccb043, type: 2}
-  moveWaypoints: []
   isSelecting: 1
   NumStemCells: 0
   NumHeatCells: 0
@@ -116,6 +129,68 @@ MonoBehaviour:
   allSelectableTargets: []
   selectedTargets: []
   selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
+  minimapCamera: {fileID: 0}
+  style_for_badges:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  Stem_Badge: {fileID: 2800000, guid: 3e4284b2b6a1675439e208a29cc267e3, type: 3}
+  Icon_Spacing: 77
 --- !u!114 &11447774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -131,7 +206,25 @@ MonoBehaviour:
   currentTaskText: {fileID: 0}
   showTaskButton: {fileID: 0}
   PlayerControls: {fileID: 11436092}
-  prefabProtein: {fileID: 0}
+  allSelectableUnits: []
+  prefabProtein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
+  TouchButton: {fileID: 0}
+  HeatButton: {fileID: 0}
+--- !u!114 &11449998
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d747c0d6a9ad7b49924dfe75bc75386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
+  optionsMenu: {fileID: 0}
+  instructionsMenu: {fileID: 0}
+  pauseMenuButton: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

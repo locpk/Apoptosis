@@ -12,6 +12,7 @@ public static class CancerChance
     public const float LEVEL_3 = 0.35f;
     public const float LEVEL_4 = 0.45f;
     public const float LEVEL_5 = 1.0f;
+    
 }
 
 /// <summary>
@@ -816,5 +817,10 @@ public class BaseCell : Photon.PunBehaviour
             }
             transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
+    }
+
+    public float GetMaxPretein()
+    {
+    return MAX_PROTEIN;
     }
 }
