@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
     public GUIStyle style_for_badges;
     public Texture2D Stem_Badge;
     public int Icon_Spacing;
-
+    private float badge_scale = .7f;
     float fps;
     float initTouchTime;
     float delay;
@@ -546,7 +546,7 @@ public class PlayerController : MonoBehaviour
             if (Time.timeScale > 0.0f)
             {
                 GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-                GUI.BeginGroup(new Rect(Screen.width * 0.18f , 20, Screen.width * 0.5f , 512));
+                GUI.BeginGroup(new Rect(Screen.width * 0.18f , 20*badge_scale, Screen.width * 0.5f , 512));
 
     
                 
@@ -556,21 +556,19 @@ public class PlayerController : MonoBehaviour
                    // {
                      //   NumStemCells_counter++;
                     NumCells_counter++;
-
                     float health_ratio = item.currentProtein / item.GetMaxPretein();
-
-                    GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing, 0, 86, 86), Stem_Badge, style_for_badges);
+                    GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), Stem_Badge, style_for_badges);
                         
                         Texture2D texture = new Texture2D(1, 1);
                         texture.SetPixel(0, 0, Color.green);  
-                        if (health_ratio <= 0.3f)               
+                        if (health_ratio <= 0.2f)               
                             texture.SetPixel(0, 0, Color.red);                                               
-                        else if (health_ratio <= 0.6f)
+                        else if (health_ratio <= 0.4f)
                             texture.SetPixel(0, 0, Color.yellow);                         
                         texture.Apply();
-
-                        GUI.DrawTexture(new Rect(15 + NumCells_counter * Icon_Spacing, 4, 58 * health_ratio, 4), texture);
-                        GUI.Label(new Rect(35, 10 + NumCells_counter * 15, 50, 50 + NumCells_counter * 11), health_ratio.ToString());//NumStemCells.ToString());
+                    // drwas the life bar
+                        GUI.DrawTexture(new Rect(15*badge_scale + NumCells_counter * Icon_Spacing*badge_scale, 4 * badge_scale, 58 * health_ratio * badge_scale, 4), texture);
+                  //      GUI.Label(new Rect(35, 10 + NumCells_counter * 15, 50, 50 + NumCells_counter * 11), health_ratio.ToString());//NumStemCells.ToString());
                         
                  //   }
                    
