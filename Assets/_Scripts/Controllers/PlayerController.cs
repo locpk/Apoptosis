@@ -71,6 +71,16 @@ public class PlayerController : MonoBehaviour
     public int NumTierTwoHeat = 0;
     public int NumEnemiesLeft = 0;
 
+    private int NumStemCells_counter = 0;
+    private int NumHeatCells_counter = 0;
+    private int NumColdCells_counter = 0;
+    private int NumAcidicCells_counter = 0;
+    private int NumAlkaliCells_counter = 0;
+    private int NumNerveCells_counter = 0;
+    private int NumTierTwoCold_counter = 0;
+    private int NumTierTwoHeat_counter = 0;
+    private int NumEnemiesLeft_counter = 0;
+    
 
     public List<BaseCell> allSelectableUnits;
     public List<BaseCell> selectedUnits;
@@ -532,12 +542,37 @@ public class PlayerController : MonoBehaviour
             if (Time.timeScale > 0.0f)
             {
                 GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-                GUI.BeginGroup(new Rect(Screen.width * 0.5f - 400, 25, Screen.width * 0.5f + 500, 100));
-                GUI.Box(new Rect(0, 0, 75, 60), "Stem Cells: ");
-                GUI.Label(new Rect(35, 35, 50, 50), NumStemCells.ToString());
+                GUI.BeginGroup(new Rect(Screen.width * 0.5f - 400, 20, Screen.width * 0.5f + 500, 512));
 
-                GUI.Box(new Rect(80, 0, 75, 60), "Heat Cells: ");
-                GUI.Label(new Rect(115, 35, 50, 50), NumHeatCells.ToString());
+    
+                
+                foreach (BaseCell item in selectedUnits)
+                {
+                    if (item.celltype == CellType.STEM_CELL)
+                    {
+                        NumStemCells_counter++;
+               
+                        GUI.Box(new Rect(0, 0 , 75, 60), "Stem Cells: ");
+                        GUI.Label(new Rect(35, 10 + NumStemCells_counter*15, 50, 50  + NumStemCells_counter*11), item.currentProtein.ToString());//NumStemCells.ToString());
+                        
+                    }
+                    if (item.celltype == CellType.HEAT_CELL)
+                    {
+                       GUI.Box(new Rect(80, 0 + NumHeatCells_counter * 75 , 75, 60 + NumHeatCells_counter * 75 ), "Heat Cells: ");                     
+                       GUI.Label(new Rect(115, 35, 50, 50), item.currentProtein.ToString());
+                       NumHeatCells_counter++;
+                    }
+                }
+
+                if (NumStemCells_counter >= NumStemCells)
+                {
+                    NumStemCells_counter = NumStemCells;
+                }
+
+                   // NumHeatCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.HEAT_CELL)).Count;
+                     
+                
+             
 
                 GUI.Box(new Rect(160, 0, 75, 60), "Cold Cells: ");
                 GUI.Label(new Rect(195, 35, 50, 50), NumColdCells.ToString());
