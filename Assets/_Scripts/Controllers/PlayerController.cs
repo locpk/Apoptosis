@@ -93,10 +93,18 @@ public class PlayerController : MonoBehaviour
 
     public Camera minimapCamera;
 
-    public GUIStyle style_for_badges;
-    public Texture2D Stem_Badge;
-    public int Icon_Spacing;
-    private float badge_scale = .7f;
+    public GUIStyle style_for_badges; // makes the GUI boxes transparent for badges
+    public Texture2D badge_Stem;
+    public Texture2D badge_Heat;
+    public Texture2D badge_Cold;
+    public Texture2D badge_Acidic;
+    public Texture2D badge_Alkali;
+    public Texture2D badge_Heat2;
+    public Texture2D badge_Cold2;
+    public Texture2D badge_Nerve;
+
+    public int Icon_Spacing;// controls the distance between badges 
+    private float badge_scale = .7f; // size of badges
     float fps;
     float initTouchTime;
     float delay;
@@ -557,20 +565,87 @@ public class PlayerController : MonoBehaviour
                      //   NumStemCells_counter++;
                     NumCells_counter++;
                     float health_ratio = item.currentProtein / item.GetMaxPretein();
-                    GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), Stem_Badge, style_for_badges);
-                        
+                    if (item.celltype == CellType.STEM_CELL)
+                    {
+                    GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Stem, style_for_badges);
+
+                    }
+                    else if (item.celltype == CellType.HEAT_CELL)
+                    {
+                        GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat, style_for_badges);
+                    }
+                    else if (item.celltype == CellType.COLD_CELL)
+                    {
+                        GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold, style_for_badges);
+                    }
+                    else if (item.celltype == CellType.COLD_CELL_TIRE2)
+                    {
+                        GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold2, style_for_badges);
+                    }
+                    else if (item.celltype == CellType.HEAT_CELL_TIRE2)
+                    {
+                        GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat2, style_for_badges);
+                    }
+                    else if (item.celltype == CellType.ACIDIC_CELL)
+                    {
+                        GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Acidic, style_for_badges);
+                    }
+                    else if (item.celltype == CellType.ALKALI_CELL)
+                    {
+                        GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Alkali, style_for_badges);
+                    }
+                    else if (item.celltype == CellType.NERVE_CELL)
+                    {
+                        GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Nerve, style_for_badges);
+                    }
+                 //   switch (item.celltype)
+                 //   {
+                 //       case CellType.STEM_CELL:
+                 //           {
+                 //               GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Stem, style_for_badges);
+                 //
+                 //               break;
+                 //           }
+                 //       case CellType.HEAT_CELL:
+                 //           {
+                 //               GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat, style_for_badges);
+                 //               break;
+                 //           }
+                 //       case CellType.COLD_CELL: GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold, style_for_badges);
+                 //           break;
+                 //       case CellType.HEAT_CELL_TIRE2:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat2, style_for_badges);
+                 //           break;
+                 //       case CellType.COLD_CELL_TIRE2:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold2, style_for_badges);
+                 //           break;
+                 //       case CellType.ACIDIC_CELL:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Acidic, style_for_badges);
+                 //           break;
+                 //       case CellType.ALKALI_CELL:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Alkali, style_for_badges);
+                 //           break;
+                 //       case CellType.CANCER_CELL:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat, style_for_badges);
+                 //           break;
+                 //       case CellType.NERVE_CELL:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Nerve, style_for_badges);
+                 //           break;
+                 //       default:
+                 //           break;
+                 //   }
+
+
+
+
+                   
+
+                        // drwas the life bar
                         Texture2D texture = new Texture2D(1, 1);
                         texture.SetPixel(0, 0, Color.green);  
                         if (health_ratio <= 0.2f)               
                             texture.SetPixel(0, 0, Color.red);                                               
                         else if (health_ratio <= 0.4f)
                             texture.SetPixel(0, 0, Color.yellow);                         
-                        texture.Apply();
-                    // drwas the life bar
+                        texture.Apply();                   
                         GUI.DrawTexture(new Rect(15*badge_scale + NumCells_counter * Icon_Spacing*badge_scale, 4 * badge_scale, 58 * health_ratio * badge_scale, 4), texture);
-                  //      GUI.Label(new Rect(35, 10 + NumCells_counter * 15, 50, 50 + NumCells_counter * 11), health_ratio.ToString());//NumStemCells.ToString());
+                 
                         
-                 //   }
+         
                    
                 }
 

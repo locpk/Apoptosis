@@ -761,7 +761,11 @@ public class BaseCell : Photon.PunBehaviour
         {
             transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
             // returns the music back to normal after the alert ping
-            sound_manager.GetInstance().master_mixer.FindSnapshot("Snapshot").TransitionTo(3.0f);
+            if (sound_manager.GetInstance() != null)
+            {
+                sound_manager.GetInstance().master_mixer.FindSnapshot("Snapshot").TransitionTo(3.0f);
+                
+            }
         }
         if (!isMine && celltype != CellType.CANCER_CELL)
         {

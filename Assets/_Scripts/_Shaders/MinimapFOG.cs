@@ -36,9 +36,12 @@ public class MinimapFOG : MonoBehaviour
     void Start()
     {
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>().GetInstance();
-
+        if (sound_manager.GetInstance() != null)
+        {
         snapshot_normal = sound_manager.GetInstance().master_mixer.FindSnapshot("Snapshot");
         snapshot_attack = sound_manager.GetInstance().master_mixer.FindSnapshot("Snapshot_Attack");
+            
+        }
     
     }
    

@@ -124,7 +124,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 477812, guid: 78c83354bbe983a44a6e1e7c583ac496, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 477812, guid: 78c83354bbe983a44a6e1e7c583ac496, type: 2}
       propertyPath: m_LocalScale.y
@@ -734,7 +734,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 850321935}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!114 &319429205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,6 +788,56 @@ Transform:
   - {fileID: 1561137126}
   m_Father: {fileID: 922612132}
   m_RootOrder: 6
+--- !u!4 &337168959 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+  m_PrefabInternal: {fileID: 348264832}
+--- !u!1001 &348264832
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 850321935}
+    m_Modifications:
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 460272, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11480174, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: minimapCamera
+      value: 
+      objectReference: {fileID: 2081285704}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &402600882
 GameObject:
   m_ObjectHideFlags: 0
@@ -3506,6 +3556,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 337168959}
   - {fileID: 1482255659}
   - {fileID: 319429204}
   - {fileID: 870805230}
@@ -3564,7 +3615,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 850321935}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!114 &870805231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5072,7 +5123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1482255658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5164,7 +5215,14 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  Stem_Badge: {fileID: 2800000, guid: 3e4284b2b6a1675439e208a29cc267e3, type: 3}
+  badge_Stem: {fileID: 0}
+  badge_Heat: {fileID: 0}
+  badge_Cold: {fileID: 0}
+  badge_Acidic: {fileID: 0}
+  badge_Alkali: {fileID: 0}
+  badge_Heat2: {fileID: 0}
+  badge_Cold2: {fileID: 0}
+  badge_Nerve: {fileID: 0}
   Icon_Spacing: 77
 --- !u!4 &1482255659
 Transform:
@@ -5177,7 +5235,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 850321935}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!1 &1511382539
 GameObject:
   m_ObjectHideFlags: 0
