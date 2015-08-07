@@ -39,6 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471d131ae0e64404b9eb047dfc59791e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchDisabled: {fileID: 21300000, guid: 728f4d9e2e622714fa9d28403acf662c, type: 3}
+  touchActivated: {fileID: 21300000, guid: 4c795ac2ef61af04bbe408e52b0c855d, type: 3}
   gameStarted: 0
   friendlySelector: {fileID: 155366, guid: 3912fbb8d5c6beb4dba246a49ba5d10d, type: 2}
   targetSelector: {fileID: 175858, guid: 10654ac488349b64888c8a297e3e3890, type: 2}
