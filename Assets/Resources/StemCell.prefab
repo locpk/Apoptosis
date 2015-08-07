@@ -117,7 +117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 84.6999969, y: 1, z: 46.7000008}
+  m_LocalPosition: {x: -2.53999996, y: 1.5, z: 6.63000011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 495744}
@@ -258,6 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0918649c5b506df4c88a8435ed870de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snapshot_attack: {fileID: 0}
+  snapshot_normal: {fileID: 0}
 --- !u!114 &11412848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -348,7 +350,7 @@ MonoBehaviour:
   fovRadius: 4
   attackDamage: 5
   attackRange: 3
-  consumeRadius: 5
+  defense: 10
   depleteTimer: 1
   depleteAmount: 3
   attackCooldown: 2
