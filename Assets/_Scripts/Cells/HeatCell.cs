@@ -94,7 +94,7 @@ public class HeatCell : BaseCell
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         navAgent.speed = 9.0f;
-        
+
     }
 
     void MUltiDMg()
@@ -182,11 +182,13 @@ public class HeatCell : BaseCell
             switch (currentState)
             {
                 case CellState.IDLE:
-                     if (IsInvoking("DamagePerSecond"))
+                    if (IsInvoking("DamagePerSecond"))
                     {
                         CancelInvoke("DamagePerSecond");
                     }
+                   
                     base.bUpdate();
+
                     break;
                 case CellState.ATTACK:
                     if (primaryTarget != null)
@@ -196,11 +198,13 @@ public class HeatCell : BaseCell
                             if (!IsInvoking("DamagePerSecond"))
                             {
                                 InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
-
+                               // navAgent.Stop();
+                                navAgent.enabled = false;
+                                navObstacle.enabled = true;
                             }
                         }
 
-                        else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                        else// if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                         {
                             if (IsInvoking("DamagePerSecond"))
                             {
@@ -210,6 +214,7 @@ public class HeatCell : BaseCell
                             {
                                 base.ChaseTarget();
                             }
+
                         }
 
                     }
