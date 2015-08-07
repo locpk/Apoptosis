@@ -42,6 +42,7 @@ TagManager:
   - Button_Evolve
   - Button_Devolve
   - Button_Merge
+  - Minimap_Camera
   layers:
   - Default
   - TransparentFX

@@ -59,7 +59,6 @@ MonoBehaviour:
   allSelectableTargets: []
   selectedTargets: []
   selector: {fileID: 2800000, guid: bb996cdaf5d4521468919a4bdb8e654b, type: 3}
-  minimapCamera: {fileID: 0}
   style_for_badges:
     m_Name: 
     m_Normal:
@@ -119,14 +118,14 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  badge_Stem: {fileID: 2800000, guid: 3e4284b2b6a1675439e208a29cc267e3, type: 3}
-  badge_Heat: {fileID: 2800000, guid: fac43243d7df7d940a7cf54a5a34839b, type: 3}
-  badge_Cold: {fileID: 2800000, guid: b9b4390d405dd044392fa10c1e572d1f, type: 3}
-  badge_Acidic: {fileID: 2800000, guid: d69cf6b6a7af9364485f494fa8c7a3f3, type: 3}
-  badge_Alkali: {fileID: 2800000, guid: 9ae9d54ba4d692341bfb38f9c00ed71b, type: 3}
-  badge_Heat2: {fileID: 2800000, guid: ffe8ce7109ea9be4888cc3a5a67d969b, type: 3}
-  badge_Cold2: {fileID: 2800000, guid: c8737d8d762062e49bce7e30c597f156, type: 3}
-  badge_Nerve: {fileID: 2800000, guid: 673011c070eb18245b49ea4cd8094aea, type: 3}
+  badge_Stem: {fileID: 2800000, guid: d2e94155476553d43ac4d98b5920a54f, type: 3}
+  badge_Heat: {fileID: 2800000, guid: 53addcadd50fa2042a2046ad445d28da, type: 3}
+  badge_Cold: {fileID: 2800000, guid: 2242f266540bb3149b84de89d10abe35, type: 3}
+  badge_Acidic: {fileID: 2800000, guid: 6f1778e7383676049b282e409d58f2ca, type: 3}
+  badge_Alkali: {fileID: 2800000, guid: 01177a5a52619b64a8f30b5ed51446ae, type: 3}
+  badge_Heat2: {fileID: 2800000, guid: ebc8ae0bac9af2c4183467a38ca25b4a, type: 3}
+  badge_Cold2: {fileID: 2800000, guid: 9142a0d668657da45b1e35defab02a3f, type: 3}
+  badge_Nerve: {fileID: 2800000, guid: 5799dd7cb72c95a45842e2c3806c0c71, type: 3}
   Icon_Spacing: 77
 --- !u!1001 &100100000
 Prefab:

@@ -100,7 +100,7 @@ GameObject:
   - 114: {fileID: 11428892}
   m_Layer: 0
   m_Name: MinimapCamera
-  m_TagString: Untagged
+  m_TagString: Minimap_Camera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195946}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 464704}
@@ -178,7 +178,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149172}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 86.8499985, y: 0, z: -14.8000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 480808}
@@ -263,7 +263,7 @@ Camera:
   far clip plane: 287.619995
   field of view: 60
   orthographic: 1
-  orthographic size: 115
+  orthographic size: 114.50705
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

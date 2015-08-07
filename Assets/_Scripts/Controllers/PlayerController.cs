@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     public Texture selector;
 
 
-    public Camera minimapCamera;
+    private Camera minimapCamera;
 
     public GUIStyle style_for_badges; // makes the GUI boxes transparent for badges
     public Texture2D badge_Stem;
@@ -143,6 +143,8 @@ public class PlayerController : MonoBehaviour
         button_devolve.interactable = false;
         button_merge.interactable = false;
         button_evolve.interactable = false;
+
+        minimapCamera = GameObject.FindGameObjectWithTag("Minimap_Camera").GetComponent<Camera>();
 
         touchButton = GameObject.Find("Touch");
         if (!Input.touchSupported)
