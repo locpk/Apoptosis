@@ -148,7 +148,7 @@ public class BaseCell : Photon.PunBehaviour
     public virtual void Move(Vector3 _destination)
     {
 
-        currentState = CellState.MOVING;
+        //currentState = CellState.MOVING;
         navObstacle.enabled = false;
         navAgent.enabled = true;
         destination = _destination;
@@ -778,7 +778,7 @@ public class BaseCell : Photon.PunBehaviour
     {
         if (transform.FindChild("Nucleus"))
         {
-            float healthRatio = currentProtein / MAX_PROTEIN;
+            float healthRatio = (Mathf.Sqrt((currentProtein / MAX_PROTEIN) / Mathf.PI) * 1.24071769563f) + .3f;
             transform.FindChild("Nucleus").localScale = new Vector3(healthRatio, healthRatio, 1);
 
 
