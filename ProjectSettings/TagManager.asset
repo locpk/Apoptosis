@@ -37,6 +37,11 @@ TagManager:
   - Terrain
   - Evolve_Animator
   - Fullscreen_Toggle
+  - HUD_Canvas
+  - Button_Split
+  - Button_Evolve
+  - Button_Devolve
+  - Button_Merge
   layers:
   - Default
   - TransparentFX
