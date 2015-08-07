@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &103180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 492658}
+  - 212: {fileID: 21232504}
+  m_Layer: 8
+  m_Name: Nucleus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &104352
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,6 +32,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &106254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 442292}
+  - 212: {fileID: 21289384}
+  m_Layer: 8
+  m_Name: Shell
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &111564
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,7 +56,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 422074}
-  - 212: {fileID: 21281526}
   - 195: {fileID: 19584330}
   - 208: {fileID: 20801582}
   - 54: {fileID: 5498356}
@@ -98,11 +129,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111564}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -14.6199541, y: 1.5, z: -13.5417986}
+  m_LocalPosition: {x: 88.6363678, y: 1, z: 43.0391769}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 443098}
   - {fileID: 433240}
+  - {fileID: 442292}
+  - {fileID: 492658}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &433240
@@ -118,6 +151,18 @@ Transform:
   - {fileID: 412578}
   m_Father: {fileID: 422074}
   m_RootOrder: 1
+--- !u!4 &442292
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106254}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: .25, y: .25, z: 1}
+  m_Children: []
+  m_Father: {fileID: 422074}
+  m_RootOrder: 2
 --- !u!4 &443098
 Transform:
   m_ObjectHideFlags: 1
@@ -130,6 +175,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 422074}
   m_RootOrder: 0
+--- !u!4 &492658
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103180}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 422074}
+  m_RootOrder: 3
 --- !u!23 &2380550
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -236,7 +293,7 @@ MonoBehaviour:
   fovRadius: 10
   attackDamage: 9
   attackRange: 5
-  defense: 20
+  consumeRadius: 5
   depleteTimer: 0
   depleteAmount: 3
   attackCooldown: 0
@@ -296,8 +353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0918649c5b506df4c88a8435ed870de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snapshot_attack: {fileID: 0}
-  snapshot_normal: {fileID: 0}
 --- !u!114 &11463068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -415,12 +470,12 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: .5
---- !u!212 &21281526
+--- !u!212 &21232504
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 111564}
+  m_GameObject: {fileID: 103180}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -440,7 +495,33 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0411488f24058234993debeb61b28cea, type: 3}
-  m_Color: {r: .479250699, g: .11505191, b: .558823526, a: 1}
+  m_Color: {r: .51629132, g: .119701557, b: .602941155, a: 1}
+--- !u!212 &21289384
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106254}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 642a9e9f46b3475478b54ddb13088018, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: ed94fef22ec7c92408aa52b78cc665c1, type: 3}
+  m_Color: {r: .778448284, g: 0, b: .948529422, a: .784313738}
 --- !u!212 &21290610
 SpriteRenderer:
   m_ObjectHideFlags: 1

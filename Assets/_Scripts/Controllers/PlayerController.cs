@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     private GameObject winScreen;
     private GameObject loseScreen;
-
+    private GameObject Hud_Canvas;
     public static bool isOverUI = false;
 
     public GameObject friendlySelector;
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     public Texture selector;
 
 
-    public Camera minimapCamera;
+    private Camera minimapCamera;
 
     public GUIStyle style_for_badges; // makes the GUI boxes transparent for badges
     public Texture2D badge_Stem;
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
     public Texture2D badge_Nerve;
 
     public int Icon_Spacing;// controls the distance between badges 
-    private float badge_scale = .7f; // size of badges
+    private float badge_scale = .8f; // size of badges
     float fps;
     float initTouchTime;
     float delay;
@@ -113,6 +113,15 @@ public class PlayerController : MonoBehaviour
 
     Vector2 origin = new Vector2();
 
+    private Button button_split;
+    private Button button_evolve;
+    private Button button_merge;
+    private Button button_devolve;
+
+    private int moreThanOne_Heat = 0;
+    private int moreThanOne_Cold = 0;
+    private int moreThanOne_AcidAlkali = 0;
+
     void Awake()
     {
         Time.timeScale = 1.0f;
@@ -120,13 +129,22 @@ public class PlayerController : MonoBehaviour
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>(); // gets the sound sources
         winScreen = GameObject.FindGameObjectWithTag("Win_Screen");
         loseScreen = GameObject.FindGameObjectWithTag("Lose_Screen");
+        Hud_Canvas = GameObject.FindGameObjectWithTag("HUD_Canvas");
 
         winScreen.SetActive(false);
         loseScreen.SetActive(false);
 
+        button_split = GameObject.FindGameObjectWithTag("Button_Split").GetComponent<Button>();
+        button_devolve = GameObject.FindGameObjectWithTag("Button_Devolve").GetComponent<Button>();
+        button_merge = GameObject.FindGameObjectWithTag("Button_Merge").GetComponent<Button>();
+        button_evolve = GameObject.FindGameObjectWithTag("Button_Evolve").GetComponent<Button>();
 
+        button_split.interactable = false;
+        button_devolve.interactable = false;
+        button_merge.interactable = false;
+        button_evolve.interactable = false;
 
-
+        minimapCamera = GameObject.FindGameObjectWithTag("Minimap_Camera").GetComponent<Camera>();
 
         touchButton = GameObject.Find("Touch");
         if (!Input.touchSupported)
@@ -553,52 +571,94 @@ public class PlayerController : MonoBehaviour
 
             if (Time.timeScale > 0.0f)
             {
-                GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-                GUI.BeginGroup(new Rect(Screen.width * 0.18f , 20*badge_scale, Screen.width * 0.5f , 512));
+                button_split.interactable = false;
+                button_devolve.interactable = false;
+                button_merge.interactable = false;
+                button_evolve.interactable = false; 
 
-    
+                GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+                GUI.BeginGroup(new Rect(Screen.width * 0.18f , 20*badge_scale, Screen.width * 0.8f , 512));
+
+                 moreThanOne_Heat = 0;
+                 moreThanOne_Cold = 0;
+                 moreThanOne_AcidAlkali = 0;
+                   
                 
                 foreach (BaseCell item in selectedUnits)
                 {
-                   // if (item.celltype == CellType.STEM_CELL)
-                   // {
-                     //   NumStemCells_counter++;
+
+                   // button_split.interactable = false;
+                   // button_devolve.interactable = false;
+                   // button_merge.interactable = false;
+                   // button_evolve.interactable = false; 
+         
+
+
                     NumCells_counter++;
                     float health_ratio = item.currentProtein / item.GetMaxPretein();
                     if (item.celltype == CellType.STEM_CELL)
                     {
                     GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Stem, style_for_badges);
-
+                    button_split.interactable = true;
+                    button_evolve.interactable = true; 
                     }
                     else if (item.celltype == CellType.HEAT_CELL)
                     {
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat, style_for_badges);
+                        button_split.interactable = true;
+                        moreThanOne_Heat++;
+                        if (moreThanOne_Heat > 1 && item.gameObject.GetComponent<HeatCell>().Inheat == true)
+                        {
+                            button_merge.interactable = true;
+                        }
                     }
                     else if (item.celltype == CellType.COLD_CELL)
                     {
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold, style_for_badges);
+                        button_split.interactable = true;
+                        moreThanOne_Cold++;
+                        if (moreThanOne_Cold > 1 && item.gameObject.GetComponent<ColdCell>().InCold == true)
+                        {
+                            button_merge.interactable = true;
+                        }
                     }
                     else if (item.celltype == CellType.COLD_CELL_TIRE2)
                     {
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold2, style_for_badges);
+                        button_devolve.interactable = true;
                     }
                     else if (item.celltype == CellType.HEAT_CELL_TIRE2)
                     {
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat2, style_for_badges);
+                        button_devolve.interactable = true;
                     }
                     else if (item.celltype == CellType.ACIDIC_CELL)
                     {
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Acidic, style_for_badges);
+                        moreThanOne_AcidAlkali++;
+                        if (moreThanOne_AcidAlkali > 1)
+                        {
+                            button_merge.interactable = true;
+                        }
                     }
                     else if (item.celltype == CellType.ALKALI_CELL)
                     {
+                        moreThanOne_AcidAlkali++;
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Alkali, style_for_badges);
+                        if (moreThanOne_AcidAlkali > 1)
+                        {
+                            button_merge.interactable = true;
+                        }
                     }
                     else if (item.celltype == CellType.NERVE_CELL)
                     {
+                        button_devolve.interactable = true;
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Nerve, style_for_badges);
                     }
-                 //   switch (item.celltype)
+                 
+                    
+
+                    //   switch (item.celltype)
                  //   {
                  //       case CellType.STEM_CELL:
                  //           {
@@ -643,9 +703,6 @@ public class PlayerController : MonoBehaviour
                             texture.SetPixel(0, 0, Color.yellow);                         
                         texture.Apply();                   
                         GUI.DrawTexture(new Rect(15*badge_scale + NumCells_counter * Icon_Spacing*badge_scale, 4 * badge_scale, 58 * health_ratio * badge_scale, 4), texture);
-                 
-                        
-         
                    
                 }
 
@@ -655,8 +712,9 @@ public class PlayerController : MonoBehaviour
                 }
 
                    // NumHeatCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.HEAT_CELL)).Count;
-                     
+    
                 
+
              
 
          //       GUI.Box(new Rect(160, 0, 75, 60), "Cold Cells: ");
