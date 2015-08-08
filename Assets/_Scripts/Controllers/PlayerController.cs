@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
 
-
+    public Sprite touchDisabled;
+    public Sprite touchActivated;
     public bool gameStarted = false;
 
     private Sound_Manager sound_manager;
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour
     private int NumTierTwoHeat_counter = 0;
     private int NumEnemiesLeft_counter = 0;
 
-    private int NumCells_counter = 0; 
+    private int NumCells_counter = 0;
 
     public List<BaseCell> allSelectableUnits;
     public List<BaseCell> selectedUnits;
@@ -161,6 +162,15 @@ public class PlayerController : MonoBehaviour
     public void ToggleSelecting()
     {
         isSelecting = !isSelecting;
+        if (isSelecting)
+        {
+            touchButton.GetComponent<Button>().image.sprite = touchActivated;
+        }
+        else
+        {
+            touchButton.GetComponent<Button>().image.sprite = touchDisabled;
+        }
+
     }
 
     public void AddNewCell(BaseCell _in)
@@ -574,33 +584,33 @@ public class PlayerController : MonoBehaviour
                 button_split.interactable = false;
                 button_devolve.interactable = false;
                 button_merge.interactable = false;
-                button_evolve.interactable = false; 
+                button_evolve.interactable = false;
 
                 GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-                GUI.BeginGroup(new Rect(Screen.width * 0.18f , 20*badge_scale, Screen.width * 0.8f , 512));
+                GUI.BeginGroup(new Rect(Screen.width * 0.18f, 20 * badge_scale, Screen.width * 0.8f, 512));
 
-                 moreThanOne_Heat = 0;
-                 moreThanOne_Cold = 0;
-                 moreThanOne_AcidAlkali = 0;
-                   
-                
+                moreThanOne_Heat = 0;
+                moreThanOne_Cold = 0;
+                moreThanOne_AcidAlkali = 0;
+
+
                 foreach (BaseCell item in selectedUnits)
                 {
 
-                   // button_split.interactable = false;
-                   // button_devolve.interactable = false;
-                   // button_merge.interactable = false;
-                   // button_evolve.interactable = false; 
-         
+                    // button_split.interactable = false;
+                    // button_devolve.interactable = false;
+                    // button_merge.interactable = false;
+                    // button_evolve.interactable = false; 
+
 
 
                     NumCells_counter++;
                     float health_ratio = item.currentProtein / item.GetMaxPretein();
                     if (item.celltype == CellType.STEM_CELL)
                     {
-                    GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Stem, style_for_badges);
-                    button_split.interactable = true;
-                    button_evolve.interactable = true; 
+                        GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Stem, style_for_badges);
+                        button_split.interactable = true;
+                        button_evolve.interactable = true;
                     }
                     else if (item.celltype == CellType.HEAT_CELL)
                     {
@@ -655,55 +665,55 @@ public class PlayerController : MonoBehaviour
                         button_devolve.interactable = true;
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Nerve, style_for_badges);
                     }
-                 
-                    
+
+
 
                     //   switch (item.celltype)
-                 //   {
-                 //       case CellType.STEM_CELL:
-                 //           {
-                 //               GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Stem, style_for_badges);
-                 //
-                 //               break;
-                 //           }
-                 //       case CellType.HEAT_CELL:
-                 //           {
-                 //               GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat, style_for_badges);
-                 //               break;
-                 //           }
-                 //       case CellType.COLD_CELL: GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold, style_for_badges);
-                 //           break;
-                 //       case CellType.HEAT_CELL_TIRE2:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat2, style_for_badges);
-                 //           break;
-                 //       case CellType.COLD_CELL_TIRE2:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold2, style_for_badges);
-                 //           break;
-                 //       case CellType.ACIDIC_CELL:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Acidic, style_for_badges);
-                 //           break;
-                 //       case CellType.ALKALI_CELL:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Alkali, style_for_badges);
-                 //           break;
-                 //       case CellType.CANCER_CELL:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat, style_for_badges);
-                 //           break;
-                 //       case CellType.NERVE_CELL:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Nerve, style_for_badges);
-                 //           break;
-                 //       default:
-                 //           break;
-                 //   }
+                    //   {
+                    //       case CellType.STEM_CELL:
+                    //           {
+                    //               GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Stem, style_for_badges);
+                    //
+                    //               break;
+                    //           }
+                    //       case CellType.HEAT_CELL:
+                    //           {
+                    //               GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat, style_for_badges);
+                    //               break;
+                    //           }
+                    //       case CellType.COLD_CELL: GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold, style_for_badges);
+                    //           break;
+                    //       case CellType.HEAT_CELL_TIRE2:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat2, style_for_badges);
+                    //           break;
+                    //       case CellType.COLD_CELL_TIRE2:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold2, style_for_badges);
+                    //           break;
+                    //       case CellType.ACIDIC_CELL:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Acidic, style_for_badges);
+                    //           break;
+                    //       case CellType.ALKALI_CELL:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Alkali, style_for_badges);
+                    //           break;
+                    //       case CellType.CANCER_CELL:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat, style_for_badges);
+                    //           break;
+                    //       case CellType.NERVE_CELL:GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Nerve, style_for_badges);
+                    //           break;
+                    //       default:
+                    //           break;
+                    //   }
 
 
 
 
-                   
 
-                        // drwas the life bar
-                        Texture2D texture = new Texture2D(1, 1);
-                        texture.SetPixel(0, 0, Color.green);  
-                        if (health_ratio <= 0.2f)               
-                            texture.SetPixel(0, 0, Color.red);                                               
-                        else if (health_ratio <= 0.4f)
-                            texture.SetPixel(0, 0, Color.yellow);                         
-                        texture.Apply();                   
-                        GUI.DrawTexture(new Rect(15*badge_scale + NumCells_counter * Icon_Spacing*badge_scale, 4 * badge_scale, 58 * health_ratio * badge_scale, 4), texture);
-                   
+
+                    // drwas the life bar
+                    Texture2D texture = new Texture2D(1, 1);
+                    texture.SetPixel(0, 0, Color.green);
+                    if (health_ratio <= 0.2f)
+                        texture.SetPixel(0, 0, Color.red);
+                    else if (health_ratio <= 0.4f)
+                        texture.SetPixel(0, 0, Color.yellow);
+                    texture.Apply();
+                    GUI.DrawTexture(new Rect(15 * badge_scale + NumCells_counter * Icon_Spacing * badge_scale, 4 * badge_scale, 58 * health_ratio * badge_scale, 4), texture);
+
                 }
 
                 if (NumCells_counter >= selectedUnits.Count)
@@ -711,35 +721,35 @@ public class PlayerController : MonoBehaviour
                     NumCells_counter = 0;
                 }
 
-                   // NumHeatCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.HEAT_CELL)).Count;
-    
-                
+                // NumHeatCells = selectedUnits.FindAll(item => (item != null) && (item.celltype == CellType.HEAT_CELL)).Count;
 
-             
 
-         //       GUI.Box(new Rect(160, 0, 75, 60), "Cold Cells: ");
-         //       GUI.Label(new Rect(195, 35, 50, 50), NumColdCells.ToString());
-         //
-         //       GUI.Box(new Rect(240, 0, 75, 60), "Acidic Cells: ");
-         //       GUI.Label(new Rect(275, 35, 50, 50), NumAcidicCells.ToString());
-         //
-         //       GUI.Box(new Rect(320, 0, 75, 60), "Alkali Cells: ");
-         //       GUI.Label(new Rect(355, 35, 50, 50), NumAlkaliCells.ToString());
-         //
-         //       GUI.Box(new Rect(400, 0, 75, 60), "Nerve Cells: ");
-         //       GUI.Label(new Rect(435, 35, 50, 50), NumNerveCells.ToString());
-         //
-         //       GUI.Box(new Rect(480, 0, 75, 60), "Tier 2\nHeat Cells: ");
-         //       GUI.Label(new Rect(515, 35, 50, 50), NumTierTwoHeat.ToString());
-         //
-         //       GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
-         //       GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
-         //
-         //       GUI.Box(new Rect(640, 0, 75, 60), "Enemies\nLeft: ");
-         //       GUI.Label(new Rect(675, 35, 50, 50), NumEnemiesLeft.ToString());
-         //
-         //       GUI.Box(new Rect(720, 0, 75, 60), "Cap: ");
-         //       GUI.Label(new Rect(755, 35, 50, 50), cap.ToString());
+
+
+
+                //       GUI.Box(new Rect(160, 0, 75, 60), "Cold Cells: ");
+                //       GUI.Label(new Rect(195, 35, 50, 50), NumColdCells.ToString());
+                //
+                //       GUI.Box(new Rect(240, 0, 75, 60), "Acidic Cells: ");
+                //       GUI.Label(new Rect(275, 35, 50, 50), NumAcidicCells.ToString());
+                //
+                //       GUI.Box(new Rect(320, 0, 75, 60), "Alkali Cells: ");
+                //       GUI.Label(new Rect(355, 35, 50, 50), NumAlkaliCells.ToString());
+                //
+                //       GUI.Box(new Rect(400, 0, 75, 60), "Nerve Cells: ");
+                //       GUI.Label(new Rect(435, 35, 50, 50), NumNerveCells.ToString());
+                //
+                //       GUI.Box(new Rect(480, 0, 75, 60), "Tier 2\nHeat Cells: ");
+                //       GUI.Label(new Rect(515, 35, 50, 50), NumTierTwoHeat.ToString());
+                //
+                //       GUI.Box(new Rect(560, 0, 75, 60), "Tier 2\nCold Cells: ");
+                //       GUI.Label(new Rect(595, 35, 50, 50), NumTierTwoCold.ToString());
+                //
+                //       GUI.Box(new Rect(640, 0, 75, 60), "Enemies\nLeft: ");
+                //       GUI.Label(new Rect(675, 35, 50, 50), NumEnemiesLeft.ToString());
+                //
+                //       GUI.Box(new Rect(720, 0, 75, 60), "Cap: ");
+                //       GUI.Label(new Rect(755, 35, 50, 50), cap.ToString());
                 GUI.EndGroup();
             }
 

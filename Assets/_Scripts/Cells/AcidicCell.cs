@@ -184,10 +184,11 @@ public class AcidicCell : BaseCell
                         if (!IsInvoking("DamagePerSecond"))
                         {
                             InvokeRepeating("DamagePerSecond", 1.0f, 3.0f);
-
+                            navAgent.enabled = false;
+                            navObstacle.enabled = true;
                         }
                     }
-                    else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                    else// if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                     {
                         if (IsInvoking("DamagePerSecond"))
                         {
@@ -195,6 +196,7 @@ public class AcidicCell : BaseCell
                         }
                         if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
                         {
+
                             base.ChaseTarget();
                         }
                     }

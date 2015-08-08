@@ -189,10 +189,11 @@ public class ColdCell : BaseCell
                             if (!IsInvoking("DamagePerSecond"))
                             {
                                 InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
-
+                                navAgent.enabled = false;
+                                navObstacle.enabled = true;
                             }
                         }
-                        else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                        else //if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                         {
                             if (IsInvoking("DamagePerSecond"))
                             {

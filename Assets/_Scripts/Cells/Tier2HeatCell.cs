@@ -152,7 +152,8 @@ public class Tier2HeatCell : BaseCell
                                 if (!IsInvoking("HasteDamagePerSecond"))
                                 {
                                     InvokeRepeating("HasteDamagePerSecond", 1.0f, 0.6f);
-
+                                    navAgent.enabled = false;
+                                    navObstacle.enabled = true;
                                 }
                             }
                             else
@@ -160,12 +161,13 @@ public class Tier2HeatCell : BaseCell
                                 if (!IsInvoking("DamagePerSecond"))
                                 {
                                     InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
-
+                                    navAgent.enabled = false;
+                                    navObstacle.enabled = true;
                                 }
                             }
                         }
 
-                        else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                        else //if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                         {
                             if (hasteActive)
                             {

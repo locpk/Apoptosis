@@ -148,9 +148,11 @@ public class BaseCell : Photon.PunBehaviour
     public virtual void Move(Vector3 _destination)
     {
 
-        currentState = CellState.MOVING;
+       currentState = CellState.IDLE;
         navObstacle.enabled = false;
         navAgent.enabled = true;
+        SetPrimaryTarget(null);
+        targets.Clear();
         destination = _destination;
         navAgent.SetDestination(_destination);
 
@@ -487,11 +489,21 @@ public class BaseCell : Photon.PunBehaviour
 
     public void ChaseTarget()
     {
-        if (primaryTarget)
-        {
-            Move(primaryTarget.transform.position);
-        }
+
+
+
+      //  currentState = CellState.IDLE;
+        navObstacle.enabled = false;
+        navAgent.enabled = true;
+
+        destination = primaryTarget.transform.position;
+        navAgent.SetDestination(destination);
     }
+
+    
+
+        
+    
     public void Deplete(float _deltaTime)
     {
         if (isDepleting)
@@ -586,45 +598,45 @@ public class BaseCell : Photon.PunBehaviour
             {
                 CancelInvoke("ConsumePerSecond");
             }
-
-            if (targets.Count >= 1)
-            {
-                targets.RemoveAll(item => item == null);
-                if (targets.Count == 0)
-                {
-                    return;
-                }
-
-                if (primaryTarget == null)
-                {
-                    for (int i = 0; i < targets.Count; i++)
-                    {
-
-                        if (i != targets.Count)
-                        {
-
-                            if (i == 0 && targets.Count == 1)
-                                primaryTarget = targets[i];
-                            else
-                                primaryTarget = targets[i + 1];
-
-                            if (primaryTarget != null)
-                            {
-                                if (primaryTarget.GetComponent<BaseCell>())
-                                {
-                                    currentState = CellState.ATTACK;
-                                    return;
-                                }
-                                else if (primaryTarget.GetComponent<Protein>())
-                                {
-                                    currentState = CellState.CONSUMING;
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+       
+       if (targets.Count >= 1)
+       {
+           targets.RemoveAll(item => item == null);
+           if (targets.Count == 0)
+           {
+               return;
+           }
+     
+           if (primaryTarget == null)
+           {
+               for (int i = 0; i < targets.Count; i++)
+               {
+     
+                   if (i != targets.Count)
+                   {
+     
+                       if (i == 0 && targets.Count == 1)
+                           primaryTarget = targets[i];
+                       else
+                           primaryTarget = targets[i + 1];
+     
+                       if (primaryTarget != null)
+                       {
+                           if (primaryTarget.GetComponent<BaseCell>())
+                           {
+                               currentState = CellState.ATTACK;
+                               return;
+                           }
+                           else if (primaryTarget.GetComponent<Protein>())
+                           {
+                               currentState = CellState.CONSUMING;
+                               return;
+                           }
+                       }
+                   }
+               }
+           }
+       }
         }
         if (currentState == CellState.MOVING)
         {
@@ -731,6 +743,8 @@ public class BaseCell : Photon.PunBehaviour
                 return;
             }
         }
+     
+   
     }
 
     public bool isStopped()
@@ -779,18 +793,22 @@ public class BaseCell : Photon.PunBehaviour
         if (transform.FindChild("Nucleus"))
         {
             float healthRatio = currentProtein / MAX_PROTEIN;
-            if (healthRatio <= 0.5f && healthRatio > 0.1f)
-            {
-                transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_50;
-            }
-            else if (healthRatio <= 0.1f)
-            {
-                transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_10;
-            }
-            else
-            {
-                transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
-            }
+            transform.FindChild("Nucleus").localScale = new Vector3(healthRatio, healthRatio, 1);
+
+
+
+            //if (healthRatio <= 0.5f && healthRatio > 0.1f)
+            //{
+            //    transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_50;
+            //}
+            //else if (healthRatio <= 0.1f)
+            //{
+            //    transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_10;
+            //}
+            //else
+            //{
+            //    transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_100;
+            //}
         }
 
         if (!isSelected)
@@ -827,4 +845,6 @@ public class BaseCell : Photon.PunBehaviour
     {
     return MAX_PROTEIN;
     }
+
+    
 }

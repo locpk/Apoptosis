@@ -125,7 +125,7 @@ public class Tier2ColdCell : BaseCell
 
                             }
                         }
-                        else if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                        else //if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
                         {
                             if (IsInvoking("DamagePerSecond"))
                             {
