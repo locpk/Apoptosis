@@ -331,7 +331,6 @@ public class TutorialController : MonoBehaviour
         foreach (GameObject item in allSelectableUnits)
         {
             item.GetComponent<BaseCell>().isDepleting = false;
-            item.GetComponent<BaseCell>().currentProtein = 400;
         }
         if (Time.timeScale == 0.0f)
         {

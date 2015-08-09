@@ -3148,6 +3148,18 @@ Prefab:
       propertyPath: orthographic size
       value: 85.1409149
       objectReference: {fileID: 0}
+    - target: {fileID: 473134, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.29999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 473134, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 473134, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7bf6043f85fca314daf18b82ee44fff5, type: 2}
   m_IsPrefabParent: 0
@@ -4910,7 +4922,7 @@ MonoBehaviour:
   taskCanvas: {fileID: 574502184}
   currentTaskText: {fileID: 1344606744}
   showTaskButton: {fileID: 1497328688}
-  PlayerControls: {fileID: 0}
+  PlayerControls: {fileID: 1134682269}
   allSelectableUnits: []
   prefabProtein: {fileID: 130200, guid: 89b99e3fe7802564599eaa768c008dad, type: 2}
   TouchButton: {fileID: 217841579}
