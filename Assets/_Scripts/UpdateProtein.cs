@@ -10,7 +10,7 @@ public class UpdateProtein : MonoBehaviour {
     {
         if (transform.FindChild("Nucleus") != null)
         {
-            float healthRatio = transform.parent.GetComponent<CellSplitAnimation>().currentProtein / BaseCell.MAX_PROTEIN;
+            float healthRatio = transform.parent.GetComponent<CellSplitAnimation>().currentProtein / transform.parent.GetComponent<BaseCell>().MAX_PROTEIN ;
             if (healthRatio <= 0.5f && healthRatio > 0.1f)
             {
                 transform.FindChild("Nucleus").GetComponent<SpriteRenderer>().sprite = health_50;

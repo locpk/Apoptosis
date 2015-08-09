@@ -55,8 +55,8 @@ public class BaseCell : Photon.PunBehaviour
     public Sprite health_50;
     public Sprite health_100;
 
-    public const float MAX_PROTEIN = 500.0f;
-    public const float DEPLETE_TIME = 5.0f;
+    public float MAX_PROTEIN;
+    public const float DEPLETE_TIME = 1.0f;
     public const float ATTACK_COOLDOWN = 1.0f;
     public const float moveSpeed = 3.0f;
     /// <summary>
@@ -84,7 +84,7 @@ public class BaseCell : Photon.PunBehaviour
     //public float defense;
     public float consumeRadius = 5.0f;
     public float depleteTimer;
-    public float depleteAmount = 3.0f; // per second
+    public float depleteAmount = 1.0f; // per second
     public float attackCooldown;
     public float splitCooldown;
 
@@ -677,7 +677,7 @@ public class BaseCell : Photon.PunBehaviour
                 }
                 float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
 
-                if (distance > consumeRadius && distance <= 15.0f)
+                if (distance > consumeRadius && distance <= 150.0f)
                 {
                     if (IsInvoking("ConsumePerSecond"))
                     {
