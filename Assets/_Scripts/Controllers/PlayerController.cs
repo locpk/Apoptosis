@@ -615,7 +615,7 @@ public class PlayerController : MonoBehaviour
                     else if (item.celltype == CellType.HEAT_CELL)
                     {
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat, style_for_badges);
-                        button_split.interactable = true;
+                       // button_split.interactable = true;
                         moreThanOne_Heat++;
                         if (moreThanOne_Heat > 1 && item.gameObject.GetComponent<HeatCell>().Inheat == true)
                         {
@@ -625,7 +625,7 @@ public class PlayerController : MonoBehaviour
                     else if (item.celltype == CellType.COLD_CELL)
                     {
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold, style_for_badges);
-                        button_split.interactable = true;
+                     //   button_split.interactable = true;
                         moreThanOne_Cold++;
                         if (moreThanOne_Cold > 1 && item.gameObject.GetComponent<ColdCell>().InCold == true)
                         {
