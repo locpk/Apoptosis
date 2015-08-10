@@ -152,7 +152,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100116}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -12.9209251, y: 6, z: 6.95041609}
+  m_LocalPosition: {x: 75.4199982, y: 1, z: 3.99000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 441596}
@@ -259,6 +259,7 @@ MonoBehaviour:
   gCancerCellPrefab: {fileID: 0}
   gStemCellPrefab: {fileID: 174676, guid: cfdbe62d04327fe4a88a026a31a9d3bc, type: 2}
   gHeatCellPrefab: {fileID: 0}
+  gHeatCancerPrefab: {fileID: 0}
   gColdCellPrefab: {fileID: 149900, guid: 054778e6ee0a8c1429b6cbf3bf479fc2, type: 2}
   gColdCancerPrefab: {fileID: 169166, guid: e157488d71bd50240afc0fa1528c42ea, type: 2}
   gAcidicCellPrefab: {fileID: 0}
@@ -269,6 +270,7 @@ MonoBehaviour:
   health_10: {fileID: 21300000, guid: 0cc9c74ad204c474296767f9b926fe8d, type: 3}
   health_50: {fileID: 21300000, guid: 6ba1d25e64ef46e4a8b7eba60276be20, type: 3}
   health_100: {fileID: 21300000, guid: e2204928fadcea34894f449270591aa2, type: 3}
+  MAX_PROTEIN: 500
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 1
@@ -283,12 +285,11 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
-  photonView: {fileID: 0}
   currentProtein: 500
   fovRadius: 3
   attackDamage: 6
   attackRange: 3
-  defense: 15
+  consumeRadius: 5
   depleteTimer: 20
   depleteAmount: 3
   attackCooldown: 1
@@ -359,8 +360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0918649c5b506df4c88a8435ed870de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snapshot_attack: {fileID: 0}
-  snapshot_normal: {fileID: 0}
 --- !u!114 &11486718
 MonoBehaviour:
   m_ObjectHideFlags: 1

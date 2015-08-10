@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     public Texture2D badge_Nerve;
 
     public int Icon_Spacing;// controls the distance between badges 
-    private float badge_scale = .8f; // size of badges
+    private float badge_scale = .9f; // size of badges
     float fps;
     float initTouchTime;
     float delay;

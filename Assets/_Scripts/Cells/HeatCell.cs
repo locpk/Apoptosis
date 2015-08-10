@@ -94,7 +94,10 @@ public class HeatCell : BaseCell
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         navAgent.speed = 9.0f;
-
+        if (currentProtein > MAX_PROTEIN) // avoid overfeeding
+        {
+            currentProtein = MAX_PROTEIN;
+        } 
     }
 
     void MUltiDMg()

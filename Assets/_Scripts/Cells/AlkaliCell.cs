@@ -20,7 +20,11 @@ public class AlkaliCell : BaseCell
 
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         navAgent.speed = 7.0f;
-        
+        if (currentProtein > MAX_PROTEIN) // avoid overfeeding
+        {
+            currentProtein = MAX_PROTEIN;
+        } 
+
     }
 
     public override void Move(Vector3 _destination)
@@ -159,12 +163,17 @@ public class AlkaliCell : BaseCell
         }
         else
         {
-          
+  
+
             switch (currentState)
             {
                 case CellState.IDLE:
                      if (IsInvoking("DamagePerSecond"))
                     {
+                        if (currentProtein > MAX_PROTEIN) // avoid overfeeding
+                        {
+                            currentProtein = MAX_PROTEIN;
+                        }     
                         CancelInvoke("DamagePerSecond");
                     }
                     base.bUpdate();

@@ -796,6 +796,7 @@ public class BaseCell : Photon.PunBehaviour
             {
                 MAX_PROTEIN = 300.0f;
             }
+              
             float healthRatio = currentProtein / MAX_PROTEIN;
             transform.FindChild("Nucleus").localScale = new Vector3(healthRatio, healthRatio, 1);
 
@@ -843,6 +844,7 @@ public class BaseCell : Photon.PunBehaviour
             }
             transform.FindChild("AlertPing").GetComponent<SpriteRenderer>().enabled = false;
         }
+        
     }
 
     public float GetMaxPretein()

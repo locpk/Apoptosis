@@ -23,7 +23,10 @@ public class Tier2ColdCell : BaseCell
         //controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
         base.bStart();
 
-
+        if (currentProtein > MAX_PROTEIN) // avoid overfeeding
+        {
+            currentProtein = MAX_PROTEIN;
+        } 
     }
     void DamagePerSecond()
     {

@@ -99,6 +99,10 @@ public class NerveCell : BaseCell
         }
         else
         {
+            if (currentProtein > MAX_PROTEIN) // avoid overfeeding
+            {
+                currentProtein = MAX_PROTEIN;
+            } 
             switch (currentState)
             {
 

@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111564}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -14.6199541, y: 1.5, z: -13.5417986}
+  m_LocalPosition: {x: 61.4382782, y: 1, z: -3.98998833}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 443098}
@@ -218,6 +218,7 @@ MonoBehaviour:
   health_10: {fileID: 21300000, guid: 54a8a7a030e30fd4193e0cdcf8360956, type: 3}
   health_50: {fileID: 21300000, guid: 89b9a71168a963b4bb385132a95f2451, type: 3}
   health_100: {fileID: 21300000, guid: 0411488f24058234993debeb61b28cea, type: 3}
+  MAX_PROTEIN: 400
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 1
@@ -236,7 +237,7 @@ MonoBehaviour:
   fovRadius: 10
   attackDamage: 9
   attackRange: 5
-  defense: 20
+  consumeRadius: 5
   depleteTimer: 0
   depleteAmount: 3
   attackCooldown: 0
@@ -296,8 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0918649c5b506df4c88a8435ed870de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snapshot_attack: {fileID: 0}
-  snapshot_normal: {fileID: 0}
 --- !u!114 &11463068
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -19,6 +19,10 @@ public class AcidicCell : BaseCell
         sound_manager = GameObject.FindGameObjectWithTag("Sound_Manager").GetComponent<Sound_Manager>();
         base.bAwake();
         navAgent.speed = 7.0f;
+        if (currentProtein > MAX_PROTEIN) // avoid overfeeding
+        {
+            currentProtein = MAX_PROTEIN;
+        } 
        
     }
     public override void Attack(GameObject _target)

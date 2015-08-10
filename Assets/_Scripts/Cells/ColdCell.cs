@@ -24,6 +24,10 @@ public class ColdCell : BaseCell
         controller = GameObject.Find("PlayerControl").GetComponent<PlayerController>();
 
         navAgent.speed = 6.0f;
+        if (currentProtein > MAX_PROTEIN) // avoid overfeeding
+        {
+            currentProtein = MAX_PROTEIN;
+        } 
 
     }
     void MUltiDMg()
