@@ -792,6 +792,10 @@ public class BaseCell : Photon.PunBehaviour
     {
         if (transform.FindChild("Nucleus"))
         {
+            if (MAX_PROTEIN <= 0)// avois the devision by 0 if no max protein is set
+            {
+                MAX_PROTEIN = 300.0f;
+            }
             float healthRatio = currentProtein / MAX_PROTEIN;
             transform.FindChild("Nucleus").localScale = new Vector3(healthRatio, healthRatio, 1);
 

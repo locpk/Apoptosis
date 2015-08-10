@@ -117,7 +117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: -2.53999996, y: 1.5, z: 6.63000011}
+  m_LocalPosition: {x: 84.5, y: 1, z: -15.3649998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 495744}
@@ -258,8 +258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0918649c5b506df4c88a8435ed870de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snapshot_attack: {fileID: 0}
-  snapshot_normal: {fileID: 0}
 --- !u!114 &11412848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,6 +330,7 @@ MonoBehaviour:
   health_10: {fileID: 21300000, guid: 6c2d348af91b78e488eef3a81f5c5187, type: 3}
   health_50: {fileID: 21300000, guid: ef16570bcc2ddfe4f9b4511edce53bdf, type: 3}
   health_100: {fileID: 21300000, guid: 5560ac182ce52ee479b7fcaa6dbf63c8, type: 3}
+  MAX_PROTEIN: 300
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 1
@@ -346,11 +345,11 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
-  currentProtein: 500
+  currentProtein: 300
   fovRadius: 4
   attackDamage: 5
   attackRange: 3
-  defense: 10
+  consumeRadius: 5
   depleteTimer: 1
   depleteAmount: 3
   attackCooldown: 2
@@ -451,7 +450,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
-  lengthInSec: 5
+  lengthInSec: 10
   startDelay: 0
   speed: 1
   randomSeed: 0
@@ -462,7 +461,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 3
+      scalar: .300000012
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -495,7 +494,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: .689999998
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -619,10 +618,10 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4292380039
+        rgba: 4293388263
       minMaxState: 0
     startSize:
-      scalar: 3.78999996
+      scalar: .300000012
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -689,12 +688,12 @@ ParticleSystem:
       minMaxState: 0
     gravityModifier: 0
     inheritVelocity: 0
-    maxNumParticles: 100000
+    maxNumParticles: 100
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 4
-    radius: 1.23000002
+    type: 1
+    radius: 1.55660248
     angle: 25
     length: 5
     boxX: 1
@@ -708,7 +707,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 20
+      scalar: 100
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -787,7 +786,7 @@ ParticleSystem:
   RotationModule:
     enabled: 0
     curve:
-      scalar: .785398185
+      scalar: .2846632
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -959,7 +958,7 @@ ParticleSystem:
   VelocityModule:
     enabled: 0
     x:
-      scalar: 0
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -992,7 +991,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     y:
-      scalar: 0
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1340,7 +1339,7 @@ ParticleSystem:
   RotationBySpeedModule:
     enabled: 0
     curve:
-      scalar: .785398185
+      scalar: .785398126
       maxCurve:
         serializedVersion: 2
         m_Curve:

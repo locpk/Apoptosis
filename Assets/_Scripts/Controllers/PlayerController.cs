@@ -593,30 +593,26 @@ public class PlayerController : MonoBehaviour
                 moreThanOne_Cold = 0;
                 moreThanOne_AcidAlkali = 0;
 
+                float health_ratio = 0;// = item.currentProtein / item.MAX_PROTEIN;
 
                 foreach (BaseCell item in selectedUnits)
                 {
-
-                    // button_split.interactable = false;
-                    // button_devolve.interactable = false;
-                    // button_merge.interactable = false;
-                    // button_evolve.interactable = false; 
-
-
-
                     NumCells_counter++;
-                    float health_ratio = item.currentProtein / item.GetMaxPretein();
+           
+                   
                     if (item.celltype == CellType.STEM_CELL)
                     {
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Stem, style_for_badges);
                         button_split.interactable = true;
                         button_evolve.interactable = true;
+                        health_ratio = item.gameObject.GetComponent<StemCell>().currentProtein / item.gameObject.GetComponent<StemCell>().MAX_PROTEIN;
                     }
                     else if (item.celltype == CellType.HEAT_CELL)
                     {
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat, style_for_badges);
                        // button_split.interactable = true;
                         moreThanOne_Heat++;
+                        health_ratio = item.gameObject.GetComponent<HeatCell>().currentProtein / item.gameObject.GetComponent<HeatCell>().MAX_PROTEIN;
                         if (moreThanOne_Heat > 1 && item.gameObject.GetComponent<HeatCell>().Inheat == true)
                         {
                             button_merge.interactable = true;
@@ -627,6 +623,7 @@ public class PlayerController : MonoBehaviour
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold, style_for_badges);
                      //   button_split.interactable = true;
                         moreThanOne_Cold++;
+                        health_ratio = item.gameObject.GetComponent<ColdCell>().currentProtein / item.gameObject.GetComponent<ColdCell>().MAX_PROTEIN;
                         if (moreThanOne_Cold > 1 && item.gameObject.GetComponent<ColdCell>().InCold == true)
                         {
                             button_merge.interactable = true;
@@ -636,16 +633,19 @@ public class PlayerController : MonoBehaviour
                     {
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Cold2, style_for_badges);
                         button_devolve.interactable = true;
+                        health_ratio = item.gameObject.GetComponent<Tier2ColdCell>().currentProtein / item.gameObject.GetComponent<Tier2ColdCell>().MAX_PROTEIN;
                     }
                     else if (item.celltype == CellType.HEAT_CELL_TIRE2)
                     {
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Heat2, style_for_badges);
                         button_devolve.interactable = true;
+                        health_ratio = item.gameObject.GetComponent<Tier2HeatCell>().currentProtein / item.gameObject.GetComponent<Tier2HeatCell>().MAX_PROTEIN;
                     }
                     else if (item.celltype == CellType.ACIDIC_CELL)
                     {
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Acidic, style_for_badges);
                         moreThanOne_AcidAlkali++;
+                        health_ratio = item.gameObject.GetComponent<AcidicCell>().currentProtein / item.gameObject.GetComponent<AcidicCell>().MAX_PROTEIN;
                         if (moreThanOne_AcidAlkali > 1)
                         {
                             button_merge.interactable = true;
@@ -655,6 +655,7 @@ public class PlayerController : MonoBehaviour
                     {
                         moreThanOne_AcidAlkali++;
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Alkali, style_for_badges);
+                        health_ratio = item.gameObject.GetComponent<AlkaliCell>().currentProtein / item.gameObject.GetComponent<AlkaliCell>().MAX_PROTEIN;
                         if (moreThanOne_AcidAlkali > 1)
                         {
                             button_merge.interactable = true;
@@ -663,8 +664,18 @@ public class PlayerController : MonoBehaviour
                     else if (item.celltype == CellType.NERVE_CELL)
                     {
                         button_devolve.interactable = true;
+                        health_ratio = item.gameObject.GetComponent<NerveCell>().currentProtein / item.gameObject.GetComponent<NerveCell>().MAX_PROTEIN;
                         GUI.Box(new Rect(0 + NumCells_counter * Icon_Spacing * badge_scale, 0, 86 * badge_scale, 86), badge_Nerve, style_for_badges);
                     }
+                 
+                    Texture2D texture = new Texture2D(1, 1);
+                    texture.SetPixel(0, 0, Color.green);
+                    if (health_ratio <= 0.2f)
+                        texture.SetPixel(0, 0, Color.red);
+                    else if (health_ratio <= 0.4f)
+                        texture.SetPixel(0, 0, Color.yellow);
+                    texture.Apply();
+                    GUI.DrawTexture(new Rect(15 * badge_scale + NumCells_counter * Icon_Spacing * badge_scale, 4 * badge_scale, 58 * health_ratio * badge_scale, 4), texture);
 
 
 
@@ -700,20 +711,8 @@ public class PlayerController : MonoBehaviour
                     //   }
 
 
-
-
-
-
                     // drwas the life bar
-                    Texture2D texture = new Texture2D(1, 1);
-                    texture.SetPixel(0, 0, Color.green);
-                    if (health_ratio <= 0.2f)
-                        texture.SetPixel(0, 0, Color.red);
-                    else if (health_ratio <= 0.4f)
-                        texture.SetPixel(0, 0, Color.yellow);
-                    texture.Apply();
-                    GUI.DrawTexture(new Rect(15 * badge_scale + NumCells_counter * Icon_Spacing * badge_scale, 4 * badge_scale, 58 * health_ratio * badge_scale, 4), texture);
-
+       
                 }
 
                 if (NumCells_counter >= selectedUnits.Count)
