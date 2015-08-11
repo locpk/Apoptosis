@@ -651,12 +651,12 @@ Prefab:
     - target: {fileID: 11494758, guid: cbfd684879b192f4b95249028d7e02e6, type: 2}
       propertyPath: EvolutionTree_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 963be3ee2aa50a046babe01353c04960,
+      objectReference: {fileID: 21300000, guid: 9a264953176840942b30079a66156cba,
         type: 3}
     - target: {fileID: 11493970, guid: cbfd684879b192f4b95249028d7e02e6, type: 2}
       propertyPath: EvolutionTree_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 963be3ee2aa50a046babe01353c04960,
+      objectReference: {fileID: 21300000, guid: 9a264953176840942b30079a66156cba,
         type: 3}
     - target: {fileID: 11493970, guid: cbfd684879b192f4b95249028d7e02e6, type: 2}
       propertyPath: Controls_Sprite
@@ -672,6 +672,21 @@ Prefab:
       propertyPath: Controls_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4585e35af3c7788478caba93cfd44a41,
+        type: 3}
+    - target: {fileID: 11451062, guid: cbfd684879b192f4b95249028d7e02e6, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2847b4d2c028bdb4785cab36f33a8a82,
+        type: 3}
+    - target: {fileID: 11493970, guid: cbfd684879b192f4b95249028d7e02e6, type: 2}
+      propertyPath: Gameplay_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2847b4d2c028bdb4785cab36f33a8a82,
+        type: 3}
+    - target: {fileID: 11494758, guid: cbfd684879b192f4b95249028d7e02e6, type: 2}
+      propertyPath: Gameplay_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2847b4d2c028bdb4785cab36f33a8a82,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbfd684879b192f4b95249028d7e02e6, type: 2}
