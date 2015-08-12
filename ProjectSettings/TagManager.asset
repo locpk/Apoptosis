@@ -43,6 +43,7 @@ TagManager:
   - Button_Devolve
   - Button_Merge
   - Minimap_Camera
+  - RoomListPanel
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,7 @@ public class SceneFadeInOut : MonoBehaviour
     public float fadeSpeed = 1.5f;
     public bool sceneStarting = true;
 
-     public float timer = 4.0f;
+     public float timer = 1.0f;
      public Texture2D cursor_Normal;
      public CursorMode cursorMode = CursorMode.Auto;
      private bool tablet_mode = false;

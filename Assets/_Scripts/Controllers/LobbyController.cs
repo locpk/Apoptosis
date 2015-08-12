@@ -84,11 +84,16 @@ public class LobbyController : Photon.PunBehaviour
         }
         GameObject joinButton = GameObject.Find("RoomJoinButton");
         GameObject thePanel = GameObject.Find("RoomListPanel");
+        Vector3 scale;
+        scale.x = 3.616198f;
+        scale.y = 3.616198f;
+        scale.z = 1.0f;
         int count = 0;
         foreach (RoomInfo item in PhotonNetwork.GetRoomList())
         {
             joinButton = Instantiate(joinButton, Vector3.zero, Quaternion.identity) as GameObject;
             joinButton.transform.SetParent(thePanel.transform, false);
+            joinButton.GetComponentInChildren<UnityEngine.UI.Text>().transform.localScale = scale;
             joinButton.GetComponentInChildren<UnityEngine.UI.Text>().text = item.name;
             joinButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => PhotonNetwork.JoinRoom(item.name));
             roomButtons.Add(joinButton);
