@@ -411,60 +411,60 @@ public class BaseCell : Photon.PunBehaviour
 
         currentLevel++;
 
-        GameObject newCell;
+    //    GameObject newCell;
 
 
         if (Random.Range(0.0f, 1.0f) > cancerousChance)
         {
 
-            switch (this.celltype)
-            {
-                case CellType.HEAT_CELL:
-                    newCell = GameObject.Instantiate(gHeatCellPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
-                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
-                    newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                    newCell.GetComponent<CellSplitAnimation>().originCell = this;
-                    Deactive();
-                    break;
-                case CellType.COLD_CELL:
-                    newCell = GameObject.Instantiate(gColdCellPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
-                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
-                    newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                    newCell.GetComponent<CellSplitAnimation>().originCell = this;
-                    Deactive();
-                    break;
-                default:
-                    break;
-            }
-        }
-        else
-        {
-
-
-            switch (this.celltype)
-            {
-                case CellType.HEAT_CELL:
-                    newCell = GameObject.Instantiate(gHeatCancerPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
-                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
-                    newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                    newCell.GetComponent<CellSplitAnimation>().originCell = this;
-                    Deactive();
-
-                    break;
-                case CellType.COLD_CELL:
-                    newCell = GameObject.Instantiate(gColdCancerPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
-                    newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
-                    newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
-                    newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
-                    newCell.GetComponent<CellSplitAnimation>().originCell = this;
-                    Deactive();
-                    break;
-                default:
-                    break;
-            }
+       //     switch (this.celltype)
+       //     {
+       //         case CellType.HEAT_CELL:
+       //             newCell = GameObject.Instantiate(gHeatCellPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+       //             newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+       //             newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+       //             newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+       //             newCell.GetComponent<CellSplitAnimation>().originCell = this;
+       //             Deactive();
+       //             break;
+       //         case CellType.COLD_CELL:
+       //             newCell = GameObject.Instantiate(gColdCellPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+       //             newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+       //             newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+       //             newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+       //             newCell.GetComponent<CellSplitAnimation>().originCell = this;
+       //             Deactive();
+       //             break;
+       //         default:
+      ////              break;
+      //      }
+      //  }
+      //  else
+      //  {
+      //
+      //
+      //      switch (this.celltype)
+      //      {
+      //          case CellType.HEAT_CELL:
+      //              newCell = GameObject.Instantiate(gHeatCancerPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+      //              newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+      //              newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+      //              newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+      //              newCell.GetComponent<CellSplitAnimation>().originCell = this;
+      //              Deactive();
+      //
+      //              break;
+      //          case CellType.COLD_CELL:
+      //              newCell = GameObject.Instantiate(gColdCancerPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
+      //              newCell.GetComponent<CellSplitAnimation>().currentLevel = currentLevel;
+      //              newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
+      //              newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
+      //              newCell.GetComponent<CellSplitAnimation>().originCell = this;
+      //              Deactive();
+      //              break;
+      //          default:
+      //              break;
+      //      }
         }
 
 
