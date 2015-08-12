@@ -370,7 +370,7 @@ public class TutorialController : MonoBehaviour
 
     bool AnyKeyCondition()
     {
-        return Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetKeyDown(KeyCode.Alpha1);
+        return Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.Alpha1);
     }
 
     bool UnitSelectionButton()
