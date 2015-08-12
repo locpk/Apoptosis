@@ -1165,7 +1165,8 @@ public class PlayerController : MonoBehaviour
 
         CheckSelectedUnits();
         CheckEnemiesLeft();
-        if (allSelectableUnits.Count == 0 && gameStarted)
+
+        if (allSelectableUnits.FindAll(item => item.celltype == CellType.STEM_CELL).Count == 0 && gameStarted)
         {
             Show_LoseScreen();
         }
@@ -1190,11 +1191,11 @@ public class PlayerController : MonoBehaviour
 
         List<GameObject> enemies = new List<GameObject>(allSelectableTargets);
 
-        enemies.RemoveAll(item => (item != null) && (item.tag == "Protein"));
-
+        enemies.RemoveAll(item => (item != null) && (item.tag == "Protein") );
+       
         NumEnemiesLeft = enemies.Count;
 
-        if (enemies.Count == 0 && gameStarted) // if there are no enemies left, the player has won the game
+        if (enemies.FindAll(item => item.GetComponent<BaseCell>().celltype == CellType.STEM_CELL).Count == 0 && gameStarted) // if there are no enemies left, the player has won the game
         {
 
             Show_WinningScreen();

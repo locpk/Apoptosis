@@ -277,7 +277,7 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
-  currentProtein: 500
+  currentProtein: 300
   fovRadius: 6
   attackDamage: 10
   attackRange: 7
@@ -497,6 +497,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: isDepleting
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: currentProtein
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
