@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EvolveEventListener : MonoBehaviour {
+public class EvolveEventListener : MonoBehaviour
+{
 
     void OnEnable()
     {
@@ -16,16 +17,20 @@ public class EvolveEventListener : MonoBehaviour {
 
     void Evolve(CellType _type)
     {
-        StemCell curCell = this.GetComponent<StemCell>();
-        if (!curCell.isSelected)
+        int nSelStem = GameObject.Find("PlayerControl").GetComponent<PlayerController>().allSelectableUnits.FindAll(item => item.GetComponent<BaseCell>().celltype == CellType.STEM_CELL).Count;
+        if (nSelStem != GameObject.Find("PlayerControl").GetComponent<PlayerController>().NumStemCells)
         {
-            return;
+            StemCell curCell = this.GetComponent<StemCell>();
+            if (!curCell.isSelected)
+            {
+                return;
+            }
+            curCell.targets.Clear();
+            curCell.SetPrimaryTarget(null);
+            curCell.Move(curCell.transform.position);
+            curCell.currentState = CellState.IDLE;
+            curCell.Mutation(_type);
         }
-        curCell.targets.Clear();
-        curCell.SetPrimaryTarget(null);
-        curCell.Move(curCell.transform.position);
-        curCell.currentState = CellState.IDLE;
-         curCell.Mutation(_type);
-       
+
     }
 }
