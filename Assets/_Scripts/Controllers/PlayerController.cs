@@ -1195,7 +1195,7 @@ public class PlayerController : MonoBehaviour
        
         NumEnemiesLeft = enemies.Count;
 
-        if (enemies.FindAll(item => item.GetComponent<BaseCell>().celltype == CellType.STEM_CELL).Count == 0 && gameStarted) // if there are no enemies left, the player has won the game
+        if (enemies.Count == 0 && gameStarted) // if there are no enemies left, the player has won the game
         {
 
             Show_WinningScreen();

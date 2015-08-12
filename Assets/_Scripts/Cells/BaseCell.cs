@@ -792,7 +792,7 @@ public class BaseCell : Photon.PunBehaviour
         {
             if (MAX_PROTEIN <= 0)// avois the devision by 0 if no max protein is set
             {
-                MAX_PROTEIN = 300.0f;
+                MAX_PROTEIN =  gameObject.GetComponent<BaseCell>().MAX_PROTEIN;
             }
               
             float healthRatio = currentProtein / MAX_PROTEIN;

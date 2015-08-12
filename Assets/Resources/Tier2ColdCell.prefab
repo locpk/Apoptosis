@@ -260,8 +260,8 @@ MonoBehaviour:
   attackDamage: 10
   attackRange: 4
   consumeRadius: 5
-  depleteTimer: 0
-  depleteAmount: 3
+  depleteTimer: 8
+  depleteAmount: -1.70000005
   attackCooldown: 0
   splitCooldown: 0
   NumEnemiesLeft: 0
@@ -542,6 +542,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Acceleration
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: depleteTimer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: depleteAmount
+      value: -1.70000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
