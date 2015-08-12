@@ -117,7 +117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 84.5, y: 1, z: -15.3649998}
+  m_LocalPosition: {x: 84.6999969, y: 1, z: 46.7000008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 495744}
@@ -350,8 +350,8 @@ MonoBehaviour:
   attackDamage: 6
   attackRange: 3
   consumeRadius: 5
-  depleteTimer: 6
-  depleteAmount: 2
+  depleteTimer: 1
+  depleteAmount: 3
   attackCooldown: 2
   splitCooldown: 0
   NumEnemiesLeft: 0
@@ -433,7 +433,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_Radius: 1.23000002
   m_Speed: 3.5
-  m_Acceleration: 500
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -450,7 +450,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174676}
-  lengthInSec: 10
+  lengthInSec: 5
   startDelay: 0
   speed: 1
   randomSeed: 0
@@ -461,7 +461,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: .300000012
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -494,7 +494,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: 2
+      scalar: .689999998
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -618,10 +618,10 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4293388263
+        rgba: 4292380039
       minMaxState: 0
     startSize:
-      scalar: .300000012
+      scalar: 3.78999996
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -688,12 +688,12 @@ ParticleSystem:
       minMaxState: 0
     gravityModifier: 0
     inheritVelocity: 0
-    maxNumParticles: 100
+    maxNumParticles: 100000
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 1
-    radius: 1.55660248
+    type: 4
+    radius: 1.23000002
     angle: 25
     length: 5
     boxX: 1
@@ -707,7 +707,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 100
+      scalar: 20
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -786,7 +786,7 @@ ParticleSystem:
   RotationModule:
     enabled: 0
     curve:
-      scalar: .2846632
+      scalar: .785398185
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -958,7 +958,7 @@ ParticleSystem:
   VelocityModule:
     enabled: 0
     x:
-      scalar: 1
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -991,7 +991,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     y:
-      scalar: 1
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1339,7 +1339,7 @@ ParticleSystem:
   RotationBySpeedModule:
     enabled: 0
     curve:
-      scalar: .785398126
+      scalar: .785398185
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1799,7 +1799,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: depleteAmount
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isDepleting
@@ -1843,18 +1843,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: currentProtein
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: m_Acceleration
-      value: 500
+      propertyPath: MAX_PROTEIN
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attackDamage
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: depleteTimer
       value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
