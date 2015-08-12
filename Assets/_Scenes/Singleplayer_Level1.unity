@@ -4790,6 +4790,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 4c795ac2ef61af04bbe408e52b0c855d,
         type: 3}
+    - target: {fileID: 11480174, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
+      propertyPath: gameStarted
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 80e5f45561476984fb60be01d1bbe24c, type: 2}
   m_IsPrefabParent: 0
