@@ -255,7 +255,7 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   targets: []
   primaryTarget: {fileID: 0}
-  currentProtein: 250
+  currentProtein: 700
   fovRadius: 10
   attackDamage: 10
   attackRange: 4
@@ -535,6 +535,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: eea9fa1213e55b848bb48e2674fa380f,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: currentProtein
+      value: 700
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182240}

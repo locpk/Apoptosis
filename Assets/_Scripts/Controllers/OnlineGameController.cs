@@ -45,7 +45,7 @@ public class OnlineGameController : Photon.PunBehaviour
     void Update()
     {
         unitsCount = PlayerControls.GetComponent<PlayerController>().allSelectableUnits.Count;
-        if (unitsCount <= 0 && gameStarted && !gameEnded)
+        if (PlayerControls.GetComponent<PlayerController>().allSelectableTargets.FindAll(item => item.GetComponent<BaseCell>().celltype == CellType.STEM_CELL).Count == 0 && gameStarted && !gameEnded)
         {
             photonView.RPC("GameEnd", PhotonTargets.AllViaServer, null);
         }
@@ -100,7 +100,7 @@ public class OnlineGameController : Photon.PunBehaviour
         if (gameEnded)
         {
             gameEnded = false;
-            if (unitsCount <= 0)
+            if (PlayerControls.GetComponent<PlayerController>().allSelectableTargets.FindAll(item => item.GetComponent<BaseCell>().celltype == CellType.STEM_CELL).Count == 0 )
             {
                 Show_LoseScreen();
             }

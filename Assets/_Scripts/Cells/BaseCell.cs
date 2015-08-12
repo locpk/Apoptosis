@@ -320,7 +320,7 @@ public class BaseCell : Photon.PunBehaviour
             case CellType.STEM_CELL:
                 cellSplitAnimation = GameObject.Instantiate(gStemCellPrefab, transform.position, Quaternion.identity) as GameObject;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().currentLevel = currentLevel + 1;
-                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein * 0.5f;
+                cellSplitAnimation.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().originCell = this;
                 Deactive();
@@ -328,7 +328,7 @@ public class BaseCell : Photon.PunBehaviour
             case CellType.CANCER_CELL:
                 cellSplitAnimation = GameObject.Instantiate(gCancerCellPrefab, transform.position, Quaternion.identity) as GameObject;
                 cellSplitAnimation.GetComponent<BaseCell>().currentLevel = currentLevel + 1;
-                cellSplitAnimation.GetComponent<BaseCell>().currentProtein = currentProtein * 0.5f;
+                cellSplitAnimation.GetComponent<BaseCell>().currentProtein = currentProtein;
                 cellSplitAnimation.GetComponent<BaseCell>().isAIPossessed = isAIPossessed;
                 cellSplitAnimation.GetComponent<CellSplitAnimation>().originCell = this;
                 Deactive();
@@ -387,30 +387,28 @@ public class BaseCell : Photon.PunBehaviour
         float cancerousChance = 0.0f;
         switch (currentLevel)
         {
-            case 0:
-            case 1:
-                cancerousChance = CancerChance.LEVEL_1;
-                break;
-            case 2:
-                cancerousChance = CancerChance.LEVEL_2;
-                break;
-            case 3:
-                cancerousChance = CancerChance.LEVEL_3;
-                break;
-            case 4:
-                cancerousChance = CancerChance.LEVEL_4;
-                break;
-            case 5:
-                cancerousChance = CancerChance.LEVEL_5;
-                break;
+            //case 0:
+            //case 1:
+            //    cancerousChance = CancerChance.LEVEL_1;
+            //    break;
+            //case 2:
+            //    cancerousChance = CancerChance.LEVEL_2;
+            //    break;
+            //case 3:
+            //    cancerousChance = CancerChance.LEVEL_3;
+            //    break;
+            //case 4:
+            //    cancerousChance = CancerChance.LEVEL_4;
+            //    break;
+            //case 5:
+            //    cancerousChance = CancerChance.LEVEL_5;
+            //    break;
             default:
-                cancerousChance = CancerChance.LEVEL_5;
+                cancerousChance = CancerChance.LEVEL_1;
                 break;
         }
 
 
-        //half my protein
-        this.currentProtein *= 0.5f;
         currentLevel++;
 
         GameObject newCell;

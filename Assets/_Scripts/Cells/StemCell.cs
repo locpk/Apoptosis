@@ -46,7 +46,7 @@ public class StemCell : BaseCell
                     return;
                 }
                 newCell = GameObject.Instantiate(stemtoAcidic, transform.position, Quaternion.Euler(0.0f, 0.0f, 0.0f)) as GameObject;
-                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein ;
+                newCell.GetComponent<CellSplitAnimation>().currentProtein = currentProtein;
                 newCell.GetComponent<CellSplitAnimation>().isAIPossessed = isAIPossessed;
                 newCell.GetComponent<CellSplitAnimation>().originCell = this;
                 this.Deactive();
@@ -190,48 +190,42 @@ public class StemCell : BaseCell
                     base.bUpdate();
                     break;
                 case CellState.ATTACK:
-                    if (primaryTarget == null)
+
+                    if (primaryTarget != null)
                     {
-                        if (IsInvoking("DamagePerSecond"))
+                        if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= attackRange)
                         {
-                            CancelInvoke("DamagePerSecond");
-                        }
-                        if (m_particleSystem.isPlaying)
-                        {
+                            if (!IsInvoking("DamagePerSecond"))
+                            {
+                                InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
+                            }
+                            if (m_particleSystem.isStopped || m_particleSystem.isPaused)
+                            {
+                                m_particleSystem.Play();
+                            }
+                            navAgent.enabled = false;
+                            navObstacle.enabled = true;
 
-                            m_particleSystem.Stop();
                         }
-                        currentState = CellState.IDLE;
-                        return;
-                    }
 
-                    float distance = Vector3.Distance(primaryTarget.transform.position, transform.position);
+                        else// if (Vector3.Distance(primaryTarget.transform.position, transform.position) <= fovRadius)
+                        {
+                            if (IsInvoking("DamagePerSecond"))
+                            {
+                                CancelInvoke("DamagePerSecond");
+                            }
+                            if (m_particleSystem.isPlaying)
+                            {
 
-                    if (distance > attackRange && distance <= fovRadius)
-                    {
-                        if (IsInvoking("DamagePerSecond"))
-                        {
-                            CancelInvoke("DamagePerSecond");
-                        }
-                        if (m_particleSystem.isPlaying)
-                        {
+                                m_particleSystem.Stop();
+                            }
+                            if (Vector3.Distance(primaryTarget.transform.position, transform.position) > attackRange)
+                            {
+                                base.ChaseTarget();
+                            }
 
-                            m_particleSystem.Stop();
                         }
-                        base.ChaseTarget();
-                        return;
-                    }
-                    else if (distance <=  attackRange)
-                    {
-                        if (!IsInvoking("DamagePerSecond"))
-                        {
-                            InvokeRepeating("DamagePerSecond", 1.0f, 1.0f);
-                        }
-                        if (m_particleSystem.isStopped || m_particleSystem.isPaused)
-                        {
-                            m_particleSystem.Play();
-                        }
-                        return;
+
                     }
                     else
                     {
@@ -245,14 +239,15 @@ public class StemCell : BaseCell
                             m_particleSystem.Stop();
                         }
                         currentState = CellState.IDLE;
-
                     }
+
+
                     break;
                 case CellState.CONSUMING:
                     base.bUpdate();
                     break;
                 case CellState.MOVING:
-                    
+
                     base.bUpdate();
                     break;
                 case CellState.ATTACK_MOVING:
