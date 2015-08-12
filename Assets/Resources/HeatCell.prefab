@@ -334,7 +334,7 @@ MonoBehaviour:
   primaryTarget: {fileID: 0}
   currentProtein: 250
   fovRadius: 10
-  attackDamage: 3
+  attackDamage: 5
   attackRange: 10
   consumeRadius: 5
   depleteTimer: 1
@@ -429,7 +429,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_Radius: 4.88999987
   m_Speed: 3.5
-  m_Acceleration: 5
+  m_Acceleration: 500
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 1.20000005
@@ -606,7 +606,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Acceleration
-      value: 5
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: isAIPossessed
@@ -634,7 +634,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attackDamage
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Inheat

@@ -283,7 +283,7 @@ MonoBehaviour:
   health_10: {fileID: 21300000, guid: f8352a793aaca5a4eb4079dc34493331, type: 3}
   health_50: {fileID: 21300000, guid: 4af6c55a799eca648aeae4e7cc2ebe41, type: 3}
   health_100: {fileID: 21300000, guid: 7bd591d9b1d87c94f90857d8f388fe8a, type: 3}
-  MAX_PROTEIN: 250
+  MAX_PROTEIN: 400
   currentLevel: 0
   isSinglePlayer: 1
   isMine: 1
@@ -300,7 +300,7 @@ MonoBehaviour:
   primaryTarget: {fileID: 0}
   currentProtein: 250
   fovRadius: 10
-  attackDamage: 5
+  attackDamage: 12
   attackRange: 9
   consumeRadius: 5
   depleteTimer: 1
@@ -616,11 +616,19 @@ Prefab:
       objectReference: {fileID: 145798, guid: 4f8b384c255e32442ad68a68db49d8a5, type: 2}
     - target: {fileID: 0}
       propertyPath: MAX_PROTEIN
-      value: 250
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: currentProtein
       value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AngularSpeed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackDamage
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

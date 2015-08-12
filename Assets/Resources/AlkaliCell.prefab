@@ -235,7 +235,7 @@ MonoBehaviour:
   primaryTarget: {fileID: 0}
   currentProtein: 400
   fovRadius: 10
-  attackDamage: 9
+  attackDamage: 6
   attackRange: 5
   consumeRadius: 5
   depleteTimer: 0
@@ -388,7 +388,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_Radius: 1.76999998
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 500
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 2
@@ -546,7 +546,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attackDamage
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: nerveCell
@@ -555,6 +555,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: currentProtein
       value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Acceleration
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
